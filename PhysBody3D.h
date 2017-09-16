@@ -1,10 +1,11 @@
 #ifndef __PhysBody3D_H__
 #define __PhysBody3D_H__
 
+#include <list>
+
 class btRigidBody;
 class Module;
 
-#include <list>
 // =================================================
 struct PhysBody3D
 {
@@ -28,7 +29,7 @@ private:
 	bool is_sensor = false;
 
 public:
-	list<Module*> collision_listeners;
+	std::list<Module*> collision_listeners;
 };
 
 #endif // __PhysBody3D_H__
