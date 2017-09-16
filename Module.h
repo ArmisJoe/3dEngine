@@ -39,7 +39,7 @@ public:
 
 	virtual update_status PostUpdate(float dt)
 	{
-		return UPDATE_CONTINUE;
+		return update_status::UPDATE_CONTINUE;
 	}
 
 	virtual bool CleanUp() 

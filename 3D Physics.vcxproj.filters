@@ -19,6 +19,9 @@
     <Filter Include="Sources\Modules\Game">
       <UniqueIdentifier>{83f46af7-e02f-40c0-9e56-41d76082527b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\ImGui">
+      <UniqueIdentifier>{3459d2dd-e7e6-4270-bde8-a11a32d9cf74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -74,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="ModulePlayer.h">
       <Filter>Sources\Modules\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleImGui.h">
+      <Filter>Sources\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -131,5 +137,15 @@
     <ClCompile Include="ModulePlayer.cpp">
       <Filter>Sources\Modules\Game</Filter>
     </ClCompile>
+    <ClCompile Include="ImGui\imgui.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_demo.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_draw.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleImGui.cpp" />
   </ItemGroup>
 </Project>

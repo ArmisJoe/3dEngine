@@ -40,8 +40,6 @@ update_status ModulePlayer::Update(float dt)
 	/*App->camera->LookAt(vec3(camera_x, camera_y, camera_z));
 	App->camera->Position = pos;*/
 
-
-
 	return UPDATE_CONTINUE;
 }
 
