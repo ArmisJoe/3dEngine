@@ -1,4 +1,4 @@
-/*#include "ModuleImGui.h"
+#include "ModuleImGui.h"
 
 ModuleImGui::ModuleImGui(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -29,7 +29,7 @@ bool ModuleImGui::Init()
 		// TODO: Store your texture pointer/identifier (whatever your engine uses) in 'io.Fonts->TexID'. This will be passed back to your via the renderer.
 		io.Fonts->TexID = (void*)texture;
 	*/
-/*
+
 	return true;
 }
 
@@ -60,4 +60,3 @@ bool ModuleImGui::CleanUp()
 {
 	return true;
 }
-*/
