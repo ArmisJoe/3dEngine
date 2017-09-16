@@ -1,5 +1,14 @@
 #pragma once
 
+#include <list>
+#include <string>
+#include <vector>
+#include <map>
+#include <iostream>
+#include "SDL\include\SDL.h"
+
+using namespace std;
+
 class Application;
 struct PhysBody3D;
 

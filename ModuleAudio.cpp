@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleAudio.h"
+#include <algorithm>
 
 #pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
@@ -54,11 +55,10 @@ bool ModuleAudio::CleanUp()
 		Mix_FreeMusic(music);
 	}
 
-	p2List_item<Mix_Chunk*>* item;
+	list<Mix_Chunk*>* item;
 
-	for(item = fx.getFirst(); item != NULL; item = item->next)
-	{
-		Mix_FreeChunk(item->data);
+	for (list<Mix_Chunk*>::iterator it = fx.begin(); it != fx.end(); ++it) {
+		Mix_FreeChunk((*it));
 	}
 
 	fx.clear();
@@ -132,8 +132,8 @@ unsigned int ModuleAudio::LoadFx(const char* path)
 	}
 	else
 	{
-		fx.add(chunk);
-		ret = fx.count();
+		fx.push_back(chunk);
+		ret = true;
 	}
 
 	return ret;
@@ -143,14 +143,18 @@ unsigned int ModuleAudio::LoadFx(const char* path)
 bool ModuleAudio::PlayFx(unsigned int id, int repeat)
 {
 	bool ret = false;
+	Mix_Chunk* chunk;
 
-	Mix_Chunk* chunk = NULL;
-	
-	if(fx.at(id-1, chunk) == true)
 	{
+		int i = 0;
+		for (list<Mix_Chunk*>::iterator it = fx.begin(); it != fx.end(); ++it) {
+			if (i == id - 1) {
+				chunk = (*it);
+			}
+		}
+	}
 		Mix_PlayChannel(-1, chunk, repeat);
 		ret = true;
-	}
 
 	return ret;
 }
