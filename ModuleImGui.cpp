@@ -12,37 +12,57 @@ ModuleImGui::~ModuleImGui()
 
 bool ModuleImGui::Init()
 {
-	
-	ImGuiIO& io = ImGui::GetIO();
-	io.DisplaySize.x = 1920.0f;
-	io.DisplaySize.y = 1280.0f;
+	// Setup SDL
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
+	{
+		printf("Error: %s\n", SDL_GetError());
+		return -1;
+	}
 
-	io.RenderDrawListsFn = NULL;
+	// Setup window
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+	SDL_DisplayMode current;
+	SDL_GetCurrentDisplayMode(0, &current);
+	window = SDL_CreateWindow("ImGui SDL2+OpenGL example", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+	glcontext = SDL_GL_CreateContext(window);
 
-	unsigned char* pixels;
-	int width, height;
-	io.Fonts->GetTexDataAsRGBA32(&pixels, &width, &height);
+	// Setup ImGui binding
+	ImGui_ImplSdl_Init(window);
 
-	/*
-	// TODO: At this points you've got the texture data and you need to upload that your your graphic system:
-	MyTexture* texture = MyEngine::CreateTextureFromMemoryPixels(pixels, width, height, TEXTURE_TYPE_RGBA)
-		// TODO: Store your texture pointer/identifier (whatever your engine uses) in 'io.Fonts->TexID'. This will be passed back to your via the renderer.
-		io.Fonts->TexID = (void*)texture;
-	*/
+	clear_color = ImColor(114, 144, 154);
 
 	return true;
 }
 
 update_status ModuleImGui::PreUpdate(float dt)
 {
-	ImGuiIO& io = ImGui::GetIO();
-
-	io.DeltaTime = 1.0f / 60.0f;
-	io.MousePos = ImVec2(App->input->GetMouseX(), App->input->GetMouseY());
-
-	ImGui::NewFrame();
+	SDL_Event event;
+	while (SDL_PollEvent(&event))
+	{
+		ImGui_ImplSdl_ProcessEvent(&event);
+		if (event.type == SDL_QUIT)
+			return update_status::UPDATE_STOP;
+	}
+	ImGui_ImplSdl_NewFrame(window);
 
 	//Code Here
+
+	if (show_test_window)
+	{
+		ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
+		ImGui::ShowTestWindow(&show_test_window);
+	}
+
+	glViewport(0, 0, (int)ImGui::GetIO().DisplaySize.x, (int)ImGui::GetIO().DisplaySize.y);
+	glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
+	glClear(GL_COLOR_BUFFER_BIT);
+	//glUseProgram(0); // You may want this if using this code in an OpenGL 3+ context where shaders may be bound
+	ImGui::Render();
+	SDL_GL_SwapWindow(window);
 
 	// !-- Code Here
 
@@ -58,5 +78,11 @@ update_status ModuleImGui::PostUpdate(float dt)
 
 bool ModuleImGui::CleanUp()
 {
+
+	ImGui_ImplSdl_Shutdown();
+	SDL_GL_DeleteContext(glcontext);
+	SDL_DestroyWindow(window);
+	SDL_Quit();
+
 	return true;
 }

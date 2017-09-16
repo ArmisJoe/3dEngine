@@ -81,6 +81,9 @@
     <ClInclude Include="ModuleImGui.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="imgui_impl_sdl.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -147,5 +150,8 @@
       <Filter>Sources\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ModuleImGui.cpp" />
+    <ClCompile Include="imgui_impl_sdl.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

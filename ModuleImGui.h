@@ -7,6 +7,9 @@
 #include "ImGui\imconfig.h"
 #include "ImGui\imgui_internal.h"
 
+#include "imgui_impl_sdl.h"
+#include "SDL/include/SDL_opengl.h"
+
 class Module;
 class Application;
 
@@ -20,5 +23,11 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
+private:
+	bool show_test_window = true;
+	bool show_another_window = false;
+	SDL_Window *window = nullptr;
+	ImVec4 clear_color;
+	SDL_GLContext glcontext;
 };
 	
