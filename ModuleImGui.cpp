@@ -25,6 +25,7 @@ update_status ModuleImGui::PreUpdate(float dt)
 {
 	ImGui_ImplSdl_NewFrame(App->window->window);
 
+
 	ImGuiIO& io = ImGui::GetIO();
 
 	//Set Keyboard / Mouse bindings here
@@ -34,6 +35,7 @@ update_status ModuleImGui::PreUpdate(float dt)
 
 update_status ModuleImGui::Update(float dt)
 {
+	ImGui::Begin("test");
 
 	show_test_window = true;
 
@@ -41,6 +43,10 @@ update_status ModuleImGui::Update(float dt)
 		ImGui::ShowTestWindow(&show_test_window);
 		ImGui::ShowMetricsWindow(&show_test_window);
 	}
+
+	ImGui::End();
+
+	ImGui::Render();
 
 	return update_status::UPDATE_CONTINUE;
 }
