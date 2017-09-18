@@ -149,9 +149,11 @@
     <ClCompile Include="ImGui\imgui_draw.cpp">
       <Filter>Sources\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleImGui.cpp" />
     <ClCompile Include="imgui_impl_sdl.cpp">
       <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleImGui.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

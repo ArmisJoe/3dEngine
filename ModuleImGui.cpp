@@ -35,13 +35,17 @@ update_status ModuleImGui::PreUpdate(float dt)
 
 update_status ModuleImGui::Update(float dt)
 {
-	ImGui::Begin("test");
+	ImGui::Begin("Close Window");
 
 	show_test_window = true;
 
 	if (show_test_window == true) {
 		ImGui::ShowTestWindow(&show_test_window);
 		ImGui::ShowMetricsWindow(&show_test_window);
+	}
+
+	if (ImGui::Button("Quit", ImVec2(100, 100))) {
+		return update_status::UPDATE_STOP;
 	}
 
 	ImGui::End();
