@@ -1,6 +1,8 @@
 #pragma once
 
 //#include "Module.h"
+#include "Panel.h"
+
 #include "Application.h"
 
 #include "ImGui\imgui.h"
@@ -12,6 +14,7 @@
 
 class Module;
 class Application;
+class PanelConsole;
 
 class ModuleImGui : public Module {
 public:
@@ -24,7 +27,13 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
+	void AddPanel(Panel* n_panel);
+
 private:
+	std::list<Panel*> panels;
+
+	PanelConsole* console = nullptr;
+
 	bool show_test_window = true;
 };
 	

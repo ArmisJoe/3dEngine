@@ -22,6 +22,9 @@
     <Filter Include="Sources\ImGui">
       <UniqueIdentifier>{3459d2dd-e7e6-4270-bde8-a11a32d9cf74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\MathGeo">
+      <UniqueIdentifier>{98206f74-b8ea-4e2b-926b-c9659600d5cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -82,6 +85,21 @@
       <Filter>Sources\Modules</Filter>
     </ClInclude>
     <ClInclude Include="imgui_impl_sdl.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathGeoLib.h">
+      <Filter>Sources\MathGeo</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathBuildConfig.h">
+      <Filter>Sources\MathGeo</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathGeoLibFwd.h">
+      <Filter>Sources\MathGeo</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelConsole.h">
+      <Filter>Sources\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Panel.h">
       <Filter>Sources\ImGui</Filter>
     </ClInclude>
   </ItemGroup>
@@ -154,6 +172,12 @@
     </ClCompile>
     <ClCompile Include="ModuleImGui.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelConsole.cpp">
+      <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Panel.cpp">
+      <Filter>Sources\ImGui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

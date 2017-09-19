@@ -1,13 +1,14 @@
 #include "ModuleImGui.h"
+#include "PanelConsole.h"
 
 ModuleImGui::ModuleImGui(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
-	
+	show_test_window = true;
 }
 
 ModuleImGui::~ModuleImGui()
 {
-
+	show_test_window = true;
 }
 
 bool ModuleImGui::Init()
@@ -17,6 +18,8 @@ bool ModuleImGui::Init()
 
 	ImGuiIO& io = ImGui::GetIO();
 	io.IniFilename = "Settings/imgui.ini";
+
+	AddPanel(console = new PanelConsole());
 
 	return true;
 }
@@ -35,7 +38,26 @@ update_status ModuleImGui::PreUpdate(float dt)
 
 update_status ModuleImGui::Update(float dt)
 {
-	ImGui::Begin("Close Window");
+
+	for (std::list<Panel*>::iterator it = panels.begin(); it != panels.end(); it++) {
+		if((*it)->active)
+			(*it)->Draw();
+	}
+
+	if (ImGui::Begin("Close Window")) {
+		if (ImGui::Button("Quit", ImVec2(100, 100))) {
+			return update_status::UPDATE_STOP;
+		}
+		ImGui::End();
+	}
+
+	if (ImGui::BeginMainMenuBar()) {
+		if (ImGui::BeginMenu("View")) {
+			ImGui::MenuItem("Console", "1", &console->active);
+			ImGui::EndMenu();
+		}
+		ImGui::EndMainMenuBar();
+	}
 
 	show_test_window = true;
 
@@ -43,12 +65,6 @@ update_status ModuleImGui::Update(float dt)
 		ImGui::ShowTestWindow(&show_test_window);
 		ImGui::ShowMetricsWindow(&show_test_window);
 	}
-
-	if (ImGui::Button("Quit", ImVec2(100, 100))) {
-		return update_status::UPDATE_STOP;
-	}
-
-	ImGui::End();
 
 	ImGui::Render();
 
@@ -62,7 +78,20 @@ update_status ModuleImGui::PostUpdate(float dt)
 
 bool ModuleImGui::CleanUp()
 {
+	for (std::list<Panel*>::iterator it = panels.begin(); it != panels.end(); it++) {
+		if ((*it) != nullptr) {
+			delete (*it);
+		}
+	}
 
+	panels.clear();
+
+	console = nullptr;
 
 	return true;
+}
+
+void ModuleImGui::AddPanel(Panel * n_panel)
+{
+	panels.push_back(n_panel);
 }
