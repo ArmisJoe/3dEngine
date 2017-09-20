@@ -168,7 +168,7 @@ void ModuleImGui::CheckAllIntersec()
 	for (std::list<Sphere*>::iterator it_a = spheres.begin(); it_a != spheres.end(); it_a++) {
 		int b_id = 1;
 		for (std::list<Sphere*>::iterator it_b = spheres.begin(); it_b != spheres.end(); it_b++) {
-			if (it_a._Ptr->_Myval->Intersects(*it_b._Ptr->_Myval)) {
+			if (it_a._Ptr->_Myval->Intersects(*(it_b._Ptr->_Myval))) {
 				string collision_log = "Sphere " + std::to_string(a_id) + " collides with Sphere " + std::to_string(b_id);
 				console->ConsoleLog(collision_log.c_str());
 			}
