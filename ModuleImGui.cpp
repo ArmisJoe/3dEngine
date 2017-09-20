@@ -73,17 +73,17 @@ update_status ModuleImGui::Update(float dt)
 
 	if (object_p) {
 		if (ImGui::Begin("Object Creation")) {
-			if (ImGui::Button("Go Random", ImVec2(50, 100))) {
+			if (ImGui::Button("Go Random", ImVec2(100, 50))) {
 				vec3 centre;
 				for (int i = 0; i < 100; i++) {
 					centre.x = 1;
 					centre.y = 1;
 					centre.z = 1;
 					float r = 10;
-					//AddSphere(centre, r);
+					AddSphere(centre, r);
 					ImGuiTextBuffer t;
 					t.append("Created Sphere nº ");
-					t.append("%s", i + 1);
+					t.append(std::to_string(i + 1).c_str());
 					console->ConsoleLog(t.begin());
 				}
 
@@ -135,7 +135,10 @@ Sphere* ModuleImGui::AddSphere(const vec3 &center, float radius)
 	Sphere* s = nullptr;
 	s = new Sphere();
 	s->r = radius;
-	//s->pos = { center.x, center.y, center.z };
-	//spheres.push_back(s);
+	float3 point;
+	point.Set(point.x, point.y, point.z);
+	s->pos.Set(point.x, point.y, point.z);
+	//s->pos.Set(center.x, center.y, center.z);
+	spheres.push_back(s);
 	return s;
 }
