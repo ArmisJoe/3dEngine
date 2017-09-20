@@ -4,6 +4,8 @@
 #include <iostream> 
 #include <string>
 
+#include <random>
+
 ModuleImGui::ModuleImGui(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
 	show_test_window = true;
@@ -78,19 +80,28 @@ update_status ModuleImGui::Update(float dt)
 		if (ImGui::Begin("Object Creation")) {
 			if (ImGui::Button("Go Random", ImVec2(100, 50))) {
 				for (int i = 0; i < 100; i++) {
-					float r = 10;
-					AddSphere(1, 1, 1, r);
-					ImGuiTextBuffer t;
-					string st = "Created Sphere " + std::to_string(i + 1);
-					console->ConsoleLog(st.c_str());
+					random_device rd;
+					mt19937 gen(rd());
+					uniform_real_distribution<> dis(0.1, 1);
+					float r = dis(gen);
+					AddSphere(dis(gen), dis(gen), dis(gen), r);
 				}
 
+				console->ConsoleLog("All Spheres Created");
 			}
 			ImGui::End();
 		}
 	}
 
+	if (ImGui::Begin("Collision Check")) {
+		if (ImGui::Button("Check Collisions", ImVec2(100, 50))) {
+			CheckAllIntersec();
+		}
+		ImGui::End();
+	}
+
 	ImGui::Render();
+
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -134,4 +145,35 @@ Sphere* ModuleImGui::AddSphere(const float x, const float y, const float z, floa
 	Sphere* s = new Sphere(point, radius);
 	spheres.push_back(s);
 	return s;
+}
+
+int ModuleImGui::CheckIntersec(Sphere * sp)
+{
+	int ret = 0;
+
+	if (!spheres.empty()) {
+		for (std::list<Sphere*>::iterator it = spheres.begin(); it != spheres.end(); it++) {
+			if (it._Ptr->_Myval->Intersects(*sp)) {
+				ret++;
+			}
+		}
+	}
+
+	return ret;
+}
+
+void ModuleImGui::CheckAllIntersec()
+{
+	int a_id = 1;
+	for (std::list<Sphere*>::iterator it_a = spheres.begin(); it_a != spheres.end(); it_a++) {
+		int b_id = 1;
+		for (std::list<Sphere*>::iterator it_b = spheres.begin(); it_b != spheres.end(); it_b++) {
+			if (it_a._Ptr->_Myval->Intersects(*it_b._Ptr->_Myval)) {
+				string collision_log = "Sphere " + std::to_string(a_id) + " collides with Sphere " + std::to_string(b_id);
+				console->ConsoleLog(collision_log.c_str());
+			}
+			b_id++;
+		}
+		a_id++;
+	}
 }

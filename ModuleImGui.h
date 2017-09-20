@@ -32,6 +32,9 @@ public:
 	void AddPanel(Panel* n_panel);
 	Sphere* AddSphere(const float x, const float y, const float z, float radius);
 
+	int CheckIntersec(Sphere* sp);
+	void CheckAllIntersec();
+
 private:
 	std::list<Panel*> panels;
 
