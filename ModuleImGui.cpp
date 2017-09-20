@@ -28,6 +28,7 @@ update_status ModuleImGui::PreUpdate(float dt)
 {
 	ImGui_ImplSdl_NewFrame(App->window->window);
 
+	console->ConsoleLog("PUTA");
 
 	ImGuiIO& io = ImGui::GetIO();
 
