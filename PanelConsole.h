@@ -5,20 +5,24 @@
 
 
 #include "Panel.h"
-#include "imgui/imgui.h"
+
+
+#include "ImGui\imgui.h"
+
 
 class PanelConsole : public Panel {
 public:
 	PanelConsole();
 	virtual ~PanelConsole();
-
+	
 	void Draw();
-
+	
 	void Clear();
-	void Log(const char* log);
+	void ConsoleLog(const char* log);
 
 private:
 	ImGuiTextBuffer text_buffer;
+	bool need_scroll = false;
 
 };
 
