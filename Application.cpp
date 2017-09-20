@@ -61,7 +61,7 @@ bool Application::Init()
 	
 
 	// After all Init calls we call Start() in all modules
-	LOG("Application Start --------------");
+	//LOG("Application Start --------------");
 
 	for (list<Module*>::iterator it = list_modules.begin(); it != list_modules.end(); ++it) {
 		if ((*it) != nullptr && ret == true) {

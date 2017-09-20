@@ -3,7 +3,7 @@
 #include "Globals.h"
 #include "Primitive.h"
 
-//#include "src\MathGeoLib.h"
+#include "src\MathGeoLib.h"
 
 #include "Bullet/include/btBulletDynamicsCommon.h"
 
@@ -28,19 +28,20 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
-	PhysBody3D* AddBody(const Sphere& sphere, float mass = 1.0f);
+	/*PhysBody3D* AddBody(const Sphere& sphere, float mass = 1.0f);
 	PhysBody3D* AddBody(const Cube& cube, float mass = 1.0f);
 	PhysBody3D* AddBody(const Cylinder& cylinder, float mass = 1.0f);
 	PhysVehicle3D* AddVehicle(const VehicleInfo& info);
 
 	void AddConstraintP2P(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB);
 	void AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB, const vec3& axisS, const vec3& axisB, bool disable_collision = false);
-
+*/
 
 private:
 
 	bool debug;
 
+	/*
 	btDefaultCollisionConfiguration*	collision_conf;
 	btCollisionDispatcher*				dispatcher;
 	btBroadphaseInterface*				broad_phase;
@@ -54,8 +55,10 @@ private:
 	list<btDefaultMotionState*> motions;
 	list<btTypedConstraint*> constraints;
 	list<PhysVehicle3D*> vehicles;
+	*/
 };
 
+/*
 class DebugDrawer : public btIDebugDraw
 {
 public:
@@ -72,4 +75,4 @@ public:
 	DebugDrawModes mode;
 	Line line;
 	Primitive point;
-};
+};*/

@@ -5,7 +5,7 @@
 
 
 #include "Panel.h"
-#include "imgui.h"
+#include "imgui/imgui.h"
 
 class PanelConsole : public Panel {
 public:
