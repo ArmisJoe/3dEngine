@@ -81,9 +81,8 @@ update_status ModuleImGui::Update(float dt)
 					float r = 10;
 					AddSphere(1, 1, 1, r);
 					ImGuiTextBuffer t;
-					string st = "Created Sphere nº " + std::to_string(i + 1);
-					t.append(st.c_str());
-					console->ConsoleLog(t.begin());
+					string st = "Created Sphere " + std::to_string(i + 1);
+					console->ConsoleLog(st.c_str());
 				}
 
 			}
