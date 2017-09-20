@@ -30,7 +30,7 @@ public:
 	bool CleanUp();
 
 	void AddPanel(Panel* n_panel);
-	Sphere* AddSphere(const vec3 &center, float radius);
+	Sphere* AddSphere(const float x, const float y, const float z, float radius);
 
 private:
 	std::list<Panel*> panels;

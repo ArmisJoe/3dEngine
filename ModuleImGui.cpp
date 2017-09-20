@@ -1,6 +1,9 @@
 #include "ModuleImGui.h"
 #include "PanelConsole.h"
 
+#include <iostream> 
+#include <string>
+
 ModuleImGui::ModuleImGui(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
 	show_test_window = true;
@@ -74,16 +77,12 @@ update_status ModuleImGui::Update(float dt)
 	if (object_p) {
 		if (ImGui::Begin("Object Creation")) {
 			if (ImGui::Button("Go Random", ImVec2(100, 50))) {
-				vec3 centre;
 				for (int i = 0; i < 100; i++) {
-					centre.x = 1;
-					centre.y = 1;
-					centre.z = 1;
 					float r = 10;
-					AddSphere(centre, r);
+					AddSphere(1, 1, 1, r);
 					ImGuiTextBuffer t;
-					t.append("Created Sphere nº ");
-					t.append(std::to_string(i + 1).c_str());
+					string st = "Created Sphere nº " + std::to_string(i + 1);
+					t.append(st.c_str());
 					console->ConsoleLog(t.begin());
 				}
 
@@ -130,15 +129,10 @@ void ModuleImGui::AddPanel(Panel * n_panel)
 	panels.push_back(n_panel);
 }
 
-Sphere* ModuleImGui::AddSphere(const vec3 &center, float radius)
+Sphere* ModuleImGui::AddSphere(const float x, const float y, const float z, float radius)
 {
-	Sphere* s = nullptr;
-	s = new Sphere();
-	s->r = radius;
-	float3 point;
-	point.Set(point.x, point.y, point.z);
-	s->pos.Set(point.x, point.y, point.z);
-	//s->pos.Set(center.x, center.y, center.z);
+	math::float3 point = { x, y, z };
+	Sphere* s = new Sphere(point, radius);
 	spheres.push_back(s);
 	return s;
 }

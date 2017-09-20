@@ -45,7 +45,7 @@ public:
 	/// Constructs a sphere with a given position and radius.
 	/** @param radius A value > 0 constructs a sphere with positive volume. A value of <= 0 is valid, and constructs a degenerate sphere.
 		@see pos, r, IsFinite(), IsDegenerate() */
-	Sphere(const vec &center, float radius);
+	Sphere(const float3 &center, float radius);
 
 	/// Constructs a sphere that passes through the given two points.
 	/** The constructed sphere will be the minimal sphere that encloses the given two points. The center point of this

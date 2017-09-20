@@ -14,6 +14,8 @@
 
 /** @file Clock.cpp
 	@brief */
+#include <time.h>
+#include "../Math/InclWindows.h"
 
 #if defined(__unix__) || defined(__native_client__) || defined(__EMSCRIPTEN__) || defined(ANDROID) || defined(__APPLE__) || defined (__CYGWIN__)
 #include <time.h>
