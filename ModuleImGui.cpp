@@ -4,11 +4,14 @@
 ModuleImGui::ModuleImGui(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
 	show_test_window = true;
+	object_p = false;
 }
 
 ModuleImGui::~ModuleImGui()
 {
 	show_test_window = true;
+	object_p = false;
+	console = nullptr;
 }
 
 bool ModuleImGui::Init()
@@ -28,8 +31,6 @@ update_status ModuleImGui::PreUpdate(float dt)
 {
 	ImGui_ImplSdl_NewFrame(App->window->window);
 
-	console->ConsoleLog("PUTA");
-
 	ImGuiIO& io = ImGui::GetIO();
 
 	//Set Keyboard / Mouse bindings here
@@ -45,15 +46,18 @@ update_status ModuleImGui::Update(float dt)
 			(*it)->Draw();
 	}
 
-	if (ImGui::Begin("Close Window")) {
-		if (ImGui::Button("Quit", ImVec2(100, 100))) {
-			return update_status::UPDATE_STOP;
-		}
-		ImGui::End();
-	}
-
 	if (ImGui::BeginMainMenuBar()) {
+		if (ImGui::BeginMenu("File")) {
+			if (ImGui::Button("Quit")) {
+				return update_status::UPDATE_STOP;
+			}
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Objects")) {
+			ImGui::EndMenu();
+		}
 		if (ImGui::BeginMenu("View")) {
+			ImGui::MenuItem("Object Creation", "O", &object_p);
 			ImGui::MenuItem("Console", "1", &console->active);
 			ImGui::EndMenu();
 		}
@@ -65,6 +69,27 @@ update_status ModuleImGui::Update(float dt)
 	if (show_test_window == true) {
 		ImGui::ShowTestWindow(&show_test_window);
 		ImGui::ShowMetricsWindow(&show_test_window);
+	}
+
+	if (object_p) {
+		if (ImGui::Begin("Object Creation")) {
+			if (ImGui::Button("Go Random", ImVec2(50, 100))) {
+				vec3 centre;
+				for (int i = 0; i < 100; i++) {
+					centre.x = 1;
+					centre.y = 1;
+					centre.z = 1;
+					float r = 10;
+					//AddSphere(centre, r);
+					ImGuiTextBuffer t;
+					t.append("Created Sphere nº ");
+					t.append("%s", i + 1);
+					console->ConsoleLog(t.begin());
+				}
+
+			}
+			ImGui::End();
+		}
 	}
 
 	ImGui::Render();
@@ -87,6 +112,14 @@ bool ModuleImGui::CleanUp()
 
 	panels.clear();
 
+	if (!spheres.empty()) {
+		for (std::list<Sphere*>::iterator it = spheres.begin(); it != spheres.end(); it++) {
+			if (it._Ptr->_Myval != nullptr) {
+				delete it._Ptr->_Myval;
+			}
+		}
+	}
+
 	console = nullptr;
 
 	return true;
@@ -95,4 +128,14 @@ bool ModuleImGui::CleanUp()
 void ModuleImGui::AddPanel(Panel * n_panel)
 {
 	panels.push_back(n_panel);
+}
+
+Sphere* ModuleImGui::AddSphere(const vec3 &center, float radius)
+{
+	Sphere* s = nullptr;
+	s = new Sphere();
+	s->r = radius;
+	//s->pos = { center.x, center.y, center.z };
+	//spheres.push_back(s);
+	return s;
 }

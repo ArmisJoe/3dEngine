@@ -12,6 +12,8 @@
 #include "imgui_impl_sdl.h"
 #include "SDL/include/SDL_opengl.h"
 
+#include "src\MathGeoLib.h"
+
 class Module;
 class Application;
 class PanelConsole;
@@ -28,11 +30,16 @@ public:
 	bool CleanUp();
 
 	void AddPanel(Panel* n_panel);
+	Sphere* AddSphere(const vec3 &center, float radius);
 
 private:
 	std::list<Panel*> panels;
 
 	PanelConsole* console = nullptr;
+
+	bool object_p = false;
+
+	std::list<Sphere*> spheres;
 
 	bool show_test_window = true;
 };
