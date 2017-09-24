@@ -122,6 +122,11 @@ bool Application::CleanUp()
 	return ret;
 }
 
+void Application::OpenURL(const char * path)
+{
+	ShellExecute(NULL, "open", path, NULL, NULL, SW_SHOWMAXIMIZED);
+}
+
 void Application::AddModule(Module* mod)
 {
 	list_modules.push_back(mod);

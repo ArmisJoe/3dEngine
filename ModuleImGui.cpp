@@ -66,6 +66,10 @@ update_status ModuleImGui::Update(float dt)
 			ImGui::MenuItem("Console", "1", &console->active);
 			ImGui::EndMenu();
 		}
+		if (ImGui::BeginMenu("Help")) {
+			ImGui::MenuItem("Configuration", "H", &about_p);
+			ImGui::EndMenu();
+		}
 		ImGui::EndMainMenuBar();
 	}
 
@@ -102,6 +106,10 @@ update_status ModuleImGui::Update(float dt)
 
 	ImGui::Render();
 
+	if (about_p)
+	{
+		UpdateAboutWin();
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -133,6 +141,22 @@ bool ModuleImGui::CleanUp()
 
 	return true;
 }
+
+
+void ModuleImGui::UpdateAboutWin()
+{
+	ImGui::SetNextWindowContentSize(ImVec2(500, 300));
+	ImGui::Begin("About", &hello2, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoFocusOnAppearing);
+	//ImGui::Text("Hello");
+	/*ImGui::Separator();
+	if (ImGui::Button("Open Documentation"))
+	{
+		App->OpenURL("https://github.com/ArmisJoe/3dEngine/wiki");
+	}*/
+
+	ImGui::End();
+}
+
 
 void ModuleImGui::AddPanel(Panel * n_panel)
 {

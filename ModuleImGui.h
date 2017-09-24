@@ -36,12 +36,17 @@ public:
 	void CheckAllIntersec();
 
 private:
+
+	void UpdateAboutWin();
+
+
 	std::list<Panel*> panels;
 
 	PanelConsole* console = nullptr;
 
 	bool object_p = false;
-
+	bool about_p = false;
+	bool hello2 = false;
 	std::list<Sphere*> spheres;
 
 	bool show_test_window = true;

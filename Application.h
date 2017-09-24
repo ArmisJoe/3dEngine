@@ -43,6 +43,7 @@ public:
 	bool Init();
 	update_status Update();
 	bool CleanUp();
+	void OpenURL(const char* path);
 
 private:
 
