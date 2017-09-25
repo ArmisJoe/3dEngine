@@ -126,11 +126,9 @@ bool Application::CleanUp()
 
 void Application::DrawConfigPanel()
 {
-	if (ImGui::BeginMenu("Application")) {
+	if (ImGui::CollapsingHeader("Application")) {
 
 		ImGui::Text(EngineName);
-
-		ImGui::EndMenu();
 	}
 }
 

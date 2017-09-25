@@ -13,6 +13,8 @@ ModuleImGui::ModuleImGui(Application * app, bool start_enabled) : Module(app, st
 	show_test_window = true;
 	config_active = false;
 	object_p = false;
+	libraries.push_back("ImGui");
+	libraries.push_back("MathGeoLib");
 }
 
 ModuleImGui::~ModuleImGui()
@@ -190,8 +192,35 @@ void ModuleImGui::CheckAllIntersec()
 
 void ModuleImGui::DrawConfigPanels()
 {
+
+	ImGui::SetNextWindowContentSize(ImVec2(500, 500));
+
 	if (ImGui::Begin("Configuration", &config_active, ImGuiWindowFlags_NoFocusOnAppearing)) {
 
+		if (ImGui::CollapsingHeader("About")) {
+			ImGui::Text("3D Engine by UPC students Pau and Josep");
+
+			ImGui::Separator();
+
+			if (ImGui::Button("Github repository"))
+			{
+				ShellExecute(NULL, "open", "https://github.com/ArmisJoe/3dEngine", NULL, NULL, SW_SHOWMAXIMIZED);
+			}
+
+			if (ImGui::Button("Read documentation"))
+			{
+				ShellExecute(NULL, "open", "https://github.com/ArmisJoe/3dEngine/wiki", NULL, NULL, SW_SHOWMAXIMIZED);
+			}
+			if (ImGui::Button("Report Issue"))
+			{
+			
+			}
+			ImGui::Text("Libraries:\n");
+			for (int i = 0; i < libraries.size(); ++i) {
+				ImGui::Text(libraries[i].c_str());
+			}
+
+		}
 
 		App->DrawConfigPanel();
 		
@@ -203,6 +232,8 @@ void ModuleImGui::DrawConfigPanels()
 
 		//Hardware
 		//App->hardware->DrawConfigPanel(
+
+
 
 		ImGui::End();
 	}

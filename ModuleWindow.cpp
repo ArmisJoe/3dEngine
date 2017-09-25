@@ -96,9 +96,7 @@ void ModuleWindow::SetTitle(const char* title)
 
 void ModuleWindow::DrawConfigPanel()
 {
-	if (ImGui::BeginMenu(name, &menu_open)) {
+	if (ImGui::CollapsingHeader(name, &menu_open)) {
 
-
-		ImGui::EndMenu();
 	}
 }

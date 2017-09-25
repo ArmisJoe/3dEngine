@@ -48,5 +48,8 @@ private:
 
 	bool config_active = false;
 	bool show_test_window = true;
+
+	// libraries
+	vector<string> libraries;
 };
 	
