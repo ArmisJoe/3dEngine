@@ -28,6 +28,13 @@ public:
 
 	//The surface contained by the window
 	SDL_Surface* screen_surface;
+
+private:
+	bool fullscreen = false;
+	bool check_fsc = false;
+
+	bool ChangeToFullScreen();
+	bool ChangeToWindow();
 };
 
 #endif // __ModuleWindow_H__

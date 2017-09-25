@@ -96,7 +96,70 @@ void ModuleWindow::SetTitle(const char* title)
 
 void ModuleWindow::DrawConfigPanel()
 {
-	if (ImGui::CollapsingHeader(name, &menu_open)) {
+	if (ImGui::CollapsingHeader("Window")) {
+		if (ImGui::Checkbox("Fullscreen", &check_fsc)) {
+			if (!fullscreen)
+			ChangeToFullScreen();
+			else 
+				ChangeToWindow();
+		}
 
 	}
+}
+
+bool ModuleWindow::ChangeToFullScreen()
+{
+	bool ret = true;
+
+	//Create window
+	Uint32 flags = SDL_WINDOW_SHOWN;
+
+	if (fullscreen == false)
+	{
+		//flags |= SDL_WINDOW_FULLSCREEN;
+		flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+		fullscreen = true;
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	}
+	else {
+
+	}
+	if (window == NULL)
+	{
+		LOG("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+		ret = false;
+	}
+	else
+	{
+		//Get window surface
+		screen_surface = SDL_GetWindowSurface(window);
+	}
+
+	return ret;
+}
+
+bool ModuleWindow::ChangeToWindow()
+{
+	bool ret = true;
+	//Create window
+
+	if (fullscreen == true)
+	{
+		fullscreen = false;
+		SDL_SetWindowFullscreen(window, SDL_FALSE);
+	}
+
+	if (window == NULL)
+	{
+		LOG("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+		ret = false;
+	}
+	else
+	{
+		//Get window surface
+		screen_surface = SDL_GetWindowSurface(window);
+	}
+
+
+	return ret;
 }
