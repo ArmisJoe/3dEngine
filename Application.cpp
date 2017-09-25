@@ -91,7 +91,16 @@ update_status Application::Update()
 {
 	update_status ret = UPDATE_CONTINUE;
 	PrepareUpdate();
-	
+
+	fps_container.push_back(ImGui::GetIO().Framerate);
+	if (fps_container.size() > 500) {
+		fps_container.erase(fps_container.begin(), fps_container.begin()+1);
+	}
+	ms_container.push_back(1000.f/ImGui::GetIO().Framerate);
+	if (ms_container.size() > 500) {
+		ms_container.erase(ms_container.begin(), ms_container.begin() + 1);
+	}
+
 	for (list<Module*>::iterator it = list_modules.begin(); it != list_modules.end(); ++it) {
 		if ((*it) != nullptr && ret == true) {
 			ret = (*it)->PreUpdate(dt);
@@ -127,8 +136,12 @@ bool Application::CleanUp()
 void Application::DrawConfigPanel()
 {
 	if (ImGui::CollapsingHeader("Application")) {
-
-		ImGui::Text(EngineName);
+		ImGui::Text("Framerate");
+		fps_title = EngineName +  ':' + std::to_string(ImGui::GetIO().Framerate);
+		ImGui::PlotHistogram("Framerate", &fps_container[0], fps_container.size(), 0, fps_title.c_str(), 0.0f, 100.0f, { 500, 100 });
+		ImGui::Separator();
+		ms_title = EngineName + ':' + std::to_string(1000.f /ImGui::GetIO().Framerate);
+		ImGui::PlotHistogram("Miliseconds", &ms_container[0], ms_container.size(), 0, ms_title.c_str(), 0.0f, 40.0f, { 500, 100 });
 	}
 }
 

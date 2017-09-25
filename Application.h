@@ -50,6 +50,11 @@ public:
 
 private:
 
+	vector<float> fps_container;
+	vector<float> ms_container;
+	string fps_title;
+	string ms_title;
+
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();

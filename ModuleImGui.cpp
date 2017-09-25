@@ -219,7 +219,7 @@ void ModuleImGui::DrawConfigPanels()
 			for (int i = 0; i < libraries.size(); ++i) {
 				ImGui::Text(libraries[i].c_str());
 			}
-
+			ImGui::Text("License: MIT");
 		}
 
 		App->DrawConfigPanel();
