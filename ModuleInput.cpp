@@ -6,6 +6,8 @@
 
 ModuleInput::ModuleInput(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+	name = "Input";
+
 	keyboard = new KEY_STATE[MAX_KEYS];
 	memset(keyboard, KEY_IDLE, sizeof(KEY_STATE) * MAX_KEYS);
 	memset(mouse_buttons, KEY_IDLE, sizeof(KEY_STATE) * MAX_MOUSE_BUTTONS);
@@ -126,4 +128,13 @@ bool ModuleInput::CleanUp()
 	//LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
+}
+
+void ModuleInput::DrawConfigPanel()
+{
+	if (ImGui::BeginMenu(name, &menu_open)) {
+
+
+		ImGui::EndMenu();
+	}
 }

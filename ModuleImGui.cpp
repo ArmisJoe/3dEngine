@@ -8,7 +8,10 @@
 
 ModuleImGui::ModuleImGui(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
+	name = "GUI";
+
 	show_test_window = true;
+	config_active = false;
 	object_p = false;
 }
 
@@ -16,6 +19,7 @@ ModuleImGui::~ModuleImGui()
 {
 	show_test_window = true;
 	object_p = false;
+	config_active = false;
 	console = nullptr;
 }
 
@@ -53,6 +57,7 @@ update_status ModuleImGui::Update(float dt)
 
 	if (ImGui::BeginMainMenuBar()) {
 		if (ImGui::BeginMenu("File")) {
+			ImGui::MenuItem("Config", "Alt+F1", &config_active);
 			if (ImGui::Button("Quit")) {
 				return update_status::UPDATE_STOP;
 			}
@@ -64,10 +69,6 @@ update_status ModuleImGui::Update(float dt)
 		if (ImGui::BeginMenu("View")) {
 			ImGui::MenuItem("Object Creation", "O", &object_p);
 			ImGui::MenuItem("Console", "1", &console->active);
-			ImGui::EndMenu();
-		}
-		if (ImGui::BeginMenu("Help")) {
-			ImGui::MenuItem("Configuration", "H", &about_p);
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
@@ -104,12 +105,12 @@ update_status ModuleImGui::Update(float dt)
 		ImGui::End();
 	}
 
+	if (config_active) {
+		DrawConfigPanels();
+	}
+
 	ImGui::Render();
 
-	if (about_p)
-	{
-		UpdateAboutWin();
-	}
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -123,6 +124,7 @@ bool ModuleImGui::CleanUp()
 {
 	for (std::list<Panel*>::iterator it = panels.begin(); it != panels.end(); it++) {
 		if ((*it) != nullptr) {
+			(*it)->CleanUp();
 			delete (*it);
 		}
 	}
@@ -141,22 +143,6 @@ bool ModuleImGui::CleanUp()
 
 	return true;
 }
-
-
-void ModuleImGui::UpdateAboutWin()
-{
-	ImGui::SetNextWindowContentSize(ImVec2(500, 300));
-	ImGui::Begin("About", &hello2, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoFocusOnAppearing);
-	//ImGui::Text("Hello");
-	/*ImGui::Separator();
-	if (ImGui::Button("Open Documentation"))
-	{
-		App->OpenURL("https://github.com/ArmisJoe/3dEngine/wiki");
-	}*/
-
-	ImGui::End();
-}
-
 
 void ModuleImGui::AddPanel(Panel * n_panel)
 {
@@ -199,5 +185,25 @@ void ModuleImGui::CheckAllIntersec()
 			b_id++;
 		}
 		a_id++;
+	}
+}
+
+void ModuleImGui::DrawConfigPanels()
+{
+	if (ImGui::Begin("Configuration", &config_active, ImGuiWindowFlags_NoFocusOnAppearing)) {
+
+
+		App->DrawConfigPanel();
+		
+		//Window
+		App->window->DrawConfigPanel();
+
+		//Input
+		App->input->DrawConfigPanel();
+
+		//Hardware
+		//App->hardware->DrawConfigPanel(
+
+		ImGui::End();
 	}
 }

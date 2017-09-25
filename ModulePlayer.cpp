@@ -11,6 +11,7 @@
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+	name = "Player";
 }
 
 ModulePlayer::~ModulePlayer()

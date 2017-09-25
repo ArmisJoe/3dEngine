@@ -16,6 +16,9 @@ class Module
 {
 private :
 	bool enabled;
+protected:
+	char* name;
+	bool menu_open = false;
 
 public:
 	Application* App;
@@ -58,4 +61,9 @@ public:
 
 	virtual void OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 	{}
+
+	// Config Panels
+	virtual void DrawConfigPanel() 
+	{}
+
 };

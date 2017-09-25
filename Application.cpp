@@ -53,6 +53,8 @@ bool Application::Init()
 
 	// Call Init() in all modules
 
+	EngineName = "PJ Edu Engine";
+
 	for (list<Module*>::iterator it = list_modules.begin(); it != list_modules.end(); ++it) {
 		if ((*it) != nullptr && ret == true) {
 			ret = (*it)->Init();
@@ -122,9 +124,14 @@ bool Application::CleanUp()
 	return ret;
 }
 
-void Application::OpenURL(const char * path)
+void Application::DrawConfigPanel()
 {
-	ShellExecute(NULL, "open", path, NULL, NULL, SW_SHOWMAXIMIZED);
+	if (ImGui::BeginMenu("Application")) {
+
+		ImGui::Text(EngineName);
+
+		ImGui::EndMenu();
+	}
 }
 
 void Application::AddModule(Module* mod)

@@ -35,20 +35,18 @@ public:
 	int CheckIntersec(Sphere* sp);
 	void CheckAllIntersec();
 
+	void DrawConfigPanels();
+
 private:
-
-	void UpdateAboutWin();
-
-
 	std::list<Panel*> panels;
 
 	PanelConsole* console = nullptr;
 
 	bool object_p = false;
-	bool about_p = false;
-	bool hello2 = false;
+
 	std::list<Sphere*> spheres;
 
+	bool config_active = false;
 	bool show_test_window = true;
 };
 	
