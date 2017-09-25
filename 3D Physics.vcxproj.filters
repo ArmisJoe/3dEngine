@@ -25,6 +25,12 @@
     <Filter Include="Sources\MathGeo">
       <UniqueIdentifier>{98206f74-b8ea-4e2b-926b-c9659600d5cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Hardware">
+      <UniqueIdentifier>{2b4039b6-1ba6-46b7-866b-722787056ed4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\gpudetect">
+      <UniqueIdentifier>{bcffffd7-9006-4ceb-b7bd-749289518548}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -288,6 +294,15 @@
     <ClInclude Include="PanelAbout.h">
       <Filter>Sources\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="Hardware.h">
+      <Filter>Sources\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="gpudetect\DeviceId.h">
+      <Filter>Sources\gpudetect</Filter>
+    </ClInclude>
+    <ClInclude Include="gpudetect\dxgi1_4.h">
+      <Filter>Sources\gpudetect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -475,6 +490,12 @@
       <Filter>Sources\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Module.cpp" />
+    <ClCompile Include="Hardware.cpp">
+      <Filter>Sources\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="gpudetect\DeviceId.cpp">
+      <Filter>Sources\gpudetect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Geometry\KDTree.inl">
