@@ -32,9 +32,25 @@ public:
 private:
 	bool fullscreen = false;
 	bool check_fsc = false;
+	bool resizable = false;
+	bool borderless = false;
+	bool check_bdls = false;
+
+	int w = SCREEN_WIDTH, h = SCREEN_HEIGHT;
+    float brightness = 1.f;
+private:
+
+	uint GetWidth() const;
+	uint GetHeight() const;
+	void SetWidth(uint width);
+	void SetHeigth(uint height);
+
 
 	bool ChangeToFullScreen();
 	bool ChangeToWindow();
+
+	void SetBorderless();
+	void SetBorder();
 };
 
 #endif // __ModuleWindow_H__

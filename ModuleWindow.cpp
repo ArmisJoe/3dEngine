@@ -98,14 +98,35 @@ void ModuleWindow::DrawConfigPanel()
 {
 	if (ImGui::CollapsingHeader("Window")) {
 		if (ImGui::Checkbox("Fullscreen", &check_fsc)) {
+			resizable = false;
 			if (!fullscreen)
 			ChangeToFullScreen();
 			else 
 				ChangeToWindow();
 		}
-
+		ImGui::SameLine();
+		if (!check_fsc)
+		{
+			ImGui::Checkbox("Resizable", &resizable);
+			if (resizable)
+			{
+				if (ImGui::SliderInt("Width", (int*)&w, 0, SCREEN_WIDTH) || ImGui::SliderInt("Height", (int*)&h, 0, SCREEN_HEIGHT))
+					SDL_SetWindowSize(window, w, h);
+			}
+			if (ImGui::Checkbox("Borderless", &check_bdls)) {
+				if (!borderless)
+				SetBorderless();
+				else SetBorder();
+			}
+		}
+		if (ImGui::SliderFloat("Brightness", &brightness, 0, 5))
+		{
+			if (SDL_SetWindowBrightness(window, brightness));
+		}
 	}
 }
+
+
 
 bool ModuleWindow::ChangeToFullScreen()
 {
@@ -160,6 +181,18 @@ bool ModuleWindow::ChangeToWindow()
 		screen_surface = SDL_GetWindowSurface(window);
 	}
 
-
 	return ret;
+}
+
+
+void ModuleWindow::SetBorderless()
+{
+	borderless = true;
+	SDL_SetWindowBordered(window, (SDL_bool)false);
+}
+
+
+void ModuleWindow::SetBorder() {
+	borderless = false;
+	SDL_SetWindowBordered(window, (SDL_bool)true);
 }
