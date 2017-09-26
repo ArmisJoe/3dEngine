@@ -485,7 +485,6 @@
     <ClCompile Include="src\Time\Clock.cpp">
       <Filter>Sources\MathGeo</Filter>
     </ClCompile>
-    <ClCompile Include="PanelAbout.cpp" />
     <ClCompile Include="Panel.cpp">
       <Filter>Sources\ImGui</Filter>
     </ClCompile>
@@ -495,6 +494,9 @@
     </ClCompile>
     <ClCompile Include="gpudetect\DeviceId.cpp">
       <Filter>Sources\gpudetect</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelAbout.cpp">
+      <Filter>Sources\ImGui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
