@@ -29,11 +29,9 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
-	void AddPanel(Panel* n_panel);
-	Sphere* AddSphere(const float x, const float y, const float z, float radius);
+	void ConsoleLog(const char* str) const;
 
-	int CheckIntersec(Sphere* sp);
-	void CheckAllIntersec();
+	void AddPanel(Panel* n_panel);
 
 	void DrawConfigPanels();
 
@@ -43,8 +41,6 @@ private:
 	PanelConsole* console = nullptr;
 
 	bool object_p = false;
-
-	std::list<Sphere*> spheres;
 
 	bool config_active = false;
 	bool show_test_window = true;

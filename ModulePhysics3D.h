@@ -7,6 +7,8 @@
 
 #include "Bullet/include/btBulletDynamicsCommon.h"
 
+#include <list>
+
 // Recommended scale is 1.0f == 1 meter, no less than 0.2 objects
 #define GRAVITY btVector3(0.0f, -10.0f, 0.0f) 
 
@@ -28,6 +30,11 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
+	Sphere* AddSphere(const float x, const float y, const float z, float radius);
+	int CheckIntersec(Sphere* sp);
+
+	void CheckAllIntersec();
+
 	/*PhysBody3D* AddBody(const Sphere& sphere, float mass = 1.0f);
 	PhysBody3D* AddBody(const Cube& cube, float mass = 1.0f);
 	PhysBody3D* AddBody(const Cylinder& cylinder, float mass = 1.0f);
@@ -36,6 +43,8 @@ public:
 	void AddConstraintP2P(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB);
 	void AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB, const vec3& axisS, const vec3& axisB, bool disable_collision = false);
 */
+
+	std::list<Sphere*> spheres;
 
 private:
 

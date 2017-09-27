@@ -140,6 +140,15 @@ update_status ModulePhysics3D::PostUpdate(float dt)
 // Called before quitting
 bool ModulePhysics3D::CleanUp()
 {
+
+	if (!spheres.empty()) {
+		for (std::list<Sphere*>::iterator it = spheres.begin(); it != spheres.end(); it++) {
+			if (it._Ptr->_Myval != nullptr) {
+				delete it._Ptr->_Myval;
+			}
+		}
+	}
+
 	/*
 	LOG("Destroying 3D Physics simulation");
 
@@ -175,6 +184,45 @@ bool ModulePhysics3D::CleanUp()
 	delete world;
 	*/
 	return true;
+}
+
+Sphere * ModulePhysics3D::AddSphere(const float x, const float y, const float z, float radius)
+{
+	math::float3 point = { x, y, z };
+	Sphere* s = new Sphere(point, radius);
+	spheres.push_back(s);
+	return s;
+}
+
+int ModulePhysics3D::CheckIntersec(Sphere * sp)
+{
+	int ret = 0;
+
+	if (!spheres.empty()) {
+		for (std::list<Sphere*>::iterator it = spheres.begin(); it != spheres.end(); it++) {
+			if (it._Ptr->_Myval->Intersects(*sp)) {
+				ret++;
+			}
+		}
+	}
+
+	return ret;
+}
+
+void ModulePhysics3D::CheckAllIntersec()
+{
+	int a_id = 1;
+	for (std::list<Sphere*>::iterator it_a = spheres.begin(); it_a != spheres.end(); it_a++) {
+		int b_id = 1;
+		for (std::list<Sphere*>::iterator it_b = spheres.begin(); it_b != spheres.end(); it_b++) {
+			if (it_a._Ptr->_Myval->Intersects(*(it_b._Ptr->_Myval))) {
+				string collision_log = "Sphere " + std::to_string(a_id) + " collides with Sphere " + std::to_string(b_id);
+				App->imgui->ConsoleLog(collision_log.c_str());
+			}
+			b_id++;
+		}
+		a_id++;
+	}
 }
 
 // ---------------------------------------------------------

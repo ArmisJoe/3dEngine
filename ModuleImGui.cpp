@@ -93,7 +93,7 @@ update_status ModuleImGui::Update(float dt)
 					mt19937 gen(rd());
 					uniform_real_distribution<> dis(0.1, 1);
 					float r = dis(gen);
-					AddSphere(dis(gen), dis(gen), dis(gen), r);
+					App->physics->AddSphere(dis(gen), dis(gen), dis(gen), r);
 				}
 
 				console->ConsoleLog("All Spheres Created");
@@ -104,7 +104,7 @@ update_status ModuleImGui::Update(float dt)
 
 	if (ImGui::Begin("Collision Check")) {
 		if (ImGui::Button("Check Collisions", ImVec2(100, 50))) {
-			CheckAllIntersec();
+			App->physics->CheckAllIntersec();
 		}
 		ImGui::End();
 	}
@@ -135,17 +135,14 @@ bool ModuleImGui::CleanUp()
 
 	panels.clear();
 
-	if (!spheres.empty()) {
-		for (std::list<Sphere*>::iterator it = spheres.begin(); it != spheres.end(); it++) {
-			if (it._Ptr->_Myval != nullptr) {
-				delete it._Ptr->_Myval;
-			}
-		}
-	}
-
 	console = nullptr;
 
 	return true;
+}
+
+void ModuleImGui::ConsoleLog(const char * str) const
+{
+	console->ConsoleLog(str);
 }
 
 void ModuleImGui::AddPanel(Panel * n_panel)
@@ -153,44 +150,6 @@ void ModuleImGui::AddPanel(Panel * n_panel)
 	panels.push_back(n_panel);
 }
 
-Sphere* ModuleImGui::AddSphere(const float x, const float y, const float z, float radius)
-{
-	math::float3 point = { x, y, z };
-	Sphere* s = new Sphere(point, radius);
-	spheres.push_back(s);
-	return s;
-}
-
-int ModuleImGui::CheckIntersec(Sphere * sp)
-{
-	int ret = 0;
-
-	if (!spheres.empty()) {
-		for (std::list<Sphere*>::iterator it = spheres.begin(); it != spheres.end(); it++) {
-			if (it._Ptr->_Myval->Intersects(*sp)) {
-				ret++;
-			}
-		}
-	}
-
-	return ret;
-}
-
-void ModuleImGui::CheckAllIntersec()
-{
-	int a_id = 1;
-	for (std::list<Sphere*>::iterator it_a = spheres.begin(); it_a != spheres.end(); it_a++) {
-		int b_id = 1;
-		for (std::list<Sphere*>::iterator it_b = spheres.begin(); it_b != spheres.end(); it_b++) {
-			if (it_a._Ptr->_Myval->Intersects(*(it_b._Ptr->_Myval))) {
-				string collision_log = "Sphere " + std::to_string(a_id) + " collides with Sphere " + std::to_string(b_id);
-				console->ConsoleLog(collision_log.c_str());
-			}
-			b_id++;
-		}
-		a_id++;
-	}
-}
 
 void ModuleImGui::DrawConfigPanels()
 {
