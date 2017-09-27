@@ -189,6 +189,9 @@ void ModuleImGui::DrawConfigPanels()
 		//Input
 		App->input->DrawConfigPanel();
 
+		//Render
+		App->renderer3D->DrawConfigPanel();
+
 		//Hardware
 		//App->hardware->DrawConfigPanel(
 

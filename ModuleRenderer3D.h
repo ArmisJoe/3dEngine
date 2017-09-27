@@ -24,10 +24,21 @@ public:
 
 	void OnResize(int width, int height);
 
+	void DrawConfigPanel();
+
 public:
 
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
+
+	bool enable_depth_test = false;
+	bool enable_cull_face = false;
+	bool enable_lightning = false;
+	bool enable_color_material = false;
+	bool enable_texture_2D = false;
+	float light_model_ambient = 0.6f;
+	float material_ambient = 1.0f;
+
 };
