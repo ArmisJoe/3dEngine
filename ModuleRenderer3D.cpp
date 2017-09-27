@@ -199,7 +199,10 @@ void ModuleRenderer3D::DrawConfigPanel()
 		if (ImGui::Checkbox("2D Textures", &enable_texture_2D)) {
 			enable_texture_2D ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
 		}
-		
+		if (ImGui::Checkbox("Wireframe Mode", &enable_wireframe)) {
+			enable_wireframe ? glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) : glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		}
+
 		//Sliders
 		if (ImGui::SliderFloat("Ambient Lighting", &light_model_ambient, 0, 1.0f)) {
 			GLfloat LightModelAmbient[] = { light_model_ambient, light_model_ambient, light_model_ambient, 1.0f };

@@ -65,6 +65,12 @@ update_status ModuleImGui::Update(float dt)
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Objects")) {
+			if (ImGui::BeginMenu ("Create")) {
+				if (ImGui::MenuItem("Sphere")) {
+					App->physics->AddSphere(0, 0, 0, 0.4f);
+				}
+				ImGui::EndMenu();
+			}
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("View")) {

@@ -38,6 +38,7 @@ public:
 	bool enable_lightning = false;
 	bool enable_color_material = false;
 	bool enable_texture_2D = false;
+	bool enable_wireframe = false;
 	float light_model_ambient = 0.6f;
 	float material_ambient = 1.0f;
 

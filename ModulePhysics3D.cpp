@@ -151,6 +151,18 @@ bool ModulePhysics3D::CleanUp()
 		}
 	}
 
+	spheres.clear();
+
+	if (!g_primitives.empty()) {
+		for (std::list<Primitive*>::iterator it = g_primitives.begin(); it != g_primitives.end(); it++) {
+			if (it._Ptr->_Myval != nullptr) {
+				delete it._Ptr->_Myval;
+			}
+		}
+	}
+
+	g_primitives.clear();
+
 	/*
 	LOG("Destroying 3D Physics simulation");
 
@@ -204,6 +216,8 @@ Sphere * ModulePhysics3D::AddSphere(const float x, const float y, const float z,
 	Sphere* s = new Sphere(point, radius);
 	g_primitives.push_back(gs);
 	spheres.push_back(s);
+
+	App->imgui->ConsoleLog("Sphere Created");
 
 	return s;
 }
