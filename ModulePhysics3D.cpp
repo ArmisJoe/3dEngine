@@ -136,11 +136,6 @@ update_status ModulePhysics3D::Update(float dt)
 update_status ModulePhysics3D::PostUpdate(float dt)
 {
 
-	for (std::list<Primitive*>::iterator it = g_primitives.begin(); it != g_primitives.end(); it++) {
-		if ((*it) != nullptr)
-			(*it)->InnerRender();
-	}
-
 	return UPDATE_CONTINUE;
 }
 
@@ -191,6 +186,14 @@ bool ModulePhysics3D::CleanUp()
 	delete world;
 	*/
 	return true;
+}
+
+void ModulePhysics3D::Draw()
+{
+	for (std::list<Primitive*>::iterator it = g_primitives.begin(); it != g_primitives.end(); it++) {
+		if ((*it) != nullptr)
+			(*it)->InnerRender();
+	}
 }
 
 Sphere * ModulePhysics3D::AddSphere(const float x, const float y, const float z, float radius)

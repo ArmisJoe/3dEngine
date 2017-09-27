@@ -30,6 +30,8 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
+	void Draw();
+
 	Sphere* AddSphere(const float x, const float y, const float z, float radius);
 	int CheckIntersec(Sphere* sp);
 

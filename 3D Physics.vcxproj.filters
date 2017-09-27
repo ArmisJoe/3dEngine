@@ -31,6 +31,9 @@
     <Filter Include="Sources\gpudetect">
       <UniqueIdentifier>{bcffffd7-9006-4ceb-b7bd-749289518548}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Glew">
+      <UniqueIdentifier>{9bed25d2-9266-422f-afcb-b475aecdfdc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -303,6 +306,18 @@
     <ClInclude Include="gpudetect\dxgi1_4.h">
       <Filter>Sources\gpudetect</Filter>
     </ClInclude>
+    <ClInclude Include="glew-2.1.0\include\GL\eglew.h">
+      <Filter>Sources\Glew</Filter>
+    </ClInclude>
+    <ClInclude Include="glew-2.1.0\include\GL\glew.h">
+      <Filter>Sources\Glew</Filter>
+    </ClInclude>
+    <ClInclude Include="glew-2.1.0\include\GL\glxew.h">
+      <Filter>Sources\Glew</Filter>
+    </ClInclude>
+    <ClInclude Include="glew-2.1.0\include\GL\wglew.h">
+      <Filter>Sources\Glew</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -497,6 +512,9 @@
     </ClCompile>
     <ClCompile Include="PanelAbout.cpp">
       <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="glew-2.1.0\glew.c">
+      <Filter>Sources\Glew</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

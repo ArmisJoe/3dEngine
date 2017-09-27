@@ -29,6 +29,8 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
+	void Draw();
+
 	void ConsoleLog(const char* str) const;
 
 	void AddPanel(Panel* n_panel);
