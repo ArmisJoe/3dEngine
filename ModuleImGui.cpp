@@ -3,8 +3,6 @@
 
 #include <iostream> 
 #include <string>
-
-#include <random>
 #include "Hardware.h"
 
 ModuleImGui::ModuleImGui(Application * app, bool start_enabled) : Module(app, start_enabled)
@@ -89,11 +87,8 @@ update_status ModuleImGui::Update(float dt)
 		if (ImGui::Begin("Object Creation")) {
 			if (ImGui::Button("Go Random", ImVec2(100, 50))) {
 				for (int i = 0; i < 100; i++) {
-					random_device rd;
-					mt19937 gen(rd());
-					uniform_real_distribution<> dis(0.1, 1);
-					float r = dis(gen);
-					App->physics->AddSphere(dis(gen), dis(gen), dis(gen), r);
+					float r = RandomNumber(0, 0.2f);
+					App->physics->AddSphere(RandomNumber(0, 20), RandomNumber(0, 20), RandomNumber(0, 20), r);
 				}
 
 				console->ConsoleLog("All Spheres Created");

@@ -4,6 +4,11 @@
 #include "glmath.h"
 #include "Light.h"
 
+#include "glew-2.1.0\include\GL\glew.h"
+#include "SDL\include\SDL_opengl.h"
+#include <gl\GL.h>
+#include <gl\GLU.h>
+
 #define MAX_LIGHTS 8
 
 class ModuleRenderer3D : public Module

@@ -26,14 +26,15 @@ ModulePhysics3D::ModulePhysics3D(Application* app, bool start_enabled) : Module(
 	dispatcher = new btCollisionDispatcher(collision_conf);
 	broad_phase = new btDbvtBroadphase();
 	solver = new btSequentialImpulseConstraintSolver();
-	debug_draw = new DebugDrawer();*/
+*/
+	debug_draw = new DebugDrawer();
 }
 
 // Destructor
 ModulePhysics3D::~ModulePhysics3D()
 {
-	/*
 	delete debug_draw;
+	/*
 	delete solver;
 	delete broad_phase;
 	delete dispatcher;
@@ -55,8 +56,8 @@ bool ModulePhysics3D::Start()
 {
 	/*LOG("Creating Physics environment");
 
-	world = new btDiscreteDynamicsWorld(dispatcher, broad_phase, solver, collision_conf);
 	world->setDebugDrawer(debug_draw);
+	world = new btDiscreteDynamicsWorld(dispatcher, broad_phase, solver, collision_conf);
 	world->setGravity(GRAVITY);
 	vehicle_raycaster = new btDefaultVehicleRaycaster(world);
 
@@ -134,6 +135,12 @@ update_status ModulePhysics3D::Update(float dt)
 // ---------------------------------------------------------
 update_status ModulePhysics3D::PostUpdate(float dt)
 {
+
+	for (std::list<Primitive*>::iterator it = g_primitives.begin(); it != g_primitives.end(); it++) {
+		if ((*it) != nullptr)
+			(*it)->InnerRender();
+	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -189,8 +196,12 @@ bool ModulePhysics3D::CleanUp()
 Sphere * ModulePhysics3D::AddSphere(const float x, const float y, const float z, float radius)
 {
 	math::float3 point = { x, y, z };
+	bSphere* gs = new bSphere(radius);
+	gs->SetPos(point.x, point.y, point.z);
 	Sphere* s = new Sphere(point, radius);
+	g_primitives.push_back(gs);
 	spheres.push_back(s);
+
 	return s;
 }
 
@@ -400,7 +411,7 @@ void ModulePhysics3D::AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, c
 
 */
 // =============================================
-/*
+
 void DebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color)
 {
 	line.origin.Set(from.getX(), from.getY(), from.getZ());
@@ -435,4 +446,3 @@ int	 DebugDrawer::getDebugMode() const
 {
 	return mode;
 }
-*/

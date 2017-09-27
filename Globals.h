@@ -6,6 +6,8 @@
 
 #include <windows.h>
 #include <stdio.h>
+#include <climits>
+#include <random>
 
 #define LOG(format, ...) log(__FILE__, __LINE__, format, __VA_ARGS__);
 
@@ -17,6 +19,7 @@ void log(const char file[], int line, const char* format, ...);
 #define RADTODEG 57.295779513082320876f
 #define HAVE_M_PI
 
+float RandomNumber(float min = INT_MIN, float max = INT_MAX);
 
 typedef unsigned int uint;
 

@@ -45,6 +45,7 @@ public:
 */
 
 	std::list<Sphere*> spheres;
+	std::list<Primitive*> g_primitives;
 
 private:
 
@@ -57,7 +58,6 @@ private:
 	btSequentialImpulseConstraintSolver* solver;
 	btDiscreteDynamicsWorld*			world;
 	btDefaultVehicleRaycaster*			vehicle_raycaster;
-	DebugDrawer*						debug_draw;
 
 	list<btCollisionShape*> shapes;
 	list<PhysBody3D*> bodies;
@@ -65,9 +65,10 @@ private:
 	list<btTypedConstraint*> constraints;
 	list<PhysVehicle3D*> vehicles;
 	*/
+	DebugDrawer*						debug_draw;
 };
 
-/*
+
 class DebugDrawer : public btIDebugDraw
 {
 public:
@@ -82,6 +83,6 @@ public:
 	int	 getDebugMode() const;
 
 	DebugDrawModes mode;
-	Line line;
+	bLine line;
 	Primitive point;
-};*/
+};
