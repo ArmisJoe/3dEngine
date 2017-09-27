@@ -51,9 +51,8 @@ update_status ModuleImGui::PreUpdate(float dt)
 
 update_status ModuleImGui::Update(float dt)
 {
-
 	for (std::list<Panel*>::iterator it = panels.begin(); it != panels.end(); it++) {
-		if((*it)->active)
+		if ((*it)->active)
 			(*it)->Draw();
 	}
 
@@ -76,7 +75,7 @@ update_status ModuleImGui::Update(float dt)
 		ImGui::EndMainMenuBar();
 	}
 
-	show_test_window = true;
+	show_test_window = false;
 
 	if (show_test_window == true) {
 		ImGui::ShowTestWindow(&show_test_window);
@@ -108,9 +107,6 @@ update_status ModuleImGui::Update(float dt)
 		DrawConfigPanels();
 	}
 
-	ImGui::Render();
-
-
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -133,6 +129,13 @@ bool ModuleImGui::CleanUp()
 	console = nullptr;
 
 	return true;
+}
+
+void ModuleImGui::Draw()
+{
+
+	ImGui::Render();
+
 }
 
 void ModuleImGui::ConsoleLog(const char * str) const
