@@ -18,7 +18,7 @@ public:
 	bool Init();
 	bool CleanUp();
 
-	void SetTitle(const char* title);
+	void SetTitle(const char* title, bool save_doc = false);
 
 	void DrawConfigPanel();
 

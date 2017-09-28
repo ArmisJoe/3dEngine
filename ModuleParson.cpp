@@ -14,7 +14,7 @@ ModuleParson::~ModuleParson()
 bool ModuleParson::Init()
 {
 	App->imgui->ConsoleLog("Module Parson Init");
-	App->config = CreateJSON("save_/config.json");
+	App->config = CreateJSON("config_/config.json");
 	return true;
 }
 
@@ -68,6 +68,7 @@ JSON_Doc * ModuleParson::LoadJSON(const char * path)
 			jsons.push_back(new_doc);
 
 			ret = new_doc;
+			ret->Save();
 		}
 	}
 
