@@ -13,6 +13,7 @@
 #include "ModulePhysics3D.h"
 #include "ModulePlayer.h"
 #include "ModuleImGui.h"
+#include "ModuleParson.h"
 
 class ModuleImGui;
 
@@ -30,6 +31,7 @@ public:
 	ModulePhysics3D* physics;
 	ModulePlayer* player;
 	ModuleImGui* imgui;
+	//ModuleParson* parson;
 
 private:
 

@@ -145,9 +145,10 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
-
+	CustomGLAttributes(); // SET GL ATTRIBUTES TO CUSTOMIZED
 	App->physics->Draw();
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	
+	StdGLAttributes();	// RESET RENDERER OPTIONS FOR THE UI
 	App->imgui->Draw();
 
 	SDL_GL_SwapWindow(App->window->window);
@@ -162,6 +163,40 @@ bool ModuleRenderer3D::CleanUp()
 	SDL_GL_DeleteContext(context);
 
 	return true;
+}
+
+void ModuleRenderer3D::StdGLAttributes()
+{
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	GLfloat LightModelAmbient[] = { STD_AMBIENT_LIGHTING, STD_AMBIENT_LIGHTING, STD_AMBIENT_LIGHTING, 1.0f };
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, LightModelAmbient);
+	GLfloat MaterialAmbient[] = { STD_MATERIAL_AMBIENT, STD_MATERIAL_AMBIENT, STD_MATERIAL_AMBIENT, 1.0f };
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MaterialAmbient);
+
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_COLOR_MATERIAL);
+	glEnable(GL_TEXTURE_2D);
+
+}
+
+void ModuleRenderer3D::CustomGLAttributes()
+{
+	if (light_model_ambient != STD_AMBIENT_LIGHTING) {
+		GLfloat LightModelAmbient[] = { light_model_ambient, light_model_ambient, light_model_ambient, 1.0f };
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, LightModelAmbient);
+	}
+	if (material_ambient != STD_MATERIAL_AMBIENT) {
+		GLfloat MaterialAmbient[] = { material_ambient, material_ambient, material_ambient, 1.0f };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MaterialAmbient);
+	}
+	enable_depth_test ? glEnable(GL_DEPTH_TEST) : glDisable(GL_DEPTH_TEST);
+	enable_cull_face ? glEnable(GL_CULL_FACE) : glDisable(GL_CULL_FACE);
+	enable_lightning ? glEnable(GL_LIGHTING) : glDisable(GL_LIGHTING);
+	enable_color_material ? glEnable(GL_COLOR_MATERIAL) : glDisable(GL_COLOR_MATERIAL);
+	enable_texture_2D ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
+	
 }
 
 
