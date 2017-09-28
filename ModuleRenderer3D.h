@@ -11,6 +11,9 @@
 
 #define MAX_LIGHTS 8
 
+#define STD_AMBIENT_LIGHTING 0.6f
+#define STD_MATERIAL_AMBIENT 1.0f
+
 class ModuleRenderer3D : public Module
 {
 public:
@@ -21,6 +24,9 @@ public:
 	update_status PreUpdate(float dt);
 	update_status PostUpdate(float dt);
 	bool CleanUp();
+
+	void StdGLAttributes();
+	void CustomGLAttributes();
 
 	void OnResize(int width, int height);
 
