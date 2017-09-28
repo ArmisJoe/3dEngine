@@ -34,6 +34,9 @@
     <Filter Include="Sources\Glew">
       <UniqueIdentifier>{9bed25d2-9266-422f-afcb-b475aecdfdc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\mmgr">
+      <UniqueIdentifier>{fda1b684-202c-43f4-9e02-d3bcb8c38f2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -318,6 +321,12 @@
     <ClInclude Include="glew-2.1.0\include\GL\wglew.h">
       <Filter>Sources\Glew</Filter>
     </ClInclude>
+    <ClInclude Include="mmgr\mmgr.h">
+      <Filter>Sources\mmgr</Filter>
+    </ClInclude>
+    <ClInclude Include="mmgr\nommgr.h">
+      <Filter>Sources\mmgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -514,6 +523,9 @@
     </ClCompile>
     <ClCompile Include="glew-2.1.0\glew.c">
       <Filter>Sources\Glew</Filter>
+    </ClCompile>
+    <ClCompile Include="mmgr\mmgr.cpp">
+      <Filter>Sources\mmgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
