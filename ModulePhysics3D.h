@@ -35,6 +35,8 @@ public:
 	Sphere* AddSphere(const float x, const float y, const float z, float radius);
 	int CheckIntersec(Sphere* sp);
 
+	void SetToWire(bool flag);
+
 	void CheckAllIntersec();
 
 	/*PhysBody3D* AddBody(const Sphere& sphere, float mass = 1.0f);
