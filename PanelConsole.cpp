@@ -13,7 +13,7 @@ PanelConsole::~PanelConsole()
 void PanelConsole::Draw()
 {
 	ImGui::SetNextWindowContentSize(ImVec2(w, h));
-	ImGui::Begin("Console", &active, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoFocusOnAppearing);
+	ImGui::Begin("Console", &active, ImGuiWindowFlags_NoFocusOnAppearing);
 	ImGui::TextUnformatted(text_buffer.begin());
 	ImGui::End();
 }

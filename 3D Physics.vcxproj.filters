@@ -503,7 +503,6 @@
     <ClCompile Include="Panel.cpp">
       <Filter>Sources\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Module.cpp" />
     <ClCompile Include="Hardware.cpp">
       <Filter>Sources\Hardware</Filter>
     </ClCompile>
