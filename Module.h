@@ -7,6 +7,8 @@
 #include <iostream>
 #include "SDL\include\SDL.h"
 
+#include "Globals.h"
+
 using namespace std;
 
 class Application;

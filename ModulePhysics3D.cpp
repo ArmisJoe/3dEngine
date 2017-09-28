@@ -221,7 +221,6 @@ Sphere * ModulePhysics3D::AddSphere(const float x, const float y, const float z,
 	spheres.push_back(s);
 
 	App->imgui->ConsoleLog("Sphere Created");
-
 	return s;
 }
 
