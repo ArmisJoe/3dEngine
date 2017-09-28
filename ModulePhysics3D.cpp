@@ -203,8 +203,11 @@ bool ModulePhysics3D::CleanUp()
 void ModulePhysics3D::Draw()
 {
 	for (std::list<Primitive*>::iterator it = g_primitives.begin(); it != g_primitives.end(); it++) {
-		if ((*it) != nullptr)
-			(*it)->InnerRender();
+		if ((*it) != nullptr) {
+			if ((*it)->wire != App->renderer3D->enable_wireframe)
+				(*it)->wire = App->renderer3D->enable_wireframe;
+			(*it)->Render();
+		}
 	}
 }
 
@@ -235,6 +238,14 @@ int ModulePhysics3D::CheckIntersec(Sphere * sp)
 	}
 
 	return ret;
+}
+
+void ModulePhysics3D::SetToWire(bool flag)
+{
+	for (std::list<Primitive*>::iterator it = g_primitives.begin(); it != g_primitives.end(); it++) {
+		if ((*it) != nullptr)
+			(*it)->wire = flag;
+	}
 }
 
 void ModulePhysics3D::CheckAllIntersec()

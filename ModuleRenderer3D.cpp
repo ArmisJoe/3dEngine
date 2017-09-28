@@ -8,7 +8,7 @@
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
-#pragma comment (lib, "glew-2.1.0/lib/Release/x64/glew32s.lib")
+//#pragma comment (lib, "glew-2.1.0/lib/Release/x64/glew32s.lib")
 
 ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -148,6 +148,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 
 	App->physics->Draw();
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	App->imgui->Draw();
 
 	SDL_GL_SwapWindow(App->window->window);
@@ -200,7 +201,7 @@ void ModuleRenderer3D::DrawConfigPanel()
 			enable_texture_2D ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
 		}
 		if (ImGui::Checkbox("Wireframe Mode", &enable_wireframe)) {
-			enable_wireframe ? glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) : glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
 		}
 
 		//Sliders
