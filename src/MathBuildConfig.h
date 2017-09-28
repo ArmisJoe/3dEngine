@@ -99,7 +99,8 @@
 
 // If KNET_LOGGING_SUPPORT_ENABLED is defined, MathGeoLib utilizes logging functions
 // from the kNet library.
-#ifndef KNET_LOGGING_SUPPORT_ENABLED
+#ifndef KNET_LOGGING_SUPPORT_DISABLED
+// polla
 //#define KNET_LOGGING_SUPPORT_ENABLED
 #endif
 

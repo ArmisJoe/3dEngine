@@ -51,6 +51,13 @@ update_status ModuleImGui::PreUpdate(float dt)
 
 update_status ModuleImGui::Update(float dt)
 {
+
+	if (App->Logs.size() > 0)
+	{
+		console->ConsoleLog(App->Logs.c_str());
+		App->Logs = "";
+	}
+
 	for (std::list<Panel*>::iterator it = panels.begin(); it != panels.end(); it++) {
 		if ((*it)->active)
 			(*it)->Draw();
