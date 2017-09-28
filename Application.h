@@ -13,10 +13,12 @@
 #include "ModulePhysics3D.h"
 #include "ModulePlayer.h"
 #include "ModuleImGui.h"
+#include "ModuleParson.h"
+
+#define LOG(format, ...) App->mylog(__FILE__, __LINE__, format, __VA_ARGS__);
 
 class ModuleImGui;
 
-#define LOG(format, ...) App->mylog(__FILE__, __LINE__, format, __VA_ARGS__);
 
 class Application
 {
@@ -30,6 +32,7 @@ public:
 	ModulePhysics3D* physics;
 	ModulePlayer* player;
 	ModuleImGui* imgui;
+	ModuleParson* parson;
 	
 private:
 

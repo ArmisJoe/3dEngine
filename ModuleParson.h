@@ -6,7 +6,12 @@
 #include "Module.h"
 
 class ModuleParson : public Module {
+public:
+	ModuleParson(Application* app, bool start_enabled = true);
+	~ModuleParson();
 
+	bool Init();
+	bool CleanUp();
 };
 
 #endif // !__MODULE_PARSON_H__
