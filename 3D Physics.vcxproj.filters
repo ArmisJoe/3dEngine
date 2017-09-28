@@ -512,7 +512,6 @@
     <ClCompile Include="Panel.cpp">
       <Filter>Sources\Tools\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Module.cpp" />
     <ClCompile Include="Hardware.cpp">
       <Filter>Sources\Hardware</Filter>
     </ClCompile>

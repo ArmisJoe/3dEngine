@@ -16,7 +16,7 @@ ModuleSceneIntro::~ModuleSceneIntro()
 // Load assets
 bool ModuleSceneIntro::Start()
 {
-//	LOG("Loading Intro assets");
+LOG("Loading Intro assets");
 	bool ret = true;
 	return ret;
 }
@@ -24,7 +24,7 @@ bool ModuleSceneIntro::Start()
 // Load assets
 bool ModuleSceneIntro::CleanUp()
 {
-//	LOG("Unloading Intro scene");
+	LOG("Unloading Intro scene");
 
 	return true;
 }

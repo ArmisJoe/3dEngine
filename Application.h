@@ -17,8 +17,9 @@
 
 class ModuleImGui;
 
-class 
-	Application
+#define LOG(format, ...) App->mylog(__FILE__, __LINE__, format, __VA_ARGS__);
+
+class Application
 {
 public:
 	ModuleWindow* window;
@@ -50,7 +51,9 @@ public:
 	bool CleanUp();
 
 	void DrawConfigPanel();
-
+	
+	string Logs;
+	void mylog(const char file[], int line, const char* format, ...);
 private:
 
 	vector<float> fps_container;
