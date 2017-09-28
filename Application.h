@@ -13,10 +13,12 @@
 #include "ModulePhysics3D.h"
 #include "ModulePlayer.h"
 #include "ModuleImGui.h"
+#include "ModuleParson.h"
+
+#define LOG(format, ...) App->mylog(__FILE__, __LINE__, format, __VA_ARGS__);
 
 class ModuleImGui;
 
-#define LOG(format, ...) App->mylog(__FILE__, __LINE__, format, __VA_ARGS__);
 
 class Application
 {
@@ -30,7 +32,8 @@ public:
 	ModulePhysics3D* physics;
 	ModulePlayer* player;
 	ModuleImGui* imgui;
-
+	ModuleParson* parson;
+	
 private:
 
 	Timer	ms_timer;
@@ -52,6 +55,9 @@ public:
 	
 	string Logs;
 	void mylog(const char file[], int line, const char* format, ...);
+
+	JSON_Doc* config = nullptr;
+
 private:
 
 	vector<float> fps_container;
