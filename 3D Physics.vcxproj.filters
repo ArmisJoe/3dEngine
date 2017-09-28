@@ -318,6 +318,9 @@
     <ClInclude Include="glew-2.1.0\include\GL\wglew.h">
       <Filter>Sources\Glew</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleParson.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
