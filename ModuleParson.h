@@ -27,6 +27,7 @@ private:
 	JSON_Value*  value = nullptr;
 	JSON_Object* object = nullptr;
 	const char*  path;
+
 };
 
 
@@ -41,8 +42,12 @@ public:
 	JSON_Doc* LoadJSON(const char* path);
 	JSON_Doc* CreateJSON(const char* path);
 
+
 private:
 	std::list<JSON_Doc*> jsons;
+
+public:
+	JSON_Doc* config = nullptr;
 };
 
 #endif // !__MODULE_PARSON_H__

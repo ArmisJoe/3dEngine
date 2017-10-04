@@ -66,6 +66,11 @@ update_status ModuleImGui::Update(float dt)
 	if (ImGui::BeginMainMenuBar()) {
 		if (ImGui::BeginMenu("File")) {
 			ImGui::MenuItem("Config", "Alt+F1", &config_active);
+			if (ImGui::Button("Save")) {
+				JSON_Doc* config = App->parson->config;
+				config->Save();
+				ConsoleLog("Configuration Saved");
+			}
 			if (ImGui::Button("Quit")) {
 				return update_status::UPDATE_STOP;
 			}

@@ -71,7 +71,7 @@ bool ModuleWindow::Init()
 	}
 
 	JSON_Doc* config = App->parson->LoadJSON("config_/config.json");
-	SetTitle(config->GetString("application.title"));
+	SetTitle(config->GetString("application.title"), false);
 
 	return ret;
 }
@@ -96,7 +96,7 @@ void ModuleWindow::SetTitle(const char* title, bool save_doc)
 {
 	SDL_SetWindowTitle(window, title);
 	if (save_doc) {
-		JSON_Doc* config = App->parson->LoadJSON("config_/config.json");
+		JSON_Doc* config = App->parson->config;
 		config->SetString("application.title", title);
 		config->Save();
 	}

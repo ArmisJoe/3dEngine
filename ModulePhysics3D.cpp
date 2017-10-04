@@ -338,7 +338,9 @@ AABB * ModulePhysics3D::AddAABB(const vec center, const vec size, bool visible)
 	aabbs.push_back(ret);
 
 	bCube* bAABB = new bCube(size.x, size.y, size.z);
-	vec position = ret->CornerPoint(2); // Corner (-1, +1, -1)
+	vec position;
+	//position = ret->CornerPoint(2); // Corner (-1, +1, -1)
+	position = ret->CenterPoint();
 	bAABB->SetPos(position.x, position.y, position.z);
 	bAABB->visible = visible;
 	g_primitives.push_back(bAABB);

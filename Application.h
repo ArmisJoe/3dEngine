@@ -56,8 +56,6 @@ public:
 	string Logs;
 	void mylog(const char file[], int line, const char* format, ...);
 
-	JSON_Doc* config = nullptr;
-
 private:
 
 	vector<float> fps_container;
