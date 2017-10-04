@@ -73,8 +73,11 @@ update_status ModuleImGui::Update(float dt)
 		}
 		if (ImGui::BeginMenu("Objects")) {
 			if (ImGui::BeginMenu ("Create")) {
-				if (ImGui::MenuItem("Sphere")) {
+				if (ImGui::Button("Sphere")) {
 					App->physics->AddSphere(0, 0, 0, 0.4f);
+				}
+				if (ImGui::Button("AABB")) {
+					App->physics->AddAABB(vec(0, 0, 0), vec(1, 1, 1));
 				}
 				ImGui::EndMenu();
 			}
