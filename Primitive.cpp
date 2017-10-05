@@ -121,15 +121,11 @@ bCube::bCube(float sizeX, float sizeY, float sizeZ) : Primitive(), size(sizeX, s
 
 void bCube::Start() {
 
-
 	float sx = size.x * 0.5f;
 	float sy = size.y * 0.5f;
 	float sz = size.z * 0.5f;
 
-	//glGenBuffers(1, (GLuint*) &(vertices_id));
-	//glBindBuffer(GL_ARRAY_BUFFER, vertices_id);
-
-	static GLfloat vertices_g[] = { 
+	 GLfloat vertices_g[] = { 
 		 -sx, -sy, -sz ,	//A
 		 -sx, -sy, sz ,		//B
 		 -sx, sy, -sz ,		//C
@@ -140,111 +136,34 @@ void bCube::Start() {
 		 sx, sy, sz			//H
 	};
 
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(float)* 8 * 3,  vertices_g , GL_STATIC_DRAW);
+	glGenBuffers(1, (GLuint*) &(vertices_id));
+	glBindBuffer(GL_ARRAY_BUFFER, vertices_id);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float)* 8 * 3,  vertices_g , GL_STATIC_DRAW);
 
-	//glBindBuffer(GL_ARRAY_BUFFER, NULL);
 
-	static GLuint elements[] = {
-		// front
-		0, 1, 2,
-		2, 3, 0,
-		// top
-		1, 5, 6,
-		6, 2, 1,
-		// back
-		7, 6, 5,
-		5, 4, 7,
-		// bottom
-		4, 0, 3,
-		3, 7, 4,
-		// left
-		4, 5, 1,
-		1, 0, 4,
-		// right
-		3, 2, 6,
-		6, 7, 3,
-	};
-
-	// Creates and bind Elements Buffer Object (14 is the elements array size)
-	//glGenBuffers(1, &ebo);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
-	//
+	glGenBuffers(1, (GLuint*) & indices_id);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_id);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
+	
 }
 
 
 void bCube::InnerRender() const
 {	
-	
 
-	/*glBegin(GL_TRIANGLES);
+	glEnableClientState(GL_VERTEX_ARRAY);
 
-	glNormal3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(-sx, -sy, sz); 
-	glVertex3f( sx, -sy, sz); 
-	glVertex3f( sx,  sy, sz);
+	glBindBuffer(GL_ARRAY_BUFFER, vertices_id);
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
-	glVertex3f(-sx, -sy, sz); 
-	glVertex3f( sx,  sy, sz); 
-	glVertex3f(-sx,  sy, sz); 
+	glGenBuffers(1, (GLuint*)& indices_id);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_id);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
 
-	glNormal3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(-sx, sy, sz);
-	glVertex3f( sx, sy, sz);
-	glVertex3f( sx, sy, -sz);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_id);
+	glDrawElements(GL_TRIANGLES, indices_id, GL_UNSIGNED_INT, NULL);
 
-	glVertex3f(-sx, sy, sz);
-	glVertex3f(sx, sy, -sz);
-	glVertex3f(-sx, sy, -sz);
-
-	glNormal3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(sx, -sy, sz);
-	glVertex3f(sx, -sy, -sz);
-	glVertex3f(sx, sy, -sz);
-
-	glVertex3f(sx, -sy, sz);
-	glVertex3f(sx, sy, -sz);
-	glVertex3f(sx, sy, sz);
-
-	glNormal3f(0.0f, 0.0f, -1.0f);
-	glVertex3f(sx, -sy, -sz);
-	glVertex3f(-sx, -sy, -sz);
-	glVertex3f(-sx, sy, -sz);
-
-	glVertex3f(sx, -sy, -sz);
-	glVertex3f(-sx, sy, -sz);
-	glVertex3f(sx, sy, -sz);
-
-	glNormal3f(0.0f, -1.0f, 0.0f);
-	glVertex3f(sx, -sy, sz);
-	glVertex3f(-sx, -sy, sz);
-	glVertex3f(-sx, -sy, -sz);
-
-	glVertex3f(sx, -sy, sz);
-	glVertex3f(-sx, -sy, -sz);
-	glVertex3f(sx, -sy, -sz);
-
-	glNormal3f(-1.0f, 0.0f, 0.0f);
-	glVertex3f(-sx, -sy, -sz);
-	glVertex3f(-sx, -sy, sz);
-	glVertex3f(-sx, sy, sz);
-
-	glVertex3f(-sx, -sy, -sz);
-	glVertex3f(-sx, sy,  sz);
-	glVertex3f(-sx, sy, -sz);
-
-
-	glEnd();*/
-
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	//glDrawElements(GL_TRIANGLES, ebo, GL_UNSIGNED_INT, NULL);
-
-	/*glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	int size;  
-	glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
-	glDrawElements(GL_TRIANGLES, size / sizeof(GLushort), GL_UNSIGNED_SHORT, 0);
-
-	glLineWidth(1.f);*/
+	glDisableClientState(GL_VERTEX_ARRAY);
 
 }
 

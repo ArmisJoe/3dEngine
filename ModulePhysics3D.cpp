@@ -136,7 +136,51 @@ update_status ModulePhysics3D::Update(float dt)
 			(*it)->Render();
 		}
 	}*/
+	/*
+	float sx = 2 * 0.5f;
+	float sy = 2 * 0.5f;
+	float sz = 2 * 0.5f;
 
+	static GLfloat vertices_g[] = {
+		-sx, -sy, -sz ,	//A
+		-sx, -sy, sz ,		//B
+		-sx, sy, -sz ,		//C
+		-sx, sy, sz ,		//D
+		sx, -sy, -sz ,		//E
+		sx, -sy, sz ,		//F
+		sx, sy, -sz ,		//G
+		sx, sy, sz			//H
+	};
+
+	uint vertices_id = 1;
+	glGenBuffers(1, (GLuint*) &(vertices_id));
+	glBindBuffer(GL_ARRAY_BUFFER, vertices_id);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 8 * 3, vertices_g, GL_STATIC_DRAW);
+
+
+	static GLuint elements[] = {
+		// front
+		0, 1, 2,
+		2, 3, 0,
+		// top
+		1, 5, 6,
+		6, 2, 1,
+		// back
+		7, 6, 5,
+		5, 4, 7,
+		// bottom
+		4, 0, 3,
+		3, 7, 4,
+		// left
+		4, 5, 1,
+		1, 0, 4,
+		// right
+		3, 2, 6,
+		6, 7, 3,
+	};
+
+	uint indices_id = 1;
+	*/
 	return UPDATE_CONTINUE;
 }
 
