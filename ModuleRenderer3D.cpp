@@ -150,6 +150,16 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	App->physics->Draw();
 
+	glLineWidth(2.0f);
+
+	glBegin(GL_LINES);
+	glColor3f(100, 100, 20);
+	glVertex3f(0.f, 0.f, 0.f);
+	glVertex3f(0.f, 10.f, 0.f);
+	glEnd();
+
+	glLineWidth(1.0f);
+
 	StdGLAttributes();	// RESET RENDERER OPTIONS FOR THE UI 
 
 	App->imgui->Draw();
