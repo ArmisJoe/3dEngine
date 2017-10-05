@@ -1,11 +1,18 @@
 
-#include "Globals.h"
+#include "glew-2.1.0\include\GL\glew.h"
+
 #include <gl/GL.h>
 #include <gl/GLU.h>
+
 #include "Primitive.h"
 #include "glut/glut.h"
 
+
+
 #pragma comment (lib, "glut/glut32.lib")
+
+
+
 
 // ------------------------------------------------------------
 Primitive::Primitive() : transform(IdentityMatrix), color(White), wire(false), axis(false), type(PrimitiveTypes::Primitive_Point)
@@ -16,7 +23,7 @@ PrimitiveTypes Primitive::GetType() const
 {
 	return type;
 }
-
+// ------------------------------------------------------------
 // ------------------------------------------------------------
 void Primitive::Render() const
 {
@@ -103,20 +110,74 @@ void Primitive::Scale(float x, float y, float z)
 bCube::bCube() : Primitive(), size(1.0f, 1.0f, 1.0f)
 {
 	type = PrimitiveTypes::Primitive_Cube;
+	/*Start();*/
 }
 
 bCube::bCube(float sizeX, float sizeY, float sizeZ) : Primitive(), size(sizeX, sizeY, sizeZ)
 {
 	type = PrimitiveTypes::Primitive_Cube;
+	Start();
 }
 
-void bCube::InnerRender() const
-{	
+void bCube::Start() {
+
+
 	float sx = size.x * 0.5f;
 	float sy = size.y * 0.5f;
 	float sz = size.z * 0.5f;
 
-	glBegin(GL_TRIANGLES);
+	//glGenBuffers(1, (GLuint*) &(vertices_id));
+	//glBindBuffer(GL_ARRAY_BUFFER, vertices_id);
+
+	static GLfloat vertices_g[] = { 
+		 -sx, -sy, -sz ,	//A
+		 -sx, -sy, sz ,		//B
+		 -sx, sy, -sz ,		//C
+		 -sx, sy, sz ,		//D
+		 sx, -sy, -sz ,		//E
+		 sx, -sy, sz ,		//F
+		 sx, sy, -sz ,		//G
+		 sx, sy, sz			//H
+	};
+
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(float)* 8 * 3,  vertices_g , GL_STATIC_DRAW);
+
+	//glBindBuffer(GL_ARRAY_BUFFER, NULL);
+
+	static GLuint elements[] = {
+		// front
+		0, 1, 2,
+		2, 3, 0,
+		// top
+		1, 5, 6,
+		6, 2, 1,
+		// back
+		7, 6, 5,
+		5, 4, 7,
+		// bottom
+		4, 0, 3,
+		3, 7, 4,
+		// left
+		4, 5, 1,
+		1, 0, 4,
+		// right
+		3, 2, 6,
+		6, 7, 3,
+	};
+
+	// Creates and bind Elements Buffer Object (14 is the elements array size)
+	//glGenBuffers(1, &ebo);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
+	//
+}
+
+
+void bCube::InnerRender() const
+{	
+	
+
+	/*glBegin(GL_TRIANGLES);
 
 	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(-sx, -sy, sz); 
@@ -173,7 +234,18 @@ void bCube::InnerRender() const
 	glVertex3f(-sx, sy, -sz);
 
 
-	glEnd();
+	glEnd();*/
+
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	//glDrawElements(GL_TRIANGLES, ebo, GL_UNSIGNED_INT, NULL);
+
+	/*glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	int size;  
+	glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
+	glDrawElements(GL_TRIANGLES, size / sizeof(GLushort), GL_UNSIGNED_SHORT, 0);
+
+	glLineWidth(1.f);*/
+
 }
 
 // SPHERE ============================================

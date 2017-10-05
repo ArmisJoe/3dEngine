@@ -4,10 +4,11 @@
 #include "glmath.h"
 #include "Light.h"
 
-#include "glew-2.1.0\include\GL\glew.h"
 #include "SDL\include\SDL_opengl.h"
 #include <gl\GL.h>
 #include <gl\GLU.h>
+//
+//#include "glew-2.1.0\include\GL\glew.h"
 
 #define MAX_LIGHTS 8
 
@@ -48,4 +49,6 @@ public:
 	float light_model_ambient = 0.6f;
 	float material_ambient = 1.0f;
 
+private:
+	bCube *TestCube;
 };

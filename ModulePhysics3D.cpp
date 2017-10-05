@@ -73,6 +73,13 @@ bool ModulePhysics3D::Start()
 		world->addRigidBody(body);
 	}
 	*/
+/*
+	bCube * TestCube = new bCube(2.f, 2.f, 2.f);
+	g_primitives.push_back(TestCube);
+*/
+
+	AddAABB({ 0,0,0 }, { 2, 2, 2 });
+
 	return true;
 }
 

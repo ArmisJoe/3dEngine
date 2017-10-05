@@ -4,7 +4,7 @@
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
-#include "glew-2.1.0\include\GL\glew.h"
+//#include "glew-2.1.0\include\GL\glew.h"
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
@@ -120,7 +120,7 @@ bool ModuleRenderer3D::Init()
 	LOG("Renderer: %s", glGetString(GL_RENDERER));
 	LOG("OpenGL version supported %s", glGetString(GL_VERSION));
 	LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
-
+	
 	return ret;
 }
 
@@ -135,6 +135,8 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	// light 0 on cam pos
 	lights[0].SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
+
+
 
 	for(uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
@@ -152,11 +154,11 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	glLineWidth(2.0f);
 
-	glBegin(GL_LINES);
+	/*glBegin(GL_LINES);
 	glColor3f(100, 100, 20);
 	glVertex3f(0.f, 0.f, 0.f);
 	glVertex3f(0.f, 10.f, 0.f);
-	glEnd();
+	glEnd();*/
 
 	glLineWidth(1.0f);
 

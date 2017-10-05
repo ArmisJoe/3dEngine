@@ -1,7 +1,14 @@
 
 #pragma once
+#include "Globals.h"
+
 #include "glmath.h"
 #include "Color.h"
+
+#include "glew-2.1.0\include\GL\glew.h"
+
+using namespace std;
+
 
 enum PrimitiveTypes
 {
@@ -18,7 +25,6 @@ class Primitive
 public:
 
 	Primitive();
-
 	virtual void	Render() const;
 	virtual void	InnerRender() const;
 	void			SetPos(float x, float y, float z);
@@ -34,6 +40,10 @@ public:
 
 protected:
 	PrimitiveTypes type;
+
+	uint num_vertices = 0;
+	//vector<vec3> vertices;
+	//vector<uint> indices;
 };
 
 // ============================================
@@ -43,8 +53,12 @@ public :
 	bCube();
 	bCube(float sizeX, float sizeY, float sizeZ);
 	void InnerRender() const;
+	void Start();
 public:
 	vec3 size;
+private:
+	uint vertices_id = 1, indices_id = 1;
+	GLuint	vao, vbo, ebo;
 };
 
 // ============================================
