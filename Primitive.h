@@ -58,20 +58,6 @@ public:
 	vec3 size;
 private:
 	uint vertices_id = 2, indices_id = 3;
-	/*GLuint elements[36] = {
-		2, 0 , 1,
-		3, 2, 1,
-		3, 1, 5,
-		7, 3, 5,
-		2, 3, 7,
-		6, 4, 7,
-		6, 4, 0,
-		2, 6, 0,
-		7, 5, 4,
-		6, 7, 4,
-		1, 0, 4,
-		5, 1, 4
-	};*/
 
 	GLuint elements[36] = {
 		2, 0 , 1,
