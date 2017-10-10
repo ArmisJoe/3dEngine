@@ -1,6 +1,15 @@
 #include "ModuleAssimp.h"
 #include "Application.h"
 
+ModuleAssimp::ModuleAssimp(Application * app, bool start_enabled) : Module(app, start_enabled)
+{
+	name = "Assimp";
+}
+
+ModuleAssimp::~ModuleAssimp()
+{
+}
+
 void ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_flag)
 {
 	std::string log_string;
@@ -15,54 +24,63 @@ void ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_fl
 		
 		// Mesh Iteration
 		for (int i = 0; i < scene->mNumMeshes; i++) {
-			aiMesh* new_mesh = scene->mMeshes[i];
-			Mesh m;
+			//Vertices
+			aiMesh* m = scene->mMeshes[i];
+			Mesh* new_mesh = new Mesh;
+			new_mesh->num_vertices = m->mNumVertices;
+			new_mesh->vertices = new float[new_mesh->num_vertices * 3];
+			memcpy(new_mesh->vertices, m->mVertices, sizeof(float) * new_mesh->num_vertices * 3);
+			LOG("New mesh with %d vertices", new_mesh->num_vertices);
+			glGenBuffers(1, (GLuint*) &(new_mesh->id_vertices));
+			glBindBuffer(GL_ARRAY_BUFFER, new_mesh->id_vertices);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * new_mesh->num_vertices * 3, new_mesh->vertices, GL_STATIC_DRAW);
 
-			m.num_vertices = new_mesh->mNumVertices;
-			m.vertices = new float[m.num_vertices * 3];
-			memcpy(m.vertices, new_mesh->mVertices, sizeof(float) * m.num_vertices * 3);
 
-			log_string = "New mesh with " + m.num_vertices;
-			log_string.append(" vertices");
-			App->imgui->ConsoleLog(log_string.c_str());
+			//Indices
+			if (m->HasFaces()) {
+				new_mesh->num_indices = m->mNumFaces * 3;
+				new_mesh->indices = new uint[new_mesh->num_indices];
 
-			if (new_mesh->HasFaces()) {
-				m.num_indices = new_mesh->mNumFaces * 3;
-				m.indices = new uint[m.num_indices]; // triangles
-				for (uint i = 0; i < new_mesh->mNumFaces; i++) {
-					if (new_mesh->mFaces[i].mNumIndices != 3)
-						App->imgui->ConsoleLog("WARNING: Geometry face with != 3 indices");
+				for (uint i = 0; i < m->mNumFaces; ++i)
+				{
+					if (m->mFaces[i].mNumIndices != 3) {
+						LOG("WARNING, geometry face with != 3 indices!");
+					}
 					else
-						memcpy(&m.indices[i * 3], new_mesh->mFaces[i].mIndices, 3 * sizeof(uint));
-
+						memcpy(&new_mesh->indices[i * 3], m->mFaces[i].mIndices, 3 * sizeof(uint));
 				}
+
 			}
-			GenerateMeshBuffer(m);
-			meshes.push_back(&m);
+			glGenBuffers(1, (GLuint*) &(new_mesh->id_indices));
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, new_mesh->id_indices);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * new_mesh->num_indices, new_mesh->indices, GL_STATIC_DRAW);
+
+
+			meshes.push_back(new_mesh);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		}
-
-
 		// !_Mesh Iteration
 
 		aiReleaseImport(scene);
 	}
 	else {
-		log_string = "Error loading scene: ";
-		log_string.append(path);
-		App->imgui->ConsoleLog(log_string.c_str());
+		LOG("Error Loading Scene %s", path);
 	}
 
 
 }
 
-void ModuleAssimp::GenerateMeshBuffer(const Mesh & mesh)
+void ModuleAssimp::GenerateVerticesBuffer(const Mesh & mesh)
 {
 	glGenBuffers(1, (GLuint*) &(mesh.id_vertices));
 	glBindBuffer(GL_ARRAY_BUFFER, mesh.id_vertices);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*mesh.num_vertices * 3, mesh.vertices, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
 
+void ModuleAssimp::GenerateIndicesBuffer(const Mesh & mesh)
+{
 	glGenBuffers(1, (GLuint*)&(mesh.id_indices));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.id_indices);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * mesh.num_indices, mesh.indices, GL_STATIC_DRAW);
@@ -73,6 +91,13 @@ void ModuleAssimp::GenerateMeshBuffer(const Mesh & mesh)
 
 bool ModuleAssimp::CleanUp()
 {
+
+	while (!meshes.empty())
+	{
+		delete[] meshes.front();
+		meshes.pop_front();
+	}
+
 	aiDetachAllLogStreams();
 	return true;
 }

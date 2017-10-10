@@ -26,12 +26,19 @@ struct Mesh {
 
 class ModuleAssimp : public Module {
 
+public:
+	ModuleAssimp(Application* app, bool start_enabled = true);
+	~ModuleAssimp();
+
+public:
 	void LoadGeometry(const char* path, const unsigned int pprocess_flag = aiProcessPreset_TargetRealtime_MaxQuality);
-	void GenerateMeshBuffer(const Mesh & mesh);
+	void GenerateVerticesBuffer(const Mesh & mesh);
+	void GenerateIndicesBuffer(const Mesh & mesh);
+
 
 	bool CleanUp();
 
-private:
+public:
 	std::list<Mesh*> meshes;
 
 };

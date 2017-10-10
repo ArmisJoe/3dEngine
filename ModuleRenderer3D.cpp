@@ -146,7 +146,9 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 update_status ModuleRenderer3D::Update(float dt)
 {
-	//for(std::list<Mesh*>::iterator it)
+	for (std::list<Mesh*>::iterator it = App->assimp->meshes.begin(); it != App->assimp->meshes.end(); it++) {
+		DrawMesh(it._Ptr->_Myval);
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -157,16 +159,6 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	CustomGLAttributes(); // SET GL ATTRIBUTES TO CUSTOMIZED 
 
 	App->physics->Draw();
-
-	glLineWidth(2.0f);
-
-	/*glBegin(GL_LINES);
-	glColor3f(100, 100, 20);
-	glVertex3f(0.f, 0.f, 0.f);
-	glVertex3f(0.f, 10.f, 0.f);
-	glEnd();*/
-
-	glLineWidth(1.0f);
 
 	StdGLAttributes();	// RESET RENDERER OPTIONS FOR THE UI 
 
@@ -276,7 +268,18 @@ void ModuleRenderer3D::DrawConfigPanel()
 
 void ModuleRenderer3D::DrawMesh(const Mesh * mesh)
 {
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertices);
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->id_indices);
-	glDrawElements(GL_TRIANGLES, mesh->id_indices, GL_UNSIGNED_INT, NULL);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
+	
+	if(enable_wireframe)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	glDrawElements(GL_TRIANGLES, mesh->num_indices, GL_UNSIGNED_INT, NULL);
+	glDisableClientState(GL_VERTEX_ARRAY);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
