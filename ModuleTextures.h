@@ -4,7 +4,7 @@
 #define __MODULE_TEXTURES_H__
 
 #include "Module.h"
-//#include "src-ILUT\include\ilut_opengl.h"
+#include "DeviL\src-ILUT\include\ilut_opengl.h"
 
 class ModuleTextures : public Module {
 public:
