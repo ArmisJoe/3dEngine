@@ -139,8 +139,6 @@ void bCube::Start() {
 	glGenBuffers(1, (GLuint*) &(vertices_id));
 	glBindBuffer(GL_ARRAY_BUFFER, vertices_id);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices_g),  vertices_g , GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0,  0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 

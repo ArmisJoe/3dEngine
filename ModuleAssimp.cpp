@@ -35,6 +35,7 @@ void ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_fl
 			glBindBuffer(GL_ARRAY_BUFFER, new_mesh->id_vertices);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * new_mesh->num_vertices * 3, new_mesh->vertices, GL_STATIC_DRAW);
 
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 			//Indices
 			if (m->HasFaces()) {
@@ -54,7 +55,6 @@ void ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_fl
 			glGenBuffers(1, (GLuint*) &(new_mesh->id_indices));
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, new_mesh->id_indices);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * new_mesh->num_indices, new_mesh->indices, GL_STATIC_DRAW);
-
 
 			meshes.push_back(new_mesh);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
