@@ -87,6 +87,7 @@
     <ClInclude Include="Hardware.h" />
     <ClInclude Include="imgui_impl_sdl.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="ModuleAssimp.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleImGui.h" />
     <ClInclude Include="ModuleParson.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ModuleAssimp.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleImGui.cpp" />

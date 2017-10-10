@@ -327,6 +327,9 @@
     <ClInclude Include="parson.h">
       <Filter>Sources\Parson</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleAssimp.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -530,6 +533,7 @@
     <ClCompile Include="ModuleParson.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleAssimp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Geometry\KDTree.inl">

@@ -15,6 +15,7 @@ Application::Application()
 	player = new ModulePlayer(this);
 	imgui = new ModuleImGui(this);
 	parson = new ModuleParson(this);
+	assimp = new ModuleAssimp(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -28,6 +29,7 @@ Application::Application()
 	AddModule(physics);
 	AddModule(imgui);
 	AddModule(parson);
+	AddModule(assimp);
 	
 	// Scenes
 	AddModule(scene_intro);

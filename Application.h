@@ -14,6 +14,7 @@
 #include "ModulePlayer.h"
 #include "ModuleImGui.h"
 #include "ModuleParson.h"
+#include "ModuleAssimp.h"
 
 #define LOG(format, ...) App->mylog(__FILE__, __LINE__, format, __VA_ARGS__);
 
@@ -33,6 +34,7 @@ public:
 	ModulePlayer* player;
 	ModuleImGui* imgui;
 	ModuleParson* parson;
+	ModuleAssimp* assimp;
 	
 private:
 

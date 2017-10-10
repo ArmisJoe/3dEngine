@@ -7,6 +7,9 @@
 #include "SDL\include\SDL_opengl.h"
 #include <gl\GL.h>
 #include <gl\GLU.h>
+
+#include "ModuleAssimp.h"
+
 //
 //#include "glew-2.1.0\include\GL\glew.h"
 
@@ -23,6 +26,7 @@ public:
 
 	bool Init();
 	update_status PreUpdate(float dt);
+	update_status Update(float dt);
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
@@ -32,6 +36,8 @@ public:
 	void CustomGLAttributes();
 
 	void DrawConfigPanel();
+
+	void DrawMesh(const Mesh* mesh);
 
 public:
 

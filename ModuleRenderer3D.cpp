@@ -144,6 +144,12 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
+update_status ModuleRenderer3D::Update(float dt)
+{
+	//for(std::list<Mesh*>::iterator it)
+	return UPDATE_CONTINUE;
+}
+
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
@@ -266,4 +272,11 @@ void ModuleRenderer3D::DrawConfigPanel()
 		}
 		
 	}
+}
+
+void ModuleRenderer3D::DrawMesh(const Mesh * mesh)
+{
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->id_indices);
+	glDrawElements(GL_TRIANGLES, mesh->id_indices, GL_UNSIGNED_INT, NULL);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
 }

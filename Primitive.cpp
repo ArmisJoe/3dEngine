@@ -110,7 +110,7 @@ void Primitive::Scale(float x, float y, float z)
 bCube::bCube() : Primitive(), size(1.0f, 1.0f, 1.0f)
 {
 	type = PrimitiveTypes::Primitive_Cube;
-	/*Start();*/
+	Start();
 }
 
 bCube::bCube(float sizeX, float sizeY, float sizeZ) : Primitive(), size(sizeX, sizeY, sizeZ)
@@ -142,13 +142,12 @@ void bCube::Start() {
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0,  0);
 
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	glGenBuffers(1, (GLuint*) & indices_id);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_id);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
 	
-	glBindVertexArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 }
