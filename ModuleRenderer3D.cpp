@@ -282,4 +282,5 @@ void ModuleRenderer3D::DrawMesh(const Mesh * mesh)
 	glDisableClientState(GL_VERTEX_ARRAY);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

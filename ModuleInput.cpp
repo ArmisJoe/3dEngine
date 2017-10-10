@@ -117,8 +117,10 @@ update_status ModuleInput::PreUpdate(float dt)
 			case SDL_DROPFILE:
 			{
 				dropped_filedir = e.drop.file;
-				App->assimp->LoadGeometry(dropped_filedir);
-				//SDL_free(dropped_filedir);
+				char* filext = strrchr(dropped_filedir, '.');
+				if (strncmp(filext, ".FBX", 4) == 0)
+					App->assimp->LoadGeometry(dropped_filedir);
+				SDL_free(dropped_filedir);
 				break;
 			}
 		}
