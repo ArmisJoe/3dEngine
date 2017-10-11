@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "ModuleInput.h"
 
+#include "HelperFoos.h"
+
 #define MAX_KEYS 300
 
 ModuleInput::ModuleInput(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -117,8 +119,9 @@ update_status ModuleInput::PreUpdate(float dt)
 			case SDL_DROPFILE:
 			{
 				dropped_filedir = e.drop.file;
-				char* filext = strrchr(dropped_filedir, '.');
-				if (strncmp(filext, ".FBX", 4) == 0)
+				char* filetext = Capitalize(strrchr(dropped_filedir, '.'));
+				LOG("FILE %s", filetext);
+				if (strncmp(filetext, ".FBX", 4) == 0)
 					App->assimp->LoadGeometry(dropped_filedir);
 				SDL_free(dropped_filedir);
 				break;

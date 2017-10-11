@@ -85,6 +85,7 @@
     <ClInclude Include="gpudetect\DeviceId.h" />
     <ClInclude Include="gpudetect\dxgi1_4.h" />
     <ClInclude Include="Hardware.h" />
+    <ClInclude Include="HelperFoos.h" />
     <ClInclude Include="imgui_impl_sdl.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="ModuleAssimp.h" />

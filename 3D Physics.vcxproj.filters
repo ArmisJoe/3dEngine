@@ -333,6 +333,9 @@
     <ClInclude Include="ModuleTextures.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="HelperFoos.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
