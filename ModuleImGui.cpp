@@ -15,6 +15,7 @@ ModuleImGui::ModuleImGui(Application * app, bool start_enabled) : Module(app, st
 	libraries.push_back("ImGui");
 	libraries.push_back("MathGeoLib");
 	libraries.push_back("gpudetect");
+	libraries.push_back("SDL");
 }
 
 ModuleImGui::~ModuleImGui()
@@ -184,8 +185,12 @@ void ModuleImGui::DrawConfigPanels()
 				ShellExecute(NULL, "open", "https://github.com/ArmisJoe/3dEngine/wiki", NULL, NULL, SW_SHOWMAXIMIZED);
 			}
 			if (ImGui::Button("Report Issue"))
+			{	
+				ShellExecute(NULL, "open", "https://github.com/ArmisJoe/3dEngine/issues", NULL, NULL, SW_SHOWMAXIMIZED);
+			}
+			if (ImGui::Button("Download latest version"))
 			{
-			
+				ShellExecute(NULL, "open", "https://github.com/ArmisJoe/3dEngine/releases", NULL, NULL, SW_SHOWMAXIMIZED);
 			}
 			ImGui::Text("Libraries:\n");
 			for (int i = 0; i < libraries.size(); ++i) {

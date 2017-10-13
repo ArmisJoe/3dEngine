@@ -99,7 +99,7 @@ update_status Application::Update()
 	if (fps_container.size() > 500) {
 		fps_container.erase(fps_container.begin(), fps_container.begin()+1);
 	}
-	/*ms_container.push_back(1000.f/ImGui::GetIO().Framerate);*/
+
 	if (ms_container.size() > 500) {
 		ms_container.erase(ms_container.begin(), ms_container.begin() + 1);
 	}
@@ -156,7 +156,6 @@ void Application::DrawConfigPanel()
 		ImGui::Separator();
 
 		ms_title = EngineName + ':' + std::to_string(1000.f /ImGui::GetIO().Framerate);
-		/*ImGui::PlotHistogram("Miliseconds", &ms_container[0], ms_container.size(), 0, ms_title.c_str(), 0.0f, 40.0f, { 500, 100 });*/
 
 		ImGui::Text("Memory Consumption");
 		ImGui::Separator();
