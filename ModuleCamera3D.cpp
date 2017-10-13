@@ -62,6 +62,7 @@ update_status ModuleCamera3D::Update(float dt)
 
 	// Mouse motion ----------------
 
+
 	if(App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
 	{
 		int dx = -App->input->GetMouseXMotion();
@@ -69,15 +70,15 @@ update_status ModuleCamera3D::Update(float dt)
 
 		float Sensitivity = 0.25f;
 
-		Position -= Reference;
-
 		if(dx != 0)
 		{
 			float DeltaX = (float)dx * Sensitivity;
 
+			
 			X = rotate(X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
 			Y = rotate(Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
 			Z = rotate(Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+
 		}
 
 		if(dy != 0)
@@ -86,6 +87,7 @@ update_status ModuleCamera3D::Update(float dt)
 
 			Y = rotate(Y, DeltaY, X);
 			Z = rotate(Z, DeltaY, X);
+			
 
 			if(Y.y < 0.0f)
 			{
@@ -94,7 +96,7 @@ update_status ModuleCamera3D::Update(float dt)
 			}
 		}
 
-		Position = Reference + Z * length(Position);
+		//Position = Reference + Z * length(Position);
 	}
 
 	// Recalculate matrix -------------
