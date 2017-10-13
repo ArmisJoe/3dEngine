@@ -56,11 +56,11 @@ update_status ModuleCamera3D::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT) {
 		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT)
 			RotateFromReference();
-
-		// Restart camera ----------------
-		if (App->input->GetKey(SDL_SCANCODE_R) == KEY_UP)
-			SetCamera(vec3(0, 0, 0), 15);
 	}
+
+	// Restart camera ----------------
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_UP)
+		SetCamera(vec3(0, 0, 0), 15);
 
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
