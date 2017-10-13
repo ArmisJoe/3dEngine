@@ -12,6 +12,8 @@
 
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
 
+struct Texture;
+
 struct Mesh {
 
 	uint id_vertices = 0; // id in VRAM
@@ -21,6 +23,12 @@ struct Mesh {
 	uint id_indices = 0; // id in VRAM
 	uint num_vertices = 0;
 	float* vertices = nullptr;
+
+	float* textureCoords; // UV Coords
+	uint num_UVChannels = 0;
+	float material_index; // material ID
+
+	Texture* tex = nullptr;
 
 };
 
@@ -34,7 +42,6 @@ public:
 	void LoadGeometry(const char* path, const unsigned int pprocess_flag = aiProcessPreset_TargetRealtime_MaxQuality);
 	void GenerateVerticesBuffer(const Mesh & mesh);
 	void GenerateIndicesBuffer(const Mesh & mesh);
-
 
 	bool CleanUp();
 

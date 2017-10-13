@@ -123,6 +123,8 @@ update_status ModuleInput::PreUpdate(float dt)
 				LOG("FILE %s", filetext);
 				if (strncmp(filetext, ".FBX", 4) == 0)
 					App->assimp->LoadGeometry(dropped_filedir);
+				if (strncmp(filetext, ".PNG", 4) == 0)
+					App->tex->LoadTexture(dropped_filedir);
 				SDL_free(dropped_filedir);
 				break;
 			}

@@ -26,7 +26,13 @@ void ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_fl
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 			//Vertices
 			aiMesh* m = scene->mMeshes[i];
-			Mesh* new_mesh = new Mesh;
+			Mesh* new_mesh = new Mesh();
+			// Texture UV's 'load'
+			new_mesh->num_UVChannels = m->GetNumUVChannels();
+			memcpy(new_mesh->textureCoords, m->mTextureCoords, sizeof(float)*new_mesh->num_vertices * 3);
+			// Material Index
+			new_mesh->material_index = m->mMaterialIndex;
+			// Vertices
 			new_mesh->num_vertices = m->mNumVertices;
 			new_mesh->vertices = new float[new_mesh->num_vertices * 3];
 			memcpy(new_mesh->vertices, m->mVertices, sizeof(float) * new_mesh->num_vertices * 3);

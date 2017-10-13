@@ -147,6 +147,10 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 update_status ModuleRenderer3D::Update(float dt)
 {
 	for (std::list<Mesh*>::iterator it = App->assimp->meshes.begin(); it != App->assimp->meshes.end(); it++) {
+		//HardCode for Assigment01
+		if(!App->tex->textures.empty())
+			it._Ptr->_Myval->tex = App->tex->textures.begin()._Ptr->_Myval;
+		//!_HardCode for Assigment01
 		DrawMesh(it._Ptr->_Myval);
 	}
 	return UPDATE_CONTINUE;
@@ -268,11 +272,16 @@ void ModuleRenderer3D::DrawConfigPanel()
 
 void ModuleRenderer3D::DrawMesh(const Mesh * mesh)
 {
+	if(mesh->tex != nullptr)
+		glBindTexture(GL_TEXTURE_2D, mesh->tex->id);
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertices);
+	glTexCoordPointer(2, GL_FLOAT, 0, mesh->textureCoords);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->id_indices);
 	
+
 	if(enable_wireframe)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	else
@@ -281,6 +290,8 @@ void ModuleRenderer3D::DrawMesh(const Mesh * mesh)
 	glDrawElements(GL_TRIANGLES, mesh->num_indices, GL_UNSIGNED_INT, NULL);
 	glDisableClientState(GL_VERTEX_ARRAY);
 
+	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 }
