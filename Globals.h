@@ -12,7 +12,6 @@
 
 //#define LOG(format, ...) mylog(__FILE__, __LINE__, format, __VA_ARGS__);
 
-
 #define CAP(n) ((n <= 0.0f) ? n=0.0f : (n >= 1.0f) ? n=1.0f : n=n)
 
 #define DEGTORAD 0.0174532925199432957f

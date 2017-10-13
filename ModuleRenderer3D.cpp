@@ -4,7 +4,7 @@
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
-#include "glew-2.1.0\include\GL\glew.h"
+//#include "glew-2.1.0\include\GL\glew.h"
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
@@ -98,6 +98,7 @@ bool ModuleRenderer3D::Init()
 		GLfloat MaterialDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MaterialDiffuse);
 		
+		enable_depth_test = true;
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 		lights[0].Active(true);
@@ -120,7 +121,7 @@ bool ModuleRenderer3D::Init()
 	LOG("Renderer: %s", glGetString(GL_RENDERER));
 	LOG("OpenGL version supported %s", glGetString(GL_VERSION));
 	LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
-
+	
 	return ret;
 }
 
@@ -136,9 +137,23 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	// light 0 on cam pos
 	lights[0].SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
 
+
+
 	for(uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
 
+	return UPDATE_CONTINUE;
+}
+
+update_status ModuleRenderer3D::Update(float dt)
+{
+	for (std::list<Mesh*>::iterator it = App->assimp->meshes.begin(); it != App->assimp->meshes.end(); it++) {
+		//HardCode for Assigment01
+		if(!App->tex->textures.empty())
+			it._Ptr->_Myval->tex = App->tex->textures.begin()._Ptr->_Myval;
+		//!_HardCode for Assigment01
+		DrawMesh(it._Ptr->_Myval);
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -147,12 +162,14 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 
 	CustomGLAttributes(); // SET GL ATTRIBUTES TO CUSTOMIZED 
-
+	
 	App->physics->Draw();
-
+	
 	StdGLAttributes();	// RESET RENDERER OPTIONS FOR THE UI 
-
+	
 	App->imgui->Draw();
+	
+	CustomGLAttributes();
 
 	SDL_GL_SwapWindow(App->window->window);
 
@@ -195,7 +212,7 @@ void ModuleRenderer3D::StdGLAttributes()
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_LIGHTING);
 	glDisable(GL_COLOR_MATERIAL);
-	glDisable(GL_TEXTURE_2D);
+	//glDisable(GL_TEXTURE_2D);
 
 }
 
@@ -254,4 +271,66 @@ void ModuleRenderer3D::DrawConfigPanel()
 		}
 		
 	}
+}
+
+void ModuleRenderer3D::DrawMesh(const Mesh * m)
+{
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+
+	glBindBuffer(GL_ARRAY_BUFFER, m->id_vertices);
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m->id_indices);
+
+	//Apply UV if exist
+	if (m->num_UV != 0)
+	{
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glBindBuffer(GL_ARRAY_BUFFER, m->id_UV);
+		glTexCoordPointer(3, GL_FLOAT, 0, NULL);
+	}
+
+	//glEnable(GL_TEXTURE_2D);
+	if(m->tex != nullptr)
+		glBindTexture(GL_TEXTURE_2D, (GLuint)m->tex->id);
+
+	if (enable_wireframe)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	glDrawElements(GL_TRIANGLES, m->num_indices, GL_UNSIGNED_INT, NULL);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+
+	/// Attemp 01
+	//if(mesh->tex != nullptr)
+	//	glBindTexture(GL_TEXTURE_2D, mesh->tex->id);
+	//
+	//glEnableClientState(GL_VERTEX_ARRAY);
+	//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	//glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertices);
+	//glTexCoordPointer(3, GL_FLOAT, 0, NULL);
+	//glVertexPointer(3, GL_FLOAT, 0, NULL);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->id_indices);
+	//
+	//if(enable_wireframe)
+	//	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//else
+	//	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	//
+	//glDrawElements(GL_TRIANGLES, mesh->num_indices, GL_UNSIGNED_INT, NULL);
+	//glDisableClientState(GL_VERTEX_ARRAY);
+	//glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	//
+	//glBindTexture(GL_TEXTURE_2D, 0);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 }
