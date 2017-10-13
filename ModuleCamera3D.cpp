@@ -41,15 +41,26 @@ bool ModuleCamera3D::CleanUp()
 // -----------------------------------------------------------------
 update_status ModuleCamera3D::Update(float dt)
 {
+	// Mouse wheel motion
+
+	vec3 newPos(0, 0, 0);
+	float speed = 3.0f * dt;
+
+	if (App->input->IsMouseWheelActive()) {
+		newPos -= Z * App->input->GetMouseWheelMotion();
+
+		Position += newPos;
+		Reference += newPos;
+	}
+
 
 	// Mouse motion ----------------
-
+	
 
 	if(App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
 	{
 
-		vec3 newPos(0, 0, 0);
-		float speed = 3.0f * dt;
+		
 		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			speed = 8.0f * dt;
 
