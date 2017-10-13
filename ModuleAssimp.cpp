@@ -19,11 +19,10 @@ void ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_fl
 	const aiScene* scene = aiImportFile(path, pprocess_flag);
 	if (scene != nullptr && scene->HasMeshes())
 	{
-		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 			//Vertices
 			aiMesh* m = scene->mMeshes[i];
-			Mesh* new_mesh = new Mesh;
+			Mesh* new_mesh = new Mesh();
 			new_mesh->num_vertices = m->mNumVertices;
 			new_mesh->vertices = new float[new_mesh->num_vertices * 3];
 			memcpy(new_mesh->vertices, m->mVertices, sizeof(float) * new_mesh->num_vertices * 3);
@@ -34,7 +33,6 @@ void ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_fl
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 			//Indices
-
 			if (m->HasFaces()) {
 				new_mesh->num_indices = m->mNumFaces * 3;
 				new_mesh->indices = new uint[new_mesh->num_indices];
@@ -42,7 +40,7 @@ void ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_fl
 				for (uint i = 0; i < m->mNumFaces; ++i)
 				{
 					if (m->mFaces[i].mNumIndices != 3) {
-						LOG("WARNING, geometry face with != 3 indices!");
+						LOG("Mesh face with != 3 indices!");
 					}
 					else
 						memcpy(&new_mesh->indices[i * 3], m->mFaces[i].mIndices, 3 * sizeof(uint));

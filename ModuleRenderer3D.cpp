@@ -98,6 +98,7 @@ bool ModuleRenderer3D::Init()
 		GLfloat MaterialDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MaterialDiffuse);
 		
+		enable_depth_test = true;
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 		lights[0].Active(true);
@@ -161,12 +162,14 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 
 	CustomGLAttributes(); // SET GL ATTRIBUTES TO CUSTOMIZED 
-
+	
 	App->physics->Draw();
-
+	
 	StdGLAttributes();	// RESET RENDERER OPTIONS FOR THE UI 
-
+	
 	App->imgui->Draw();
+	
+	CustomGLAttributes();
 
 	SDL_GL_SwapWindow(App->window->window);
 
@@ -272,6 +275,7 @@ void ModuleRenderer3D::DrawConfigPanel()
 
 void ModuleRenderer3D::DrawMesh(const Mesh * m)
 {
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 
 	glBindBuffer(GL_ARRAY_BUFFER, m->id_vertices);

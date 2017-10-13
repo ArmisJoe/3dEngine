@@ -46,7 +46,7 @@ public:
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
 
-	bool enable_depth_test = false;
+	bool enable_depth_test = true;
 	bool enable_cull_face = true;
 	bool enable_lightning = false;
 	bool enable_color_material = false;
