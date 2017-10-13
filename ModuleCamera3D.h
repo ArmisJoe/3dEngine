@@ -22,6 +22,12 @@ private:
 
 	void CalculateViewMatrix();
 
+	void RotateCamera();
+	void RotateFromReference();
+
+	void MoveCamera(float dt);
+	void CameraZoom(float dt);
+
 public:
 	
 	vec3 X, Y, Z, Position, Reference;
