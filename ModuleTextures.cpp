@@ -66,6 +66,8 @@ GLuint ModuleTextures::LoadTexture(const char * path)
 		}
 		else {	
 
+			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
 			Texture* new_tex = new Texture();
 
 			glGenTextures(1, &textureID);

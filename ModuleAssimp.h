@@ -24,12 +24,13 @@ struct Mesh {
 	uint num_vertices = 0;
 	float* vertices = nullptr;
 
+	Texture* tex = nullptr; // Mesh Texture
+	uint id_UV = 0; // id in VRAM
 	float* textureCoords; // UV Coords
-	uint num_UVChannels = 0;
+	uint num_UV = 0;
+
 	float material_index; // material ID
-
-	Texture* tex = nullptr;
-
+	uint num_UVChannels = 0;
 };
 
 class ModuleAssimp : public Module {
