@@ -28,6 +28,9 @@ private:
 	void MoveCamera(float dt);
 	void CameraZoom(float dt);
 
+	void SetCamera(const vec3& focus, const float& distance);
+
+
 public:
 	
 	vec3 X, Y, Z, Position, Reference;

@@ -55,10 +55,11 @@ update_status ModuleCamera3D::Update(float dt)
 	else
 	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT) {
 		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT)
-		{
-
 			RotateFromReference();
-		}
+
+		// Restart camera ----------------
+		if (App->input->GetKey(SDL_SCANCODE_R) == KEY_UP)
+			SetCamera(vec3(0, 0, 0), 15);
 	}
 
 	// Recalculate matrix -------------
@@ -218,4 +219,11 @@ void ModuleCamera3D::CameraZoom(float dt)
 
 	Position += newPos;
 	Reference += newPos;
+}
+
+
+void ModuleCamera3D::SetCamera(const vec3& focus, const float& distance)
+{
+	Reference = focus;
+	Position = Reference + Z * distance;
 }
