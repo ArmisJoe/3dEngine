@@ -103,6 +103,7 @@ bool ModuleRenderer3D::Init()
 		lights[0].Active(true);
 		glEnable(GL_LIGHTING);
 		glEnable(GL_COLOR_MATERIAL);
+		
 	}
 
 	// Projection matrix for
@@ -126,7 +127,6 @@ bool ModuleRenderer3D::Init()
 // PreUpdate: clear buffer
 update_status ModuleRenderer3D::PreUpdate(float dt)
 {
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
@@ -146,11 +146,16 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 
+	CustomGLAttributes(); // SET GL ATTRIBUTES TO CUSTOMIZED 
+
 	App->physics->Draw();
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	StdGLAttributes();	// RESET RENDERER OPTIONS FOR THE UI 
+
 	App->imgui->Draw();
 
 	SDL_GL_SwapWindow(App->window->window);
+
 	return UPDATE_CONTINUE;
 }
 
@@ -176,6 +181,41 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+}
+
+void ModuleRenderer3D::StdGLAttributes()
+{
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	GLfloat LightModelAmbient[] = { STD_AMBIENT_LIGHTING, STD_AMBIENT_LIGHTING, STD_AMBIENT_LIGHTING, 1.0f };
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, LightModelAmbient);
+	GLfloat MaterialAmbient[] = { STD_MATERIAL_AMBIENT, STD_MATERIAL_AMBIENT, STD_MATERIAL_AMBIENT, 1.0f };
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MaterialAmbient);
+
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_CULL_FACE);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_COLOR_MATERIAL);
+	glDisable(GL_TEXTURE_2D);
+
+}
+
+void ModuleRenderer3D::CustomGLAttributes()
+{
+	if (light_model_ambient != STD_AMBIENT_LIGHTING) {
+		GLfloat LightModelAmbient[] = { light_model_ambient, light_model_ambient, light_model_ambient, 1.0f };
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, LightModelAmbient);
+	}
+	if (material_ambient != STD_MATERIAL_AMBIENT) {
+		GLfloat MaterialAmbient[] = { material_ambient, material_ambient, material_ambient, 1.0f };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MaterialAmbient);
+	}
+
+	enable_depth_test ? glEnable(GL_DEPTH_TEST) : glDisable(GL_DEPTH_TEST);
+	enable_cull_face ? glEnable(GL_CULL_FACE) : glDisable(GL_CULL_FACE);
+	enable_lightning ? glEnable(GL_LIGHTING) : glDisable(GL_LIGHTING);
+	enable_color_material ? glEnable(GL_COLOR_MATERIAL) : glDisable(GL_COLOR_MATERIAL);
+	enable_texture_2D ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
+
 }
 
 void ModuleRenderer3D::DrawConfigPanel()

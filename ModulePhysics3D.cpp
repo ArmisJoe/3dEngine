@@ -154,6 +154,107 @@ bool ModulePhysics3D::CleanUp()
 
 	spheres.clear();
 
+	if (!aabbs.empty()) {
+		for (std::list<AABB*>::iterator it = aabbs.begin(); it != aabbs.end(); it++) {
+			if (it._Ptr->_Myval != nullptr) {
+				delete it._Ptr->_Myval;
+			}
+		}
+	}
+
+	aabbs.clear();
+
+	if (!obbs.empty()) {
+		for (std::list<OBB*>::iterator it = obbs.begin(); it != obbs.end(); it++) {
+			if (it._Ptr->_Myval != nullptr) {
+				delete it._Ptr->_Myval;
+			}
+		}
+	}
+
+	obbs.clear();
+
+	if (!lines.empty()) {
+		for (std::list<Line*>::iterator it = lines.begin(); it != lines.end(); it++) {
+			if (it._Ptr->_Myval != nullptr) {
+				delete it._Ptr->_Myval;
+			}
+		}
+	}
+
+	lines.clear();
+
+	if (!line_segments.empty()) {
+		for (std::list<LineSegment*>::iterator it = line_segments.begin(); it != line_segments.end(); it++) {
+			if (it._Ptr->_Myval != nullptr) {
+				delete it._Ptr->_Myval;
+			}
+		}
+	}
+
+	line_segments.clear();
+
+	if (!capsules.empty()) {
+		for (std::list<Capsule*>::iterator it = capsules.begin(); it != capsules.end(); it++) {
+			if (it._Ptr->_Myval != nullptr) {
+				delete it._Ptr->_Myval;
+			}
+		}
+	}
+
+	capsules.clear();
+
+	if (!frustums.empty()) {
+		for (std::list<Frustum*>::iterator it = frustums.begin(); it != frustums.end(); it++) {
+			if (it._Ptr->_Myval != nullptr) {
+				delete it._Ptr->_Myval;
+			}
+		}
+	}
+
+	frustums.clear();
+
+	if (!planes.empty()) {
+		for (std::list<Plane*>::iterator it = planes.begin(); it != planes.end(); it++) {
+			if (it._Ptr->_Myval != nullptr) {
+				delete it._Ptr->_Myval;
+			}
+		}
+	}
+
+	planes.clear();
+
+	if (!polyhedrons.empty()) {
+		for (std::list<Polyhedron*>::iterator it = polyhedrons.begin(); it != polyhedrons.end(); it++) {
+			if (it._Ptr->_Myval != nullptr) {
+				delete it._Ptr->_Myval;
+			}
+		}
+	}
+
+	polyhedrons.clear();
+
+	if (!triangles.empty()) {
+		for (std::list<Triangle*>::iterator it = triangles.begin(); it != triangles.end(); it++) {
+			if (it._Ptr->_Myval != nullptr) {
+				delete it._Ptr->_Myval;
+			}
+		}
+	}
+
+	triangles.clear();
+
+	if (!rays.empty()) {
+		for (std::list<Ray*>::iterator it = rays.begin(); it != rays.end(); it++) {
+			if (it._Ptr->_Myval != nullptr) {
+				delete it._Ptr->_Myval;
+			}
+		}
+	}
+
+	rays.clear();
+
+	// GRAPHICAL PRIMITIVES LIST CLEAN UP
 	if (!g_primitives.empty()) {
 		for (std::list<Primitive*>::iterator it = g_primitives.begin(); it != g_primitives.end(); it++) {
 			if (it._Ptr->_Myval != nullptr) {
@@ -207,12 +308,13 @@ void ModulePhysics3D::Draw()
 		if ((*it) != nullptr) {
 			if ((*it)->wire != App->renderer3D->enable_wireframe)
 				(*it)->wire = App->renderer3D->enable_wireframe;
-			(*it)->Render();
+			if((*it)->visible)
+				(*it)->Render();
 		}
 	}
 }
 
-Sphere * ModulePhysics3D::AddSphere(const float x, const float y, const float z, float radius)
+Sphere * ModulePhysics3D::AddSphere(const float x, const float y, const float z, float radius, bool visible)
 {
 	math::float3 point = { x, y, z };
 	bSphere* gs = new bSphere(radius);
@@ -224,6 +326,28 @@ Sphere * ModulePhysics3D::AddSphere(const float x, const float y, const float z,
 	App->imgui->ConsoleLog("Sphere Created");
 
 	return s;
+}
+
+AABB * ModulePhysics3D::AddAABB(const vec center, const vec size, bool visible)
+{
+	AABB* ret = nullptr;
+
+	ret = new AABB();
+
+	ret->SetFromCenterAndSize(center, size);
+	aabbs.push_back(ret);
+
+	bCube* bAABB = new bCube(size.z, size.x, size.y);
+	vec position;
+	//position = ret->CornerPoint(2); // Corner (-1, +1, -1)
+	position = ret->CenterPoint();
+	bAABB->SetPos(position.x, position.y, position.z);
+	bAABB->visible = visible;
+	g_primitives.push_back(bAABB);
+
+	App->imgui->ConsoleLog("AABB Created");
+
+	return ret;
 }
 
 int ModulePhysics3D::CheckIntersec(Sphere * sp)

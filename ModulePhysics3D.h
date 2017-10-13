@@ -32,7 +32,18 @@ public:
 
 	void Draw();
 
-	Sphere* AddSphere(const float x, const float y, const float z, float radius);
+	Sphere* AddSphere(const float x, const float y, const float z, float radius, bool visible = true);
+	AABB* AddAABB(const vec center, const vec size, bool visible = true);
+	OBB* AddOBB();
+	Line* AddLine();
+	LineSegment AddLineSegment();
+	Capsule* AddCapsule();
+	Frustum* AddFrustum();
+	Plane* AddPlane();
+	Polyhedron* AddPolyhedron();
+	Triangle* AddTriangle();
+	Ray* AddRay();
+
 	int CheckIntersec(Sphere* sp);
 
 	void SetToWire(bool flag);
@@ -49,6 +60,18 @@ public:
 */
 
 	std::list<Sphere*> spheres;
+	std::list<AABB*> aabbs;
+	std::list<OBB*> obbs;
+	std::list<Line*> lines;
+	std::list<LineSegment*> line_segments;
+	std::list<Capsule*> capsules;
+	std::list<Frustum*> frustums;
+	std::list<Plane*> planes;
+	std::list<Polyhedron*> polyhedrons;
+	std::list<Triangle*> triangles;
+
+	std::list<Ray*> rays;
+
 	std::list<Primitive*> g_primitives;
 
 private:

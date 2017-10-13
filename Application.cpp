@@ -17,6 +17,7 @@ Application::Application()
 	physics = new ModulePhysics3D(this);
 	player = new ModulePlayer(this);
 	imgui = new ModuleImGui(this);
+	parson = new ModuleParson(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -29,6 +30,7 @@ Application::Application()
 	AddModule(audio);
 	AddModule(physics);
 	AddModule(imgui);
+	AddModule(parson);
 	
 	// Scenes
 	AddModule(scene_intro);

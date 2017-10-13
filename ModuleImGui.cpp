@@ -67,6 +67,11 @@ update_status ModuleImGui::Update(float dt)
 	if (ImGui::BeginMainMenuBar()) {
 		if (ImGui::BeginMenu("File")) {
 			ImGui::MenuItem("Config", "Alt+F1", &config_active);
+			if (ImGui::Button("Save")) {
+				JSON_Doc* config = App->parson->config;
+				config->Save();
+				ConsoleLog("Configuration Saved");
+			}
 			if (ImGui::Button("Quit")) {
 				return update_status::UPDATE_STOP;
 			}
@@ -74,8 +79,11 @@ update_status ModuleImGui::Update(float dt)
 		}
 		if (ImGui::BeginMenu("Objects")) {
 			if (ImGui::BeginMenu ("Create")) {
-				if (ImGui::MenuItem("Sphere")) {
+				if (ImGui::Button("Sphere")) {
 					App->physics->AddSphere(0, 0, 0, 0.4f);
+				}
+				if (ImGui::Button("AABB")) {
+					App->physics->AddAABB(vec(0, 0, 0), vec(1, 1, 1));
 				}
 				ImGui::EndMenu();
 			}

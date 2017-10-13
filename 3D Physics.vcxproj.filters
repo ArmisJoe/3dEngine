@@ -36,6 +36,8 @@
     </Filter>
     <Filter Include="Sources\mmgr">
       <UniqueIdentifier>{fda1b684-202c-43f4-9e02-d3bcb8c38f2b}</UniqueIdentifier>
+    <Filter Include="Sources\Parson">
+      <UniqueIdentifier>{f6a8f983-ac85-4902-96ac-556afdd48830}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -326,6 +328,11 @@
     </ClInclude>
     <ClInclude Include="mmgr\nommgr.h">
       <Filter>Sources\mmgr</Filter>
+    <ClInclude Include="ModuleParson.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="parson.h">
+      <Filter>Sources\Parson</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -526,6 +533,11 @@
     </ClCompile>
     <ClCompile Include="mmgr\mmgr.cpp">
       <Filter>Sources\mmgr</Filter>
+    <ClCompile Include="parson.c">
+      <Filter>Sources\Parson</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleParson.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
