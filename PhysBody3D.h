@@ -14,11 +14,11 @@ public:
 	PhysBody3D(btRigidBody* body);
 	~PhysBody3D();
 
-	void Push(float x, float y, float z);
+	void Push(const float &x,const float &y, const float &z) const;
 	void GetTransform(float* matrix) const;
 	void SetTransform(const float* matrix) const;
-	void SetPos(float x, float y, float z);
-	btRigidBody* GetBody() {
+	void SetPos(const float &x, const float &y, const float &z);
+	btRigidBody* GetBody() const {
 		return body;
 	}
 

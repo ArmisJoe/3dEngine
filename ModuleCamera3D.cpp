@@ -142,7 +142,6 @@ void ModuleCamera3D::FocusMesh(const float* vertices, const uint &num_vertices)
 
 
 		Position.y = Reference.y = highest_vertex_y * PROPORTION_CAMERA;
-
 		Position.z = Reference.z = highest_vertex_z * PROPORTION_CAMERA;
 		Position.x = Reference.x = highest_vertex_x * PROPORTION_CAMERA;
 

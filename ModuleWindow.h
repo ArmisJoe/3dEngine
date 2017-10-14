@@ -39,12 +39,12 @@ private:
 	int w = SCREEN_WIDTH, h = SCREEN_HEIGHT;
     float brightness = 1.f;
 private:
-
+	/*
 	uint GetWidth() const;
 	uint GetHeight() const;
 	void SetWidth(uint width);
 	void SetHeigth(uint height);
-
+*/
 
 	bool ChangeToFullScreen();
 	bool ChangeToWindow();

@@ -15,7 +15,7 @@ PhysBody3D::~PhysBody3D()
 }
 
 // ---------------------------------------------------------
-void PhysBody3D::Push(float x, float y, float z)
+void PhysBody3D::Push(const float &x, const float &y, const float &z) const
 {
 	body->applyCentralImpulse(btVector3(x, y, z));
 }
@@ -41,7 +41,7 @@ void PhysBody3D::SetTransform(const float* matrix) const
 }
 
 // ---------------------------------------------------------
-void PhysBody3D::SetPos(float x, float y, float z)
+void PhysBody3D::SetPos(const float &x, const float &y, const float &z)
 {
 	btTransform t = body->getWorldTransform();
 	t.setOrigin(btVector3(x, y, z));

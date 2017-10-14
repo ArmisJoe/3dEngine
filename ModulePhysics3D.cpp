@@ -365,7 +365,7 @@ void ModulePhysics3D::Draw()
 	}
 }
 
-Sphere * ModulePhysics3D::AddSphere(const float x, const float y, const float z, float radius, bool visible)
+Sphere * ModulePhysics3D::AddSphere(const float &x, const float &y, const float &z, float radius, bool visible)
 {
 	math::float3 point = { x, y, z };
 	bSphere* gs = new bSphere(radius);

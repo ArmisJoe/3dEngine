@@ -30,10 +30,10 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
-	void OnResize(int width, int height);
+	void OnResize(const int width, const int height);
 
-	void StdGLAttributes();
-	void CustomGLAttributes();
+	void StdGLAttributes() const;
+	void CustomGLAttributes() const;
 
 	void DrawConfigPanel();
 

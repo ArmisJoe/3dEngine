@@ -193,7 +193,7 @@ bool ModuleRenderer3D::CleanUp()
 }
 
 
-void ModuleRenderer3D::OnResize(int width, int height)
+void ModuleRenderer3D::OnResize(const int width, const int height)
 {
 	glViewport(0, 0, width, height);
 
@@ -206,7 +206,7 @@ void ModuleRenderer3D::OnResize(int width, int height)
 	glLoadIdentity();
 }
 
-void ModuleRenderer3D::StdGLAttributes()
+void ModuleRenderer3D::StdGLAttributes() const
 {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	GLfloat LightModelAmbient[] = { STD_AMBIENT_LIGHTING, STD_AMBIENT_LIGHTING, STD_AMBIENT_LIGHTING, 1.0f };
@@ -222,7 +222,7 @@ void ModuleRenderer3D::StdGLAttributes()
 
 }
 
-void ModuleRenderer3D::CustomGLAttributes()
+void ModuleRenderer3D::CustomGLAttributes() const
 {
 	if (light_model_ambient != STD_AMBIENT_LIGHTING) {
 		GLfloat LightModelAmbient[] = { light_model_ambient, light_model_ambient, light_model_ambient, 1.0f };

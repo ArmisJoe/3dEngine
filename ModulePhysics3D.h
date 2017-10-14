@@ -32,7 +32,7 @@ public:
 
 	void Draw();
 
-	Sphere* AddSphere(const float x, const float y, const float z, float radius, bool visible = true);
+	Sphere* AddSphere(const float &x, const float &y, const float &z, float radius, bool visible = true);
 	AABB* AddAABB(const vec center, const vec size, bool visible = true);
 	OBB* AddOBB();
 	Line* AddLine();
