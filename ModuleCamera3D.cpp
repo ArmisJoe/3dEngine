@@ -118,17 +118,21 @@ float* ModuleCamera3D::GetViewMatrix()
 void ModuleCamera3D::FocusMesh(const float* vertices, const uint &num_vertices)
 {
 		uint	y_test = 0;
-		float	highest_vertex = 0.0f;
+		float	highest_vertex_y = 0.0f, highest_vertex_x = 0.0f, highest_vertex_z = 0.0f;
 
 		for (uint i = 0; i < num_vertices; ++i) {
 			switch (++y_test) {
 			case 1:
+				if (highest_vertex_x < vertices[i])
+					highest_vertex_x = vertices[i];
 				break;
 			case 2:
-				if (highest_vertex < vertices[i])
-					highest_vertex = vertices[i];
+				if (highest_vertex_y < vertices[i])
+					highest_vertex_y = vertices[i];
 				break;
 			case 3:
+				if (highest_vertex_z < vertices[i])
+					highest_vertex_z = vertices[i];
 				y_test = 0;
 				break;
 			}
@@ -137,11 +141,10 @@ void ModuleCamera3D::FocusMesh(const float* vertices, const uint &num_vertices)
 		vec3 first_v(vertices[0], vertices[1], vertices[2]);
 
 
-		Position.y = Reference.y = highest_vertex * PROPORTION_CAMERA;
+		Position.y = Reference.y = highest_vertex_y * PROPORTION_CAMERA;
 
-		Position.z = Reference.z = first_v.z * PROPORTION_CAMERA;
-		Position.x = Reference.x = first_v.x * PROPORTION_CAMERA;
-
+		Position.z = Reference.z = highest_vertex_z * PROPORTION_CAMERA;
+		Position.x = Reference.x = highest_vertex_x * PROPORTION_CAMERA;
 
 		vec3 closest_vertex(first_v), furthest_vertex;
 
@@ -161,6 +164,7 @@ void ModuleCamera3D::FocusMesh(const float* vertices, const uint &num_vertices)
 				dist_furthest = dot(Position, closest_vertex);
 			}
 		}
+
 		vec3 midpoint = (closest_vertex + furthest_vertex) / 2;
 
 	 LookAt(midpoint);
