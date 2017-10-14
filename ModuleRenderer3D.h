@@ -46,11 +46,11 @@ public:
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
 
-	bool enable_depth_test = false;
+	bool enable_depth_test = true;
 	bool enable_cull_face = true;
 	bool enable_lightning = false;
 	bool enable_color_material = false;
-	bool enable_texture_2D = false;
+	bool enable_texture_2D = true;
 	bool enable_wireframe = false;
 	float light_model_ambient = 0.6f;
 	float material_ambient = 1.0f;
