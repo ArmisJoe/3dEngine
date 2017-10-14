@@ -13,6 +13,7 @@
 #include "ModulePhysics3D.h"
 #include "ModulePlayer.h"
 #include "ModuleImGui.h"
+#include "mmgr\mmgr.h"
 #include "ModuleParson.h"
 #include "ModuleAssimp.h"
 #include "ModuleTextures.h"
@@ -61,10 +62,12 @@ public:
 	void mylog(const char file[], int line, const char* format, ...);
 
 private:
-
 	vector<float> fps_container;
 	vector<float> ms_container;
-	string fps_title;
+	vector<float> mem_container;
+	sMStats stats;
+
+	
 	string ms_title;
 
 	void AddModule(Module* mod);
