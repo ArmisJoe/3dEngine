@@ -147,12 +147,18 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 update_status ModuleRenderer3D::Update(float dt)
 {
-	for (std::list<Mesh*>::iterator it = App->assimp->meshes.begin(); it != App->assimp->meshes.end(); it++) {
-		//HardCode for Assigment01
-		if(!App->tex->textures.empty())
-			it._Ptr->_Myval->tex = App->tex->textures.begin()._Ptr->_Myval;
-		//!_HardCode for Assigment01
-		DrawMesh(it._Ptr->_Myval);
+	for (std::list<GameObject*>::iterator go_it = App->scene->gameObjects.begin(); go_it != App->scene->gameObjects.end(); go_it++) {
+		std::list<Component*> ms = (*go_it)->GetComponents(componentType_Mesh);
+		for (std::list<Component*>::iterator m_it = ms.begin(); m_it != ms.end(); m_it++) {
+			Mesh* m = (Mesh*)(*m_it);
+			if(m == nullptr)
+				LOG("Renderer3D: No Mesh Component Found")
+			//HardCode for Assigment01
+			if(!App->tex->textures.empty())
+				m->tex = App->tex->textures.back();
+			//!_HardCode for Assigment01
+			DrawMesh(m);
+		}
 	}
 	return UPDATE_CONTINUE;
 }

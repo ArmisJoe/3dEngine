@@ -4,16 +4,7 @@
 #define __MODULE_TEXTURES_H__
 
 #include "Module.h"
-
-struct Mesh;
-
-struct Texture {
-	int id = 0;
-	float w = 0;
-	float h = 0;
-
-	int format = 0;
-};
+#include "GameObject.h"
 
 class ModuleTextures : public Module {
 public:
@@ -25,7 +16,7 @@ public:
 
 	bool CleanUp();
 
-	uint LoadTexture(const char* path);
+	Texture* LoadTexture(const char* path); // Returns nullptr on failure.
 
 public:
 	std::list<Texture*> textures;

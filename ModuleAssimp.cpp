@@ -10,19 +10,22 @@ ModuleAssimp::~ModuleAssimp()
 {
 }
 
-void ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_flag)
+std::list<Mesh*> ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_flag)
 {
 	struct aiLogStream stream;
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
+
+	std::list<Mesh*> ms;
 
 	const aiScene* scene = aiImportFile(path, pprocess_flag);
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 			//Vertices
+			Mesh* new_mesh = nullptr;
 			aiMesh* m = scene->mMeshes[i];
-			Mesh* new_mesh = new Mesh();
+			new_mesh = new Mesh();
 			new_mesh->num_vertices = m->mNumVertices;
 			new_mesh->vertices = new float[new_mesh->num_vertices * 3];
 			memcpy(new_mesh->vertices, m->mVertices, sizeof(float) * new_mesh->num_vertices * 3);
@@ -71,6 +74,7 @@ void ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_fl
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 			meshes.push_back(new_mesh);
+			ms.push_back(new_mesh);
 		}
 
 		aiReleaseImport(scene);
@@ -78,6 +82,7 @@ void ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_fl
 	else
 		LOG("Error loading scene %s", path);
 
+	return ms;
 
 }
 
@@ -105,7 +110,8 @@ bool ModuleAssimp::CleanUp()
 
 	while (!meshes.empty())
 	{
-		delete[] meshes.front();
+		if(meshes.front() != nullptr)
+			delete[] meshes.front();
 		meshes.pop_front();
 	}
 

@@ -43,10 +43,12 @@ bool ModuleTextures::CleanUp()
 	return true;
 }
 
-GLuint ModuleTextures::LoadTexture(const char * path)
+Texture* ModuleTextures::LoadTexture(const char * path)
 {
 	uint textureID = 0;
 	ILuint imageID;
+
+	Texture* new_tex = nullptr;
 
 	ILenum error;
 
@@ -68,7 +70,7 @@ GLuint ModuleTextures::LoadTexture(const char * path)
 
 			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-			Texture* new_tex = new Texture();
+			new_tex = new Texture();
 
 			glGenTextures(1, &textureID);
 			glBindTexture(GL_TEXTURE_2D, textureID);
@@ -104,6 +106,6 @@ GLuint ModuleTextures::LoadTexture(const char * path)
 
 	//LOG("Texture Loading Finished");
 
-	return textureID;
+	return new_tex;
 }
 

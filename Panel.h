@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ImGui\imgui.h"
+
 class Panel {
 public:
 	Panel();
@@ -11,7 +13,8 @@ public:
 
 public:
 	bool active = true;
-	int x, y, w, h;
+	ImVec2 pos = { 0, 0 };
+	ImVec2 size = { 0, 0 };
 
 public:
 	char* name;

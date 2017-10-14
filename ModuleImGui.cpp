@@ -96,12 +96,13 @@ update_status ModuleImGui::Update(float dt)
 		ImGui::EndMainMenuBar();
 	}
 
-	show_test_window = false;
-
-	if (show_test_window == true) {
-		ImGui::ShowTestWindow(&show_test_window);
-		ImGui::ShowMetricsWindow(&show_test_window);
-	}
+	/// Test Window Code
+	//show_test_window = false;
+	//
+	//if (show_test_window == true) {
+	//	ImGui::ShowTestWindow(&show_test_window);
+	//	ImGui::ShowMetricsWindow(&show_test_window);
+	//}
 
 	if (object_p) {
 		if (ImGui::Begin("Object Creation")) {

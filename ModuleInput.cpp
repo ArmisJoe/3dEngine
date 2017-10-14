@@ -121,10 +121,22 @@ update_status ModuleInput::PreUpdate(float dt)
 				dropped_filedir = e.drop.file;
 				char* filetext = Capitalize(strrchr(dropped_filedir, '.'));
 				LOG("FILE %s", filetext);
-				if (strncmp(filetext, ".FBX", 4) == 0)
-					App->assimp->LoadGeometry(dropped_filedir);
-				if (strncmp(filetext, ".PNG", 4) == 0)
-					App->tex->LoadTexture(dropped_filedir);
+				if (strncmp(filetext, ".FBX", 4) == 0) {
+					// Hardcode for Assigment01
+					App->scene->RemoveAllGameObject();
+					// !_Hardcode for Assigment01
+					std::list<Mesh*> ms = App->assimp->LoadGeometry(dropped_filedir);
+					GameObject* go = new GameObject();
+					for (std::list<Mesh*>::iterator it = ms.begin(); it != ms.end(); it++) {
+						go->AddComponent(componentType_Mesh, (*it));
+					}
+					App->scene->AddGameObject(go);
+				}
+				if (strncmp(filetext, ".PNG", 4) == 0) {
+					if (!App->assimp->meshes.empty()) {
+						App->assimp->meshes.back()->tex = App->tex->LoadTexture(dropped_filedir);
+					}
+				}
 				SDL_free(dropped_filedir);
 				break;
 			}
