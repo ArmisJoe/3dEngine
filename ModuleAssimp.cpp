@@ -1,5 +1,7 @@
 #include "ModuleAssimp.h"
 #include "Application.h"
+#include "ModuleCamera3D.h"
+
 
 ModuleAssimp::ModuleAssimp(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -75,6 +77,8 @@ std::list<Mesh*> ModuleAssimp::LoadGeometry(const char* path, const unsigned int
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 			meshes.push_back(new_mesh);
 			ms.push_back(new_mesh);
+			// camera Focus
+			App->camera->FocusMesh(new_mesh->vertices, new_mesh->num_vertices);
 		}
 
 		aiReleaseImport(scene);
