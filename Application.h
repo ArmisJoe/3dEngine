@@ -15,6 +15,8 @@
 #include "ModuleImGui.h"
 #include "mmgr\mmgr.h"
 #include "ModuleParson.h"
+#include "ModuleAssimp.h"
+#include "ModuleTextures.h"
 
 #define LOG(format, ...) App->mylog(__FILE__, __LINE__, format, __VA_ARGS__);
 
@@ -34,6 +36,8 @@ public:
 	ModulePlayer* player;
 	ModuleImGui* imgui;
 	ModuleParson* parson;
+	ModuleAssimp* assimp;
+	ModuleTextures* tex;
 	
 private:
 

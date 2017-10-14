@@ -18,6 +18,8 @@ Application::Application()
 	player = new ModulePlayer(this);
 	imgui = new ModuleImGui(this);
 	parson = new ModuleParson(this);
+	assimp = new ModuleAssimp(this);
+	tex = new ModuleTextures(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -31,6 +33,8 @@ Application::Application()
 	AddModule(physics);
 	AddModule(imgui);
 	AddModule(parson);
+	AddModule(assimp);
+	AddModule(tex);
 	
 	// Scenes
 	AddModule(scene_intro);
@@ -138,7 +142,6 @@ update_status Application::Update()
 bool Application::CleanUp()
 {
 	bool ret = true;
-	fps_container.erase(fps_container.begin(), fps_container.begin() + 500);
 	for (list<Module*>::iterator it = list_modules.begin(); it != list_modules.end(); ++it) {
 		if ((*it) != nullptr && ret == true) {
 			ret = (*it)->CleanUp();

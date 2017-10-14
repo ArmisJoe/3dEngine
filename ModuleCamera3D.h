@@ -3,6 +3,9 @@
 #include "Globals.h"
 #include "glmath.h"
 
+
+#define PROPORTION_CAMERA 1.5;
+
 class ModuleCamera3D : public Module
 {
 public:
@@ -18,9 +21,20 @@ public:
 	void Move(const vec3 &Movement);
 	float* GetViewMatrix();
 
+	void FocusMesh(const float *vertices, const uint &num_vertices);
+
 private:
 
 	void CalculateViewMatrix();
+
+	void RotateCamera();
+	void RotateFromReference();
+
+	void MoveCamera(float dt);
+	void CameraZoom(float dt);
+
+	void SetCamera(const vec3& focus, const float& distance);
+
 
 public:
 	

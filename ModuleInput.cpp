@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "ModuleInput.h"
 
+#include "HelperFoos.h"
+
 #define MAX_KEYS 300
 
 ModuleInput::ModuleInput(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -88,12 +90,16 @@ update_status ModuleInput::PreUpdate(float dt)
 
 	bool quit = false;
 	SDL_Event e;
+
+	mouse_wheel = false;
+
 	while(SDL_PollEvent(&e))
 	{
 		switch(e.type)
 		{
 			case SDL_MOUSEWHEEL:
 			mouse_z = e.wheel.y;
+			mouse_wheel = true;
 			break;
 
 			case SDL_MOUSEMOTION:
@@ -112,6 +118,19 @@ update_status ModuleInput::PreUpdate(float dt)
 			{
 				if(e.window.event == SDL_WINDOWEVENT_RESIZED)
 					App->renderer3D->OnResize(e.window.data1, e.window.data2);
+			}
+			break;
+			case SDL_DROPFILE:
+			{
+				dropped_filedir = e.drop.file;
+				char* filetext = Capitalize(strrchr(dropped_filedir, '.'));
+				LOG("FILE %s", filetext);
+				if (strncmp(filetext, ".FBX", 4) == 0)
+					App->assimp->LoadGeometry(dropped_filedir);
+				if (strncmp(filetext, ".PNG", 4) == 0)
+					App->tex->LoadTexture(dropped_filedir);
+				SDL_free(dropped_filedir);
+				break;
 			}
 		}
 	}

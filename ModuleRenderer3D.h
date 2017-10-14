@@ -4,10 +4,14 @@
 #include "glmath.h"
 #include "Light.h"
 
-#include "glew-2.1.0\include\GL\glew.h"
 #include "SDL\include\SDL_opengl.h"
 #include <gl\GL.h>
 #include <gl\GLU.h>
+
+#include "ModuleAssimp.h"
+
+//
+//#include "glew-2.1.0\include\GL\glew.h"
 
 #define MAX_LIGHTS 8
 
@@ -22,6 +26,7 @@ public:
 
 	bool Init();
 	update_status PreUpdate(float dt);
+	update_status Update(float dt);
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
@@ -32,6 +37,8 @@ public:
 
 	void DrawConfigPanel();
 
+	void DrawMesh(const Mesh* mesh);
+
 public:
 
 	Light lights[MAX_LIGHTS];
@@ -39,13 +46,15 @@ public:
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
 
-	bool enable_depth_test = false;
-	bool enable_cull_face = false;
+	bool enable_depth_test = true;
+	bool enable_cull_face = true;
 	bool enable_lightning = false;
 	bool enable_color_material = false;
-	bool enable_texture_2D = false;
+	bool enable_texture_2D = true;
 	bool enable_wireframe = false;
 	float light_model_ambient = 0.6f;
 	float material_ambient = 1.0f;
 
+private:
+	bCube *TestCube;
 };
