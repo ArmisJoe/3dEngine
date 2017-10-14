@@ -12,6 +12,9 @@
 
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
 
+
+#include "glmath.h"
+
 struct Mesh {
 
 	uint id_vertices = 0; // id in VRAM
@@ -21,7 +24,6 @@ struct Mesh {
 	uint id_indices = 0; // id in VRAM
 	uint num_vertices = 0;
 	float* vertices = nullptr;
-
 };
 
 class ModuleAssimp : public Module {

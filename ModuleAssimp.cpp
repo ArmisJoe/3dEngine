@@ -1,5 +1,7 @@
 #include "ModuleAssimp.h"
 #include "Application.h"
+#include "ModuleCamera3D.h"
+
 
 ModuleAssimp::ModuleAssimp(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -58,6 +60,8 @@ void ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_fl
 
 			meshes.push_back(new_mesh);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+			App->camera->FocusMesh(new_mesh->vertices, new_mesh->num_vertices);
 		}
 		// !_Mesh Iteration
 

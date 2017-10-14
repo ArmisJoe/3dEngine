@@ -115,6 +115,58 @@ float* ModuleCamera3D::GetViewMatrix()
 	return &ViewMatrix;
 }
 
+void ModuleCamera3D::FocusMesh(const float* vertices, const uint &num_vertices)
+{
+		uint	y_test = 0;
+		float	highest_vertex = 0.0f;
+
+		for (uint i = 0; i < num_vertices; ++i) {
+			switch (++y_test) {
+			case 1:
+				break;
+			case 2:
+				if (highest_vertex < vertices[i])
+					highest_vertex = vertices[i];
+				break;
+			case 3:
+				y_test = 0;
+				break;
+			}
+		}
+
+		vec3 first_v(vertices[0], vertices[1], vertices[2]);
+
+
+		Position.y = Reference.y = highest_vertex * PROPORTION_CAMERA;
+
+		Position.z = Reference.z = first_v.z * PROPORTION_CAMERA;
+		Position.x = Reference.x = first_v.x * PROPORTION_CAMERA;
+
+
+		vec3 closest_vertex(first_v), furthest_vertex;
+
+		float dist_closest = dot(Position, vec3(vertices[0], vertices[1], vertices[2]));
+		float dist_furthest = 0.0f;
+
+		for (uint i = 0; i < num_vertices; i+=3)
+		{
+			if (dot(Position , vec3(vertices[i], vertices[i + 1], vertices[i + 2])) < dist_closest)
+			{
+				closest_vertex = vec3(vertices[i], vertices[i + 1], vertices[i + 2]);
+				dist_closest = dot(Position, closest_vertex);
+			}
+			else if (dot(Position, vec3(vertices[i], vertices[i + 1], vertices[i + 2])) > dist_furthest)
+			{
+				furthest_vertex = vec3(vertices[i], vertices[i + 1], vertices[i + 2]);
+				dist_furthest = dot(Position, closest_vertex);
+			}
+		}
+		vec3 midpoint = (closest_vertex + furthest_vertex) / 2;
+
+	 LookAt(midpoint);
+
+}
+
 // -----------------------------------------------------------------
 void ModuleCamera3D::CalculateViewMatrix()
 {
