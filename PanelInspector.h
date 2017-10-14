@@ -4,12 +4,18 @@
 
 #include "Panel.h"
 
+class ModuleScene;
+
 class PanelInspector : public Panel {
+	friend class ModuleEditorUI;
 public:
 	PanelInspector();
 	virtual ~PanelInspector();
 
 	void Draw();
+
+protected:
+	ModuleScene* scene;
 
 };
 

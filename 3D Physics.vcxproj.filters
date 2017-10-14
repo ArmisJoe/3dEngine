@@ -1,578 +1,249 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Sources">
-      <UniqueIdentifier>{8b7ed093-66ce-4096-96d2-fbb9faa4bf52}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Modules">
-      <UniqueIdentifier>{7b418be2-1631-4a31-9ef2-8a8b234a7339}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Containers">
-      <UniqueIdentifier>{afc36133-f401-499a-aa33-0da1e500fb52}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Tools">
-      <UniqueIdentifier>{7e4dfaf7-022c-4f7d-92aa-f3b3fa9d6248}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Helpers">
-      <UniqueIdentifier>{121f8e6b-df36-4ab0-be0d-601ddfc9e503}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Modules\Game">
-      <UniqueIdentifier>{83f46af7-e02f-40c0-9e56-41d76082527b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\ImGui">
-      <UniqueIdentifier>{3459d2dd-e7e6-4270-bde8-a11a32d9cf74}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\MathGeo">
-      <UniqueIdentifier>{98206f74-b8ea-4e2b-926b-c9659600d5cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Hardware">
-      <UniqueIdentifier>{2b4039b6-1ba6-46b7-866b-722787056ed4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\gpudetect">
-      <UniqueIdentifier>{bcffffd7-9006-4ceb-b7bd-749289518548}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Glew">
-      <UniqueIdentifier>{9bed25d2-9266-422f-afcb-b475aecdfdc5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\mmgr">
-      <UniqueIdentifier>{fda1b684-202c-43f4-9e02-d3bcb8c38f2b}</UniqueIdentifier>
-    <Filter Include="Sources\Parson">
-      <UniqueIdentifier>{f6a8f983-ac85-4902-96ac-556afdd48830}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Module.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleAudio.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleCamera3D.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleInput.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleRenderer3D.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleWindow.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="glmath.h">
-      <Filter>Sources\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="Application.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="Globals.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="Primitive.h">
-      <Filter>Sources\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h">
-      <Filter>Sources\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>Sources\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Sources\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="ModulePhysics3D.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysBody3D.h">
-      <Filter>Sources\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysVehicle3D.h">
-      <Filter>Sources\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="ModulePlayer.h">
-      <Filter>Sources\Modules\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleImGui.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui_impl_sdl.h">
-      <Filter>Sources\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MathGeoLib.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MathBuildConfig.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MathGeoLibFwd.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="PanelConsole.h">
-      <Filter>Sources\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Panel.h">
-      <Filter>Sources\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\AABB.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\AABB2D.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\Capsule.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\Circle.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\Frustum.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\GeometryAll.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\GeomType.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\HitInfo.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\KDTree.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\Line.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\LineSegment.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\OBB.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\PBVolume.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\Plane.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\Polygon.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\Polyhedron.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\QuadTree.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\Ray.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\Sphere.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\Triangle.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Geometry\TriangleMesh.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Algorithm\GJK.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Algorithm\SAT.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Algorithm\Random\LCG.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\emscripten\library_system.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\assume.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\BitOps.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\Callstack.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\FixedPoint.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\float2.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\float3.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\float3x3.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\float3x4.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\float4.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\float4_neon.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\float4_sse.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\float4d.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\float4x4.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\float4x4_neon.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\float4x4_sse.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\FloatCmp.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\grisu3.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\InclWindows.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\MathAll.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\MathConstants.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\MathFunc.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\MathLog.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\MathNamespace.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\MathTypes.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\MatrixProxy.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\myassert.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\Polynomial.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\Quat.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\quat_simd.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\Rect.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\Reinterpret.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\simd.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\sse_mathfun.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\SSEMath.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\TransformOps.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Time\Clock.h">
-      <Filter>Sources\MathGeo</Filter>
-    </ClInclude>
-    <ClInclude Include="PanelAbout.h">
-      <Filter>Sources\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Hardware.h">
-      <Filter>Sources\Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="gpudetect\DeviceId.h">
-      <Filter>Sources\gpudetect</Filter>
-    </ClInclude>
-    <ClInclude Include="gpudetect\dxgi1_4.h">
-      <Filter>Sources\gpudetect</Filter>
-    </ClInclude>
-    <ClInclude Include="glew-2.1.0\include\GL\eglew.h">
-      <Filter>Sources\Glew</Filter>
-    </ClInclude>
-    <ClInclude Include="glew-2.1.0\include\GL\glew.h">
-      <Filter>Sources\Glew</Filter>
-    </ClInclude>
-    <ClInclude Include="glew-2.1.0\include\GL\glxew.h">
-      <Filter>Sources\Glew</Filter>
-    </ClInclude>
-    <ClInclude Include="glew-2.1.0\include\GL\wglew.h">
-      <Filter>Sources\Glew</Filter>
-    </ClInclude>
-    <ClInclude Include="mmgr\mmgr.h">
-      <Filter>Sources\mmgr</Filter>
-    </ClInclude>
-    <ClInclude Include="mmgr\nommgr.h">
-      <Filter>Sources\mmgr</Filter>
-    <ClInclude Include="ModuleParson.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="parson.h">
-      <Filter>Sources\Parson</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleAssimp.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleTextures.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="HelperFoos.h">
-      <Filter>Sources\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="PanelInspector.h">
-      <Filter>Sources\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Sources\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleScene.h">
-      <Filter>Sources\Modules\Game</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Color.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="glew-2.1.0\glew.c" />
+    <ClCompile Include="glmath.cpp" />
+    <ClCompile Include="gpudetect\DeviceId.cpp" />
+    <ClCompile Include="Hardware.cpp" />
+    <ClCompile Include="ImGui\imgui.cpp" />
+    <ClCompile Include="ImGui\imgui_demo.cpp" />
+    <ClCompile Include="ImGui\imgui_draw.cpp" />
+    <ClCompile Include="imgui_impl_sdl.cpp" />
+    <ClCompile Include="Light.cpp" />
+    <ClCompile Include="log.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="mmgr\mmgr.cpp" />
+    <ClCompile Include="Panel.cpp" />
+    <ClCompile Include="PanelAbout.cpp" />
+    <ClCompile Include="PanelConsole.cpp" />
+    <ClCompile Include="PanelInspector.cpp" />
+    <ClCompile Include="parson.c" />
+    <ClCompile Include="PhysBody3D.cpp" />
+    <ClCompile Include="PhysVehicle3D.cpp" />
+    <ClCompile Include="Primitive.cpp" />
+    <ClCompile Include="src\Algorithm\GJK.cpp" />
+    <ClCompile Include="src\Algorithm\Random\LCG.cpp" />
+    <ClCompile Include="src\Geometry\AABB.cpp" />
+    <ClCompile Include="src\Geometry\Capsule.cpp" />
+    <ClCompile Include="src\Geometry\Circle.cpp" />
+    <ClCompile Include="src\Geometry\Frustum.cpp" />
+    <ClCompile Include="src\Geometry\Line.cpp" />
+    <ClCompile Include="src\Geometry\LineSegment.cpp" />
+    <ClCompile Include="src\Geometry\OBB.cpp" />
+    <ClCompile Include="src\Geometry\PBVolume.cpp" />
+    <ClCompile Include="src\Geometry\Plane.cpp" />
+    <ClCompile Include="src\Geometry\Polygon.cpp" />
+    <ClCompile Include="src\Geometry\Polyhedron.cpp" />
+    <ClCompile Include="src\Geometry\Ray.cpp" />
+    <ClCompile Include="src\Geometry\Sphere.cpp" />
+    <ClCompile Include="src\Geometry\Triangle.cpp" />
+    <ClCompile Include="src\Geometry\TriangleMesh.cpp" />
+    <ClCompile Include="src\Math\BitOps.cpp" />
+    <ClCompile Include="src\Math\Callstack.cpp" />
+    <ClCompile Include="src\Math\float2.cpp" />
+    <ClCompile Include="src\Math\float3.cpp" />
+    <ClCompile Include="src\Math\float3x3.cpp" />
+    <ClCompile Include="src\Math\float3x4.cpp" />
+    <ClCompile Include="src\Math\float4.cpp" />
+    <ClCompile Include="src\Math\float4d.cpp" />
+    <ClCompile Include="src\Math\float4x4.cpp" />
+    <ClCompile Include="src\Math\grisu3.c" />
+    <ClCompile Include="src\Math\grisu3_cpp.cpp" />
+    <ClCompile Include="src\Math\MathFunc.cpp" />
+    <ClCompile Include="src\Math\MathLog.cpp" />
+    <ClCompile Include="src\Math\MathOps.cpp" />
+    <ClCompile Include="src\Math\Polynomial.cpp" />
+    <ClCompile Include="src\Math\Quat.cpp" />
+    <ClCompile Include="src\Math\SSEMath.cpp" />
+    <ClCompile Include="src\Math\TransformOps.cpp" />
+    <ClCompile Include="src\Time\Clock.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="ModuleAudio.cpp">
-      <Filter>Sources\Modules</Filter>
+      <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleCamera3D.cpp">
-      <Filter>Sources\Modules</Filter>
+      <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleInput.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleRenderer3D.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleWindow.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="log.cpp">
-      <Filter>Sources\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>Sources\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="glmath.cpp">
-      <Filter>Sources\Containers</Filter>
-    </ClCompile>
-    <ClCompile Include="Primitive.cpp">
-      <Filter>Sources\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="Color.cpp">
-      <Filter>Sources\Containers</Filter>
-    </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>Sources\Helpers</Filter>
+      <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModulePhysics3D.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysBody3D.cpp">
-      <Filter>Sources\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysVehicle3D.cpp">
-      <Filter>Sources\Helpers</Filter>
+      <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModulePlayer.cpp">
-      <Filter>Sources\Modules\Game</Filter>
+      <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ImGui\imgui.cpp">
-      <Filter>Sources\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="ImGui\imgui_demo.cpp">
-      <Filter>Sources\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="ImGui\imgui_draw.cpp">
-      <Filter>Sources\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_impl_sdl.cpp">
-      <Filter>Sources\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleImGui.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="PanelConsole.cpp">
-      <Filter>Sources\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Geometry\AABB.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Geometry\Capsule.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Geometry\Circle.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Geometry\Frustum.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Geometry\Line.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Geometry\LineSegment.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Geometry\OBB.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Geometry\PBVolume.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Geometry\Plane.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Geometry\Polygon.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Geometry\Polyhedron.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Geometry\Ray.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Geometry\Sphere.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Geometry\Triangle.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Geometry\TriangleMesh.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Algorithm\GJK.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Algorithm\Random\LCG.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\BitOps.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Callstack.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\float2.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\float3.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\float3x3.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\float3x4.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\float4.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\float4d.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\float4x4.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\grisu3.c">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\grisu3_cpp.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\MathFunc.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\MathLog.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\MathOps.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Polynomial.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Quat.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\SSEMath.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\TransformOps.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Time\Clock.cpp">
-      <Filter>Sources\MathGeo</Filter>
-    </ClCompile>
-    <ClCompile Include="Panel.cpp">
-      <Filter>Sources\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Hardware.cpp">
-      <Filter>Sources\Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="gpudetect\DeviceId.cpp">
-      <Filter>Sources\gpudetect</Filter>
-    </ClCompile>
-    <ClCompile Include="PanelAbout.cpp">
-      <Filter>Sources\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="glew-2.1.0\glew.c">
-      <Filter>Sources\Glew</Filter>
-    </ClCompile>
-    <ClCompile Include="mmgr\mmgr.cpp">
-      <Filter>Sources\mmgr</Filter>
-    <ClCompile Include="parson.c">
-      <Filter>Sources\Parson</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleParson.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleAssimp.cpp" />
-    <ClCompile Include="ModuleTextures.cpp" />
-    <ClCompile Include="PanelInspector.cpp" />
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Sources\Containers</Filter>
+    <ClCompile Include="ModuleRenderer3D.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleScene.cpp">
-      <Filter>Sources\Modules\Game</Filter>
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWindow.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleAssimp.cpp">
+      <Filter>Modules\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleParson.cpp">
+      <Filter>Modules\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTextures.cpp">
+      <Filter>Modules\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleEditorUI.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\Geometry\KDTree.inl">
-      <Filter>Sources\MathGeo</Filter>
-    </None>
-    <None Include="src\Geometry\QuadTree.inl">
-      <Filter>Sources\MathGeo</Filter>
-    </None>
-    <None Include="src\Math\float2.inl">
-      <Filter>Sources\MathGeo</Filter>
-    </None>
-    <None Include="src\Math\Matrix.inl">
-      <Filter>Sources\MathGeo</Filter>
-    </None>
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="glew-2.1.0\include\GL\eglew.h" />
+    <ClInclude Include="glew-2.1.0\include\GL\glew.h" />
+    <ClInclude Include="glew-2.1.0\include\GL\glxew.h" />
+    <ClInclude Include="glew-2.1.0\include\GL\wglew.h" />
+    <ClInclude Include="glmath.h" />
+    <ClInclude Include="Globals.h" />
+    <ClInclude Include="gpudetect\DeviceId.h" />
+    <ClInclude Include="gpudetect\dxgi1_4.h" />
+    <ClInclude Include="Hardware.h" />
+    <ClInclude Include="HelperFoos.h" />
+    <ClInclude Include="imgui_impl_sdl.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="mmgr\mmgr.h" />
+    <ClInclude Include="mmgr\nommgr.h" />
+    <ClInclude Include="Panel.h" />
+    <ClInclude Include="PanelAbout.h" />
+    <ClInclude Include="PanelConsole.h" />
+    <ClInclude Include="PanelInspector.h" />
+    <ClInclude Include="parson.h" />
+    <ClInclude Include="PhysBody3D.h" />
+    <ClInclude Include="PhysVehicle3D.h" />
+    <ClInclude Include="Primitive.h" />
+    <ClInclude Include="src\Algorithm\GJK.h" />
+    <ClInclude Include="src\Algorithm\Random\LCG.h" />
+    <ClInclude Include="src\Algorithm\SAT.h" />
+    <ClInclude Include="src\emscripten\library_system.h" />
+    <ClInclude Include="src\Geometry\AABB.h" />
+    <ClInclude Include="src\Geometry\AABB2D.h" />
+    <ClInclude Include="src\Geometry\Capsule.h" />
+    <ClInclude Include="src\Geometry\Circle.h" />
+    <ClInclude Include="src\Geometry\Frustum.h" />
+    <ClInclude Include="src\Geometry\GeometryAll.h" />
+    <ClInclude Include="src\Geometry\GeomType.h" />
+    <ClInclude Include="src\Geometry\HitInfo.h" />
+    <ClInclude Include="src\Geometry\KDTree.h" />
+    <ClInclude Include="src\Geometry\Line.h" />
+    <ClInclude Include="src\Geometry\LineSegment.h" />
+    <ClInclude Include="src\Geometry\OBB.h" />
+    <ClInclude Include="src\Geometry\PBVolume.h" />
+    <ClInclude Include="src\Geometry\Plane.h" />
+    <ClInclude Include="src\Geometry\Polygon.h" />
+    <ClInclude Include="src\Geometry\Polyhedron.h" />
+    <ClInclude Include="src\Geometry\QuadTree.h" />
+    <ClInclude Include="src\Geometry\Ray.h" />
+    <ClInclude Include="src\Geometry\Sphere.h" />
+    <ClInclude Include="src\Geometry\Triangle.h" />
+    <ClInclude Include="src\Geometry\TriangleMesh.h" />
+    <ClInclude Include="src\MathBuildConfig.h" />
+    <ClInclude Include="src\MathGeoLib.h" />
+    <ClInclude Include="src\MathGeoLibFwd.h" />
+    <ClInclude Include="src\Math\assume.h" />
+    <ClInclude Include="src\Math\BitOps.h" />
+    <ClInclude Include="src\Math\Callstack.h" />
+    <ClInclude Include="src\Math\FixedPoint.h" />
+    <ClInclude Include="src\Math\float2.h" />
+    <ClInclude Include="src\Math\float3.h" />
+    <ClInclude Include="src\Math\float3x3.h" />
+    <ClInclude Include="src\Math\float3x4.h" />
+    <ClInclude Include="src\Math\float4.h" />
+    <ClInclude Include="src\Math\float4d.h" />
+    <ClInclude Include="src\Math\float4x4.h" />
+    <ClInclude Include="src\Math\float4x4_neon.h" />
+    <ClInclude Include="src\Math\float4x4_sse.h" />
+    <ClInclude Include="src\Math\float4_neon.h" />
+    <ClInclude Include="src\Math\float4_sse.h" />
+    <ClInclude Include="src\Math\FloatCmp.h" />
+    <ClInclude Include="src\Math\grisu3.h" />
+    <ClInclude Include="src\Math\InclWindows.h" />
+    <ClInclude Include="src\Math\MathAll.h" />
+    <ClInclude Include="src\Math\MathConstants.h" />
+    <ClInclude Include="src\Math\MathFunc.h" />
+    <ClInclude Include="src\Math\MathLog.h" />
+    <ClInclude Include="src\Math\MathNamespace.h" />
+    <ClInclude Include="src\Math\MathTypes.h" />
+    <ClInclude Include="src\Math\MatrixProxy.h" />
+    <ClInclude Include="src\Math\myassert.h" />
+    <ClInclude Include="src\Math\Polynomial.h" />
+    <ClInclude Include="src\Math\Quat.h" />
+    <ClInclude Include="src\Math\quat_simd.h" />
+    <ClInclude Include="src\Math\Rect.h" />
+    <ClInclude Include="src\Math\Reinterpret.h" />
+    <ClInclude Include="src\Math\simd.h" />
+    <ClInclude Include="src\Math\SSEMath.h" />
+    <ClInclude Include="src\Math\sse_mathfun.h" />
+    <ClInclude Include="src\Math\TransformOps.h" />
+    <ClInclude Include="src\Time\Clock.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="ModuleAudio.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCamera3D.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleInput.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePhysics3D.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePlayer.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleRenderer3D.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleScene.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleWindow.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Module.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleAssimp.h">
+      <Filter>Modules\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleParson.h">
+      <Filter>Modules\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTextures.h">
+      <Filter>Modules\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleEditorUI.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Geometry\KDTree.inl" />
+    <None Include="src\Geometry\QuadTree.inl" />
+    <None Include="src\Math\float2.inl" />
+    <None Include="src\Math\Matrix.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{076e3a68-78aa-4218-9766-8e0bf33dfcee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MathGeo">
+      <UniqueIdentifier>{2a5118d2-df2b-4ac4-a490-f81fbf910a1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Loaders">
+      <UniqueIdentifier>{378ab0ef-39a7-4e00-9643-d39a87b97f3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

@@ -1,5 +1,7 @@
 #include "GameObject.h"
-
+#include "Application.h"
+#include "ImGui\imgui.h"
+#include <string>
 GameObject::GameObject()
 {
 	name = "name";
@@ -27,8 +29,8 @@ void GameObject::CleanUp()
 	if (!components.empty()) {
 		for (std::list<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr) {
-				(*it)->CleanUp();
-				delete (*it);
+				//(*it)->CleanUp(); // Triggers an exeption error (possible deleting what is already deleted)
+				//delete (*it);
 			}
 		}
 		components.clear();
@@ -80,16 +82,63 @@ std::list<Component*> GameObject::GetComponents(componentType type)
 
 	return cs;
 }
-
-bool Mesh::Update(float dt)
+void GameObject::DrawInspectorPanel()
 {
+	if (ImGui::CollapsingHeader(this->name, false)) {
+		if (ImGui::CollapsingHeader("Transform", true)) {
+			//Position
+			std::string str = "X: " + std::to_string(this->transform.position.x);
+			ImGui::Text("Position: ");
+			ImGui::Text(str.c_str());
+			ImGui::SameLine();
+			str = "Y: " + std::to_string(this->transform.position.y);
+			ImGui::Text(str.c_str());
+			ImGui::SameLine();
+			str = "Z: " + std::to_string(this->transform.position.z);
+			ImGui::Text(str.c_str());
+			//Rotation
+			ImGui::Text("Rotation: ");
+			str = "X: " + std::to_string(this->transform.rotation.x);
+			ImGui::Text(str.c_str());
+			ImGui::SameLine();
+			str = "Y: " + std::to_string(this->transform.rotation.y);
+			ImGui::Text(str.c_str());
+			ImGui::SameLine();
+			str = "Z: " + std::to_string(this->transform.rotation.z);
+			ImGui::Text(str.c_str());
+		}
+		for (std::list<Component*>::iterator c_it = this->components.begin(); c_it != this->components.end(); c_it++) {
+			Component* c = (*c_it);
+			if (ImGui::CollapsingHeader(c->name, true)) {
+				c->DrawInspectorPanel();
+			}
+		}
+	}
+};
 
-	Draw();
-
-	return true;
+void Mesh::DrawInspectorPanel()
+{
+	std::string str = "Triangles: " + std::to_string(this->num_triangles);
+	ImGui::Text(str.c_str());
+	str = "Vertices: " + std::to_string(this->num_vertices);
+	ImGui::Text(str.c_str());
+	ImGui::SameLine();
+	str = "Indices: " + std::to_string(this->num_indices);
+	ImGui::Text(str.c_str());
+	ImGui::Text("Scale:");
+	str = "X: " + std::to_string(this->scale.x);
+	ImGui::Text(str.c_str());
+	ImGui::SameLine();
+	str = "Y: " + std::to_string(this->scale.y);
+	ImGui::Text(str.c_str());
+	ImGui::SameLine();
+	str = "Z: " + std::to_string(this->scale.z);
+	ImGui::Text(str.c_str());
 }
 
-void Mesh::Draw()
+void Texture::DrawInspectorPanel()
 {
-
+	std::string str = "Size: " + std::to_string((int)this->w) + "x"+ std::to_string((int)this->h);
+	ImGui::Text(str.c_str());
+	ImGui::Image((ImTextureID)this->id, ImVec2(120, 120));
 }

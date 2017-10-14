@@ -17,13 +17,16 @@
 class Module;
 class Application;
 class PanelConsole;
+class PanelAbout;
+class PanelInspector;
 
-class ModuleImGui : public Module {
+class ModuleEditorUI : public Module {
 public:
-	ModuleImGui(Application* app, bool start_enabled = true);
-	~ModuleImGui();
+	ModuleEditorUI(Application* app, bool start_enabled = true);
+	~ModuleEditorUI();
 
 	bool Init();
+	bool Start();
 	update_status PreUpdate(float dt);
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
@@ -41,6 +44,7 @@ private:
 	std::list<Panel*> panels;
 
 	PanelConsole* console = nullptr;
+	PanelInspector* inspector = nullptr;
 
 	bool object_p = false;
 

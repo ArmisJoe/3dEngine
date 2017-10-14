@@ -28,6 +28,7 @@ std::list<Mesh*> ModuleAssimp::LoadGeometry(const char* path, const unsigned int
 			Mesh* new_mesh = nullptr;
 			aiMesh* m = scene->mMeshes[i];
 			new_mesh = new Mesh();
+			new_mesh->num_triangles = m->mNumFaces;
 			new_mesh->num_vertices = m->mNumVertices;
 			new_mesh->vertices = new float[new_mesh->num_vertices * 3];
 			memcpy(new_mesh->vertices, m->mVertices, sizeof(float) * new_mesh->num_vertices * 3);

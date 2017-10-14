@@ -93,7 +93,7 @@
     <ClInclude Include="mmgr\nommgr.h" />
     <ClInclude Include="ModuleAssimp.h" />
     <ClInclude Include="ModuleCamera3D.h" />
-    <ClInclude Include="ModuleImGui.h" />
+    <ClInclude Include="ModuleEditorUI.h" />
     <ClInclude Include="ModuleParson.h" />
     <ClInclude Include="ModulePhysics3D.h" />
     <ClInclude Include="ModulePlayer.h" />
@@ -197,7 +197,7 @@
     <ClCompile Include="ModuleAssimp.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
-    <ClCompile Include="ModuleImGui.cpp" />
+    <ClCompile Include="ModuleEditorUI.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleParson.cpp" />
     <ClCompile Include="ModulePhysics3D.cpp" />

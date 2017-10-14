@@ -173,7 +173,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	
 	StdGLAttributes();	// RESET RENDERER OPTIONS FOR THE UI 
 	
-	App->imgui->Draw();
+	App->editor->Draw();
 	
 	CustomGLAttributes();
 

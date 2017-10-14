@@ -37,7 +37,8 @@ bool ModuleTextures::CleanUp()
 {
 	while (!textures.empty())
 	{
-		delete[] textures.front();
+		if(textures.front() != nullptr)
+			delete[] textures.front();
 		textures.pop_front();
 	}
 	return true;

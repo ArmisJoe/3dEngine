@@ -88,7 +88,6 @@ update_status ModuleInput::PreUpdate(float dt)
 
 	mouse_x_motion = mouse_y_motion = 0;
 
-	bool quit = false;
 	SDL_Event e;
 
 	mouse_wheel = false;
@@ -137,8 +136,9 @@ update_status ModuleInput::PreUpdate(float dt)
 					App->scene->AddGameObject(go);
 				}
 				if (strncmp(filetext, ".PNG", 4) == 0) {
-					if (!App->assimp->meshes.empty()) {
-						App->assimp->meshes.back()->tex = App->tex->LoadTexture(dropped_filedir);
+					if (!App->scene->gameObjects.empty()) {
+						GameObject* go = App->scene->gameObjects.front();
+						go->AddComponent(componentType_Texture, App->tex->LoadTexture(dropped_filedir));
 					}
 				}
 				SDL_free(dropped_filedir);

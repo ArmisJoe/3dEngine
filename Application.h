@@ -12,7 +12,7 @@
 #include "ModuleCamera3D.h"
 #include "ModulePhysics3D.h"
 #include "ModulePlayer.h"
-#include "ModuleImGui.h"
+#include "ModuleEditorUI.h"
 #include "mmgr\mmgr.h"
 #include "ModuleParson.h"
 #include "ModuleAssimp.h"
@@ -20,7 +20,7 @@
 
 #define LOG(format, ...) App->mylog(__FILE__, __LINE__, format, __VA_ARGS__);
 
-class ModuleImGui;
+class ModuleEditorUI;
 
 class Application
 {
@@ -33,7 +33,7 @@ public:
 	ModuleCamera3D* camera;
 	ModulePhysics3D* physics;
 	ModulePlayer* player;
-	ModuleImGui* imgui;
+	ModuleEditorUI* editor;
 	ModuleParson* parson;
 	ModuleAssimp* assimp;
 	ModuleTextures* tex;

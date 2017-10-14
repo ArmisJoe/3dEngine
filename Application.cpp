@@ -16,7 +16,7 @@ Application::Application()
 	camera = new ModuleCamera3D(this);
 	physics = new ModulePhysics3D(this);
 	player = new ModulePlayer(this);
-	imgui = new ModuleImGui(this);
+	editor = new ModuleEditorUI(this);
 	parson = new ModuleParson(this);
 	assimp = new ModuleAssimp(this);
 	tex = new ModuleTextures(this);
@@ -31,7 +31,7 @@ Application::Application()
 	AddModule(input);
 	AddModule(audio);
 	AddModule(physics);
-	AddModule(imgui);
+	AddModule(editor);
 	AddModule(parson);
 	AddModule(assimp);
 	AddModule(tex);

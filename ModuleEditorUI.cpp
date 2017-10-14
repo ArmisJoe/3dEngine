@@ -1,11 +1,12 @@
-#include "ModuleImGui.h"
+#include "ModuleEditorUI.h"
 #include "PanelConsole.h"
+#include "PanelInspector.h"
 
 #include <iostream> 
 #include <string>
 #include "Hardware.h"
 
-ModuleImGui::ModuleImGui(Application * app, bool start_enabled) : Module(app, start_enabled)
+ModuleEditorUI::ModuleEditorUI(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
 	name = "GUI";
 
@@ -16,9 +17,10 @@ ModuleImGui::ModuleImGui(Application * app, bool start_enabled) : Module(app, st
 	libraries.push_back("MathGeoLib");
 	libraries.push_back("gpudetect");
 	libraries.push_back("SDL");
+	libraries.push_back("DevIL");
 }
 
-ModuleImGui::~ModuleImGui()
+ModuleEditorUI::~ModuleEditorUI()
 {
 	show_test_window = true;
 	object_p = false;
@@ -26,7 +28,7 @@ ModuleImGui::~ModuleImGui()
 	console = nullptr;
 }
 
-bool ModuleImGui::Init()
+bool ModuleEditorUI::Init()
 {
 	
 	ImGui_ImplSdl_Init(App->window->window);
@@ -35,11 +37,20 @@ bool ModuleImGui::Init()
 	io.IniFilename = "Settings/imgui.ini";
 
 	AddPanel(console = new PanelConsole());
+	AddPanel(inspector = new PanelInspector());
+	inspector->scene = App->scene;
 
 	return true;
 }
 
-update_status ModuleImGui::PreUpdate(float dt)
+bool ModuleEditorUI::Start()
+{
+	console->active = true;
+	inspector->active = true;
+	return true;
+}
+
+update_status ModuleEditorUI::PreUpdate(float dt)
 {
 	ImGui_ImplSdl_NewFrame(App->window->window);
 
@@ -50,7 +61,7 @@ update_status ModuleImGui::PreUpdate(float dt)
 	return update_status::UPDATE_CONTINUE;
 }
 
-update_status ModuleImGui::Update(float dt)
+update_status ModuleEditorUI::Update(float dt)
 {
 
 	if (App->Logs.size() > 0)
@@ -73,7 +84,7 @@ update_status ModuleImGui::Update(float dt)
 				ConsoleLog("Configuration Saved");
 			}
 			if (ImGui::Button("Quit")) {
-				return update_status::UPDATE_STOP;
+				App->input->AppQuit(true);
 			}
 			ImGui::EndMenu();
 		}
@@ -91,7 +102,8 @@ update_status ModuleImGui::Update(float dt)
 		}
 		if (ImGui::BeginMenu("View")) {
 			ImGui::MenuItem("Object Creation", "O", &object_p);
-			ImGui::MenuItem("Console", "1", &console->active);
+			ImGui::MenuItem("Inspector", "I", &inspector->active);
+			ImGui::MenuItem("Console", "Alt+C", &console->active);
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
@@ -133,12 +145,12 @@ update_status ModuleImGui::Update(float dt)
 	return update_status::UPDATE_CONTINUE;
 }
 
-update_status ModuleImGui::PostUpdate(float dt)
+update_status ModuleEditorUI::PostUpdate(float dt)
 {
 	return update_status::UPDATE_CONTINUE;
 }
 
-bool ModuleImGui::CleanUp()
+bool ModuleEditorUI::CleanUp()
 {
 	for (std::list<Panel*>::iterator it = panels.begin(); it != panels.end(); it++) {
 		if ((*it) != nullptr) {
@@ -150,29 +162,30 @@ bool ModuleImGui::CleanUp()
 	panels.clear();
 
 	console = nullptr;
+	inspector = nullptr;
 
 	return true;
 }
 
-void ModuleImGui::Draw()
+void ModuleEditorUI::Draw()
 {
 
 	ImGui::Render();
 
 }
 
-void ModuleImGui::ConsoleLog(const char * str) const
+void ModuleEditorUI::ConsoleLog(const char * str) const
 {
 	console->ConsoleLog(str);
 }
 
-void ModuleImGui::AddPanel(Panel * n_panel)
+void ModuleEditorUI::AddPanel(Panel * n_panel)
 {
 	panels.push_back(n_panel);
 }
 
 
-void ModuleImGui::DrawConfigPanels()
+void ModuleEditorUI::DrawConfigPanels()
 {
 
 	ImGui::SetNextWindowContentSize(ImVec2(500, 500));
