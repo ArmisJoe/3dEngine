@@ -5,13 +5,6 @@
 #include <gl/GLU.h>
 
 #include "Primitive.h"
-#include "glut/glut.h"
-
-
-
-#pragma comment (lib, "glut/glut32.lib")
-
-
 
 
 // ------------------------------------------------------------
@@ -172,7 +165,7 @@ bSphere::bSphere(float radius) : Primitive(), radius(radius)
 
 void bSphere::InnerRender() const
 {
-	glutSolidSphere(radius, 25, 25);
+	//glutSolidSphere(radius, 25, 25);
 }
 
 
