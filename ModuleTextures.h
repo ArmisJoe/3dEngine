@@ -22,6 +22,9 @@ public:
 public:
 	std::list<Texture*> textures;
 
+public: // Configurations
+
+
 };
 
 #endif // !__MODULE_TEXTURES_H__

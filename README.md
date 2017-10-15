@@ -24,7 +24,8 @@ LAlt + Mouse Left Click to rotate around the object.
 
 Panel about gives important info about the project.
 Panel Config gives running information and allows to change settings.
-The console panel will log all actions done automatically.
+The Console panel will log all actions done automatically.
+Panel Inspector gives information about the current GameObjects. (Such as geometry, transform or texture).
 
 ## How To Use
 
