@@ -18,12 +18,13 @@ public:
 
 	Texture* LoadTexture(const char* path); // Returns nullptr on failure.
 	void RemoveAllTextures();
-
+	void DrawConfigPanel();
 public:
 	std::list<Texture*> textures;
 
 public: // Configurations
-
+private:
+	bool check = false, check2 = false;
 
 };
 

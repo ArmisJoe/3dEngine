@@ -282,6 +282,8 @@ void ModuleEditorUI::DrawConfigPanels()
 		//Render
 		App->renderer3D->DrawConfigPanel();
 
+		// TExtures
+		App->tex->DrawConfigPanel();
 		//Hardware
 		//App->hardware->DrawConfigPanel(
 

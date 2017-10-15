@@ -125,3 +125,17 @@ void ModuleTextures::RemoveAllTextures()
 	}
 }
 
+void ModuleTextures::DrawConfigPanel()
+{
+	if (ImGui::CollapsingHeader("textures")) 
+	{
+		if (ImGui::Checkbox("Test", &check)) 
+		{
+		}
+		if (ImGui::Checkbox("Test2", &check2)) 
+		{
+		}
+	}
+
+}
+
