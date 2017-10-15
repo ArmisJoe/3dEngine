@@ -374,7 +374,7 @@ Sphere * ModulePhysics3D::AddSphere(const float &x, const float &y, const float 
 	g_primitives.push_back(gs);
 	spheres.push_back(s);
 
-	App->editor->ConsoleLog("Sphere Created");
+	LOG("Sphere Created x:%f y:%f z:%f r:%f", point.x, point.y, point.z, radius);
 
 	return s;
 }
@@ -396,7 +396,7 @@ AABB * ModulePhysics3D::AddAABB(const vec center, const vec size, bool visible)
 	bAABB->visible = visible;
 	g_primitives.push_back(bAABB);
 
-	App->editor->ConsoleLog("AABB Created");
+	LOG("AABB Created x:%f y:%f z:%f size:%ix%ix%i", center.x, center.y, center.z, size.x, size.y, size.z);
 
 	return ret;
 }
@@ -432,7 +432,7 @@ void ModulePhysics3D::CheckAllIntersec()
 		for (std::list<Sphere*>::iterator it_b = spheres.begin(); it_b != spheres.end(); it_b++) {
 			if (it_a._Ptr->_Myval->Intersects(*(it_b._Ptr->_Myval))) {
 				string collision_log = "Sphere " + std::to_string(a_id) + " collides with Sphere " + std::to_string(b_id);
-				App->editor->ConsoleLog(collision_log.c_str());
+				LOG(collision_log.c_str());
 			}
 			b_id++;
 		}

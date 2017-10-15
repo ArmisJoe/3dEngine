@@ -35,6 +35,7 @@ public:
 	void Draw();
 
 	void ConsoleLog(const char* str) const;
+	void ClearLog();
 
 	void AddPanel(Panel* n_panel);
 

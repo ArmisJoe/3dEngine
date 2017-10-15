@@ -16,10 +16,6 @@
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="mmgr\mmgr.cpp" />
-    <ClCompile Include="Panel.cpp" />
-    <ClCompile Include="PanelAbout.cpp" />
-    <ClCompile Include="PanelConsole.cpp" />
-    <ClCompile Include="PanelInspector.cpp" />
     <ClCompile Include="parson.c" />
     <ClCompile Include="PhysBody3D.cpp" />
     <ClCompile Include="PhysVehicle3D.cpp" />
@@ -97,6 +93,18 @@
     <ClCompile Include="ModuleEditorUI.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Panel.cpp">
+      <Filter>Modules\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelAbout.cpp">
+      <Filter>Modules\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelConsole.cpp">
+      <Filter>Modules\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelInspector.cpp">
+      <Filter>Modules\Panels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -116,10 +124,6 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="mmgr\mmgr.h" />
     <ClInclude Include="mmgr\nommgr.h" />
-    <ClInclude Include="Panel.h" />
-    <ClInclude Include="PanelAbout.h" />
-    <ClInclude Include="PanelConsole.h" />
-    <ClInclude Include="PanelInspector.h" />
     <ClInclude Include="parson.h" />
     <ClInclude Include="PhysBody3D.h" />
     <ClInclude Include="PhysVehicle3D.h" />
@@ -228,6 +232,18 @@
     <ClInclude Include="ModuleEditorUI.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Panel.h">
+      <Filter>Modules\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelAbout.h">
+      <Filter>Modules\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelConsole.h">
+      <Filter>Modules\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelInspector.h">
+      <Filter>Modules\Panels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Geometry\KDTree.inl" />
@@ -244,6 +260,9 @@
     </Filter>
     <Filter Include="Modules\Loaders">
       <UniqueIdentifier>{378ab0ef-39a7-4e00-9643-d39a87b97f3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Panels">
+      <UniqueIdentifier>{68878a14-636f-4cd9-afa4-c9609921a996}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

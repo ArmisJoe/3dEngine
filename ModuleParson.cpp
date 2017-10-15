@@ -13,7 +13,7 @@ ModuleParson::~ModuleParson()
 
 bool ModuleParson::Init()
 {
-	App->editor->ConsoleLog("Module Parson Init");
+	LOG("Module Parson Init");
 	config = LoadJSON("config_/config.json");
 	return true;
 }

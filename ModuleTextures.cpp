@@ -1,6 +1,8 @@
 #include "ModuleTextures.h"
 #include "ModuleAssimp.h"
 
+#include "Application.h"
+
 #include "glew-2.1.0\include\GL\glew.h"
 
 #include "Devil\include\il.h"
@@ -46,6 +48,9 @@ bool ModuleTextures::CleanUp()
 
 Texture* ModuleTextures::LoadTexture(const char * path)
 {
+
+	App->editor->ClearLog();
+
 	uint textureID = 0;
 	ILuint imageID;
 
@@ -65,7 +70,7 @@ Texture* ModuleTextures::LoadTexture(const char * path)
 		}
 		if (!ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE)) {
 			error = ilGetError();
-			//LOG("Texture Image conversion Failed: %d %s", error, iluErrorString(error));
+			LOG("Texture Image conversion Failed: %d %s", error, iluErrorString(error));
 		}
 		else {	
 
@@ -91,6 +96,9 @@ Texture* ModuleTextures::LoadTexture(const char * path)
 			//Texture Specifications
 			glTexImage2D(GL_TEXTURE_2D, 0, new_tex->format, new_tex->w, new_tex->h, 0, new_tex->format, GL_UNSIGNED_BYTE, ilGetData());
 
+			//Hardcode for Assigment01
+			this->CleanUp();
+			//!_Hardcode for Assigment01
 			textures.push_back(new_tex);
 
 			glBindTexture(GL_TEXTURE_2D, 0);
@@ -98,15 +106,25 @@ Texture* ModuleTextures::LoadTexture(const char * path)
 	}
 	else {
 		error = ilGetError();
-		//LOG("Image Load Error %d %s", error, iluErrorString(error));
+		LOG("Image Load Error %d %s", error, iluErrorString(error));
 	}
 
 	//glBindTexture(GL_TEXTURE_2D, 0);
 
 	ilDeleteImages(1, &imageID);
 
-	//LOG("Texture Loading Finished");
+	LOG("Texture Loaded Without Errors:\n\t%s", path);
 
 	return new_tex;
+}
+
+void ModuleTextures::RemoveAllTextures()
+{
+	while (!textures.empty())
+	{
+		if (textures.front() != nullptr)
+			delete[] textures.front();
+		textures.pop_front();
+	}
 }
 

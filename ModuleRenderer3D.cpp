@@ -154,8 +154,9 @@ update_status ModuleRenderer3D::Update(float dt)
 			if(m == nullptr)
 				LOG("Renderer3D: No Mesh Component Found")
 			//HardCode for Assigment01
-			if(!App->tex->textures.empty())
-				m->tex = App->tex->textures.back();
+				if (!App->tex->textures.empty()) {
+					m->tex = App->tex->textures.back();
+				}
 			//!_HardCode for Assigment01
 			DrawMesh(m);
 		}

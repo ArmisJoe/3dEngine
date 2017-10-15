@@ -123,10 +123,10 @@ update_status ModuleInput::PreUpdate(float dt)
 			{
 				dropped_filedir = e.drop.file;
 				char* filetext = Capitalize(strrchr(dropped_filedir, '.'));
-				LOG("FILE %s", filetext);
 				if (strncmp(filetext, ".FBX", 4) == 0) {
 					// Hardcode for Assigment01
 					App->scene->RemoveAllGameObject();
+					App->tex->RemoveAllTextures();
 					// !_Hardcode for Assigment01
 					std::list<Mesh*> ms = App->assimp->LoadGeometry(dropped_filedir);
 					GameObject* go = new GameObject();
@@ -139,6 +139,10 @@ update_status ModuleInput::PreUpdate(float dt)
 					if (!App->scene->gameObjects.empty()) {
 						GameObject* go = App->scene->gameObjects.front();
 						go->AddComponent(componentType_Texture, App->tex->LoadTexture(dropped_filedir));
+					}
+					else {
+						App->editor->ClearLog();
+						LOG("WARNING! -> No GameObject to attach the Texture to");
 					}
 				}
 				SDL_free(dropped_filedir);

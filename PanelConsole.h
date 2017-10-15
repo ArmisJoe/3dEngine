@@ -18,6 +18,7 @@ public:
 
 private:
 	ImGuiTextBuffer text_buffer;
+	bool scrollToBottom = false;
 
 };
 

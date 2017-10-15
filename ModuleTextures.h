@@ -17,6 +17,7 @@ public:
 	bool CleanUp();
 
 	Texture* LoadTexture(const char* path); // Returns nullptr on failure.
+	void RemoveAllTextures();
 
 public:
 	std::list<Texture*> textures;

@@ -14,6 +14,9 @@ ModuleAssimp::~ModuleAssimp()
 
 std::list<Mesh*> ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_flag)
 {
+
+	App->editor->ClearLog();
+
 	struct aiLogStream stream;
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
@@ -32,7 +35,6 @@ std::list<Mesh*> ModuleAssimp::LoadGeometry(const char* path, const unsigned int
 			new_mesh->num_vertices = m->mNumVertices;
 			new_mesh->vertices = new float[new_mesh->num_vertices * 3];
 			memcpy(new_mesh->vertices, m->mVertices, sizeof(float) * new_mesh->num_vertices * 3);
-			LOG("New mesh with %d vertices", new_mesh->num_vertices);
 			glGenBuffers(1, (GLuint*) &(new_mesh->id_vertices));
 			glBindBuffer(GL_ARRAY_BUFFER, new_mesh->id_vertices);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * new_mesh->num_vertices * 3, new_mesh->vertices, GL_STATIC_DRAW);
@@ -76,6 +78,7 @@ std::list<Mesh*> ModuleAssimp::LoadGeometry(const char* path, const unsigned int
 			}
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			LOG("New mesh with %d vertices %d indices %d UVs", new_mesh->num_vertices, new_mesh->num_indices, new_mesh->num_UV);
 			meshes.push_back(new_mesh);
 			ms.push_back(new_mesh);
 			// camera Focus

@@ -13,10 +13,26 @@ PanelConsole::~PanelConsole()
 
 void PanelConsole::Draw()
 {
-	ImGui::SetNextWindowContentSize(size);
 	ImGui::SetNextWindowPos(pos);
-	ImGui::Begin(name, &active, ImGuiWindowFlags_NoFocusOnAppearing);
+	ImGui::SetNextWindowContentSize(size);
+	ImGui::Begin(name, &active, ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+	if(ImGui::SmallButton("Clear")) {
+		Clear();
+	}
+	ImGui::Separator();
+
+	ImGui::SetNextWindowContentSize(size);
+	ImGui::BeginChild("ScrollingRegion", ImVec2(0, -ImGui::GetItemsLineHeightWithSpacing()), false, ImGuiWindowFlags_HorizontalScrollbar);
+
 	ImGui::TextUnformatted(text_buffer.begin());
+
+	if (scrollToBottom) {
+		ImGui::SetScrollHere(1.0f);
+		scrollToBottom = false;
+	}
+
+	ImGui::EndChild();
+
 	ImGui::End();
 }
 
@@ -28,5 +44,5 @@ void PanelConsole::Clear()
 void PanelConsole::ConsoleLog(const char * log)
 {
 	text_buffer.append(log);
-	text_buffer.append("\n");
+	scrollToBottom = true;
 }

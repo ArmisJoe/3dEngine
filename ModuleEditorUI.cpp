@@ -47,6 +47,10 @@ bool ModuleEditorUI::Start()
 {
 	console->active = true;
 	inspector->active = true;
+
+	console->size = { (float)App->window->screen_surface->w * 2 / 3, (float)App->window->screen_surface->h / 4 };
+	console->pos = { App->window->screen_surface->w/2 - console->size.x/2 , App->window->screen_surface->h - (console->size.y ) };
+
 	return true;
 }
 
@@ -81,7 +85,7 @@ update_status ModuleEditorUI::Update(float dt)
 			if (ImGui::Button("Save")) {
 				JSON_Doc* config = App->parson->config;
 				config->Save();
-				ConsoleLog("Configuration Saved");
+				LOG("Configuration Saved");
 			}
 			if (ImGui::Button("Quit")) {
 				App->input->AppQuit(true);
@@ -100,10 +104,14 @@ update_status ModuleEditorUI::Update(float dt)
 			}
 			ImGui::EndMenu();
 		}
-		if (ImGui::BeginMenu("View")) {
+		if (ImGui::BeginMenu("Windows")) {
 			ImGui::MenuItem("Object Creation", "O", &object_p);
 			ImGui::MenuItem("Inspector", "I", &inspector->active);
 			ImGui::MenuItem("Console", "Alt+C", &console->active);
+			ImGui::Separator();
+			if(ImGui::Button("Clear Console")) {
+				console->Clear();
+			}
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
@@ -125,18 +133,19 @@ update_status ModuleEditorUI::Update(float dt)
 					App->physics->AddSphere(RandomNumber(0, 20), RandomNumber(0, 20), RandomNumber(0, 20), r);
 				}
 
-				console->ConsoleLog("All Spheres Created");
+				LOG("All Spheres Created");
 			}
 			ImGui::End();
 		}
 	}
 
-	if (ImGui::Begin("Collision Check")) {
-		if (ImGui::Button("Check Collisions", ImVec2(100, 50))) {
-			App->physics->CheckAllIntersec();
-		}
-		ImGui::End();
-	}
+	/// Collision Check Button
+	//if (ImGui::Begin("Collision Check")) {
+	//	if (ImGui::Button("Check Collisions", ImVec2(100, 50))) {
+	//		App->physics->CheckAllIntersec();
+	//	}
+	//	ImGui::End();
+	//}
 
 	if (config_active) {
 		DrawConfigPanels();
@@ -177,6 +186,11 @@ void ModuleEditorUI::Draw()
 void ModuleEditorUI::ConsoleLog(const char * str) const
 {
 	console->ConsoleLog(str);
+}
+
+void ModuleEditorUI::ClearLog()
+{
+	console->Clear();
 }
 
 void ModuleEditorUI::AddPanel(Panel * n_panel)
