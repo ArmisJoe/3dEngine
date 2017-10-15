@@ -129,11 +129,16 @@ update_status ModuleInput::PreUpdate(float dt)
 					App->tex->RemoveAllTextures();
 					// !_Hardcode for Assigment01
 					std::list<Mesh*> ms = App->assimp->LoadGeometry(dropped_filedir);
-					GameObject* go = new GameObject();
-					for (std::list<Mesh*>::iterator it = ms.begin(); it != ms.end(); it++) {
-						go->AddComponent(componentType_Mesh, (*it));
+					if (!ms.empty()) {
+						GameObject* go = new GameObject();
+						for (std::list<Mesh*>::iterator it = ms.begin(); it != ms.end(); it++) {
+							go->AddComponent(componentType_Mesh, (*it));
+						}
+						App->scene->AddGameObject(go);
 					}
-					App->scene->AddGameObject(go);
+					else {
+						LOG("No Meshes in FBX or Corrupted File:\n\t%s", dropped_filedir);
+					}
 				}
 				if (strncmp(filetext, ".PNG", 4) == 0) {
 					if (!App->scene->gameObjects.empty()) {

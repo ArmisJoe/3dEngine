@@ -43,6 +43,8 @@ void PanelConsole::Clear()
 
 void PanelConsole::ConsoleLog(const char * log)
 {
-	text_buffer.append(log);
-	scrollToBottom = true;
+	if (log != nullptr) {
+		text_buffer.append(log);
+		scrollToBottom = true;
+	}
 }

@@ -1,6 +1,7 @@
 #include "ModuleEditorUI.h"
 #include "PanelConsole.h"
 #include "PanelInspector.h"
+#include "PanelAbout.h"
 
 #include <iostream> 
 #include <string>
@@ -13,11 +14,12 @@ ModuleEditorUI::ModuleEditorUI(Application * app, bool start_enabled) : Module(a
 	show_test_window = true;
 	config_active = false;
 	object_p = false;
-	libraries.push_back("ImGui");
-	libraries.push_back("MathGeoLib");
-	libraries.push_back("gpudetect");
-	libraries.push_back("SDL");
-	libraries.push_back("DevIL");
+	//libraries.push_back("ImGui");
+	//libraries.push_back("MathGeoLib");
+	//libraries.push_back("gpudetect");
+	//libraries.push_back("SDL");
+	//libraries.push_back("Glew v2.1.0");
+	//libraries.push_back("DevIL 1.8.0");
 }
 
 ModuleEditorUI::~ModuleEditorUI()
@@ -26,11 +28,13 @@ ModuleEditorUI::~ModuleEditorUI()
 	object_p = false;
 	config_active = false;
 	console = nullptr;
+	inspector = nullptr;
+	about = nullptr;
 }
 
 bool ModuleEditorUI::Init()
 {
-	
+
 	ImGui_ImplSdl_Init(App->window->window);
 
 	ImGuiIO& io = ImGui::GetIO();
@@ -38,6 +42,7 @@ bool ModuleEditorUI::Init()
 
 	AddPanel(console = new PanelConsole());
 	AddPanel(inspector = new PanelInspector());
+	AddPanel(about = new PanelAbout());
 	inspector->scene = App->scene;
 
 	return true;
@@ -47,9 +52,37 @@ bool ModuleEditorUI::Start()
 {
 	console->active = true;
 	inspector->active = true;
+	about->active = false;
 
 	console->size = { (float)App->window->screen_surface->w * 2 / 3, (float)App->window->screen_surface->h / 4 };
 	console->pos = { App->window->screen_surface->w/2 - console->size.x/2 , App->window->screen_surface->h - (console->size.y ) };
+
+	//Versions
+	std::string library_str;
+	// ImGui
+	library_str = "ImGui v";
+	library_str.append(ImGui::GetVersion());
+	libraries.push_back(library_str);
+	//MathGeo
+	libraries.push_back("MathGeoLib v1.5");
+	//GpDetect
+	libraries.push_back("gpudetect Apache 2.0 license");
+	//SDL
+	SDL_version ver;
+	SDL_GetVersion(&ver);
+	library_str = "SDL v";
+	std::string tmp = "SDL v" + ver.minor + '.' + ver.patch + '.' + ver.major;
+	library_str.append(tmp.c_str());
+	tmp.clear();
+	libraries.push_back(library_str);
+	//OpenGL
+	libraries.push_back("OpenGL v2.1.0");
+	//Glew
+	libraries.push_back("Glew v2.1.0");
+	//DevIL
+	libraries.push_back("DevIL v1.8.0");
+
+	about->libraries = libraries;
 
 	return true;
 }
@@ -113,6 +146,9 @@ update_status ModuleEditorUI::Update(float dt)
 				console->Clear();
 			}
 			ImGui::EndMenu();
+		}
+		if (ImGui::SmallButton("About")) {
+			about->active = !about->active;
 		}
 		ImGui::EndMainMenuBar();
 	}

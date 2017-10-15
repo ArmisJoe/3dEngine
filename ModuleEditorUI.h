@@ -44,8 +44,9 @@ public:
 private:
 	std::list<Panel*> panels;
 
-	PanelConsole* console = nullptr;
-	PanelInspector* inspector = nullptr;
+	PanelConsole*		console = nullptr;
+	PanelInspector*		inspector = nullptr;
+	PanelAbout*			about = nullptr;
 
 	bool object_p = false;
 

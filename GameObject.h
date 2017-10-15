@@ -71,7 +71,7 @@ public:
 	char* tag = nullptr;
 	componentType type;
 	char* name = nullptr;
-protected:
+public:
 	virtual bool Update(float dt) { return true; };
 	virtual void CleanUp() {};
 };
@@ -105,6 +105,9 @@ public:
 	//Scale
 	vec3 scale = { 1, 1, 1 };
 
+public:
+	//Post-Assigment01 Code
+	//Material* material = nullptr;
 };
 
 struct Texture : public Component {
@@ -120,5 +123,14 @@ public:
 	int format = 0;
 };
 
+struct Material : public Component {
+	Material() { name = "Material"; };
+	virtual ~Material() {};
+public:
+	void DrawInspectorPanel() {};
+public:
+	std::list<Texture*> diffuse;
+
+};
 
 #endif // !__GAMEOBJECT_H__

@@ -2,6 +2,8 @@
 
 #include "Panel.h"
 
+#include <vector>
+
 #ifndef __PANELABOUT_H__
 #define __PANELABOUT_H__
 
@@ -9,12 +11,10 @@
 
 class PanelAbout : public Panel {
 public:
-
-private:
 	void Draw();
 
-private:
-
+public:
+	std::vector<std::string> libraries;
 };
 
 #endif // !__PANELABOUT_H__

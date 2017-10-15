@@ -16,7 +16,7 @@ bool GameObject::Update(float dt)
 	if (!components.empty()) {
 		for (std::list<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr) {
-				(*it)->Update(dt);
+				//(*it)->Update(dt);
 			}
 		}
 	}

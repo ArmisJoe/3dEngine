@@ -17,15 +17,24 @@ std::list<Mesh*> ModuleAssimp::LoadGeometry(const char* path, const unsigned int
 
 	App->editor->ClearLog();
 
-	struct aiLogStream stream;
-	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
-	aiAttachLogStream(&stream);
+	//struct aiLogStream stream;
+	//stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
+	//aiAttachLogStream(&stream);
 
 	std::list<Mesh*> ms;
 
 	const aiScene* scene = aiImportFile(path, pprocess_flag);
+	aiMaterial** ai_mat = nullptr;
 	if (scene != nullptr && scene->HasMeshes())
 	{
+		//Scene Materials
+		if (scene->HasMaterials()) {
+			ai_mat = scene->mMaterials;
+		}
+		else {
+			LOG("Scene with No Materials");
+		}
+		// Scene Meshes
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 			//Vertices
 			Mesh* new_mesh = nullptr;
@@ -55,11 +64,34 @@ std::list<Mesh*> ModuleAssimp::LoadGeometry(const char* path, const unsigned int
 				}
 
 			}
+			else {
+				LOG("Mesh with no Faces");
+			}
 
 			glGenBuffers(1, (GLuint*) &(new_mesh->id_indices));
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, new_mesh->id_indices);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * new_mesh->num_indices, new_mesh->indices, GL_STATIC_DRAW);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+			//Material
+			if (ai_mat != nullptr) {
+				aiMaterial* m_mat = nullptr;
+				m_mat = ai_mat[(int)new_mesh->material_index];
+				Material* mat = nullptr;
+				mat = new Material();
+				// Diffuse
+				if (m_mat->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
+					for (uint i = 0; i < m_mat->GetTextureCount(aiTextureType_DIFFUSE); i++) {
+						aiString m_path;
+						m_mat->GetTexture(aiTextureType_DIFFUSE, i, &m_path);
+						if(m_path.length > 0)
+							mat->diffuse.push_back(App->tex->LoadTexture(m_path.C_Str()));
+					}
+				}
+				else {
+					LOG("No Diffuse found")
+				}
+			}
 
 			//UVS
 			if (m->HasTextureCoords(0))
@@ -123,6 +155,6 @@ bool ModuleAssimp::CleanUp()
 		meshes.pop_front();
 	}
 
-	aiDetachAllLogStreams();
+	//aiDetachAllLogStreams();
 	return true;
 }
