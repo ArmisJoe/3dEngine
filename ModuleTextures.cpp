@@ -167,6 +167,5 @@ void ModuleTextures::DrawConfigPanel()
 		if(interpolate_str != nullptr)
 			ImGui::Combo("Interpolation Method", &interpolation_type, interpolate_str);
 	}
-
 }
 

@@ -2,6 +2,10 @@
 #include "Module.h"
 #include "Globals.h"
 
+
+#include <iostream> 
+#include <sstream> 
+
 #define MAX_MOUSE_BUTTONS 5
 
 enum KEY_STATE
@@ -68,6 +72,7 @@ public:
 	{
 		return mouse_wheel;
 	}
+
 	void AppQuit(bool flag) {
 		quit = flag;
 	}
@@ -86,4 +91,6 @@ private:
 	bool mouse_wheel = false;
 	//int mouse_z_motion;
 	char* dropped_filedir;
+	bool menu_open = false;
+
 };

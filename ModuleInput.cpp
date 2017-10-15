@@ -172,7 +172,14 @@ bool ModuleInput::CleanUp()
 
 void ModuleInput::DrawConfigPanel()
 {
-	if (ImGui::CollapsingHeader(name, &menu_open)) {
+	if (ImGui::CollapsingHeader("Input")) {
+		int x, y;
+		x = GetMouseX();
+		y = GetMouseY();
+
+		string mousepos = "Mouse Position: X = " + std::to_string(x) + " Y = " + std::to_string(y);
+
+		ImGui::Text(mousepos.c_str());
 
 	}
 }
