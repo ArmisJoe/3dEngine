@@ -23,4 +23,6 @@ public:
 	void RemoveAllGameObject();
 public:
 	std::list<GameObject*> gameObjects;
+
+private:
 };

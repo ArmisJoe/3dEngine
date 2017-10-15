@@ -3,6 +3,7 @@
 
 #include "Globals.h"
 #include "Timer.h"
+#include "PerfTimer.h"
 #include "Module.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
@@ -43,7 +44,8 @@ private:
 	Timer	ms_timer;
 	float	dt;
 	list<Module*> list_modules;
-
+	PerfTimer module_timer;
+	PerfTimer start_up;
 	char* EngineName;
 
 public:
@@ -59,15 +61,17 @@ public:
 	
 	string Logs;
 	void mylog(const char file[], int line, const char* format, ...);
+	void AddModulePerformance(const string name, float ms);
 
 private:
 	vector<float> fps_container;
-	vector<float> ms_container;
+	map<string, vector<float>> module_container;
 	vector<float> mem_container;
 	sMStats stats;
 
 	
 	string ms_title;
+
 
 	void AddModule(Module* mod);
 	void PrepareUpdate();

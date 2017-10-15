@@ -204,7 +204,7 @@ void ModuleEditorUI::DrawConfigPanels()
 
 	ImGui::SetNextWindowContentSize(ImVec2(500, 500));
 
-	if (ImGui::Begin("Configuration", &config_active, ImGuiWindowFlags_NoFocusOnAppearing)) {
+	if (ImGui::Begin("Configuration", &config_active, ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_AlwaysVerticalScrollbar)) {
 
 		if (ImGui::CollapsingHeader("About")) {
 			ImGui::Text("3D Engine by UPC students Pau and Josep");

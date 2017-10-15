@@ -57,4 +57,5 @@ public:
 
 private:
 	bCube *TestCube;
+
 };

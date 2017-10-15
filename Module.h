@@ -19,11 +19,11 @@ class Module
 private :
 	bool enabled;
 protected:
-	char* name;
 	bool menu_open = false;
 
 public:
 	Application* App;
+	char* name;
 
 	Module(Application* parent, bool start_enabled = true) : App(parent)
 	{}

@@ -109,6 +109,7 @@
     <ClInclude Include="PanelConsole.h" />
     <ClInclude Include="PanelInspector.h" />
     <ClInclude Include="parson.h" />
+    <ClInclude Include="PerfTimer.h" />
     <ClInclude Include="PhysBody3D.h" />
     <ClInclude Include="PhysVehicle3D.h" />
     <ClInclude Include="Primitive.h" />
@@ -211,6 +212,7 @@
     <ClCompile Include="PanelConsole.cpp" />
     <ClCompile Include="PanelInspector.cpp" />
     <ClCompile Include="parson.c" />
+    <ClCompile Include="PerfTimer.cpp" />
     <ClCompile Include="PhysBody3D.cpp" />
     <ClCompile Include="PhysVehicle3D.cpp" />
     <ClCompile Include="Primitive.cpp" />
