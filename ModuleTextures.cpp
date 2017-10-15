@@ -32,6 +32,12 @@ bool ModuleTextures::Init()
 	ilutInit();
 	ilutRenderer(ILUT_OPENGL);
 
+	clamp_type = clampingTexType_ClampRepeat;
+	interpolation_type = interpolationTexType_Linear;
+
+	clamping_str = "Clamp to Edge\0Repeat\0Mirrored Repeat\0";
+	interpolate_str = "Nearest\0Linear\0";
+
 	return true;
 }
 
@@ -87,11 +93,38 @@ Texture* ModuleTextures::LoadTexture(const char * path)
 			new_tex->format = ilGetInteger(IL_IMAGE_FORMAT);
 
 			//Clamping Method
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			GLint clampParam;
+			switch (clamp_type) {
+			case clampingTexType_ClampToEdge:
+				clampParam = GL_CLAMP_TO_EDGE;
+				break;
+			case clampingTexType_ClampRepeat:
+				clampParam = GL_REPEAT;
+				break;
+			case clampingTexType_ClampMirroredRepeat:
+				clampParam = GL_MIRRORED_REPEAT;
+				break;
+			default:
+				clampParam = GL_REPEAT;
+				break;
+			}
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, clampParam);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, clampParam);
 			// Interpolation Method
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			GLint interParam;
+			switch (interpolation_type) {
+			case interpolationTexType_Nearest:
+				interParam = GL_NEAREST;
+				break;
+			case interpolationTexType_Linear:
+				interParam = GL_LINEAR;
+				break;
+			default:
+				interParam = GL_LINEAR;
+				break;
+			}
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, interParam);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, interParam);
 
 			//Texture Specifications
 			glTexImage2D(GL_TEXTURE_2D, 0, new_tex->format, new_tex->w, new_tex->h, 0, new_tex->format, GL_UNSIGNED_BYTE, ilGetData());
@@ -129,12 +162,10 @@ void ModuleTextures::DrawConfigPanel()
 {
 	if (ImGui::CollapsingHeader("textures")) 
 	{
-		if (ImGui::Checkbox("Test", &check)) 
-		{
-		}
-		if (ImGui::Checkbox("Test2", &check2)) 
-		{
-		}
+		if(clamping_str != nullptr)
+			ImGui::Combo("Clamping Method", &clamp_type, clamping_str);
+		if(interpolate_str != nullptr)
+			ImGui::Combo("Interpolation Method", &interpolation_type, interpolate_str);
 	}
 
 }

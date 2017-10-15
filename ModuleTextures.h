@@ -5,8 +5,19 @@
 
 #include "Module.h"
 #include "GameObject.h"
+	
+enum clampingTexType {
+	clampingTexType_ClampToEdge = 0,
+	clampingTexType_ClampRepeat,
+	clampingTexType_ClampMirroredRepeat
+};
+enum interpolationTexType {
+	interpolationTexType_Nearest = 0,
+	interpolationTexType_Linear
+};
 
 class ModuleTextures : public Module {
+public:
 public:
 	ModuleTextures(Application* app, bool start_enabled = true);
 	~ModuleTextures();
@@ -22,9 +33,11 @@ public:
 public:
 	std::list<Texture*> textures;
 
-public: // Configurations
-private:
-	bool check = false, check2 = false;
+private: // Configurations
+	int clamp_type = clampingTexType_ClampRepeat;
+	int interpolation_type = interpolationTexType_Linear;
+	char* clamping_str = nullptr;
+	char* interpolate_str = nullptr;
 
 };
 
