@@ -2,6 +2,12 @@
 #include "Application.h"
 #include "ImGui\imgui.h"
 #include <string>
+
+#include "ComponentMaterial.h"
+#include "ComponentMesh.h"
+#include "ComponentTransform.h"
+
+
 GameObject::GameObject()
 {
 	name = "name";
@@ -116,29 +122,4 @@ void GameObject::DrawInspectorPanel()
 	}
 };
 
-void Mesh::DrawInspectorPanel()
-{
-	std::string str = "Triangles: " + std::to_string(this->num_triangles);
-	ImGui::Text(str.c_str());
-	str = "Vertices: " + std::to_string(this->num_vertices);
-	ImGui::Text(str.c_str());
-	ImGui::SameLine();
-	str = "Indices: " + std::to_string(this->num_indices);
-	ImGui::Text(str.c_str());
-	ImGui::Text("Scale:");
-	str = "X: " + std::to_string(this->scale.x);
-	ImGui::Text(str.c_str());
-	ImGui::SameLine();
-	str = "Y: " + std::to_string(this->scale.y);
-	ImGui::Text(str.c_str());
-	ImGui::SameLine();
-	str = "Z: " + std::to_string(this->scale.z);
-	ImGui::Text(str.c_str());
-}
 
-void Texture::DrawInspectorPanel()
-{
-	std::string str = "Size: " + std::to_string((int)this->w) + "x"+ std::to_string((int)this->h);
-	ImGui::Text(str.c_str());
-	ImGui::Image((ImTextureID)this->id, ImVec2(120, 120));
-}
