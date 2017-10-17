@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glew-2.1.0\glew.c" />
     <ClCompile Include="glmath.cpp" />
     <ClCompile Include="gpudetect\DeviceId.cpp" />
@@ -108,11 +107,13 @@
     <ClCompile Include="PerfTimer.cpp">
       <Filter>Tools</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Color.h" />
-    <ClInclude Include="GameObject.h" />
     <ClInclude Include="glew-2.1.0\include\GL\eglew.h" />
     <ClInclude Include="glew-2.1.0\include\GL\glew.h" />
     <ClInclude Include="glew-2.1.0\include\GL\glxew.h" />
@@ -250,6 +251,9 @@
     <ClInclude Include="PerfTimer.h">
       <Filter>Tools</Filter>
     </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Geometry\KDTree.inl" />
@@ -272,6 +276,9 @@
     </Filter>
     <Filter Include="Tools">
       <UniqueIdentifier>{f812f70b-ac10-4c48-9a5d-02507e6cf400}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{8153403d-73ee-4579-b4a4-0262017c55d6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

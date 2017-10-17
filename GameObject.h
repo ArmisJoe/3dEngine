@@ -18,15 +18,13 @@ enum componentType {
 	componentType_Unknown
 };
 
-struct Transform {
-	Transform() {
-		position = { 0, 0, 0 };
-		rotation = { 0, 0, 0 };
-	}
+struct Transform : public Component {
+	Transform() {};
 	~Transform() {};
 
 	vec3 position;
-	vec3 rotation;
+	vec4 rotation;
+	vec3 size;
 };
 
 class GameObject {
