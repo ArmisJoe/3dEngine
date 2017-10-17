@@ -22,7 +22,7 @@ public:
 	GameObject* AddGameObject(GameObject* go); //Adds a GameObject into Scene. Return nullptr on failure.
 	void RemoveAllGameObject();
 public:
-	std::list<GameObject*> gameObjects;
+	GameObject* root;
 
 private:
 };

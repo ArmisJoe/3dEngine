@@ -14,7 +14,7 @@ GameObject::~GameObject()
 bool GameObject::Update(float dt)
 {
 	if (!components.empty()) {
-		for (std::list<Component*>::iterator it = components.begin(); it != components.end(); it++) {
+		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr) {
 				//(*it)->Update(dt);
 			}
@@ -27,7 +27,7 @@ bool GameObject::Update(float dt)
 void GameObject::CleanUp()
 {
 	if (!components.empty()) {
-		for (std::list<Component*>::iterator it = components.begin(); it != components.end(); it++) {
+		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr) {
 				//(*it)->CleanUp(); // Triggers an exeption error (possible deleting what is already deleted)
 				//delete (*it);
@@ -69,11 +69,11 @@ Component * GameObject::AddComponent(componentType type, Component * componentPo
 	return newComponent;
 }
 
-std::list<Component*> GameObject::GetComponents(componentType type)
+std::vector<Component*> GameObject::GetComponents(componentType type)
 {
-	std::list<Component*> cs;
+	std::vector<Component*> cs;
 
-	for (std::list<Component*>::iterator it = components.begin(); it != components.end(); it++) {
+	for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 		if ((*it) != nullptr) {
 			if ((*it)->type == type)
 				cs.push_back((*it));
@@ -107,7 +107,7 @@ void GameObject::DrawInspectorPanel()
 			str = "Z: " + std::to_string(this->transform.rotation.z);
 			ImGui::Text(str.c_str());
 		}
-		for (std::list<Component*>::iterator c_it = this->components.begin(); c_it != this->components.end(); c_it++) {
+		for (std::vector<Component*>::iterator c_it = this->components.begin(); c_it != this->components.end(); c_it++) {
 			Component* c = (*c_it);
 			if (ImGui::CollapsingHeader(c->name, true)) {
 				c->DrawInspectorPanel();
