@@ -3,7 +3,7 @@
 #define __GAMEOBJECT_H__
 
 #include "glmath.h"
-#include <list>
+#include <vector>
 #include "Globals.h"
 #include "Component.h"
 
@@ -18,7 +18,12 @@ public:	// General Methods
 	virtual void CleanUp();
 public: // Specific Methods
 	Component* AddComponent(componentType type, Component * componentPointer = nullptr); // Adds a new Component to the GameObject. Return nullptr on failure.
-	std::list<Component*> GetComponents(componentType type);
+
+	std::vector<Component*> GetComponents(componentType type);
+
+	GameObject* GetParent() {
+		return parent;
+	};
 	void DrawInspectorPanel();
 private:
 	bool activeSelf = false;
@@ -29,7 +34,11 @@ public:
 	char* tag = nullptr;
 	ComponentTransform transform;
 public:
-	std::list<Component*> components;
+	std::vector<Component*> components;
+private:
+	GameObject* parent;
+	std::vector<GameObject*> child;
+
 };
 
 #endif // !__GAMEOBJECT_H__

@@ -74,9 +74,6 @@
     <ClCompile Include="ModuleRenderer3D.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleScene.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleWindow.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -110,11 +107,16 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="ComponentMesh.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="ComponentMaterial.cpp">
       <Filter>GameObject</Filter>
+=======
+    <ClCompile Include="ModuleScene.cpp">
+      <Filter>Modules\Scene</Filter>
+>>>>>>> origin/master
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -221,9 +223,6 @@
     <ClInclude Include="ModuleRenderer3D.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleScene.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleWindow.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -260,6 +259,7 @@
     <ClInclude Include="GameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Component.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -271,6 +271,10 @@
     </ClInclude>
     <ClInclude Include="ComponentMaterial.h">
       <Filter>GameObject</Filter>
+=======
+    <ClInclude Include="ModuleScene.h">
+      <Filter>Modules\Scene</Filter>
+>>>>>>> origin/master
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -297,6 +301,9 @@
     </Filter>
     <Filter Include="GameObject">
       <UniqueIdentifier>{8153403d-73ee-4579-b4a4-0262017c55d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Scene">
+      <UniqueIdentifier>{cb9a6d29-5f9d-4222-ba71-1e0e14a86d33}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
