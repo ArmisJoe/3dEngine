@@ -15,7 +15,24 @@
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="mmgr\mmgr.cpp" />
+    <ClCompile Include="ModuleAssimp.cpp" />
+    <ClCompile Include="ModuleAudio.cpp" />
+    <ClCompile Include="ModuleCamera3D.cpp" />
+    <ClCompile Include="ModuleEditorUI.cpp" />
+    <ClCompile Include="ModuleInput.cpp" />
+    <ClCompile Include="ModuleParson.cpp" />
+    <ClCompile Include="ModulePhysics3D.cpp" />
+    <ClCompile Include="ModulePlayer.cpp" />
+    <ClCompile Include="ModuleRenderer3D.cpp" />
+    <ClCompile Include="ModuleScene.cpp" />
+    <ClCompile Include="ModuleTextures.cpp" />
+    <ClCompile Include="ModuleWindow.cpp" />
+    <ClCompile Include="Panel.cpp" />
+    <ClCompile Include="PanelAbout.cpp" />
+    <ClCompile Include="PanelConsole.cpp" />
+    <ClCompile Include="PanelInspector.cpp" />
     <ClCompile Include="parson.c" />
+    <ClCompile Include="PerfTimer.cpp" />
     <ClCompile Include="PhysBody3D.cpp" />
     <ClCompile Include="PhysVehicle3D.cpp" />
     <ClCompile Include="Primitive.cpp" />
@@ -56,68 +73,16 @@
     <ClCompile Include="src\Math\TransformOps.cpp" />
     <ClCompile Include="src\Time\Clock.cpp" />
     <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="ModuleAudio.cpp">
-      <Filter>Modules</Filter>
+    <ClCompile Include="ComponentMaterial.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleCamera3D.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleInput.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModulePhysics3D.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModulePlayer.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleRenderer3D.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleWindow.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleAssimp.cpp">
-      <Filter>Modules\Loaders</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleParson.cpp">
-      <Filter>Modules\Loaders</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleTextures.cpp">
-      <Filter>Modules\Loaders</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleEditorUI.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Panel.cpp">
-      <Filter>Modules\Panels</Filter>
-    </ClCompile>
-    <ClCompile Include="PanelAbout.cpp">
-      <Filter>Modules\Panels</Filter>
-    </ClCompile>
-    <ClCompile Include="PanelConsole.cpp">
-      <Filter>Modules\Panels</Filter>
-    </ClCompile>
-    <ClCompile Include="PanelInspector.cpp">
-      <Filter>Modules\Panels</Filter>
-    </ClCompile>
-    <ClCompile Include="PerfTimer.cpp">
-      <Filter>Tools</Filter>
+    <ClCompile Include="ComponentMesh.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="ComponentMesh.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="ComponentMaterial.cpp">
-      <Filter>GameObject</Filter>
-=======
-    <ClCompile Include="ModuleScene.cpp">
-      <Filter>Modules\Scene</Filter>
->>>>>>> origin/master
-    </ClCompile>
+    <ClCompile Include="Component.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -136,7 +101,25 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="mmgr\mmgr.h" />
     <ClInclude Include="mmgr\nommgr.h" />
+    <ClInclude Include="ModuleAssimp.h" />
+    <ClInclude Include="ModuleCamera3D.h" />
+    <ClInclude Include="ModuleEditorUI.h" />
+    <ClInclude Include="ModuleParson.h" />
+    <ClInclude Include="ModulePhysics3D.h" />
+    <ClInclude Include="ModulePlayer.h" />
+    <ClInclude Include="ModuleRenderer3D.h" />
+    <ClInclude Include="Module.h" />
+    <ClInclude Include="ModuleAudio.h" />
+    <ClInclude Include="ModuleInput.h" />
+    <ClInclude Include="ModuleScene.h" />
+    <ClInclude Include="ModuleTextures.h" />
+    <ClInclude Include="ModuleWindow.h" />
+    <ClInclude Include="Panel.h" />
+    <ClInclude Include="PanelAbout.h" />
+    <ClInclude Include="PanelConsole.h" />
+    <ClInclude Include="PanelInspector.h" />
     <ClInclude Include="parson.h" />
+    <ClInclude Include="PerfTimer.h" />
     <ClInclude Include="PhysBody3D.h" />
     <ClInclude Include="PhysVehicle3D.h" />
     <ClInclude Include="Primitive.h" />
@@ -205,76 +188,20 @@
     <ClInclude Include="src\Math\TransformOps.h" />
     <ClInclude Include="src\Time\Clock.h" />
     <ClInclude Include="Timer.h" />
-    <ClInclude Include="ModuleAudio.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleCamera3D.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleInput.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModulePhysics3D.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModulePlayer.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleRenderer3D.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleWindow.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="Module.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleAssimp.h">
-      <Filter>Modules\Loaders</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleParson.h">
-      <Filter>Modules\Loaders</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleTextures.h">
-      <Filter>Modules\Loaders</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleEditorUI.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="Panel.h">
-      <Filter>Modules\Panels</Filter>
-    </ClInclude>
-    <ClInclude Include="PanelAbout.h">
-      <Filter>Modules\Panels</Filter>
-    </ClInclude>
-    <ClInclude Include="PanelConsole.h">
-      <Filter>Modules\Panels</Filter>
-    </ClInclude>
-    <ClInclude Include="PanelInspector.h">
-      <Filter>Modules\Panels</Filter>
-    </ClInclude>
-    <ClInclude Include="PerfTimer.h">
-      <Filter>Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
+    <ClInclude Include="ComponentTransform.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="Component.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentTransform.h">
+    <ClInclude Include="ComponentMaterial.h">
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="ComponentMesh.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentMaterial.h">
+    <ClInclude Include="GameObject.h">
       <Filter>GameObject</Filter>
-=======
-    <ClInclude Include="ModuleScene.h">
-      <Filter>Modules\Scene</Filter>
->>>>>>> origin/master
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -284,26 +211,8 @@
     <None Include="src\Math\Matrix.inl" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Modules">
-      <UniqueIdentifier>{076e3a68-78aa-4218-9766-8e0bf33dfcee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="MathGeo">
-      <UniqueIdentifier>{2a5118d2-df2b-4ac4-a490-f81fbf910a1c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Loaders">
-      <UniqueIdentifier>{378ab0ef-39a7-4e00-9643-d39a87b97f3f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Panels">
-      <UniqueIdentifier>{68878a14-636f-4cd9-afa4-c9609921a996}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tools">
-      <UniqueIdentifier>{f812f70b-ac10-4c48-9a5d-02507e6cf400}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject">
-      <UniqueIdentifier>{8153403d-73ee-4579-b4a4-0262017c55d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Scene">
-      <UniqueIdentifier>{cb9a6d29-5f9d-4222-ba71-1e0e14a86d33}</UniqueIdentifier>
+      <UniqueIdentifier>{92e4d207-5371-4ba6-9341-b216ab139aa5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

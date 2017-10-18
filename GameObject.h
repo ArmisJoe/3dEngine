@@ -4,11 +4,13 @@
 
 #include "glmath.h"
 #include <vector>
+#include <string>
 #include "Globals.h"
 #include "Component.h"
 
 class Component;
 
+/*
 class GameObject {
 public:
 	GameObject();
@@ -40,5 +42,26 @@ private:
 	std::vector<GameObject*> child;
 
 };
+*/
+
+class GameObject {
+private:
+	GameObject* parent;
+	string name;
+public:
+	vector<Component*> components;
+	vector<GameObject*> children; // DELCIOSIOS
+public:
+	void Update();
+	void CleanUp();
+	Component* FindComponent(componentType type);
+	Component* AddComponent(componentType type, Component * componentPointer = nullptr);
+	Component* DestroyComponent(componentType type, Component*componentPointer = nullptr);
+	GameObject* GetParent() const { return parent; }
+	string GetName() const { return name; }
+
+}
 
 #endif // !__GAMEOBJECT_H__
+
+

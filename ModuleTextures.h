@@ -5,6 +5,7 @@
 
 #include "Module.h"
 #include "GameObject.h"
+#include "ComponentMaterial.h"
 	
 enum clampingTexType {
 	clampingTexType_ClampToEdge = 0,

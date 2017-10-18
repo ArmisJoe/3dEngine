@@ -3,6 +3,7 @@
 #include "ImGui\imgui.h"
 #include <string>
 
+#include "Component.h"
 #include "ComponentMaterial.h"
 #include "ComponentMesh.h"
 #include "ComponentTransform.h"
@@ -17,17 +18,15 @@ GameObject::~GameObject()
 {
 }
 
-bool GameObject::Update(float dt)
+void GameObject::Update()
 {
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr) {
-				//(*it)->Update(dt);
+				(*it)->Update();
 			}
 		}
 	}
-
-	return true;
 }
 
 void GameObject::CleanUp()
@@ -35,12 +34,25 @@ void GameObject::CleanUp()
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr) {
-				//(*it)->CleanUp(); // Triggers an exeption error (possible deleting what is already deleted)
-				//delete (*it);
+				(*it)->CleanUp(); // Triggers an exeption error (possible deleting what is already deleted)
+				delete (*it);
 			}
 		}
 		components.clear();
 	}
+
+	// Let's do it like this for now.
+	// v	v	v	v	v	v	v	
+	if (!children.empty()) {
+		for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
+			if ((*it) != nullptr) {
+				(*it)->CleanUp(); 
+				delete (*it);
+			}
+		}
+		children.clear();
+	}
+
 }
 
 Component * GameObject::AddComponent(componentType type, Component * componentPointer)
@@ -50,10 +62,13 @@ Component * GameObject::AddComponent(componentType type, Component * componentPo
 	if (componentPointer == nullptr) {
 		switch (type) {
 		case componentType_Mesh:
-			newComponent = new Mesh();
+			newComponent = new ComponentMesh();
 			break;
-		case componentType_Texture:
-			newComponent = new Texture();
+		case componentType_Material:
+			newComponent = new ComponentMaterial();
+			break;
+		case componentType_Transform:
+			newComponent = new ComponentTransform();
 			break;
 		case componentType_Unknown:
 			break;
