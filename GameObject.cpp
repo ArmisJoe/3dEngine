@@ -79,10 +79,10 @@ Component * GameObject::AddComponent(componentType type, Component * componentPo
 	}
 
 	if (newComponent != nullptr) {
-		newComponent->type = type;
-		newComponent->gameObject = this;
-		newComponent->transform = this->transform;
-		newComponent->tag = this->tag;
+		newComponent->SetType(type);
+		newComponent->SetParent(this);
+
+		//newComponent->tag = this->tag;
 
 		components.push_back(newComponent);
 	}
@@ -90,6 +90,16 @@ Component * GameObject::AddComponent(componentType type, Component * componentPo
 	return newComponent;
 }
 
+void GameObject::DestroyComponent(componentType type, Component * componentPointer)
+{
+	vector<Component*>::iterator position = find(components.begin(), components.end(), componentPointer);
+	if (position != components.end()) {// == myVector.end() means the element was not found
+		(*position)->CleanUp();
+		components.erase(position);
+	}
+}
+
+/* //????????
 std::vector<Component*> GameObject::GetComponents(componentType type)
 {
 	std::vector<Component*> cs;
@@ -102,7 +112,9 @@ std::vector<Component*> GameObject::GetComponents(componentType type)
 	}
 
 	return cs;
-}
+}*/
+
+/* // This does no longer go here
 void GameObject::DrawInspectorPanel()
 {
 	if (ImGui::CollapsingHeader(this->name, false)) {
@@ -136,5 +148,5 @@ void GameObject::DrawInspectorPanel()
 		}
 	}
 };
-
+*/
 

@@ -56,7 +56,7 @@ public:
 	void CleanUp();
 	Component* FindComponent(componentType type);
 	Component* AddComponent(componentType type, Component * componentPointer = nullptr);
-	Component* DestroyComponent(componentType type, Component*componentPointer = nullptr);
+	void DestroyComponent(componentType type, Component*componentPointer = nullptr);
 	GameObject* GetParent() const { return parent; }
 	string GetName() const { return name; }
 
