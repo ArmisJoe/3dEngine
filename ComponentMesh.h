@@ -3,8 +3,9 @@
 #include "Component.h"
 
 class ComponentMesh : public Component {
+public:
 
-	ComponentMesh() { };
+	ComponentMesh(componentType argtype, GameObject* argparent);
 	virtual ~ComponentMesh() {};
 
 public:

@@ -34,6 +34,8 @@ public:
 
 
 class Component {
+public:
+	Component(componentType argtype, GameObject* argparent);
 protected:
 	componentType type;
 	bool isActive = true;

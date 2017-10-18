@@ -55,6 +55,19 @@ void GameObject::CleanUp()
 
 }
 
+Component * GameObject::FindComponent(componentType type)
+{
+	Component* ret;
+	if (!components.empty()) {
+		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
+			if ((*it) != nullptr && ((*it)->GetType() == type)) {
+				ret = (*it);
+			}
+		}
+	}
+	return ret;
+}
+
 Component * GameObject::AddComponent(componentType type, Component * componentPointer)
 {
 	Component* newComponent = nullptr;
@@ -62,29 +75,24 @@ Component * GameObject::AddComponent(componentType type, Component * componentPo
 	if (componentPointer == nullptr) {
 		switch (type) {
 		case componentType_Mesh:
-			newComponent = new ComponentMesh();
+			newComponent = new ComponentMesh(type, this);
+			components.push_back(newComponent);
 			break;
 		case componentType_Material:
-			newComponent = new ComponentMaterial();
+			newComponent = new ComponentMaterial(type, this);
+			components.push_back(newComponent);
 			break;
 		case componentType_Transform:
-			newComponent = new ComponentTransform();
+			newComponent = new ComponentTransform(type, this);
+			components.push_back(newComponent);
 			break;
 		case componentType_Unknown:
 			break;
 		}
+
 	}
 	else {
 		newComponent = componentPointer;
-	}
-
-	if (newComponent != nullptr) {
-		newComponent->SetType(type);
-		newComponent->SetParent(this);
-
-		//newComponent->tag = this->tag;
-
-		components.push_back(newComponent);
 	}
 
 	return newComponent;

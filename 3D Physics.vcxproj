@@ -189,6 +189,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentMaterial.cpp" />
     <ClCompile Include="ComponentMesh.cpp" />
+    <ClCompile Include="ComponentTransform.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glew-2.1.0\glew.c" />
     <ClCompile Include="glmath.cpp" />

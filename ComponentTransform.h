@@ -5,7 +5,8 @@
 #include "glmath.h"
 
 class ComponentTransform : public Component {
-	ComponentTransform() {};
+public:
+	ComponentTransform(componentType argtype, GameObject* argparent);
 	~ComponentTransform() {};
 
 	vec3 position;

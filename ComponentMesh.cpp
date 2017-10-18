@@ -4,6 +4,10 @@
 #include <string>
 
 
+ComponentMesh::ComponentMesh(componentType argtype, GameObject * argparent) : Component(argtype, argparent)
+{
+}
+
 void ComponentMesh::DrawInspectorPanel()
 {
 		std::string str = "Triangles: " + std::to_string(this->num_triangles);

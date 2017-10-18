@@ -1,13 +1,13 @@
 #pragma once
 
 #include "Component.h"
-
+#include <list>
 
 struct Texture {
 	Texture() {};
 	virtual ~Texture() {};
 public:
-	//void DrawInspectorPanel();
+	void DrawInspectorPanel();
 public:
 	unsigned int id = 0;
 	float w = 0;
@@ -18,7 +18,7 @@ public:
 
 
 struct ComponentMaterial : public Component {
-	ComponentMaterial() { };
+	ComponentMaterial(componentType argtype, GameObject* argparent);
 	virtual ~ComponentMaterial() {};
 public:
 	void DrawInspectorPanel() {};
