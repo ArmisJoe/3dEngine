@@ -4,7 +4,7 @@
 
 class ComponentMesh : public Component {
 
-	ComponentMesh() { name = "Mesh"; };
+	ComponentMesh() { };
 	virtual ~ComponentMesh() {};
 
 public:

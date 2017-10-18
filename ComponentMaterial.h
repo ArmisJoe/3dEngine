@@ -3,11 +3,11 @@
 #include "Component.h"
 
 
-struct Texture : public Component {
-	Texture() { name = "Texture"; };
+struct Texture {
+	Texture() {};
 	virtual ~Texture() {};
 public:
-	void DrawInspectorPanel();
+	//void DrawInspectorPanel();
 public:
 	unsigned int id = 0;
 	float w = 0;
@@ -18,7 +18,7 @@ public:
 
 
 struct ComponentMaterial : public Component {
-	ComponentMaterial() { name = "Material"; };
+	ComponentMaterial() { };
 	virtual ~ComponentMaterial() {};
 public:
 	void DrawInspectorPanel() {};

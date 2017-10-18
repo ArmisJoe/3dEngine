@@ -38,13 +38,13 @@ protected:
 	componentType type;
 	bool isActive = true;
 	GameObject* parent;
-
 public:
 	virtual componentType GetType() { return type; }
 	virtual void Update() {}
 	virtual void CleanUp() {}
 	virtual void Enable() { isActive = true; }
 	virtual void Disable() { isActive = false; }
+	virtual void OnEditor() {}
 	GameObject* GetParent() const { return parent; }
 	bool SetParent(GameObject* parent);
 	void SetType(componentType ntype) { type = ntype; }
