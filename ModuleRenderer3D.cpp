@@ -4,6 +4,7 @@
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
+#include "ComponentMesh.h"
 //#include "glew-2.1.0\include\GL\glew.h"
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
@@ -147,20 +148,20 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 update_status ModuleRenderer3D::Update(float dt)
 {
-	for (std::list<GameObject*>::iterator go_it = App->scene->gameObjects.begin(); go_it != App->scene->gameObjects.end(); go_it++) {
-		std::list<Component*> ms = (*go_it)->GetComponents(componentType_Mesh);
-		for (std::list<Component*>::iterator m_it = ms.begin(); m_it != ms.end(); m_it++) {
-			Mesh* m = (Mesh*)(*m_it);
-			if(m == nullptr)
-				LOG("Renderer3D: No Mesh Component Found")
-			//HardCode for Assigment01
-				if (!App->tex->textures.empty()) {
-					m->tex = App->tex->textures.back();
-				}
-			//!_HardCode for Assigment01
-			DrawMesh(m);
-		}
-	}
+	//for (std::list<GameObject*>::iterator go_it = App->scene->gameObjects.begin(); go_it != App->scene->gameObjects.end(); go_it++) {
+	//	std::list<Component*> ms = (*go_it)->GetComponents(componentType_Mesh);
+	//	for (std::list<Component*>::iterator m_it = ms.begin(); m_it != ms.end(); m_it++) {
+	//		Mesh* m = (Mesh*)(*m_it);
+	//		if(m == nullptr)
+	//			LOG("Renderer3D: No Mesh Component Found")
+	//		//HardCode for Assigment01
+	//			if (!App->tex->textures.empty()) {
+	//				m->tex = App->tex->textures.back();
+	//			}
+	//		//!_HardCode for Assigment01
+	//		DrawMesh(m);
+	//	}
+	//}
 	return UPDATE_CONTINUE;
 }
 
@@ -280,7 +281,7 @@ void ModuleRenderer3D::DrawConfigPanel()
 	}
 }
 
-void ModuleRenderer3D::DrawMesh(const Mesh * m)
+void ModuleRenderer3D::DrawMesh(ComponentMesh * m, ComponentMaterial* mat)
 {
 
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -289,17 +290,20 @@ void ModuleRenderer3D::DrawMesh(const Mesh * m)
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m->id_indices);
 
-	//Apply UV if exist
-	if (m->num_UV != 0)
-	{
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glBindBuffer(GL_ARRAY_BUFFER, m->id_UV);
-		glTexCoordPointer(3, GL_FLOAT, 0, NULL);
-	}
+	if (mat != nullptr) {
+		//Apply UV if exist
+		if (m->num_UV != 0)
+		{
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+			glBindBuffer(GL_ARRAY_BUFFER, m->id_UV);
+			glTexCoordPointer(3, GL_FLOAT, 0, NULL);
+		}
 
-	//glEnable(GL_TEXTURE_2D);
-	if(m->tex != nullptr)
-		glBindTexture(GL_TEXTURE_2D, (GLuint)m->tex->id);
+		//glEnable(GL_TEXTURE_2D);
+		if (mat->GetTextureChannel(texType_Diffuse) != nullptr)
+			glBindTexture(GL_TEXTURE_2D, (GLuint)mat->GetTextureChannel(texType_Diffuse)->id);
+
+	}
 
 	if (enable_wireframe)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -339,5 +343,4 @@ void ModuleRenderer3D::DrawMesh(const Mesh * m)
 	//glBindTexture(GL_TEXTURE_2D, 0);
 	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	//glBindBuffer(GL_ARRAY_BUFFER, 0);
-
 }

@@ -29,8 +29,13 @@ public:
 	virtual ~ComponentMaterial() {};
 public:
 	void DrawInspectorPanel() {};
-	Texture* GetTextureChannel(const int texType_id) const {
-		return texture_Channels[texType_id];
+	Texture* GetTextureChannel(const int texType_Channel) const {
+		return texture_Channels[texType_Channel];
+	}
+	void SetTextureChannel(const int texType_Channel, Texture* tex) {
+		if (texType_Channel < texType_Unknown) {
+			texture_Channels[texType_Channel] = tex;
+		}
 	}
 private:
 	Texture* texture_Channels[texType_Unknown];

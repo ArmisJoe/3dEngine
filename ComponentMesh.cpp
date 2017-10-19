@@ -23,12 +23,12 @@ void ComponentMesh::DrawInspectorPanel()
 		str = "Indices: " + std::to_string(this->num_indices);
 		ImGui::Text(str.c_str());
 		ImGui::Text("Scale:");
-		str = "X: " + std::to_string(this->scale.x);
+		str = "X: " + std::to_string(this->transform.scale.x);
 		ImGui::Text(str.c_str());
 		ImGui::SameLine();
-		str = "Y: " + std::to_string(this->scale.y);
+		str = "Y: " + std::to_string(this->transform.scale.y);
 		ImGui::Text(str.c_str());
 		ImGui::SameLine();
-		str = "Z: " + std::to_string(this->scale.z);
+		str = "Z: " + std::to_string(this->transform.scale.z);
 		ImGui::Text(str.c_str());
 }

@@ -6,13 +6,14 @@
 #include <vector>
 #include <string>
 #include "Globals.h"
-#include "Component.h"
-
-#include "ComponentMesh.h"
-#include "ComponentMaterial.h"
-#include "ComponentTransform.h"
 
 class Component;
+
+class ComponentMesh;
+class ComponentMaterial;
+class ComponentTransform;
+
+enum componentType;
 
 /*
 class GameObject {
@@ -51,21 +52,24 @@ private:
 class GameObject {
 public:
 	GameObject();
-	~GameObject();
+	virtual ~GameObject();
 private:
 	GameObject* parent;
-	string name;
+	std::string name;
 public:
-	vector<Component*> components;
-	vector<GameObject*> children; // DELCIOSIOS
+	std::vector<Component*> components;
+	std::vector<GameObject*> children; // DELCIOSIOS
 public:
-	void Update();
+	void Update(float dt);
 	void CleanUp();
-	Component* FindComponent(componentType type);
+public:
+	std::vector<Component*> FindComponents(componentType type);
 	Component* AddComponent(const componentType type, Component* componentPointer = nullptr);
-	void DestroyComponent(const componentType type, Component* componentPointer = nullptr);
+	void DestroyComponent(Component* componentPointer = nullptr);
 	GameObject* GetParent() const { return parent; }
-	string GetName() const { return name; }
+	std::string GetName() const { return name; }
+
+	void OnEditor();
 
 };
 

@@ -18,19 +18,19 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::Update()
+void GameObject::Update(float dt)
 {
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr) {
-				(*it)->Update();
+				(*it)->Update(dt);
 			}
 		}
 	}
 	if (!children.empty()) {
 		for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
 			if ((*it) != nullptr) {
-				(*it)->Update();
+				(*it)->Update(dt);
 			}
 		}
 	}
@@ -42,7 +42,7 @@ void GameObject::CleanUp()
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr) {
 				(*it)->CleanUp(); // Triggers an exeption error (possible deleting what is already deleted)
-				delete (*it);
+				delete[] (*it);
 			}
 		}
 		components.clear();
@@ -54,7 +54,7 @@ void GameObject::CleanUp()
 		for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
 			if ((*it) != nullptr) {
 				(*it)->CleanUp(); 
-				delete (*it);
+				delete[] (*it);
 			}
 		}
 		children.clear();
@@ -62,13 +62,13 @@ void GameObject::CleanUp()
 
 }
 
-Component * GameObject::FindComponent(componentType type)
+std::vector<Component*> GameObject::FindComponents(componentType type)
 {
-	Component* ret = nullptr;
+	std::vector<Component*> ret;
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr && ((*it)->GetType() == type)) {
-				ret = (*it);
+				ret.push_back((*it));
 			}
 		}
 	}
@@ -108,12 +108,30 @@ Component * GameObject::AddComponent(const componentType type, Component * compo
 	return newComponent;
 }
 
-void GameObject::DestroyComponent(const componentType type, Component * componentPointer)
+void GameObject::DestroyComponent(Component * componentPointer)
 {
-	vector<Component*>::iterator position = find(components.begin(), components.end(), componentPointer);
-	if (position != components.end()) {// == myVector.end() means the element was not found
-		(*position)->CleanUp();
-		components.erase(position);
+	if (!components.empty()) {
+		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
+			if ((*it) == componentPointer && (*it) != nullptr) {
+				(*it)->CleanUp();
+				components.erase(it);
+				delete[](*it);
+			}
+		}
+	}
+}
+
+void GameObject::OnEditor()
+{
+	if (!components.empty()) {
+		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
+			(*it)->OnEditor();
+		}
+	}
+	if (!children.empty()) {
+		for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
+			(*it)->OnEditor();
+		}
 	}
 }
 

@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleCamera3D.h"
 
+#include "ComponentMesh.h"
 
 ModuleAssimp::ModuleAssimp(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -77,15 +78,15 @@ std::vector<ComponentMesh*> ModuleAssimp::LoadGeometry(const char* path, const u
 			if (ai_mat != nullptr) {
 				aiMaterial* m_mat = nullptr;
 				m_mat = ai_mat[(int)new_mesh->material_index];
-				Material* mat = nullptr;
-				mat = new Material();
+				ComponentMaterial* mat = nullptr;
+				mat = new ComponentMaterial();
 				// Diffuse
 				if (m_mat->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
 					for (uint i = 0; i < m_mat->GetTextureCount(aiTextureType_DIFFUSE); i++) {
 						aiString m_path;
 						m_mat->GetTexture(aiTextureType_DIFFUSE, i, &m_path);
 						if(m_path.length > 0)
-							mat->diffuse.push_back(App->tex->LoadTexture(m_path.C_Str()));
+							mat->SetTextureChannel(texType_Diffuse, App->tex->LoadTexture(m_path.C_Str()));
 					}
 				}
 				else {
@@ -126,7 +127,7 @@ std::vector<ComponentMesh*> ModuleAssimp::LoadGeometry(const char* path, const u
 
 }
 
-void ModuleAssimp::GenerateVerticesBuffer(const Mesh & mesh)
+void ModuleAssimp::GenerateVerticesBuffer(const ComponentMesh & mesh)
 {
 	glGenBuffers(1, (GLuint*) &(mesh.id_vertices));
 	glBindBuffer(GL_ARRAY_BUFFER, mesh.id_vertices);
@@ -135,7 +136,7 @@ void ModuleAssimp::GenerateVerticesBuffer(const Mesh & mesh)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void ModuleAssimp::GenerateIndicesBuffer(const Mesh & mesh)
+void ModuleAssimp::GenerateIndicesBuffer(const ComponentMesh & mesh)
 {
 	glGenBuffers(1, (GLuint*)&(mesh.id_indices));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.id_indices);
@@ -148,11 +149,13 @@ void ModuleAssimp::GenerateIndicesBuffer(const Mesh & mesh)
 bool ModuleAssimp::CleanUp()
 {
 
-	while (!meshes.empty())
-	{
-		if(meshes.front() != nullptr)
-			delete[] meshes.front();
-		meshes.pop_front();
+	if (!meshes.empty()) {
+		for (std::vector<ComponentMesh*>::iterator it = meshes.begin(); it != meshes.end(); it++) {
+			if ((*it) != nullptr) {
+				delete[](*it);
+			}
+		}
+		meshes.clear();
 	}
 
 	//aiDetachAllLogStreams();

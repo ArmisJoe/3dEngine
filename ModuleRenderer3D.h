@@ -37,7 +37,7 @@ public:
 
 	void DrawConfigPanel();
 
-	void DrawMesh(const Mesh* mesh);
+	void DrawMesh(ComponentMesh* mesh, ComponentMaterial* material = nullptr);
 
 public:
 

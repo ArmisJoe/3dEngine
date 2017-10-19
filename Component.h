@@ -32,6 +32,11 @@ public:
 	virtual void CleanUp() {};
 };*/
 
+struct Transform {
+	vec3 position;
+	vec4 rotation;
+	vec3 scale;
+};
 
 class Component {
 	friend class GameObject;
@@ -40,13 +45,15 @@ public:
 	Component(componentType argtype, GameObject* argparent);
 private:
 	bool SetParent(GameObject* parent);
-protected:
+public:
 	componentType type;
+	Transform transform;
+protected:
 	bool isActive = true;
 	GameObject* parent;
 public:
 	virtual componentType GetType() { return type; }
-	virtual void Update() {}
+	virtual void Update(float dt) {}
 	virtual void CleanUp() {}
 
 	virtual void Enable() { isActive = true; }

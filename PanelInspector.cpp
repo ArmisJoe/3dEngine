@@ -19,10 +19,8 @@ void PanelInspector::Draw()
 
 	ImGui::Begin(name, &active, ImGuiWindowFlags_HorizontalScrollbar);
 
-	for (std::list<GameObject*>::iterator it = scene->gameObjects.begin(); it != scene->gameObjects.end(); it++) {
-		GameObject* go = (*it);
-		go->DrawInspectorPanel();	
-	}
+	if(scene != nullptr && scene->GetRoot() != nullptr)
+		scene->GetRoot()->OnEditor();
 
 	ImGui::End();
 }

@@ -128,27 +128,27 @@ update_status ModuleInput::PreUpdate(float dt)
 					App->scene->RemoveAllGameObject();
 					App->tex->RemoveAllTextures();
 					// !_Hardcode for Assigment01
-					std::list<Mesh*> ms = App->assimp->LoadGeometry(dropped_filedir);
+					std::vector<ComponentMesh*> ms = App->assimp->LoadGeometry(dropped_filedir);
 					if (!ms.empty()) {
 						GameObject* go = new GameObject();
-						for (std::list<Mesh*>::iterator it = ms.begin(); it != ms.end(); it++) {
-							go->AddComponent(componentType_Mesh, (*it));
+						for (std::vector<ComponentMesh*>::iterator it = ms.begin(); it != ms.end(); it++) {
+							go->AddComponent(componentType_Mesh, (Component*)(*it));
 						}
-						App->scene->AddGameObject(go);
+						App->scene->AddGameObject(App->scene->GetRoot(), go);
 					}
 					else {
 						LOG("No Meshes in FBX or Corrupted File:\n\t%s", dropped_filedir);
 					}
 				}
 				if (strncmp(filetext, ".PNG", 4) == 0) {
-					if (!App->scene->gameObjects.empty()) {
-						GameObject* go = App->scene->gameObjects.front();
-						go->AddComponent(componentType_Texture, App->tex->LoadTexture(dropped_filedir));
-					}
-					else {
-						App->editor->ClearLog();
-						LOG("WARNING! -> No GameObject to attach the Texture to");
-					}
+					//if (!App->scene->gameObjects.empty()) {
+					//	GameObject* go = App->scene->gameObjects.front();
+					//	go->AddComponent(componentType_Texture, App->tex->LoadTexture(dropped_filedir));
+					//}
+					//else {
+					//	App->editor->ClearLog();
+					//	LOG("WARNING! -> No GameObject to attach the Texture to");
+					//}
 				}
 				SDL_free(dropped_filedir);
 				break;
