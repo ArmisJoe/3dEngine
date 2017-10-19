@@ -34,8 +34,12 @@ public:
 
 
 class Component {
+	friend class GameObject;
 public:
+	Component(const componentType argtype);
 	Component(componentType argtype, GameObject* argparent);
+private:
+	bool SetParent(GameObject* parent);
 protected:
 	componentType type;
 	bool isActive = true;
@@ -44,10 +48,11 @@ public:
 	virtual componentType GetType() { return type; }
 	virtual void Update() {}
 	virtual void CleanUp() {}
+
 	virtual void Enable() { isActive = true; }
 	virtual void Disable() { isActive = false; }
 	virtual void OnEditor() {}
+
 	GameObject* GetParent() const { return parent; }
-	bool SetParent(GameObject* parent);
 	void SetType(componentType ntype) { type = ntype; }
 };

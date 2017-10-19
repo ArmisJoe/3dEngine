@@ -16,13 +16,23 @@ public:
 	int format = 0;
 };
 
+enum texType {
+	texType_Diffuse = 0,
+	//Unknown Always Last
+	texType_Unknown
+};
 
-struct ComponentMaterial : public Component {
+class ComponentMaterial : public Component {
+public:
+	ComponentMaterial();
 	ComponentMaterial(componentType argtype, GameObject* argparent);
 	virtual ~ComponentMaterial() {};
 public:
 	void DrawInspectorPanel() {};
-public:
-	std::list<Texture*> diffuse;
+	Texture* GetTextureChannel(const int texType_id) const {
+		return texture_Channels[texType_id];
+	}
+private:
+	Texture* texture_Channels[texType_Unknown];
 
 };

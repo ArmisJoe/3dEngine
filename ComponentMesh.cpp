@@ -4,6 +4,11 @@
 #include <string>
 
 
+
+ComponentMesh::ComponentMesh() : Component(componentType_Mesh)
+{
+}
+
 ComponentMesh::ComponentMesh(componentType argtype, GameObject * argparent) : Component(argtype, argparent)
 {
 }

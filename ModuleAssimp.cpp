@@ -12,7 +12,7 @@ ModuleAssimp::~ModuleAssimp()
 {
 }
 
-std::list<Mesh*> ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_flag)
+std::vector<ComponentMesh*> ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_flag)
 {
 
 	App->editor->ClearLog();
@@ -21,7 +21,7 @@ std::list<Mesh*> ModuleAssimp::LoadGeometry(const char* path, const unsigned int
 	//stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	//aiAttachLogStream(&stream);
 
-	std::list<Mesh*> ms;
+	std::vector<ComponentMesh*> ms;
 
 	const aiScene* scene = aiImportFile(path, pprocess_flag);
 	aiMaterial** ai_mat = nullptr;
@@ -37,9 +37,9 @@ std::list<Mesh*> ModuleAssimp::LoadGeometry(const char* path, const unsigned int
 		// Scene Meshes
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 			//Vertices
-			Mesh* new_mesh = nullptr;
+			ComponentMesh* new_mesh = nullptr;
 			aiMesh* m = scene->mMeshes[i];
-			new_mesh = new Mesh();
+			new_mesh = new ComponentMesh();
 			new_mesh->num_triangles = m->mNumFaces;
 			new_mesh->num_vertices = m->mNumVertices;
 			new_mesh->vertices = new float[new_mesh->num_vertices * 3];

@@ -27,6 +27,13 @@ void GameObject::Update()
 			}
 		}
 	}
+	if (!children.empty()) {
+		for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
+			if ((*it) != nullptr) {
+				(*it)->Update();
+			}
+		}
+	}
 }
 
 void GameObject::CleanUp()
@@ -57,7 +64,7 @@ void GameObject::CleanUp()
 
 Component * GameObject::FindComponent(componentType type)
 {
-	Component* ret;
+	Component* ret = nullptr;
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr && ((*it)->GetType() == type)) {
@@ -68,7 +75,7 @@ Component * GameObject::FindComponent(componentType type)
 	return ret;
 }
 
-Component * GameObject::AddComponent(componentType type, Component * componentPointer)
+Component * GameObject::AddComponent(const componentType type, Component * componentPointer)
 {
 	Component* newComponent = nullptr;
 
@@ -88,17 +95,20 @@ Component * GameObject::AddComponent(componentType type, Component * componentPo
 			break;
 		case componentType_Unknown:
 			break;
+		default:
+			break;
 		}
 
 	}
 	else {
 		newComponent = componentPointer;
+		components.push_back(newComponent);
 	}
 
 	return newComponent;
 }
 
-void GameObject::DestroyComponent(componentType type, Component * componentPointer)
+void GameObject::DestroyComponent(const componentType type, Component * componentPointer)
 {
 	vector<Component*>::iterator position = find(components.begin(), components.end(), componentPointer);
 	if (position != components.end()) {// == myVector.end() means the element was not found

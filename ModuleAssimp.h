@@ -21,14 +21,14 @@ public:
 	~ModuleAssimp();
 
 public:
-	std::list<Mesh*> LoadGeometry(const char* path, const unsigned int pprocess_flag = aiProcessPreset_TargetRealtime_MaxQuality);
-	void GenerateVerticesBuffer(const Mesh & mesh);
-	void GenerateIndicesBuffer(const Mesh & mesh);
+	std::vector<ComponentMesh*> LoadGeometry(const char* path, const unsigned int pprocess_flag = aiProcessPreset_TargetRealtime_MaxQuality);
+	void GenerateVerticesBuffer(const ComponentMesh & mesh);
+	void GenerateIndicesBuffer(const ComponentMesh & mesh);
 
 	bool CleanUp();
 
 public:
-	std::list<Mesh*> meshes;
+	std::vector<ComponentMesh*> meshes;
 
 };
 

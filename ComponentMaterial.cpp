@@ -11,5 +11,9 @@ void Texture::DrawInspectorPanel()
 		ImGui::Image((ImTextureID)this->id, ImVec2(120, 120));
 }
 
+ComponentMaterial::ComponentMaterial() : Component(componentType_Material)
+{
+}
+
 ComponentMaterial::ComponentMaterial(componentType argtype, GameObject * argparent) : Component(argtype, argparent)
 {}

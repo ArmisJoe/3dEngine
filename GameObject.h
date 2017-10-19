@@ -8,6 +8,10 @@
 #include "Globals.h"
 #include "Component.h"
 
+#include "ComponentMesh.h"
+#include "ComponentMaterial.h"
+#include "ComponentTransform.h"
+
 class Component;
 
 /*
@@ -45,6 +49,9 @@ private:
 */
 
 class GameObject {
+public:
+	GameObject();
+	~GameObject();
 private:
 	GameObject* parent;
 	string name;
@@ -55,12 +62,12 @@ public:
 	void Update();
 	void CleanUp();
 	Component* FindComponent(componentType type);
-	Component* AddComponent(componentType type, Component * componentPointer = nullptr);
-	void DestroyComponent(componentType type, Component*componentPointer = nullptr);
+	Component* AddComponent(const componentType type, Component* componentPointer = nullptr);
+	void DestroyComponent(const componentType type, Component* componentPointer = nullptr);
 	GameObject* GetParent() const { return parent; }
 	string GetName() const { return name; }
 
-}
+};
 
 #endif // !__GAMEOBJECT_H__
 
