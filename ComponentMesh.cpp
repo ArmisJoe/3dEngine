@@ -1,9 +1,9 @@
 #include "ComponentMesh.h"
 
+#include "Application.h"
+
 #include "ImGui\imgui.h"
 #include <string>
-
-
 
 ComponentMesh::ComponentMesh() : Component(componentType_Mesh)
 {
@@ -11,6 +11,15 @@ ComponentMesh::ComponentMesh() : Component(componentType_Mesh)
 
 ComponentMesh::ComponentMesh(componentType argtype, GameObject * argparent) : Component(argtype, argparent)
 {
+}
+
+void ComponentMesh::Update(float dt)
+{
+	if (visible) {
+		ComponentMaterial* mat = (ComponentMaterial*)this->GetParent()->FindComponents(componentType_Material)[0];
+		application->renderer3D->DrawMesh(this, mat);
+	}
+
 }
 
 void ComponentMesh::DrawInspectorPanel()

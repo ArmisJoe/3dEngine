@@ -8,7 +8,8 @@
 #include <gl\GL.h>
 #include <gl\GLU.h>
 
-#include "ModuleAssimp.h"
+#include "ComponentMesh.h"
+#include "ComponentMaterial.h"
 
 //
 //#include "glew-2.1.0\include\GL\glew.h"
@@ -37,7 +38,7 @@ public:
 
 	void DrawConfigPanel();
 
-	void DrawMesh(ComponentMesh* mesh, ComponentMaterial* material = nullptr);
+	void DrawMesh(ComponentMesh* m, ComponentMaterial* mat = nullptr);
 
 public:
 
@@ -54,8 +55,5 @@ public:
 	bool enable_wireframe = false;
 	float light_model_ambient = 0.6f;
 	float material_ambient = 1.0f;
-
-private:
-	bCube *TestCube;
 
 };

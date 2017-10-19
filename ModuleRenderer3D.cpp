@@ -281,7 +281,7 @@ void ModuleRenderer3D::DrawConfigPanel()
 	}
 }
 
-void ModuleRenderer3D::DrawMesh(ComponentMesh * m, ComponentMaterial* mat)
+void ModuleRenderer3D::DrawMesh(ComponentMesh* m, ComponentMaterial* mat)
 {
 
 	glEnableClientState(GL_VERTEX_ARRAY);

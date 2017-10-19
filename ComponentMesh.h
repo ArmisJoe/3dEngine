@@ -4,12 +4,12 @@
 
 class ComponentMesh : public Component {
 public:
-
 	ComponentMesh();
 	ComponentMesh(componentType argtype, GameObject* argparent);
 	virtual ~ComponentMesh() {};
 
 public:
+	void Update(float dt);
 	void DrawInspectorPanel();
 public:
 	//Vertices
@@ -28,4 +28,7 @@ public:
 	unsigned int num_UV = 0;
 	float material_index; // material ID
 	unsigned int num_UVChannels = 0;
+
+	bool visible = true;
+
 };
