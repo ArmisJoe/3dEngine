@@ -13,11 +13,21 @@ void Texture::DrawInspectorPanel()
 
 ComponentMaterial::ComponentMaterial() : Component(componentType_Material)
 {
+	for (int i = 0; i < texType_Unknown; i++) {
+		texture_Channels[i] = nullptr;
+	}
 }
 
 ComponentMaterial::ComponentMaterial(GameObject* argparent) : Component(componentType_Material, argparent)
 {
+	for (int i = 0; i < texType_Unknown; i++) {
+		texture_Channels[i] = nullptr;
+	}
 }
 
 ComponentMaterial::ComponentMaterial(componentType argtype, GameObject * argparent) : Component(argtype, argparent)
-{}
+{
+	for (int i = 0; i < texType_Unknown; i++) {
+		texture_Channels[i] = nullptr;
+	}
+}

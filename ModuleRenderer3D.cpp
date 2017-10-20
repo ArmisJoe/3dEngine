@@ -242,6 +242,11 @@ void ModuleRenderer3D::CustomGLAttributes() const
 	enable_color_material ? glEnable(GL_COLOR_MATERIAL) : glDisable(GL_COLOR_MATERIAL);
 	enable_texture_2D ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
 
+	if (enable_wireframe)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
 }
 
 void ModuleRenderer3D::DrawConfigPanel()

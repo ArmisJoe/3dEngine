@@ -45,7 +45,8 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 			if (scene_mats != nullptr) {
 				if (new_mesh != nullptr) {
 					ComponentMaterial* new_material = LoadMaterial(scene_mats[(int)new_mesh->material_index]);
-					Geometry->AddComponent(componentType_Material, new_material);
+					if(new_material != nullptr)
+						Geometry->AddComponent(componentType_Material, new_material);
 				}
 			}
 			// camera Focus
