@@ -136,14 +136,19 @@ update_status ModuleInput::PreUpdate(float dt)
 				}
 				if (strncmp(filetext, ".PNG", 4) == 0) {
 					Texture* new_tex = App->tex->LoadTexture(dropped_filedir);
-					//if (!App->scene->gameObjects.empty()) {
-					//	GameObject* go = App->scene->gameObjects.front();
-					//	go->AddComponent(componentType_Texture, App->tex->LoadTexture(dropped_filedir));
-					//}
-					//else {
-					//	App->editor->ClearLog();
-					//	LOG("WARNING! -> No GameObject to attach the Texture to");
-					//}
+					//HardCode for Testing [Assigning Textures]
+					for (std::vector<GameObject*>::iterator it = App->scene->GetRoot()->children.begin(); it != App->scene->GetRoot()->children.end(); it++) {
+						if ((*it) != nullptr) {
+							std::vector<Component*> ms = (*it)->FindComponents(componentType_Material);
+							for (std::vector<Component*>::iterator mit = ms.begin(); mit != ms.end(); mit++) {
+								if ((*mit) != nullptr) {
+									ComponentMaterial* mat = (ComponentMaterial*)(*mit);
+									mat->SetTextureChannel(texType_Diffuse, new_tex);
+								}
+							}
+						}
+					}
+					//!_HardCode for Testing [Assigning Textures]
 				}
 				SDL_free(dropped_filedir);
 				break;
