@@ -13,7 +13,7 @@ ModuleAssimp::~ModuleAssimp()
 {
 }
 
-std::vector<ComponentMesh*> ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_flag)
+GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_flag)
 {
 
 	App->editor->ClearLog();
@@ -22,98 +22,32 @@ std::vector<ComponentMesh*> ModuleAssimp::LoadGeometry(const char* path, const u
 	//stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	//aiAttachLogStream(&stream);
 
-	std::vector<ComponentMesh*> ms;
+	GameObject* Geometry = nullptr;
+	Geometry = new GameObject();
 
 	const aiScene* scene = aiImportFile(path, pprocess_flag);
-	aiMaterial** ai_mat = nullptr;
+	aiMaterial** scene_mats = nullptr;
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		//Scene Materials
 		if (scene->HasMaterials()) {
-			ai_mat = scene->mMaterials;
+			scene_mats = scene->mMaterials;
 		}
 		else {
 			LOG("Scene with No Materials");
 		}
 		// Scene Meshes
 		for (int i = 0; i < scene->mNumMeshes; i++) {
-			//Vertices
-			ComponentMesh* new_mesh = nullptr;
-			aiMesh* m = scene->mMeshes[i];
-			new_mesh = new ComponentMesh();
-			new_mesh->num_triangles = m->mNumFaces;
-			new_mesh->num_vertices = m->mNumVertices;
-			new_mesh->vertices = new float[new_mesh->num_vertices * 3];
-			memcpy(new_mesh->vertices, m->mVertices, sizeof(float) * new_mesh->num_vertices * 3);
-			glGenBuffers(1, (GLuint*) &(new_mesh->id_vertices));
-			glBindBuffer(GL_ARRAY_BUFFER, new_mesh->id_vertices);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * new_mesh->num_vertices * 3, new_mesh->vertices, GL_STATIC_DRAW);
-
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-			//Indices
-			if (m->HasFaces()) {
-				new_mesh->num_indices = m->mNumFaces * 3;
-				new_mesh->indices = new uint[new_mesh->num_indices];
-
-				for (uint i = 0; i < m->mNumFaces; ++i)
-				{
-					if (m->mFaces[i].mNumIndices != 3) {
-						LOG("Mesh face with != 3 indices!");
-					}
-					else
-						memcpy(&new_mesh->indices[i * 3], m->mFaces[i].mIndices, 3 * sizeof(uint));
-				}
-
-			}
-			else {
-				LOG("Mesh with no Faces");
-			}
-
-			glGenBuffers(1, (GLuint*) &(new_mesh->id_indices));
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, new_mesh->id_indices);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * new_mesh->num_indices, new_mesh->indices, GL_STATIC_DRAW);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
+			//Meshes
+			ComponentMesh* new_mesh = LoadMesh(scene->mMeshes[i]);
+			Geometry->AddComponent(componentType_Mesh, new_mesh);
 			//Material
-			if (ai_mat != nullptr) {
-				aiMaterial* m_mat = nullptr;
-				m_mat = ai_mat[(int)new_mesh->material_index];
-				ComponentMaterial* mat = nullptr;
-				mat = new ComponentMaterial();
-				// Diffuse
-				if (m_mat->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
-					for (uint i = 0; i < m_mat->GetTextureCount(aiTextureType_DIFFUSE); i++) {
-						aiString m_path;
-						m_mat->GetTexture(aiTextureType_DIFFUSE, i, &m_path);
-						if(m_path.length > 0)
-							mat->SetTextureChannel(texType_Diffuse, App->tex->LoadTexture(m_path.C_Str()));
-					}
-				}
-				else {
-					LOG("No Diffuse found")
+			if (scene_mats != nullptr) {
+				if (new_mesh != nullptr) {
+					ComponentMaterial* new_material = LoadMaterial(scene_mats[(int)new_mesh->material_index]);
+					Geometry->AddComponent(componentType_Material, new_material);
 				}
 			}
-
-			//UVS
-			if (m->HasTextureCoords(0))
-			{
-				new_mesh->num_UV = m->mNumVertices;
-				new_mesh->textureCoords = new float[new_mesh->num_UV * 3];
-				memcpy(new_mesh->textureCoords, m->mTextureCoords[0], sizeof(float)*new_mesh->num_UV * 3);
-
-				glGenBuffers(1, (GLuint*)&(new_mesh->id_UV));
-				glBindBuffer(GL_ARRAY_BUFFER, (GLuint)new_mesh->id_UV);
-				glBufferData(GL_ARRAY_BUFFER, sizeof(uint) * new_mesh->num_UV * 3, new_mesh->textureCoords, GL_STATIC_DRAW);
-			}
-			else
-			{
-				LOG("No Texture Coords found");
-			}
-
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-			LOG("New mesh with %d vertices %d indices %d UVs", new_mesh->num_vertices, new_mesh->num_indices, new_mesh->num_UV);
-			meshes.push_back(new_mesh);
-			ms.push_back(new_mesh);
 			// camera Focus
 			App->camera->FocusMesh(new_mesh->vertices, new_mesh->num_vertices);
 		}
@@ -123,41 +57,104 @@ std::vector<ComponentMesh*> ModuleAssimp::LoadGeometry(const char* path, const u
 	else
 		LOG("Error loading scene %s", path);
 
-	return ms;
+	if (Geometry != nullptr) {
+		App->res->gameObjects.push_back(Geometry);
+	}
+
+	return Geometry;
 
 }
 
-void ModuleAssimp::GenerateVerticesBuffer(const ComponentMesh & mesh)
+ComponentMesh * ModuleAssimp::LoadMesh(const aiMesh* m)
 {
-	glGenBuffers(1, (GLuint*) &(mesh.id_vertices));
-	glBindBuffer(GL_ARRAY_BUFFER, mesh.id_vertices);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*mesh.num_vertices * 3, mesh.vertices, GL_STATIC_DRAW);
+	ComponentMesh* new_mesh = nullptr;
+	
+	//Vertices
+	new_mesh = new ComponentMesh();
+	new_mesh->material_index = m->mMaterialIndex;
+	new_mesh->num_triangles = m->mNumFaces;
+	new_mesh->num_vertices = m->mNumVertices;
+	new_mesh->vertices = new float[new_mesh->num_vertices * 3];
+	memcpy(new_mesh->vertices, m->mVertices, sizeof(float) * new_mesh->num_vertices * 3);
+	glGenBuffers(1, (GLuint*) &(new_mesh->id_vertices));
+	glBindBuffer(GL_ARRAY_BUFFER, new_mesh->id_vertices);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * new_mesh->num_vertices * 3, new_mesh->vertices, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-}
+	//Indices
+	if (m->HasFaces()) {
+		new_mesh->num_indices = m->mNumFaces * 3;
+		new_mesh->indices = new uint[new_mesh->num_indices];
 
-void ModuleAssimp::GenerateIndicesBuffer(const ComponentMesh & mesh)
-{
-	glGenBuffers(1, (GLuint*)&(mesh.id_indices));
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.id_indices);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * mesh.num_indices, mesh.indices, GL_STATIC_DRAW);
+		for (uint i = 0; i < m->mNumFaces; ++i)
+		{
+			if (m->mFaces[i].mNumIndices != 3) {
+				LOG("Mesh face with != 3 indices!");
+			}
+			else
+				memcpy(&new_mesh->indices[i * 3], m->mFaces[i].mIndices, 3 * sizeof(uint));
+		}
 
+	}
+	else {
+		LOG("Mesh with no Faces");
+	}
+
+	glGenBuffers(1, (GLuint*) &(new_mesh->id_indices));
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, new_mesh->id_indices);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * new_mesh->num_indices, new_mesh->indices, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+	//UVS
+	if (m->HasTextureCoords(0))
+	{
+		new_mesh->num_UV = m->mNumVertices;
+		new_mesh->textureCoords = new float[new_mesh->num_UV * 3];
+		memcpy(new_mesh->textureCoords, m->mTextureCoords[0], sizeof(float)*new_mesh->num_UV * 3);
+
+		glGenBuffers(1, (GLuint*)&(new_mesh->id_UV));
+		glBindBuffer(GL_ARRAY_BUFFER, (GLuint)new_mesh->id_UV);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(uint) * new_mesh->num_UV * 3, new_mesh->textureCoords, GL_STATIC_DRAW);
+	}
+	else
+	{
+		LOG("No Texture Coords found");
+	}
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	LOG("Loaded mesh with %d vertices %d indices %d UVs", new_mesh->num_vertices, new_mesh->num_indices, new_mesh->num_UV);
+
+	App->res->meshes.push_back(new_mesh);
+
+	return new_mesh;
+}
+
+ComponentMaterial * ModuleAssimp::LoadMaterial(const aiMaterial* mat)
+{
+	ComponentMaterial* new_mat = nullptr;
+	new_mat = new ComponentMaterial();
+
+	// Diffuse
+	if (mat->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
+		for (uint i = 0; i < mat->GetTextureCount(aiTextureType_DIFFUSE); i++) {
+			aiString m_path;
+			mat->GetTexture(aiTextureType_DIFFUSE, i, &m_path);
+			if (m_path.length > 0)
+				new_mat->SetTextureChannel(texType_Diffuse, App->tex->LoadTexture(m_path.C_Str()));
+		}
+	}
+	else {
+		LOG("No Diffuse found")
+	}
+	//All other texture types...
+
+	App->res->materials.push_back(new_mat);
+
+	return new_mat;
 }
 
 bool ModuleAssimp::CleanUp()
 {
-
-	if (!meshes.empty()) {
-		for (std::vector<ComponentMesh*>::iterator it = meshes.begin(); it != meshes.end(); it++) {
-			if ((*it) != nullptr) {
-				delete[](*it);
-			}
-		}
-		meshes.clear();
-	}
-
 	//aiDetachAllLogStreams();
 	return true;
 }

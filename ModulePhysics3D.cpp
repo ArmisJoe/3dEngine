@@ -354,14 +354,6 @@ bool ModulePhysics3D::CleanUp()
 
 void ModulePhysics3D::Draw()
 {
-	for (std::list<Primitive*>::iterator it = g_primitives.begin(); it != g_primitives.end(); it++) {
-		if ((*it) != nullptr) {
-			if ((*it)->wire != App->renderer3D->enable_wireframe)
-				(*it)->wire = App->renderer3D->enable_wireframe;
-			if((*it)->visible)
-				(*it)->Render();
-		}
-	}
 }
 
 Sphere * ModulePhysics3D::AddSphere(const float &x, const float &y, const float &z, float radius, bool visible)

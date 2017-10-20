@@ -5,11 +5,13 @@
 class ComponentMesh : public Component {
 public:
 	ComponentMesh();
+	ComponentMesh(GameObject* argparent);
 	ComponentMesh(componentType argtype, GameObject* argparent);
 	virtual ~ComponentMesh() {};
 
 public:
 	void Update(float dt);
+	void Draw(const ComponentMaterial* mat = nullptr);
 	void DrawInspectorPanel();
 public:
 	//Vertices
@@ -30,5 +32,5 @@ public:
 	unsigned int num_UVChannels = 0;
 
 	bool visible = true;
-
+	bool wireframe = false;
 };

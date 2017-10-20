@@ -25,6 +25,7 @@ enum texType {
 class ComponentMaterial : public Component {
 public:
 	ComponentMaterial();
+	ComponentMaterial(GameObject* argparent);
 	ComponentMaterial(componentType argtype, GameObject* argparent);
 	virtual ~ComponentMaterial() {};
 public:

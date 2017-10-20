@@ -54,9 +54,16 @@ GameObject * ModuleScene::CreateGameObject(GameObject* parent)
 
 GameObject * ModuleScene::AddGameObject(GameObject * parent, GameObject * go)
 {
-	if (parent != nullptr)
-		parent->children.push_back(go);
-	return go;
+	GameObject* new_go = nullptr;
+
+	if (parent != nullptr && go != nullptr) {
+		new_go = new GameObject(parent);
+		memcpy(new_go, go, sizeof(GameObject));
+		new_go->SetParent(parent);
+		parent->children.push_back(new_go);
+	}
+
+	return new_go;
 }
 
 void ModuleScene::RemoveAllGameObject()

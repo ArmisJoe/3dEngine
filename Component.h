@@ -2,7 +2,7 @@
 
 #include "GameObject.h"
 
-
+class Application;
 class ComponentTransform;
 
 enum componentType {
@@ -61,5 +61,6 @@ public:
 	virtual void OnEditor() {}
 
 	GameObject* GetParent() const { return parent; }
+	bool HasParent() const { return parent != nullptr; }
 	void SetType(componentType ntype) { type = ntype; }
 };

@@ -43,20 +43,11 @@ bool ModuleTextures::Init()
 
 bool ModuleTextures::CleanUp()
 {
-	while (!textures.empty())
-	{
-		if(textures.front() != nullptr)
-			delete[] textures.front();
-		textures.pop_front();
-	}
 	return true;
 }
 
 Texture* ModuleTextures::LoadTexture(const char * path)
 {
-
-	App->editor->ClearLog();
-
 	uint textureID = 0;
 	ILuint imageID;
 
@@ -129,7 +120,7 @@ Texture* ModuleTextures::LoadTexture(const char * path)
 			//Texture Specifications
 			glTexImage2D(GL_TEXTURE_2D, 0, new_tex->format, new_tex->w, new_tex->h, 0, new_tex->format, GL_UNSIGNED_BYTE, ilGetData());
 
-			textures.push_back(new_tex);
+			App->res->textures.push_back(new_tex);
 			
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
@@ -146,16 +137,6 @@ Texture* ModuleTextures::LoadTexture(const char * path)
 	LOG("Texture Loaded Without Errors:\n\t%s", path);
 
 	return new_tex;
-}
-
-void ModuleTextures::RemoveAllTextures()
-{
-	while (!textures.empty())
-	{
-		if (textures.front() != nullptr)
-			delete[] textures.front();
-		textures.pop_front();
-	}
 }
 
 void ModuleTextures::DrawConfigPanel()

@@ -15,5 +15,9 @@ ComponentMaterial::ComponentMaterial() : Component(componentType_Material)
 {
 }
 
+ComponentMaterial::ComponentMaterial(GameObject* argparent) : Component(componentType_Material, argparent)
+{
+}
+
 ComponentMaterial::ComponentMaterial(componentType argtype, GameObject * argparent) : Component(argtype, argparent)
 {}

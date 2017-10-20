@@ -2,12 +2,17 @@
 #include "Application.h"
 #include "ImGui\imgui.h"
 #include <string>
+#include <assert.h>
 
 #include "Component.h"
 #include "ComponentMaterial.h"
 #include "ComponentMesh.h"
 #include "ComponentTransform.h"
 
+
+GameObject::GameObject(GameObject * p) : parent(p)
+{
+}
 
 GameObject::GameObject()
 {
@@ -41,8 +46,8 @@ void GameObject::CleanUp()
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr) {
-				(*it)->CleanUp(); // Triggers an exeption error (possible deleting what is already deleted)
-				delete[] (*it);
+				(*it)->CleanUp();
+				delete[](*it);
 			}
 		}
 		components.clear();
@@ -79,32 +84,47 @@ Component * GameObject::AddComponent(const componentType type, Component * compo
 {
 	Component* newComponent = nullptr;
 
-	if (componentPointer == nullptr) {
-		switch (type) {
+	// Create the New Component
+	switch (type) {
 		case componentType_Mesh:
-			newComponent = new ComponentMesh(type, this);
-			components.push_back(newComponent);
+			newComponent = new ComponentMesh(this);
 			break;
 		case componentType_Material:
-			newComponent = new ComponentMaterial(type, this);
-			components.push_back(newComponent);
+			newComponent = new ComponentMaterial(this);
 			break;
 		case componentType_Transform:
-			newComponent = new ComponentTransform(type, this);
-			components.push_back(newComponent);
+			newComponent = new ComponentTransform(this);
 			break;
-		case componentType_Unknown:
+	}
+
+	// Copy the 'Reference' Component into the New Component
+	if (componentPointer != nullptr && newComponent != nullptr) {
+		assert(componentPointer->type == newComponent->type);
+
+		uint bufferSize = 0;
+
+		switch (newComponent->type) {
+		case componentType_Mesh:
+			bufferSize = sizeof(ComponentMesh);
 			break;
-		default:
+		case componentType_Material:
+			bufferSize = sizeof(ComponentMaterial);
+			break;
+		case componentType_Transform:
+			bufferSize = sizeof(ComponentTransform);
 			break;
 		}
 
-	}
-	else {
-		newComponent = componentPointer;
-		components.push_back(newComponent);
+		if (bufferSize != 0) {
+			memcpy(newComponent, componentPointer, bufferSize);
+		}
 	}
 
+	if (newComponent != nullptr) {
+		newComponent->parent = this;
+		components.push_back(newComponent);
+	}
+	
 	return newComponent;
 }
 

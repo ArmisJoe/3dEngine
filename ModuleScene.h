@@ -22,7 +22,7 @@ public:
 public:
 	GameObject* CreateGameObject(GameObject* parent); //Adds a GameObject into Parent. Return nullptr on failure.
 	GameObject* AddGameObject(GameObject* parent, GameObject* go); //Adds a GameObject into a Parent GameObject. Return nullptr on failure.
-	GameObject* GetRoot() {
+	GameObject* GetRoot() const {
 		return root;
 	}
 	void RemoveAllGameObject();

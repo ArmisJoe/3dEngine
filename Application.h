@@ -18,6 +18,7 @@
 #include "ModuleParson.h"
 #include "ModuleAssimp.h"
 #include "ModuleTextures.h"
+#include "ModuleResources.h"
 
 #define LOG(format, ...) App->mylog(__FILE__, __LINE__, format, __VA_ARGS__);
 
@@ -38,6 +39,7 @@ public:
 	ModuleParson* parson;
 	ModuleAssimp* assimp;
 	ModuleTextures* tex;
+	ModuleResources* res;
 	
 private:
 
@@ -77,5 +79,3 @@ private:
 	void PrepareUpdate();
 	void FinishUpdate();
 };
-
-extern Application* application;

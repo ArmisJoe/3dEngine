@@ -51,6 +51,7 @@ private:
 
 class GameObject {
 public:
+	GameObject(GameObject* parent);
 	GameObject();
 	virtual ~GameObject();
 private:
@@ -67,6 +68,7 @@ public:
 	Component* AddComponent(const componentType type, Component* componentPointer = nullptr);
 	void DestroyComponent(Component* componentPointer = nullptr);
 	GameObject* GetParent() const { return parent; }
+	void SetParent(GameObject* p) { parent = p; }
 	std::string GetName() const { return name; }
 
 	void OnEditor();

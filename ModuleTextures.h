@@ -29,10 +29,7 @@ public:
 	bool CleanUp();
 
 	Texture* LoadTexture(const char* path); // Returns nullptr on failure.
-	void RemoveAllTextures();
 	void DrawConfigPanel();
-public:
-	std::list<Texture*> textures;
 
 private: // Configurations
 	int clamp_type = clampingTexType_ClampRepeat;

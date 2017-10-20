@@ -162,6 +162,7 @@ update_status ModuleRenderer3D::Update(float dt)
 	//		DrawMesh(m);
 	//	}
 	//}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -265,7 +266,11 @@ void ModuleRenderer3D::DrawConfigPanel()
 			enable_texture_2D ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
 		}
 		if (ImGui::Checkbox("Wireframe Mode", &enable_wireframe)) {
-
+			for (std::vector<ComponentMesh*>::iterator it = App->res->meshes.begin(); it != App->res->meshes.end(); it++) {
+				if ((*it) != nullptr) {
+					(*it)->wireframe = App->renderer3D->enable_wireframe;
+				}
+			}
 		}
 
 		//Sliders

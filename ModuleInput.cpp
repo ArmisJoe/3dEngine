@@ -124,23 +124,18 @@ update_status ModuleInput::PreUpdate(float dt)
 				dropped_filedir = e.drop.file;
 				char* filetext = Capitalize(strrchr(dropped_filedir, '.'));
 				if (strncmp(filetext, ".FBX", 4) == 0) {
-					// Hardcode for Assigment01
-					App->scene->RemoveAllGameObject();
-					App->tex->RemoveAllTextures();
-					// !_Hardcode for Assigment01
-					std::vector<ComponentMesh*> ms = App->assimp->LoadGeometry(dropped_filedir);
-					if (!ms.empty()) {
-						GameObject* go = new GameObject();
-						for (std::vector<ComponentMesh*>::iterator it = ms.begin(); it != ms.end(); it++) {
-							go->AddComponent(componentType_Mesh, (Component*)(*it));
-						}
-						App->scene->AddGameObject(App->scene->GetRoot(), go);
+					GameObject* new_geo = nullptr;
+					new_geo = App->assimp->LoadGeometry(dropped_filedir);
+					if (new_geo != nullptr) {
+						App->scene->AddGameObject(App->scene->GetRoot(), new_geo);
 					}
 					else {
-						LOG("No Meshes in FBX or Corrupted File:\n\t%s", dropped_filedir);
+						LOG("ERROR at Loading Geometry from FILE:\n\t%s", dropped_filedir);
 					}
+					LOG("File Loaded:\n\t%s", dropped_filedir);
 				}
 				if (strncmp(filetext, ".PNG", 4) == 0) {
+					Texture* new_tex = App->tex->LoadTexture(dropped_filedir);
 					//if (!App->scene->gameObjects.empty()) {
 					//	GameObject* go = App->scene->gameObjects.front();
 					//	go->AddComponent(componentType_Texture, App->tex->LoadTexture(dropped_filedir));

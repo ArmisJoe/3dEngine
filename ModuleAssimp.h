@@ -21,14 +21,11 @@ public:
 	~ModuleAssimp();
 
 public:
-	std::vector<ComponentMesh*> LoadGeometry(const char* path, const unsigned int pprocess_flag = aiProcessPreset_TargetRealtime_MaxQuality);
-	void GenerateVerticesBuffer(const ComponentMesh & mesh);
-	void GenerateIndicesBuffer(const ComponentMesh & mesh);
+	GameObject* LoadGeometry(const char* path, const unsigned int pprocess_flag = aiProcessPreset_TargetRealtime_MaxQuality);
+	ComponentMesh* LoadMesh(const aiMesh* m);
+	ComponentMaterial* LoadMaterial(const aiMaterial* mat);
 
 	bool CleanUp();
-
-public:
-	std::vector<ComponentMesh*> meshes;
 
 };
 

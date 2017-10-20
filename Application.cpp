@@ -20,6 +20,7 @@ Application::Application()
 	parson = new ModuleParson(this);
 	assimp = new ModuleAssimp(this);
 	tex = new ModuleTextures(this);
+	res = new ModuleResources(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -35,6 +36,7 @@ Application::Application()
 	AddModule(parson);
 	AddModule(assimp);
 	AddModule(tex);
+	AddModule(res);
 	
 	// Scenes
 	AddModule(scene);
