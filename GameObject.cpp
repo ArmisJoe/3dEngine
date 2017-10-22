@@ -16,7 +16,10 @@ GameObject::GameObject(GameObject * p) : parent(p)
 
 GameObject::GameObject()
 {
-	name = "name";
+	name = "GameObject";
+	this->AddComponent(componentType_Transform);
+	this->AddComponent(componentType_Material);
+
 }
 
 GameObject::~GameObject()
@@ -47,7 +50,7 @@ void GameObject::CleanUp()
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr) {
 				(*it)->CleanUp();
-				delete[](*it);
+				//delete[] (*it); /// -> [EXAMINATE] TRIGGERS AN EXCEPTION (posible deleting what is already deleted [but it shouldn't])
 			}
 		}
 		components.clear();
@@ -70,6 +73,7 @@ void GameObject::CleanUp()
 std::vector<Component*> GameObject::FindComponents(componentType type)
 {
 	std::vector<Component*> ret;
+
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr && ((*it)->GetType() == type)) {
@@ -77,6 +81,7 @@ std::vector<Component*> GameObject::FindComponents(componentType type)
 			}
 		}
 	}
+
 	return ret;
 }
 
@@ -90,10 +95,12 @@ Component * GameObject::AddComponent(const componentType type, Component * compo
 			newComponent = new ComponentMesh(this);
 			break;
 		case componentType_Material:
-			newComponent = new ComponentMaterial(this);
+			if (this->FindComponents(type).empty())
+				newComponent = new ComponentMaterial(this);
 			break;
 		case componentType_Transform:
-			newComponent = new ComponentTransform(this);
+			if (this->FindComponents(type).empty())
+				newComponent = new ComponentTransform(this);
 			break;
 	}
 
@@ -145,64 +152,14 @@ void GameObject::OnEditor()
 {
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
-			(*it)->OnEditor();
+			if((*it) != nullptr)
+				(*it)->OnEditor();
 		}
 	}
 	if (!children.empty()) {
 		for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
-			(*it)->OnEditor();
+			if((*it) != nullptr)
+				(*it)->OnEditor();
 		}
 	}
 }
-
-/* //????????
-std::vector<Component*> GameObject::GetComponents(componentType type)
-{
-	std::vector<Component*> cs;
-
-	for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
-		if ((*it) != nullptr) {
-			if ((*it)->type == type)
-				cs.push_back((*it));
-		}
-	}
-
-	return cs;
-}*/
-
-/* // This does no longer go here
-void GameObject::DrawInspectorPanel()
-{
-	if (ImGui::CollapsingHeader(this->name, false)) {
-		if (ImGui::CollapsingHeader("Transform", true)) {
-			//Position
-			std::string str = "X: " + std::to_string(this->transform.position.x);
-			ImGui::Text("Position: ");
-			ImGui::Text(str.c_str());
-			ImGui::SameLine();
-			str = "Y: " + std::to_string(this->transform.position.y);
-			ImGui::Text(str.c_str());
-			ImGui::SameLine();
-			str = "Z: " + std::to_string(this->transform.position.z);
-			ImGui::Text(str.c_str());
-			//Rotation
-			ImGui::Text("Rotation: ");
-			str = "X: " + std::to_string(this->transform.rotation.x);
-			ImGui::Text(str.c_str());
-			ImGui::SameLine();
-			str = "Y: " + std::to_string(this->transform.rotation.y);
-			ImGui::Text(str.c_str());
-			ImGui::SameLine();
-			str = "Z: " + std::to_string(this->transform.rotation.z);
-			ImGui::Text(str.c_str());
-		}
-		for (std::vector<Component*>::iterator c_it = this->components.begin(); c_it != this->components.end(); c_it++) {
-			Component* c = (*c_it);
-			if (ImGui::CollapsingHeader(c->name, true)) {
-				c->DrawInspectorPanel();
-			}
-		}
-	}
-};
-*/
-

@@ -75,6 +75,21 @@ void ModuleScene::RemoveAllGameObject()
 
 update_status ModuleScene::PreUpdate(float dt)
 {
+	//[TEST] Assigning textures
+	if (root != nullptr) {
+		for (int i = 0; i < root->children.size(); i++) {
+			for (int k = 0; k < root->children[i]->children.size(); k++) {
+				std::vector<Component*> ms = root->children[i]->children[k]->FindComponents(componentType_Material);
+				for (int it = 0; it < ms.size(); it++) {
+					ComponentMaterial* mat = (ComponentMaterial*)ms[it];
+					if (!App->res->textures.empty()) {
+						mat->SetTextureChannel(texType_Diffuse, App->res->textures[0]);
+					}
+				}
+			}
+		}
+	}
+	//!_[TEST] Assigning textures
 	return UPDATE_CONTINUE;
 }
 

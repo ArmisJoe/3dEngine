@@ -15,40 +15,6 @@ class ComponentTransform;
 
 enum componentType;
 
-/*
-class GameObject {
-public:
-	GameObject();
-	virtual ~GameObject();
-public:	// General Methods
-	virtual bool Update(float dt);
-	virtual void CleanUp();
-public: // Specific Methods
-	Component* AddComponent(componentType type, Component * componentPointer = nullptr); // Adds a new Component to the GameObject. Return nullptr on failure.
-
-	std::vector<Component*> GetComponents(componentType type);
-
-	GameObject* GetParent() {
-		return parent;
-	};
-	void DrawInspectorPanel();
-private:
-	bool activeSelf = false;
-public:
-	// Properties
-	char* name = nullptr;
-	unsigned int layer = 0;
-	char* tag = nullptr;
-	ComponentTransform transform;
-public:
-	std::vector<Component*> components;
-private:
-	GameObject* parent;
-	std::vector<GameObject*> child;
-
-};
-*/
-
 class GameObject {
 public:
 	GameObject(GameObject* parent);
@@ -58,11 +24,11 @@ private:
 	GameObject* parent;
 	std::string name;
 public:
-	std::vector<Component*> components;
-	std::vector<GameObject*> children; // DELCIOSIOS
+	std::vector<Component*> components; // Children Components
+	std::vector<GameObject*> children; // Children GameObjects
 public:
-	void Update(float dt);
-	void CleanUp();
+	void Update(float dt); // Called every ModuleScene->Update(dt) (if they are insied the scene)
+	void CleanUp(); // Called at App CleanUp
 public:
 	std::vector<Component*> FindComponents(componentType type);
 	Component* AddComponent(const componentType type, Component* componentPointer = nullptr);

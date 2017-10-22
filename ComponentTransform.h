@@ -3,6 +3,7 @@
 #include "Component.h"
 
 #include "glmath.h"
+#include "src\MathGeoLib.h"
 
 class ComponentTransform : public Component {
 public:
@@ -11,7 +12,7 @@ public:
 	ComponentTransform(componentType argtype, GameObject* argparent);
 	~ComponentTransform() {};
 public:
-	vec3 position;
-	vec4 rotation;
-	vec3 scale;
+	float3 position;
+	Quat rotation;
+	float3 scale;
 };

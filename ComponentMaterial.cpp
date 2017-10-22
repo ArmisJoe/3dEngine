@@ -1,6 +1,5 @@
 #include "ComponentMaterial.h"
 
-
 #include "ImGui\imgui.h"
 #include <string>
 
@@ -13,6 +12,8 @@ void Texture::DrawInspectorPanel()
 
 ComponentMaterial::ComponentMaterial() : Component(componentType_Material)
 {
+	name = "Material";
+	numMax = 1;
 	for (int i = 0; i < texType_Unknown; i++) {
 		texture_Channels[i] = nullptr;
 	}
@@ -20,6 +21,8 @@ ComponentMaterial::ComponentMaterial() : Component(componentType_Material)
 
 ComponentMaterial::ComponentMaterial(GameObject* argparent) : Component(componentType_Material, argparent)
 {
+	name = "Material";
+	numMax = 1;
 	for (int i = 0; i < texType_Unknown; i++) {
 		texture_Channels[i] = nullptr;
 	}
@@ -27,7 +30,27 @@ ComponentMaterial::ComponentMaterial(GameObject* argparent) : Component(componen
 
 ComponentMaterial::ComponentMaterial(componentType argtype, GameObject * argparent) : Component(argtype, argparent)
 {
+	name = "Material";
+	numMax = 1;
 	for (int i = 0; i < texType_Unknown; i++) {
 		texture_Channels[i] = nullptr;
 	}
+}
+
+void ComponentMaterial::OnEditor()
+{
+}
+
+bool ComponentMaterial::HasTextures()
+{
+	bool ret = false;
+	
+	for (int i = 0; i < texType_Unknown; i++) {
+		if (texture_Channels[i] != nullptr) {
+			ret = true;
+			break;
+		}
+	}
+
+	return ret;
 }

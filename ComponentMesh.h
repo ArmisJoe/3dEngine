@@ -28,9 +28,9 @@ public:
 	unsigned int id_UV = 0; // id in VRAM
 	float* textureCoords; // UV Coords
 	unsigned int num_UV = 0;
-	float material_index; // material ID
 	unsigned int num_UVChannels = 0;
 
+	float material_index = 0; // material ID
+
 	bool visible = true;
-	bool wireframe = false;
 };

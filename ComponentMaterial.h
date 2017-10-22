@@ -30,12 +30,16 @@ public:
 	virtual ~ComponentMaterial() {};
 public:
 	void DrawInspectorPanel() {};
+	virtual void OnEditor();
+	bool HasTextures();
 	Texture* GetTextureChannel(const int texType_Channel) const {
 		return texture_Channels[texType_Channel];
 	}
 	void SetTextureChannel(const int texType_Channel, Texture* tex) {
-		if (texType_Channel < texType_Unknown) {
-			texture_Channels[texType_Channel] = tex;
+		if (tex != nullptr) {
+			if (texType_Channel < texType_Unknown) {
+				texture_Channels[texType_Channel] = tex;
+			}
 		}
 	}
 private:

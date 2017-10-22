@@ -2,7 +2,9 @@
 #include "Application.h"
 #include "ModuleCamera3D.h"
 
+#include "ComponentMaterial.h"
 #include "ComponentMesh.h"
+#include "ComponentTransform.h"
 
 ModuleAssimp::ModuleAssimp(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -13,54 +15,82 @@ ModuleAssimp::~ModuleAssimp()
 {
 }
 
+GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene)
+{
+	assert(node != nullptr);
+	assert(scene != nullptr);
+
+	GameObject* new_node = new GameObject();
+
+	aiMaterial** materials = nullptr;
+	if (scene->HasMaterials())
+		materials = scene->mMaterials;
+	else
+		LOG("Scene without materials");
+
+	//LoadMeshes
+	for (uint i = 0; i < node->mNumMeshes; i++) {
+		//Mesh Load
+		ComponentMesh* new_mesh = LoadMesh(scene->mMeshes[node->mMeshes[i]]);
+		if(new_mesh != nullptr)
+			new_node->AddComponent(componentType_Mesh, new_mesh);
+		//Material Load
+		if (materials != nullptr && new_mesh != nullptr) {
+			ComponentMaterial* new_material = LoadMaterial(materials[(int)new_mesh->material_index]);
+			if (new_material != nullptr) {
+				new_node->AddComponent(componentType_Material, new_material);
+			}
+		}
+	}
+
+	//Transform
+	if (!new_node->FindComponents(componentType_Transform).empty()) {
+		ComponentTransform* ref_transform = (ComponentTransform*)new_node->FindComponents(componentType_Transform)[0];
+		if (ref_transform != nullptr) {
+			aiVector3D translation, scaling;
+			aiQuaternion rotation;
+			node->mTransformation.Decompose(scaling, rotation, translation);
+			ref_transform->position = { translation.x, translation.y, translation.y };
+			ref_transform->rotation = { rotation.x, rotation.y, rotation.z, rotation.w };
+			ref_transform->scale = { scaling.x, scaling.y, scaling.z };
+		}
+	}
+		
+
+	//Node Children 'Recursivity'
+	for (uint i = 0; i < node->mNumChildren; i++) {
+		new_node->children.push_back(LoadNode(node->mChildren[i], scene));
+	}
+
+	if(new_node != nullptr)
+		App->res->gameObjects.push_back(new_node);
+
+	return new_node;
+}
+
 GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_flag)
 {
 
 	App->editor->ClearLog();
 
-	//struct aiLogStream stream;
-	//stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
-	//aiAttachLogStream(&stream);
-
 	GameObject* Geometry = nullptr;
-	Geometry = new GameObject();
 
 	const aiScene* scene = aiImportFile(path, pprocess_flag);
-	aiMaterial** scene_mats = nullptr;
-	if (scene != nullptr && scene->HasMeshes())
-	{
-		//Scene Materials
-		if (scene->HasMaterials()) {
-			scene_mats = scene->mMaterials;
-		}
-		else {
-			LOG("Scene with No Materials");
-		}
-		// Scene Meshes
-		for (int i = 0; i < scene->mNumMeshes; i++) {
-			//Meshes
-			ComponentMesh* new_mesh = LoadMesh(scene->mMeshes[i]);
-			Geometry->AddComponent(componentType_Mesh, new_mesh);
-			//Material
-			if (scene_mats != nullptr) {
-				if (new_mesh != nullptr) {
-					ComponentMaterial* new_material = LoadMaterial(scene_mats[(int)new_mesh->material_index]);
-					if(new_material != nullptr)
-						Geometry->AddComponent(componentType_Material, new_material);
-				}
-			}
-			// camera Focus
-			App->camera->FocusMesh(new_mesh->vertices, new_mesh->num_vertices);
-		}
+	const aiNode* root_node = nullptr;
 
+	if (scene != nullptr)
+	{
+		//ROOT Node
+		root_node = scene->mRootNode;
+		//Loading All nodes into Root Node
+		Geometry = LoadNode(root_node, scene);
+		//Camera Focus
+		//App->camera->FocusMesh(new_mesh->vertices, new_mesh->num_vertices);
+		//Release Scene
 		aiReleaseImport(scene);
 	}
 	else
 		LOG("Error loading scene %s", path);
-
-	if (Geometry != nullptr) {
-		App->res->gameObjects.push_back(Geometry);
-	}
 
 	return Geometry;
 
@@ -123,6 +153,9 @@ ComponentMesh * ModuleAssimp::LoadMesh(const aiMesh* m)
 	}
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+	//Name
+	new_mesh->name = m->mName.C_Str();
+
 	LOG("Loaded mesh with %d vertices %d indices %d UVs", new_mesh->num_vertices, new_mesh->num_indices, new_mesh->num_UV);
 
 	App->res->meshes.push_back(new_mesh);
@@ -140,22 +173,32 @@ ComponentMaterial * ModuleAssimp::LoadMaterial(const aiMaterial* mat)
 		for (uint i = 0; i < mat->GetTextureCount(aiTextureType_DIFFUSE); i++) {
 			aiString m_path;
 			mat->GetTexture(aiTextureType_DIFFUSE, i, &m_path);
-			if (m_path.length > 0)
+			if (m_path.length > 0) {
 				new_mat->SetTextureChannel(texType_Diffuse, App->tex->LoadTexture(m_path.C_Str()));
+			}
+			else {
+				LOG("Unvalid Path from texture: %s", m_path.C_Str());
+			}
 		}
 	}
 	else {
-		LOG("No Diffuse found")
+		LOG("No Diffuse found");
 	}
 	//All other texture types...
 
-	App->res->materials.push_back(new_mat);
+	if (new_mat->HasTextures()) {
+		App->res->materials.push_back(new_mat);
+	}
+	else {
+		new_mat->CleanUp();
+		delete[] new_mat;
+		new_mat = nullptr;
+	}
 
 	return new_mat;
 }
 
 bool ModuleAssimp::CleanUp()
 {
-	//aiDetachAllLogStreams();
 	return true;
 }

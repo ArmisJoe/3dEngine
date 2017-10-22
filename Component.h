@@ -2,6 +2,8 @@
 
 #include "GameObject.h"
 
+#include <string>
+
 class Application;
 class ComponentTransform;
 
@@ -32,12 +34,6 @@ public:
 	virtual void CleanUp() {};
 };*/
 
-struct Transform {
-	vec3 position;
-	vec4 rotation;
-	vec3 scale;
-};
-
 class Component {
 	friend class GameObject;
 public:
@@ -46,13 +42,14 @@ public:
 private:
 	bool SetParent(GameObject* parent);
 public:
+	std::string name;
 	componentType type;
-	Transform transform;
 protected:
 	bool isActive = true;
 	GameObject* parent;
+	uint numMax = NULL;
 public:
-	virtual componentType GetType() { return type; }
+	virtual componentType GetType() const { return type; }
 	virtual void Update(float dt) {}
 	virtual void CleanUp() {}
 

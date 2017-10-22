@@ -134,7 +134,7 @@ Texture* ModuleTextures::LoadTexture(const char * path)
 
 	ilDeleteImages(1, &imageID);
 
-	LOG("Texture Loaded Without Errors:\n\t%s", path);
+	LOG("Texture Load End:\n\t%s", path);
 
 	return new_tex;
 }
