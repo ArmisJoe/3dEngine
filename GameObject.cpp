@@ -18,7 +18,6 @@ GameObject::GameObject()
 {
 	name = "GameObject";
 	this->AddComponent(componentType_Transform);
-	this->AddComponent(componentType_Material);
 
 }
 
@@ -133,6 +132,16 @@ Component * GameObject::AddComponent(const componentType type, Component * compo
 	}
 	
 	return newComponent;
+}
+
+void GameObject::DeleteChild(GameObject * go)
+{
+	for (int i = 0; i < children.size(); i++) {
+		if (go == children[i]) {
+			children[i]->CleanUp();
+			delete[] children[i];
+		}
+	}
 }
 
 void GameObject::DestroyComponent(Component * componentPointer)

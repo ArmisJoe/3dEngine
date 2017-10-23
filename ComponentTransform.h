@@ -12,6 +12,8 @@ public:
 	ComponentTransform(componentType argtype, GameObject* argparent);
 	~ComponentTransform() {};
 public:
+	void OnEditor();
+public:
 	float3 position;
 	Quat rotation;
 	float3 scale;

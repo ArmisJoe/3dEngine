@@ -32,6 +32,7 @@ public:
 public:
 	std::vector<Component*> FindComponents(componentType type);
 	Component* AddComponent(const componentType type, Component* componentPointer = nullptr);
+	void DeleteChild(GameObject* go);
 	void DestroyComponent(Component* componentPointer = nullptr);
 	GameObject* GetParent() const { return parent; }
 	void SetParent(GameObject* p) { parent = p; }

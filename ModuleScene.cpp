@@ -66,6 +66,13 @@ GameObject * ModuleScene::AddGameObject(GameObject * parent, GameObject * go)
 	return new_go;
 }
 
+void ModuleScene::DeleteGameObject(GameObject * go)
+{
+	if (go != nullptr) {
+		go->GetParent()->DeleteChild(go);
+	}
+}
+
 void ModuleScene::RemoveAllGameObject()
 {
 	if (root != nullptr) {
@@ -80,10 +87,15 @@ update_status ModuleScene::PreUpdate(float dt)
 		for (int i = 0; i < root->children.size(); i++) {
 			for (int k = 0; k < root->children[i]->children.size(); k++) {
 				std::vector<Component*> ms = root->children[i]->children[k]->FindComponents(componentType_Material);
+				if (ms.empty()) {
+					root->children[i]->children[k]->AddComponent(componentType_Material);
+					ms = root->children[i]->children[k]->FindComponents(componentType_Material);
+				}
 				for (int it = 0; it < ms.size(); it++) {
 					ComponentMaterial* mat = (ComponentMaterial*)ms[it];
 					if (!App->res->textures.empty()) {
-						mat->SetTextureChannel(texType_Diffuse, App->res->textures[0]);
+						if(mat->GetTextureChannel(texType_Diffuse) == nullptr)
+							mat->SetTextureChannel(texType_Diffuse, App->res->textures.back());
 					}
 				}
 			}

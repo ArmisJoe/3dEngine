@@ -3,13 +3,6 @@
 #include "ImGui\imgui.h"
 #include <string>
 
-void Texture::DrawInspectorPanel()
-{
-		std::string str = "Size: " + std::to_string((int)this->w) + "x" + std::to_string((int)this->h);
-		ImGui::Text(str.c_str());
-		ImGui::Image((ImTextureID)this->id, ImVec2(120, 120));
-}
-
 ComponentMaterial::ComponentMaterial() : Component(componentType_Material)
 {
 	name = "Material";
@@ -39,6 +32,18 @@ ComponentMaterial::ComponentMaterial(componentType argtype, GameObject * argpare
 
 void ComponentMaterial::OnEditor()
 {
+	Texture* tex = nullptr;
+	const char* tex_path = nullptr;
+	//Diffuse
+	//tex = texture_Channels[texType_Diffuse];
+	//if (tex != nullptr) {
+	//	tex_path = tex->path;
+	//	ImGui::InputText("Diffuse: ", tex_path, sizeof(tex_path));
+	//	std::string str = "Size: " + std::to_string((int)tex->w) + "x" + std::to_string((int)tex->h);
+	//	ImGui::Text(str.c_str());
+	//	ImGui::Image((ImTextureID)tex->id, ImVec2(120, 120));
+	//	ImGui::Separator();
+	//}
 }
 
 bool ComponentMaterial::HasTextures()

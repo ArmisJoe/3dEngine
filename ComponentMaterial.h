@@ -7,11 +7,11 @@ struct Texture {
 	Texture() {};
 	virtual ~Texture() {};
 public:
-	void DrawInspectorPanel();
-public:
 	unsigned int id = 0;
 	float w = 0;
 	float h = 0;
+
+	const char* path = nullptr;
 
 	int format = 0;
 };
@@ -29,7 +29,6 @@ public:
 	ComponentMaterial(componentType argtype, GameObject* argparent);
 	virtual ~ComponentMaterial() {};
 public:
-	void DrawInspectorPanel() {};
 	virtual void OnEditor();
 	bool HasTextures();
 	Texture* GetTextureChannel(const int texType_Channel) const {

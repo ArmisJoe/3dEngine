@@ -136,6 +136,9 @@ Texture* ModuleTextures::LoadTexture(const char * path)
 
 	LOG("Texture Load End:\n\t%s", path);
 
+	if (new_tex != nullptr)
+		new_tex->path = path;
+
 	return new_tex;
 }
 

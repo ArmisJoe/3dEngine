@@ -83,7 +83,8 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 		//ROOT Node
 		root_node = scene->mRootNode;
 		//Loading All nodes into Root Node
-		Geometry = LoadNode(root_node, scene);
+		if(root_node->mNumChildren > 0)
+			Geometry = LoadNode(root_node, scene);
 		//Camera Focus
 		//App->camera->FocusMesh(new_mesh->vertices, new_mesh->num_vertices);
 		//Release Scene

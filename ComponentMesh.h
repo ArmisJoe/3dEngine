@@ -12,7 +12,7 @@ public:
 public:
 	void Update(float dt);
 	void Draw(const ComponentMaterial* mat = nullptr);
-	void DrawInspectorPanel();
+	void OnEditor();
 public:
 	//Vertices
 	unsigned int id_vertices = 0; // id in VRAM
