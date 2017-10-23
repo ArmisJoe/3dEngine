@@ -174,7 +174,9 @@ ComponentMaterial * ModuleAssimp::LoadMaterial(const aiMaterial* mat)
 			aiString m_path;
 			mat->GetTexture(aiTextureType_DIFFUSE, i, &m_path);
 			if (m_path.length > 0) {
-				new_mat->SetTextureChannel(texType_Diffuse, App->tex->LoadTexture(m_path.C_Str()));
+				string fullPath = "Game\\Assets\\";
+				fullPath.append(m_path.C_Str());
+				new_mat->SetTextureChannel(texType_Diffuse, App->tex->LoadTexture(fullPath.c_str()));
 			}
 			else {
 				LOG("Unvalid Path from texture: %s", m_path.C_Str());
