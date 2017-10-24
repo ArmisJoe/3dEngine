@@ -26,8 +26,13 @@ public:
 	GameObject* GetRoot() const {
 		return root;
 	}
+	GameObject* GetSelected() const {
+		return current_selected;
+	}
+	void SetSelected(GameObject* go);
 	void RemoveAllGameObject();
 
 private:
-	GameObject* root = nullptr;
+	GameObject* root;
+	GameObject* current_selected;
 };

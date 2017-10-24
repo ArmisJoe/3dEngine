@@ -5,6 +5,9 @@
 #include "PhysBody3D.h"
 #include "ModulePlayer.h"
 
+#include "ModuleEditorUI.h"
+#include "PanelInspector.h"
+
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	name = "Scene";
@@ -60,6 +63,7 @@ GameObject * ModuleScene::AddGameObject(GameObject * parent, GameObject * go)
 		new_go = new GameObject(parent);
 		memcpy(new_go, go, sizeof(GameObject));
 		new_go->SetParent(parent);
+		new_go->SetScene(this);
 		parent->children.push_back(new_go);
 	}
 
@@ -71,6 +75,19 @@ void ModuleScene::DeleteGameObject(GameObject * go)
 	if (go != nullptr) {
 		go->GetParent()->DeleteChild(go);
 	}
+}
+
+void ModuleScene::SetSelected(GameObject * go)
+{
+	if(current_selected != nullptr)
+		current_selected->selected = false;
+	current_selected = go;
+	current_selected->selected = true;
+
+	if (App->editor->inspector != nullptr)
+		App->editor->inspector->SetInspected(current_selected);
+
+	LOG("HALO");
 }
 
 void ModuleScene::RemoveAllGameObject()

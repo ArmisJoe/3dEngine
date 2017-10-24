@@ -4,6 +4,8 @@
 
 #include "Panel.h"
 
+#include "GameObject.h"
+
 class ModuleScene;
 
 class PanelInspector : public Panel {
@@ -14,8 +16,10 @@ public:
 
 	void Draw();
 
-protected:
-	ModuleScene* scene;
+	void SetInspected(GameObject* new_insp);
+
+private:
+	GameObject* inspected = nullptr;
 
 };
 

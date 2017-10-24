@@ -89,6 +89,7 @@
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="ModuleResources.cpp" />
+    <ClCompile Include="PanelSceneTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -210,6 +211,7 @@
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="ModuleResources.h" />
+    <ClInclude Include="PanelSceneTree.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Geometry\KDTree.inl" />

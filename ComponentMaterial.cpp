@@ -33,17 +33,13 @@ ComponentMaterial::ComponentMaterial(componentType argtype, GameObject * argpare
 void ComponentMaterial::OnEditor()
 {
 	Texture* tex = nullptr;
-	const char* tex_path = nullptr;
 	//Diffuse
-	//tex = texture_Channels[texType_Diffuse];
-	//if (tex != nullptr) {
-	//	tex_path = tex->path;
-	//	ImGui::InputText("Diffuse: ", tex_path, sizeof(tex_path));
-	//	std::string str = "Size: " + std::to_string((int)tex->w) + "x" + std::to_string((int)tex->h);
-	//	ImGui::Text(str.c_str());
-	//	ImGui::Image((ImTextureID)tex->id, ImVec2(120, 120));
-	//	ImGui::Separator();
-	//}
+	tex = texture_Channels[texType_Diffuse];
+	if (tex != nullptr) {
+		if (ImGui::CollapsingHeader("Diffuse: ")) {
+			tex->OnEditor();
+		}
+	}
 }
 
 bool ComponentMaterial::HasTextures()
@@ -58,4 +54,14 @@ bool ComponentMaterial::HasTextures()
 	}
 
 	return ret;
+}
+
+void Texture::OnEditor()
+{
+	std::string str = "Size: " + std::to_string((int)w) + "x" + std::to_string((int)h);
+	ImGui::Text(str.c_str());
+	//ImGui::Text("Path: ");
+	//ImGui::Text(path);
+	ImGui::Image((ImTextureID)id, ImVec2(120, 120));
+	ImGui::Separator();
 }

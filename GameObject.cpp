@@ -9,16 +9,19 @@
 #include "ComponentMesh.h"
 #include "ComponentTransform.h"
 
+#include "PanelInspector.h"
+
 
 GameObject::GameObject(GameObject * p) : parent(p)
 {
+	name = "GameObject";
+	this->AddComponent(componentType_Transform);
 }
 
 GameObject::GameObject()
 {
 	name = "GameObject";
 	this->AddComponent(componentType_Transform);
-
 }
 
 GameObject::~GameObject()
@@ -157,6 +160,11 @@ void GameObject::DestroyComponent(Component * componentPointer)
 	}
 }
 
+void GameObject::SetScene(ModuleScene * sce)
+{
+	scene = sce;
+}
+
 void GameObject::OnEditor()
 {
 	if (!components.empty()) {
@@ -165,10 +173,32 @@ void GameObject::OnEditor()
 				(*it)->OnEditor();
 		}
 	}
-	if (!children.empty()) {
-		for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
-			if((*it) != nullptr)
-				(*it)->OnEditor();
-		}
+}
+
+void GameObject::OnHierarchyTree()
+{
+
+	uint flags = 0;
+
+	if (children.empty()) {
+		flags |= ImGuiTreeNodeFlags_Leaf;
 	}
+	if (selected == true) {
+		flags |= ImGuiTreeNodeFlags_Selected;
+	}
+	if (ImGui::TreeNodeEx(name.c_str(), flags)) {
+		if (ImGui::IsItemClicked(1)) {
+			if (scene != nullptr) {
+				scene->SetSelected(this);
+			}
+		}
+		if (!children.empty()) {
+			for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
+				if ((*it) != nullptr)
+					(*it)->OnHierarchyTree();
+			}
+		}
+		ImGui::TreePop();
+	}
+
 }

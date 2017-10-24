@@ -120,6 +120,9 @@ Texture* ModuleTextures::LoadTexture(const char * path)
 			//Texture Specifications
 			glTexImage2D(GL_TEXTURE_2D, 0, new_tex->format, new_tex->w, new_tex->h, 0, new_tex->format, GL_UNSIGNED_BYTE, ilGetData());
 
+			if (new_tex != nullptr)
+				new_tex->path = path;
+
 			App->res->textures.push_back(new_tex);
 			
 			glBindTexture(GL_TEXTURE_2D, 0);
@@ -135,9 +138,6 @@ Texture* ModuleTextures::LoadTexture(const char * path)
 	ilDeleteImages(1, &imageID);
 
 	LOG("Texture Load End:\n\t%s", path);
-
-	if (new_tex != nullptr)
-		new_tex->path = path;
 
 	return new_tex;
 }

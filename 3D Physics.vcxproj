@@ -113,6 +113,7 @@
     <ClInclude Include="PanelAbout.h" />
     <ClInclude Include="PanelConsole.h" />
     <ClInclude Include="PanelInspector.h" />
+    <ClInclude Include="PanelSceneTree.h" />
     <ClInclude Include="parson.h" />
     <ClInclude Include="PerfTimer.h" />
     <ClInclude Include="PhysBody3D.h" />
@@ -221,6 +222,7 @@
     <ClCompile Include="PanelAbout.cpp" />
     <ClCompile Include="PanelConsole.cpp" />
     <ClCompile Include="PanelInspector.cpp" />
+    <ClCompile Include="PanelSceneTree.cpp" />
     <ClCompile Include="parson.c" />
     <ClCompile Include="PerfTimer.cpp" />
     <ClCompile Include="PhysBody3D.cpp" />
