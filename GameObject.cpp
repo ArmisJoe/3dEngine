@@ -41,6 +41,20 @@ void GameObject::Update(float dt)
 			}
 		}
 	}
+
+	if (aabb != nullptr) {
+		glLineWidth(2.0f);
+		glBegin(GL_LINES);
+		for (uint i = 0; i < aabb->NumVertices; ++i)
+		{
+		}
+		glVertex3f(0.f, 0.f, 0.f);
+		glVertex3f(0.f, 10.f, 0.f);
+		glEnd();
+		glLineWidth(1.0f);
+
+	}
+
 }
 
 void GameObject::CleanUp()
@@ -92,10 +106,13 @@ Component * GameObject::AddComponent(const componentType type, Component * compo
 	switch (type) {
 		case componentType_Mesh:
 			newComponent = new ComponentMesh(this);
+			CreateAABBFromMesh();
+
 			break;
 		case componentType_Material:
 			if (this->FindComponents(type).empty())
 				newComponent = new ComponentMaterial(this);
+
 			break;
 		case componentType_Transform:
 			if (this->FindComponents(type).empty())
@@ -155,6 +172,54 @@ void GameObject::DestroyComponent(Component * componentPointer)
 			}
 		}
 	}
+}
+
+void GameObject::CreateAABBFromMesh()
+{
+	vector<Component*> meshes = FindComponents(componentType_Mesh);
+
+	if (meshes.size() > 0) {
+
+		uint num_vert = 0;
+		vec *pointArray = nullptr;
+
+		for (vector<Component*>::iterator it = meshes.begin(); it != meshes.end(); ++it)
+		{
+			ComponentMesh *curr_mesh = (ComponentMesh*)(*it);
+
+			num_vert += curr_mesh->num_vertices;
+
+			vec curr_it;
+
+			for (uint i = 0; i < (curr_mesh->num_vertices * 3); ++i)
+			{
+				switch (i % 3) {
+				case 0:
+
+					if (i != 0)
+						pointArray->Add(curr_it);
+				
+					curr_it.x = curr_mesh->vertices[i];
+					break;
+				case 1:
+					curr_it.y = curr_mesh->vertices[i];
+					break;
+				case 2:
+					curr_it.z = curr_mesh->vertices[i];
+					break;
+				}
+
+			}
+
+			pointArray->Add(curr_it);
+		}
+
+		AABB *aabb = new AABB();
+
+		aabb->SetFrom(pointArray, num_vert);
+		this->aabb = aabb;
+	}
+
 }
 
 void GameObject::OnEditor()

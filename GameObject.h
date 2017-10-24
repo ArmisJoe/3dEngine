@@ -2,6 +2,7 @@
 #ifndef __GAMEOBJECT_H__
 #define __GAMEOBJECT_H__
 
+#include "src\MathGeoLib.h"
 #include "glmath.h"
 #include <vector>
 #include <string>
@@ -23,6 +24,9 @@ public:
 private:
 	GameObject* parent;
 	std::string name;
+
+	AABB *aabb = nullptr;
+
 public:
 	std::vector<Component*> components; // Children Components
 	std::vector<GameObject*> children; // Children GameObjects
@@ -37,6 +41,8 @@ public:
 	GameObject* GetParent() const { return parent; }
 	void SetParent(GameObject* p) { parent = p; }
 	std::string GetName() const { return name; }
+	void CreateAABBFromMesh();
+
 
 	void OnEditor();
 
