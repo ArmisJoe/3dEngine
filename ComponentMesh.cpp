@@ -5,6 +5,8 @@
 #include "ImGui\imgui.h"
 #include <string>
 
+#include "ComponentTransform.h"
+
 ComponentMesh::ComponentMesh() : Component(componentType_Mesh)
 {
 	name = "Mesh";
@@ -23,24 +25,35 @@ ComponentMesh::ComponentMesh(componentType argtype, GameObject * argparent) : Co
 void ComponentMesh::Update(float dt)
 {
 	if (visible) {
+		ComponentMaterial* mat = nullptr;
 		if (!this->GetParent()->FindComponents(componentType_Material).empty()) {
-			ComponentMaterial* mat = (ComponentMaterial*)this->GetParent()->FindComponents(componentType_Material)[0];
-			Draw(mat);
+			mat = (ComponentMaterial*)this->GetParent()->FindComponents(componentType_Material)[0];
 		}
-		else {
-			Draw();
+		ComponentTransform* trans = nullptr;
+		if (!this->GetParent()->FindComponents(componentType_Transform).empty()) {
+			trans = (ComponentTransform*)this->GetParent()->FindComponents(componentType_Transform)[0];
 		}
+		Draw(trans, mat);
 	}
 
 }
 
-void ComponentMesh::Draw(const ComponentMaterial * mat)
+void ComponentMesh::Draw(const ComponentTransform* trans, const ComponentMaterial * mat)
 {
 	glEnableClientState(GL_VERTEX_ARRAY);
 
+	if (trans != nullptr) {
+		glPushMatrix();
+		glTranslatef(trans->position.x, trans->position.y, trans->position.z);
+		glRotatef(trans->rotation.x, trans->rotation.y, trans->rotation.z, trans->rotation.w);
+		glScalef(trans->scale.x, trans->scale.y, trans->scale.z);
+		//glMultMatrixf(trans->GetMatrix4x4());
+	}
+
+	glEnableClientState(GL_VERTEX_ARRAY);
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertices);
+
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_indices);
 
 	// Applying Material
 	if (mat != nullptr) {
@@ -58,7 +71,9 @@ void ComponentMesh::Draw(const ComponentMaterial * mat)
 
 	}
 
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_indices);
 	glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, NULL);
+
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -66,6 +81,9 @@ void ComponentMesh::Draw(const ComponentMaterial * mat)
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	if(trans != nullptr)
+		glPopMatrix();
 }
 
 void ComponentMesh::OnEditor()

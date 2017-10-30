@@ -47,6 +47,8 @@ public:
 	std::string GetName() const { return name; }
 	void SetName(const char* str) { name = str; }
 
+	ComponentTransform* GetTransform();
+
 	void SetScene(ModuleScene* sce);
 
 	void OnEditor();

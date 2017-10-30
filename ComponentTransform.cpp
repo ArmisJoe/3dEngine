@@ -48,20 +48,76 @@ void ComponentTransform::OnEditor()
 	sca[1] = scale.y;
 	sca[2] = scale.z;
 
-	ImGui::InputFloat3("Position: ", pos);
-	ImGui::InputFloat3("Rotation: ", rot);
-	ImGui::InputFloat3("Scale: ", sca);
+	if (ImGui::DragFloat3("Position:", pos, 0.1f)) {
+		position.x = pos[0];
+		position.y = pos[1];
+		position.z = pos[2];
+	}
+	if (ImGui::DragFloat4("Rotation:", rot, 0.1f)) {
+		rotation.x = rot[0];
+		rotation.y = rot[1];
+		rotation.z = rot[2];
+		rotation.w = rot[3];
+	}
+	if (ImGui::DragFloat3("Scale:", sca, 0.1f)) {
+		scale.x = sca[0];
+		scale.y = sca[1];
+		scale.z = sca[2];
+	}
 
-	position.x = pos[0];
-	position.y = pos[1];
-	position.z = pos[2];
+}
 
-	rotation.x = rot[0];
-	rotation.y = rot[1];
-	rotation.z = rot[2];
-	rotation.w = rot[3];
+float* ComponentTransform::GetMatrix4x4() const
+{
 
-	scale.x = sca[0];
-	scale.y = sca[1];
-	scale.z = sca[2];
+	Matrix4x4.FromTRS(GetGlobalPos(), GetGlobalRot(), GetGlobalScale());
+
+	return Matrix4x4.Transposed().ptr();
+}
+
+float3 ComponentTransform::GetGlobalPos() const
+{
+	float3 GP = position;
+
+	//if (parent != nullptr) {
+	//	if (parent->GetParent() != nullptr) {
+	//		if (!parent->GetParent()->FindComponents(componentType_Transform).empty()) {
+	//			ComponentTransform* ParentTrans = (ComponentTransform*)parent->GetParent()->FindComponents(componentType_Transform)[0];
+	//			GP += ParentTrans->GetGlobalPos();
+	//		}
+	//	}
+	//}
+
+	return GP;
+}
+
+Quat ComponentTransform::GetGlobalRot() const
+{
+	Quat GR = rotation;
+
+	//if (parent != nullptr) {
+	//	GameObject* GoParent = parent->GetParent();
+	//	if (!GoParent->FindComponents(componentType_Transform).empty()) {
+	//		ComponentTransform* ParentTrans = (ComponentTransform*)GoParent->FindComponents(componentType_Transform)[0];
+	//		GR.Mul(ParentTrans->GetGlobalRot());
+	//	}
+	//
+	//}
+
+	return GR;
+}
+
+float3 ComponentTransform::GetGlobalScale() const
+{
+	float3 GS = scale;
+
+	//if (parent != nullptr) {
+	//	GameObject* GoParent = parent->GetParent();
+	//	if (!GoParent->FindComponents(componentType_Transform).empty()) {
+	//		ComponentTransform* ParentTrans = (ComponentTransform*)GoParent->FindComponents(componentType_Transform)[0];
+	//		GS += ParentTrans->GetGlobalScale();
+	//	}
+	//}
+
+	return GS;
 }

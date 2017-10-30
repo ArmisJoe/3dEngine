@@ -160,6 +160,15 @@ void GameObject::DestroyComponent(Component * componentPointer)
 	}
 }
 
+ComponentTransform * GameObject::GetTransform()
+{
+	ComponentTransform* ret = nullptr;
+	if (components.empty() == false) {
+		ret = (ComponentTransform*)FindComponents(componentType_Transform)[0];
+	}
+	return ret;
+}
+
 void GameObject::SetScene(ModuleScene * sce)
 {
 	scene = sce;

@@ -11,7 +11,7 @@ public:
 
 public:
 	void Update(float dt);
-	void Draw(const ComponentMaterial* mat = nullptr);
+	void Draw(const ComponentTransform* trans = nullptr, const ComponentMaterial* mat = nullptr);
 	void OnEditor();
 public:
 	//Vertices
