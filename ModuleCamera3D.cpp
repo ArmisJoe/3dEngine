@@ -3,6 +3,10 @@
 #include "PhysBody3D.h"
 #include "ModuleCamera3D.h"
 
+#include "src\MathGeoLib.h"
+#include "glmath.h"
+#include "src\Geometry\Frustum.h"
+
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	
@@ -16,10 +20,14 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 
 	Position = vec3(0.0f, 0.0f, 5.0f);
 	Reference = vec3(0.0f, 0.0f, 0.0f);
+
+	main_camera = new Camera();
 }
 
 ModuleCamera3D::~ModuleCamera3D()
-{}
+{
+	delete main_camera;
+}
 
 // -----------------------------------------------------------------
 bool ModuleCamera3D::Start()
@@ -34,6 +42,8 @@ bool ModuleCamera3D::Start()
 bool ModuleCamera3D::CleanUp()
 {
 	LOG("Cleaning camera");
+
+
 
 	return true;
 }
@@ -282,5 +292,41 @@ void ModuleCamera3D::SetCamera(const vec3& focus, const float& distance)
 
 Camera::Camera()
 {
-	//frustum.Type = PerspectiveFrustum;
+	//frustum.Type = FrustumType::PerspectiveFrustum;
+
+	frustum.pos.x = 0.0f; frustum.pos.y = 0.0f; frustum.pos.z = 5.0f;
+	frustum.front.x = 0.0f; frustum.front.y = 0.0f; frustum.front.z = 1.0f;
+	frustum.up.x = 0.0f; frustum.up.y = 1.0f; frustum.up.z = 0.0;
+
+	frustum.farPlaneDistance = 200.f;
+	frustum.nearPlaneDistance = 0.5f;
+
+	frustum.horizontalFov = 0;
+	frustum.verticalFov = 0;
+	aspect_ratio = 1.1f;
+
+	SetFov(60);
+}
+
+Camera::~Camera()
+{
+}
+
+bool Camera::SetFov(float argFOV)
+{
+	if (argFOV < 1)
+		return false; // I don't play with demons
+
+	else
+	{
+		// fov = rad2deg(2 * atan(0.5 * width / distance));
+		//frustum.horizontalFov / frustum.verticalFov = argFOV;
+		// so: horitzonal = vertical * FOV(rad);
+		FOV = argFOV;
+		frustum.verticalFov = DEGTORAD * argFOV;
+		frustum.horizontalFov = 2.f * atanf(tanf(frustum.verticalFov / 2.0f) * aspect_ratio);
+		return true;
+	}
+
+	return false;
 }

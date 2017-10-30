@@ -11,9 +11,16 @@ class Camera
 {
 public:
 	Camera::Camera();
+	Camera::~Camera();
 
+public:
+	bool SetFov(float argFOV);
+
+	float GetFOV() { return FOV; }
 private:
 	Frustum frustum;
+	float FOV;
+	float aspect_ratio;
 };
 
 
@@ -51,6 +58,7 @@ public:
 	vec3 X, Y, Z, Position, Reference;
 
 private:
+	Camera* main_camera;
 
 	mat4x4 ViewMatrix, ViewMatrixInverse;
 };

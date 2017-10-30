@@ -97,7 +97,7 @@ enum FrustumHandedness
 /// Represents either an orthographic or a perspective viewing frustum.
 class Frustum
 {
-private:
+public:
 	/// Specifies whether this frustum is a perspective or an orthographic frustum.
 	/** [noscript] @todo Remove the noscript attribute. */
 	FrustumType type;
@@ -590,7 +590,6 @@ public:
 	bool Contains(const Frustum &frustum) const;
 	bool Contains(const Polyhedron &polyhedron) const;
 
-	int ContainsAABox(AABB const &AABox)const;
 	/// Computes the closest point inside this Frustum to the given point.
 	/** If the target point lies inside this Frustum, then that point is returned.
 		@see Distance(), Contains(), Intersects().

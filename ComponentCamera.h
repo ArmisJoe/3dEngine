@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Component.h"
-
+#include "ModuleCamera3D.h"
 
 
 class ComponentCamera : public Component {
@@ -18,6 +18,5 @@ public:
 	void CleanUp();
 
 private:
-	Frustum frustum;
-
+	Camera camera;
 };
