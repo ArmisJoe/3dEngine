@@ -21,10 +21,13 @@ public:
 	void MoveRight(const float &movement);
 	void MoveForwards(const float &movement);
 	void MoveBackwards(const float &movement);
-
 	void Rotate(const float& mov_y, const float& mov_z);
 
+	void SetPos(const float3 pos) { frustum.pos = pos; }
+
 	float GetFOV() const { return FOV; }
+	float3 GetPos() const { return frustum.pos; }
+
 private:
 	Frustum frustum;
 	float FOV;
