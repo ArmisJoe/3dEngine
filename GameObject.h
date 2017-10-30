@@ -45,11 +45,12 @@ public:
 	GameObject* GetParent() const { return parent; }
 	void SetParent(GameObject* p) { parent = p; }
 	std::string GetName() const { return name; }
+	void SetName(const char* str) { name = str; }
 
 	void SetScene(ModuleScene* sce);
 
 	void OnEditor();
-	void OnHierarchyTree();
+	void OnHierarchyTree(bool skip_root = false);
 
 };
 

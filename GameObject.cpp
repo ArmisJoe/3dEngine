@@ -175,30 +175,41 @@ void GameObject::OnEditor()
 	}
 }
 
-void GameObject::OnHierarchyTree()
+void GameObject::OnHierarchyTree(bool skip_root)
 {
 
 	uint flags = 0;
 
-	if (children.empty()) {
-		flags |= ImGuiTreeNodeFlags_Leaf;
-	}
-	if (selected == true) {
-		flags |= ImGuiTreeNodeFlags_Selected;
-	}
-	if (ImGui::TreeNodeEx(name.c_str(), flags)) {
-		if (ImGui::IsItemClicked(1)) {
-			if (scene != nullptr) {
-				scene->SetSelected(this);
-			}
-		}
+	if(skip_root == true) {
 		if (!children.empty()) {
 			for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
 				if ((*it) != nullptr)
-					(*it)->OnHierarchyTree();
+					(*it)->OnHierarchyTree(false);
 			}
 		}
-		ImGui::TreePop();
+	}
+	else {
+
+		if (children.empty()) {
+			flags |= ImGuiTreeNodeFlags_Leaf;
+		}
+		if (selected == true) {
+			flags |= ImGuiTreeNodeFlags_Selected;
+		}
+		if (ImGui::TreeNodeEx(name.c_str(), flags)) {
+			if (ImGui::IsItemClicked(0)) {
+				if (scene != nullptr) {
+					scene->SetSelected(this);
+				}
+			}
+			if (!children.empty()) {
+				for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
+					if ((*it) != nullptr)
+						(*it)->OnHierarchyTree();
+				}
+			}
+			ImGui::TreePop();
+		}
 	}
 
 }

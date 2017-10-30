@@ -55,6 +55,10 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene)
 			ref_transform->scale = { scaling.x, scaling.y, scaling.z };
 		}
 	}
+
+	if (node->mName.length > 0)
+		new_node->SetName(node->mName.C_Str());
+
 		
 
 	//Node Children 'Recursivity'
@@ -83,8 +87,9 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 		//ROOT Node
 		root_node = scene->mRootNode;
 		//Loading All nodes into Root Node
-		if(root_node->mNumChildren > 0)
+		if (root_node->mNumChildren > 0) {
 			Geometry = LoadNode(root_node, scene);
+		}
 		//Camera Focus
 		//App->camera->FocusMesh(new_mesh->vertices, new_mesh->num_vertices);
 		//Release Scene

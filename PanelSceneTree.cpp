@@ -17,8 +17,8 @@ void PanelSceneTree::Draw()
 
 	ImGui::Begin(name, &active, ImGuiWindowFlags_HorizontalScrollbar);
 
-	if(root != nullptr)
-		root->OnHierarchyTree();
+	if(root != nullptr && !root->children.empty())
+		root->OnHierarchyTree(true);
 
 	ImGui::End();
 }

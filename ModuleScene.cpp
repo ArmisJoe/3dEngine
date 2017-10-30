@@ -79,15 +79,13 @@ void ModuleScene::DeleteGameObject(GameObject * go)
 
 void ModuleScene::SetSelected(GameObject * go)
 {
-	if(current_selected != nullptr)
-		current_selected->selected = false;
+	//if(current_selected != nullptr)
+	//	current_selected->selected = false;
 	current_selected = go;
-	current_selected->selected = true;
+	//current_selected->selected = true;
 
 	if (App->editor->inspector != nullptr)
 		App->editor->inspector->SetInspected(current_selected);
-
-	LOG("HALO");
 }
 
 void ModuleScene::RemoveAllGameObject()
