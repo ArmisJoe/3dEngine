@@ -330,3 +330,46 @@ bool Camera::SetFov(float argFOV)
 
 	return false;
 }
+
+void Camera::MoveUp(const float & movement)
+{
+	float3 move = float3::zero;
+	move += frustum.up * movement;
+	frustum.Translate(move);
+}
+
+void Camera::MoveDown(const float & movement)
+{
+	float3 move = float3::zero;
+	move -= frustum.up * movement;
+	frustum.Translate(move);
+}
+
+void Camera::MoveLeft(const float & movement)
+{
+	float3 move = float3::zero;
+	move -= frustum.WorldRight() * movement;
+	frustum.Translate(move);
+}
+
+void Camera::MoveRight(const float & movement)
+{
+	float3 move = float3::zero;
+	move += frustum.WorldRight() * movement;
+	frustum.Translate(move);
+}
+
+void Camera::MoveForwards(const float & movement)
+{
+	float3 move = float3::zero;
+	move += frustum.front * movement;
+	frustum.Translate(move);
+}
+
+void Camera::MoveBackwards(const float & movement)
+{
+	float3 move = float3::zero;
+	move -= frustum.front * movement;
+	frustum.Translate(move);
+}
+

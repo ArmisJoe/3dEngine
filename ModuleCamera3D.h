@@ -15,8 +15,15 @@ public:
 
 public:
 	bool SetFov(float argFOV);
+	void MoveUp(const float &movement);
+	void MoveDown(const float &movement);
+	void MoveLeft(const float &movement);
+	void MoveRight(const float &movement);
+	void MoveForwards(const float &movement);
+	void MoveBackwards(const float &movement);
 
-	float GetFOV() { return FOV; }
+
+	float GetFOV() const { return FOV; }
 private:
 	Frustum frustum;
 	float FOV;
