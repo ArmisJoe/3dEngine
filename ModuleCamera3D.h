@@ -6,6 +6,17 @@
 
 #define PROPORTION_CAMERA 1.5;
 
+
+class Camera
+{
+public:
+	Camera::Camera();
+
+private:
+	Frustum frustum;
+};
+
+
 class ModuleCamera3D : public Module
 {
 public:

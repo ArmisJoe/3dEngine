@@ -45,13 +45,13 @@ void GameObject::Update(float dt)
 	if (aabb != nullptr) {
 		glLineWidth(2.0f);
 		glBegin(GL_LINES);
-		for (uint i = 0; i < aabb->NumVertices; ++i)
+		/*for (uint i = 0; i < aabb->NumVertices; ++i)
 		{
 		}
 		glVertex3f(0.f, 0.f, 0.f);
 		glVertex3f(0.f, 10.f, 0.f);
 		glEnd();
-		glLineWidth(1.0f);
+		glLineWidth(1.0f);*/
 
 	}
 

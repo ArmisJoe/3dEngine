@@ -279,3 +279,8 @@ void ModuleCamera3D::SetCamera(const vec3& focus, const float& distance)
 	Reference = focus;
 	Position = Reference + Z * distance;
 }
+
+Camera::Camera()
+{
+	//frustum.Type = PerspectiveFrustum;
+}
