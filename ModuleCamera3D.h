@@ -28,7 +28,8 @@ public:
 	float GetFOV() const { return FOV; }
 	float3 GetPos() const { return frustum.pos; }
 
-private:
+public:
+	void GetCorners(float3* corners) {frustum.GetCornerPoints(corners); }
 	Frustum frustum;
 	float FOV;
 	float aspect_ratio;
