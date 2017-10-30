@@ -373,3 +373,33 @@ void Camera::MoveBackwards(const float & movement)
 	frustum.Translate(move);
 }
 
+void Camera::Rotate(const float & mov_y, const float & mov_z)
+{
+
+	if (mov_z != 0)
+	{
+		//float DeltaX = (float)mov_z;
+
+		Quat q = Quat::RotateY(mov_z);
+
+		frustum.front = q.Mul(frustum.front).Normalized();
+		frustum.up = q.Mul(frustum.up).Normalized();
+
+	}
+
+	if (mov_y != 0)
+	{
+		//float DeltaY = (float)dy * Sensitivity;
+
+		Quat q = Quat::RotateAxisAngle(frustum.WorldRight(), mov_y);
+
+		float3 Y = q.Mul(frustum.up).Normalized();
+
+		if (Y.y > 0.0f)
+		{
+			frustum.up = Y;
+			frustum.front = q.Mul(frustum.front).Normalized();
+		}
+	}
+}
+

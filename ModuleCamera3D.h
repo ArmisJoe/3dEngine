@@ -22,6 +22,7 @@ public:
 	void MoveForwards(const float &movement);
 	void MoveBackwards(const float &movement);
 
+	void Rotate(const float& mov_y, const float& mov_z);
 
 	float GetFOV() const { return FOV; }
 private:
