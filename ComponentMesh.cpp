@@ -44,10 +44,7 @@ void ComponentMesh::Draw(const ComponentTransform* trans, const ComponentMateria
 
 	if (trans != nullptr) {
 		glPushMatrix();
-		glRotatef(trans->rotation.x, trans->rotation.y, trans->rotation.z, trans->rotation.w);
-		glScalef(trans->scale.x, trans->scale.y, trans->scale.z);
-		glTranslatef(trans->position.x, trans->position.y, trans->position.z);
-		//glMultMatrixf(trans->GetMatrix4x4());
+		glMultMatrixf(trans->GetMatrix4x4());
 	}
 
 	glEnableClientState(GL_VERTEX_ARRAY);

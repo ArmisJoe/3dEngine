@@ -15,13 +15,13 @@ public:
 	void OnEditor();
 public:
 	float* GetMatrix4x4() const;
-	float3 GetGlobalPos() const;
-	Quat GetGlobalRot() const;
-	float3 GetGlobalScale() const;
 public:
 	float3 position;
 	Quat rotation;
 	float3 scale;
+	float3 GlobalPosition;
+	Quat GlobalRotation;
+	float3 GlobalScale;
 private:
 	float4x4 Matrix4x4;
 };

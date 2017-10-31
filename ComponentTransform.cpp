@@ -56,9 +56,6 @@ void ComponentTransform::OnEditor()
 	if (ImGui::DragFloat3("Rotation:", rot, 0.1f)) {
 		float3 tmp = DegToRad(float3(rot[0], rot[1], rot[2]));
 		rotation = rotation.FromEulerXYZ(tmp.x, tmp.y, tmp.z);
-		rotation.x *= rot[0];
-		rotation.y *= rot[1];
-		rotation.z *= rot[2];
 	}
 	
 	if (ImGui::DragFloat3("Scale:", sca, 0.1f)) {
@@ -72,54 +69,7 @@ void ComponentTransform::OnEditor()
 float* ComponentTransform::GetMatrix4x4() const
 {
 
-	Matrix4x4.FromTRS(GetGlobalPos(), GetGlobalRot(), GetGlobalScale());
+	const float4x4 retMat = Matrix4x4.FromTRS(position, rotation, scale);
 
-	return Matrix4x4.Transposed().ptr();
-}
-
-float3 ComponentTransform::GetGlobalPos() const
-{
-	float3 GP = position;
-
-	//if (parent != nullptr) {
-	//	if (parent->GetParent() != nullptr) {
-	//		if (!parent->GetParent()->FindComponents(componentType_Transform).empty()) {
-	//			ComponentTransform* ParentTrans = (ComponentTransform*)parent->GetParent()->FindComponents(componentType_Transform)[0];
-	//			GP += ParentTrans->GetGlobalPos();
-	//		}
-	//	}
-	//}
-
-	return GP;
-}
-
-Quat ComponentTransform::GetGlobalRot() const
-{
-	Quat GR = rotation;
-
-	//if (parent != nullptr) {
-	//	GameObject* GoParent = parent->GetParent();
-	//	if (!GoParent->FindComponents(componentType_Transform).empty()) {
-	//		ComponentTransform* ParentTrans = (ComponentTransform*)GoParent->FindComponents(componentType_Transform)[0];
-	//		GR.Mul(ParentTrans->GetGlobalRot());
-	//	}
-	//
-	//}
-
-	return GR;
-}
-
-float3 ComponentTransform::GetGlobalScale() const
-{
-	float3 GS = scale;
-
-	//if (parent != nullptr) {
-	//	GameObject* GoParent = parent->GetParent();
-	//	if (!GoParent->FindComponents(componentType_Transform).empty()) {
-	//		ComponentTransform* ParentTrans = (ComponentTransform*)GoParent->FindComponents(componentType_Transform)[0];
-	//		GS += ParentTrans->GetGlobalScale();
-	//	}
-	//}
-
-	return GS;
+	return retMat.Transposed().ptr();
 }

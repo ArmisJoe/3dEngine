@@ -23,7 +23,7 @@ public:
 	GameObject();
 	virtual ~GameObject();
 private:
-	GameObject* parent;
+	GameObject* parent = nullptr;
 	std::string name;
 public:
 	std::vector<Component*> components; // Children Components
@@ -47,6 +47,7 @@ public:
 	std::string GetName() const { return name; }
 	void SetName(const char* str) { name = str; }
 
+	void SetToGlobalTransform();
 	ComponentTransform* GetTransform();
 
 	void SetScene(ModuleScene* sce);

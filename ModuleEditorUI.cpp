@@ -143,6 +143,7 @@ update_status ModuleEditorUI::Update(float dt)
 		}
 		if (ImGui::BeginMenu("Windows")) {
 			ImGui::MenuItem("Object Creation", "O", &object_p);
+			ImGui::MenuItem("Scene Tree", "S", &sceneTree->active);
 			ImGui::MenuItem("Inspector", "I", &inspector->active);
 			ImGui::MenuItem("Console", "Alt+C", &console->active);
 			ImGui::Separator();

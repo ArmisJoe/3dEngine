@@ -160,11 +160,29 @@ void GameObject::DestroyComponent(Component * componentPointer)
 	}
 }
 
+void GameObject::SetToGlobalTransform()
+{
+	if (!children.empty()) {
+		for (int i = 0; i < children.size(); i++) {
+				ComponentTransform* cTrans = children[i]->GetTransform(); 
+				if (cTrans != nullptr && GetTransform() != nullptr) {
+					cTrans->GlobalPosition = GetTransform()->position + cTrans->position;
+					cTrans->GlobalRotation = GetTransform()->rotation * cTrans->rotation;
+					cTrans->GlobalScale = GetTransform()->scale + cTrans->scale;
+				}
+				children[i]->SetToGlobalTransform();
+		}
+	}
+}
+
 ComponentTransform * GameObject::GetTransform()
 {
 	ComponentTransform* ret = nullptr;
 	if (components.empty() == false) {
-		ret = (ComponentTransform*)FindComponents(componentType_Transform)[0];
+		std::vector<Component*> cts = FindComponents(componentType_Transform);
+		if (!cts.empty()) {
+			ret = (ComponentTransform*)cts[0];
+		}
 	}
 	return ret;
 }

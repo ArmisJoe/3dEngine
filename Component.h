@@ -46,7 +46,7 @@ public:
 	componentType type;
 protected:
 	bool isActive = true;
-	GameObject* parent;
+	GameObject* parent = nullptr;
 	uint numMax = NULL;
 public:
 	virtual componentType GetType() const { return type; }

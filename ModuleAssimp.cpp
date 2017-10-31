@@ -52,7 +52,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene)
 			node->mTransformation.Decompose(scaling, rotation, translation);
 			ref_transform->position = { translation.x, translation.y, translation.y };
 			ref_transform->rotation = { rotation.x, rotation.y, rotation.z, rotation.w };
-			ref_transform->scale = { scaling.x / 100, scaling.y / 100, scaling.z / 100 };
+			ref_transform->scale = { scaling.x/100, scaling.y/100, scaling.z/100 };
 		}
 	}
 

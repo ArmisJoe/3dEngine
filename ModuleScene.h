@@ -32,6 +32,8 @@ public:
 	void SetSelected(GameObject* go);
 	void RemoveAllGameObject();
 
+	void SetAllToGlobalTransforms();
+
 private:
 	GameObject* root;
 	GameObject* current_selected;

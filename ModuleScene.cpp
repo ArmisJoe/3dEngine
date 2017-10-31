@@ -22,6 +22,7 @@ bool ModuleScene::Init()
 	LOG("Scene Init");
 
 	root = new GameObject(nullptr);
+	root->SetName("Scene Root");
 
 	return true;
 }
@@ -95,28 +96,18 @@ void ModuleScene::RemoveAllGameObject()
 	}
 }
 
+void ModuleScene::SetAllToGlobalTransforms()
+{
+	if (root != nullptr && !root->children.empty()) {
+		//root->SetToGlobalTransform();
+	}
+}
+
 update_status ModuleScene::PreUpdate(float dt)
 {
-	//[TEST] Assigning textures
-	//if (root != nullptr) {
-	//	for (int i = 0; i < root->children.size(); i++) {
-	//		for (int k = 0; k < root->children[i]->children.size(); k++) {
-	//			std::vector<Component*> ms = root->children[i]->children[k]->FindComponents(componentType_Material);
-	//			if (ms.empty()) {
-	//				root->children[i]->children[k]->AddComponent(componentType_Material);
-	//				ms = root->children[i]->children[k]->FindComponents(componentType_Material);
-	//			}
-	//			for (int it = 0; it < ms.size(); it++) {
-	//				ComponentMaterial* mat = (ComponentMaterial*)ms[it];
-	//				if (!App->res->textures.empty()) {
-	//					if(mat->GetTextureChannel(texType_Diffuse) == nullptr)
-	//						mat->SetTextureChannel(texType_Diffuse, App->res->textures.back());
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
-	//!_[TEST] Assigning textures
+	
+	SetAllToGlobalTransforms();
+
 	return UPDATE_CONTINUE;
 }
 
