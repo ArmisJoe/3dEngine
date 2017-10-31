@@ -39,25 +39,28 @@ void ComponentTransform::OnEditor()
 	pos[1] = position.y;
 	pos[2] = position.z;
 
-	float3 r = rotation.ToEulerXYZ();
-	rot[0] = r.x;
-	rot[1] = r.y;
-	rot[2] = r.z;
+	float3 r = RadToDeg(rotation.ToEulerXYZ());
+	rot[0] = (r.x);
+	rot[1] = (r.y);
+	rot[2] = (r.z);
 
 	sca[0] = scale.x;
 	sca[1] = scale.y;
 	sca[2] = scale.z;
 
-	if (ImGui::DragFloat3("Position:", pos, 0.1f)) {
+	if (ImGui::DragFloat3("Position:", pos, 0.1f)) { 
 		position.x = pos[0];
 		position.y = pos[1];
 		position.z = pos[2];
 	}
 	if (ImGui::DragFloat3("Rotation:", rot, 0.1f)) {
-		rotation.RotateX(math::DegToRad(rot[0]));
-		rotation.RotateY(math::DegToRad(rot[1]));
-		rotation.RotateZ(math::DegToRad(rot[2]));
+		float3 tmp = DegToRad(float3(rot[0], rot[1], rot[2]));
+		rotation = rotation.FromEulerXYZ(tmp.x, tmp.y, tmp.z);
+		rotation.x *= rot[0];
+		rotation.y *= rot[1];
+		rotation.z *= rot[2];
 	}
+	
 	if (ImGui::DragFloat3("Scale:", sca, 0.1f)) {
 		scale.x = sca[0];
 		scale.y = sca[1];
