@@ -2,39 +2,9 @@
 #include "Module.h"
 #include "Globals.h"
 #include "glmath.h"
-
+#include "ComponentCamera.h"
 
 #define PROPORTION_CAMERA 1.5;
-
-
-class Camera
-{
-public:
-	Camera::Camera();
-	Camera::~Camera();
-
-public:
-	bool SetFov(float argFOV);
-	void MoveUp(const float &movement);
-	void MoveDown(const float &movement);
-	void MoveLeft(const float &movement);
-	void MoveRight(const float &movement);
-	void MoveForwards(const float &movement);
-	void MoveBackwards(const float &movement);
-	void Rotate(const float& mov_y, const float& mov_z);
-
-	void SetPos(const float3 pos) { frustum.pos = pos; }
-
-	float GetFOV() const { return FOV; }
-	float3 GetPos() const { return frustum.pos; }
-
-public:
-	void GetCorners(float3* corners) {frustum.GetCornerPoints(corners); }
-	Frustum frustum;
-	float FOV;
-	float aspect_ratio;
-};
-
 
 class ModuleCamera3D : public Module
 {
@@ -68,9 +38,10 @@ private:
 public:
 	
 	vec3 X, Y, Z, Position, Reference;
+	Camera* main_camera;
 
 private:
-	Camera* main_camera;
+	
 
 	mat4x4 ViewMatrix, ViewMatrixInverse;
 };

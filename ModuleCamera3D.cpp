@@ -68,6 +68,15 @@ update_status ModuleCamera3D::Update(float dt)
 			RotateFromReference();
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT)
+	{
+		main_camera->SetFov(100);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT)
+	{
+		main_camera->SetFov(20);
+	}
+
 	// Restart camera ----------------
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_UP)
 		SetCamera(vec3(0, 0, 0), 15);
@@ -374,7 +383,7 @@ Camera::Camera()
 	frustum.front.x = 0.0f; frustum.front.y = 0.0f; frustum.front.z = 1.0f;
 	frustum.up.x = 0.0f; frustum.up.y = 1.0f; frustum.up.z = 0.0;
 
-	frustum.farPlaneDistance = 200.f;
+	frustum.farPlaneDistance = 50.f;
 	frustum.nearPlaneDistance = 0.5f;
 
 	frustum.horizontalFov = 0;
@@ -477,5 +486,11 @@ void Camera::Rotate(const float & mov_y, const float & mov_z)
 			frustum.front = q.Mul(frustum.front).Normalized();
 		}
 	}
+}
+
+void Camera::SetAspectRatio(const float & w, const float & h)
+{
+	aspect_ratio = w / h;
+	SetFov(FOV);
 }
 

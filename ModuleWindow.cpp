@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleWindow.h"
+#include "ModuleCamera3D.h"
 
 ModuleWindow::ModuleWindow(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -119,7 +120,10 @@ void ModuleWindow::DrawConfigPanel()
 			if (resizable)
 			{
 				if (ImGui::SliderInt("Width", (int*)&w, 0, SCREEN_WIDTH) || ImGui::SliderInt("Height", (int*)&h, 0, SCREEN_HEIGHT))
+				{
 					SDL_SetWindowSize(window, w, h);
+					App->camera->main_camera->SetAspectRatio(w , h);
+				}
 			}
 			if (ImGui::Checkbox("Borderless", &check_bdls)) {
 				if (!borderless)

@@ -115,6 +115,7 @@
     <ClCompile Include="ModuleWindow.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -267,6 +268,9 @@
     <ClInclude Include="ComponentCamera.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="DebugDraw.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Geometry\KDTree.inl" />
@@ -280,6 +284,9 @@
     </Filter>
     <Filter Include="Modules">
       <UniqueIdentifier>{6860ee16-9aed-493c-9de3-9d539eafed5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{69d90a25-2be6-4857-80b1-a69bc7e34140}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
