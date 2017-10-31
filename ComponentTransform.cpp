@@ -32,17 +32,17 @@ ComponentTransform::ComponentTransform(componentType argtype, GameObject * argpa
 void ComponentTransform::OnEditor()
 {
 	float pos[3];
-	float rot[4];
+	float rot[3];
 	float sca[3];
 
 	pos[0] = position.x;
 	pos[1] = position.y;
 	pos[2] = position.z;
 
-	rot[0] = rotation.x;
-	rot[1] = rotation.y;
-	rot[2] = rotation.z;
-	rot[3] = rotation.w;
+	float3 r = rotation.ToEulerXYZ();
+	rot[0] = r.x;
+	rot[1] = r.y;
+	rot[2] = r.z;
 
 	sca[0] = scale.x;
 	sca[1] = scale.y;
@@ -53,11 +53,10 @@ void ComponentTransform::OnEditor()
 		position.y = pos[1];
 		position.z = pos[2];
 	}
-	if (ImGui::DragFloat4("Rotation:", rot, 0.1f)) {
-		rotation.x = rot[0];
-		rotation.y = rot[1];
-		rotation.z = rot[2];
-		rotation.w = rot[3];
+	if (ImGui::DragFloat3("Rotation:", rot, 0.1f)) {
+		rotation.RotateX(math::DegToRad(rot[0]));
+		rotation.RotateY(math::DegToRad(rot[1]));
+		rotation.RotateZ(math::DegToRad(rot[2]));
 	}
 	if (ImGui::DragFloat3("Scale:", sca, 0.1f)) {
 		scale.x = sca[0];
