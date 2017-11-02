@@ -13,7 +13,7 @@ PanelConsole::~PanelConsole()
 
 void PanelConsole::Draw()
 {
-	ImGui::SetNextWindowPos(pos);
+	ImGui::SetNextWindowPos(pos); //[REMOVE]
 	ImGui::SetNextWindowContentSize(size);
 	ImGui::Begin(name, &active, ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 	if(ImGui::SmallButton("Clear")) {

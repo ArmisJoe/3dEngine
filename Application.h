@@ -18,6 +18,7 @@
 #include "ModuleParson.h"
 #include "ModuleAssimp.h"
 #include "ModuleTextures.h"
+#include "ModuleImporter.h"
 #include "ModuleResources.h"
 
 #define LOG(format, ...) App->mylog(__FILE__, __LINE__, format, __VA_ARGS__);
@@ -40,6 +41,7 @@ public:
 	ModuleAssimp* assimp;
 	ModuleTextures* tex;
 	ModuleResources* res;
+	ModuleImporter* importer;
 	
 private:
 

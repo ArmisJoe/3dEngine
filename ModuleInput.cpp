@@ -94,6 +94,7 @@ update_status ModuleInput::PreUpdate(float dt)
 
 	while(SDL_PollEvent(&e))
 	{
+		ImGui_ImplSdl_ProcessEvent(&e);
 		switch(e.type)
 		{
 			case SDL_MOUSEWHEEL:

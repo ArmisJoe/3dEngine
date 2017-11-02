@@ -39,10 +39,9 @@ void ComponentTransform::OnEditor()
 	pos[1] = position.y;
 	pos[2] = position.z;
 
-	float3 r = RadToDeg(rotation.ToEulerXYZ());
-	rot[0] = (r.x);
-	rot[1] = (r.y);
-	rot[2] = (r.z);
+	rot[0] = RadToDeg(rotation.ToEulerXYZ().x);
+	rot[1] = RadToDeg(rotation.ToEulerXYZ().y);
+	rot[2] = RadToDeg(rotation.ToEulerXYZ().z);
 
 	sca[0] = scale.x;
 	sca[1] = scale.y;
@@ -54,8 +53,7 @@ void ComponentTransform::OnEditor()
 		position.z = pos[2];
 	}
 	if (ImGui::DragFloat3("Rotation:", rot, 0.1f)) {
-		float3 tmp = DegToRad(float3(rot[0], rot[1], rot[2]));
-		rotation = rotation.FromEulerXYZ(tmp.x, tmp.y, tmp.z);
+		rotation = rotation.FromEulerXYZ(DegToRad(rot[0]), DegToRad(rot[1]), DegToRad(rot[2]));
 	}
 	
 	if (ImGui::DragFloat3("Scale:", sca, 0.1f)) {
@@ -68,7 +66,6 @@ void ComponentTransform::OnEditor()
 
 float* ComponentTransform::GetMatrix4x4() const
 {
-
 	const float4x4 retMat = Matrix4x4.FromTRS(position, rotation, scale);
 
 	return retMat.Transposed().ptr();

@@ -50,9 +50,12 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene)
 			aiVector3D translation, scaling;
 			aiQuaternion rotation;
 			node->mTransformation.Decompose(scaling, rotation, translation);
+			ref_transform->rotation = Quat(1, 0, 0, 0);
+			ref_transform->position = { 0, 0, 0 };
+			ref_transform->scale = { 1, 1, 1 };
 			ref_transform->position = { translation.x, translation.y, translation.y };
-			ref_transform->rotation = { rotation.x, rotation.y, rotation.z, rotation.w };
-			ref_transform->scale = { scaling.x/100, scaling.y/100, scaling.z/100 };
+			ref_transform->rotation = Quat( rotation.x, rotation.y, rotation.z, rotation.w );
+			ref_transform->scale = { scaling.x, scaling.y, scaling.z };
 		}
 	}
 

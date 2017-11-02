@@ -99,14 +99,14 @@ void ModuleScene::RemoveAllGameObject()
 void ModuleScene::SetAllToGlobalTransforms()
 {
 	if (root != nullptr && !root->children.empty()) {
-		//root->SetToGlobalTransform();
+		root->SetToGlobalTransform();
 	}
 }
 
 update_status ModuleScene::PreUpdate(float dt)
 {
 	
-	SetAllToGlobalTransforms();
+	//SetAllToGlobalTransforms();
 
 	return UPDATE_CONTINUE;
 }
