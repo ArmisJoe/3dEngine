@@ -2,15 +2,29 @@
 
 #include "Component.h"
 
-
-class Camera
-{
+class ComponentCamera : public Component {
 public:
-	Camera::Camera();
-	Camera::~Camera();
-
+	ComponentCamera();
+	ComponentCamera(GameObject* argparent);
+	ComponentCamera(componentType argtype, GameObject* argparent);
+	virtual ~ComponentCamera();
 public:
-	bool SetFov(float argFOV);
+	virtual void OnEditor();
+
+	void Start();
+	void Update();
+	void CleanUp();
+
+
+	void SetPos(const float3 pos) { frustum->pos = pos; }
+	float* GetViewMatrix() const;
+	float* GetProjectionMatrix() const;
+	void SetAspectRatio(const float &w, const float&h);
+	void SetAspectRatio(const float & aspect_ratio);
+	float GetFOV() const { return FOV; }
+	float3 GetPos() const { return frustum->pos; }
+	void GetCorners(float3* corners) { frustum->GetCornerPoints(corners); }
+	Frustum* GetFrustum() const { return frustum; }
 	void MoveUp(const float &movement);
 	void MoveDown(const float &movement);
 	void MoveLeft(const float &movement);
@@ -19,32 +33,12 @@ public:
 	void MoveBackwards(const float &movement);
 	void Rotate(const float& mov_y, const float& mov_z);
 
-	void SetPos(const float3 pos) { frustum.pos = pos; }
-	void SetAspectRatio(const float &w, const float&h);
-	float GetFOV() const { return FOV; }
-	float3 GetPos() const { return frustum.pos; }
+private:
+	void UpdateProjection();
+	bool SetFov(float argFOV);
 
-public:
-	void GetCorners(float3* corners) { frustum.GetCornerPoints(corners); }
-	Frustum frustum;
+	Frustum* frustum;
 	float FOV;
 	float aspect_ratio;
-};
-
-
-class ComponentCamera : public Component {
-public:
-	ComponentCamera();
-	ComponentCamera(GameObject* argparent);
-	ComponentCamera(componentType argtype, GameObject* argparent);
-	virtual ~ComponentCamera() {};
-public:
-	virtual void OnEditor();
-
-	void Start();
-	void Update();
-	void CleanUp();
-
-private:
-	Camera* camera;
+	//Color background_color = Black;
 };

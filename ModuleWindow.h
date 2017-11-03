@@ -17,7 +17,7 @@ public:
 
 	bool Init();
 	bool CleanUp();
-
+	update_status Update();
 	void SetTitle(const char* title, bool save_doc = false);
 
 	void DrawConfigPanel();
@@ -29,6 +29,9 @@ public:
 	//The surface contained by the window
 	SDL_Surface* screen_surface;
 
+	int GetWidth() const { return w; }
+	int GetHeight() const { return h; }
+
 private:
 	bool fullscreen = false;
 	bool check_fsc = false;
@@ -37,7 +40,7 @@ private:
 	bool check_bdls = false;
 
 	int w = SCREEN_WIDTH, h = SCREEN_HEIGHT;
-    float brightness = 1.f;
+	float brightness = 1.f;
 private:
 
 	bool ChangeToFullScreen();
@@ -45,6 +48,7 @@ private:
 
 	void SetBorderless();
 	void SetBorder();
+
 };
 
 #endif // __ModuleWindow_H__

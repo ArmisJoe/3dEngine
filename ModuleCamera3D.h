@@ -36,12 +36,13 @@ private:
 	void SetCamera(const vec3& focus, const float& distance);
 
 public:
-	
-	vec3 X, Y, Z, Position, Reference;
-	Camera* main_camera;
+	ComponentCamera* curr_camera;
 
 private:
 	
+	vec3 X, Y, Z, Position, Reference;
+	ComponentCamera* main_camera;
 
+private:
 	mat4x4 ViewMatrix, ViewMatrixInverse;
 };
