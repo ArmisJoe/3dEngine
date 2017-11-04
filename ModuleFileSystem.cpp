@@ -94,12 +94,74 @@ void ModuleFileSystem::FileDelete(const char * filepath)
 bool ModuleFileSystem::SaveFile(const char * path, const char * file_content, const char * name, const char * extension, int size)
 {
 	bool ret = false;
+
+	string file = path;
+	file += name;
+	file += ".";
+	file += extension;
+
+	std::ofstream;
+	FILE* new_file = fopen(file.c_str(), "wb");
+
+	if (new_file)
+	{
+		fwrite(file_content, sizeof(char), size, new_file);
+		ret = true;
+	}
+	else
+	{
+		LOG("Error saving file %s: ", name);
+	}
+
+	fclose(new_file);
+	return ret;
+}
+
+bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, const char * name, const char * extension, int size, std::string & output_file)
+{
 	bool ret = false;
 
 	string file = path;
 	file += name;
 	file += ".";
 	file += extension;
+
+	if (exists(file)) {
+		LOG("File Already Exists %s", file.c_str());
+		return false;
+	}
+
+	std::ofstream;
+	FILE* new_file = fopen(file.c_str(), "wb");
+
+	if (new_file)
+	{
+		fwrite(file_content, sizeof(char), size, new_file);
+		output_file = file;
+		ret = true;
+	}
+	else
+	{
+		LOG("Error saving file %s: ", name);
+	}
+
+	fclose(new_file);
+	return ret;
+}
+
+bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, const char * name, const char * extension, int size)
+{
+	bool ret = false;
+
+	string file = path;
+	file += name;
+	file += ".";
+	file += extension;
+
+	if (exists(file)) {
+		LOG("File Already Exists %s", file.c_str());
+		return false;
+	}
 
 	std::ofstream;
 	FILE* new_file = fopen(file.c_str(), "wb");

@@ -2,6 +2,8 @@
 #ifndef __IMPORTERTEXTURE_H__
 #define __IMPORTERTEXTURE_H__
 
+#include "ModuleTextures.h"
+
 #include "Importer.h"
 
 class ImporterTexture : public Importer {
