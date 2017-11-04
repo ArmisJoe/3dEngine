@@ -370,7 +370,7 @@ Sphere * ModulePhysics3D::AddSphere(const float &x, const float &y, const float 
 	return s;
 }
 
-AABB * ModulePhysics3D::AddAABB(const float3 center, const float3 size, bool visible)
+AABB * ModulePhysics3D::AddAABB(const vec center, const vec size, bool visible)
 {
 	AABB* ret = nullptr;
 
@@ -380,7 +380,7 @@ AABB * ModulePhysics3D::AddAABB(const float3 center, const float3 size, bool vis
 	aabbs.push_back(ret);
 
 	bCube* bAABB = new bCube(size.z, size.x, size.y);
-	float3 position;
+	vec position;
 	//position = ret->CornerPoint(2); // Corner (-1, +1, -1)
 	position = ret->CenterPoint();
 	bAABB->SetPos(position.x, position.y, position.z);

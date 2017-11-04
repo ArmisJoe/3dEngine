@@ -27,7 +27,7 @@ private:
 
 	void CalculateViewMatrix();
 
-	void RotateCamera(float dt);
+	void RotateCamera();
 	void RotateFromReference();
 
 	void MoveCamera(float dt);

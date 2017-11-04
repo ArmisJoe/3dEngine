@@ -145,8 +145,8 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glLoadIdentity();
 
 	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(App->camera->GetViewMatrix());
-	//glLoadIdentity();
+	glLoadMatrixf(App->camera->curr_camera->GetViewMatrix());
+	glLoadIdentity();
 	// light 0 on cam pos
 	lights[0].SetPos(App->camera->curr_camera->GetPos().x, App->camera->curr_camera->GetPos().y, App->camera->curr_camera->GetPos().z);
 

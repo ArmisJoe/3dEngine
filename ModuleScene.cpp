@@ -28,8 +28,6 @@ bool ModuleScene::Start()
 {
 	bool ret = true;
 
-	root->AddComponent(componentType_Camera);
-
 	return ret;
 }
 
