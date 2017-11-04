@@ -28,13 +28,13 @@ ModulePhysics3D::ModulePhysics3D(Application* app, bool start_enabled) : Module(
 	broad_phase = new btDbvtBroadphase();
 	solver = new btSequentialImpulseConstraintSolver();
 */
-	debug_draw = new DebugDrawer();
+	//debug_draw = new DebugDrawer();
 }
 
 // Destructor
 ModulePhysics3D::~ModulePhysics3D()
 {
-	delete debug_draw;
+	//delete debug_draw;
 	/*
 	delete solver;
 	delete broad_phase;
@@ -606,7 +606,7 @@ void ModulePhysics3D::AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, c
 
 */
 // =============================================
-
+/*
 void DebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color)
 {
 	line.origin.Set(from.getX(), from.getY(), from.getZ());
@@ -642,3 +642,4 @@ int	 DebugDrawer::getDebugMode() const
 {
 	return mode;
 }
+*/
