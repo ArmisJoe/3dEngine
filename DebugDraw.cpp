@@ -1,0 +1,92 @@
+#include "DebugDraw.h"
+
+
+#include "SDL/include/SDL_opengl.h"
+#include <gl/GL.h>
+#include <gl/GLU.h>
+
+DebugDraw::DebugDraw()
+{
+}
+
+DebugDraw::~DebugDraw()
+{
+}
+
+void DebugDraw::SetLinesSize(float argsize)
+{
+	if (argsize > 0) line_size = argsize;
+}
+
+void DebugDraw::Draw(float3 * line_points, int size) const
+{
+	
+	glLineWidth((float)5);
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, (float*)line_points->ptr());
+
+	glEnableClientState(GL_COLOR_ARRAY);
+	glColorPointer(3, GL_FLOAT, 0, &color.r);
+	
+
+	glDrawArrays(GL_LINES, 0, size);
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
+
+	glLineWidth(1);
+
+}
+
+void DebugDraw::DrawFrustum(float3 * corners)
+{
+	int size = 24;
+
+	float3* lines = new float3[size];
+
+	lines[0] = float3(corners[0].x, corners[0].y, corners[0].z);
+	lines[1] = float3(corners[2].x, corners[2].y, corners[2].z);
+
+	lines[2] = float3(corners[2].x, corners[2].y, corners[2].z);
+	lines[3] = float3(corners[6].x, corners[6].y, corners[6].z);
+
+	lines[4] = float3(corners[4].x, corners[4].y, corners[4].z);
+	lines[5] = float3(corners[6].x, corners[6].y, corners[6].z);
+
+	lines[6] = float3(corners[4].x, corners[4].y, corners[4].z);
+	lines[7] = float3(corners[0].x, corners[0].y, corners[0].z);
+
+	//
+
+	lines[8] = float3(corners[1].x, corners[1].y, corners[1].z);
+	lines[9] = float3(corners[3].x, corners[3].y, corners[3].z);
+
+	lines[10] = float3(corners[3].x, corners[3].y, corners[3].z);
+	lines[11] = float3(corners[7].x, corners[7].y, corners[7].z);
+
+	lines[12] = float3(corners[5].x, corners[5].y, corners[5].z);
+	lines[13] = float3(corners[7].x, corners[7].y, corners[7].z);
+
+	lines[14] = float3(corners[5].x, corners[5].y, corners[5].z);
+	lines[15] = float3(corners[1].x, corners[1].y, corners[1].z);
+
+	//
+
+	lines[16] = float3(corners[0].x, corners[0].y, corners[0].z);
+	lines[17] = float3(corners[1].x, corners[1].y, corners[1].z);
+
+	lines[18] = float3(corners[2].x, corners[2].y, corners[2].z);
+	lines[19] = float3(corners[3].x, corners[3].y, corners[3].z);
+
+	lines[20] = float3(corners[4].x, corners[4].y, corners[4].z);
+	lines[21] = float3(corners[5].x, corners[5].y, corners[5].z);
+
+	lines[22] = float3(corners[6].x, corners[6].y, corners[6].z);
+	lines[23] = float3(corners[7].x, corners[7].y, corners[7].z);
+
+	Draw(lines, size);
+
+	delete[] lines;
+
+}

@@ -11,6 +11,7 @@
 #include "ComponentMesh.h"
 #include "ComponentMaterial.h"
 #include "ModuleCamera3D.h"
+#include "DebugDraw.h"
 
 //
 //#include "glew-2.1.0\include\GL\glew.h"
@@ -45,6 +46,7 @@ public:
 
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
+	DebugDraw* debugger;
 
 	bool enable_depth_test = true;
 	bool enable_cull_face = true;

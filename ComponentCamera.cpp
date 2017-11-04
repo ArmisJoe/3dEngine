@@ -8,7 +8,6 @@ ComponentCamera::ComponentCamera() : Component(componentType_Camera)
 	frustum.type = FrustumType::PerspectiveFrustum;
 	frustum.nearPlaneDistance = 0.5f;
 	frustum.farPlaneDistance = 500.f;
-	
 
 	frustum.verticalFov = DEGTORAD * 60.0f;
 	frustum.horizontalFov = SCREEN_WIDTH / SCREEN_HEIGHT;

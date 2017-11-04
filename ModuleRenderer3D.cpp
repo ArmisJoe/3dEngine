@@ -13,6 +13,7 @@
 ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	name = "Renderer";
+	debugger = new DebugDraw();
 }
 
 // Destructor
@@ -201,7 +202,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 bool ModuleRenderer3D::CleanUp()
 {
 	//LOG("Destroying 3D Renderer");
-
+	delete debugger;
 	SDL_GL_DeleteContext(context);
 
 	return true;
