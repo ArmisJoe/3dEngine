@@ -92,6 +92,9 @@
     <ClInclude Include="Hardware.h" />
     <ClInclude Include="HelperFoos.h" />
     <ClInclude Include="imgui_impl_sdl.h" />
+    <ClInclude Include="ImporterMaterial.h" />
+    <ClInclude Include="ImporterMesh.h" />
+    <ClInclude Include="ImporterTexture.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="mmgr\mmgr.h" />
     <ClInclude Include="mmgr\nommgr.h" />
@@ -99,7 +102,7 @@
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleEditorUI.h" />
     <ClInclude Include="ModuleFileSystem.h" />
-    <ClInclude Include="ModuleImporter.h" />
+    <ClInclude Include="Importer.h" />
     <ClInclude Include="ModuleParson.h" />
     <ClInclude Include="ModulePhysics3D.h" />
     <ClInclude Include="ModulePlayer.h" />
@@ -203,6 +206,9 @@
     <ClCompile Include="ImGui\imgui_demo.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />
     <ClCompile Include="imgui_impl_sdl.cpp" />
+    <ClCompile Include="ImporterMaterial.cpp" />
+    <ClCompile Include="ImporterMesh.cpp" />
+    <ClCompile Include="ImporterTexture.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -212,7 +218,6 @@
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleEditorUI.cpp" />
     <ClCompile Include="ModuleFileSystem.cpp" />
-    <ClCompile Include="ModuleImporter.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleParson.cpp" />
     <ClCompile Include="ModulePhysics3D.cpp" />

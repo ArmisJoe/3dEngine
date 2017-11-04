@@ -90,8 +90,10 @@
     </ClCompile>
     <ClCompile Include="ModuleResources.cpp" />
     <ClCompile Include="PanelSceneTree.cpp" />
-    <ClCompile Include="ModuleImporter.cpp" />
     <ClCompile Include="ModuleFileSystem.cpp" />
+    <ClCompile Include="ImporterTexture.cpp" />
+    <ClCompile Include="ImporterMaterial.cpp" />
+    <ClCompile Include="ImporterMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -214,8 +216,11 @@
     </ClInclude>
     <ClInclude Include="ModuleResources.h" />
     <ClInclude Include="PanelSceneTree.h" />
-    <ClInclude Include="ModuleImporter.h" />
     <ClInclude Include="ModuleFileSystem.h" />
+    <ClInclude Include="Importer.h" />
+    <ClInclude Include="ImporterTexture.h" />
+    <ClInclude Include="ImporterMaterial.h" />
+    <ClInclude Include="ImporterMesh.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Geometry\KDTree.inl" />
