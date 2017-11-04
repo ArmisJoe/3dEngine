@@ -47,7 +47,7 @@ update_status ModuleCamera3D::Update(float dt)
 	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
 	{
 		MoveCamera(dt);
-		RotateCamera();
+		RotateCamera(dt);
 	}
 	/*else
 		if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT) {
@@ -186,7 +186,7 @@ void ModuleCamera3D::Move(const vec3 &Movement)
 // -----------------------------------------------------------------
 float* ModuleCamera3D::GetViewMatrix()
 {
-	return &ViewMatrix;
+	return main_camera->GetViewMatrix();
 }
 
 void ModuleCamera3D::FocusMesh(const float* vertices, const uint &num_vertices)
@@ -251,12 +251,12 @@ void ModuleCamera3D::CalculateViewMatrix()
 	ViewMatrixInverse = inverse(ViewMatrix);
 }
 
-void ModuleCamera3D::RotateCamera()
+void ModuleCamera3D::RotateCamera(float dt)
 {
 	float Sensitivity = 0.25f;
 
-	int dx = -App->input->GetMouseXMotion() * Sensitivity;
-	int dy = -App->input->GetMouseYMotion() * Sensitivity;
+	float dx = -App->input->GetMouseXMotion() * Sensitivity * dt;
+	float dy = -App->input->GetMouseYMotion() * Sensitivity * dt;
 
 	main_camera->Rotate(dx, dy);
 }
@@ -296,7 +296,7 @@ void ModuleCamera3D::RotateFromReference()
 
 void ModuleCamera3D::MoveCamera(float dt)
 {
-	float speed = 0.0f;
+	float speed = 2.0f * dt;
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 		speed = 8.0f * dt;
 

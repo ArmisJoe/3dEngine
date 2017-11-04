@@ -181,7 +181,7 @@ void GameObject::CreateAABBFromMesh()
 	if (meshes.size() > 0) {
 
 		uint num_vert = 0;
-		vec *pointArray = nullptr;
+		float3 *pointArray = nullptr;
 
 		for (vector<Component*>::iterator it = meshes.begin(); it != meshes.end(); ++it)
 		{
@@ -189,7 +189,7 @@ void GameObject::CreateAABBFromMesh()
 
 			num_vert += curr_mesh->num_vertices;
 
-			vec curr_it;
+			float3 curr_it;
 
 			for (uint i = 0; i < (curr_mesh->num_vertices * 3); ++i)
 			{
