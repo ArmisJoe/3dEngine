@@ -191,7 +191,6 @@ float* ModuleCamera3D::GetViewMatrix()
 
 void ModuleCamera3D::FocusMesh(const float* vertices, const uint &num_vertices)
 {
-	//
 	uint	y_test = 0;
 	float	highest_vertex_y = 0.0f, highest_vertex_x = 0.0f, highest_vertex_z = 0.0f;
 
