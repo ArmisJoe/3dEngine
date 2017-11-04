@@ -22,51 +22,42 @@ ComponentCamera::ComponentCamera() : Component(componentType_Camera)
 
 }
 
-ComponentCamera::ComponentCamera(GameObject * argparent) : Component(componentType_Camera)
+ComponentCamera::ComponentCamera(GameObject * argparent) : Component(componentType_Camera, argparent)
 {
 	name = "Camera";
-	//frustum.Type = FrustumType::PerspectiveFrustum;
-/*	frustum->type = FrustumType::PerspectiveFrustum;
-	frustum->pos = float3::zero;
-	frustum->front = float3::unitZ;
-	frustum->up = float3::unitY;
+	frustum.type = FrustumType::PerspectiveFrustum;
+	frustum.nearPlaneDistance = 0.5f;
+	frustum.farPlaneDistance = 500.f;
 
-	frustum->nearPlaneDistance = 0.5f;
-	frustum->farPlaneDistance = 500.f;
-
-
-	frustum->verticalFov = DEGTORAD * 60.0f;
-	aspect_ratio = 1.1f;
-
+	frustum.verticalFov = DEGTORAD * 60.0f;
+	frustum.horizontalFov = SCREEN_WIDTH / SCREEN_HEIGHT;
+	aspect_ratio = SCREEN_WIDTH / SCREEN_HEIGHT;
 	SetFov(60);
-//	frustum->WorldMatrixChanged();
 
-	SetAspectRatio(1.1f);*/
+
+	//frustum.Type = FrustumType::PerspectiveFrustum;
+	frustum.pos = float3::zero;
+	frustum.front = -float3::unitZ;
+	frustum.up = float3::unitY;
 }
 
-ComponentCamera::ComponentCamera(componentType argtype, GameObject * argparent) : Component(componentType_Camera)
+ComponentCamera::ComponentCamera(componentType argtype, GameObject * argparent) : Component(componentType_Camera, argparent)
 {
 	name = "Camera";
-	/*frustum = new Frustum();
-	frustum->nearPlaneDistance = 0.5f;
-	frustum->farPlaneDistance = 500.f;
+	frustum.type = FrustumType::PerspectiveFrustum;
+	frustum.nearPlaneDistance = 0.5f;
+	frustum.farPlaneDistance = 500.f;
+
+	frustum.verticalFov = DEGTORAD * 60.0f;
+	frustum.horizontalFov = SCREEN_WIDTH / SCREEN_HEIGHT;
+	aspect_ratio = SCREEN_WIDTH / SCREEN_HEIGHT;
+	SetFov(60);
+
 
 	//frustum.Type = FrustumType::PerspectiveFrustum;
-	frustum->type = FrustumType::PerspectiveFrustum;
-	frustum->pos = float3::zero;
-	frustum->front = float3::unitZ;
-	frustum->up = float3::unitY;
-
-
-
-
-	frustum->verticalFov = DEGTORAD * 60.0f;
-	aspect_ratio = 1.1f;
-
-	SetFov(60);
-	//frustum->WorldMatrixChanged();
-
-	SetAspectRatio(1.1f);*/
+	frustum.pos = float3::zero;
+	frustum.front = -float3::unitZ;
+	frustum.up = float3::unitY;
 }
 
 ComponentCamera::~ComponentCamera()

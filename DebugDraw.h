@@ -17,4 +17,6 @@ private:
 	float line_size = 1.0f;
 public:
 	void DrawFrustum(float3* vertices);
+	void DrawAABB(float3 center, float3 size);
+	
 };

@@ -61,9 +61,9 @@ update_status ModuleCamera3D::Update(float dt)
 	//	SetCamera(vec3(0, 0, 0), 15);
 
 	// Recalculate matrix -------------
-	float3 corners[8];
+	/*float3 corners[8];
 	main_camera->GetCorners(corners);
-	App->renderer3D->debugger->DrawFrustum(corners);
+	App->renderer3D->debugger->DrawFrustum(corners);*/
 	//	DrawLinesList(lines, s, 5, colors);
 
 	return UPDATE_CONTINUE;

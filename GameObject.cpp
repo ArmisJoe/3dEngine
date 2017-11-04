@@ -18,10 +18,13 @@ GameObject::GameObject()
 {
 	name = "GameObject";
 	this->AddComponent(componentType_Transform);
-
 }
 
 GameObject::~GameObject()
+{
+}
+
+void GameObject::Start()
 {
 }
 
@@ -40,21 +43,7 @@ void GameObject::Update(float dt)
 				(*it)->Update(dt);
 			}
 		}
-	}
-
-	if (aabb != nullptr) {
-		glLineWidth(2.0f);
-		glBegin(GL_LINES);
-		/*for (uint i = 0; i < aabb->NumVertices; ++i)
-		{
-		}
-		glVertex3f(0.f, 0.f, 0.f);
-		glVertex3f(0.f, 10.f, 0.f);
-		glEnd();
-		glLineWidth(1.0f);*/
-
-	}
-
+	}	
 }
 
 void GameObject::CleanUp()
@@ -76,6 +65,15 @@ void GameObject::CleanUp()
 			if ((*it) != nullptr) {
 				(*it)->CleanUp(); 
 				delete[] (*it);
+			}
+		}
+		children.clear();
+	}
+
+	if (!aabbs.empty()) {
+		for (std::vector<AABB*>::iterator it = aabbs.begin(); it != aabbs.end(); it++) {
+			if ((*it) != nullptr) {
+				delete[](*it);
 			}
 		}
 		children.clear();
@@ -104,20 +102,21 @@ Component * GameObject::AddComponent(const componentType type, Component * compo
 
 	// Create the New Component
 	switch (type) {
-		case componentType_Mesh:
-			newComponent = new ComponentMesh(this);
-			CreateAABBFromMesh();
-
-			break;
-		case componentType_Material:
-			if (this->FindComponents(type).empty())
-				newComponent = new ComponentMaterial(this);
-
-			break;
-		case componentType_Transform:
-			if (this->FindComponents(type).empty())
-				newComponent = new ComponentTransform(this);
-			break;
+	case componentType_Mesh:
+		newComponent = new ComponentMesh(this);
+		break;
+	case componentType_Material:
+		if (this->FindComponents(type).empty())
+			newComponent = new ComponentMaterial(this);
+		break;
+	case componentType_Transform:
+		if (this->FindComponents(type).empty())
+			newComponent = new ComponentTransform(this);
+		break;
+	case componentType_Camera:
+		if (this->FindComponents(type).empty())
+			newComponent = new ComponentCamera(this);
+		break;
 	}
 
 	// Copy the 'Reference' Component into the New Component
@@ -136,6 +135,9 @@ Component * GameObject::AddComponent(const componentType type, Component * compo
 		case componentType_Transform:
 			bufferSize = sizeof(ComponentTransform);
 			break;
+		case componentType_Camera:
+			bufferSize = sizeof(ComponentCamera);
+			break;
 		}
 
 		if (bufferSize != 0) {
@@ -146,6 +148,7 @@ Component * GameObject::AddComponent(const componentType type, Component * compo
 	if (newComponent != nullptr) {
 		newComponent->parent = this;
 		components.push_back(newComponent);
+		newComponent->Start();
 	}
 	
 	return newComponent;
@@ -181,43 +184,60 @@ void GameObject::CreateAABBFromMesh()
 	if (meshes.size() > 0) {
 
 		uint num_vert = 0;
-		float3 *pointArray = nullptr;
+		float3 pointArray = float3::zero;
 
 		for (vector<Component*>::iterator it = meshes.begin(); it != meshes.end(); ++it)
 		{
 			ComponentMesh *curr_mesh = (ComponentMesh*)(*it);
 
-			num_vert += curr_mesh->num_vertices;
+			AABB *aabb = new AABB();
+
+			aabb->SetNegativeInfinity();
+			aabb->Enclose((float3*)curr_mesh->vertices, curr_mesh->num_vertices);
+			if (GetParent() != nullptr) {
+				ComponentTransform * cmp_tr = (ComponentTransform*)GetParent()->FindComponents(componentType_Transform)[0];
+				OBB tmp = aabb->Transform(cmp_tr->GetWorldMatrix());
+				aabb = &tmp.MinimalEnclosingAABB();
+
+				this->aabbs.push_back(aabb);
+			}
+			/*aabb->
+			GetMesh()->box.SetNegativeInfinity();
+			GetMesh()->box.Enclose((float3*)GetMesh()->vertices, GetMesh()->num_vertices);
+			math::OBB obb = GetMesh()->box.Transform(GetGameObject()->GetGlobalTransfomMatrix());
+			GetMesh()->box = obb.MinimalEnclosingAABB();*/
+
+
+		/*	num_vert += curr_mesh->num_vertices;
 
 			float3 curr_it;
-
-			for (uint i = 0; i < (curr_mesh->num_vertices * 3); ++i)
+			uint c = 0;
+			for (uint i = curr_mesh->num_vertices * 3; i > 0; i--)
 			{
 				switch (i % 3) {
 				case 0:
 
-					if (i != 0)
-						pointArray->Add(curr_it);
+					if (c != 0)
+						pointArray.Add(curr_it);
 				
-					curr_it.x = curr_mesh->vertices[i];
+					curr_it.x = curr_mesh->vertices[c];
 					break;
 				case 1:
-					curr_it.y = curr_mesh->vertices[i];
+					curr_it.y = curr_mesh->vertices[c];
 					break;
 				case 2:
-					curr_it.z = curr_mesh->vertices[i];
+					curr_it.z = curr_mesh->vertices[c];
 					break;
 				}
-
+				c++;
 			}
-
-			pointArray->Add(curr_it);
+			pointArray.Add(curr_it);*/
 		}
 
-		AABB *aabb = new AABB();
+		
 
-		aabb->SetFrom(pointArray, num_vert);
-		this->aabb = aabb;
+		//aabb->SetFrom(&pointArray, num_vert);
+		//this->aabb = aabb;
 	}
 
 }

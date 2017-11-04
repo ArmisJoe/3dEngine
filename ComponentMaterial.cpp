@@ -21,7 +21,7 @@ ComponentMaterial::ComponentMaterial(GameObject* argparent) : Component(componen
 	}
 }
 
-ComponentMaterial::ComponentMaterial(componentType argtype, GameObject * argparent) : Component(argtype, argparent)
+ComponentMaterial::ComponentMaterial(componentType argtype, GameObject * argparent) : Component(componentType_Material, argparent)
 {
 	name = "Material";
 	numMax = 1;

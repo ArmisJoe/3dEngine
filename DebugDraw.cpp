@@ -90,3 +90,55 @@ void DebugDraw::DrawFrustum(float3 * corners)
 	delete[] lines;
 
 }
+
+void DebugDraw::DrawAABB(float3 center, float3 size)
+{
+	int s = 24;
+
+	float3* lines = new float3[s];
+	float3* colors = new float3[s];
+
+	float3 half_size = size / 2;
+
+	lines[0] = float3(center.x - half_size.x, center.y - half_size.y, center.z - half_size.z);
+	lines[1] = float3(center.x - half_size.x, center.y + half_size.y, center.z - half_size.z);
+
+	lines[2] = float3(center.x - half_size.x, center.y - half_size.y, center.z - half_size.z);
+	lines[3] = float3(center.x + half_size.x, center.y - half_size.y, center.z - half_size.z);
+
+	lines[4] = float3(center.x - half_size.x, center.y - half_size.y, center.z - half_size.z);
+	lines[5] = float3(center.x - half_size.x, center.y - half_size.y, center.z + half_size.z);
+
+	lines[6] = float3(center.x - half_size.x, center.y - half_size.y, center.z + half_size.z);
+	lines[7] = float3(center.x + half_size.x, center.y - half_size.y, center.z + half_size.z);
+
+	lines[8] = float3(center.x + half_size.x, center.y - half_size.y, center.z + half_size.z);
+	lines[9] = float3(center.x + half_size.x, center.y - half_size.y, center.z - half_size.z);
+
+	lines[10] = float3(center.x - half_size.x, center.y + half_size.y, center.z - half_size.z);
+	lines[11] = float3(center.x - half_size.x, center.y + half_size.y, center.z + half_size.z);
+
+	lines[12] = float3(center.x - half_size.x, center.y + half_size.y, center.z + half_size.z);
+	lines[13] = float3(center.x + half_size.x, center.y + half_size.y, center.z + half_size.z);
+
+	lines[14] = float3(center.x + half_size.x, center.y + half_size.y, center.z + half_size.z);
+	lines[15] = float3(center.x + half_size.x, center.y + half_size.y, center.z - half_size.z);
+
+	lines[16] = float3(center.x + half_size.x, center.y + half_size.y, center.z - half_size.z);
+	lines[17] = float3(center.x - half_size.x, center.y + half_size.y, center.z - half_size.z);
+
+	lines[18] = float3(center.x - half_size.x, center.y + half_size.y, center.z + half_size.z);
+	lines[19] = float3(center.x - half_size.x, center.y - half_size.y, center.z + half_size.z);
+
+	lines[20] = float3(center.x + half_size.x, center.y + half_size.y, center.z + half_size.z);
+	lines[21] = float3(center.x + half_size.x, center.y - half_size.y, center.z + half_size.z);
+
+	lines[22] = float3(center.x + half_size.x, center.y + half_size.y, center.z - half_size.z);
+	lines[23] = float3(center.x + half_size.x, center.y - half_size.y, center.z - half_size.z);
+
+
+	Draw(lines, s);
+
+	delete[] lines;
+	delete[] colors;
+}

@@ -15,9 +15,14 @@ ComponentMesh::ComponentMesh(GameObject* argparent) : Component(componentType_Me
 	name = "Mesh";
 }
 
-ComponentMesh::ComponentMesh(componentType argtype, GameObject * argparent) : Component(argtype, argparent)
+ComponentMesh::ComponentMesh(componentType argtype, GameObject * argparent) : Component(componentType_Mesh, argparent)
 {
 	name = "Mesh";
+}
+
+void ComponentMesh::Start()
+{
+	GetParent()->CreateAABBFromMesh();
 }
 
 void ComponentMesh::Update(float dt)
