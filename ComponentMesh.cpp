@@ -29,6 +29,7 @@ void ComponentMesh::Start()
 
 void ComponentMesh::Update(float dt)
 {
+	/**/
 	if (visible) {
 		ComponentMaterial* mat = nullptr;
 		if (!this->GetParent()->FindComponents(componentType_Material).empty()) {
@@ -38,13 +39,13 @@ void ComponentMesh::Update(float dt)
 		if (!this->GetParent()->FindComponents(componentType_Transform).empty()) {
 			trans = (ComponentTransform*)this->GetParent()->FindComponents(componentType_Transform)[0];
 		}
-		Draw(trans, mat);
+		//Draw(trans, mat);
 	}
 }
 
 void ComponentMesh::Draw(const ComponentTransform* trans, const ComponentMaterial * mat)
 {
-	glEnableClientState(GL_VERTEX_ARRAY);
+	/*glEnableClientState(GL_VERTEX_ARRAY);
 
 	if (trans != nullptr) {
 		glPushMatrix();
@@ -85,7 +86,7 @@ void ComponentMesh::Draw(const ComponentTransform* trans, const ComponentMateria
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	if(trans != nullptr)
-		glPopMatrix();
+		glPopMatrix();*/
 }
 
 void ComponentMesh::OnEditor()

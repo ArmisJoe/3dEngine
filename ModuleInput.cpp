@@ -124,7 +124,7 @@ update_status ModuleInput::PreUpdate(float dt)
 			{
 				dropped_filedir = e.drop.file;
 				char* filetext = Capitalize(strrchr(dropped_filedir, '.'));
-				if (strncmp(filetext, ".FBX", 4) == 0) {
+				if (strncmp(filetext, ".FBX", 4) == 0 || strncmp(filetext, ".fbx", 4) == 0) {
 					GameObject* new_geo = nullptr;
 					new_geo = App->assimp->LoadGeometry(dropped_filedir);
 					if (new_geo != nullptr) {
@@ -137,7 +137,7 @@ update_status ModuleInput::PreUpdate(float dt)
 					}
 					LOG("File Loaded:\n\t%s", dropped_filedir);
 				}
-				if (strncmp(filetext, ".PNG", 4) == 0) {
+				if (strncmp(filetext, ".PNG", 4) == 0 || strncmp(filetext, ".png", 4) == 0) {
 					Texture* new_tex = App->tex->LoadTexture(dropped_filedir);
 					//[TEST] Assigning Textures
 					//!_[TEST] Assigning Textures

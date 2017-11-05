@@ -25,7 +25,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 	if (parent != nullptr)
 	{
 		new_node->SetParent(parent);
-		new_node->GetParent()->children.push_back(new_node);
+		//new_node->GetParent()->children.push_back(new_node);
 	}
 	else {
 		new_node->SetParent(App->scene->GetRoot());
@@ -36,18 +36,6 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 		materials = scene->mMaterials;
 	else
 		LOG("Scene without materials");
-
-	//Transform
-	if (!new_node->FindComponents(componentType_Transform).empty()) {
-		aiVector3D translation, scaling;
-		aiQuaternion rotation;
-		node->mTransformation.Decompose(scaling, rotation, translation);
-		float3 position = { translation.x, translation.y, translation.y };
-		Quat rotation2 = { rotation.x, rotation.y, rotation.z, rotation.w };
-		float3 scale = { scaling.x, scaling.y, scaling.z };
-		ComponentTransform* trans = new ComponentTransform(new_node,position, rotation2, scale);
-		new_node->AddComponent(componentType_Transform, trans, false);
-		}
 		
 	//LoadMeshes
 	for (uint i = 0; i < node->mNumMeshes; i++) {
@@ -63,22 +51,21 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 			}
 		}
 	}
-  /*
+  
 	//Transform
 	if (!new_node->FindComponents(componentType_Transform).empty()) {
-		ComponentTransform* ref_transform = (ComponentTransform*)new_node->FindComponents(componentType_Transform)[0];
-		if (ref_transform != nullptr) {
-			aiVector3D translation, scaling;
-			aiQuaternion rotation;
-			node->mTransformation.Decompose(scaling, rotation, translation);
-			ref_transform->rotation = Quat(1, 0, 0, 0);
-			ref_transform->position = { 0, 0, 0 };
-			ref_transform->scale = { 1, 1, 1 };
-			ref_transform->position = { translation.x, translation.y, translation.y };
-			ref_transform->rotation = Quat( rotation.x, rotation.y, rotation.z, rotation.w );
-			ref_transform->scale = { scaling.x, scaling.y, scaling.z };
-		}
-	}*/
+
+		aiVector3D translation, scaling;
+		aiQuaternion rotation(1, 0, 0, 0);
+		node->mTransformation.Decompose(scaling, rotation, translation);
+		float3 position = { 0, 0, 0 };
+		float3 scale = { 1, 1, 1 };
+		position = { translation.x, translation.y, translation.y };
+		Quat rotation2 = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
+		scale = { scaling.x, scaling.y, scaling.z };
+		ComponentTransform* trans = new ComponentTransform(new_node, position, rotation2, scale);
+		new_node->AddComponent(componentType_Transform, trans, false);
+	}
 
 	if (node->mName.length > 0)
 		new_node->SetName(node->mName.C_Str());

@@ -1,7 +1,7 @@
 #include "ModuleFileSystem.h"
 #include "Application.h"
-#include "HelperFoos.h"
-#include <fstream>
+//#include "HelperFoos.h"
+//#include <fstream>
 
 ModuleFileSystem::ModuleFileSystem(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -28,6 +28,7 @@ bool ModuleFileSystem::CleanUp()
 
 string ModuleFileSystem::CreateFolder(const char * path, const char * name)
 {
+	
 	string ret;
 
 	string strPath = path;
@@ -50,6 +51,7 @@ string ModuleFileSystem::CreateFolder(const char * path, const char * name)
 
 void ModuleFileSystem::FileMove(const char * filepath, const char * new_path, bool replace_existing)
 {
+	/*
 	string path = new_path;
 	if (path[path.length() - 1] != '\\') {
 		path += '\\';
@@ -66,11 +68,12 @@ void ModuleFileSystem::FileMove(const char * filepath, const char * new_path, bo
 			LOG("ERROR MoveFile:\n\t%s", filepath);
 		}
 	}
-
+	*/
 }
 
 void ModuleFileSystem::FileCopyPaste(const char * filepath, const char * new_path)
 {
+	/*
 	string path = new_path;
 	if (path[path.length() - 1] != '\\') {
 		path += '\\';
@@ -78,22 +81,23 @@ void ModuleFileSystem::FileCopyPaste(const char * filepath, const char * new_pat
 	path += GetFileFromPath(filepath);
 	if (CopyFile(filepath, path.c_str(), false)) {
 		LOG("ERROR Coping File");
-	}
+	}*/
 }
 
 void ModuleFileSystem::FileDelete(const char * filepath)
 {
+	/*
 	if (DeleteFile(filepath) == 0) {
 		DWORD error = GetLastError();
 		if (error == ERROR_FILE_NOT_FOUND) {
 			LOG("ERROR Deleting file %d", error);
 		}
-	}
+	}*/
 }
 
 bool ModuleFileSystem::SaveFile(const char * path, const char * file_content, const char * name, const char * extension, int size)
 {
-	bool ret = false;
+	/*
 	bool ret = false;
 
 	string file = path;
@@ -101,7 +105,7 @@ bool ModuleFileSystem::SaveFile(const char * path, const char * file_content, co
 	file += ".";
 	file += extension;
 
-	std::ofstream;
+	//std::ofstream;
 	FILE* new_file = fopen(file.c_str(), "wb");
 
 	if (new_file)
@@ -115,5 +119,6 @@ bool ModuleFileSystem::SaveFile(const char * path, const char * file_content, co
 	}
 
 	fclose(new_file);
-	return ret;
+	return ret;*/
+	return false;
 }

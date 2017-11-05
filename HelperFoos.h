@@ -15,7 +15,7 @@ char* Capitalize(char* str) {
 
 string GetFileFromPath(const char* path) {
 	string ret;
-
+	
 	for (int i = 0; path[i] != '\0'; i++) {
 		if (path[i] == '\\' || path[i] == '/') {
 			ret.clear();

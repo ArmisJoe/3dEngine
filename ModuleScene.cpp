@@ -58,7 +58,7 @@ update_status ModuleScene::PreUpdate(float dt)
 		}
 	}
 	//!_[TEST] Assigning textures*/
-  SetAllToGlobalTransforms();
+  //SetAllToGlobalTransforms();
 	return UPDATE_CONTINUE;
 }
 
@@ -73,28 +73,34 @@ update_status ModuleScene::Update(float dt)
 	tmp->GetCorners(corners);
 	App->renderer3D->debugger->DrawFrustum(corners);
 
-	for (std::vector<GameObject*>::iterator it = root->children.begin(); it < root->children.end(); ++it)
-	{
-		for (std::vector<GameObject*>::iterator sub_it = (*it)->children.begin(); sub_it < (*it)->children.end(); ++sub_it)
-		{
-			float3 center = float3::zero, size = float3::zero;
-			int i = (*sub_it)->aabbs.size();
-			int a = 3;
-			for (std::vector<AABB>::iterator iitt = (*sub_it)->aabbs.begin(); iitt < (*sub_it)->aabbs.end(); iitt++)
-			{
-				AABB aabb = (*iitt);
-				center = aabb.CenterPoint();
-				size = aabb.Size();
-				App->renderer3D->debugger->DrawAABB(center, size);
-				int i = (*sub_it)->components.size();
-				CollisionType type = App->camera->curr_camera->GetFrustum().ContainsBox((*iitt));
-				if (type != OUTSIDE)
-					App->renderer3D->todraw.push_back((*sub_it));
-			}
-		}
-	}
+	IteratingElement(root);
+
 	return UPDATE_CONTINUE;
 }
+
+bool ModuleScene::IteratingElement(GameObject * go)
+{
+	for (std::vector<GameObject*>::iterator sub_it = go->children.begin(); sub_it < go->children.end(); ++sub_it)
+	{
+		float3 center = float3::zero, size = float3::zero;
+		int i = (*sub_it)->aabbs.size();
+		for (std::vector<AABB>::iterator iitt = (*sub_it)->aabbs.begin(); iitt < (*sub_it)->aabbs.end(); iitt++)
+		{
+			AABB aabb = (*iitt);
+			center = aabb.CenterPoint();
+			size = aabb.Size();
+			App->renderer3D->debugger->DrawAABB(center, size);
+			int i = (*sub_it)->components.size();
+			CollisionType type = App->camera->curr_camera->GetFrustum().ContainsBox((*iitt));
+			if (type != OUTSIDE)
+				App->renderer3D->todraw.push_back((*sub_it));
+		}
+		IteratingElement(*sub_it);
+	}
+	return true;
+}
+
+
 
 // Load assets
 bool ModuleScene::CleanUp()
@@ -163,7 +169,6 @@ void ModuleScene::SetAllToGlobalTransforms()
 		root->SetToGlobalTransform();
 	}
 }
-
 update_status ModuleScene::PostUpdate(float dt)
 {
 	// Creates the Axis and Default Grid

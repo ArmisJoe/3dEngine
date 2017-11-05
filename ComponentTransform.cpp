@@ -37,11 +37,11 @@ ComponentTransform::ComponentTransform(GameObject * argparent, float3 position, 
 
 void ComponentTransform::UpdateMatrix() {	
 	WorldMatrix = float4x4::FromTRS(position, rotation, scale);
-	for (std::vector<GameObject*>::iterator it = GetParent()->children.begin(); it != GetParent()->children.end(); it++)
+	/*for (std::vector<GameObject*>::iterator it = GetParent()->children.begin(); it != GetParent()->children.end(); it++)
 	{
 		ComponentTransform* child_transform = (ComponentTransform*)(*it)->FindComponents(componentType_Transform)[0];
 		child_transform->UpdateMatrix();
-	}
+	}*/
 }
 
 void ComponentTransform::OnEditor()

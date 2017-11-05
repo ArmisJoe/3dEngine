@@ -184,15 +184,17 @@ update_status ModuleRenderer3D::Update(float dt)
 				ComponentMesh* m = (ComponentMesh*)(*m_it);
 				if (m != nullptr)
 				{
-					ComponentMaterial* mat = (ComponentMaterial*)(*it)->FindComponents(componentType_Material).front();
+					ComponentMaterial* mat = nullptr;
+					if (!(*it)->FindComponents(componentType_Material).empty())
+						mat = (ComponentMaterial*)(*it)->FindComponents(componentType_Material).front();
 					DrawMesh(m, mat);
 				}
 			}
 		}
-		objects_drawn = todraw.size();
-
-		todraw.clear();
 	}
+
+	objects_drawn = todraw.size();
+	todraw.clear();
 
 	return UPDATE_CONTINUE;
 }

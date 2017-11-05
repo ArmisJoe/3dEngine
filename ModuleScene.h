@@ -32,6 +32,7 @@ public:
 	void SetSelected(GameObject* go);
 	void RemoveAllGameObject();
 	void SetAllToGlobalTransforms();
+	bool IteratingElement(GameObject* go);
 private:
 	GameObject* root;
 	GameObject* current_selected;
