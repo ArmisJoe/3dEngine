@@ -9,9 +9,13 @@
 #include "ComponentMesh.h"
 #include "ComponentTransform.h"
 
+#include "PanelInspector.h"
+
 
 GameObject::GameObject(GameObject * p) : parent(p)
 {
+	name = "GameObject";
+	this->AddComponent(componentType_Transform);
 }
 
 GameObject::GameObject()
@@ -63,7 +67,7 @@ void GameObject::CleanUp()
 		for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
 			if ((*it) != nullptr) {
 				(*it)->CleanUp(); 
-				//delete[] (*it); // We have children inside children now RÎP --> are we deleting something already deleted??
+				//delete[] (*it); // We have children inside children now Rï¿½P --> are we deleting something already deleted??
 			}
 		}
 		children.clear();
@@ -186,6 +190,7 @@ void GameObject::DestroyComponent(Component * componentPointer)
 	}
 }
 
+
 void GameObject::CreateAABBFromMesh(ComponentMesh* mesh)
 {
 
@@ -210,6 +215,37 @@ void GameObject::CreateAABBFromMesh(ComponentMesh* mesh)
 			}
 	}
 
+
+void GameObject::SetToGlobalTransform()
+{
+	if (!children.empty()) {
+		for (int i = 0; i < children.size(); i++) {
+				ComponentTransform* cTrans = children[i]->GetTransform(); 
+				if (cTrans != nullptr && GetTransform() != nullptr) {
+					cTrans->GlobalPosition = GetTransform()->position + cTrans->position;
+					cTrans->GlobalRotation = GetTransform()->rotation * cTrans->rotation;
+					cTrans->GlobalScale = GetTransform()->scale + cTrans->scale;
+				}
+				children[i]->SetToGlobalTransform();
+		}
+	}
+}
+
+ComponentTransform * GameObject::GetTransform()
+{
+	ComponentTransform* ret = nullptr;
+	if (components.empty() == false) {
+		std::vector<Component*> cts = FindComponents(componentType_Transform);
+		if (!cts.empty()) {
+			ret = (ComponentTransform*)cts[0];
+		}
+	}
+	return ret;
+}
+
+void GameObject::SetScene(ModuleScene * sce)
+{
+	scene = sce;
 }
 
 void GameObject::OnEditor()
@@ -220,10 +256,43 @@ void GameObject::OnEditor()
 				(*it)->OnEditor();
 		}
 	}
-	if (!children.empty()) {
-		for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
-			if((*it) != nullptr)
-				(*it)->OnEditor();
+}
+
+void GameObject::OnHierarchyTree(bool skip_root)
+{
+
+	uint flags = 0;
+
+	if(skip_root == true) {
+		if (!children.empty()) {
+			for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
+				if ((*it) != nullptr)
+					(*it)->OnHierarchyTree(false);
+			}
 		}
 	}
+	else {
+
+		if (children.empty()) {
+			flags |= ImGuiTreeNodeFlags_Leaf;
+		}
+		if (selected == true) {
+			flags |= ImGuiTreeNodeFlags_Selected;
+		}
+		if (ImGui::TreeNodeEx(name.c_str(), flags)) {
+			if (ImGui::IsItemClicked(0)) {
+				if (scene != nullptr) {
+					scene->SetSelected(this);
+				}
+			}
+			if (!children.empty()) {
+				for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
+					if ((*it) != nullptr)
+						(*it)->OnHierarchyTree();
+				}
+			}
+			ImGui::TreePop();
+		}
+	}
+
 }

@@ -7,6 +7,8 @@ public:
 	Panel();
 	virtual ~Panel();
 
+	virtual void Start();
+
 	virtual void Draw() = 0;
 
 	virtual void CleanUp();

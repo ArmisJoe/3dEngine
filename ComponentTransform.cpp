@@ -47,36 +47,41 @@ void ComponentTransform::UpdateMatrix() {
 void ComponentTransform::OnEditor()
 {
 	float pos[3];
-	float rot[4];
+	float rot[3];
 	float sca[3];
 
 	pos[0] = position.x;
 	pos[1] = position.y;
 	pos[2] = position.z;
 
-	rot[0] = rotation.x;
-	rot[1] = rotation.y;
-	rot[2] = rotation.z;
-	rot[3] = rotation.w;
+	rot[0] = RadToDeg(rotation.ToEulerXYZ().x);
+	rot[1] = RadToDeg(rotation.ToEulerXYZ().y);
+	rot[2] = RadToDeg(rotation.ToEulerXYZ().z);
 
 	sca[0] = scale.x;
 	sca[1] = scale.y;
 	sca[2] = scale.z;
 
-	ImGui::InputFloat3("Position: ", pos);
-	ImGui::InputFloat3("Rotation: ", rot);
-	ImGui::InputFloat3("Scale: ", sca);
+	if (ImGui::DragFloat3("Position:", pos, 0.1f)) { 
+		position.x = pos[0];
+		position.y = pos[1];
+		position.z = pos[2];
+	}
+	if (ImGui::DragFloat3("Rotation:", rot, 0.1f)) {
+		rotation = rotation.FromEulerXYZ(DegToRad(rot[0]), DegToRad(rot[1]), DegToRad(rot[2]));
+	}
+	
+	if (ImGui::DragFloat3("Scale:", sca, 0.1f)) {
+		scale.x = sca[0];
+		scale.y = sca[1];
+		scale.z = sca[2];
+	}
 
-	position.x = pos[0];
-	position.y = pos[1];
-	position.z = pos[2];
+}
 
-	rotation.x = rot[0];
-	rotation.y = rot[1];
-	rotation.z = rot[2];
-	rotation.w = rot[3];
+float* ComponentTransform::GetMatrix4x4() const
+{
+	const float4x4 retMat = Matrix4x4.FromTRS(position, rotation, scale);
 
-	scale.x = sca[0];
-	scale.y = sca[1];
-	scale.z = sca[2];
+	return retMat.Transposed().ptr();
 }

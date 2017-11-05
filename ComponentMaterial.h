@@ -7,6 +7,8 @@ struct Texture {
 	Texture() {};
 	virtual ~Texture() {};
 public:
+	void OnEditor();
+public:
 	unsigned int id = 0;
 	float w = 0;
 	float h = 0;

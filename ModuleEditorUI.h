@@ -19,6 +19,7 @@ class Application;
 class PanelConsole;
 class PanelAbout;
 class PanelInspector;
+class PanelSceneTree;
 
 class ModuleEditorUI : public Module {
 public:
@@ -44,16 +45,18 @@ public:
 private:
 	std::list<Panel*> panels;
 
-	PanelConsole*		console = nullptr;
-	PanelInspector*		inspector = nullptr;
-	PanelAbout*			about = nullptr;
-
 	bool object_p = false;
 
 	bool config_active = false;
 	bool show_test_window = true;
 
-	// libraries
+	// List of libraries which actually they are strings which they are char*-based classes themselves from C but also used on C# and (like on this case) C++
 	vector<string> libraries;
+
+public:
+	PanelConsole*		console = nullptr;
+	PanelInspector*		inspector = nullptr;
+	PanelAbout*			about = nullptr;
+	PanelSceneTree*		sceneTree = nullptr;
 };
 	

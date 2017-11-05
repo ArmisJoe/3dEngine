@@ -5,6 +5,9 @@
 #include "PhysBody3D.h"
 #include "ModulePlayer.h"
 
+#include "ModuleEditorUI.h"
+#include "PanelInspector.h"
+
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	name = "Scene";
@@ -18,7 +21,8 @@ bool ModuleScene::Init()
 {
 	LOG("Scene Init");
 
-	root = new GameObject();
+	root = new GameObject(nullptr);
+	root->SetName("Scene Root");
 
 	return true;
 }
@@ -34,6 +38,7 @@ bool ModuleScene::Start()
 update_status ModuleScene::PreUpdate(float dt)
 {
 	//[TEST] Assigning textures
+  /*
 	if (root != nullptr) {
 		for (int i = 0; i < root->children.size(); i++) {
 			for (int k = 0; k < root->children[i]->children.size(); k++) {
@@ -52,7 +57,8 @@ update_status ModuleScene::PreUpdate(float dt)
 			}
 		}
 	}
-	//!_[TEST] Assigning textures
+	//!_[TEST] Assigning textures*/
+  SetAllGlobalTransforms();
 	return UPDATE_CONTINUE;
 }
 
@@ -119,6 +125,7 @@ GameObject * ModuleScene::AddGameObject(GameObject * parent, GameObject * go)
 		new_go = new GameObject(parent);
 		memcpy(new_go, go, sizeof(GameObject));
 		new_go->SetParent(parent);
+		new_go->SetScene(this);
 		parent->children.push_back(new_go);
 	}
 
@@ -132,10 +139,28 @@ void ModuleScene::DeleteGameObject(GameObject * go)
 	}
 }
 
+void ModuleScene::SetSelected(GameObject * go)
+{
+	//if(current_selected != nullptr)
+	//	current_selected->selected = false;
+	current_selected = go;
+	//current_selected->selected = true;
+
+	if (App->editor->inspector != nullptr)
+		App->editor->inspector->SetInspected(current_selected);
+}
+
 void ModuleScene::RemoveAllGameObject()
 {
 	if (root != nullptr) {
 		root->CleanUp();
+	}
+}
+
+void ModuleScene::SetAllToGlobalTransforms()
+{
+	if (root != nullptr && !root->children.empty()) {
+		root->SetToGlobalTransform();
 	}
 }
 

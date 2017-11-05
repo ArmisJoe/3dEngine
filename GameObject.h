@@ -14,6 +14,8 @@ class ComponentMesh;
 class ComponentMaterial;
 class ComponentTransform;
 
+class ModuleScene;
+
 enum componentType;
 
 class GameObject {
@@ -22,7 +24,7 @@ public:
 	GameObject();
 	virtual ~GameObject();
 private:
-	GameObject* parent;
+	GameObject* parent = nullptr;
 	std::string name;
 
 
@@ -30,6 +32,11 @@ public:
 	std::vector<Component*> components; // Children Components
 	std::vector<GameObject*> children; // Children GameObjects
 	std::vector<AABB> aabbs;
+
+	bool selected = false;
+
+private:
+	ModuleScene* scene = nullptr;
 public:
 	void Start();
 	void Update(float dt); // Called every ModuleScene->Update(dt) (if they are insied the scene)
@@ -43,9 +50,15 @@ public:
 	void SetParent(GameObject* p) { parent = p; }
 	std::string GetName() const { return name; }
 	void CreateAABBFromMesh(ComponentMesh* mesh);
-	//AABB* GetAABB() const { return aabb; }
+	void SetName(const char* str) { name = str; }
+
+	void SetToGlobalTransform();
+	ComponentTransform* GetTransform();
+
+	void SetScene(ModuleScene* sce);
 
 	void OnEditor();
+	void OnHierarchyTree(bool skip_root = false);
 
 };
 

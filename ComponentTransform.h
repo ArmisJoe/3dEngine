@@ -17,10 +17,18 @@ public:
 	void OnEditor();
 	float4x4 GetWorldMatrix() { UpdateMatrix(); return WorldMatrix; }
 public:
+	float* GetMatrix4x4() const;
+public:
 	float3 position;
 	Quat rotation;
 	float3 scale;
 	float4x4 WorldMatrix = float4x4::zero;
 private:
 	void UpdateMatrix();
+	float3 GlobalPosition;
+	Quat GlobalRotation;
+	float3 GlobalScale;
+private:
+	//float4x4 Matrix4x4;
+
 };

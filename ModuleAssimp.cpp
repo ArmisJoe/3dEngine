@@ -63,6 +63,25 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 			}
 		}
 	}
+  /*
+	//Transform
+	if (!new_node->FindComponents(componentType_Transform).empty()) {
+		ComponentTransform* ref_transform = (ComponentTransform*)new_node->FindComponents(componentType_Transform)[0];
+		if (ref_transform != nullptr) {
+			aiVector3D translation, scaling;
+			aiQuaternion rotation;
+			node->mTransformation.Decompose(scaling, rotation, translation);
+			ref_transform->rotation = Quat(1, 0, 0, 0);
+			ref_transform->position = { 0, 0, 0 };
+			ref_transform->scale = { 1, 1, 1 };
+			ref_transform->position = { translation.x, translation.y, translation.y };
+			ref_transform->rotation = Quat( rotation.x, rotation.y, rotation.z, rotation.w );
+			ref_transform->scale = { scaling.x, scaling.y, scaling.z };
+		}
+	}*/
+
+	if (node->mName.length > 0)
+		new_node->SetName(node->mName.C_Str());
 
 
 	//Node Children 'Recursivity'
@@ -91,8 +110,9 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 		//ROOT Node
 		root_node = scene->mRootNode;
 		//Loading All nodes into Root Node
-		if(root_node->mNumChildren > 0)
+		if (root_node->mNumChildren > 0) {
 			Geometry = LoadNode(root_node, scene);
+		}
 		//Camera Focus
 		//App->camera->FocusMesh(new_mesh->vertices, new_mesh->num_vertices);
 		//Release Scene

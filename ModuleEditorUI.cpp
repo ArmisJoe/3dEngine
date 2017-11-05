@@ -2,6 +2,7 @@
 #include "PanelConsole.h"
 #include "PanelInspector.h"
 #include "PanelAbout.h"
+#include "PanelSceneTree.h"
 
 #include <iostream> 
 #include <string>
@@ -30,6 +31,7 @@ ModuleEditorUI::~ModuleEditorUI()
 	console = nullptr;
 	inspector = nullptr;
 	about = nullptr;
+	sceneTree = nullptr;
 }
 
 bool ModuleEditorUI::Init()
@@ -43,7 +45,7 @@ bool ModuleEditorUI::Init()
 	AddPanel(console = new PanelConsole());
 	AddPanel(inspector = new PanelInspector());
 	AddPanel(about = new PanelAbout());
-	inspector->scene = App->scene;
+	AddPanel(sceneTree = new PanelSceneTree());
 
 	return true;
 }
@@ -53,6 +55,8 @@ bool ModuleEditorUI::Start()
 	console->active = true;
 	inspector->active = true;
 	about->active = false;
+
+	sceneTree->SetRoot(App->scene->GetRoot());
 
 	console->size = { (float)App->window->screen_surface->w * 2 / 3, (float)App->window->screen_surface->h / 4 };
 	console->pos = { App->window->screen_surface->w/2 - console->size.x/2 , App->window->screen_surface->h - (console->size.y ) };
@@ -139,6 +143,7 @@ update_status ModuleEditorUI::Update(float dt)
 		}
 		if (ImGui::BeginMenu("Windows")) {
 			ImGui::MenuItem("Object Creation", "O", &object_p);
+			ImGui::MenuItem("Scene Tree", "S", &sceneTree->active);
 			ImGui::MenuItem("Inspector", "I", &inspector->active);
 			ImGui::MenuItem("Console", "Alt+C", &console->active);
 			ImGui::Separator();
