@@ -77,9 +77,11 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="ComponentCamera.h" />
     <ClInclude Include="ComponentMaterial.h" />
     <ClInclude Include="ComponentMesh.h" />
     <ClInclude Include="ComponentTransform.h" />
+    <ClInclude Include="DebugDraw.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="glew-2.1.0\include\GL\eglew.h" />
     <ClInclude Include="glew-2.1.0\include\GL\glew.h" />
@@ -194,9 +196,11 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="ComponentCamera.cpp" />
     <ClCompile Include="ComponentMaterial.cpp" />
     <ClCompile Include="ComponentMesh.cpp" />
     <ClCompile Include="ComponentTransform.cpp" />
+    <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glew-2.1.0\glew.c" />
     <ClCompile Include="glmath.cpp" />
@@ -237,7 +241,6 @@
     <ClCompile Include="PhysBody3D.cpp" />
     <ClCompile Include="PhysVehicle3D.cpp" />
     <ClCompile Include="Primitive.cpp" />
-    <ClCompile Include="src\Algorithm\GJK.cpp" />
     <ClCompile Include="src\Algorithm\Random\LCG.cpp" />
     <ClCompile Include="src\Geometry\AABB.cpp" />
     <ClCompile Include="src\Geometry\Capsule.cpp" />
@@ -246,7 +249,6 @@
     <ClCompile Include="src\Geometry\Line.cpp" />
     <ClCompile Include="src\Geometry\LineSegment.cpp" />
     <ClCompile Include="src\Geometry\OBB.cpp" />
-    <ClCompile Include="src\Geometry\PBVolume.cpp" />
     <ClCompile Include="src\Geometry\Plane.cpp" />
     <ClCompile Include="src\Geometry\Polygon.cpp" />
     <ClCompile Include="src\Geometry\Polyhedron.cpp" />
@@ -255,16 +257,12 @@
     <ClCompile Include="src\Geometry\Triangle.cpp" />
     <ClCompile Include="src\Geometry\TriangleMesh.cpp" />
     <ClCompile Include="src\Math\BitOps.cpp" />
-    <ClCompile Include="src\Math\Callstack.cpp" />
     <ClCompile Include="src\Math\float2.cpp" />
     <ClCompile Include="src\Math\float3.cpp" />
     <ClCompile Include="src\Math\float3x3.cpp" />
     <ClCompile Include="src\Math\float3x4.cpp" />
     <ClCompile Include="src\Math\float4.cpp" />
-    <ClCompile Include="src\Math\float4d.cpp" />
     <ClCompile Include="src\Math\float4x4.cpp" />
-    <ClCompile Include="src\Math\grisu3.c" />
-    <ClCompile Include="src\Math\grisu3_cpp.cpp" />
     <ClCompile Include="src\Math\MathFunc.cpp" />
     <ClCompile Include="src\Math\MathLog.cpp" />
     <ClCompile Include="src\Math\MathOps.cpp" />

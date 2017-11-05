@@ -4,7 +4,7 @@
 #include "Primitive.h"
 #include "PhysBody3D.h"
 #include "ModulePlayer.h"
-
+#include "ComponentCamera.h"
 #include "GameObject.h"
 
 class ModuleScene : public Module
@@ -31,9 +31,7 @@ public:
 	}
 	void SetSelected(GameObject* go);
 	void RemoveAllGameObject();
-
 	void SetAllToGlobalTransforms();
-
 private:
 	GameObject* root;
 	GameObject* current_selected;

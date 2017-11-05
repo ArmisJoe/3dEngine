@@ -2,7 +2,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "glmath.h"
-
+#include "ComponentCamera.h"
 
 #define PROPORTION_CAMERA 1.5;
 
@@ -16,30 +16,20 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-	void Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference = false);
-	void LookAt(const vec3 &Spot);
-	void Move(const vec3 &Movement);
+
 	float* GetViewMatrix();
 
 	void FocusMesh(const float *vertices, const uint &num_vertices);
-
+	void LookAt(const float3 &spot);
+	void DrawConfigPanel();
 private:
-
-	void CalculateViewMatrix();
-
-	void RotateCamera();
-	void RotateFromReference();
+	void RotateCamera(float dt);
 
 	void MoveCamera(float dt);
 	void CameraZoom(float dt);
 
-	void SetCamera(const vec3& focus, const float& distance);
-
 public:
-	
-	vec3 X, Y, Z, Position, Reference;
-
-private:
-
-	mat4x4 ViewMatrix, ViewMatrixInverse;
+	ComponentCamera* curr_camera;
+	ComponentCamera* main_camera;
+	float3 orbitate_around = float3::zero;
 };

@@ -35,6 +35,67 @@ bool ModuleScene::Start()
 	return ret;
 }
 
+update_status ModuleScene::PreUpdate(float dt)
+{
+	//[TEST] Assigning textures
+  /*
+	if (root != nullptr) {
+		for (int i = 0; i < root->children.size(); i++) {
+			for (int k = 0; k < root->children[i]->children.size(); k++) {
+				std::vector<Component*> ms = root->children[i]->children[k]->FindComponents(componentType_Material);
+				if (ms.empty()) {
+					root->children[i]->children[k]->AddComponent(componentType_Material);
+					ms = root->children[i]->children[k]->FindComponents(componentType_Material);
+				}
+				for (int it = 0; it < ms.size(); it++) {
+					ComponentMaterial* mat = (ComponentMaterial*)ms[it];
+					if (!App->res->textures.empty()) {
+						if (mat->GetTextureChannel(texType_Diffuse) == nullptr)
+							mat->SetTextureChannel(texType_Diffuse, App->res->textures.back());
+					}
+				}
+			}
+		}
+	}
+	//!_[TEST] Assigning textures*/
+  SetAllGlobalTransforms();
+	return UPDATE_CONTINUE;
+}
+
+// Update
+update_status ModuleScene::Update(float dt)
+{
+	if (root != nullptr)
+		root->Update(dt);
+
+	float3 corners[8];
+	ComponentCamera* tmp = (ComponentCamera*)App->camera->curr_camera;
+	tmp->GetCorners(corners);
+	App->renderer3D->debugger->DrawFrustum(corners);
+
+	for (std::vector<GameObject*>::iterator it = root->children.begin(); it < root->children.end(); ++it)
+	{
+		for (std::vector<GameObject*>::iterator sub_it = (*it)->children.begin(); sub_it < (*it)->children.end(); ++sub_it)
+		{
+			float3 center = float3::zero, size = float3::zero;
+			int i = (*sub_it)->aabbs.size();
+			int a = 3;
+			for (std::vector<AABB>::iterator iitt = (*sub_it)->aabbs.begin(); iitt < (*sub_it)->aabbs.end(); iitt++)
+			{
+				AABB aabb = (*iitt);
+				center = aabb.CenterPoint();
+				size = aabb.Size();
+				App->renderer3D->debugger->DrawAABB(center, size);
+				int i = (*sub_it)->components.size();
+				CollisionType type = App->camera->curr_camera->GetFrustum().ContainsBox((*iitt));
+				if (type != OUTSIDE)
+					App->renderer3D->todraw.push_back((*sub_it));
+			}
+		}
+	}
+	return UPDATE_CONTINUE;
+}
+
 // Load assets
 bool ModuleScene::CleanUp()
 {
@@ -101,23 +162,6 @@ void ModuleScene::SetAllToGlobalTransforms()
 	if (root != nullptr && !root->children.empty()) {
 		root->SetToGlobalTransform();
 	}
-}
-
-update_status ModuleScene::PreUpdate(float dt)
-{
-	
-	//SetAllToGlobalTransforms();
-
-	return UPDATE_CONTINUE;
-}
-
-// Update
-update_status ModuleScene::Update(float dt)
-{
-	if(root != nullptr)
-		root->Update(dt);
-
-	return UPDATE_CONTINUE;
 }
 
 update_status ModuleScene::PostUpdate(float dt)

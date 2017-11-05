@@ -12,7 +12,7 @@
 // Recommended scale is 1.0f == 1 meter, no less than 0.2 objects
 #define GRAVITY btVector3(0.0f, -10.0f, 0.0f) 
 
-class DebugDrawer;
+//class DebugDrawer;
 struct PhysBody3D;
 struct PhysVehicle3D;
 struct VehicleInfo;
@@ -33,7 +33,7 @@ public:
 	void Draw();
 
 	Sphere* AddSphere(const float &x, const float &y, const float &z, float radius, bool visible = true);
-	AABB* AddAABB(const vec center, const vec size, bool visible = true);
+	AABB* AddAABB(const float3 center, const float3 size, bool visible = true);
 	OBB* AddOBB();
 	Line* AddLine();
 	LineSegment AddLineSegment();
@@ -92,10 +92,10 @@ private:
 	list<btTypedConstraint*> constraints;
 	list<PhysVehicle3D*> vehicles;
 	*/
-	DebugDrawer*						debug_draw;
+	//DebugDrawer*						debug_draw;
 };
 
-
+/*
 class DebugDrawer : public btIDebugDraw
 {
 public:
@@ -112,4 +112,4 @@ public:
 	DebugDrawModes mode;
 	bLine line;
 	Primitive point;
-};
+};*/

@@ -28,6 +28,10 @@ GameObject::~GameObject()
 {
 }
 
+void GameObject::Start()
+{
+}
+
 void GameObject::Update(float dt)
 {
 	if (!components.empty()) {
@@ -43,18 +47,17 @@ void GameObject::Update(float dt)
 				(*it)->Update(dt);
 			}
 		}
-	}
+	}	
 }
 
 void GameObject::CleanUp()
 {
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
-			if ((*it) != nullptr) {
+			/*if ((*it) != nullptr) {
 				(*it)->CleanUp();
-				//delete[] (*it); /// -> [EXAMINATE] TRIGGERS AN EXCEPTION (posible deleting what is already deleted [but it shouldn't])
+				//delete[] (*it); /// -> [EXAMINATE] TRIGGERS AN EXCEPTION (posible deleting what is already deleted [but it shouldn't])*/
 			}
-		}
 		components.clear();
 	}
 
@@ -64,11 +67,22 @@ void GameObject::CleanUp()
 		for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
 			if ((*it) != nullptr) {
 				(*it)->CleanUp(); 
-				delete[] (*it);
+				//delete[] (*it); // We have children inside children now R�P --> are we deleting something already deleted??
 			}
 		}
 		children.clear();
 	}
+
+	/*if (!aabbs.empty()) {
+		for (std::vector<AABB*>::iterator it = aabbs.begin(); it != aabbs.end(); it++) {
+			if ((*it) != nullptr) {
+				delete[](*it);
+			}
+		}
+		children.clear();
+	}*/
+
+	aabbs.clear();
 
 }
 
@@ -87,12 +101,19 @@ std::vector<Component*> GameObject::FindComponents(componentType type)
 	return ret;
 }
 
-Component * GameObject::AddComponent(const componentType type, Component * componentPointer)
+Component * GameObject::AddComponent(const componentType type, Component * componentPointer, bool fromReference)
 {
 	Component* newComponent = nullptr;
 
-	// Create the New Component
-	switch (type) {
+	if (!fromReference && componentPointer!= nullptr)
+	{
+		componentPointer->parent = this;
+		components.push_back(componentPointer);
+		componentPointer->Start();
+	}
+	else {
+		// Create the New Component
+		switch (type) {
 		case componentType_Mesh:
 			newComponent = new ComponentMesh(this);
 			break;
@@ -104,36 +125,45 @@ Component * GameObject::AddComponent(const componentType type, Component * compo
 			if (this->FindComponents(type).empty())
 				newComponent = new ComponentTransform(this);
 			break;
-	}
-
-	// Copy the 'Reference' Component into the New Component
-	if (componentPointer != nullptr && newComponent != nullptr) {
-		assert(componentPointer->type == newComponent->type);
-
-		uint bufferSize = 0;
-
-		switch (newComponent->type) {
-		case componentType_Mesh:
-			bufferSize = sizeof(ComponentMesh);
-			break;
-		case componentType_Material:
-			bufferSize = sizeof(ComponentMaterial);
-			break;
-		case componentType_Transform:
-			bufferSize = sizeof(ComponentTransform);
+		case componentType_Camera:
+			if (this->FindComponents(type).empty())
+				newComponent = new ComponentCamera(this);
 			break;
 		}
 
-		if (bufferSize != 0) {
-			memcpy(newComponent, componentPointer, bufferSize);
+		// Copy the 'Reference' Component into the New Component
+		if (componentPointer != nullptr && newComponent != nullptr) {
+			assert(componentPointer->type == newComponent->type);
+
+			uint bufferSize = 0;
+
+			switch (newComponent->type) {
+			case componentType_Mesh:
+				bufferSize = sizeof(ComponentMesh);
+				break;
+			case componentType_Material:
+				bufferSize = sizeof(ComponentMaterial);
+				break;
+			case componentType_Transform:
+				bufferSize = sizeof(ComponentTransform);
+				break;
+			case componentType_Camera:
+				bufferSize = sizeof(ComponentCamera);
+				break;
+			}
+
+			if (bufferSize != 0) {
+				memcpy(newComponent, componentPointer, bufferSize);
+			}
+		}
+
+		if (newComponent != nullptr) {
+			newComponent->parent = this;
+			components.push_back(newComponent);
+			newComponent->Start();
 		}
 	}
 
-	if (newComponent != nullptr) {
-		newComponent->parent = this;
-		components.push_back(newComponent);
-	}
-	
 	return newComponent;
 }
 
@@ -159,6 +189,32 @@ void GameObject::DestroyComponent(Component * componentPointer)
 		}
 	}
 }
+
+
+void GameObject::CreateAABBFromMesh(ComponentMesh* mesh)
+{
+
+	if (mesh != nullptr) {
+
+		uint num_vert = 0;
+		float3 pointArray = float3::zero;
+
+		AABB aabb;
+
+		aabb.SetNegativeInfinity();
+		aabb.Enclose((float3*)mesh->vertices, mesh->num_vertices);
+		if (GetParent() != nullptr) {
+			std::vector<Component*> cmp_tr = GetParent()->FindComponents(componentType_Transform);
+			if (cmp_tr.size() > 0 && cmp_tr[0] != nullptr)
+			{
+				ComponentTransform* tmp = (ComponentTransform*)cmp_tr[0];
+				OBB obb = aabb.Transform(tmp->GetWorldMatrix());
+				aabb = obb.MinimalEnclosingAABB();
+				this->aabbs.push_back(aabb);
+				}
+			}
+	}
+
 
 void GameObject::SetToGlobalTransform()
 {

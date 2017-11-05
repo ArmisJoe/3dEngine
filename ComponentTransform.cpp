@@ -20,13 +20,28 @@ ComponentTransform::ComponentTransform(GameObject* argparent) : Component(compon
 	scale = { 1, 1, 1 };
 }
 
-ComponentTransform::ComponentTransform(componentType argtype, GameObject * argparent) : Component(argtype, argparent)
+ComponentTransform::ComponentTransform(componentType argtype, GameObject * argparent) : Component(componentType_Transform, argparent)
 {
 	name = "Transform";
 	numMax = 1;
 	position = { 0, 0, 0 };
 	rotation = { 0, 0, 0, 0 };
 	scale = { 1, 1, 1 };
+}
+
+ComponentTransform::ComponentTransform(GameObject * argparent, float3 position, Quat rotation, float3 scale) : Component(componentType_Transform, argparent)
+{
+	this->position = position; this->rotation = rotation; this->scale = scale;
+}
+
+
+void ComponentTransform::UpdateMatrix() {	
+	WorldMatrix = float4x4::FromTRS(position, rotation, scale);
+	for (std::vector<GameObject*>::iterator it = GetParent()->children.begin(); it != GetParent()->children.end(); it++)
+	{
+		ComponentTransform* child_transform = (ComponentTransform*)(*it)->FindComponents(componentType_Transform)[0];
+		child_transform->UpdateMatrix();
+	}
 }
 
 void ComponentTransform::OnEditor()

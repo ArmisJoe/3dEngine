@@ -17,9 +17,14 @@ ComponentMesh::ComponentMesh(GameObject* argparent) : Component(componentType_Me
 	name = "Mesh";
 }
 
-ComponentMesh::ComponentMesh(componentType argtype, GameObject * argparent) : Component(argtype, argparent)
+ComponentMesh::ComponentMesh(componentType argtype, GameObject * argparent) : Component(componentType_Mesh, argparent)
 {
 	name = "Mesh";
+}
+
+void ComponentMesh::Start()
+{
+	GetParent()->CreateAABBFromMesh(this);
 }
 
 void ComponentMesh::Update(float dt)
@@ -35,7 +40,6 @@ void ComponentMesh::Update(float dt)
 		}
 		Draw(trans, mat);
 	}
-
 }
 
 void ComponentMesh::Draw(const ComponentTransform* trans, const ComponentMaterial * mat)
@@ -77,6 +81,7 @@ void ComponentMesh::Draw(const ComponentTransform* trans, const ComponentMateria
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	if(trans != nullptr)

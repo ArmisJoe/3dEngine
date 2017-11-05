@@ -28,13 +28,13 @@ ModulePhysics3D::ModulePhysics3D(Application* app, bool start_enabled) : Module(
 	broad_phase = new btDbvtBroadphase();
 	solver = new btSequentialImpulseConstraintSolver();
 */
-	debug_draw = new DebugDrawer();
+	//debug_draw = new DebugDrawer();
 }
 
 // Destructor
 ModulePhysics3D::~ModulePhysics3D()
 {
-	delete debug_draw;
+	//delete debug_draw;
 	/*
 	delete solver;
 	delete broad_phase;
@@ -370,7 +370,7 @@ Sphere * ModulePhysics3D::AddSphere(const float &x, const float &y, const float 
 	return s;
 }
 
-AABB * ModulePhysics3D::AddAABB(const vec center, const vec size, bool visible)
+AABB * ModulePhysics3D::AddAABB(const float3 center, const float3 size, bool visible)
 {
 	AABB* ret = nullptr;
 
@@ -380,7 +380,7 @@ AABB * ModulePhysics3D::AddAABB(const vec center, const vec size, bool visible)
 	aabbs.push_back(ret);
 
 	bCube* bAABB = new bCube(size.z, size.x, size.y);
-	vec position;
+	float3 position;
 	//position = ret->CornerPoint(2); // Corner (-1, +1, -1)
 	position = ret->CenterPoint();
 	bAABB->SetPos(position.x, position.y, position.z);
@@ -606,7 +606,7 @@ void ModulePhysics3D::AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, c
 
 */
 // =============================================
-
+/*
 void DebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color)
 {
 	line.origin.Set(from.getX(), from.getY(), from.getZ());
@@ -642,3 +642,4 @@ int	 DebugDrawer::getDebugMode() const
 {
 	return mode;
 }
+*/

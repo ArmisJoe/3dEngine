@@ -10,6 +10,8 @@
 
 #include "ComponentMesh.h"
 #include "ComponentMaterial.h"
+#include "ModuleCamera3D.h"
+#include "DebugDraw.h"
 
 //
 //#include "glew-2.1.0\include\GL\glew.h"
@@ -30,22 +32,19 @@ public:
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
 	bool CleanUp();
-
 	void OnResize(const int width, const int height);
-
 	void StdGLAttributes() const;
 	void CustomGLAttributes() const;
-
 	void DrawConfigPanel();
+private:
 
 	void DrawMesh(ComponentMesh* m, ComponentMaterial* mat = nullptr);
-
+	uint objects_drawn = 0;
 public:
 
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
-	mat3x3 NormalMatrix;
-	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
+	DebugDraw* debugger;
 
 	bool enable_depth_test = true;
 	bool enable_cull_face = true;
@@ -55,5 +54,6 @@ public:
 	bool enable_wireframe = false;
 	float light_model_ambient = 0.6f;
 	float material_ambient = 1.0f;
-
+	mat4x4 ProjectionMatrix;
+	vector<GameObject*> todraw;
 };

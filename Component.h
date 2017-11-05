@@ -11,6 +11,7 @@ enum componentType {
 	componentType_Mesh = 0,
 	componentType_Material,
 	componentType_Transform,
+	componentType_Camera,
 	// Unknown ALLWAYS Last
 	componentType_Unknown
 };
@@ -50,6 +51,7 @@ protected:
 	uint numMax = NULL;
 public:
 	virtual componentType GetType() const { return type; }
+	virtual void Start() {}
 	virtual void Update(float dt) {}
 	virtual void CleanUp() {}
 

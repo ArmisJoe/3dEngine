@@ -135,7 +135,7 @@ update_status ModuleEditorUI::Update(float dt)
 					App->physics->AddSphere(0, 0, 0, 0.4f);
 				}
 				if (ImGui::Button("AABB")) {
-					App->physics->AddAABB(vec(0, 0, 0), vec(1, 1, 1));
+					App->physics->AddAABB(float3(0, 0, 0), float3(1, 1, 1));
 				}
 				ImGui::EndMenu();
 			}
@@ -289,6 +289,9 @@ void ModuleEditorUI::DrawConfigPanels()
 
 		// TExtures
 		App->tex->DrawConfigPanel();
+
+		// Camera
+		App->camera->DrawConfigPanel();
 		//Hardware
 		//App->hardware->DrawConfigPanel(
 
