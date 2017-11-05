@@ -50,11 +50,10 @@ void GameObject::CleanUp()
 {
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
-			if ((*it) != nullptr) {
+			/*if ((*it) != nullptr) {
 				(*it)->CleanUp();
-				//delete[] (*it); /// -> [EXAMINATE] TRIGGERS AN EXCEPTION (posible deleting what is already deleted [but it shouldn't])
+				//delete[] (*it); /// -> [EXAMINATE] TRIGGERS AN EXCEPTION (posible deleting what is already deleted [but it shouldn't])*/
 			}
-		}
 		components.clear();
 	}
 
@@ -64,7 +63,7 @@ void GameObject::CleanUp()
 		for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
 			if ((*it) != nullptr) {
 				(*it)->CleanUp(); 
-			//	delete[] (*it); // We have children inside children now RÎP --> are we deleting something already deleted??
+				//delete[] (*it); // We have children inside children now RÎP --> are we deleting something already deleted??
 			}
 		}
 		children.clear();
@@ -78,6 +77,8 @@ void GameObject::CleanUp()
 		}
 		children.clear();
 	}*/
+
+	aabbs.clear();
 
 }
 
@@ -207,41 +208,6 @@ void GameObject::CreateAABBFromMesh(ComponentMesh* mesh)
 				this->aabbs.push_back(aabb);
 				}
 			}
-			/*aabb->
-			GetMesh()->box.SetNegativeInfinity();
-			GetMesh()->box.Enclose((float3*)GetMesh()->vertices, GetMesh()->num_vertices);
-			math::OBB obb = GetMesh()->box.Transform(GetGameObject()->GetGlobalTransfomMatrix());
-			GetMesh()->box = obb.MinimalEnclosingAABB();*/
-
-
-		/*	num_vert += curr_mesh->num_vertices;
-
-			float3 curr_it;
-			uint c = 0;
-			for (uint i = curr_mesh->num_vertices * 3; i > 0; i--)
-			{
-				switch (i % 3) {
-				case 0:
-
-					if (c != 0)
-						pointArray.Add(curr_it);
-				
-					curr_it.x = curr_mesh->vertices[c];
-					break;
-				case 1:
-					curr_it.y = curr_mesh->vertices[c];
-					break;
-				case 2:
-					curr_it.z = curr_mesh->vertices[c];
-					break;
-				}
-				c++;
-			}
-			pointArray.Add(curr_it);*/
-		
-
-		//aabb->SetFrom(&pointArray, num_vert);
-		//this->aabb = aabb;
 	}
 
 }

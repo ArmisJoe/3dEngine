@@ -29,7 +29,6 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 	}
 	else {
 		new_node->SetParent(App->scene->GetRoot());
-		new_node->GetParent()->children.push_back(new_node);
 	}
 
 	aiMaterial** materials = nullptr;

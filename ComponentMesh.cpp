@@ -40,7 +40,7 @@ void ComponentMesh::Update(float dt)
 
 void ComponentMesh::Draw(const ComponentMaterial * mat)
 {
-	glEnableClientState(GL_VERTEX_ARRAY);
+	/*glEnableClientState(GL_VERTEX_ARRAY);
 
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertices);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
@@ -69,7 +69,7 @@ void ComponentMesh::Draw(const ComponentMaterial * mat)
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);*/
 }
 
 void ComponentMesh::OnEditor()

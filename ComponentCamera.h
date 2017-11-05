@@ -32,11 +32,11 @@ public:
 	void MoveForwards(const float &movement);
 	void MoveBackwards(const float &movement);
 	void Rotate(const float& mov_y, const float& mov_z);
-
+	bool SetFov(float argFOV);
 private:
 	void UpdateProjection();
 	void UpdatePosition();
-	bool SetFov(float argFOV);
+	
 
 	Frustum frustum;
 	float FOV;

@@ -77,53 +77,53 @@ bool ModuleRenderer3D::Init()
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 
-		//Check for error
-		error = glGetError();
-		if (error != GL_NO_ERROR)
-		{
-			//			LOG("Error initializing OpenGL! %s\n", gluErrorString(error));
-			ret = false;
-		}
+//Check for error
+error = glGetError();
+if (error != GL_NO_ERROR)
+{
+	//			LOG("Error initializing OpenGL! %s\n", gluErrorString(error));
+	ret = false;
+}
 
-		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-		glClearDepth(1.0f);
+glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+glClearDepth(1.0f);
 
-		//Initialize clear color
-		glClearColor(0.f, 0.f, 0.f, 1.f);
+//Initialize clear color
+glClearColor(0.f, 0.f, 0.f, 1.f);
 
-		//Check for error
-		error = glGetError();
-		if (error != GL_NO_ERROR)
-		{
-			//			LOG("Error initializing OpenGL! %s\n", gluErrorString(error));
-			ret = false;
-		}
+//Check for error
+error = glGetError();
+if (error != GL_NO_ERROR)
+{
+	//			LOG("Error initializing OpenGL! %s\n", gluErrorString(error));
+	ret = false;
+}
 
-		GLfloat LightModelAmbient[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, LightModelAmbient);
+GLfloat LightModelAmbient[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+glLightModelfv(GL_LIGHT_MODEL_AMBIENT, LightModelAmbient);
 
-		lights[0].ref = GL_LIGHT0;
-		lights[0].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
-		lights[0].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
-		lights[0].SetPos(0.0f, 0.0f, 0.0f);
-		lights[0].Init();
+lights[0].ref = GL_LIGHT0;
+lights[0].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
+lights[0].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
+lights[0].SetPos(0.0f, 0.0f, 0.0f);
+lights[0].Init();
 
-		GLfloat MaterialAmbient[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MaterialAmbient);
+GLfloat MaterialAmbient[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MaterialAmbient);
 
-		GLfloat MaterialDiffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MaterialDiffuse);
+GLfloat MaterialDiffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MaterialDiffuse);
 
-		enable_depth_test = true;
+enable_depth_test = true;
 
-		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_CULL_FACE);
-		lights[0].Active(true);
-		glEnable(GL_LIGHTING);
-		glEnable(GL_COLOR_MATERIAL);
-		glEnable(GL_TEXTURE_2D);
+glEnable(GL_DEPTH_TEST);
+glEnable(GL_CULL_FACE);
+lights[0].Active(true);
+glEnable(GL_LIGHTING);
+glEnable(GL_COLOR_MATERIAL);
+glEnable(GL_TEXTURE_2D);
 
-		glShadeModel(GL_SMOOTH);
+glShadeModel(GL_SMOOTH);
 
 	}
 
@@ -176,6 +176,24 @@ update_status ModuleRenderer3D::Update(float dt)
 	//	}
 	//}
 
+	if (!todraw.empty())
+	{
+		for (std::vector<GameObject*>::iterator it = todraw.begin(); it != todraw.end(); ++it) {
+			std::vector<Component*> ms = (*it)->FindComponents(componentType_Mesh);
+			for (std::vector<Component*>::iterator m_it = ms.begin(); m_it != ms.end(); m_it++) {
+				ComponentMesh* m = (ComponentMesh*)(*m_it);
+				if (m != nullptr)
+				{
+					ComponentMaterial* mat = (ComponentMaterial*)(*it)->FindComponents(componentType_Material).front();
+					DrawMesh(m, mat);
+				}
+			}
+		}
+		objects_drawn = todraw.size();
+
+		todraw.clear();
+	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -219,6 +237,8 @@ void ModuleRenderer3D::OnResize(const int width, const int height)
 	glLoadMatrixf(&ProjectionMatrix);
 
 	glMatrixMode(GL_MODELVIEW);
+
+	App->camera->main_camera->SetAspectRatio(width, height);
 }
 
 void ModuleRenderer3D::StdGLAttributes() const
@@ -265,6 +285,10 @@ void ModuleRenderer3D::DrawConfigPanel()
 {
 	if (ImGui::CollapsingHeader("Render")) {
 		//Check Boxes
+		string log = "Objects being drawn: " + to_string(objects_drawn);
+
+		ImGui::Text(log.c_str());
+
 		if (ImGui::Checkbox("Depth Test", &enable_depth_test)) {
 			enable_depth_test ? glEnable(GL_DEPTH_TEST) : glDisable(GL_DEPTH_TEST);
 		}

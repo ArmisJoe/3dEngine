@@ -36,7 +36,7 @@ ComponentCamera::ComponentCamera(GameObject * argparent) : Component(componentTy
 
 
 	//frustum.Type = FrustumType::PerspectiveFrustum;
-	frustum.pos = float3::zero;
+	frustum.pos = float3{ 0.0f, 0.0f, 30.f };
 	frustum.front = -float3::unitZ;
 	frustum.up = float3::unitY;
 }
@@ -55,7 +55,7 @@ ComponentCamera::ComponentCamera(componentType argtype, GameObject * argparent) 
 
 
 	//frustum.Type = FrustumType::PerspectiveFrustum;
-	frustum.pos = float3::zero;
+	frustum.pos = float3{ 0.0f, 0.0f, 30.f };
 	frustum.front = -float3::unitZ;
 	frustum.up = float3::unitY;
 }

@@ -284,6 +284,9 @@ void ModuleEditorUI::DrawConfigPanels()
 
 		// TExtures
 		App->tex->DrawConfigPanel();
+
+		// Camera
+		App->camera->DrawConfigPanel();
 		//Hardware
 		//App->hardware->DrawConfigPanel(
 

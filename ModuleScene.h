@@ -4,7 +4,7 @@
 #include "Primitive.h"
 #include "PhysBody3D.h"
 #include "ModulePlayer.h"
-
+#include "ComponentCamera.h"
 #include "GameObject.h"
 
 class ModuleScene : public Module
@@ -27,7 +27,6 @@ public:
 		return root;
 	}
 	void RemoveAllGameObject();
-
 private:
 	GameObject* root = nullptr;
 };

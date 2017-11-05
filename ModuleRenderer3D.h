@@ -32,16 +32,14 @@ public:
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
 	bool CleanUp();
-
 	void OnResize(const int width, const int height);
-
 	void StdGLAttributes() const;
 	void CustomGLAttributes() const;
-
 	void DrawConfigPanel();
+private:
 
 	void DrawMesh(ComponentMesh* m, ComponentMaterial* mat = nullptr);
-
+	uint objects_drawn = 0;
 public:
 
 	Light lights[MAX_LIGHTS];
@@ -57,4 +55,5 @@ public:
 	float light_model_ambient = 0.6f;
 	float material_ambient = 1.0f;
 	mat4x4 ProjectionMatrix;
+	vector<GameObject*> todraw;
 };

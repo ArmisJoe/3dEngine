@@ -49,65 +49,8 @@ update_status ModuleCamera3D::Update(float dt)
 		MoveCamera(dt);
 		RotateCamera(dt);
 	}
-	/*else
-		if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT) {
-			if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT)
-				//RotateFromReference();
-		}*/
-
-	// Restart camera ----------------
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_UP)
-		main_camera->SetPos(math::float3(0, 0, 0));
-	//	SetCamera(vec3(0, 0, 0), 15);
-
-	// Recalculate matrix -------------
-	/*float3 corners[8];
-	main_camera->GetCorners(corners);
-	App->renderer3D->debugger->DrawFrustum(corners);*/
-	//	DrawLinesList(lines, s, 5, colors);
 
 	return UPDATE_CONTINUE;
-}
-
-// -----------------------------------------------------------------
-void ModuleCamera3D::Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference)
-{
-	this->Position = Position;
-	this->Reference = Reference;
-
-	Z = normalize(Position - Reference);
-	X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
-	Y = cross(Z, X);
-
-	if (!RotateAroundReference)
-	{
-		this->Reference = this->Position;
-		this->Position += Z * 0.05f;
-	}
-
-	CalculateViewMatrix();
-}
-
-// -----------------------------------------------------------------
-void ModuleCamera3D::LookAt(const vec3 &Spot)
-{
-	Reference = Spot;
-
-	Z = normalize(Position - Reference);
-	X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
-	Y = cross(Z, X);
-
-	CalculateViewMatrix();
-}
-
-
-// -----------------------------------------------------------------
-void ModuleCamera3D::Move(const vec3 &Movement)
-{
-	Position += Movement;
-	Reference += Movement;
-
-	CalculateViewMatrix();
 }
 
 // -----------------------------------------------------------------
@@ -118,6 +61,7 @@ float* ModuleCamera3D::GetViewMatrix()
 
 void ModuleCamera3D::FocusMesh(const float* vertices, const uint &num_vertices)
 {
+	/*
 	uint	y_test = 0;
 	float	highest_vertex_y = 0.0f, highest_vertex_x = 0.0f, highest_vertex_z = 0.0f;
 
@@ -166,17 +110,32 @@ void ModuleCamera3D::FocusMesh(const float* vertices, const uint &num_vertices)
 	}
 
 	vec3 midpoint = (closest_vertex + furthest_vertex) / 2;
-
-	LookAt(midpoint);
+	*/
+	//LookAt(midpoint);
 
 }
 
-// -----------------------------------------------------------------
-void ModuleCamera3D::CalculateViewMatrix()
+void ModuleCamera3D::LookAt(const float3 & spot)
 {
-	ViewMatrix = mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);
-	ViewMatrixInverse = inverse(ViewMatrix);
+	float3 direction = spot - main_camera->GetFrustum().pos;
+
+	float3x3 matrix = float3x3::LookAt(main_camera->GetFrustum().front, direction.Normalized(), main_camera->GetFrustum().up, float3::unitY);
+
+	main_camera->GetFrustum().front = matrix.MulDir(main_camera->GetFrustum().front).Normalized();
+	main_camera->GetFrustum().up = matrix.MulDir(main_camera->GetFrustum().up).Normalized();
 }
+
+void ModuleCamera3D::DrawConfigPanel()
+{
+	if (ImGui::CollapsingHeader("Camera")) {
+		float curr_fov = main_camera->GetFOV();
+		if (ImGui::SliderFloat("Set FOV (60 by default)", &curr_fov, 1.f, 200.f)) {
+			if (curr_fov != main_camera->GetFOV()) main_camera->SetFov(curr_fov);
+		}
+	}
+
+}
+
 
 void ModuleCamera3D::RotateCamera(float dt)
 {
@@ -186,39 +145,6 @@ void ModuleCamera3D::RotateCamera(float dt)
 	float dy = -App->input->GetMouseYMotion() * Sensitivity * dt;
 
 	main_camera->Rotate(dx, dy);
-}
-
-void ModuleCamera3D::RotateFromReference()
-{
-
-	Reference = vec3(0, 0, 0);
-
-	int dx = -App->input->GetMouseXMotion();
-	int dy = -App->input->GetMouseYMotion();
-
-	float Sensitivity = 0.25f;
-
-	Position -= Reference;
-
-	if (dx != 0)
-	{
-		float DeltaX = (float)dx * Sensitivity;
-		X = rotate(X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-		Y = rotate(Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-		Z = rotate(Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-
-	}
-
-	if (dy != 0)
-	{
-
-		float DeltaY = (float)dy * Sensitivity;
-
-		Y = rotate(Y, DeltaY, X);
-		Z = rotate(Z, DeltaY, X);
-
-	}
-	Position = Reference + Z * length(Position);
 }
 
 void ModuleCamera3D::MoveCamera(float dt)
@@ -241,11 +167,4 @@ void ModuleCamera3D::MoveCamera(float dt)
 void ModuleCamera3D::CameraZoom(float dt)
 {
 	main_camera->MoveForwards(App->input->GetMouseWheelMotion());
-}
-
-
-void ModuleCamera3D::SetCamera(const vec3& focus, const float& distance)
-{
-	Reference = focus;
-	Position = Reference + Z * distance;
 }
