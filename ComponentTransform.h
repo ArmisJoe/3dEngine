@@ -23,12 +23,10 @@ public:
 	Quat rotation;
 	float3 scale;
 	float4x4 WorldMatrix = float4x4::zero;
-private:
+public:
 	void UpdateMatrix();
 	float3 GlobalPosition;
 	Quat GlobalRotation;
 	float3 GlobalScale;
 private:
-	//float4x4 Matrix4x4;
-
 };

@@ -81,7 +81,7 @@ void ComponentTransform::OnEditor()
 
 float* ComponentTransform::GetMatrix4x4() const
 {
-	const float4x4 retMat = Matrix4x4.FromTRS(position, rotation, scale);
+	const float4x4 retMat = WorldMatrix.FromTRS(position, rotation, scale);
 
 	return retMat.Transposed().ptr();
 }

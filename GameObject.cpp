@@ -193,7 +193,6 @@ void GameObject::DestroyComponent(Component * componentPointer)
 
 void GameObject::CreateAABBFromMesh(ComponentMesh* mesh)
 {
-
 	if (mesh != nullptr) {
 
 		uint num_vert = 0;
@@ -211,9 +210,10 @@ void GameObject::CreateAABBFromMesh(ComponentMesh* mesh)
 				OBB obb = aabb.Transform(tmp->GetWorldMatrix());
 				aabb = obb.MinimalEnclosingAABB();
 				this->aabbs.push_back(aabb);
-				}
 			}
+		}
 	}
+}
 
 
 void GameObject::SetToGlobalTransform()

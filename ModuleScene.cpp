@@ -58,7 +58,7 @@ update_status ModuleScene::PreUpdate(float dt)
 		}
 	}
 	//!_[TEST] Assigning textures*/
-  SetAllGlobalTransforms();
+  SetAllToGlobalTransforms();
 	return UPDATE_CONTINUE;
 }
 
