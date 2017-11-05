@@ -10,6 +10,7 @@ public:
 	ComponentTransform();
 	ComponentTransform(GameObject* argparent);
 	ComponentTransform(componentType argtype, GameObject* argparent);
+	ComponentTransform(GameObject* argparent, float3 position, Quat rotation, float3 scale);
 	~ComponentTransform() {};
 public:
 	//void Update(float dt);

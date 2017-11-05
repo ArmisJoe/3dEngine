@@ -24,7 +24,7 @@ public:
 	//Scene
 	GameObject* LoadGeometry(const char* path, const unsigned int pprocess_flag = aiProcessPreset_TargetRealtime_MaxQuality);
 	//Nodes
-	GameObject* LoadNode(const aiNode* node, const aiScene* scene);
+	GameObject* LoadNode(const aiNode* node, const aiScene* scene, GameObject* parent = nullptr);
 	//Components
 	ComponentMesh* LoadMesh(const aiMesh* m);
 	ComponentMaterial* LoadMaterial(const aiMaterial* mat);

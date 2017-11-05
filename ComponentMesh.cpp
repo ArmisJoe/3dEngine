@@ -22,7 +22,7 @@ ComponentMesh::ComponentMesh(componentType argtype, GameObject * argparent) : Co
 
 void ComponentMesh::Start()
 {
-	GetParent()->CreateAABBFromMesh();
+	GetParent()->CreateAABBFromMesh(this);
 }
 
 void ComponentMesh::Update(float dt)
@@ -36,7 +36,6 @@ void ComponentMesh::Update(float dt)
 			Draw();
 		}
 	}
-
 }
 
 void ComponentMesh::Draw(const ComponentMaterial * mat)

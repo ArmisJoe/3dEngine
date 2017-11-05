@@ -15,12 +15,22 @@ ModuleAssimp::~ModuleAssimp()
 {
 }
 
-GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene)
+GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, GameObject* parent)
 {
 	assert(node != nullptr);
 	assert(scene != nullptr);
 
 	GameObject* new_node = new GameObject();
+
+	if (parent != nullptr)
+	{
+		new_node->SetParent(parent);
+		new_node->GetParent()->children.push_back(new_node);
+	}
+	else {
+		new_node->SetParent(App->scene->GetRoot());
+		new_node->GetParent()->children.push_back(new_node);
+	}
 
 	aiMaterial** materials = nullptr;
 	if (scene->HasMaterials())
@@ -28,11 +38,23 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene)
 	else
 		LOG("Scene without materials");
 
+	//Transform
+	if (!new_node->FindComponents(componentType_Transform).empty()) {
+		aiVector3D translation, scaling;
+		aiQuaternion rotation;
+		node->mTransformation.Decompose(scaling, rotation, translation);
+		float3 position = { translation.x, translation.y, translation.y };
+		Quat rotation2 = { rotation.x, rotation.y, rotation.z, rotation.w };
+		float3 scale = { scaling.x, scaling.y, scaling.z };
+		ComponentTransform* trans = new ComponentTransform(new_node,position, rotation2, scale);
+		new_node->AddComponent(componentType_Transform, trans, false);
+		}
+		
 	//LoadMeshes
 	for (uint i = 0; i < node->mNumMeshes; i++) {
 		//Mesh Load
 		ComponentMesh* new_mesh = LoadMesh(scene->mMeshes[node->mMeshes[i]]);
-		if(new_mesh != nullptr)
+		if (new_mesh != nullptr)
 			new_node->AddComponent(componentType_Mesh, new_mesh);
 		//Material Load
 		if (materials != nullptr && new_mesh != nullptr) {
@@ -43,23 +65,10 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene)
 		}
 	}
 
-	//Transform
-	if (!new_node->FindComponents(componentType_Transform).empty()) {
-		ComponentTransform* ref_transform = (ComponentTransform*)new_node->FindComponents(componentType_Transform)[0];
-		if (ref_transform != nullptr) {
-			aiVector3D translation, scaling;
-			aiQuaternion rotation;
-			node->mTransformation.Decompose(scaling, rotation, translation);
-			ref_transform->position = { translation.x, translation.y, translation.y };
-			ref_transform->rotation = { rotation.x, rotation.y, rotation.z, rotation.w };
-			ref_transform->scale = { scaling.x, scaling.y, scaling.z };
-		}
-	}
-		
 
 	//Node Children 'Recursivity'
 	for (uint i = 0; i < node->mNumChildren; i++) {
-		new_node->children.push_back(LoadNode(node->mChildren[i], scene));
+		new_node->children.push_back(LoadNode(node->mChildren[i], scene, new_node));
 	}
 
 	if(new_node != nullptr)

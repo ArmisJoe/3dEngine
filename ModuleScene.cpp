@@ -73,15 +73,12 @@ update_status ModuleScene::Update(float dt)
 		for (std::vector<GameObject*>::iterator sub_it = (*it)->children.begin(); sub_it < (*it)->children.end(); ++sub_it)
 		{
 			float3 center = float3::zero, size = float3::zero;
-			for (std::vector<AABB*>::iterator iitt = (*sub_it)->aabbs.begin(); iitt < (*sub_it)->aabbs.end(); iitt++)
+			for (std::vector<AABB>::iterator iitt = (*sub_it)->aabbs.begin(); iitt < (*sub_it)->aabbs.end(); iitt++)
 			{
-				AABB* aabb = (*iitt);
-				if (aabb != nullptr)
-				{
-					center = aabb->CenterPoint();
-					size = aabb->Size();
-					App->renderer3D->debugger->DrawAABB(center, size);
-				}
+				AABB aabb = (*iitt);
+				center = aabb.CenterPoint();
+				size = aabb.Size();
+				App->renderer3D->debugger->DrawAABB(center, size);
 				int i = (*sub_it)->components.size();
 				int c = 0;
 			}

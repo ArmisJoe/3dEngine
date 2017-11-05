@@ -29,6 +29,11 @@ ComponentTransform::ComponentTransform(componentType argtype, GameObject * argpa
 	scale = { 1, 1, 1 };
 }
 
+ComponentTransform::ComponentTransform(GameObject * argparent, float3 position, Quat rotation, float3 scale) : Component(componentType_Transform, argparent)
+{
+	this->position = position; this->rotation = rotation; this->scale = scale;
+}
+
 
 void ComponentTransform::UpdateMatrix() {	
 	WorldMatrix = float4x4::FromTRS(position, rotation, scale);
