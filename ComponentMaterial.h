@@ -14,6 +14,7 @@ public:
 	float h = 0;
 
 	const char* path = nullptr;
+	const char* name = nullptr;
 
 	int format = 0;
 };

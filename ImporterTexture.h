@@ -7,13 +7,17 @@
 #include "Importer.h"
 
 class ImporterTexture : public Importer {
+	friend class ModuleTextures;
 public:
 	ImporterTexture();
 	~ImporterTexture();
 public:
-	bool Import(const char* file, const char* path, std::string& output_file);
+	bool Import(const char* path, std::string& output_file);
 	bool Import(const void* buffer, uint size, std::string& output_file);
 	bool Load(const char* exported_file);
+protected:
+	int clamp_type = clampingTexType_ClampRepeat;
+	int interpolation_type = interpolationTexType_Linear;
 };
 
 #endif // !__IMPORTERTEXTURE_H__

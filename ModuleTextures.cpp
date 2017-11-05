@@ -3,6 +3,8 @@
 
 #include "Application.h"
 
+#include "HelperFoos.h"
+
 #include "glew-2.1.0\include\GL\glew.h"
 
 #include "Devil\include\il.h"
@@ -38,15 +40,21 @@ bool ModuleTextures::Init()
 	clamping_str = "Clamp to Edge\0Repeat\0Mirrored Repeat\0";
 	interpolate_str = "Nearest\0Linear\0";
 
+	importer = new ImporterTexture();
+
 	return true;
 }
 
 bool ModuleTextures::CleanUp()
 {
+
+	if(importer != nullptr)
+		delete importer;
+
 	return true;
 }
 
-Texture* ModuleTextures::LoadTexture(const char * path)
+Texture* ModuleTextures::LoadRawTexture(const char * path)
 {
 	uint textureID = 0;
 	ILuint imageID;
@@ -82,6 +90,8 @@ Texture* ModuleTextures::LoadTexture(const char * path)
 			new_tex->w = ilGetInteger(IL_IMAGE_WIDTH);
 			new_tex->h = ilGetInteger(IL_IMAGE_HEIGHT);
 			new_tex->format = ilGetInteger(IL_IMAGE_FORMAT);
+			new_tex->path = path;
+			new_tex->name = GetFileFromPath(path).c_str();
 
 			//Clamping Method
 			GLint clampParam;
@@ -140,6 +150,28 @@ Texture* ModuleTextures::LoadTexture(const char * path)
 	LOG("Texture Load End:\n\t%s", path);
 
 	return new_tex;
+}
+
+bool ModuleTextures::ImportTexture(const char * path, std::string& output_file)
+{
+	bool ret = false;
+
+	std::string output_file;
+	importer->clamp_type = clamp_type;
+	importer->interpolation_type = interpolation_type;
+
+	ret = importer->Import(path, output_file);
+
+	return ret;
+}
+
+Texture * ModuleTextures::LoadDDSTexture(const char * path)
+{
+	Texture* tex = nullptr;
+
+	//App->fs->
+
+	return tex;
 }
 
 void ModuleTextures::DrawConfigPanel()

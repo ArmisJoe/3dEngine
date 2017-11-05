@@ -8,7 +8,7 @@ ImporterMesh::~ImporterMesh()
 {
 }
 
-bool ImporterMesh::Import(const char * file, const char * path, std::string & output_file)
+bool ImporterMesh::Import(const char * path, std::string & output_file)
 {
 	bool ret = false;
 
