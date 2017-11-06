@@ -3,7 +3,7 @@
 #include "Globals.h"
 #include "Primitive.h"
 
-#include "src\MathGeoLib.h"
+#include "MathGeoLib\MathGeoLib.h"
 
 #include "Bullet/include/btBulletDynamicsCommon.h"
 

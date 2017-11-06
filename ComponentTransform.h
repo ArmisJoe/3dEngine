@@ -3,7 +3,7 @@
 #include "Component.h"
 
 #include "glmath.h"
-#include "src\MathGeoLib.h"
+#include "MathGeoLib\MathGeoLib.h"
 
 class ComponentTransform : public Component {
 public:

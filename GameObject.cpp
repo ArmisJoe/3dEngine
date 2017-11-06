@@ -192,7 +192,7 @@ void GameObject::DestroyComponent(Component * componentPointer)
 void GameObject::CreateAABBFromMesh(ComponentMesh* mesh)
 {
 	if (mesh != nullptr) {
-		std::vector<Component*> nana = GetParent()->FindComponents(componentType_Mesh);
+	//	std::vector<Component*> nana = GetParent()->FindComponents(componentType_Mesh);
 
 		uint num_vert = 0;
 		float3 pointArray = float3::zero;
@@ -202,7 +202,7 @@ void GameObject::CreateAABBFromMesh(ComponentMesh* mesh)
 		tmpAABB.SetNegativeInfinity();
 		tmpAABB.Enclose((float3*)mesh->vertices, mesh->num_vertices);
 		if (GetParent() != nullptr) {
-			std::vector<Component*> cmp_tr = GetParent()->FindComponents(componentType_Transform);
+			std::vector<Component*> cmp_tr = FindComponents(componentType_Transform);
 			if (cmp_tr.size() > 0 && cmp_tr[0] != nullptr)
 			{
 				ComponentTransform* tmp = (ComponentTransform*)cmp_tr.back();

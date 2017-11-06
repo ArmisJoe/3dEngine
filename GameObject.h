@@ -2,7 +2,7 @@
 #ifndef __GAMEOBJECT_H__
 #define __GAMEOBJECT_H__
 
-#include "src\MathGeoLib.h"
+#include "MathGeoLib\MathGeoLib.h"
 #include "glmath.h"
 #include <vector>
 #include <string>

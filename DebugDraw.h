@@ -1,6 +1,6 @@
 #pragma once
 
-#include "src\MathGeoLib.h"
+#include "MathGeoLib\MathGeoLib.h"
 
 #include "Color.h"
 

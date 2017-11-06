@@ -3,9 +3,9 @@
 #include "PhysBody3D.h"
 #include "ModuleCamera3D.h"
 
-#include "src\MathGeoLib.h"
+#include "MathGeoLib\MathGeoLib.h"
 #include "glmath.h"
-#include "src\Geometry\Frustum.h"
+#include "MathGeoLib\Geometry\Frustum.h"
 
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {

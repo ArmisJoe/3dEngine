@@ -12,7 +12,7 @@
 #include "imgui_impl_sdl.h"
 #include "SDL/include/SDL_opengl.h"
 
-#include "src\MathGeoLib.h"
+#include "MathGeoLib\MathGeoLib.h"
 
 class Module;
 class Application;
