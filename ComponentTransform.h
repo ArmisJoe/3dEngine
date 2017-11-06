@@ -15,7 +15,7 @@ public:
 public:
 	//void Update(float dt);
 	void OnEditor();
-	float4x4 GetWorldMatrix() { UpdateMatrix(); return WorldMatrix; }
+	float4x4 GetWorldMatrix() const;
 public:
 	float* GetMatrix4x4() const;
 public:
@@ -28,5 +28,6 @@ public:
 	float3 GlobalPosition;
 	Quat GlobalRotation;
 	float3 GlobalScale;
+	bool Transformed = false;
 private:
 };

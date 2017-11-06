@@ -82,8 +82,6 @@ void GameObject::CleanUp()
 		children.clear();
 	}*/
 
-	aabbs.clear();
-
 }
 
 std::vector<Component*> GameObject::FindComponents(componentType type)
@@ -194,22 +192,23 @@ void GameObject::DestroyComponent(Component * componentPointer)
 void GameObject::CreateAABBFromMesh(ComponentMesh* mesh)
 {
 	if (mesh != nullptr) {
+		std::vector<Component*> nana = GetParent()->FindComponents(componentType_Mesh);
 
 		uint num_vert = 0;
 		float3 pointArray = float3::zero;
 
-		AABB aabb;
+		AABB tmpAABB;
 
-		aabb.SetNegativeInfinity();
-		aabb.Enclose((float3*)mesh->vertices, mesh->num_vertices);
+		tmpAABB.SetNegativeInfinity();
+		tmpAABB.Enclose((float3*)mesh->vertices, mesh->num_vertices);
 		if (GetParent() != nullptr) {
 			std::vector<Component*> cmp_tr = GetParent()->FindComponents(componentType_Transform);
 			if (cmp_tr.size() > 0 && cmp_tr[0] != nullptr)
 			{
-				ComponentTransform* tmp = (ComponentTransform*)cmp_tr[0];
-				OBB obb = aabb.Transform(tmp->GetWorldMatrix());
-				aabb = obb.MinimalEnclosingAABB();
-				this->aabbs.push_back(aabb);
+				ComponentTransform* tmp = (ComponentTransform*)cmp_tr.back();
+				OBB obb = tmpAABB.Transform(tmp->GetWorldMatrix());
+				tmpAABB = obb.MinimalEnclosingAABB();
+				aabb = tmpAABB;
 			}
 		}
 	}

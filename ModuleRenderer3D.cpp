@@ -5,6 +5,7 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #include "ComponentMesh.h"
+#include "ComponentTransform.h"
 //#include "glew-2.1.0\include\GL\glew.h"
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
@@ -187,7 +188,11 @@ update_status ModuleRenderer3D::Update(float dt)
 					ComponentMaterial* mat = nullptr;
 					if (!(*it)->FindComponents(componentType_Material).empty())
 						mat = (ComponentMaterial*)(*it)->FindComponents(componentType_Material).front();
-					DrawMesh(m, mat);
+
+					ComponentTransform* trans = nullptr;
+					if (!(*it)->FindComponents(componentType_Transform).empty())
+						trans = (ComponentTransform*)(*it)->FindComponents(componentType_Transform).front();
+					DrawMesh(trans, m, mat);
 				}
 			}
 		}
@@ -324,9 +329,52 @@ void ModuleRenderer3D::DrawConfigPanel()
 	}
 }
 
-void ModuleRenderer3D::DrawMesh(ComponentMesh* m, ComponentMaterial* mat)
+void ModuleRenderer3D::DrawMesh(ComponentTransform* trans, ComponentMesh* m, ComponentMaterial* mat)
 {
+	glEnableClientState(GL_VERTEX_ARRAY);
+	
+	if (trans != nullptr) {
+		glPushMatrix();
+		glMultMatrixf((GLfloat*)trans->GetMatrix4x4());
+	}
 
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glBindBuffer(GL_ARRAY_BUFFER, m->id_vertices);
+
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+
+	// Applying Material
+	if (mat != nullptr) {
+		//Apply UV if exist
+		if (m->num_UV != 0)
+		{
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+			glBindBuffer(GL_ARRAY_BUFFER, m->id_UV);
+			glTexCoordPointer(3, GL_FLOAT, 0, NULL);
+		}
+
+		//Diffuse Channel
+		if (mat->GetTextureChannel(texType_Diffuse) != nullptr)
+			glBindTexture(GL_TEXTURE_2D, (GLuint)mat->GetTextureChannel(texType_Diffuse)->id);
+
+	}
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m->id_indices);
+	glDrawElements(GL_TRIANGLES, m->num_indices, GL_UNSIGNED_INT, NULL);
+
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	if (trans != nullptr)
+		glPopMatrix();
+
+	/*
 	glEnableClientState(GL_VERTEX_ARRAY);
 
 	glBindBuffer(GL_ARRAY_BUFFER, m->id_vertices);
@@ -385,5 +433,5 @@ void ModuleRenderer3D::DrawMesh(ComponentMesh* m, ComponentMaterial* mat)
 	//
 	//glBindTexture(GL_TEXTURE_2D, 0);
 	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+	//glBindBuffer(GL_ARRAY_BUFFER, 0);*/
 }

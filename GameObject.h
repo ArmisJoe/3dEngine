@@ -31,7 +31,7 @@ private:
 public:
 	std::vector<Component*> components; // Children Components
 	std::vector<GameObject*> children; // Children GameObjects
-	std::vector<AABB> aabbs;
+	AABB aabb;
 
 	bool selected = false;
 

@@ -83,18 +83,12 @@ bool ModuleScene::IteratingElement(GameObject * go)
 	for (std::vector<GameObject*>::iterator sub_it = go->children.begin(); sub_it < go->children.end(); ++sub_it)
 	{
 		float3 center = float3::zero, size = float3::zero;
-		int i = (*sub_it)->aabbs.size();
-		for (std::vector<AABB>::iterator iitt = (*sub_it)->aabbs.begin(); iitt < (*sub_it)->aabbs.end(); iitt++)
-		{
-			AABB aabb = (*iitt);
-			center = aabb.CenterPoint();
-			size = aabb.Size();
-			App->renderer3D->debugger->DrawAABB(center, size);
-			int i = (*sub_it)->components.size();
-			CollisionType type = App->camera->curr_camera->GetFrustum().ContainsBox((*iitt));
-			if (type != OUTSIDE)
-				App->renderer3D->todraw.push_back((*sub_it));
-		}
+	    center = (*sub_it)->aabb.CenterPoint();
+		size = (*sub_it)->aabb.Size();
+		App->renderer3D->debugger->DrawAABB(center, size);
+		CollisionType type = App->camera->curr_camera->GetFrustum().ContainsBox((*sub_it)->aabb);
+		if (type != OUTSIDE)
+		App->renderer3D->todraw.push_back((*sub_it));
 		IteratingElement(*sub_it);
 	}
 	return true;
