@@ -2,6 +2,8 @@
 #include "Application.h"
 #include <fstream>
 
+#include "HelperFoos.h"
+
 ModuleFileSystem::ModuleFileSystem(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
 }
@@ -109,7 +111,7 @@ bool ModuleFileSystem::SaveFile(const char * path, const char * file_content, co
 	}
 	else
 	{
-		LOG("Error saving file %s: ", name);
+		LOG("ERROR saving file %s: ", name);
 	}
 
 	fclose(new_file);
@@ -143,7 +145,7 @@ bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, 
 	}
 	else
 	{
-		LOG("Error saving file %s: ", name);
+		LOG("ERROR saving file %s: ", name);
 	}
 
 	fclose(new_file);
@@ -169,18 +171,18 @@ bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, 
 	std::ofstream;
 	FILE* new_file = fopen(file.c_str(), "wb");
 
-	if (new_file)
+	if (new_file != nullptr)
 	{
 		fwrite(file_content, sizeof(char), size, new_file);
 		output_file = file;
 		ret = true;
+		fclose(new_file);
 	}
 	else
 	{
-		LOG("Error saving file %s: ", name);
+		LOG("ERROR saving file %s: ", name);
 	}
 
-	fclose(new_file);
 	return ret;
 }
 
@@ -190,18 +192,20 @@ uint ModuleFileSystem::Load(const char * path, char ** buffer)
 	uint ret = 0;
 
 	std::ofstream;
-	FILE* load_file = fopen(path, "r");
+	FILE* load_file = fopen(path, "rb");
 
-	if (load_file != nullptr) {
-		fseek(load_file, 0, SEEK_END); // pointer to end
-		int size = ftell(load_file); // Tell the pointer pos a.k.a 'file size'
-		fseek(load_file, 0, SEEK_SET); // return ptr to begining
+	if (load_file) {
+		
+		int size = 0;
+
+		std::ifstream in(path, std::ifstream::ate | std::ifstream::binary);
+		size = in.tellg();
 
 		if (size > 0) {
 			*buffer = new char[size];
 			uint readed = (uint)fread(*buffer, sizeof(char), size, load_file);
 			if (readed != size) {
-				LOG("ERROR while reading file %s", path);
+				LOG("ERROR while reading file:\n\t%s", path);
 				if (*buffer != nullptr)
 					memdelete[] *buffer;
 			}
@@ -209,12 +213,12 @@ uint ModuleFileSystem::Load(const char * path, char ** buffer)
 				ret = readed;
 			}
 		}
-		if (fclose(load_file) == 0) {
-			LOG("ERROR while closing file %s", path);
+		if (fclose(load_file) != 0) {
+			LOG("ERROR while closing file:\n\t%s", path);
 		}
 	}
 	else {
-		LOG("ERROR while opening file %s", path);
+		LOG("ERROR while opening file:\n\t%s", path);
 	}
 
 	return ret;

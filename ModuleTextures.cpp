@@ -5,6 +5,8 @@
 
 #include "glew-2.1.0\include\GL\glew.h"
 
+#include "HelperFoos.h"
+
 #include "Devil\include\il.h"
 #include "Devil\include\ilu.h"
 #include "Devil\include\ilut.h"
@@ -205,9 +207,9 @@ bool ModuleTextures::Import(const char * path, std::string & output_file)
 		ret = Import(buffer, size, output_file, GetFileFromPath(path).c_str());
 	}
 
-	if (buffer != nullptr) {
-		memdelete[] buffer;
-	}
+	//if (buffer != nullptr) {
+	//	memdelete[] buffer;
+	//}
 
 	return ret;
 }

@@ -2,6 +2,8 @@
 
 #include "glew-2.1.0\include\GL\glew.h"
 
+#include "HelperFoos.h"
+
 #include "Devil\include\il.h"
 #include "Devil\include\ilu.h"
 #include "Devil\include\ilut.h"

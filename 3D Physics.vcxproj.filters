@@ -94,6 +94,7 @@
     <ClCompile Include="ImporterTexture.cpp" />
     <ClCompile Include="ImporterMaterial.cpp" />
     <ClCompile Include="ImporterMesh.cpp" />
+    <ClCompile Include="HelperFoos.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />

@@ -5,26 +5,8 @@
 
 #include <string>
 
-char* Capitalize(char* str) {
-	for (int i = 0; str[i] != '\0'; i++)
-	{
-		str[i] = toupper(str[i]);
-	}
-	return str;
-};
+char* Capitalize(char* str);
 
-std::string GetFileFromPath(const char* path) {
-	std::string ret;
-
-	for (int i = 0; path[i] != '\0'; i++) {
-		if (path[i] == '\\' || path[i] == '/') {
-			ret.clear();
-			continue;
-		}
-		ret += path[i];
-	}
-
-	return ret;
-};
+std::string GetFileFromPath(const char* path);
 
 #endif // !__HELPER_FOOS_H__
