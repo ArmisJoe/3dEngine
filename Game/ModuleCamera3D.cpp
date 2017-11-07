@@ -30,7 +30,7 @@ bool ModuleCamera3D::Start()
 bool ModuleCamera3D::CleanUp()
 {
 	LOG("Cleaning camera");
-	delete main_camera;
+	mdelete main_camera;
 	curr_camera = nullptr;
 	return true;
 }

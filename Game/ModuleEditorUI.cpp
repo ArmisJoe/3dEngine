@@ -205,7 +205,7 @@ bool ModuleEditorUI::CleanUp()
 	for (std::list<Panel*>::iterator it = panels.begin(); it != panels.end(); it++) {
 		if ((*it) != nullptr) {
 			(*it)->CleanUp();
-			delete (*it);
+			mdelete (*it);
 		}
 	}
 

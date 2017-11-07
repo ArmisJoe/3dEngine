@@ -195,7 +195,7 @@ ComponentMaterial * ModuleAssimp::LoadMaterial(const aiMaterial* mat)
 			if (m_path.length > 0) {
 				string fullPath = "Assets\\";
 				fullPath.append(m_path.C_Str());
-				new_mat->SetTextureChannel(texType_Diffuse, App->tex->LoadTexture(fullPath.c_str()));
+				new_mat->SetTextureChannel(texType_Diffuse, App->tex->LoadToDDS(fullPath.c_str()));
 			}
 			else {
 				LOG("Unvalid Path from texture: %s", m_path.C_Str());
@@ -212,7 +212,7 @@ ComponentMaterial * ModuleAssimp::LoadMaterial(const aiMaterial* mat)
 	}
 	else {
 		new_mat->CleanUp();
-		delete[] new_mat;
+		mdelete[] new_mat;
 		new_mat = nullptr;
 	}
 

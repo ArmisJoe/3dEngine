@@ -38,6 +38,7 @@ Application::Application()
 	AddModule(assimp);
 	AddModule(tex);
 	AddModule(res);
+	AddModule(fs);
 	
 	// Scenes
 	AddModule(scene);
@@ -52,7 +53,7 @@ Application::~Application()
 	for (std::list<Module*>::reverse_iterator rit = list_modules.rbegin(); rit != list_modules.rend(); ++rit)
 	{
 		if ((*rit) != nullptr)
-		delete *rit;
+		mdelete *rit;
 	}
 
 	list_modules.clear();

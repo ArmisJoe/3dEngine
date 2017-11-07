@@ -181,7 +181,7 @@ void GameObject::DeleteChild(GameObject * go)
 	for (int i = 0; i < children.size(); i++) {
 		if (go == children[i]) {
 			children[i]->CleanUp();
-			delete[] children[i];
+			mdelete[] children[i];
 		}
 	}
 }
@@ -192,7 +192,7 @@ void GameObject::DestroyComponent(Component * componentPointer)
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) == componentPointer && (*it) != nullptr) {
 				(*it)->CleanUp();
-				delete (*it);
+				mdelete (*it);
 				components.erase(it);
 				break;
 			}

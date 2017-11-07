@@ -18,7 +18,7 @@ ModuleInput::ModuleInput(Application* app, bool start_enabled) : Module(app, sta
 // Destructor
 ModuleInput::~ModuleInput()
 {
-	delete[] keyboard;
+	mdelete[] keyboard;
 }
 
 // Called before render is available
@@ -138,7 +138,7 @@ update_status ModuleInput::PreUpdate(float dt)
 					LOG("File Loaded:\n\t%s", dropped_filedir);
 				}
 				if (strncmp(filetext, ".PNG", 4) == 0 || strncmp(filetext, ".png", 4) == 0) {
-					Texture* new_tex = App->tex->LoadTexture(dropped_filedir);
+					Texture* new_tex = App->tex->LoadToDDS(dropped_filedir);
 					//[TEST] Assigning Textures
 					//!_[TEST] Assigning Textures
 				}

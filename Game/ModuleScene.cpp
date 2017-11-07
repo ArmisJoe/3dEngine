@@ -109,7 +109,7 @@ bool ModuleScene::CleanUp()
 	LOG("Unloading Scene");
 
 	RemoveAllGameObject();
-	delete root;
+	mdelete root;
 
 	return true;
 }

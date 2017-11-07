@@ -27,7 +27,7 @@ bool ModuleParson::CleanUp()
 	for (list<JSON_Doc*>::iterator it = jsons.begin(); it != jsons.end();)
 	{
 		(*it)->CleanUp();
-		delete (*it);
+		mdelete (*it);
 
 		it = jsons.erase(it);
 	}
