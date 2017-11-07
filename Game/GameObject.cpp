@@ -233,31 +233,29 @@ void GameObject::UpdateAABBFromMesh(ComponentMesh * mesh)
 		aabb.SetNegativeInfinity();
 		aabb.Enclose((float3*)mesh->vertices, mesh->num_vertices);
 		aabb.TransformAsAABB(GetTransform()->GetTransformMatrix());
-
-		int a = 3;
-/*		// VERSION 1
-	aabb.SetNegativeInfinity();
-	aabb.Enclose((float3*)mesh->vertices, mesh->num_vertices);
-	math::OBB obb = aabb.Transform(GetTransform()->GetWorldMatrix());
-	aabb = obb.MinimalEnclosingAABB();*/
+		/*		// VERSION 1
+			aabb.SetNegativeInfinity();
+			aabb.Enclose((float3*)mesh->vertices, mesh->num_vertices);
+			math::OBB obb = aabb.Transform(GetTransform()->GetWorldMatrix());
+			aabb = obb.MinimalEnclosingAABB();*/
 
 
-	/*	//VERSION 2
-		float4x4 matrix = GetTransform()->GetWorldMatrix();
-		AABB transformed_bounding_box = aabb;
-		transformed_bounding_box.TransformAsAABB(matrix);
-		aabb = transformed_bounding_box;*/
+			/*	//VERSION 2
+				float4x4 matrix = GetTransform()->GetWorldMatrix();
+				AABB transformed_bounding_box = aabb;
+				transformed_bounding_box.TransformAsAABB(matrix);
+				aabb = transformed_bounding_box;*/
 
-		/*
-		glPushMatrix();
-		glMultMatrixf(GetTransform()->GetWorldMatrix().Transposed().ptr());
-		glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertices);
-		glPopMatrix();
-		glBufferData(GL_ARRAY_BUFFER, sizeof(float) *mesh->num_vertices * 3, mesh->vertices, GL_STATIC_DRAW);*/
+				/*
+				glPushMatrix();
+				glMultMatrixf(GetTransform()->GetWorldMatrix().Transposed().ptr());
+				glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertices);
+				glPopMatrix();
+				glBufferData(GL_ARRAY_BUFFER, sizeof(float) *mesh->num_vertices * 3, mesh->vertices, GL_STATIC_DRAW);*/
 
-		/*// VERSION 3
-		OBB obb = aabb.Transform(GetTransform()->GetWorldMatrix());
-		aabb.SetFrom(obb);*/
+				/*// VERSION 3
+				OBB obb = aabb.Transform(GetTransform()->GetWorldMatrix());
+				aabb.SetFrom(obb);*/
 	}
 }
 

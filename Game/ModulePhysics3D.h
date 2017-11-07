@@ -60,7 +60,7 @@ public:
 */
 
 	std::list<Sphere*> spheres;
-	std::list<AABB*> aabbs;
+	//std::list<AABB*> aabbs;
 	std::list<OBB*> obbs;
 	std::list<Line*> lines;
 	std::list<LineSegment*> line_segments;

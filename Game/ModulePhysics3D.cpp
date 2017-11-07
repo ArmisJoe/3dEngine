@@ -204,15 +204,15 @@ bool ModulePhysics3D::CleanUp()
 
 	spheres.clear();
 
-	if (!aabbs.empty()) {
+	/*if (!aabbs.empty()) {
 		for (std::list<AABB*>::iterator it = aabbs.begin(); it != aabbs.end(); it++) {
 			if (it._Ptr->_Myval != nullptr) {
 				delete it._Ptr->_Myval;
 			}
 		}
-	}
+	}*/
 
-	aabbs.clear();
+	//aabbs.clear();
 
 	if (!obbs.empty()) {
 		for (std::list<OBB*>::iterator it = obbs.begin(); it != obbs.end(); it++) {
@@ -374,7 +374,7 @@ AABB * ModulePhysics3D::AddAABB(const float3 center, const float3 size, bool vis
 {
 	AABB* ret = nullptr;
 
-	ret = new AABB();
+	/*ret = new AABB();
 
 	ret->SetFromCenterAndSize(center, size);
 	aabbs.push_back(ret);
@@ -387,7 +387,7 @@ AABB * ModulePhysics3D::AddAABB(const float3 center, const float3 size, bool vis
 	bAABB->visible = visible;
 	g_primitives.push_back(bAABB);
 
-	LOG("AABB Created x:%f y:%f z:%f size:%ix%ix%i", center.x, center.y, center.z, size.x, size.y, size.z);
+	LOG("AABB Created x:%f y:%f z:%f size:%ix%ix%i", center.x, center.y, center.z, size.x, size.y, size.z);*/
 
 	return ret;
 }
