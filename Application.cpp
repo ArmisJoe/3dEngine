@@ -38,6 +38,7 @@ Application::Application()
 	AddModule(assimp);
 	AddModule(tex);
 	AddModule(res);
+	AddModule(fs);
 	
 	// Scenes
 	AddModule(scene);

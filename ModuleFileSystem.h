@@ -4,9 +4,9 @@
 
 #include "Module.h"
 
-#define LIBRARY_TEXTURES "Library/Textures"
-#define LIBRARY_MATERIALS "Library/Materials"
-#define LIBRARY_MESHES "Library/Meshes"
+#define LIBRARY_TEXTURES "Library/Textures/"
+#define LIBRARY_MATERIALS "Library/Materials/"
+#define LIBRARY_MESHES "Library/Meshes/"
 
 using namespace std;
 
@@ -16,7 +16,7 @@ public:
 	virtual ~ModuleFileSystem();
 public:	
 	bool Start();
-	bool Update();
+
 	bool CleanUp();
 
 	std::string CreateFolder(const char* path, const char* name);
@@ -24,11 +24,11 @@ public:
 	void FileCopyPaste(const char* filepath, const char* new_path);
 	void FileDelete(const char* filepath);
 	bool SaveFile(const char* path, const char* file_content, const char* name, const char* extension, int size);
-	bool SaveUnique(const char* path, const char* file_content, const char* name, const char* extension, int size, std::string& output_file); // returns new file path (IF it has been created successfully)
-	bool SaveUnique(const char* path, const char* file_content, const char* name, const char* extension, int size);
-	inline bool exists(const std::string& name) {
+	bool SaveUnique(const char* path, const char* file_content, const char* name, const char* extension, int size, std::string& output_file, bool gen_uid = true); // returns new file path. if gen_uid == false -> will not save again repeated files
+	bool SaveUnique(const char* path, const char* file_content, const char* name, const char* extension, int size, bool gen_uid = true); // if gen_uid == false -> will not save again repeated files
+	inline bool exists(const std::string& path) {
 		struct stat buffer;
-		return (stat(name.c_str(), &buffer) == 0);
+		return (stat(path.c_str(), &buffer) == 0);
 	}
 	uint Load(const char* path, char** buffer);
 };

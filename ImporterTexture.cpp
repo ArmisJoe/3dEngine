@@ -38,7 +38,7 @@ bool ImporterTexture::Import(const char * path, std::string & output_file)
 	return ret;
 }
 
-bool ImporterTexture::Import(const void * buffer, uint size, std::string & output_file, const char* file_name = "texture")
+bool ImporterTexture::Import(const void * buffer, uint size, std::string & output_file, const char* file_name = DEFAULT_TEXTURE_NAME)
 {
 	bool ret = false;
 
@@ -57,7 +57,7 @@ bool ImporterTexture::Import(const void * buffer, uint size, std::string & outpu
 			if (ilsize > 0) {
 				data = new ILubyte[ilsize];
 				if (ilSaveL(IL_DDS, data, ilsize) > 0) {
-					ret = App->fs->SaveUnique(LIBRARY_TEXTURES, (char*)data, file_name, "dds", ilsize, output_file);
+					ret = App->fs->SaveUnique(LIBRARY_TEXTURES, (char*)data, file_name, "dds", ilsize, output_file, (file_name == DEFAULT_TEXTURE_NAME));
 				}
 
 				if (data != nullptr) {

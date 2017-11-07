@@ -6,6 +6,7 @@
 
 ModuleFileSystem::ModuleFileSystem(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
+	name = "FileSystem";
 }
 
 ModuleFileSystem::~ModuleFileSystem()
@@ -14,11 +15,12 @@ ModuleFileSystem::~ModuleFileSystem()
 
 bool ModuleFileSystem::Start()
 {
-	return true;
-}
 
-bool ModuleFileSystem::Update()
-{
+	CreateFolder("", "Library");
+	CreateFolder("Library", "Textures");
+	CreateFolder("Library", "Meshes");
+	CreateFolder("Library", "Materials");
+
 	return true;
 }
 
@@ -32,15 +34,13 @@ string ModuleFileSystem::CreateFolder(const char * path, const char * name)
 	string ret;
 
 	string strPath = path;
-	if (strPath[strPath.length() - 1] != '\\') {
+	if (strPath.length() > 0 && strPath[strPath.length() - 1] != '\\') {
 		strPath += '\\';
 	}
 	strPath += name;
-	DWORD error = GetLastError();
 
 	if (CreateDirectory(strPath.c_str(), NULL) == 0) {
-		error = GetLastError();
-		LOG("ERROR Creating Directory %s :: %d", path, error);
+		LOG("ERROR Creating Directory %s [%s]", name, strerror(errno));
 		return ret;
 	}
 
@@ -118,22 +118,29 @@ bool ModuleFileSystem::SaveFile(const char * path, const char * file_content, co
 	return ret;
 }
 
-bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, const char * name, const char * extension, int size)
+bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, const char * name, const char * extension, int size, bool gen_uid)
 {
 	bool ret = false;
 
 	uint uniqueID = 0;
 	string file;
 
-	do {
+	if (gen_uid == true) {
+		do {
+			file = path;
+			file += name;
+			file += "_";
+			file += std::to_string(uniqueID++);
+			file += ".";
+			file += extension;
+		} while (exists(file));
+	}
+	else {
 		file = path;
 		file += name;
-		file += "_";
-		file += uniqueID++;
 		file += ".";
 		file += extension;
-	} while (exists(file));
-
+	}
 
 	std::ofstream;
 	FILE* new_file = fopen(file.c_str(), "wb");
@@ -145,28 +152,36 @@ bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, 
 	}
 	else
 	{
-		LOG("ERROR saving file %s: ", name);
+		LOG("ERROR saving unique file %s: ", name);
 	}
 
 	fclose(new_file);
 	return ret;
 }
 
-bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, const char * name, const char * extension, int size, std::string& output_file)
+bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, const char * name, const char * extension, int size, std::string& output_file, bool gen_uid)
 {
 	bool ret = false;
 
 	uint uniqueID = 0;
 	string file;
 
-	do {
+	if (gen_uid == true) {
+		do {
+			file = path;
+			file += name;
+			file += "_";
+			file += std::to_string(uniqueID++);
+			file += ".";
+			file += extension;
+		} while (exists(file));
+	}
+	else {
 		file = path;
 		file += name;
-		file += "_";
-		file += uniqueID++;
 		file += ".";
 		file += extension;
-	} while (exists(file));
+	}
 
 	std::ofstream;
 	FILE* new_file = fopen(file.c_str(), "wb");
@@ -180,7 +195,7 @@ bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, 
 	}
 	else
 	{
-		LOG("ERROR saving file %s: ", name);
+		LOG("ERROR unique saving file:\n\t%s\n\tERROR: %s ", name, strerror(errno));
 	}
 
 	return ret;
@@ -218,7 +233,7 @@ uint ModuleFileSystem::Load(const char * path, char ** buffer)
 		}
 	}
 	else {
-		LOG("ERROR while opening file:\n\t%s", path);
+		LOG("ERROR while opening file:\n\t%s\n\t%s", path, strerror(errno));
 	}
 
 	return ret;

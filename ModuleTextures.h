@@ -7,6 +7,9 @@
 #include "GameObject.h"
 #include "ComponentMaterial.h"
 
+#define DEFAULT_TEXTURE_NAME "__default_texture_name__"
+
+
 enum clampingTexType {
 	clampingTexType_ClampToEdge = 0,
 	clampingTexType_ClampRepeat,
@@ -24,6 +27,8 @@ public:
 
 public:
 	bool Init();
+
+	update_status Update(float dt);
 
 	bool CleanUp();
 
