@@ -7,8 +7,6 @@
 #include "GameObject.h"
 #include "ComponentMaterial.h"
 
-#include "ImporterTexture.h"
-
 enum clampingTexType {
 	clampingTexType_ClampToEdge = 0,
 	clampingTexType_ClampRepeat,
@@ -21,7 +19,6 @@ enum interpolationTexType {
 
 class ModuleTextures : public Module {
 public:
-public:
 	ModuleTextures(Application* app, bool start_enabled = true);
 	~ModuleTextures();
 
@@ -32,10 +29,15 @@ public:
 
 	Texture* LoadRawTexture(const char* path); // Returns nullptr on failure.
 	bool ImportTexture(const char* path, std::string& output_file); // Imports a Texture into DDS format. Returns [false] on failure;
-	Texture* LoadDDSTexture(const char* path);
+	Texture* LoadDDSTexture(const char* path); // Returns nullptr on failure
+	Texture* LoadToDDS(const char* path);
 	void DrawConfigPanel();
-public:
-	ImporterTexture* importer = nullptr; // Texture Importer
+
+private: // Importer Methods
+	bool Import(const char* path, std::string& output_file); // Creates a DDS File from other extensions [NOT LOADING FILE INTO ENGINE]
+	bool Import(const void* buffer, uint size, std::string& output_file, const char* file_name); // Creates a DDS File from other extensions [NOT LOADING FILE INTO ENGINE]
+	bool Load(const char* exported_file);
+	bool Load(const char* exported_file, Texture* tex); // fills 'tex' with the loaded texture
 
 private: // Configurations
 	int clamp_type = clampingTexType_ClampRepeat;

@@ -1,6 +1,5 @@
 #include "ModuleFileSystem.h"
 #include "Application.h"
-#include "HelperFoos.h"
 #include <fstream>
 
 ModuleFileSystem::ModuleFileSystem(Application * app, bool start_enabled) : Module(app, start_enabled)
@@ -117,19 +116,55 @@ bool ModuleFileSystem::SaveFile(const char * path, const char * file_content, co
 	return ret;
 }
 
-bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, const char * name, const char * extension, int size, std::string & output_file)
+bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, const char * name, const char * extension, int size)
 {
 	bool ret = false;
 
-	string file = path;
-	file += name;
-	file += ".";
-	file += extension;
+	uint uniqueID = 0;
+	string file;
 
-	if (exists(file)) {
-		LOG("File Already Exists %s", file.c_str());
-		return false;
+	do {
+		file = path;
+		file += name;
+		file += "_";
+		file += uniqueID++;
+		file += ".";
+		file += extension;
+	} while (exists(file));
+
+
+	std::ofstream;
+	FILE* new_file = fopen(file.c_str(), "wb");
+
+	if (new_file)
+	{
+		fwrite(file_content, sizeof(char), size, new_file);
+		ret = true;
 	}
+	else
+	{
+		LOG("Error saving file %s: ", name);
+	}
+
+	fclose(new_file);
+	return ret;
+}
+
+bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, const char * name, const char * extension, int size, std::string& output_file)
+{
+	bool ret = false;
+
+	uint uniqueID = 0;
+	string file;
+
+	do {
+		file = path;
+		file += name;
+		file += "_";
+		file += uniqueID++;
+		file += ".";
+		file += extension;
+	} while (exists(file));
 
 	std::ofstream;
 	FILE* new_file = fopen(file.c_str(), "wb");
@@ -149,33 +184,38 @@ bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, 
 	return ret;
 }
 
-bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, const char * name, const char * extension, int size)
+
+uint ModuleFileSystem::Load(const char * path, char ** buffer)
 {
-	bool ret = false;
-
-	string file = path;
-	file += name;
-	file += ".";
-	file += extension;
-
-	if (exists(file)) {
-		LOG("File Already Exists %s", file.c_str());
-		return false;
-	}
+	uint ret = 0;
 
 	std::ofstream;
-	FILE* new_file = fopen(file.c_str(), "wb");
+	FILE* load_file = fopen(path, "r");
 
-	if (new_file)
-	{
-		fwrite(file_content, sizeof(char), size, new_file);
-		ret = true;
+	if (load_file != nullptr) {
+		fseek(load_file, 0, SEEK_END); // pointer to end
+		int size = ftell(load_file); // Tell the pointer pos a.k.a 'file size'
+		fseek(load_file, 0, SEEK_SET); // return ptr to begining
+
+		if (size > 0) {
+			*buffer = new char[size];
+			uint readed = (uint)fread(*buffer, sizeof(char), size, load_file);
+			if (readed != size) {
+				LOG("ERROR while reading file %s", path);
+				if (*buffer != nullptr)
+					memdelete[] *buffer;
+			}
+			else {
+				ret = readed;
+			}
+		}
+		if (fclose(load_file) == 0) {
+			LOG("ERROR while closing file %s", path);
+		}
 	}
-	else
-	{
-		LOG("Error saving file %s: ", name);
+	else {
+		LOG("ERROR while opening file %s", path);
 	}
 
-	fclose(new_file);
 	return ret;
 }

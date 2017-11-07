@@ -51,7 +51,7 @@ private:
 	bool show_test_window = true;
 
 	// List of libraries which actually they are strings which they are char*-based classes themselves from C but also used on C# and (like on this case) C++
-	vector<string> libraries;
+	vector<std::string> libraries;
 
 public:
 	PanelConsole*		console = nullptr;

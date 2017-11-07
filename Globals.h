@@ -9,6 +9,7 @@
 #include <climits>
 #include <random>
 
+#include "HelperFoos.h"
 
 //#define LOG(format, ...) mylog(__FILE__, __LINE__, format, __VA_ARGS__);
 

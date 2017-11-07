@@ -21,7 +21,6 @@ Application::Application()
 	assimp = new ModuleAssimp(this);
 	tex = new ModuleTextures(this);
 	res = new ModuleResources(this);
-	importer = new ModuleImporter(this);
 	fs = new ModuleFileSystem(this);
 
 	// The order of calls is very important!
@@ -39,7 +38,6 @@ Application::Application()
 	AddModule(assimp);
 	AddModule(tex);
 	AddModule(res);
-	AddModule(importer);
 	
 	// Scenes
 	AddModule(scene);
@@ -54,7 +52,7 @@ Application::~Application()
 	for (std::list<Module*>::reverse_iterator rit = list_modules.rbegin(); rit != list_modules.rend(); ++rit)
 	{
 		if ((*rit) != nullptr)
-		delete *rit;
+		memdelete *rit;
 	}
 
 	list_modules.clear();

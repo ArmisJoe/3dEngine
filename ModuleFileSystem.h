@@ -19,7 +19,7 @@ public:
 	bool Update();
 	bool CleanUp();
 
-	string CreateFolder(const char* path, const char* name);
+	std::string CreateFolder(const char* path, const char* name);
 	void FileMove(const char* filepath, const char* new_path, bool replace_existing = true);
 	void FileCopyPaste(const char* filepath, const char* new_path);
 	void FileDelete(const char* filepath);
@@ -30,6 +30,7 @@ public:
 		struct stat buffer;
 		return (stat(name.c_str(), &buffer) == 0);
 	}
+	uint Load(const char* path, char** buffer);
 };
 
 #endif // !__MODULE_FILESYSTEM_H__

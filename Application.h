@@ -18,7 +18,6 @@
 #include "ModuleParson.h"
 #include "ModuleAssimp.h"
 #include "ModuleTextures.h"
-#include "ModuleImporter.h"
 #include "ModuleResources.h"
 #include "ModuleFileSystem.h"
 
@@ -42,7 +41,6 @@ public:
 	ModuleAssimp* assimp;
 	ModuleTextures* tex;
 	ModuleResources* res;
-	ModuleImporter* importer;
 	ModuleFileSystem* fs;
 	
 private:

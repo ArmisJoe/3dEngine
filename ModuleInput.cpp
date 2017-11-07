@@ -2,8 +2,6 @@
 #include "Application.h"
 #include "ModuleInput.h"
 
-#include "HelperFoos.h"
-
 #define MAX_KEYS 300
 
 ModuleInput::ModuleInput(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -18,7 +16,7 @@ ModuleInput::ModuleInput(Application* app, bool start_enabled) : Module(app, sta
 // Destructor
 ModuleInput::~ModuleInput()
 {
-	delete[] keyboard;
+	memdelete[] keyboard;
 }
 
 // Called before render is available
@@ -138,9 +136,7 @@ update_status ModuleInput::PreUpdate(float dt)
 					LOG("File Loaded:\n\t%s", dropped_filedir);
 				}
 				if (strncmp(filetext, ".PNG", 4) == 0) {
-					Texture* new_tex = App->tex->LoadTexture(dropped_filedir);
-					//[TEST] Assigning Textures
-					//!_[TEST] Assigning Textures
+					Texture* new_tex = App->tex->LoadToDDS(dropped_filedir);
 				}
 				SDL_free(dropped_filedir);
 				break;

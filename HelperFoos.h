@@ -11,10 +11,10 @@ char* Capitalize(char* str) {
 		str[i] = toupper(str[i]);
 	}
 	return str;
-}
+};
 
-string GetFileFromPath(const char* path) {
-	string ret;
+std::string GetFileFromPath(const char* path) {
+	std::string ret;
 
 	for (int i = 0; path[i] != '\0'; i++) {
 		if (path[i] == '\\' || path[i] == '/') {
@@ -25,6 +25,6 @@ string GetFileFromPath(const char* path) {
 	}
 
 	return ret;
-}
+};
 
 #endif // !__HELPER_FOOS_H__

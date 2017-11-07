@@ -8,7 +8,7 @@ ImporterMaterial::~ImporterMaterial()
 {
 }
 
-bool ImporterMaterial::Import(const char * file, const char * path, std::string & output_file)
+bool ImporterMaterial::Import(const char * path, std::string & output_file)
 {
 	bool ret = false;
 

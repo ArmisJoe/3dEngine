@@ -52,7 +52,7 @@ void GameObject::CleanUp()
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr) {
 				(*it)->CleanUp();
-				//delete[] (*it); /// -> [EXAMINATE] TRIGGERS AN EXCEPTION (posible deleting what is already deleted [but it shouldn't])
+				//memdelete[] (*it); /// -> [EXAMINATE] TRIGGERS AN EXCEPTION (posible deleting what is already deleted [but it shouldn't])
 			}
 		}
 		components.clear();
@@ -64,7 +64,7 @@ void GameObject::CleanUp()
 		for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
 			if ((*it) != nullptr) {
 				(*it)->CleanUp(); 
-				delete[] (*it);
+				memdelete[] (*it);
 			}
 		}
 		children.clear();
@@ -142,7 +142,7 @@ void GameObject::DeleteChild(GameObject * go)
 	for (int i = 0; i < children.size(); i++) {
 		if (go == children[i]) {
 			children[i]->CleanUp();
-			delete[] children[i];
+			memdelete[] children[i];
 		}
 	}
 }
@@ -154,7 +154,7 @@ void GameObject::DestroyComponent(Component * componentPointer)
 			if ((*it) == componentPointer && (*it) != nullptr) {
 				(*it)->CleanUp();
 				components.erase(it);
-				delete[](*it);
+				memdelete[](*it);
 			}
 		}
 	}

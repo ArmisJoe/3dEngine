@@ -47,7 +47,6 @@ public:
 protected:
 	bool isActive = true;
 	GameObject* parent = nullptr;
-	uint numMax = NULL;
 public:
 	virtual componentType GetType() const { return type; }
 	virtual void Update(float dt) {}

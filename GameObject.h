@@ -5,7 +5,6 @@
 #include "glmath.h"
 #include <vector>
 #include <string>
-#include "Globals.h"
 
 class Component;
 

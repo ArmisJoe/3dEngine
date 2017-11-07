@@ -9,9 +9,9 @@ public:
 	Importer() {};
 	virtual ~Importer() {};
 public:
-	virtual bool Import(const char* path, std::string& output_file) = 0;
-	virtual bool Import(const void* buffer, uint size, std::string& output_file) = 0;
-	virtual bool Load(const char* exported_file) = 0;
+	virtual bool Import(const char* path, std::string& output_file) { return true; };
+	virtual bool Import(const void* buffer, uint size, std::string& output_file) { return true; };
+	virtual bool Load(const char* exported_file) { return true; };
 public:
 	Application* App;
 };
