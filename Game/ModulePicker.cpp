@@ -23,3 +23,10 @@ bool ModulePicker::CleanUp()
 {
 	return true;
 }
+
+GameObject * ModulePicker::RayCast(LineSegment segment, float & dist)
+{
+	GameObject* ret = nullptr;
+
+	return ret;
+}
