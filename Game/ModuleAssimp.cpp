@@ -36,7 +36,26 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 		materials = scene->mMaterials;
 	else
 		LOG("Scene without materials");
-		
+	
+	//Transform
+	if (!new_node->FindComponents(componentType_Transform).empty()) {
+
+		aiVector3D translation, scaling;
+		aiQuaternion rotation(1, 0, 0, 0);
+		node->mTransformation.Decompose(scaling, rotation, translation);
+		float3 position = { 0, 0, 0 };
+		float3 scale = { 1, 1, 1 };
+		position = { translation.x, translation.y, translation.y };
+		Quat rotation2 = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
+		scale = { scaling.x/100, scaling.y/100, scaling.z/100 };
+		ComponentTransform* trans = new ComponentTransform(new_node, position, rotation2, scale);
+		vector<Component*> tmp = new_node->FindComponents(componentType_Transform);
+		if (!tmp.empty())
+			new_node->DestroyComponent(tmp[0]);
+		new_node->AddComponent(componentType_Transform, trans, false);
+	}
+
+
 	//LoadMeshes
 	for (uint i = 0; i < node->mNumMeshes; i++) {
 		//Mesh Load
@@ -51,24 +70,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 			}
 		}
 	}
-  
-	//Transform
-	if (!new_node->FindComponents(componentType_Transform).empty()) {
 
-		aiVector3D translation, scaling;
-		aiQuaternion rotation(1, 0, 0, 0);
-		node->mTransformation.Decompose(scaling, rotation, translation);
-		float3 position = { 0, 0, 0 };
-		float3 scale = { 1, 1, 1 };
-		position = { translation.x, translation.y, translation.y };
-		Quat rotation2 = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
-		scale = { scaling.x, scaling.y, scaling.z };
-		ComponentTransform* trans = new ComponentTransform(new_node, position, rotation2, scale);
-		vector<Component*> tmp = new_node->FindComponents(componentType_Transform);
-		if (!tmp.empty())
-			new_node->DestroyComponent(tmp[0]);
-		new_node->AddComponent(componentType_Transform, trans, false);
-	}
 
 	if (node->mName.length > 0)
 		new_node->SetName(node->mName.C_Str());
@@ -193,7 +195,7 @@ ComponentMaterial * ModuleAssimp::LoadMaterial(const aiMaterial* mat)
 			aiString m_path;
 			mat->GetTexture(aiTextureType_DIFFUSE, i, &m_path);
 			if (m_path.length > 0) {
-				string fullPath = "Game\\Assets\\";
+				string fullPath = "Assets\\";
 				fullPath.append(m_path.C_Str());
 				new_mat->SetTextureChannel(texType_Diffuse, App->tex->LoadTexture(fullPath.c_str()));
 			}
