@@ -64,6 +64,9 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 		Quat rotation2 = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
 		scale = { scaling.x, scaling.y, scaling.z };
 		ComponentTransform* trans = new ComponentTransform(new_node, position, rotation2, scale);
+		vector<Component*> tmp = new_node->FindComponents(componentType_Transform);
+		if (!tmp.empty())
+			new_node->DestroyComponent(tmp[0]);
 		new_node->AddComponent(componentType_Transform, trans, false);
 	}
 

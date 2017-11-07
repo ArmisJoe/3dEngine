@@ -21,7 +21,7 @@ GameObject::GameObject(GameObject * p) : parent(p)
 GameObject::GameObject()
 {
 	name = "GameObject";
-	this->AddComponent(componentType_Transform);
+    this->AddComponent(componentType_Transform);
 }
 
 GameObject::~GameObject()
@@ -181,8 +181,9 @@ void GameObject::DestroyComponent(Component * componentPointer)
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) == componentPointer && (*it) != nullptr) {
 				(*it)->CleanUp();
+				delete (*it);
 				components.erase(it);
-				delete[](*it);
+				break;
 			}
 		}
 	}
