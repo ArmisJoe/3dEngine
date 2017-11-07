@@ -22,6 +22,7 @@ Application::Application()
 	tex = new ModuleTextures(this);
 	res = new ModuleResources(this);
 	fs = new ModuleFileSystem(this);
+	picker = new ModulePicker(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -38,6 +39,7 @@ Application::Application()
 	AddModule(assimp);
 	AddModule(tex);
 	AddModule(res);
+	AddModule(picker);
 	
 	// Scenes
 	AddModule(scene);

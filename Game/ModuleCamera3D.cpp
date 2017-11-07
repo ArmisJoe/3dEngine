@@ -179,6 +179,16 @@ void ModuleCamera3D::CameraZoom(float dt)
 
 GameObject * ModuleCamera3D::Pick()
 {
-	GameObject ret = nullptr;
+	GameObject* ret = nullptr;
+
+	float mousex = App->input->GetMouseX(), mousey = App->input->GetMouseY();
+
+	float dist_w = -(1.0f - (mousex * 2.0f));
+	float dist_y = 1.0f - (mousey * 2.0f);
+
+	LineSegment picker = main_camera->GetFrustum().UnProjectLineSegment(dist_w / App->window->GetWidth(), App->window->GetHeight());
+
+	GameObject* contact;
+
 	return ret;
 }

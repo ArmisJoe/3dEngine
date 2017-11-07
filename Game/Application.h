@@ -20,6 +20,7 @@
 #include "ModuleTextures.h"
 #include "ModuleResources.h"
 #include "ModuleFileSystem.h"
+#include "ModulePicker.h"
 
 #define LOG(format, ...) App->mylog(__FILE__, __LINE__, format, __VA_ARGS__);
 
@@ -42,6 +43,7 @@ public:
 	ModuleTextures* tex;
 	ModuleResources* res;
 	ModuleFileSystem* fs;
+	ModulePicker* picker;
 	
 private:
 

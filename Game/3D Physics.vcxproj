@@ -107,6 +107,7 @@
     <ClInclude Include="Importer.h" />
     <ClInclude Include="ModuleParson.h" />
     <ClInclude Include="ModulePhysics3D.h" />
+    <ClInclude Include="ModulePicker.h" />
     <ClInclude Include="ModulePlayer.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
     <ClInclude Include="Module.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleParson.cpp" />
     <ClCompile Include="ModulePhysics3D.cpp" />
+    <ClCompile Include="ModulePicker.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
     <ClCompile Include="ModuleRenderer3D.cpp" />
     <ClCompile Include="ModuleResources.cpp" />
