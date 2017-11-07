@@ -42,12 +42,20 @@ update_status ModuleCamera3D::Update(float dt)
 	if (App->input->IsMouseWheelActive()) {
 		CameraZoom(dt);
 	}
+	
 	// Mouse motion ----------------
 
 	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
 	{
 		MoveCamera(dt);
 		RotateCamera(dt);
+	}
+
+	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+	{
+		GameObject* pick = Pick();
+		//if (pick != nullptr)
+			//App->editor->SetSelected(pick, (App->editor->selected == pick));
 	}
 
 	return UPDATE_CONTINUE;
@@ -167,4 +175,10 @@ void ModuleCamera3D::MoveCamera(float dt)
 void ModuleCamera3D::CameraZoom(float dt)
 {
 	main_camera->MoveForwards(App->input->GetMouseWheelMotion());
+}
+
+GameObject * ModuleCamera3D::Pick()
+{
+	GameObject ret = nullptr;
+	return ret;
 }

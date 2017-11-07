@@ -28,7 +28,10 @@ private:
 	void MoveCamera(float dt);
 	void CameraZoom(float dt);
 
+	GameObject* Pick();
 public:
+	LineSegment picker;
+
 	ComponentCamera* curr_camera;
 	ComponentCamera* main_camera;
 	float3 orbitate_around = float3::zero;
