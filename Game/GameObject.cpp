@@ -15,13 +15,13 @@
 GameObject::GameObject(GameObject * p) : parent(p)
 {
 	name = "GameObject";
-	this->AddComponent(componentType_Transform);
+	//this->AddComponent(componentType_Transform);
 }
 
 GameObject::GameObject()
 {
 	name = "GameObject";
-    this->AddComponent(componentType_Transform);
+    //this->AddComponent(componentType_Transform);
 }
 
 GameObject::~GameObject()
@@ -82,6 +82,17 @@ void GameObject::CleanUp()
 		children.clear();
 	}*/
 
+}
+
+void GameObject::SetRoot(bool root)
+{
+	isRoot = root;
+}
+
+bool GameObject::IsRoot() const
+{
+
+	return isRoot;
 }
 
 std::vector<Component*> GameObject::FindComponents(componentType type)
@@ -207,11 +218,46 @@ void GameObject::CreateAABBFromMesh(ComponentMesh* mesh)
 			if (cmp_tr.size() > 0 && cmp_tr[0] != nullptr)
 			{
 				ComponentTransform* tmp = (ComponentTransform*)cmp_tr.back();
-				OBB obb = tmpAABB.Transform(tmp->GetWorldMatrix());
+				OBB obb = tmpAABB.Transform(tmp->GetLocalMatrix());
 				tmpAABB = obb.MinimalEnclosingAABB();
 				aabb = tmpAABB;
 			}
 		}
+	}
+}
+
+void GameObject::UpdateAABBFromMesh(ComponentMesh * mesh)
+{
+	if (mesh != nullptr) {
+
+		aabb.SetNegativeInfinity();
+		aabb.Enclose((float3*)mesh->vertices, mesh->num_vertices);
+		aabb.TransformAsAABB(GetTransform()->GetLocalMatrix());
+
+		int a = 3;
+/*		// VERSION 1
+	aabb.SetNegativeInfinity();
+	aabb.Enclose((float3*)mesh->vertices, mesh->num_vertices);
+	math::OBB obb = aabb.Transform(GetTransform()->GetWorldMatrix());
+	aabb = obb.MinimalEnclosingAABB();*/
+
+
+	/*	//VERSION 2
+		float4x4 matrix = GetTransform()->GetWorldMatrix();
+		AABB transformed_bounding_box = aabb;
+		transformed_bounding_box.TransformAsAABB(matrix);
+		aabb = transformed_bounding_box;*/
+
+		/*
+		glPushMatrix();
+		glMultMatrixf(GetTransform()->GetWorldMatrix().Transposed().ptr());
+		glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertices);
+		glPopMatrix();
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) *mesh->num_vertices * 3, mesh->vertices, GL_STATIC_DRAW);*/
+
+		/*// VERSION 3
+		OBB obb = aabb.Transform(GetTransform()->GetWorldMatrix());
+		aabb.SetFrom(obb);*/
 	}
 }
 

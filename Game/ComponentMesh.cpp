@@ -38,11 +38,6 @@ void ComponentMesh::Update(float dt)
 		ComponentTransform* trans = nullptr;
 		if (!this->GetParent()->FindComponents(componentType_Transform).empty()) {
 			trans = (ComponentTransform*)this->GetParent()->FindComponents(componentType_Transform)[0];
-			if (trans->Transformed == true)
-			{
-				GetParent()->CreateAABBFromMesh(this);
-				trans->Transformed = false;
-			}
 		}
 
 	}

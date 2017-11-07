@@ -8,6 +8,8 @@
 #include "ModuleEditorUI.h"
 #include "PanelInspector.h"
 
+#include "Component.h"
+
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	name = "Scene";
@@ -23,6 +25,8 @@ bool ModuleScene::Init()
 
 	root = new GameObject(nullptr);
 	root->SetName("Scene Root");
+	root->SetRoot(true);
+	root->AddComponent(componentType_Transform);
 
 	return true;
 }
@@ -75,6 +79,7 @@ update_status ModuleScene::Update(float dt)
 
 	IteratingElement(root);
 
+
 	return UPDATE_CONTINUE;
 }
 
@@ -102,6 +107,7 @@ bool ModuleScene::CleanUp()
 	LOG("Unloading Scene");
 
 	RemoveAllGameObject();
+	delete root;
 
 	return true;
 }

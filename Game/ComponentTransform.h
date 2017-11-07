@@ -12,10 +12,12 @@ public:
 	ComponentTransform(componentType argtype, GameObject* argparent);
 	ComponentTransform(GameObject* argparent, float3 position, Quat rotation, float3 scale);
 	~ComponentTransform() {};
+	void Update(float dt);
 public:
 	//void Update(float dt);
 	void OnEditor();
-	float4x4 GetWorldMatrix() const;
+	float4x4 GetWorldMatrix();
+	float4x4 GetLocalMatrix() const;
 public:
 	float* GetMatrix4x4() const;
 public:

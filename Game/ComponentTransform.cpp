@@ -6,8 +6,8 @@ ComponentTransform::ComponentTransform() : Component(componentType_Transform)
 {
 	name = "Transform";
 	numMax = 1;
-	position = { 0, 0, 0 };
-	rotation = { 0, 0, 0, 0 };
+	position = { 1, 1, 1 };
+	rotation = { 0, 0, 0, 1 };
 	scale = { 1, 1, 1 };
 }
 
@@ -15,8 +15,8 @@ ComponentTransform::ComponentTransform(GameObject* argparent) : Component(compon
 {
 	name = "Transform";
 	numMax = 1;
-	position = { 0, 0, 0 };
-	rotation = { 0, 0, 0, 0 };
+	position = { 1, 1, 1 };
+	rotation = { 0, 0, 0, 1 };
 	scale = { 1, 1, 1 };
 }
 
@@ -24,14 +24,40 @@ ComponentTransform::ComponentTransform(componentType argtype, GameObject * argpa
 {
 	name = "Transform";
 	numMax = 1;
-	position = { 0, 0, 0 };
-	rotation = { 0, 0, 0, 0 };
+	position = { 1, 1, 1 };
+	rotation = { 0, 0, 0, 1 };
 	scale = { 1, 1, 1 };
 }
 
 ComponentTransform::ComponentTransform(GameObject * argparent, float3 position, Quat rotation, float3 scale) : Component(componentType_Transform, argparent)
 {
 	this->position = position; this->rotation = rotation; this->scale = scale;
+}
+
+void ComponentTransform::Update(float dt)
+{
+	if (!GetParent()->IsRoot())
+	{
+		ComponentTransform* parent_transform = (ComponentTransform*)GetParent()->GetParent()->GetTransform();
+
+		WorldMatrix = WorldMatrix.FromTRS(position, rotation, scale);
+		WorldMatrix = parent_transform->WorldMatrix * WorldMatrix;
+	}
+	else
+	{
+		WorldMatrix = float4x4::FromTRS(position, rotation, scale);
+		for (std::vector<GameObject*>::iterator it = GetParent()->children.begin(); it != GetParent()->children.end(); ++it)
+		{
+			ComponentTransform* child_transform = (ComponentTransform*)(*it)->GetTransform();
+			child_transform->UpdateMatrix();
+		}
+	}
+
+	std::vector<Component*> components = GetParent()->FindComponents(componentType_Mesh);
+
+	for (uint i = 0; i < components.size(); ++i)
+	GetParent()->UpdateAABBFromMesh((ComponentMesh*)components[i]);
+
 }
 
 
@@ -88,7 +114,12 @@ void ComponentTransform::OnEditor()
 
 }
 
-float4x4 ComponentTransform::GetWorldMatrix() const
+float4x4 ComponentTransform::GetWorldMatrix()
+{
+	return WorldMatrix;
+}
+
+float4x4 ComponentTransform::GetLocalMatrix() const
 {
 	return WorldMatrix.FromTRS(position, rotation, scale);
 }

@@ -38,7 +38,6 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 		LOG("Scene without materials");
 	
 	//Transform
-	if (!new_node->FindComponents(componentType_Transform).empty()) {
 
 		aiVector3D translation, scaling;
 		aiQuaternion rotation(1, 0, 0, 0);
@@ -53,7 +52,6 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 		if (!tmp.empty())
 			new_node->DestroyComponent(tmp[0]);
 		new_node->AddComponent(componentType_Transform, trans, false);
-	}
 
 
 	//LoadMeshes
