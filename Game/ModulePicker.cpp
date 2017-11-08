@@ -30,8 +30,9 @@ GameObject * ModulePicker::RayCast(const LineSegment &segment, float& total_dist
 {
 	GameObject* ret = nullptr;
 	total_distance = infinite;
-	IterativeRayCast(segment, total_distance, ret);
+	IterativeRayCast(segment, total_distance, &ret);
 
+	picked = ret;
 	return ret;
 }
 void ModulePicker::IntersectAABB(const LineSegment & picking, std::vector<GameObject*>& DistanceList)
@@ -76,7 +77,7 @@ void ModulePicker::IntersectAABB(const LineSegment & picking, std::vector<GameOb
 
 
 
-void ModulePicker::IterativeRayCast(const LineSegment & segment, float &dist, GameObject *tocollide)
+void ModulePicker::IterativeRayCast(const LineSegment & segment, float &dist, GameObject** tocollide)
 {
 
 	for (uint i = 0; i < App->scene->GetRoot()->children.size(); ++i)
@@ -94,7 +95,7 @@ void ModulePicker::IterativeRayCast(const LineSegment & segment, float &dist, Ga
 			// We check the AABB first so we can avoid the whole awkward triangle process
 			if (!segment_local_space.Intersects(go->aabb)) continue;
 
-			segment_local_space.Transform(go->GetTransform()->GetGlobalMatrix().Inverted());		
+			segment_local_space.Transform(go->GetTransform()->GetTransformMatrix().Inverted());
 		
 			for (uint i = 0; i < mesh->num_indices; i += 3)
 			{
@@ -111,10 +112,8 @@ void ModulePicker::IterativeRayCast(const LineSegment & segment, float &dist, Ga
 					if (distance < dist)
 					{
 						dist = distance;
-						tocollide = go;
+						*tocollide = go;
 					}
-
-
 				}
 			}
 
