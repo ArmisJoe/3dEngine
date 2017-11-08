@@ -101,35 +101,35 @@ void ComponentTransform::Update(float dt)
 
 void ComponentTransform::SetPosition(const float3 & _position)
 {
-	//if (GetParent()->IsStatic() == false)
-	//{
+	if (GetParent()->IsStatic() == false)
+	{
 		position = _position;
 		transform_modified = true;
-	//}
+	}
 
 }
 
 void ComponentTransform::SetRotation(const float3& _rotation)
 {
-	///if (GetParent()->IsStatic() == false)
-	//{
+	if (GetParent()->IsStatic() == false)
+	{
 		Quat mod = Quat::FromEulerXYZ(_rotation.x, _rotation.y, _rotation.z);
 		rotation = mod;
 
 		transform_modified = true;
 
-	//}
+	}
 }
 
 
 void ComponentTransform::SetScale(const float3 & _scale)
 {
-	//if (GetComponentParent()->IsStatic() == false)
-	//{
+	if (GetParent()->IsStatic() == false)
+	{
 		scale = _scale;
 
 		transform_modified = true;
-	//}
+	}
 }
 
 

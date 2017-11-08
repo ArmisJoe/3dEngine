@@ -38,6 +38,7 @@ public:
 private:
 	ModuleScene* scene = nullptr;
 	bool isRoot = false;
+	bool isStatic = false;
 public:
 	void Start();
 	void Update(float dt); // Called every ModuleScene->Update(dt) (if they are insied the scene)
@@ -46,7 +47,8 @@ public:
 public:
 	void SetRoot(bool root);
 	bool IsRoot() const;
-
+	void SetStatic(bool set);
+	bool IsStatic() const;
 	std::vector<Component*> FindComponents(componentType type);
 	Component* AddComponent(const componentType type, Component* componentPointer = nullptr, bool fromReference = true);
 	void DeleteChild(GameObject* go);

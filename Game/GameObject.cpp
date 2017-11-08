@@ -91,8 +91,17 @@ void GameObject::SetRoot(bool root)
 
 bool GameObject::IsRoot() const
 {
-
 	return isRoot;
+}
+
+void GameObject::SetStatic(bool set)
+{
+	isStatic = set;
+}
+
+bool GameObject::IsStatic() const
+{
+	return isStatic;
 }
 
 std::vector<Component*> GameObject::FindComponents(componentType type)
