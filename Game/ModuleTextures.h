@@ -41,8 +41,8 @@ public:
 private: // Importer Methods
 	bool Import(const char* path, std::string& output_file); // Creates a DDS File from other extensions [NOT LOADING FILE INTO ENGINE]
 	bool Import(const void* buffer, uint size, std::string& output_file, const char* file_name); // Creates a DDS File from other extensions [NOT LOADING FILE INTO ENGINE]
-	bool Load(const char* exported_file);
-	bool Load(const char* exported_file, Texture* tex); // fills 'tex' with the loaded texture
+	Texture* Load(const char* exported_file);
+	Texture* Load(const char* exported_file, Texture* tex); // fills 'tex' with the loaded texture
 
 private: // Configurations
 	int clamp_type = clampingTexType_ClampRepeat;

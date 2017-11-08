@@ -170,7 +170,7 @@ Texture * ModuleTextures::LoadDDSTexture(const char * path)
 {
 	Texture* tex = nullptr;
 
-	Load(path, tex);
+	tex = Load(path, tex);
 
 	return tex;
 }
@@ -257,10 +257,8 @@ bool ModuleTextures::Import(const void * buffer, uint size, std::string & output
 	return ret;
 }
 
-bool ModuleTextures::Load(const char * exported_file)
+Texture* ModuleTextures::Load(const char * exported_file)
 {
-	bool ret = false;
-
 	uint textureID = 0;
 	ILuint imageID;
 
@@ -351,24 +349,22 @@ bool ModuleTextures::Load(const char * exported_file)
 
 	LOG("Texture Load End:\n\t%s", exported_file);
 
-	return ret;
+	return new_tex;
 }
 
-bool ModuleTextures::Load(const char * exported_file, Texture * tex)
+Texture* ModuleTextures::Load(const char * exported_file, Texture * tex)
 {
-	bool ret = false;
-
 	char* buffer = nullptr;
 	std::string file = exported_file;
 	uint size = App->fs->Load(file.c_str(), &buffer);
+
+	Texture* new_tex = nullptr;
 
 	if (buffer != nullptr) {
 		if (size > 0) {
 			uint textureID = 0;
 			ILuint imageID;
 			ILenum error;
-
-			Texture* new_tex = nullptr;
 
 			ilGenImages(1, &imageID);
 			ilBindImage(imageID);
@@ -437,7 +433,6 @@ bool ModuleTextures::Load(const char * exported_file, Texture * tex)
 					//Texture Specifications
 					glTexImage2D(GL_TEXTURE_2D, 0, new_tex->format, new_tex->w, new_tex->h, 0, new_tex->format, GL_UNSIGNED_BYTE, ilGetData());
 
-					tex = new_tex;
 					App->res->textures.push_back(new_tex);
 
 					glBindTexture(GL_TEXTURE_2D, 0);
@@ -453,6 +448,6 @@ bool ModuleTextures::Load(const char * exported_file, Texture * tex)
 	
 	LOG("Texture Load End:\n\t%s", exported_file);
 
-	return ret;
+	return new_tex;
 }
 
