@@ -10,11 +10,19 @@
 
 using namespace std;
 
+enum ExtensionType {
+	et_texture = 0,
+	et_geometry,
+	// unknown always last
+	et_unknown
+};
+
 class ModuleFileSystem : public Module {
 public:
 	ModuleFileSystem(Application* app, bool start_enabled = true);
 	virtual ~ModuleFileSystem();
 public:	
+	bool Init();
 	bool Start();
 
 	bool CleanUp();
@@ -31,6 +39,9 @@ public:
 		return (stat(path.c_str(), &buffer) == 0);
 	}
 	uint Load(const char* path, char** buffer);
+
+	int GetTypeFromExtension(mutable const char* ext);
+
 };
 
 #endif // !__MODULE_FILESYSTEM_H__

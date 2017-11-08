@@ -8,6 +8,6 @@
 char* Capitalize(char* str);
 
 std::string GetFileFromPath(const char* path, bool take_extension = true);
-const char* GetExtension(const char* path);
-
+std::string GetExtension(const char* path);
+const char* GetCExtension(const char* path);
 #endif // !__HELPER_FOOS_H__

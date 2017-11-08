@@ -11,6 +11,13 @@ ModuleFileSystem::ModuleFileSystem(Application * app, bool start_enabled) : Modu
 
 ModuleFileSystem::~ModuleFileSystem()
 {
+	name = "FileSystem";
+}
+
+bool ModuleFileSystem::Init()
+{
+	
+	return true;
 }
 
 bool ModuleFileSystem::Start()
@@ -235,6 +242,24 @@ uint ModuleFileSystem::Load(const char * path, char ** buffer)
 	else {
 		LOG("ERROR while opening file:\n\t%s\n\t%s", path, strerror(errno));
 	}
+
+	return ret;
+}
+
+int ModuleFileSystem::GetTypeFromExtension(const char * ext)
+{
+	int ret = et_unknown;
+
+	if (strcmp(ext, "DDS") == 0 || strcmp(ext, "dds") == 0)
+		ret = et_texture;
+	if (strcmp(ext, "TGA") == 0 || strcmp(ext, "tga") == 0)
+		ret = et_texture;
+	if (strcmp(ext, "JPG") == 0 || strcmp(ext, "jpg") == 0)
+		ret = et_texture;
+	if (strcmp(ext, "PNG") == 0 || strcmp(ext, "png") == 0)
+		ret = et_texture;
+	if (strcmp(ext, "FBX") == 0 || strcmp(ext, "fbx") == 0)
+		ret = et_geometry;
 
 	return ret;
 }

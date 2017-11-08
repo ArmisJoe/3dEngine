@@ -332,8 +332,8 @@ ComponentMesh* ModuleAssimp::LoadMyFormatMesh(const char * exported_file)
 		LOG("ERROR Empty or unvalid Path");
 		return false;
 	}
-	const char* str = GetExtension(exported_file);
-	if (std::strcmp(GetExtension(exported_file), MESH_OWN_FORMAT) == false) {
+	const char* str = GetCExtension(exported_file);
+	if (std::strcmp(GetCExtension(exported_file), MESH_OWN_FORMAT) == false) {
 		LOG("ERROR not '%s' extension file", MESH_OWN_FORMAT);
 		return false;
 	}

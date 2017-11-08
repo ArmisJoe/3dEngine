@@ -28,7 +28,22 @@ std::string GetFileFromPath(const char * path, bool take_extension)
 	return ret;
 }
 
-const char* GetExtension(const char * path)
+std::string GetExtension(const char * path)
+{
+	std::string extension;
+
+	for (int i = 0; path[i] != '\0'; i++) {
+		if (path[i] == '.') {
+			extension.clear();
+			continue;
+		}
+		extension += path[i];
+	}
+
+	return extension;
+}
+
+const char* GetCExtension(const char * path)
 {
 	std::string extension;
 

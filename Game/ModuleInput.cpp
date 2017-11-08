@@ -123,8 +123,9 @@ update_status ModuleInput::PreUpdate(float dt)
 			case SDL_DROPFILE:
 			{
 				dropped_filedir = e.drop.file;
-				char* filetext = Capitalize(strrchr(dropped_filedir, '.'));
-				if (strncmp(filetext, ".FBX", 4) == 0 || strncmp(filetext, ".fbx", 4) == 0) {
+				std::string filetext = GetExtension(dropped_filedir);
+				int filetype = App->fs->GetTypeFromExtension(filetext.c_str());
+				if (filetype == ExtensionType::et_geometry) {	// Is Geometry
 					GameObject* new_geo = nullptr;
 					new_geo = App->assimp->LoadGeometry(dropped_filedir);
 					if (new_geo != nullptr) {
@@ -137,11 +138,13 @@ update_status ModuleInput::PreUpdate(float dt)
 					}
 					LOG("File Loaded:\n\t%s", dropped_filedir);
 				}
-				if (strncmp(filetext, ".PNG", 4) == 0 || strncmp(filetext, ".png", 4) == 0) {
+				else if (filetype == ExtensionType::et_texture) {	// Is Texture
 					Texture* new_tex = App->tex->LoadToDDS(dropped_filedir);
-					//[TEST] Assigning Textures
-					//!_[TEST] Assigning Textures
 				}
+				else {												// Is Default / Unknown
+					LOG("Unknown file format '%s'", filetext);
+				}
+				
 				SDL_free(dropped_filedir);
 				break;
 			}
