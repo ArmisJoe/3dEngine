@@ -157,7 +157,6 @@
     <ClInclude Include="MathGeoLib\MathGeoLibFwd.h" />
     <ClInclude Include="MathGeoLib\Math\assume.h" />
     <ClInclude Include="MathGeoLib\Math\BitOps.h" />
-    <ClInclude Include="MathGeoLib\Math\Callstack.h" />
     <ClInclude Include="MathGeoLib\Math\FixedPoint.h" />
     <ClInclude Include="MathGeoLib\Math\float2.h" />
     <ClInclude Include="MathGeoLib\Math\float3.h" />

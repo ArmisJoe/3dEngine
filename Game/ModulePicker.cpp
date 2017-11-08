@@ -116,7 +116,6 @@ void ModulePicker::IterativeRayCast(const LineSegment & segment, float &dist, Ga
 					}
 				}
 			}
-
 			/*Triangle triangle;
 			for (uint it = 0; it < mesh->num_indices;)
 			{
