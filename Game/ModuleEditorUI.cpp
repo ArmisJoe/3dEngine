@@ -8,6 +8,8 @@
 #include <string>
 #include "Hardware.h"
 
+#include "ImGuizmo/ImGuizmo.h"
+
 ModuleEditorUI::ModuleEditorUI(bool start_enabled) : Module(start_enabled)
 {
 	name = "GUI";
@@ -94,9 +96,12 @@ bool ModuleEditorUI::Start()
 
 update_status ModuleEditorUI::PreUpdate(float dt)
 {
+
 	ImGui_ImplSdl_NewFrame(App->window->window);
 
 	ImGuiIO& io = ImGui::GetIO();
+
+	ImGuizmo::BeginFrame();
 
 	//Set Keyboard / Mouse bindings here
 

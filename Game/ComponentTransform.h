@@ -36,7 +36,7 @@ public:
 
 	bool Transformed = false;
 private:
-
+	float4x4 GetParentTransform()const;
 	float3 position = float3::zero;
 	Quat rotation = Quat::identity;
 	float3 scale = float3::one;

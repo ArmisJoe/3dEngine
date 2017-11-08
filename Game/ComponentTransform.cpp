@@ -1,6 +1,8 @@
 #include "ImGui\imgui.h"
 #include "ImGuizmo\ImGuizmo.h"
 #include "ComponentTransform.h"
+#include "MathGeoLib\MathGeoLib.h"
+
 #include "Application.h"
 #include "GameObject.h"
 
@@ -179,8 +181,6 @@ void ComponentTransform::OnEditor()
 	}
 
 	// ImGuizmo
-/*
-
 	ImGuizmo::Enable(true);
 
 	static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::ROTATE);
@@ -196,7 +196,7 @@ void ComponentTransform::OnEditor()
 		else mCurrentGizmoMode = ImGuizmo::WORLD;
 	}
 
-	/*if (ImGui::Button("Translate") || App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	if (ImGui::Button("Translate") || App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		mCurrentGizmoOperation = ImGuizmo::TRANSLATE;
 	ImGui::SameLine();
 	if (ImGui::Button("Rotate") || App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
@@ -210,8 +210,8 @@ void ComponentTransform::OnEditor()
 	ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
 
 
-	float4x4 view_matrix = App->camera->frustum.ViewMatrix();
-	float4x4 proj_matrix = App->camera->frustum.ProjectionMatrix();
+	float4x4 view_matrix = App->camera->curr_camera->GetFrustum().ViewMatrix();
+	float4x4 proj_matrix = App->camera->curr_camera->GetFrustum().ProjectionMatrix();
 	view_matrix.Transpose();
 	proj_matrix.Transpose();
 
@@ -230,16 +230,27 @@ void ComponentTransform::OnEditor()
 		trs_matrix.Decompose(new_pos, new_q, new_scale);
 
 		if (mCurrentGizmoOperation == ImGuizmo::TRANSLATE)
-			SetTranslation(new_pos.x, new_pos.y, new_pos.z);
+			SetPosition(float3(new_pos.x, new_pos.y, new_pos.z));
 		if (mCurrentGizmoOperation == ImGuizmo::SCALE)
-			SetScale(new_scale.x, new_scale.y, new_scale.z);
+			SetScale(float3(new_scale.x, new_scale.y, new_scale.z));
 		if (mCurrentGizmoOperation == ImGuizmo::ROTATE)
 		{
-			rot_in_euler = new_q.ToEulerXYZ()*RADTODEG;
-			SetRotation(new_q);
-		}
+			rotation = new_q;
+		}	
+	}
+}
 
-	
-	}*/
+float4x4 ComponentTransform::GetParentTransform() const
+{
+	GameObject* g = GetParent()->GetParent();
+	float4x4 parent_transform = float4x4::identity;
 
+	if (g != nullptr)
+	{
+		if (g->GetTransform() != nullptr)
+			parent_transform = g->GetTransform()->GetTransformMatrix();
+
+		return parent_transform;
+	}
+	else return transform_matrix;
 }

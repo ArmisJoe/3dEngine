@@ -186,6 +186,9 @@
     <ClCompile Include="Timer.cpp">
       <Filter>Tools\Math</Filter>
     </ClCompile>
+    <ClCompile Include="ImGuizmo\ImGuizmo.cpp">
+      <Filter>Tools\ImGuizmo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glew-2.1.0\include\GL\eglew.h" />
@@ -434,6 +437,9 @@
     <ClInclude Include="Timer.h">
       <Filter>Tools\Math</Filter>
     </ClInclude>
+    <ClInclude Include="ImGuizmo\ImGuizmo.h">
+      <Filter>Tools\ImGuizmo</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Geometry\KDTree.inl" />
@@ -473,6 +479,9 @@
     </Filter>
     <Filter Include="Application\Main">
       <UniqueIdentifier>{a916d836-32c8-4cda-ae1b-46962a94eae0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\ImGuizmo">
+      <UniqueIdentifier>{f742ce9a-00a8-49ae-a979-78c488ff3c54}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

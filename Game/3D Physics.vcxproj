@@ -93,6 +93,7 @@
     <ClInclude Include="gpudetect\dxgi1_4.h" />
     <ClInclude Include="Hardware.h" />
     <ClInclude Include="HelperFoos.h" />
+    <ClInclude Include="ImGuizmo\ImGuizmo.h" />
     <ClInclude Include="imgui_impl_sdl.h" />
     <ClInclude Include="ImporterMaterial.h" />
     <ClInclude Include="ImporterMesh.h" />
@@ -206,6 +207,7 @@
     <ClCompile Include="glmath.cpp" />
     <ClCompile Include="gpudetect\DeviceId.cpp" />
     <ClCompile Include="Hardware.cpp" />
+    <ClCompile Include="ImGuizmo\ImGuizmo.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_demo.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />
