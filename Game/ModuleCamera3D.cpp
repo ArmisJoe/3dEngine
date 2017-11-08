@@ -183,12 +183,20 @@ GameObject * ModuleCamera3D::Pick()
 
 	float mousex = App->input->GetMouseX(), mousey = App->input->GetMouseY();
 
-	float dist_w = -(1.0f - (mousex * 2.0f));
-	float dist_y = 1.0f - (mousey * 2.0f);
+	float dist_w = -(1.0f - (float (mousex * 2.0f)) / App->window->GetWidth());
+	float dist_y = 1.0f - (float (mousey * 2.0f)) / App->window->GetHeight();
 
-	LineSegment picker = main_camera->GetFrustum().UnProjectLineSegment(dist_w / App->window->GetWidth(), App->window->GetHeight());
+	LineSegment picker = main_camera->GetFrustum().UnProjectLineSegment(dist_w , dist_y);
 
-	GameObject* contact;
+	float distance = 0.f;
+
+	ret = App->picker->RayCast(picker, distance);
+	if (ret != nullptr && distance != FLOAT_INF)
+	{
+		pickingat = picker.GetPoint(distance);
+		string PickedObject = "You selected: " + ret->GetName();
+		LOG(PickedObject.c_str());
+	}
 
 	return ret;
 }

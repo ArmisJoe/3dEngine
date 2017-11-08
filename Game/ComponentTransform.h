@@ -25,10 +25,12 @@ public:
 	Quat GetLocalRotation()const;
 	float3 GetLocalScale()const;
 
+	
 	void SetTransformMatrix();
 	const float* GetLocalTransform();
 	int GetTransformID()const;
 
+	float4x4 GetGlobalMatrix()const { return WorldMatrix; }
 	float4x4 GetTransformMatrix();
 	void SetIdentityTransform();
 	void OnEditor();
@@ -42,6 +44,9 @@ private:
 
 	float4x4 transform_matrix;
 	float4x4 prev_local_transform;
+
+	float4x4 WorldMatrix;
+
 
 	int transform_id;
 

@@ -23,11 +23,11 @@ public:
 	void LookAt(const float3 &spot);
 	void DrawConfigPanel();
 private:
-	void RotateCamera(float dt);
+	float3 pickingat = float3::zero;
 
+	void RotateCamera(float dt);
 	void MoveCamera(float dt);
 	void CameraZoom(float dt);
-
 	GameObject* Pick();
 public:
 	LineSegment picker;

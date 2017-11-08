@@ -37,7 +37,6 @@ public:
 	void CustomGLAttributes() const;
 	void DrawConfigPanel();
 private:
-
 	void DrawMesh(ComponentTransform* trans, ComponentMesh* m, ComponentMaterial* mat = nullptr);
 	uint objects_drawn = 0;
 public:

@@ -11,6 +11,7 @@ Application::Application()
 	window = new ModuleWindow(this);
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this, true);
+	picker = new ModulePicker(this);
 	scene = new ModuleScene(this);
 	renderer3D = new ModuleRenderer3D(this);
 	camera = new ModuleCamera3D(this);
@@ -22,7 +23,6 @@ Application::Application()
 	tex = new ModuleTextures(this);
 	res = new ModuleResources(this);
 	fs = new ModuleFileSystem(this);
-	picker = new ModulePicker(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -39,11 +39,13 @@ Application::Application()
 	AddModule(assimp);
 	AddModule(tex);
 	AddModule(res);
-	AddModule(picker);
 	
 	// Scenes
 	AddModule(scene);
 	AddModule(player);
+
+	// Picker
+	AddModule(picker);
 
 	// Renderer last!
 	AddModule(renderer3D);
