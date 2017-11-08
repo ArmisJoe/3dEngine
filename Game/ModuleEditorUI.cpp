@@ -3,7 +3,7 @@
 #include "PanelInspector.h"
 #include "PanelAbout.h"
 #include "PanelSceneTree.h"
-
+#include "ModulePicker.h"
 #include <iostream> 
 #include <string>
 #include "Hardware.h"
@@ -61,6 +61,7 @@ bool ModuleEditorUI::Start()
 	console->size = { (float)App->window->screen_surface->w * 2 / 3, (float)App->window->screen_surface->h / 4 };
 	console->pos = { App->window->screen_surface->w/2 - console->size.x/2 , App->window->screen_surface->h - (console->size.y ) };
 
+	inspector->SetInspected(App->picker->GetPicked());
 	//Versions
 	std::string library_str;
 	// ImGui

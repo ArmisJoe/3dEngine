@@ -324,6 +324,7 @@ void GameObject::OnHierarchyTree(bool skip_root)
 		if (selected == true) {
 			flags |= ImGuiTreeNodeFlags_Selected;
 		}
+
 		if (ImGui::TreeNodeEx(name.c_str(), flags)) {
 			if (ImGui::IsItemClicked(0)) {
 				if (scene != nullptr) {

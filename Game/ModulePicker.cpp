@@ -18,6 +18,12 @@ bool ModulePicker::Start()
 
 update_status ModulePicker::Update(float dt)
 {
+	if (picked != nullptr)
+	{
+	if (!picked->selected)
+		picked->selected = true;
+	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -32,7 +38,11 @@ GameObject * ModulePicker::RayCast(const LineSegment &segment, float& total_dist
 	total_distance = infinite;
 	IterativeRayCast(segment, total_distance, &ret);
 
+	if (picked != nullptr) {
+		picked->selected = false;
+	}
 	picked = ret;
+	App->scene->SetSelected(picked);
 	return ret;
 }
 void ModulePicker::IntersectAABB(const LineSegment & picking, std::vector<GameObject*>& DistanceList)
