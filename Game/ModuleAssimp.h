@@ -14,6 +14,9 @@
 
 #include "GameObject.h"
 
+#define MESH_OWN_FORMAT "mymesh"
+#define NUM_MESH_IDX 3
+
 class ModuleAssimp : public Module {
 
 public:
@@ -26,12 +29,13 @@ public:
 	//Nodes
 	GameObject* LoadNode(const aiNode* node, const aiScene* scene, GameObject* parent = nullptr);
 	//Components
-	ComponentMesh* LoadMesh(const aiMesh* m);
+	ComponentMesh* LoadRawMesh(const aiMesh* m);
 	ComponentMaterial* LoadMaterial(const aiMaterial* mat);
 	//Importer
 	bool Import(const aiMesh* m, std::string& output_file);
 	bool SaveToOwnFormat(ComponentMesh* m, std::string& output_file); // [FORMAT] -> { nV, nI, nUV, Vs, Is, UVs }
-
+	ComponentMesh* LoadMyFormatMesh(const char* exported_file);
+	ComponentMesh* LoadToOwnFormat(const aiMesh* m);
 	bool CleanUp();
 
 };

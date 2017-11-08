@@ -8,6 +8,8 @@
 
 #include "ModuleFileSystem.h"
 
+#include "HelperFoos.h"
+
 ModuleAssimp::ModuleAssimp(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
 	name = "Geometry Loader";
@@ -59,7 +61,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 	//LoadMeshes
 	for (uint i = 0; i < node->mNumMeshes; i++) {
 		//Mesh Load
-		ComponentMesh* new_mesh = LoadMesh(scene->mMeshes[node->mMeshes[i]]);
+		ComponentMesh* new_mesh = LoadToOwnFormat(scene->mMeshes[node->mMeshes[i]]);
 		if (new_mesh != nullptr)
 			new_node->AddComponent(componentType_Mesh, new_mesh);
 		//Material Load
@@ -117,15 +119,15 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 
 }
 
-ComponentMesh * ModuleAssimp::LoadMesh(const aiMesh* m)
+ComponentMesh * ModuleAssimp::LoadRawMesh(const aiMesh* m)
 {
 	ComponentMesh* new_mesh = nullptr;
 	
-	//Vertices
 	new_mesh = new ComponentMesh();
 	new_mesh->material_index = m->mMaterialIndex;
 	new_mesh->num_triangles = m->mNumFaces;
 	new_mesh->num_vertices = m->mNumVertices;
+	//Vertices
 	new_mesh->vertices = new float[new_mesh->num_vertices * 3];
 	memcpy(new_mesh->vertices, m->mVertices, sizeof(float) * new_mesh->num_vertices * 3);
 	glGenBuffers(1, (GLuint*) &(new_mesh->id_vertices));
@@ -290,7 +292,7 @@ bool ModuleAssimp::SaveToOwnFormat(ComponentMesh * m, std::string & output_file)
 {
 	bool ret = false;
 
-	int bufferIdx[] = { // Setting the buffer Indexes
+	int bufferIdx[NUM_MESH_IDX] = { // Setting the buffer Indexes
 		m->num_vertices,
 		m->num_indices,
 		m->num_UV
@@ -314,12 +316,98 @@ bool ModuleAssimp::SaveToOwnFormat(ComponentMesh * m, std::string & output_file)
 		std::memcpy(it, m->textureCoords, sizeof(float) * m->num_UV * 3); // Allocating UVs
 	}
 
-	//ret = App->fs->SaveUnique(LIBRARY_MESHES, buffer, m->name, "mymesh", bufferSize, output_file, true);
+	ret = App->fs->SaveUnique(LIBRARY_MESHES, buffer, m->name.c_str(), MESH_OWN_FORMAT, bufferSize, output_file, false);
 
 	if (buffer != nullptr)
 		mdelete[] buffer;
 
 	return ret;
+}
+
+ComponentMesh* ModuleAssimp::LoadMyFormatMesh(const char * exported_file)
+{
+	ComponentMesh* new_mesh = nullptr;
+
+	if (exported_file == nullptr) {
+		LOG("ERROR Empty or unvalid Path");
+		return false;
+	}
+	const char* str = GetExtension(exported_file);
+	if (std::strcmp(GetExtension(exported_file), MESH_OWN_FORMAT) == false) {
+		LOG("ERROR not '%s' extension file", MESH_OWN_FORMAT);
+		return false;
+	}
+
+	char* buffer = nullptr;
+	int bufferSize = App->fs->Load(exported_file, &buffer);
+	if (buffer != nullptr) {
+		if (bufferSize > 0) {
+			// [FORMAT] nV nI nUV - Vs Is UVs
+			new_mesh = new ComponentMesh();
+			memcpy(&new_mesh->num_vertices, buffer, sizeof(uint));
+			memcpy(&new_mesh->num_indices, buffer + sizeof(uint), sizeof(uint));
+			memcpy(&new_mesh->num_UV, buffer + 2 * sizeof(uint), sizeof(uint));
+			char* it = buffer;
+			// Vertices
+			it = buffer + sizeof(uint) * NUM_MESH_IDX; // it = buffer[Vs]
+			new_mesh->vertices = new float[new_mesh->num_vertices * 3];
+			memcpy(new_mesh->vertices, it, sizeof(float) * new_mesh->num_vertices * 3);
+			glGenBuffers(1, (GLuint*)&(new_mesh->id_vertices));
+			glBindBuffer(GL_ARRAY_BUFFER, new_mesh->id_vertices);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * new_mesh->num_vertices * 3, new_mesh->vertices, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			// Indices
+			it += sizeof(float) * new_mesh->num_vertices * 3; // it = buffer[Is]
+			new_mesh->indices = new uint[new_mesh->num_indices];
+			memcpy(new_mesh->indices, it, sizeof(uint) * new_mesh->num_indices);
+			glGenBuffers(1, (GLuint*) &(new_mesh->id_indices));
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, new_mesh->id_indices);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * new_mesh->num_indices, new_mesh->indices, GL_STATIC_DRAW);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+			// UVs
+			if (new_mesh->num_UV > 0) {
+				it += sizeof(uint) * new_mesh->num_indices; // it = buffer[UVs]
+				new_mesh->textureCoords = new float[new_mesh->num_UV * 3];
+				memcpy(new_mesh->textureCoords, it, sizeof(float) * new_mesh->num_UV);
+
+				glGenBuffers(1, (GLuint*)&(new_mesh->id_UV));
+				glBindBuffer(GL_ARRAY_BUFFER, (GLuint)new_mesh->id_UV);
+				glBufferData(GL_ARRAY_BUFFER, sizeof(uint) * new_mesh->num_UV * 3, new_mesh->textureCoords, GL_STATIC_DRAW);
+				glBindBuffer(GL_ARRAY_BUFFER, 0);
+			}
+			else
+				LOG("Mesh with no Uvs");
+			// Name
+			new_mesh->name = GetFileFromPath(exported_file, false);
+
+			if (new_mesh != nullptr) {
+				LOG("Loaded mesh with %d vertices %d indices %d UVs", new_mesh->num_vertices, new_mesh->num_indices, new_mesh->num_UV);
+			}
+		}
+	}
+
+	return new_mesh;
+}
+
+ComponentMesh * ModuleAssimp::LoadToOwnFormat(const aiMesh * m)
+{
+	ComponentMesh* new_m = nullptr;
+
+	std::string output_file;
+	if (Import(m, output_file)) {
+		new_m = LoadMyFormatMesh(output_file.c_str());
+		if (new_m == nullptr)
+			LOG("ERROR Loading Mesh from '%s' format", MESH_OWN_FORMAT);
+	}
+	else {
+		LOG("ERROR Importing Mesh to '%s' format", MESH_OWN_FORMAT);
+	}
+
+	if (new_m != nullptr) {
+		App->res->meshes.push_back(new_m);
+	}
+
+	return new_m;
 }
 
 bool ModuleAssimp::CleanUp()
