@@ -8,7 +8,7 @@ using namespace std;
 
 class ModuleFileSystem : public Module {
 public:
-	ModuleFileSystem(Application* app, bool start_enabled = true);
+	ModuleFileSystem(bool start_enabled = true);
 	virtual ~ModuleFileSystem();
 public:	
 	bool Start();

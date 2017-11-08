@@ -20,7 +20,7 @@ enum interpolationTexType {
 class ModuleTextures : public Module {
 public:
 public:
-	ModuleTextures(Application* app, bool start_enabled = true);
+	ModuleTextures( bool start_enabled = true);
 	~ModuleTextures();
 
 public:

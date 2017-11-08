@@ -3,7 +3,7 @@
 //#include "HelperFoos.h"
 //#include <fstream>
 
-ModuleFileSystem::ModuleFileSystem(Application * app, bool start_enabled) : Module(app, start_enabled)
+ModuleFileSystem::ModuleFileSystem(bool start_enabled) : Module(start_enabled)
 {
 }
 

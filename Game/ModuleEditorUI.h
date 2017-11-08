@@ -23,7 +23,7 @@ class PanelSceneTree;
 
 class ModuleEditorUI : public Module {
 public:
-	ModuleEditorUI(Application* app, bool start_enabled = true);
+	ModuleEditorUI(bool start_enabled = true);
 	~ModuleEditorUI();
 
 	bool Init();
@@ -41,7 +41,9 @@ public:
 	void AddPanel(Panel* n_panel);
 
 	void DrawConfigPanels();
-
+	//bool AreGizmosActive() const { return GizmosActive; }
+	//void GizmoStart() { GizmosActive = true; }
+	//void GizmoEnd() { GizmosActive = false; }
 private:
 	std::list<Panel*> panels;
 
@@ -52,6 +54,8 @@ private:
 
 	// List of libraries which actually they are strings which they are char*-based classes themselves from C but also used on C# and (like on this case) C++
 	vector<string> libraries;
+
+	//bool GizmosActive = true;
 
 public:
 	PanelConsole*		console = nullptr;

@@ -5,7 +5,6 @@
 #include "glmath.h"
 #include "MathGeoLib\MathGeoLib.h"
 
-
 class ComponentTransform : public Component {
 public:
 
@@ -51,4 +50,7 @@ private:
 	int transform_id;
 
 	bool transform_modified = false;
+
+	float4x4 view_matrix_fromCamera;
+	float4x4 proj_matrix_fromCamera;
 };

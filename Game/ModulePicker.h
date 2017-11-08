@@ -9,7 +9,7 @@
 class ModulePicker : public Module
 {
 public:
-	ModulePicker(Application* app, bool start_enabled = true);
+	ModulePicker(bool start_enabled = true);
 	~ModulePicker();
 
 	bool Start();

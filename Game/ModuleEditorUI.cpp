@@ -8,7 +8,7 @@
 #include <string>
 #include "Hardware.h"
 
-ModuleEditorUI::ModuleEditorUI(Application * app, bool start_enabled) : Module(app, start_enabled)
+ModuleEditorUI::ModuleEditorUI(bool start_enabled) : Module(start_enabled)
 {
 	name = "GUI";
 

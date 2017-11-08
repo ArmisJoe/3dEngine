@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ComponentTransform.h"
 
-ModulePicker::ModulePicker(Application * app, bool start_enabled) : Module(app, start_enabled)
+ModulePicker::ModulePicker(bool start_enabled) : Module(start_enabled)
 {
 	name = "Picker";
 }

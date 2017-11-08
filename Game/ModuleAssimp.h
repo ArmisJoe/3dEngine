@@ -17,7 +17,7 @@
 class ModuleAssimp : public Module {
 
 public:
-	ModuleAssimp(Application* app, bool start_enabled = true);
+	ModuleAssimp(bool start_enabled = true);
 	~ModuleAssimp();
 
 public:

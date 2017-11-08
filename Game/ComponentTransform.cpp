@@ -1,6 +1,9 @@
-#include "ComponentTransform.h"
-
 #include "ImGui\imgui.h"
+#include "ImGuizmo\ImGuizmo.h"
+#include "ComponentTransform.h"
+#include "Application.h"
+#include "GameObject.h"
+
 
 ComponentTransform::ComponentTransform() : Component(componentType_Transform)
 {
@@ -174,5 +177,69 @@ void ComponentTransform::OnEditor()
 		scale.y = sca[1];
 		scale.z = sca[2];
 	}
+
+	// ImGuizmo
+/*
+
+	ImGuizmo::Enable(true);
+
+	static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::ROTATE);
+	static ImGuizmo::MODE mCurrentGizmoMode(ImGuizmo::WORLD);
+
+	static bool local_opt = false;
+
+	ImGui::Separator();
+	if (ImGui::Checkbox("Local", &local_opt))
+	{
+		if (local_opt)
+			mCurrentGizmoMode = ImGuizmo::LOCAL;
+		else mCurrentGizmoMode = ImGuizmo::WORLD;
+	}
+
+	/*if (ImGui::Button("Translate") || App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+		mCurrentGizmoOperation = ImGuizmo::TRANSLATE;
+	ImGui::SameLine();
+	if (ImGui::Button("Rotate") || App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+		mCurrentGizmoOperation = ImGuizmo::ROTATE;
+	ImGui::SameLine();
+	if (ImGui::Button("Scale") || App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+		mCurrentGizmoOperation = ImGuizmo::SCALE;
+
+
+	ImGuiIO& io = ImGui::GetIO();
+	ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
+
+
+	float4x4 view_matrix = App->camera->frustum.ViewMatrix();
+	float4x4 proj_matrix = App->camera->frustum.ProjectionMatrix();
+	view_matrix.Transpose();
+	proj_matrix.Transpose();
+
+
+	float4x4 trs_matrix = transform_matrix;
+	ImGuizmo::Manipulate(view_matrix.ptr(), proj_matrix.ptr(), mCurrentGizmoOperation, mCurrentGizmoMode, trs_matrix.ptr());
+
+	if (ImGuizmo::IsUsing())
+	{
+		trs_matrix.Transpose();
+		trs_matrix = GetParentTransform().Transposed().Inverted() * trs_matrix;
+
+		float3 new_pos;
+		float3 new_scale;
+		Quat new_q;
+		trs_matrix.Decompose(new_pos, new_q, new_scale);
+
+		if (mCurrentGizmoOperation == ImGuizmo::TRANSLATE)
+			SetTranslation(new_pos.x, new_pos.y, new_pos.z);
+		if (mCurrentGizmoOperation == ImGuizmo::SCALE)
+			SetScale(new_scale.x, new_scale.y, new_scale.z);
+		if (mCurrentGizmoOperation == ImGuizmo::ROTATE)
+		{
+			rot_in_euler = new_q.ToEulerXYZ()*RADTODEG;
+			SetRotation(new_q);
+		}
+
+	
+	}*/
 
 }
