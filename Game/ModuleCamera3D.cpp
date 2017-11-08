@@ -38,7 +38,7 @@ bool ModuleCamera3D::CleanUp()
 // -----------------------------------------------------------------
 update_status ModuleCamera3D::Update(float dt)
 {
-	if (!ImGui::IsAnyWindowHovered())
+	if (!ImGui::IsAnyWindowHovered() && active_camera == true)
 	{
 		// Mouse wheel motion
 		if (App->input->IsMouseWheelActive()) {

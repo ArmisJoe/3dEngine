@@ -45,8 +45,7 @@ private:
 	float4x4 prev_local_transform;
 
 	float4x4 WorldMatrix;
-
-
+	bool can_update = true;
 	int transform_id;
 
 	bool transform_modified = false;

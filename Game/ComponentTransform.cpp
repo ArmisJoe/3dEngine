@@ -86,20 +86,23 @@ void ComponentTransform::SetIdentityTransform()
 
 void ComponentTransform::Update(float dt)
 {
-	if (!GetParent()->IsRoot())
+	if (can_update)
 	{
-		ComponentTransform* parent_transform = (ComponentTransform*)GetParent()->GetParent()->GetTransform();
-
-		WorldMatrix = WorldMatrix.FromTRS(position, rotation, scale);
-		WorldMatrix = parent_transform->WorldMatrix * WorldMatrix;
-	}
-	else
-	{
-		WorldMatrix = float4x4::FromTRS(position, rotation, scale);
-		for (std::vector<GameObject*>::iterator it = GetParent()->children.begin(); it != GetParent()->children.end(); ++it)
+		if (!GetParent()->IsRoot())
 		{
-			ComponentTransform* child_transform = (ComponentTransform*)(*it)->GetTransform();
-			child_transform->Update(dt);
+			ComponentTransform* parent_transform = (ComponentTransform*)GetParent()->GetParent()->GetTransform();
+
+			WorldMatrix = WorldMatrix.FromTRS(position, rotation, scale);
+			WorldMatrix = parent_transform->WorldMatrix * WorldMatrix;
+		}
+		else
+		{
+			WorldMatrix = float4x4::FromTRS(position, rotation, scale);
+			for (std::vector<GameObject*>::iterator it = GetParent()->children.begin(); it != GetParent()->children.end(); ++it)
+			{
+				ComponentTransform* child_transform = (ComponentTransform*)(*it)->GetTransform();
+				child_transform->Update(dt);
+			}
 		}
 	}
 }
@@ -181,62 +184,74 @@ void ComponentTransform::OnEditor()
 	}
 
 	// ImGuizmo
-	ImGuizmo::Enable(true);
-
-	static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::ROTATE);
-	static ImGuizmo::MODE mCurrentGizmoMode(ImGuizmo::WORLD);
-
-	static bool local_opt = false;
-
-	ImGui::Separator();
-	if (ImGui::Checkbox("Local", &local_opt))
+	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT)
 	{
-		if (local_opt)
-			mCurrentGizmoMode = ImGuizmo::LOCAL;
-		else mCurrentGizmoMode = ImGuizmo::WORLD;
-	}
+		//can_update = false;
+		App->camera->SetCameraActive(false);
+		ImGuizmo::Enable(true);
 
-	if (ImGui::Button("Translate") || App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-		mCurrentGizmoOperation = ImGuizmo::TRANSLATE;
-	ImGui::SameLine();
-	if (ImGui::Button("Rotate") || App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-		mCurrentGizmoOperation = ImGuizmo::ROTATE;
-	ImGui::SameLine();
-	if (ImGui::Button("Scale") || App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-		mCurrentGizmoOperation = ImGuizmo::SCALE;
+		static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::ROTATE);
+		static ImGuizmo::MODE mCurrentGizmoMode(ImGuizmo::WORLD);
 
+		static bool local_opt = false;
 
-	ImGuiIO& io = ImGui::GetIO();
-	ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
-
-
-	float4x4 view_matrix = App->camera->curr_camera->GetFrustum().ViewMatrix();
-	float4x4 proj_matrix = App->camera->curr_camera->GetFrustum().ProjectionMatrix();
-	view_matrix.Transpose();
-	proj_matrix.Transpose();
-
-
-	float4x4 trs_matrix = transform_matrix;
-	ImGuizmo::Manipulate(view_matrix.ptr(), proj_matrix.ptr(), mCurrentGizmoOperation, mCurrentGizmoMode, trs_matrix.ptr());
-
-	if (ImGuizmo::IsUsing())
-	{
-		trs_matrix.Transpose();
-		trs_matrix = GetParentTransform().Transposed().Inverted() * trs_matrix;
-
-		float3 new_pos;
-		float3 new_scale;
-		Quat new_q;
-		trs_matrix.Decompose(new_pos, new_q, new_scale);
-
-		if (mCurrentGizmoOperation == ImGuizmo::TRANSLATE)
-			SetPosition(float3(new_pos.x, new_pos.y, new_pos.z));
-		if (mCurrentGizmoOperation == ImGuizmo::SCALE)
-			SetScale(float3(new_scale.x, new_scale.y, new_scale.z));
-		if (mCurrentGizmoOperation == ImGuizmo::ROTATE)
+		ImGui::Separator();
+		if (ImGui::Checkbox("Local", &local_opt))
 		{
-			rotation = new_q;
-		}	
+			if (local_opt)
+				mCurrentGizmoMode = ImGuizmo::LOCAL;
+			else mCurrentGizmoMode = ImGuizmo::WORLD;
+		}
+
+		if (ImGui::Button("Translate") || App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+			mCurrentGizmoOperation = ImGuizmo::TRANSLATE;
+		ImGui::SameLine();
+		if (ImGui::Button("Rotate") || App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+			mCurrentGizmoOperation = ImGuizmo::ROTATE;
+		ImGui::SameLine();
+		if (ImGui::Button("Scale") || App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+			mCurrentGizmoOperation = ImGuizmo::SCALE;
+
+
+		ImGuiIO& io = ImGui::GetIO();
+		
+
+		ImGuizmo::SetRect(0, 0, io.DisplaySize.x + 2, io.DisplaySize.y + 2);
+
+
+		float4x4 view_matrix = App->camera->curr_camera->GetFrustum().ViewMatrix();
+		float4x4 proj_matrix = App->camera->curr_camera->GetFrustum().ProjectionMatrix();
+		view_matrix.Transpose();
+		proj_matrix.Transpose();
+
+
+		float4x4 trs_matrix = transform_matrix;
+		ImGuizmo::Manipulate(view_matrix.ptr(), proj_matrix.ptr(), mCurrentGizmoOperation, mCurrentGizmoMode, trs_matrix.ptr());
+
+		if (ImGuizmo::IsUsing())
+		{
+			trs_matrix.Transpose();
+			trs_matrix = GetParentTransform().Transposed().Inverted() * trs_matrix;
+
+			float3 new_pos;
+			float3 new_scale;
+			Quat new_q;
+			trs_matrix.Decompose(new_pos, new_q, new_scale);
+
+			if (mCurrentGizmoOperation == ImGuizmo::TRANSLATE)
+				SetPosition(float3(new_pos.x/10, new_pos.y/10, new_pos.z/10));
+			if (mCurrentGizmoOperation == ImGuizmo::SCALE)
+				SetScale(float3(new_scale.x/10, new_scale.y/10, new_scale.z/10));
+			if (mCurrentGizmoOperation == ImGuizmo::ROTATE)
+			{
+				//SetRotation(new_q.ToEulerXYZ());
+			}
+		}
+	}
+	else {
+		ImGuizmo::Enable(false);
+		App->camera->SetCameraActive(true);
+		can_update = true;
 	}
 }
 
@@ -245,7 +260,7 @@ float4x4 ComponentTransform::GetParentTransform() const
 	GameObject* g = GetParent()->GetParent();
 	float4x4 parent_transform = float4x4::identity;
 
-	if (g != nullptr)
+	if (g != nullptr && g->IsRoot() == false)
 	{
 		if (g->GetTransform() != nullptr)
 			parent_transform = g->GetTransform()->GetTransformMatrix();
