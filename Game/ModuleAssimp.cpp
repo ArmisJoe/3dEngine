@@ -6,9 +6,11 @@
 #include "ComponentMesh.h"
 #include "ComponentTransform.h"
 
+#include "ModuleFileSystem.h"
+
 ModuleAssimp::ModuleAssimp(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
-	name = "Assimp";
+	name = "Geometry Loader";
 }
 
 ModuleAssimp::~ModuleAssimp()
@@ -217,6 +219,107 @@ ComponentMaterial * ModuleAssimp::LoadMaterial(const aiMaterial* mat)
 	}
 
 	return new_mat;
+}
+
+bool ModuleAssimp::Import(const aiMesh * m, std::string & output_file)
+{
+	bool ret = false;
+
+	if (m == nullptr) {
+		LOG("ERROR Loading mesh -> Mesh is NULLPTR");
+		return false;
+	}
+
+	ComponentMesh* new_mesh = nullptr;
+
+	//Vertices
+	new_mesh = new ComponentMesh();
+	new_mesh->material_index = m->mMaterialIndex;
+	new_mesh->num_triangles = m->mNumFaces;
+	new_mesh->num_vertices = m->mNumVertices;
+	new_mesh->vertices = new float[new_mesh->num_vertices * 3];
+	memcpy(new_mesh->vertices, m->mVertices, sizeof(float) * new_mesh->num_vertices * 3);
+
+	//Indices
+	if (m->HasFaces()) {
+		new_mesh->num_indices = m->mNumFaces * 3;
+		new_mesh->indices = new uint[new_mesh->num_indices];
+
+		for (uint i = 0; i < m->mNumFaces; ++i)
+		{
+			if (m->mFaces[i].mNumIndices != 3) {
+				LOG("Mesh face with != 3 indices!");
+			}
+			else
+				memcpy(&new_mesh->indices[i * 3], m->mFaces[i].mIndices, 3 * sizeof(uint));
+		}
+
+	}
+	else {
+		LOG("Mesh with no Faces");
+	}
+
+	//UVS
+	if (m->HasTextureCoords(0))
+	{
+		new_mesh->num_UV = m->mNumVertices;
+		new_mesh->textureCoords = new float[new_mesh->num_UV * 3];
+		memcpy(new_mesh->textureCoords, m->mTextureCoords[0], sizeof(float)*new_mesh->num_UV * 3);
+
+	}
+	else
+	{
+		LOG("No Texture Coords found");
+	}
+
+	//Name
+	new_mesh->name = m->mName.C_Str();
+
+	if (new_mesh != nullptr) {
+		ret = SaveToOwnFormat(new_mesh, output_file);
+	}
+
+	if (new_mesh != nullptr) {
+		mdelete new_mesh;
+	}
+
+	return ret;
+}
+
+bool ModuleAssimp::SaveToOwnFormat(ComponentMesh * m, std::string & output_file)
+{
+	bool ret = false;
+
+	int bufferIdx[] = { // Setting the buffer Indexes
+		m->num_vertices,
+		m->num_indices,
+		m->num_UV
+	};
+	
+	int bufferSize = 0;	// Setting the Buffer full size to allocate;
+	bufferSize += sizeof(bufferIdx);
+	bufferSize += sizeof(float) * m->num_vertices * 3;
+	bufferSize += sizeof(unsigned int) * m->num_indices;
+	bufferSize += sizeof(float) * m->num_UV * 3;
+
+	char* buffer = new char[bufferSize]; // Creating the Buffer
+	char* it = buffer;
+	std::memcpy(buffer, bufferIdx, sizeof(bufferIdx)); // Allocating Indexes
+	it += sizeof(bufferIdx);
+	std::memcpy(it, m->vertices, sizeof(float) * m->num_vertices * 3); // Allocating vertices
+	it += sizeof(float) * m->num_vertices * 3;
+	std::memcpy(it, m->indices, sizeof(unsigned int) * m->num_indices); // Allocating indices
+	if (m->num_UV > 0) {
+		it += sizeof(unsigned int) * m->num_indices;
+		std::memcpy(it, m->textureCoords, sizeof(float) * m->num_UV * 3); // Allocating UVs
+	}
+
+	//ret = App->fs->SaveUnique(LIBRARY_MESHES, buffer, m->name, "mymesh", bufferSize, output_file, true);
+
+	if (buffer != nullptr)
+		mdelete[] buffer;
+
+	return ret;
 }
 
 bool ModuleAssimp::CleanUp()

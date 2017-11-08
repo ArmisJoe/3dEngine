@@ -28,6 +28,9 @@ public:
 	//Components
 	ComponentMesh* LoadMesh(const aiMesh* m);
 	ComponentMaterial* LoadMaterial(const aiMaterial* mat);
+	//Importer
+	bool Import(const aiMesh* m, std::string& output_file);
+	bool SaveToOwnFormat(ComponentMesh* m, std::string& output_file); // [FORMAT] -> { nV, nI, nUV, Vs, Is, UVs }
 
 	bool CleanUp();
 
