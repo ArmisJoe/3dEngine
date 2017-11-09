@@ -93,8 +93,17 @@ void GameObject::SetRoot(bool root)
 
 bool GameObject::IsRoot() const
 {
-
 	return isRoot;
+}
+
+void GameObject::SetStatic(bool set)
+{
+	isStatic = set;
+}
+
+bool GameObject::IsStatic() const
+{
+	return isStatic;
 }
 
 std::vector<Component*> GameObject::FindComponents(componentType type)
@@ -326,6 +335,7 @@ void GameObject::OnHierarchyTree(bool skip_root)
 		if (selected == true) {
 			flags |= ImGuiTreeNodeFlags_Selected;
 		}
+
 		if (ImGui::TreeNodeEx(name.c_str(), flags)) {
 			if (ImGui::IsItemClicked(0)) {
 				if (scene != nullptr) {

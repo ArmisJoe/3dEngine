@@ -5,7 +5,6 @@
 #include "glmath.h"
 #include "MathGeoLib\MathGeoLib.h"
 
-
 class ComponentTransform : public Component {
 public:
 
@@ -25,17 +24,19 @@ public:
 	Quat GetLocalRotation()const;
 	float3 GetLocalScale()const;
 
+	
 	void SetTransformMatrix();
 	const float* GetLocalTransform();
 	int GetTransformID()const;
 
+	float4x4 GetGlobalMatrix()const { return WorldMatrix; }
 	float4x4 GetTransformMatrix();
 	void SetIdentityTransform();
 	void OnEditor();
 
 	bool Transformed = false;
 private:
-
+	float4x4 GetParentTransform()const;
 	float3 position = float3::zero;
 	Quat rotation = Quat::identity;
 	float3 scale = float3::one;
@@ -43,7 +44,12 @@ private:
 	float4x4 transform_matrix;
 	float4x4 prev_local_transform;
 
+	float4x4 WorldMatrix;
+	bool can_update = true;
 	int transform_id;
 
 	bool transform_modified = false;
+
+	float4x4 view_matrix_fromCamera;
+	float4x4 proj_matrix_fromCamera;
 };

@@ -3,10 +3,11 @@
 #include "GameObject.h"
 
 #include "ModuleParson.h"
+#include "Globals.h"
 
 #include <string>
 
-class Application;
+
 class ComponentTransform;
 
 enum componentType {
@@ -18,24 +19,6 @@ enum componentType {
 	componentType_Unknown
 };
 
-/*
-class Component {
-	friend GameObject;
-public:
-	Component() { name = "Component"; };
-	virtual ~Component() {};
-public:
-	virtual void DrawInspectorPanel() {};
-public:
-	GameObject* gameObject = nullptr;
-	ComponentTransform transform;
-	char* tag = nullptr;
-	componentType type;
-	char* name = nullptr;
-public:
-	virtual bool Update(float dt) { return true; };
-	virtual void CleanUp() {};
-};*/
 
 class Component {
 	friend class GameObject;

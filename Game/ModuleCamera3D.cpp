@@ -7,7 +7,7 @@
 #include "glmath.h"
 #include "MathGeoLib\Geometry\Frustum.h"
 
-ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
+ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 {
 	main_camera = new ComponentCamera();
 	name = "Camera3D";
@@ -41,18 +41,28 @@ bool ModuleCamera3D::CleanUp()
 // -----------------------------------------------------------------
 update_status ModuleCamera3D::Update(float dt)
 {
-// Mouse wheel motion
-if (App->input->IsMouseWheelActive()) {
-	CameraZoom(dt);
-}
-// Mouse motion ----------------
+	if (!ImGui::IsAnyWindowHovered() && active_camera == true)
+	{
+		// Mouse wheel motion
+		if (App->input->IsMouseWheelActive()) {
+			CameraZoom(dt);
+		}
 
-if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
-{
-	MoveCamera(dt);
-	RotateCamera(dt);
-}
+		// Mouse motion ----------------
 
+		if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
+		{
+			MoveCamera(dt);
+			RotateCamera(dt);
+		}
+
+		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+		{
+			GameObject* pick = Pick();
+			//if (pick != nullptr)
+				//App->editor->SetSelected(pick, (App->editor->selected == pick));
+		}
+	}
 return UPDATE_CONTINUE;
 }
 
@@ -186,4 +196,29 @@ void ModuleCamera3D::MoveCamera(float dt)
 void ModuleCamera3D::CameraZoom(float dt)
 {
 	main_camera->MoveForwards(App->input->GetMouseWheelMotion());
+}
+
+GameObject * ModuleCamera3D::Pick()
+{
+	GameObject* ret = nullptr;
+
+	float mousex = App->input->GetMouseX(), mousey = App->input->GetMouseY();
+
+	float dist_w = -(1.0f - (float (mousex * 2.0f)) / App->window->GetWidth());
+	float dist_y = 1.0f - (float (mousey * 2.0f)) / App->window->GetHeight();
+
+	LineSegment picker = main_camera->GetFrustum().UnProjectLineSegment(dist_w , dist_y);
+
+	float distance = 0.f;
+
+	ret = App->picker->RayCast(picker, distance);
+	if (ret != nullptr && distance != FLOAT_INF)
+	{
+		pickingat = picker.GetPoint(distance);
+		string PickedObject = "You selected: " + ret->GetName();
+		LOG(PickedObject.c_str());
+	}
+
+
+	return ret;
 }

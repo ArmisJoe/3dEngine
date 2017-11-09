@@ -42,7 +42,7 @@ private:
 
 class ModuleParson : public Module {
 public:
-	ModuleParson(Application* app, bool start_enabled = true);
+	ModuleParson(bool start_enabled = true);
 	~ModuleParson();
 
 	bool Init();

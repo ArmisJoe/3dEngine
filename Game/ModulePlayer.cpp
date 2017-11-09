@@ -9,7 +9,8 @@
 
 
 
-ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
+
+ModulePlayer::ModulePlayer(bool start_enabled) : Module(start_enabled)
 {
 	name = "Player";
 }

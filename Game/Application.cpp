@@ -8,20 +8,21 @@
 
 Application::Application()
 {
-	window = new ModuleWindow(this);
-	input = new ModuleInput(this);
-	audio = new ModuleAudio(this, true);
-	scene = new ModuleScene(this);
-	renderer3D = new ModuleRenderer3D(this);
-	camera = new ModuleCamera3D(this);
-	physics = new ModulePhysics3D(this);
-	player = new ModulePlayer(this);
-	editor = new ModuleEditorUI(this);
-	parson = new ModuleParson(this);
-	assimp = new ModuleAssimp(this);
-	tex = new ModuleTextures(this);
-	res = new ModuleResources(this);
-	fs = new ModuleFileSystem(this);
+	window = new ModuleWindow();
+	input = new ModuleInput();
+	audio = new ModuleAudio();
+	picker = new ModulePicker();
+	scene = new ModuleScene();
+	renderer3D = new ModuleRenderer3D();
+	camera = new ModuleCamera3D();
+	physics = new ModulePhysics3D();
+	player = new ModulePlayer();
+	editor = new ModuleEditorUI();
+	parson = new ModuleParson();
+	assimp = new ModuleAssimp();
+	tex = new ModuleTextures();
+	res = new ModuleResources();
+	fs = new ModuleFileSystem();
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -43,6 +44,9 @@ Application::Application()
 	// Scenes
 	AddModule(scene);
 	AddModule(player);
+
+	// Picker
+	AddModule(picker);
 
 	// Renderer last!
 	AddModule(renderer3D);

@@ -12,7 +12,8 @@
 #include "ComponentTransform.h"
 #include "ComponentMesh.h"
 
-ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
+
+ModuleScene::ModuleScene(bool start_enabled) : Module(start_enabled)
 {
 	name = "Scene";
 }
