@@ -22,14 +22,22 @@ public:
 	void FocusMesh(const float *vertices, const uint &num_vertices);
 	void LookAt(const float3 &spot);
 	void DrawConfigPanel();
-	void LoadConfig();
-private:
-	void RotateCamera(float dt);
 
+	void SetCameraActive(bool set) { active_camera = set; }
+	bool IsActive() const { return active_camera; }
+
+	void LoadConfig();
+
+private:
+	float3 pickingat = float3::zero;
+	bool active_camera = true;
+	void RotateCamera(float dt);
 	void MoveCamera(float dt);
 	void CameraZoom(float dt);
-
+	GameObject* Pick();
 public:
+	LineSegment picker;
+
 	ComponentCamera* curr_camera;
 	ComponentCamera* main_camera;
 	float3 orbitate_around = float3::zero;

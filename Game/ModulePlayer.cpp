@@ -9,7 +9,8 @@
 
 
 
-ModulePlayer::ModulePlayer( bool start_enabled) : Module( start_enabled)
+
+ModulePlayer::ModulePlayer(bool start_enabled) : Module(start_enabled)
 {
 	name = "Player";
 }

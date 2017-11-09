@@ -11,7 +11,7 @@
 
 class ModuleResources : public Module {
 public:
-	ModuleResources( bool start_enabled = true);
+	ModuleResources(bool start_enabled = true);
 	~ModuleResources();
 public:
 	bool Init();

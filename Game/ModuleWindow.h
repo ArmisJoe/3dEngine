@@ -12,6 +12,7 @@ public:
 
 	ModuleWindow(bool start_enabled = true);
 
+
 	// Destructor
 	virtual ~ModuleWindow();
 

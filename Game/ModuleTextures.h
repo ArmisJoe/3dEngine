@@ -22,6 +22,8 @@ enum interpolationTexType {
 
 class ModuleTextures : public Module {
 public:
+
+public:
 	ModuleTextures( bool start_enabled = true);
 	~ModuleTextures();
 

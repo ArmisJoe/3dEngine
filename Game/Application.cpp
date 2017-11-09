@@ -11,6 +11,7 @@ Application::Application()
 	window = new ModuleWindow();
 	input = new ModuleInput();
 	audio = new ModuleAudio();
+	picker = new ModulePicker();
 	scene = new ModuleScene();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
@@ -43,6 +44,9 @@ Application::Application()
 	// Scenes
 	AddModule(scene);
 	AddModule(player);
+
+	// Picker
+	AddModule(picker);
 
 	// Renderer last!
 	AddModule(renderer3D);

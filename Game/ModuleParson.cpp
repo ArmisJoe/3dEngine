@@ -2,7 +2,8 @@
 #include "Application.h"
 #include <string>
 
-ModuleParson::ModuleParson( bool start_enabled) : Module(start_enabled)
+
+ModuleParson::ModuleParson(bool start_enabled) : Module(start_enabled)
 {
 	name = "Parson";
 }

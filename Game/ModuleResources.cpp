@@ -2,7 +2,8 @@
 
 #include "Application.h"
 
-ModuleResources::ModuleResources( bool start_enabled) : Module(start_enabled)
+
+ModuleResources::ModuleResources(bool start_enabled) : Module(start_enabled)
 {
 	name = "Resources";
 }

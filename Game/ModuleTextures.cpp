@@ -15,7 +15,8 @@
 #pragma comment (lib, "Devil/libx86/ILU.lib")
 #pragma comment (lib, "Devil/libx86/ILUT.lib")
 
-ModuleTextures::ModuleTextures( bool start_enabled) : Module( start_enabled)
+
+ModuleTextures::ModuleTextures(bool start_enabled) : Module(start_enabled)
 {
 	name = "Texture";
 }

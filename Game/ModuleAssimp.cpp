@@ -10,6 +10,7 @@
 
 #include "HelperFoos.h"
 
+
 ModuleAssimp::ModuleAssimp(bool start_enabled) : Module(start_enabled)
 {
 	name = "Geometry Loader";

@@ -3,10 +3,14 @@
 #include "PanelInspector.h"
 #include "PanelAbout.h"
 #include "PanelSceneTree.h"
-
+#include "ModulePicker.h"
 #include <iostream> 
 #include <string>
 #include "Hardware.h"
+
+
+#include "ImGuizmo/ImGuizmo.h"
+
 
 ModuleEditorUI::ModuleEditorUI(bool start_enabled) : Module(start_enabled)
 {
@@ -61,6 +65,7 @@ bool ModuleEditorUI::Start()
 	console->size = { (float)App->window->screen_surface->w * 2 / 3, (float)App->window->screen_surface->h / 4 };
 	console->pos = { App->window->screen_surface->w/2 - console->size.x/2 , App->window->screen_surface->h - (console->size.y ) };
 
+	inspector->SetInspected(App->picker->GetPicked());
 	//Versions
 	std::string library_str;
 	// ImGui
@@ -93,9 +98,12 @@ bool ModuleEditorUI::Start()
 
 update_status ModuleEditorUI::PreUpdate(float dt)
 {
+
 	ImGui_ImplSdl_NewFrame(App->window->window);
 
 	ImGuiIO& io = ImGui::GetIO();
+
+	ImGuizmo::BeginFrame();
 
 	//Set Keyboard / Mouse bindings here
 
