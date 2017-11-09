@@ -52,7 +52,5 @@ public:
 
 private: // Serializa Values
 	double UID;
-	double parentUID;
-
 
 };

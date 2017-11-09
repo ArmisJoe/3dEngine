@@ -73,7 +73,6 @@ public:
 
 private: // Serialization Values
 	double UID;
-	double parentUID;
 
 };
 

@@ -357,7 +357,33 @@ void GameObject::OnHierarchyTree(bool skip_root)
 void GameObject::Serialize(JSON_Doc* doc) {
 	if (doc == nullptr)
 		return;
-	
+
+	doc->MoveToRootSection();
+
+	doc->AddSectionArr("gameobjects");
+	doc->MoveToSectionInsideArr("gameobjects", doc->GetArraySize("gameobjects") - 1);
+
+	// UIDs
+	doc->SetNumber("uid", UID);
+	if (parent != nullptr)
+		doc->SetNumber("parentUID", parent->UID);
+	else
+		doc->SetNumber("parentUID", -1);
+	// Name
+	doc->SetString("name", name.c_str());
+	// Components
+	doc->SetArray("components");
+	for (int i = 0; i < components.size(); i++) {
+		components[i]->Serialize(doc);
+	}
+
+
+	// Children
+	for (int i = 0; i < children.size(); i++) {
+		children[i]->Serialize(doc);
+	}
+
+	doc->MoveToRootSection(); // Politeness pls
 }
 
 

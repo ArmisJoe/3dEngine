@@ -1,0 +1,12 @@
+{
+    "scene": {
+        "name": "scene_name"
+    },
+    "gameobjects": [
+        {
+            "parentUID": -1,
+            "name": "Scene Root",
+            "components": []
+        }
+    ]
+}

@@ -128,9 +128,9 @@ update_status ModuleEditorUI::Update(float dt)
 		if (ImGui::BeginMenu("File")) {
 			ImGui::MenuItem("Config", "Alt+F1", &config_active);
 			if (ImGui::Button("Save")) {
-				JSON_Doc* config = App->parson->config;
-				config->Save();
-				LOG("Configuration Saved");
+				char* scene_name = "MainScene";
+				App->scene->Serialize(scene_name);
+				LOG("Scene Saved as '%s'", scene_name);
 			}
 			if (ImGui::Button("Quit")) {
 				App->input->AppQuit(true);
