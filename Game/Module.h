@@ -71,5 +71,8 @@ public:
 	// Config Panels
 	virtual void DrawConfigPanel() 
 	{}
+	// Config Load [JSON]
+	virtual void LoadConfig() 
+	{}
 
 };

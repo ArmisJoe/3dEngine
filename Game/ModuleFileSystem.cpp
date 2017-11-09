@@ -22,7 +22,9 @@ bool ModuleFileSystem::Init()
 
 bool ModuleFileSystem::Start()
 {
-
+	// Settings
+	CreateFolder("", "Settings");
+	// Libraries
 	CreateFolder("", "Library");
 	CreateFolder("Library", "Textures");
 	CreateFolder("Library", "Meshes");

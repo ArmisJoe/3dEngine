@@ -27,7 +27,7 @@ public:
 
 public:
 	bool Init();
-
+	bool Start();
 	update_status Update(float dt);
 
 	bool CleanUp();
@@ -37,6 +37,7 @@ public:
 	Texture* LoadDDSTexture(const char* path); // Returns nullptr on failure
 	Texture* LoadToDDS(const char* path);
 	void DrawConfigPanel();
+	void LoadConfig();
 
 private: // Importer Methods
 	bool Import(const char* path, std::string& output_file); // Creates a DDS File from other extensions [NOT LOADING FILE INTO ENGINE]

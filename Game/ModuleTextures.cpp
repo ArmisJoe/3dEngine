@@ -34,12 +34,14 @@ bool ModuleTextures::Init()
 	ilutInit();
 	ilutRenderer(ILUT_OPENGL);
 
-	clamp_type = clampingTexType_ClampRepeat;
-	interpolation_type = interpolationTexType_Linear;
-
 	clamping_str = "Clamp to Edge\0Repeat\0Mirrored Repeat\0";
 	interpolate_str = "Nearest\0Linear\0";
 
+	return true;
+}
+
+bool ModuleTextures::Start() {
+	LoadConfig();
 	return true;
 }
 
@@ -54,6 +56,11 @@ bool ModuleTextures::CleanUp()
 
 
 	return true;
+}
+
+void ModuleTextures::LoadConfig() {
+	clamp_type = App->parson->config->GetNumber("configuration.textures.clamping");
+	interpolation_type = App->parson->config->GetNumber("configuration.textures.interpolation");
 }
 
 Texture* ModuleTextures::LoadRawTexture(const char * path)
@@ -196,9 +203,15 @@ void ModuleTextures::DrawConfigPanel()
 	if (ImGui::CollapsingHeader("textures")) 
 	{
 		if(clamping_str != nullptr)
-			ImGui::Combo("Clamping Method", &clamp_type, clamping_str);
+			if (ImGui::Combo("Clamping Method", &clamp_type, clamping_str)) {
+				App->parson->config->SetNumber("configuration.textures.clamping", clamp_type);
+				App->parson->config->Save();
+			}
 		if(interpolate_str != nullptr)
-			ImGui::Combo("Interpolation Method", &interpolation_type, interpolate_str);
+			if (ImGui::Combo("Interpolation Method", &interpolation_type, interpolate_str)) {
+				App->parson->config->SetNumber("configuration.textures.interpolation", interpolation_type);
+				App->parson->config->Save();
+			}
 	}
 }
 

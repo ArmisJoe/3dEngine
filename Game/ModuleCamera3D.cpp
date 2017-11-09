@@ -23,6 +23,9 @@ bool ModuleCamera3D::Start()
 	LOG("Setting up the camera");
 	bool ret = true;
 	curr_camera = main_camera;
+
+	LoadConfig();
+
 	return ret;
 }
 
@@ -38,19 +41,19 @@ bool ModuleCamera3D::CleanUp()
 // -----------------------------------------------------------------
 update_status ModuleCamera3D::Update(float dt)
 {
-	// Mouse wheel motion
-	if (App->input->IsMouseWheelActive()) {
-		CameraZoom(dt);
-	}
-	// Mouse motion ----------------
+// Mouse wheel motion
+if (App->input->IsMouseWheelActive()) {
+	CameraZoom(dt);
+}
+// Mouse motion ----------------
 
-	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
-	{
-		MoveCamera(dt);
-		RotateCamera(dt);
-	}
+if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
+{
+	MoveCamera(dt);
+	RotateCamera(dt);
+}
 
-	return UPDATE_CONTINUE;
+return UPDATE_CONTINUE;
 }
 
 // -----------------------------------------------------------------
@@ -130,10 +133,26 @@ void ModuleCamera3D::DrawConfigPanel()
 	if (ImGui::CollapsingHeader("Camera")) {
 		float curr_fov = main_camera->GetFOV();
 		if (ImGui::SliderFloat("Set FOV (60 by default)", &curr_fov, 1.f, 200.f)) {
-			if (curr_fov != main_camera->GetFOV()) main_camera->SetFov(curr_fov);
+			if (curr_fov != main_camera->GetFOV()) {
+				main_camera->SetFov((int)curr_fov);
+				App->parson->config->SetNumber("configuration.camera3D.main.FOV", main_camera->GetFOV());
+				App->parson->config->Save();
+			}
+		}
+		if(ImGui::SmallButton("Reset")) {
+			main_camera->SetFov((int)App->parson->default_config->GetNumber("configuration.camera3D.main.FOV"));
+			App->parson->config->SetNumber("configuration.camera3D.main.FOV", main_camera->GetFOV());
+			App->parson->config->Save();
 		}
 	}
 
+}
+
+void ModuleCamera3D::LoadConfig()
+{
+	// FOV
+	if (main_camera != nullptr)
+		main_camera->SetFov(App->parson->config->GetNumber("configuration.camera3D.main.FOV"));
 }
 
 

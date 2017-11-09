@@ -14,7 +14,8 @@ ModuleParson::~ModuleParson()
 bool ModuleParson::Init()
 {
 	LOG("Module Parson Init");
-	config = LoadJSON("config_/config.json");
+	config = LoadJSON("Settings/config.json");
+	default_config = LoadJSON("Settings/default_config.json");
 	return true;
 }
 

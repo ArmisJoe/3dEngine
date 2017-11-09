@@ -8,6 +8,8 @@
 #define LIBRARY_MATERIALS "Library/Materials/"
 #define LIBRARY_MESHES "Library/Meshes/"
 
+#define SETTINGS_DIRECTORY "Settings/"
+
 using namespace std;
 
 enum ExtensionType {

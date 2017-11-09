@@ -22,6 +22,7 @@ public:
 	void FocusMesh(const float *vertices, const uint &num_vertices);
 	void LookAt(const float3 &spot);
 	void DrawConfigPanel();
+	void LoadConfig();
 private:
 	void RotateCamera(float dt);
 

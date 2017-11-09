@@ -16,9 +16,12 @@ public:
 	virtual ~ModuleWindow();
 
 	bool Init();
+	bool Start();
 	bool CleanUp();
-	update_status Update();
+	update_status Update(float dt);
 	void SetTitle(const char* title, bool save_doc = false);
+
+	void LoadConfig();
 
 	void DrawConfigPanel();
 

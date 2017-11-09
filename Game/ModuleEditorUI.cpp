@@ -287,7 +287,7 @@ void ModuleEditorUI::DrawConfigPanels()
 		//Render
 		App->renderer3D->DrawConfigPanel();
 
-		// TExtures
+		// Textures
 		App->tex->DrawConfigPanel();
 
 		// Camera
