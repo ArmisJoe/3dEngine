@@ -16,14 +16,14 @@ GameObject::GameObject(GameObject * p) : parent(p)
 {
 	name = "GameObject";
 	//this->AddComponent(componentType_Transform);
-	UID = RandomNumber(DBL_MIN, DBL_MAX);
+	UID = RandomNumber();
 }
 
 GameObject::GameObject()
 {
 	name = "GameObject";
     //this->AddComponent(componentType_Transform);
-	UID = RandomNumber(DBL_MIN, DBL_MAX);
+	UID = RandomNumber();
 }
 
 GameObject::~GameObject()

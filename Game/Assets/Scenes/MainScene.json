@@ -4,6 +4,7 @@
     },
     "gameobjects": [
         {
+            "uid": 1395896960,
             "parentUID": -1,
             "name": "Scene Root",
             "components": []
