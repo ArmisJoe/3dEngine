@@ -71,13 +71,17 @@ bool ModuleWindow::Init()
 		}
 	}
 
-	JSON_Doc* config = App->parson->LoadJSON("config_/config.json");
-	SetTitle(config->GetString("application.title"), false);
-
 	return ret;
 }
 
-update_status ModuleWindow::Update()
+bool ModuleWindow::Start() {
+
+	LoadConfig();
+
+	return true;
+}
+
+update_status ModuleWindow::Update(float dt)
 {
 	SDL_GetWindowSize(window, &w, &h);
 	return UPDATE_CONTINUE;
@@ -113,6 +117,8 @@ void ModuleWindow::DrawConfigPanel()
 	if (ImGui::CollapsingHeader("Window")) {
 		if (ImGui::Checkbox("Fullscreen", &check_fsc)) {
 			resizable = false;
+			App->parson->config->SetBool("configuration.window.fullscreen", fullscreen);
+			App->parson->config->Save();
 			if (!fullscreen)
 				ChangeToFullScreen();
 			else
@@ -121,24 +127,38 @@ void ModuleWindow::DrawConfigPanel()
 		ImGui::SameLine();
 		if (!check_fsc)
 		{
-			ImGui::Checkbox("Resizable", &resizable);
+			if (ImGui::Checkbox("Resizable", &resizable)) {
+				App->parson->config->SetBool("configuration.window.resizable", resizable);
+				App->parson->config->Save();
+			}
 			if (resizable)
 			{
 				if (ImGui::SliderInt("Width", (int*)&w, 0, SCREEN_WIDTH) || ImGui::SliderInt("Height", (int*)&h, 0, SCREEN_HEIGHT))
 				{
 					SDL_SetWindowSize(window, w, h);
 					App->camera->curr_camera->SetAspectRatio(w, h);
+					App->parson->config->SetNumber("configuration.window.w", w);
+					App->parson->config->SetNumber("configuration.window.h", h);
+					App->parson->config->Save();
 				}
 			}
 			if (ImGui::Checkbox("Borderless", &check_bdls)) {
 				if (!borderless)
 					SetBorderless();
 				else SetBorder();
+
+				App->parson->config->SetBool("configuration.window.borderless", borderless);
+				App->parson->config->Save();
+
 			}
 		}
 		if (ImGui::SliderFloat("Brightness", &brightness, 0, 5))
 		{
-			if (SDL_SetWindowBrightness(window, brightness));
+			if (SDL_SetWindowBrightness(window, brightness) == 0) {
+				App->parson->config->SetNumber("configuration.window.brightness", brightness);
+				App->parson->config->Save();
+			}
+
 		}
 	}
 }
@@ -212,4 +232,14 @@ void ModuleWindow::SetBorderless()
 void ModuleWindow::SetBorder() {
 	borderless = false;
 	SDL_SetWindowBordered(window, (SDL_bool)true);
+}
+
+void ModuleWindow::LoadConfig() {
+	SetTitle(App->parson->config->GetString("application.title"), false);
+	fullscreen = App->parson->config->GetBool("configuration.window.fullscreen");
+	resizable = App->parson->config->GetBool("configuration.window.resizable");
+	w = App->parson->config->GetNumber("configuration.window.w");
+	h = App->parson->config->GetNumber("configuration.window.h");
+	borderless = App->parson->config->GetBool("configuration.window.borderless");
+	brightness = App->parson->config->GetNumber("configuration.window.brightness");
 }

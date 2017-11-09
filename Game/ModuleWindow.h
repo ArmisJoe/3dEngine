@@ -10,15 +10,19 @@ class ModuleWindow : public Module
 {
 public:
 
-	ModuleWindow( bool start_enabled = true);
+	ModuleWindow(bool start_enabled = true);
+
 
 	// Destructor
 	virtual ~ModuleWindow();
 
 	bool Init();
+	bool Start();
 	bool CleanUp();
-	update_status Update();
+	update_status Update(float dt);
 	void SetTitle(const char* title, bool save_doc = false);
+
+	void LoadConfig();
 
 	void DrawConfigPanel();
 

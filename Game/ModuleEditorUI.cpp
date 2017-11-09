@@ -8,7 +8,9 @@
 #include <string>
 #include "Hardware.h"
 
+
 #include "ImGuizmo/ImGuizmo.h"
+
 
 ModuleEditorUI::ModuleEditorUI(bool start_enabled) : Module(start_enabled)
 {
@@ -211,7 +213,7 @@ bool ModuleEditorUI::CleanUp()
 	for (std::list<Panel*>::iterator it = panels.begin(); it != panels.end(); it++) {
 		if ((*it) != nullptr) {
 			(*it)->CleanUp();
-			delete (*it);
+			mdelete (*it);
 		}
 	}
 
@@ -293,7 +295,7 @@ void ModuleEditorUI::DrawConfigPanels()
 		//Render
 		App->renderer3D->DrawConfigPanel();
 
-		// TExtures
+		// Textures
 		App->tex->DrawConfigPanel();
 
 		// Camera

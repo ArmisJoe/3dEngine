@@ -7,6 +7,7 @@
 #include <iostream>
 #include "SDL\include\SDL.h"
 
+
 #include "Globals.h"
 
 using namespace std;
@@ -69,6 +70,9 @@ public:
 
 	// Config Panels
 	virtual void DrawConfigPanel() 
+	{}
+	// Config Load [JSON]
+	virtual void LoadConfig() 
 	{}
 
 };

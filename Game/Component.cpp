@@ -1,8 +1,12 @@
 #include "Component.h"
 
-Component::Component(const componentType argtype) : type(argtype) {}
+Component::Component(const componentType argtype) : type(argtype) {
+	UID = RandomNumber(DBL_MIN, DBL_MAX);
+}
 
-Component::Component(componentType argtype, GameObject * argparent) : type(argtype), parent(argparent) {}
+Component::Component(componentType argtype, GameObject * argparent) : type(argtype), parent(argparent) {
+	UID = RandomNumber(DBL_MIN, DBL_MAX);
+}
 
 bool Component::SetParent(GameObject * parent)
 {

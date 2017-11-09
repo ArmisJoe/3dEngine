@@ -2,6 +2,7 @@
 
 #include "Application.h"
 
+
 ModuleResources::ModuleResources(bool start_enabled) : Module(start_enabled)
 {
 	name = "Resources";
@@ -44,7 +45,7 @@ bool ModuleResources::CleanUp()
 		for (std::vector<ComponentMesh*>::iterator it = meshes.begin(); it != meshes.end(); it++) {
 			if ((*it) != nullptr) {
 				(*it)->CleanUp();
-				delete[](*it);
+				mdelete[](*it);
 			}
 		}
 		meshes.clear();
@@ -56,7 +57,7 @@ bool ModuleResources::CleanUp()
 		for (std::vector<ComponentMaterial*>::iterator it = materials.begin(); it != materials.end(); it++) {
 			if ((*it) != nullptr) {
 				(*it)->CleanUp();
-				delete[](*it);
+				mdelete[](*it);
 			}
 		}
 		materials.clear();
@@ -67,11 +68,16 @@ bool ModuleResources::CleanUp()
 	if (!textures.empty()) {
 		for (std::vector<Texture*>::iterator it = textures.begin(); it != textures.end(); it++) {
 			if ((*it) != nullptr) {
-				delete[](*it);
+				mdelete[](*it);
 			}
 		}
 	}
 	LOG("All Textures Cleaned Up");
 
 	return true;
+}
+
+double  ModuleResources::GenerateUID() const
+{
+	return RandomNumber();
 }

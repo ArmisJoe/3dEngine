@@ -10,18 +10,20 @@
 #include "ComponentTransform.h"
 
 #include "PanelInspector.h"
-
+#include "ModuleParson.h"
 
 GameObject::GameObject(GameObject * p) : parent(p)
 {
 	name = "GameObject";
 	//this->AddComponent(componentType_Transform);
+	UID = RandomNumber(DBL_MIN, DBL_MAX);
 }
 
 GameObject::GameObject()
 {
 	name = "GameObject";
     //this->AddComponent(componentType_Transform);
+	UID = RandomNumber(DBL_MIN, DBL_MAX);
 }
 
 GameObject::~GameObject()
@@ -190,7 +192,7 @@ void GameObject::DeleteChild(GameObject * go)
 	for (int i = 0; i < children.size(); i++) {
 		if (go == children[i]) {
 			children[i]->CleanUp();
-			delete[] children[i];
+			mdelete[] children[i];
 		}
 	}
 }
@@ -201,7 +203,7 @@ void GameObject::DestroyComponent(Component * componentPointer)
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) == componentPointer && (*it) != nullptr) {
 				(*it)->CleanUp();
-				delete (*it);
+				mdelete (*it);
 				components.erase(it);
 				break;
 			}
@@ -351,3 +353,9 @@ void GameObject::OnHierarchyTree(bool skip_root)
 	}
 
 }
+
+void GameObject::Serialize() {
+
+}
+
+

@@ -16,6 +16,7 @@
 	#pragma comment (lib, "Bullet/libx86/LinearMath.lib")
 #endif
 
+
 ModulePhysics3D::ModulePhysics3D(bool start_enabled) : Module(start_enabled)
 {
 	debug = true;
@@ -197,7 +198,7 @@ bool ModulePhysics3D::CleanUp()
 	if (!spheres.empty()) {
 		for (std::list<Sphere*>::iterator it = spheres.begin(); it != spheres.end(); it++) {
 			if (it._Ptr->_Myval != nullptr) {
-				delete it._Ptr->_Myval;
+				mdelete it._Ptr->_Myval;
 			}
 		}
 	}
@@ -207,7 +208,7 @@ bool ModulePhysics3D::CleanUp()
 	/*if (!aabbs.empty()) {
 		for (std::list<AABB*>::iterator it = aabbs.begin(); it != aabbs.end(); it++) {
 			if (it._Ptr->_Myval != nullptr) {
-				delete it._Ptr->_Myval;
+				mdelete it._Ptr->_Myval;
 			}
 		}
 	}*/
@@ -217,7 +218,7 @@ bool ModulePhysics3D::CleanUp()
 	if (!obbs.empty()) {
 		for (std::list<OBB*>::iterator it = obbs.begin(); it != obbs.end(); it++) {
 			if (it._Ptr->_Myval != nullptr) {
-				delete it._Ptr->_Myval;
+				mdelete it._Ptr->_Myval;
 			}
 		}
 	}
@@ -227,7 +228,7 @@ bool ModulePhysics3D::CleanUp()
 	if (!lines.empty()) {
 		for (std::list<Line*>::iterator it = lines.begin(); it != lines.end(); it++) {
 			if (it._Ptr->_Myval != nullptr) {
-				delete it._Ptr->_Myval;
+				mdelete it._Ptr->_Myval;
 			}
 		}
 	}
@@ -237,7 +238,7 @@ bool ModulePhysics3D::CleanUp()
 	if (!line_segments.empty()) {
 		for (std::list<LineSegment*>::iterator it = line_segments.begin(); it != line_segments.end(); it++) {
 			if (it._Ptr->_Myval != nullptr) {
-				delete it._Ptr->_Myval;
+				mdelete it._Ptr->_Myval;
 			}
 		}
 	}
@@ -247,7 +248,7 @@ bool ModulePhysics3D::CleanUp()
 	if (!capsules.empty()) {
 		for (std::list<Capsule*>::iterator it = capsules.begin(); it != capsules.end(); it++) {
 			if (it._Ptr->_Myval != nullptr) {
-				delete it._Ptr->_Myval;
+				mdelete it._Ptr->_Myval;
 			}
 		}
 	}
@@ -257,7 +258,7 @@ bool ModulePhysics3D::CleanUp()
 	if (!frustums.empty()) {
 		for (std::list<Frustum*>::iterator it = frustums.begin(); it != frustums.end(); it++) {
 			if (it._Ptr->_Myval != nullptr) {
-				delete it._Ptr->_Myval;
+				mdelete it._Ptr->_Myval;
 			}
 		}
 	}
@@ -267,7 +268,7 @@ bool ModulePhysics3D::CleanUp()
 	if (!planes.empty()) {
 		for (std::list<Plane*>::iterator it = planes.begin(); it != planes.end(); it++) {
 			if (it._Ptr->_Myval != nullptr) {
-				delete it._Ptr->_Myval;
+				mdelete it._Ptr->_Myval;
 			}
 		}
 	}
@@ -277,7 +278,7 @@ bool ModulePhysics3D::CleanUp()
 	if (!polyhedrons.empty()) {
 		for (std::list<Polyhedron*>::iterator it = polyhedrons.begin(); it != polyhedrons.end(); it++) {
 			if (it._Ptr->_Myval != nullptr) {
-				delete it._Ptr->_Myval;
+				mdelete it._Ptr->_Myval;
 			}
 		}
 	}
@@ -287,7 +288,7 @@ bool ModulePhysics3D::CleanUp()
 	if (!triangles.empty()) {
 		for (std::list<Triangle*>::iterator it = triangles.begin(); it != triangles.end(); it++) {
 			if (it._Ptr->_Myval != nullptr) {
-				delete it._Ptr->_Myval;
+				mdelete it._Ptr->_Myval;
 			}
 		}
 	}
@@ -297,7 +298,7 @@ bool ModulePhysics3D::CleanUp()
 	if (!rays.empty()) {
 		for (std::list<Ray*>::iterator it = rays.begin(); it != rays.end(); it++) {
 			if (it._Ptr->_Myval != nullptr) {
-				delete it._Ptr->_Myval;
+				mdelete it._Ptr->_Myval;
 			}
 		}
 	}
@@ -308,7 +309,7 @@ bool ModulePhysics3D::CleanUp()
 	if (!g_primitives.empty()) {
 		for (std::list<Primitive*>::iterator it = g_primitives.begin(); it != g_primitives.end(); it++) {
 			if (it._Ptr->_Myval != nullptr) {
-				delete it._Ptr->_Myval;
+				mdelete it._Ptr->_Myval;
 			}
 		}
 	}

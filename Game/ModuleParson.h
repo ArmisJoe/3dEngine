@@ -48,6 +48,9 @@ private:
 
 public:
 	JSON_Doc* config = nullptr;
+	JSON_Doc* default_config = nullptr;
+
+	JSON_Doc* savescene = nullptr;
 };
 
 #endif // !__MODULE_PARSON_H__

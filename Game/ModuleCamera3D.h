@@ -26,6 +26,8 @@ public:
 	void SetCameraActive(bool set) { active_camera = set; }
 	bool IsActive() const { return active_camera; }
 
+	void LoadConfig();
+
 private:
 	float3 pickingat = float3::zero;
 	bool active_camera = true;

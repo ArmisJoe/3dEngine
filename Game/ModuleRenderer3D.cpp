@@ -11,6 +11,7 @@
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 
+
 ModuleRenderer3D::ModuleRenderer3D(bool start_enabled) : Module(start_enabled)
 {
 	name = "Renderer";
@@ -134,6 +135,11 @@ glShadeModel(GL_SMOOTH);
 	return ret;
 }
 
+bool ModuleRenderer3D::Start() {
+	LoadConfig();
+	return true;
+}
+
 // PreUpdate: clear buffer
 update_status ModuleRenderer3D::PreUpdate(float dt)
 {
@@ -227,7 +233,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 bool ModuleRenderer3D::CleanUp()
 {
 	//LOG("Destroying 3D Renderer");
-	delete debugger;
+	mdelete debugger;
 	SDL_GL_DeleteContext(context);
 
 	return true;
@@ -298,22 +304,34 @@ void ModuleRenderer3D::DrawConfigPanel()
 
 		if (ImGui::Checkbox("Depth Test", &enable_depth_test)) {
 			enable_depth_test ? glEnable(GL_DEPTH_TEST) : glDisable(GL_DEPTH_TEST);
+			App->parson->config->SetBool("configuration.renderer.depth_test", enable_depth_test);
+			App->parson->config->Save();
 		}
 		ImGui::SameLine();
 		if (ImGui::Checkbox("Face Culling", &enable_cull_face)) {
 			enable_cull_face ? glEnable(GL_CULL_FACE) : glDisable(GL_CULL_FACE);
+			App->parson->config->SetBool("configuration.renderer.cull_face", enable_cull_face);
+			App->parson->config->Save();
 		}
 		if (ImGui::Checkbox("Lighting", &enable_lightning)) {
 			enable_lightning ? glEnable(GL_LIGHTING) : glDisable(GL_LIGHTING);
+			App->parson->config->SetBool("configuration.renderer.lighting", enable_lightning);
+			App->parson->config->Save();
 		}
 		ImGui::SameLine();
 		if (ImGui::Checkbox("Material Color", &enable_color_material)) {
 			enable_color_material ? glEnable(GL_COLOR_MATERIAL) : glDisable(GL_COLOR_MATERIAL);
+			App->parson->config->SetBool("configuration.renderer.material_color", enable_color_material);
+			App->parson->config->Save();
 		}
 		if (ImGui::Checkbox("2D Textures", &enable_texture_2D)) {
 			enable_texture_2D ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
+			App->parson->config->SetBool("configuration.renderer.2D_textures", enable_texture_2D);
+			App->parson->config->Save();
 		}
 		if (ImGui::Checkbox("Wireframe Mode", &enable_wireframe)) {
+			App->parson->config->SetBool("configuration.renderer.wireframe", enable_wireframe);
+			App->parson->config->Save();
 		}
 
 		//Sliders
@@ -327,6 +345,15 @@ void ModuleRenderer3D::DrawConfigPanel()
 		}
 
 	}
+}
+
+void ModuleRenderer3D::LoadConfig() {
+	enable_depth_test = App->parson->config->GetBool("configuration.renderer.depth_test");
+	enable_cull_face = App->parson->config->GetBool("configuration.renderer.cull_face");
+	enable_lightning = App->parson->config->GetBool("configuration.renderer.lighting");
+	enable_color_material = App->parson->config->GetBool("configuration.renderer.material_color");
+	enable_texture_2D = App->parson->config->GetBool("configuration.renderer.2D_textures");
+	enable_wireframe = App->parson->config->GetBool("configuration.renderer.wireframe");
 }
 
 void ModuleRenderer3D::DrawMesh(ComponentTransform* trans, ComponentMesh* m, ComponentMaterial* mat)

@@ -24,10 +24,12 @@
 class ModuleRenderer3D : public Module
 {
 public:
+
 	ModuleRenderer3D(bool start_enabled = true);
 	~ModuleRenderer3D();
 
 	bool Init();
+	bool Start();
 	update_status PreUpdate(float dt);
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
@@ -36,11 +38,13 @@ public:
 	void StdGLAttributes() const;
 	void CustomGLAttributes() const;
 	void DrawConfigPanel();
+	void LoadConfig();
+
 private:
 	void DrawMesh(ComponentTransform* trans, ComponentMesh* m, ComponentMaterial* mat = nullptr);
 	uint objects_drawn = 0;
-public:
 
+public:
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
 	DebugDraw* debugger;

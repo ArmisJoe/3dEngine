@@ -1,0 +1,32 @@
+{
+    "application": {
+        "title": "QUEENGINE3D"
+    },
+    "configuration": {
+        "camera3D": {
+            "main": {
+                "FOV": 60
+            }
+        },
+        "window": {
+            "fullscreen": false,
+            "brightness": 1,
+            "resizable": true,
+            "borderless": false,
+            "w": 1280,
+            "h": 1024
+        },
+        "renderer": {
+            "lighting": true,
+            "material_color": false,
+            "2D_textures": true,
+            "wireframe": false,
+            "depth_test": true,
+            "cull_face": true
+        },
+        "textures": {
+            "interpolation": 1,
+            "clamping": 1
+        }
+    }
+}

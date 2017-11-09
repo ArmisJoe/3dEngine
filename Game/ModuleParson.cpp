@@ -2,6 +2,7 @@
 #include "Application.h"
 #include <string>
 
+
 ModuleParson::ModuleParson(bool start_enabled) : Module(start_enabled)
 {
 	name = "Parson";
@@ -14,7 +15,8 @@ ModuleParson::~ModuleParson()
 bool ModuleParson::Init()
 {
 	LOG("Module Parson Init");
-	config = LoadJSON("config_/config.json");
+	config = LoadJSON("Settings/config.json");
+	default_config = LoadJSON("Settings/default_config.json");
 	return true;
 }
 
@@ -27,7 +29,7 @@ bool ModuleParson::CleanUp()
 	for (list<JSON_Doc*>::iterator it = jsons.begin(); it != jsons.end();)
 	{
 		(*it)->CleanUp();
-		delete (*it);
+		mdelete (*it);
 
 		it = jsons.erase(it);
 	}
@@ -39,20 +41,22 @@ JSON_Doc * ModuleParson::LoadJSON(const char * path)
 {
 	JSON_Doc* ret = nullptr;
 
-	bool exists = false;
-	for (list<JSON_Doc*>::iterator it = jsons.begin(); it != jsons.end(); it++)
-	{
-		string doc_str = (*it)->GetPath();
-		if (doc_str.compare(path))
-		{
-			ret = (*it);
-			exists = true;
-			break;
-		}
-	}
+	//bool exists = false;
+	//for (list<JSON_Doc*>::iterator it = jsons.begin(); it != jsons.end(); it++)
+	//{
+	//	string doc_str = (*it)->GetPath();
+	//	if (doc_str.compare(path))
+	//	{
+	//		ret = (*it);
+	//		exists = true;
+	//		break;
+	//	}
+	//}
 
-	if (!exists)
-	{
+	if (!App->fs->exists(path)) {
+		CreateJSON(path);
+	}
+	if(App->fs->exists(path)){
 		JSON_Value *user_data = json_parse_file(path);
 		JSON_Object *root_object = json_value_get_object(user_data);
 
@@ -70,8 +74,7 @@ JSON_Doc * ModuleParson::LoadJSON(const char * path)
 			ret = new_doc;
 			ret->Save();
 		}
-	}
-
+	} 
 	return ret;
 }
 
@@ -79,18 +82,18 @@ JSON_Doc * ModuleParson::CreateJSON(const char * path)
 {
 	JSON_Doc* ret = nullptr;
 
-	bool exists = false;
-	for (list<JSON_Doc*>::iterator it = jsons.begin(); it != jsons.end(); it++)
-	{
-		string doc_str = (*it)->GetPath();
-		if (doc_str.compare(path))
-		{
-			exists = true;
-			break;
-		}
-	}
+	//bool exists = false;
+	//for (list<JSON_Doc*>::iterator it = jsons.begin(); it != jsons.end(); it++)
+	//{
+	//	string doc_str = (*it)->GetPath();
+	//	if (doc_str.compare(path))
+	//	{
+	//		exists = true;
+	//		break;
+	//	}
+	//}
 
-	if (exists)
+	if (App->fs->exists(path))
 	{
 		LOG("Error creating %s. There is already a file with this path/name", path);
 	}

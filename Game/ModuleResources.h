@@ -20,6 +20,9 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+
+	double GenerateUID() const;
+
 public:
 	std::vector<ComponentMesh*> meshes;
 	std::vector<ComponentMaterial*> materials;
