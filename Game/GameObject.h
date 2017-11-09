@@ -47,7 +47,7 @@ public:
 	void SetRoot(bool root);
 	bool IsRoot() const;
 
-	void Serialize();
+	void Serialize(JSON_Doc* doc);
 
 	std::vector<Component*> FindComponents(componentType type);
 	Component* AddComponent(const componentType type, Component* componentPointer = nullptr, bool fromReference = true);

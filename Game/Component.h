@@ -2,6 +2,8 @@
 
 #include "GameObject.h"
 
+#include "ModuleParson.h"
+
 #include <string>
 
 class Application;
@@ -63,7 +65,7 @@ public:
 	bool HasParent() const { return parent != nullptr; }
 	void SetType(componentType ntype) { type = ntype; }
 
-	void Serialize();
+	void Serialize(JSON_Doc* doc);
 
 private: // Serializa Values
 	double UID;

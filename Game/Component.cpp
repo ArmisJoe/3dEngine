@@ -30,3 +30,7 @@ bool Component::SetParent(GameObject * parent)
 
 	return ret;
 }
+
+void Component::Serialize(JSON_Doc* doc) {
+
+}

@@ -33,6 +33,9 @@ public:
 	void RemoveAllGameObject();
 	void SetAllToGlobalTransforms();
 	bool IteratingElement(GameObject* go);
+
+	void Serialize(const char* scene_name);
+
 private:
 	GameObject* root;
 	GameObject* current_selected;
