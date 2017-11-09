@@ -2,7 +2,7 @@
 
 #include "Application.h"
 
-ModuleResources::ModuleResources(Application * parent, bool start_enabled) : Module(parent, start_enabled)
+ModuleResources::ModuleResources( bool start_enabled) : Module(start_enabled)
 {
 	name = "Resources";
 }

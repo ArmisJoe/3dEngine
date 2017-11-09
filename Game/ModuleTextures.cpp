@@ -1,4 +1,4 @@
-#include "ModuleTextures.h"
+ #include "ModuleTextures.h"
 #include "ModuleAssimp.h"
 
 #include "Application.h"
@@ -15,7 +15,7 @@
 #pragma comment (lib, "Devil/libx86/ILU.lib")
 #pragma comment (lib, "Devil/libx86/ILUT.lib")
 
-ModuleTextures::ModuleTextures(Application * app, bool start_enabled) : Module(app, start_enabled)
+ModuleTextures::ModuleTextures( bool start_enabled) : Module( start_enabled)
 {
 	name = "Texture";
 }

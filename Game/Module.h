@@ -7,6 +7,7 @@
 #include <iostream>
 #include "SDL\include\SDL.h"
 
+
 #include "Globals.h"
 
 using namespace std;
@@ -22,10 +23,9 @@ protected:
 	bool menu_open = false;
 
 public:
-	Application* App;
 	char* name;
 
-	Module(Application* parent, bool start_enabled = true) : App(parent)
+	Module(bool start_enabled = true)
 	{}
 
 	virtual ~Module()

@@ -23,7 +23,7 @@ class PanelSceneTree;
 
 class ModuleEditorUI : public Module {
 public:
-	ModuleEditorUI(Application* app, bool start_enabled = true);
+	ModuleEditorUI(bool start_enabled = true);
 	~ModuleEditorUI();
 
 	bool Init();
