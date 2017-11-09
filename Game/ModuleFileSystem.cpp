@@ -17,11 +17,6 @@ ModuleFileSystem::~ModuleFileSystem()
 bool ModuleFileSystem::Init()
 {
 	
-	return true;
-}
-
-bool ModuleFileSystem::Start()
-{
 	// Settings
 	CreateFolder("", "Settings");
 	// Libraries
@@ -31,6 +26,12 @@ bool ModuleFileSystem::Start()
 	CreateFolder("Library", "Materials");
 	// Assets
 	CreateFolder("", "Assets");
+
+	return true;
+}
+
+bool ModuleFileSystem::Start()
+{
 
 	return true;
 }

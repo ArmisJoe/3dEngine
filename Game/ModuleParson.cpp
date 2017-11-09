@@ -147,6 +147,92 @@ void JSON_Doc::SetNumber(const char * set, double nu)
 	json_object_dotset_number(object, set, nu);
 }
 
+void JSON_Doc::SetArray(const char * set)
+{
+	JSON_Value* va = json_value_init_array();
+	JSON_Array* jarr = json_value_get_array(va);
+
+	json_object_dotset_value(object, set, va);
+
+}
+
+const int JSON_Doc::GetArraySize(const char * arr)
+{
+	int ret = 0;
+
+	JSON_Array* jarr = json_object_get_array(object, arr);
+	if (jarr != nullptr)
+		ret = json_array_get_count(jarr);
+
+	return ret;
+}
+
+const char * JSON_Doc::GetStringArr(const char * arr, int idx)
+{
+	const char* ret = nullptr;
+	JSON_Array* jarr = json_object_get_array(object, arr);
+	if (jarr != nullptr)
+		if (FindArrayValue(arr, idx, json_value_type::JSONString))
+			ret = json_array_get_string(jarr, idx);
+	return ret;
+}
+
+const bool JSON_Doc::GetBoolArr(const char * arr, int idx)
+{
+	bool ret = false;
+	JSON_Array* jarr = json_object_get_array(object, arr);
+	if (jarr != nullptr)
+		if (FindArrayValue(arr, idx, json_value_type::JSONBoolean))
+			ret = json_array_get_boolean(jarr, idx);
+	return ret;
+}
+
+const double JSON_Doc::GetNumberArr(const char * arr, int idx)
+{
+	double ret = 0;
+	JSON_Array* jarr = json_object_get_array(object, arr);
+	if (jarr != nullptr)
+		if (FindArrayValue(arr, idx, json_value_type::JSONNumber))
+			ret = json_array_get_number(jarr, idx);
+	return ret;
+}
+
+void JSON_Doc::AddStringArr(const char * arr, const char * str)
+{
+	JSON_Array* jarr = json_object_get_array(object, arr);
+	if (jarr != nullptr)
+		json_array_append_string(jarr, str);
+}
+
+void JSON_Doc::AddBoolArr(const char * arr, bool bo)
+{
+	JSON_Array* jarr = json_object_get_array(object, arr);
+	if (jarr != nullptr)
+		json_array_append_boolean(jarr, bo);
+}
+
+void JSON_Doc::AddNumberArr(const char * arr, double nu)
+{
+	JSON_Array* jarr = json_object_get_array(object, arr);
+	if (jarr != nullptr)
+		json_array_append_number(jarr, nu);
+}
+
+bool JSON_Doc::FindArrayValue(const char * arr, int idx, json_value_type type)
+{
+	bool ret = false;
+
+	JSON_Array* jarr = json_object_get_array(object, arr);
+	if (jarr != nullptr) {
+		JSON_Value* value = json_array_get_value(jarr, idx);
+		if (value != nullptr && json_value_get_type(value) == type)
+			ret = true;
+	}
+
+
+	return ret;
+}
+
 const char * JSON_Doc::GetString(const char * str)
 {
 	return json_object_dotget_string(object, str);

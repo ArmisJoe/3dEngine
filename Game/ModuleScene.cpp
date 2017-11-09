@@ -182,3 +182,17 @@ update_status ModuleScene::PostUpdate(float dt)
 
 	return UPDATE_CONTINUE;
 }
+
+void ModuleScene::Serialize(const char* scene_name) {
+	std::string file = "Assets/";
+	file += scene_name;
+	JSON_Doc* scene_doc = App->parson->LoadJSON(file.c_str());
+
+	scene_doc->SetString("scene.name", "scene_name");
+	scene_doc->SetNumber("scene.uid", RandomNumber(DBL_MIN, DBL_MAX));
+
+	if (root != nullptr) {
+		root->Serialize(scene_doc);
+	}
+
+}
