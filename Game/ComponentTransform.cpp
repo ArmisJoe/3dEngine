@@ -143,50 +143,52 @@ void ComponentTransform::SetScale(const float3 & _scale)
 
 void ComponentTransform::OnEditor()
 {
-	float pos[3];
-	float rot[3];
-	float sca[3];
+	if (!can_update)
+	{
+		float pos[3];
+		float rot[3];
+		float sca[3];
 
-	pos[0] = position.x;
-	pos[1] = position.y;
-	pos[2] = position.z;
+		pos[0] = position.x;
+		pos[1] = position.y;
+		pos[2] = position.z;
 
-	rot[0] = RadToDeg(rotation.ToEulerXYZ().x);
-	rot[1] = RadToDeg(rotation.ToEulerXYZ().y);
-	rot[2] = RadToDeg(rotation.ToEulerXYZ().z);
+		rot[0] = RadToDeg(rotation.ToEulerXYZ().x);
+		rot[1] = RadToDeg(rotation.ToEulerXYZ().y);
+		rot[2] = RadToDeg(rotation.ToEulerXYZ().z);
 
-	sca[0] = scale.x;
-	sca[1] = scale.y;
-	sca[2] = scale.z;
+		sca[0] = scale.x;
+		sca[1] = scale.y;
+		sca[2] = scale.z;
 
-	if (ImGui::DragFloat3("Position:", pos, 0.1f)) {
-		if (pos[0] != position.x || pos[1] != position.y || pos[2] != position.z)
-			Transformed = true;
+		if (ImGui::DragFloat3("Position:", pos, 0.1f)) {
+			if (pos[0] != position.x || pos[1] != position.y || pos[2] != position.z)
+				Transformed = true;
 
-		position.x = pos[0];
-		position.y = pos[1];
-		position.z = pos[2];
+			position.x = pos[0];
+			position.y = pos[1];
+			position.z = pos[2];
+		}
+		if (ImGui::DragFloat3("Rotation:", rot, 0.1f)) {
+			if (rot[0] != RadToDeg(rotation.ToEulerXYZ().x) || rot[1] != RadToDeg(rotation.ToEulerXYZ().y) || rot[2] != RadToDeg(rotation.ToEulerXYZ().z))
+				Transformed = true;
+
+			rotation = rotation.FromEulerXYZ(DegToRad(rot[0]), DegToRad(rot[1]), DegToRad(rot[2]));
+		}
+
+		if (ImGui::DragFloat3("Scale:", sca, 0.1f)) {
+			if (sca[0] != scale.x || sca[1] != scale.y || sca[2] != scale.z)
+				Transformed = true;
+
+			scale.x = sca[0];
+			scale.y = sca[1];
+			scale.z = sca[2];
+		}
 	}
-	if (ImGui::DragFloat3("Rotation:", rot, 0.1f)) {
-		if (rot[0] != RadToDeg(rotation.ToEulerXYZ().x) || rot[1] != RadToDeg(rotation.ToEulerXYZ().y) || rot[2] != RadToDeg(rotation.ToEulerXYZ().z))
-			Transformed = true;
-
-		rotation = rotation.FromEulerXYZ(DegToRad(rot[0]), DegToRad(rot[1]), DegToRad(rot[2]));
-	}
-
-	if (ImGui::DragFloat3("Scale:", sca, 0.1f)) {
-		if (sca[0] != scale.x || sca[1] != scale.y || sca[2] != scale.z)
-			Transformed = true;
-
-		scale.x = sca[0];
-		scale.y = sca[1];
-		scale.z = sca[2];
-	}
-
 	// ImGuizmo
 	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT)
 	{
-		//can_update = false;
+		can_update = false;
 		App->camera->SetCameraActive(false);
 		ImGuizmo::Enable(true);
 
@@ -224,28 +226,30 @@ void ComponentTransform::OnEditor()
 		view_matrix.Transpose();
 		proj_matrix.Transpose();
 
+		float4x4 trs_matrix = GetTransformMatrix();
 
-		float4x4 trs_matrix = transform_matrix;
+
 		ImGuizmo::Manipulate(view_matrix.ptr(), proj_matrix.ptr(), mCurrentGizmoOperation, mCurrentGizmoMode, trs_matrix.ptr());
 
 		if (ImGuizmo::IsUsing())
 		{
-			trs_matrix.Transpose();
-			trs_matrix = GetParentTransform().Transposed().Inverted() * trs_matrix;
 
-			float3 new_pos;
-			float3 new_scale;
-			Quat new_q;
+			trs_matrix.Transpose();
+			float3 new_pos = position;
+			float3 new_scale = scale;
+			Quat new_q = rotation;
 			trs_matrix.Decompose(new_pos, new_q, new_scale);
 
 			if (mCurrentGizmoOperation == ImGuizmo::TRANSLATE)
-				SetPosition(float3(new_pos.x/10, new_pos.y/10, new_pos.z/10));
+				SetPosition(float3(new_pos.x, new_pos.y, new_pos.z));
 			if (mCurrentGizmoOperation == ImGuizmo::SCALE)
-				SetScale(float3(new_scale.x/10, new_scale.y/10, new_scale.z/10));
+				SetScale(float3(new_scale.x, new_scale.y, new_scale.z));
 			if (mCurrentGizmoOperation == ImGuizmo::ROTATE)
 			{
-				//SetRotation(new_q.ToEulerXYZ());
+				//new_q.T
+				//rotation = rotation.FromEulerXYZ(DegToRad(new_q.ToEulerXYZ()[0]), DegToRad(new_q.ToEulerXYZ()[1]), DegToRad(new_q.ToEulerXYZ()[2]));
 			}
+
 		}
 	}
 	else {
