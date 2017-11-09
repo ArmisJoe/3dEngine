@@ -47,6 +47,8 @@ public:
 	void SetRoot(bool root);
 	bool IsRoot() const;
 
+	void Serialize();
+
 	std::vector<Component*> FindComponents(componentType type);
 	Component* AddComponent(const componentType type, Component* componentPointer = nullptr, bool fromReference = true);
 	void DeleteChild(GameObject* go);
@@ -64,6 +66,10 @@ public:
 
 	void OnEditor();
 	void OnHierarchyTree(bool skip_root = false);
+
+private: // Serialization Values
+	double UID;
+	double parentUID;
 
 };
 

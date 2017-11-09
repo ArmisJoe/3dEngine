@@ -10,18 +10,20 @@
 #include "ComponentTransform.h"
 
 #include "PanelInspector.h"
-
+#include "ModuleParson.h"
 
 GameObject::GameObject(GameObject * p) : parent(p)
 {
 	name = "GameObject";
 	//this->AddComponent(componentType_Transform);
+	UID = RandomNumber(DBL_MIN, DBL_MAX);
 }
 
 GameObject::GameObject()
 {
 	name = "GameObject";
     //this->AddComponent(componentType_Transform);
+	UID = RandomNumber(DBL_MIN, DBL_MAX);
 }
 
 GameObject::~GameObject()
@@ -341,3 +343,9 @@ void GameObject::OnHierarchyTree(bool skip_root)
 	}
 
 }
+
+void GameObject::Serialize() {
+
+}
+
+

@@ -10,7 +10,7 @@
         },
         "window": {
             "fullscreen": false,
-            "brightness": 1.0,
+            "brightness": 1,
             "resizable": true,
             "borderless": false,
             "w": 1280,

@@ -62,4 +62,12 @@ public:
 	GameObject* GetParent() const { return parent; }
 	bool HasParent() const { return parent != nullptr; }
 	void SetType(componentType ntype) { type = ntype; }
+
+	void Serialize();
+
+private: // Serializa Values
+	double UID;
+	double parentUID;
+
+
 };

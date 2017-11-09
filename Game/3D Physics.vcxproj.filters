@@ -82,8 +82,6 @@
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="ModuleResources.cpp" />
     <ClCompile Include="PanelSceneTree.cpp" />
-    <ClCompile Include="ImporterMaterial.cpp" />
-    <ClCompile Include="ImporterMesh.cpp" />
     <ClCompile Include="MathGeoLib\Algorithm\Random\LCG.cpp" />
     <ClCompile Include="MathGeoLib\Geometry\AABB.cpp" />
     <ClCompile Include="MathGeoLib\Geometry\Capsule.cpp" />
@@ -121,6 +119,7 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="HelperFoos.cpp" />
+    <ClCompile Include="md5.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -211,9 +210,6 @@
     </ClInclude>
     <ClInclude Include="ModuleResources.h" />
     <ClInclude Include="PanelSceneTree.h" />
-    <ClInclude Include="Importer.h" />
-    <ClInclude Include="ImporterMaterial.h" />
-    <ClInclude Include="ImporterMesh.h" />
     <ClInclude Include="MathGeoLib\Algorithm\GJK.h" />
     <ClInclude Include="MathGeoLib\Algorithm\Random\LCG.h" />
     <ClInclude Include="MathGeoLib\Algorithm\SAT.h" />
@@ -284,6 +280,7 @@
     <ClInclude Include="ModuleTextures.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="md5.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Geometry\KDTree.inl" />

@@ -29,6 +29,8 @@ bool ModuleFileSystem::Start()
 	CreateFolder("Library", "Textures");
 	CreateFolder("Library", "Meshes");
 	CreateFolder("Library", "Materials");
+	// Assets
+	CreateFolder("", "Assets");
 
 	return true;
 }

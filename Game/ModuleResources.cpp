@@ -75,3 +75,8 @@ bool ModuleResources::CleanUp()
 
 	return true;
 }
+
+double  ModuleResources::GenerateUID() const
+{
+	return RandomNumber();
+}
