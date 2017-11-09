@@ -345,7 +345,9 @@ void GameObject::OnHierarchyTree(bool skip_root)
 }
 
 void GameObject::Serialize(JSON_Doc* doc) {
-
+	if (doc == nullptr)
+		return;
+	
 }
 
 

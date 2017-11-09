@@ -15,6 +15,15 @@ public:
 	void SetString(const char* set, const char* str);
 	void SetBool(const char* set, bool bo);
 	void SetNumber(const char* set, double nu);
+	void SetArray(const char* set);
+	const int GetArraySize(const char* arr);
+	const char* GetStringArr(const char* arr, int idx);
+	const bool GetBoolArr(const char* arr, int idx);
+	const double GetNumberArr(const char* arr, int idx);
+	void AddStringArr(const char* arr, const char* str);
+	void AddBoolArr(const char* arr, bool bo);
+	void AddNumberArr(const char* arr, double nu);
+	bool FindArrayValue(const char* arr, int idx, json_value_type type);
 	const char* GetString(const char* str);
 	bool GetBool(const char* bo);
 	double GetNumber(const char* nu);
