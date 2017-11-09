@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include "Globals.h"
+#include "ModuleParson.h"
 
 class Component;
 
