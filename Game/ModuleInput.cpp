@@ -140,7 +140,9 @@ update_status ModuleInput::PreUpdate(float dt)
 					LOG("File Loaded:\n\t%s", dropped_filedir);
 				}
 				else if (filetype == ExtensionType::et_texture) {	// Is Texture
-					Texture* new_tex = App->tex->LoadToDDS(dropped_filedir);
+					std::string tex_path;
+					Texture* new_tex = App->tex->LoadToDDS(dropped_filedir, tex_path);
+					new_tex->path = tex_path.c_str();
 				}
 				else {												// Is Default / Unknown
 					LOG("Unknown file format '%s'", filetext);

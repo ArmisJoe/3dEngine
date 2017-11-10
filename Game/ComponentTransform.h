@@ -34,6 +34,8 @@ public:
 	void SetIdentityTransform();
 	void OnEditor();
 
+	void Serialize(JSON_Doc* doc);
+
 	bool Transformed = false;
 private:
 	float4x4 GetParentTransform()const;

@@ -191,12 +191,12 @@ void ModuleScene::Serialize(const char* scene_name) {
 	file += scene_name;
 	if(strcmp(GetCExtension(scene_name), ".json") != 0)
 		file += ".json";
+
 	JSON_Doc* scene_doc = App->parson->LoadJSON(file.c_str());
 
-	scene_doc->SetString("scene.name", "scene_name");
+	scene_doc->SetString("scene.name", scene_name);
 
 	scene_doc->SetArray("gameobjects");
-
 	if (root != nullptr) {
 		root->Serialize(scene_doc);
 	}

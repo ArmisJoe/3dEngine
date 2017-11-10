@@ -15,6 +15,7 @@ public:
 	void Update();
 	void CleanUp();
 
+	void Serialize(JSON_Doc* doc);
 
 	void SetPos(const float3 pos) { frustum.pos = pos; }
 	float* GetViewMatrix() const;

@@ -30,6 +30,7 @@ public:
 	const char* GetString(const char* str);
 	bool GetBool(const char* bo);
 	double GetNumber(const char* nu);
+	bool MoveToSection(const char* section);
 
 	const char* GetPath();
 	void Save();

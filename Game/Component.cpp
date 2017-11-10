@@ -32,5 +32,5 @@ bool Component::SetParent(GameObject * parent)
 }
 
 void Component::Serialize(JSON_Doc* doc) {
-
+	
 }

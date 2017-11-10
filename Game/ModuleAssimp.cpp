@@ -200,7 +200,10 @@ ComponentMaterial * ModuleAssimp::LoadMaterial(const aiMaterial* mat)
 			if (m_path.length > 0) {
 				string fullPath = "Assets\\";
 				fullPath.append(m_path.C_Str());
-				new_mat->SetTextureChannel(texType_Diffuse, App->tex->LoadToDDS(fullPath.c_str()));
+				std::string tex_path;
+				Texture* tmp_tex = App->tex->LoadToDDS(fullPath.c_str(), tex_path);
+				tmp_tex->path = tex_path.c_str();
+				new_mat->SetTextureChannel(texType_Diffuse, tmp_tex);
 			}
 			else {
 				LOG("Unvalid Path from texture: %s", m_path.C_Str());
@@ -405,6 +408,28 @@ ComponentMesh * ModuleAssimp::LoadToOwnFormat(const aiMesh * m)
 	}
 
 	if (new_m != nullptr) {
+		new_m->path = output_file.c_str();
+		App->res->meshes.push_back(new_m);
+	}
+
+	return new_m;
+}
+
+ComponentMesh * ModuleAssimp::LoadToOwnFormat(const aiMesh * m, std::string& output_file)
+{
+	ComponentMesh* new_m = nullptr;
+
+	if (Import(m, output_file)) {
+		new_m = LoadMyFormatMesh(output_file.c_str());
+		if (new_m == nullptr)
+			LOG("ERROR Loading Mesh from '%s' format", MESH_OWN_FORMAT);
+	}
+	else {
+		LOG("ERROR Importing Mesh to '%s' format", MESH_OWN_FORMAT);
+	}
+
+	if (new_m != nullptr) {
+		new_m->path = output_file.c_str();
 		App->res->meshes.push_back(new_m);
 	}
 

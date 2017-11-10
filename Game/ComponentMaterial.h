@@ -8,6 +8,7 @@ struct Texture {
 	virtual ~Texture() {};
 public:
 	void OnEditor();
+	void Serialize(JSON_Doc* doc, int channel = -1);
 public:
 	unsigned int id = 0;
 	float w = 0;
@@ -44,6 +45,7 @@ public:
 			}
 		}
 	}
+	void Serialize(JSON_Doc* doc);
 private:
 	Texture* texture_Channels[texType_Unknown];
 

@@ -36,6 +36,7 @@ public:
 	bool SaveToOwnFormat(ComponentMesh* m, std::string& output_file); // [FORMAT] -> { nV, nI, nUV, Vs, Is, UVs }
 	ComponentMesh* LoadMyFormatMesh(const char* exported_file);
 	ComponentMesh* LoadToOwnFormat(const aiMesh* m);
+	ComponentMesh* LoadToOwnFormat(const aiMesh* m, std::string& output_file);
 	bool CleanUp();
 
 };

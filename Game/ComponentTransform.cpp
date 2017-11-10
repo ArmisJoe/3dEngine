@@ -273,3 +273,24 @@ float4x4 ComponentTransform::GetParentTransform() const
 	}
 	else return transform_matrix;
 }
+
+void ComponentTransform::Serialize(JSON_Doc* doc) {
+	if (doc == nullptr)
+		return;
+	
+	// Type
+	doc->SetNumber("type", type);
+	// Pos
+	doc->SetNumber("position.x", position.x);
+	doc->SetNumber("position.y", position.y);
+	doc->SetNumber("position.z", position.z);
+	// Rot
+	doc->SetNumber("rotation.x", rotation.x);
+	doc->SetNumber("rotation.y", rotation.y);
+	doc->SetNumber("rotation.z", rotation.z);
+	doc->SetNumber("rotation.w", rotation.w);
+	// Scale
+	doc->SetNumber("scale.x", scale.x);
+	doc->SetNumber("scale.y", scale.y);
+	doc->SetNumber("scale.z", scale.z);
+}

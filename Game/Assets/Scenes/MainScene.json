@@ -1,13 +1,39 @@
 {
     "scene": {
-        "name": "scene_name"
+        "name": "MainScene"
     },
     "gameobjects": [
         {
-            "uid": 1395896960,
+            "uid": -1984634496,
             "parentUID": -1,
             "name": "Scene Root",
-            "components": []
+            "components": [
+                {}
+            ],
+            "dummy_test": 0
+        },
+        {
+            "uid": -1877330176,
+            "parentUID": -1984634496,
+            "name": "Chimney",
+            "components": [
+                {},
+                {},
+                {}
+            ],
+            "dummy_test": 2
+        },
+        {
+            "uid": -1933725184,
+            "parentUID": -1984634496,
+            "name": "Baker_house",
+            "components": [
+                {},
+                {},
+                {}
+            ],
+            "dummy_test": 2
         }
-    ]
+    ],
+    "dummy_test": 2
 }

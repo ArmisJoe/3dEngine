@@ -288,3 +288,16 @@ void JSON_Doc::CleanUp()
 void JSON_Doc::MoveToRootSection() {
 	object = root;
 }
+
+bool JSON_Doc::MoveToSection(const char* section) {
+	bool ret = false;
+
+	JSON_Object* jobj = json_object_get_object(object, section);
+
+	if (jobj != nullptr) {
+		object = jobj;
+		ret = true;
+	}
+
+	return ret;
+}
