@@ -12,6 +12,7 @@
 
 class QuadtreeNode {
 public:
+	QuadtreeNode();
 	QuadtreeNode(const AABB & limits);
 	QuadtreeNode(const AABB &aabb, QuadtreeNode* node);
 
@@ -19,7 +20,7 @@ public:
 	void Insert(GameObject* go);
 	void Remove(GameObject* go);
 	void Create(const AABB &limits);
-	void ClearNode(QuadtreeNode* node);
+	void Clear();
 	void Redistribute();
 	void Devide();
 
@@ -47,6 +48,7 @@ public:
 	void Intersections(std::vector<GameObject*>& objects, const AABB &aabb) const;
 	void CollectAllNodes(vector<AABB>& nodes);
 	void RecursiveNodes(vector<AABB>& nodes, QuadtreeNode* it);
+	void ClearNode(QuadtreeNode* point);
 
 public:
 	QuadtreeNode* root = nullptr;

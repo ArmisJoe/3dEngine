@@ -1,5 +1,11 @@
 #include "QuadTreeh.h"
+#include "Globals.h"
 
+QuadtreeNode::QuadtreeNode()
+{
+	parent = nullptr;
+	nodes[0] = nullptr; nodes[1] = nullptr; nodes[2] = nullptr; nodes[3] = nullptr;
+}
 QuadtreeNode::QuadtreeNode(const AABB & limits){
 	size = limits;
 	parent = nullptr;
@@ -23,8 +29,7 @@ QuadtreeNode::~QuadtreeNode()
 	{
 		if (nodes[i] != nullptr)
 		{
-			ClearNode(nodes[i]);
-			delete nodes[i];
+			//delete(nodes[i]);
 			// I really hope this does not crash
 			// nvm it does lol
 		}
@@ -75,16 +80,9 @@ void QuadtreeNode::Create(const AABB & limits)
 }
 
 
-void QuadtreeNode::ClearNode(QuadtreeNode* node)
+void QuadtreeNode::Clear()
 {
-	for (int i = 0; i < SUBDIVISIONS; ++i)
-	{
-		if (nodes[i] != nullptr)
-		{
-			ClearNode(nodes[i]);
-			delete nodes[i];
-		}
-	}
+
 }
 
 
@@ -122,36 +120,37 @@ void QuadtreeNode::Redistribute()
 
 void QuadtreeNode::Devide()
 {
-	if (nodes[0] == nullptr) {
-		AABB new_box;
-		float3 new_lenght = size.HalfSize();
-		float3 center = this->size.CenterPoint();
+	// We need to subdivide this node ...
+	float3 size(this->size.Size());
+	float3 new_size(size.x*0.5f, size.y, size.z*0.5f); // Octree would subdivide y too
 
-		int child_index = 0;
+	float3 center(this->size.CenterPoint());
+	float3 new_center(center);
+	AABB new_box;
 
-		for (int x = 0; x < 2; x++)
-		{
-			for (int y = 0; y < 2; y++)
-			{
-				for (int z = 0; z < 2; z++)
-				{
-					float3 min_point(size.minPoint.x + z * new_lenght.x, size.minPoint.y + y * new_lenght.y, size.minPoint.z + x * new_lenght.z);
-					float3 max_point(min_point.x + new_lenght.x, min_point.y + new_lenght.y, min_point.z + new_lenght.z);
+	// NorthEast
+	new_center.x = center.x + size.x * 0.25f;
+	new_center.z = center.z + size.z * 0.25f;
+	new_box.SetFromCenterAndSize(new_center, new_size);
+	nodes[0] = new QuadtreeNode(new_box);
 
-					new_box.minPoint = min_point;
-					new_box.maxPoint = max_point;
+	// SouthEast
+	new_center.x = center.x + size.x * 0.25f;
+	new_center.z = center.z - size.z * 0.25f;
+	new_box.SetFromCenterAndSize(new_center, new_size);
+	nodes[1] = new QuadtreeNode(new_box);
 
-					nodes[child_index] = new QuadtreeNode(new_box, this);
-					child_index++;
-				}
-			}
-		}
-	}
-	else {
-		for (int i = 0; i < 8; i++) {
-			nodes[i]->Devide();
-		}
-	}
+	// SouthWest
+	new_center.x = center.x - size.x * 0.25f;
+	new_center.z = center.z - size.z * 0.25f;
+	new_box.SetFromCenterAndSize(new_center, new_size);
+	nodes[2] = new QuadtreeNode(new_box);
+
+	// NorthWest
+	new_center.x = center.x - size.x * 0.25f;
+	new_center.z = center.z + size.z * 0.25f;
+	new_box.SetFromCenterAndSize(new_center, new_size);
+	nodes[3] = new QuadtreeNode(new_box);
 }
 
 template<typename TYPE>
@@ -209,7 +208,11 @@ void Quadtree::Erase(GameObject * go)
 void Quadtree::Clear()
 {
 	if (root != nullptr)
-		delete root;
+	{
+		//root->Clear();
+		ClearNode(root);
+		delete(root);
+	}
 	//tecnhically de destructor will handle the inside data...
 }
 
@@ -243,4 +246,17 @@ void Quadtree::RecursiveNodes(vector<AABB> &nodes, QuadtreeNode * it)
 	}
 }
 
+void Quadtree::ClearNode(QuadtreeNode * point)
+{
+	for (int i = 0; i < SUBDIVISIONS; ++i)
+	{
+		if (point->nodes[i] != nullptr)
+		{
+			ClearNode(point->nodes[i]);
+			delete(point->nodes[i]);
+			// I really hope this does not crash
+			// nvm it does lol
+		}
+	}
+}
 
