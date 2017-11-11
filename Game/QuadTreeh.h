@@ -20,7 +20,7 @@ public:
 	void Insert(GameObject* go);
 	void Remove(GameObject* go);
 	void Create(const AABB &limits);
-	void Clear();
+	//void Clear();
 	void Redistribute();
 	void Devide();
 

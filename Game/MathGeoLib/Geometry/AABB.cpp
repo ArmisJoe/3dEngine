@@ -838,6 +838,7 @@ bool AABB::Intersects(const AABB &aabb) const
 {
 	// If any of the cardinal X,Y,Z axes is a separating axis, then
 	// there is no intersection.
+
 	return minPoint.x < aabb.maxPoint.x &&
 	       minPoint.y < aabb.maxPoint.y &&
 	       minPoint.z < aabb.maxPoint.z &&

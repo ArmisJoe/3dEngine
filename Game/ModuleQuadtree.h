@@ -17,7 +17,11 @@ public:
 	bool Start();
 	update_status Update(float dt);
 	bool CleanUp();
+	bool InsertObject(GameObject* go); // Returns false if the object is not static
+	void RestartQuadtree();
+	void ResetQuadtree(AABB aabb);
+	bool GetRoot(AABB* getter) const; // returns false if root is nullptr
 
 private:
-	Quadtree quadtreeh; // I deadass created the quadtree class when there is one in mathgeolib ok
+	Quadtree* quadtreeh; // I deadass created the quadtree class when there is one in mathgeolib ok
 };

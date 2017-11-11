@@ -29,7 +29,7 @@ QuadtreeNode::~QuadtreeNode()
 	{
 		if (nodes[i] != nullptr)
 		{
-			//delete(nodes[i]);
+			delete(nodes[i]);
 			// I really hope this does not crash
 			// nvm it does lol
 		}
@@ -45,16 +45,24 @@ void QuadtreeNode::Insert(GameObject * go)
 		//If it is within the limits of the Quadtree
 		if (elements.size() < MAX_ELEMENTS || (size.HalfSize().LengthSq() <= MIN_SIZE * MIN_SIZE))
 			elements.push_back(go);
+
 		else
 		{
 			//If you run out of Bucket space and you are a leaf subdivide in 4 (where the magic happens)
 			Devide();
+			//Add it node’s list
+			elements.push_back(go);
+			//Redistribute all GameObjects to proper childs based on their position in space
+			Redistribute();
 		}
 	}
+	else
+	{
 		//Add it node’s list
 		elements.push_back(go);
 		//Redistribute all GameObjects to proper childs based on their position in space
 		Redistribute();
+	}
 }
 
 void QuadtreeNode::Remove(GameObject * go)
@@ -78,13 +86,6 @@ void QuadtreeNode::Create(const AABB & limits)
 {
  // why does the handout say we need this?	
 }
-
-
-void QuadtreeNode::Clear()
-{
-
-}
-
 
 void QuadtreeNode::Redistribute()
 {
@@ -181,7 +182,10 @@ Quadtree::Quadtree()
 
 Quadtree::~Quadtree()
 {
-	Clear();
+	if (root != nullptr)
+	{
+		delete root;
+	}
 }
 
 void Quadtree::SetMaxSize(const AABB & box)
@@ -194,7 +198,7 @@ void Quadtree::Insert(GameObject * go)
 {
 	if (root != nullptr)
 	{
-		if (go->aabb.Intersects(root->GetBox()))
+		if (!go->aabb.ToOBB().Intersects(root->GetBox()))
 			root->Insert(go);
 	}
 }
@@ -207,12 +211,6 @@ void Quadtree::Erase(GameObject * go)
 
 void Quadtree::Clear()
 {
-	if (root != nullptr)
-	{
-		//root->Clear();
-		ClearNode(root);
-		delete(root);
-	}
 	//tecnhically de destructor will handle the inside data...
 }
 
