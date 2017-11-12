@@ -21,6 +21,7 @@ public:
 
 public:
 	GameObject* CreateGameObject(GameObject* parent); //Adds a GameObject into Parent. Return nullptr on failure.
+	GameObject* CreateGameObject();
 	GameObject* AddGameObject(GameObject* parent, GameObject* go); //Adds a GameObject into a Parent GameObject. Return nullptr on failure.
 	void DeleteGameObject(GameObject* go);
 	GameObject* GetRoot() const {
@@ -35,6 +36,7 @@ public:
 	bool IteratingElement(GameObject* go);
 
 	void Serialize(const char* scene_name);
+	void LoadScene(const char* scene_name);
 
 private:
 	GameObject* root;

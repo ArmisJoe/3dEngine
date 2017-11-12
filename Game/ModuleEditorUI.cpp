@@ -127,10 +127,15 @@ update_status ModuleEditorUI::Update(float dt)
 	if (ImGui::BeginMainMenuBar()) {
 		if (ImGui::BeginMenu("File")) {
 			ImGui::MenuItem("Config", "Alt+F1", &config_active);
-			if (ImGui::Button("Save")) {
+			if (ImGui::Button("Save Scene")) {
 				char* scene_name = "MainScene";
 				App->scene->Serialize(scene_name);
 				LOG("Scene Saved as '%s'", scene_name);
+			}
+			if (ImGui::Button("Load Scene")) {
+				char* scene_name = "MainScene";
+				App->scene->LoadScene(scene_name);
+				LOG("Scene Loaded '%s'", scene_name);
 			}
 			if (ImGui::Button("Quit")) {
 				App->input->AppQuit(true);

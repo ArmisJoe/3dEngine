@@ -121,12 +121,23 @@ bool ModuleScene::CleanUp()
 GameObject * ModuleScene::CreateGameObject(GameObject* parent)
 {
 	GameObject* newGameObject = nullptr;
-
-	newGameObject = new GameObject();
-
-	parent->children.push_back(newGameObject);
-
+	if (parent != nullptr) {
+		newGameObject = new GameObject(parent);
+		newGameObject->SetScene(this);
+		newGameObject->SetParent(parent);
+		parent->children.push_back(newGameObject);
+	}
+	else
+		LOG("ERROR Trying to create a nullptr parent GameObject");
 	return newGameObject;
+}
+
+GameObject * ModuleScene::CreateGameObject()
+{
+	GameObject* new_go = nullptr;
+	new_go = new GameObject();
+	new_go->SetScene(this);
+	return new_go;
 }
 
 GameObject * ModuleScene::AddGameObject(GameObject * parent, GameObject * go)
@@ -204,4 +215,77 @@ void ModuleScene::Serialize(const char* scene_name) {
 
 	scene_doc->Save();
 
+}
+
+void ModuleScene::LoadScene(const char* scene_name)
+{
+	std::string file = "Assets/Scenes/";
+	file += scene_name;
+	if (strcmp(GetCExtension(scene_name), ".json") != 0)
+		file += ".json";
+
+	JSON_Doc* scene_doc = App->parson->LoadJSON(file.c_str());
+
+	if (scene_doc == nullptr) {
+		LOG("ERROR Loading Scene");
+		return;
+	}
+
+	RemoveAllGameObject();  // RESET SCENE
+
+	// GameObjects Load
+	std::vector<GameObject*> tmp_gos;
+	scene_doc->MoveToRootSection();
+	for (int i = 0; i < scene_doc->GetArraySize("gameobjects"); i++) {
+		scene_doc->MoveToSectionInsideArr("gameobjects", i);
+		if (scene_doc->GetBool("isRoot") == true) {
+			root->SetUID(scene_doc->GetNumber("uid"));
+			tmp_gos.push_back(root);
+		}
+		else {
+			GameObject* go = CreateGameObject();
+			if (go != nullptr) {
+				go->SetUID(scene_doc->GetNumber("uid"));
+				go->SetParentUID(scene_doc->GetNumber("parentUID"));
+				go->SetName(scene_doc->GetString("name"));
+				tmp_gos.push_back(go);
+			}
+			else
+				LOG("ERROR Loading gameobject '%s'", scene_doc->GetString("name"));
+		}
+		scene_doc->MoveToRootSection();
+	}
+	// GameObjects Connections
+	for (int i = 0; i < tmp_gos.size(); i++) {
+		GameObject* curr = tmp_gos[i];
+		for (int k = 0; k < tmp_gos.size(); k++) {
+			GameObject* checked = tmp_gos[k];
+			if (curr->GetParentUID() == checked->GetUID()) {
+				curr->SetParent(checked);
+				checked->children.push_back(curr);
+				break;
+			}
+		}
+	}
+	// Components Load
+	for (int n = 0; n < tmp_gos.size(); n++) {
+		scene_doc->MoveToRootSection();
+		for (int i = 0; i < scene_doc->GetArraySize("components"); i++) {
+			scene_doc->MoveToRootSection();
+			scene_doc->MoveToSectionInsideArr("components", i);
+			if (scene_doc->GetNumber("parentUID") == tmp_gos[i]->GetParentUID()) {
+				int compType = scene_doc->GetNumber("type");
+				Component* newComp = nullptr;
+				switch (compType) {
+				case componentType_Mesh:
+					break;
+				case componentType_Material:
+					break;
+				case componentType_Transform:
+					break;
+				}
+				tmp_gos[i]->AddComponent(compType, newComp, !(compType == componentType_Transform));
+			}
+		}
+	}
 }

@@ -52,5 +52,6 @@ public:
 
 private: // Serialize Values
 	double UID;
+	double gameObjectUID;
 
 };
