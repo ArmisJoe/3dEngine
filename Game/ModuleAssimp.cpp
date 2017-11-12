@@ -207,7 +207,8 @@ ComponentMaterial * ModuleAssimp::LoadMaterial(const aiMaterial* mat)
 				std::string tex_path;
 				Texture* tmp_tex = App->tex->LoadToDDS(fullPath.c_str(), tex_path);
 				tmp_tex->path = tex_path.c_str();
-				new_mat->SetTextureChannel(texType_Diffuse, tmp_tex);
+				if(new_mat != nullptr)
+					new_mat->SetTextureChannel(texType_Diffuse, tmp_tex);
 			}
 			else {
 				LOG("Unvalid Path from texture: %s", m_path.C_Str());
@@ -219,13 +220,15 @@ ComponentMaterial * ModuleAssimp::LoadMaterial(const aiMaterial* mat)
 	}
 	//All other texture types...
 
-	if (new_mat->HasTextures()) {
+	if (new_mat != nullptr && new_mat->HasTextures()) {
 		App->res->materials.push_back(new_mat);
 	}
 	else {
-		new_mat->CleanUp();
-		mdelete[] new_mat;
-		new_mat = nullptr;
+		if (new_mat != nullptr) {
+			new_mat->CleanUp();
+			mdelete[] new_mat;
+			new_mat = nullptr;
+		}
 	}
 
 	return new_mat;
