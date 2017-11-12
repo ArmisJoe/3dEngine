@@ -70,10 +70,6 @@
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="ModuleResources.cpp" />
-    <ClCompile Include="ModuleFileSystem.cpp" />
-    <ClCompile Include="ImporterTexture.cpp" />
-    <ClCompile Include="ImporterMaterial.cpp" />
-    <ClCompile Include="ImporterMesh.cpp" />
     <ClCompile Include="MathGeoLib\Geometry\Frustum.cpp" />
     <ClCompile Include="PanelSceneTree.cpp" />
     <ClCompile Include="MathGeoLib\Algorithm\Random\LCG.cpp" />
@@ -219,6 +215,15 @@
     </ClCompile>
     <ClCompile Include="HelperFoos.cpp" />
     <ClCompile Include="md5.cpp" />
+    <ClCompile Include="ModuleQuadtree.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTreeh.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFileSystem.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glew-2.1.0\include\GL\eglew.h" />
@@ -298,11 +303,6 @@
       <Filter>Tools</Filter>
     </ClInclude>
     <ClInclude Include="ModuleResources.h" />
-    <ClInclude Include="ModuleFileSystem.h" />
-    <ClInclude Include="Importer.h" />
-    <ClInclude Include="ImporterTexture.h" />
-    <ClInclude Include="ImporterMaterial.h" />
-    <ClInclude Include="ImporterMesh.h" />
     <ClInclude Include="MathGeoLib\Algorithm\GJK.h" />
     <ClInclude Include="MathGeoLib\Algorithm\SAT.h" />
     <ClInclude Include="MathGeoLib\emscripten\library_system.h" />
@@ -337,7 +337,6 @@
     <ClInclude Include="MathGeoLib\MathGeoLibFwd.h" />
     <ClInclude Include="MathGeoLib\Math\assume.h" />
     <ClInclude Include="MathGeoLib\Math\BitOps.h" />
-    <ClInclude Include="MathGeoLib\Math\Callstack.h" />
     <ClInclude Include="MathGeoLib\Math\FixedPoint.h" />
     <ClInclude Include="MathGeoLib\Math\float2.h" />
     <ClInclude Include="MathGeoLib\Math\float3.h" />
@@ -515,6 +514,15 @@
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="md5.h" />
+    <ClInclude Include="ModuleQuadtree.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTreeh.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFileSystem.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Geometry\KDTree.inl" />

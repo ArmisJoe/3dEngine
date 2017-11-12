@@ -143,8 +143,6 @@ void ComponentTransform::SetScale(const float3 & _scale)
 
 void ComponentTransform::OnEditor()
 {
-	if (!can_update)
-	{
 		float pos[3];
 		float rot[3];
 		float sca[3];
@@ -184,11 +182,10 @@ void ComponentTransform::OnEditor()
 			scale.y = sca[1];
 			scale.z = sca[2];
 		}
-	}
+	
 	// ImGuizmo
 	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT)
 	{
-		can_update = false;
 		App->camera->SetCameraActive(false);
 		ImGuizmo::Enable(true);
 
@@ -255,7 +252,6 @@ void ComponentTransform::OnEditor()
 	else {
 		ImGuizmo::Enable(false);
 		App->camera->SetCameraActive(true);
-		can_update = true;
 	}
 }
 
