@@ -48,11 +48,9 @@ public:
 	bool HasParent() const { return parent != nullptr; }
 	void SetType(componentType ntype) { type = ntype; }
 
-	void Serialize(JSON_Doc* doc);
+	virtual void Serialize(JSON_Doc* doc);
 
-private: // Serializa Values
+private: // Serialize Values
 	double UID;
-	double parentUID;
-
 
 };

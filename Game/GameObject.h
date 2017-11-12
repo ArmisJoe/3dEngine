@@ -51,6 +51,10 @@ public:
 	void SetStatic(bool set);
 	bool IsStatic() const;
 
+	double GetUID() const {
+		return UID;
+	}
+
 	void Serialize(JSON_Doc* doc);
 
 	std::vector<Component*> FindComponents(componentType type);
@@ -73,7 +77,6 @@ public:
 
 private: // Serialization Values
 	double UID;
-	double parentUID;
 
 };
 

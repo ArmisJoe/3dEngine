@@ -8,6 +8,8 @@
 #include "ModuleEditorUI.h"
 #include "PanelInspector.h"
 
+#include "HelperFoos.h"
+
 #include "Component.h"
 #include "ComponentTransform.h"
 #include "ComponentMesh.h"
@@ -184,15 +186,22 @@ update_status ModuleScene::PostUpdate(float dt)
 }
 
 void ModuleScene::Serialize(const char* scene_name) {
-	std::string file = "Assets/";
+	App->fs->CreateFolder("Assets", "Scenes");
+	std::string file = "Assets/Scenes/";
 	file += scene_name;
+	if(strcmp(GetCExtension(scene_name), ".json") != 0)
+		file += ".json";
+
 	JSON_Doc* scene_doc = App->parson->LoadJSON(file.c_str());
 
-	scene_doc->SetString("scene.name", "scene_name");
-	scene_doc->SetNumber("scene.uid", RandomNumber(DBL_MIN, DBL_MAX));
+	scene_doc->SetString("scene.name", scene_name);
 
+	scene_doc->SetArray("gameobjects");
+	scene_doc->SetArray("components");
 	if (root != nullptr) {
 		root->Serialize(scene_doc);
 	}
+
+	scene_doc->Save();
 
 }

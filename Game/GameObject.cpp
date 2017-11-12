@@ -16,14 +16,14 @@ GameObject::GameObject(GameObject * p) : parent(p)
 {
 	name = "GameObject";
 	//this->AddComponent(componentType_Transform);
-	UID = RandomNumber(DBL_MIN, DBL_MAX);
+	UID = RandomNumber();
 }
 
 GameObject::GameObject()
 {
 	name = "GameObject";
     //this->AddComponent(componentType_Transform);
-	UID = RandomNumber(DBL_MIN, DBL_MAX);
+	UID = RandomNumber();
 }
 
 GameObject::~GameObject()
@@ -357,7 +357,35 @@ void GameObject::OnHierarchyTree(bool skip_root)
 void GameObject::Serialize(JSON_Doc* doc) {
 	if (doc == nullptr)
 		return;
-	
+
+	doc->MoveToRootSection();
+
+	doc->AddSectionArr("gameobjects");
+	doc->MoveToSectionInsideArr("gameobjects", doc->GetArraySize("gameobjects") - 1);
+
+	// UIDs
+	doc->SetNumber("uid", UID);
+	if (parent != nullptr)
+		doc->SetNumber("parentUID", parent->UID);
+	else
+		doc->SetNumber("parentUID", -1);
+	// Name
+	doc->SetString("name", name.c_str());
+	// Components
+	for (int i = 0; i < components.size(); i++) {
+		doc->MoveToRootSection();
+		doc->AddSectionArr("components");
+		doc->MoveToSectionInsideArr("components", doc->GetArraySize("components") - 1);
+		components[i]->Serialize(doc);
+	}
+
+
+	// Children
+	for (int i = 0; i < children.size(); i++) {
+		children[i]->Serialize(doc);
+	}
+
+	doc->MoveToRootSection(); // Politeness pls
 }
 
 

@@ -23,10 +23,14 @@ public:
 	void AddStringArr(const char* arr, const char* str);
 	void AddBoolArr(const char* arr, bool bo);
 	void AddNumberArr(const char* arr, double nu);
+	void AddSectionArr(const char* arr);
 	bool FindArrayValue(const char* arr, int idx, json_value_type type);
+	bool MoveToSectionInsideArr(const char* arr, int idx);
+	void MoveToRootSection();
 	const char* GetString(const char* str);
 	bool GetBool(const char* bo);
 	double GetNumber(const char* nu);
+	bool MoveToSection(const char* section);
 
 	const char* GetPath();
 	void Save();
@@ -35,6 +39,7 @@ public:
 private:
 	JSON_Value*  value = nullptr;
 	JSON_Object* object = nullptr;
+	JSON_Object* root = nullptr;
 	const char*  path;
 
 };

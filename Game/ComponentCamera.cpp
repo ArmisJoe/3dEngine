@@ -81,6 +81,11 @@ void ComponentCamera::CleanUp()
 {
 }
 
+void ComponentCamera::Serialize(JSON_Doc * doc)
+{
+	// Necessary ??
+}
+
 void ComponentCamera::UpdateProjection()
 {
 	glMatrixMode(GL_PROJECTION);
