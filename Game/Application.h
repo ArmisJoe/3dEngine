@@ -21,6 +21,7 @@
 #include "ModuleResources.h"
 #include "ModuleFileSystem.h"
 #include "ModulePicker.h"
+#include "ModuleQuadtree.h"
 
 #define LOG(format, ...) App->mylog(__FILE__, __LINE__, format, __VA_ARGS__);
 
@@ -44,7 +45,7 @@ public:
 	ModuleResources* res;
 	ModuleFileSystem* fs;
 	ModulePicker* picker;
-	
+	ModuleQuadtree* quadTree;
 private:
 
 	Timer	ms_timer;

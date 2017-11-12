@@ -23,6 +23,7 @@ Application::Application()
 	tex = new ModuleTextures();
 	res = new ModuleResources();
 	fs = new ModuleFileSystem();
+	quadTree = new ModuleQuadtree();
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -40,7 +41,8 @@ Application::Application()
 	AddModule(tex);
 	AddModule(res);
 	AddModule(fs);
-	
+	AddModule(quadTree);
+
 	// Scenes
 	AddModule(scene);
 	AddModule(player);
