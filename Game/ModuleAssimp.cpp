@@ -51,7 +51,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 		float3 scale = { 1, 1, 1 };
 		position = { translation.x, translation.y, translation.y };
 		Quat rotation2 = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
-		scale = { scaling.x/100, scaling.y/100, scaling.z/100 };
+		scale = { scaling.x, scaling.y, scaling.z };
 		ComponentTransform* trans = new ComponentTransform(new_node, position, rotation2, scale);
 		vector<Component*> tmp = new_node->FindComponents(componentType_Transform);
 		if (!tmp.empty())
@@ -60,11 +60,15 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 
 
 	//LoadMeshes
+		std::string mesh_path;
+		ComponentMesh* new_mesh = nullptr;
 	for (uint i = 0; i < node->mNumMeshes; i++) {
 		//Mesh Load
-		ComponentMesh* new_mesh = LoadToOwnFormat(scene->mMeshes[node->mMeshes[i]]);
-		if (new_mesh != nullptr)
+		new_mesh = LoadToOwnFormat(scene->mMeshes[node->mMeshes[i]], mesh_path);
+		if (new_mesh != nullptr) {
+			new_mesh->path = mesh_path;
 			new_node->AddComponent(componentType_Mesh, new_mesh);
+		}
 		//Material Load
 		if (materials != nullptr && new_mesh != nullptr) {
 			ComponentMaterial* new_material = LoadMaterial(materials[(int)new_mesh->material_index]);
@@ -408,7 +412,7 @@ ComponentMesh * ModuleAssimp::LoadToOwnFormat(const aiMesh * m)
 	}
 
 	if (new_m != nullptr) {
-		new_m->path = output_file.c_str();
+		//new_m->path = output_file.c_str();
 		App->res->meshes.push_back(new_m);
 	}
 
@@ -429,7 +433,7 @@ ComponentMesh * ModuleAssimp::LoadToOwnFormat(const aiMesh * m, std::string& out
 	}
 
 	if (new_m != nullptr) {
-		new_m->path = output_file.c_str();
+		//new_m->path = output_file.c_str();
 		App->res->meshes.push_back(new_m);
 	}
 

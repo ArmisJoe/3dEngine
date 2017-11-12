@@ -280,6 +280,7 @@ void ComponentTransform::Serialize(JSON_Doc* doc) {
 	
 	// Type
 	doc->SetNumber("type", type);
+	doc->SetNumber("parentUID", (parent != nullptr) ? parent->GetUID() : -1);
 	// Pos
 	doc->SetNumber("position.x", position.x);
 	doc->SetNumber("position.y", position.y);

@@ -197,6 +197,7 @@ void ModuleScene::Serialize(const char* scene_name) {
 	scene_doc->SetString("scene.name", scene_name);
 
 	scene_doc->SetArray("gameobjects");
+	scene_doc->SetArray("components");
 	if (root != nullptr) {
 		root->Serialize(scene_doc);
 	}

@@ -14,7 +14,7 @@ public:
 	float w = 0;
 	float h = 0;
 
-	const char* path = nullptr;
+	std::string path;
 	const char* name = nullptr;
 
 	int format = 0;

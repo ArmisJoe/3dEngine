@@ -372,13 +372,11 @@ void GameObject::Serialize(JSON_Doc* doc) {
 	// Name
 	doc->SetString("name", name.c_str());
 	// Components
-	doc->SetArray("components");
 	for (int i = 0; i < components.size(); i++) {
+		doc->MoveToRootSection();
 		doc->AddSectionArr("components");
-		//[WIP]
-		//doc->MoveToSectionInsideArr("components", doc->GetArraySize("components") - 1);
-		doc->SetNumber("dummy_test", i);
-		//components[i]->Serialize(doc);
+		doc->MoveToSectionInsideArr("components", doc->GetArraySize("components") - 1);
+		components[i]->Serialize(doc);
 	}
 
 

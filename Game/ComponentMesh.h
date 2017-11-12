@@ -17,7 +17,7 @@ public:
 	void Serialize(JSON_Doc* doc);
 public:
 	//Path
-	const char* path = nullptr;
+	std::string path;
 	//Vertices
 	unsigned int id_vertices = 0; // id in VRAM
 	unsigned int num_indices = 0;

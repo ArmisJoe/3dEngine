@@ -50,7 +50,7 @@ public:
 
 	virtual void Serialize(JSON_Doc* doc);
 
-private: // Serializa Values
+private: // Serialize Values
 	double UID;
 
 };

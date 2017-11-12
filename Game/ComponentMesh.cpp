@@ -51,15 +51,16 @@ void ComponentMesh::OnEditor()
 	ImGui::SameLine();
 	str = "Indices: " + std::to_string(this->num_indices);
 	ImGui::Text(str.c_str());
+	ImGui::Text(path.c_str());
 }
 void ComponentMesh::Serialize(JSON_Doc * doc)
 {
-	if (doc == nullptr)
+	if (doc == NULL)
 		return;
 
 	doc->SetNumber("type", type);
-	doc->SetString("dummy", "test");
-	//doc->SetString("path", path);
+	doc->SetNumber("parentUID", (parent != nullptr) ? parent->GetUID() : -1);
+	doc->SetString("path", path.c_str());
 
 }
 ;
