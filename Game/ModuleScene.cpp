@@ -240,6 +240,7 @@ void ModuleScene::LoadScene(const char* scene_name)
 		scene_doc->MoveToSectionInsideArr("gameobjects", i);
 		if (scene_doc->GetBool("isRoot") == true) {
 			root->SetUID(scene_doc->GetNumber("uid"));
+			root->SetStatic(scene_doc->GetBool("static"));
 			tmp_gos.push_back(root);
 		}
 		else {
@@ -248,6 +249,7 @@ void ModuleScene::LoadScene(const char* scene_name)
 				go->SetUID(scene_doc->GetNumber("uid"));
 				go->SetParentUID(scene_doc->GetNumber("parentUID"));
 				go->SetName(scene_doc->GetString("name"));
+				go->SetStatic(scene_doc->GetBool("static"));
 				tmp_gos.push_back(go);
 			}
 			else
@@ -268,23 +270,65 @@ void ModuleScene::LoadScene(const char* scene_name)
 		}
 	}
 	// Components Load
-	for (int n = 0; n < tmp_gos.size(); n++) {
+	std::vector<Component*> tmp_cs;
+	scene_doc->MoveToRootSection();
+	int nComponents = scene_doc->GetArraySize("components");
+	for (int i = 0; i < nComponents; i++) {
 		scene_doc->MoveToRootSection();
-		for (int i = 0; i < scene_doc->GetArraySize("components"); i++) {
+		scene_doc->MoveToSectionInsideArr("components", i);
+		int type = scene_doc->GetNumber("type");
+		Component* c = nullptr;
+		ComponentMaterial* mat = nullptr;
+		int aux = 0;
+		switch (type) {
+		case componentType_Mesh:
+			c = App->assimp->LoadMyFormatMesh(scene_doc->GetString("path"));
+			if (c != nullptr)
+				App->res->meshes.push_back((ComponentMesh*)c);
+			break;
+		case componentType_Material:
+			mat = new ComponentMaterial();
+			aux = scene_doc->GetArraySize("texture_channels");
+			for (int i = 0; i < aux; i++) {
+				scene_doc->MoveToSectionInsideArr("texture_channels", i);
+				mat->SetTextureChannel((int)scene_doc->GetNumber("channel"), App->tex->LoadToDDS(scene_doc->GetString("path")));
+			}
+			if (mat != nullptr && mat->HasTextures()) {
+				App->res->materials.push_back(mat);
+				c = mat;
+			}
+			else
+				if (mat != nullptr) {
+					mat->CleanUp();
+					mdelete mat;
+				}
 			scene_doc->MoveToRootSection();
 			scene_doc->MoveToSectionInsideArr("components", i);
-			if (scene_doc->GetNumber("parentUID") == tmp_gos[i]->GetParentUID()) {
-				int compType = scene_doc->GetNumber("type");
-				Component* newComp = nullptr;
-				switch (compType) {
-				case componentType_Mesh:
-					break;
-				case componentType_Material:
-					break;
-				case componentType_Transform:
-					break;
-				}
-				tmp_gos[i]->AddComponent(compType, newComp, !(compType == componentType_Transform));
+			break;
+		case componentType_Transform:
+			ComponentTransform* trans = new ComponentTransform();
+			float3 p = { (float)scene_doc->GetNumber("position.x"), (float)scene_doc->GetNumber("position.y"), (float)scene_doc->GetNumber("position.z") };
+			Quat r = { (float)scene_doc->GetNumber("rotation.x"), (float)scene_doc->GetNumber("rotation.y"), (float)scene_doc->GetNumber("rotation.z"), (float)scene_doc->GetNumber("rotation.w") };
+			float3 s = { (float)scene_doc->GetNumber("scale.x"), (float)scene_doc->GetNumber("scale.y"), (float)scene_doc->GetNumber("scale.z") };
+			trans->SetPosition(p);
+			trans->SetRotation(r);
+			trans->SetScale(s);
+			c = trans;
+			break;
+		}
+		if (c != nullptr) {
+			c->SetGoUID(scene_doc->GetNumber("parentUID"));
+			c->type = (componentType)type;
+			tmp_cs.push_back(c);
+		}
+
+
+	}
+	// Components Link
+	for (int i = 0; i < tmp_gos.size(); i++) {
+		for (int k = 0; k < tmp_cs.size(); k++) {
+			if (tmp_gos[i]->GetUID() == tmp_cs[k]->GetGoUID()) {
+				tmp_gos[i]->AddComponent(tmp_cs[k]->type, tmp_cs[k], !(tmp_cs[k]->type == componentType_Transform));
 			}
 		}
 	}

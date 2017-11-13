@@ -109,7 +109,7 @@ void ComponentTransform::Update(float dt)
 
 void ComponentTransform::SetPosition(const float3 & _position)
 {
-	if (GetParent()->IsStatic() == false)
+	if (GetParent() == nullptr || GetParent()->IsStatic() == false)
 	{
 		position = _position;
 		transform_modified = true;
@@ -119,7 +119,7 @@ void ComponentTransform::SetPosition(const float3 & _position)
 
 void ComponentTransform::SetRotation(const float3& _rotation)
 {
-	if (GetParent()->IsStatic() == false)
+	if (GetParent() == nullptr || GetParent()->IsStatic() == false)
 	{
 		Quat mod = Quat::FromEulerXYZ(_rotation.x, _rotation.y, _rotation.z);
 		rotation = mod;
@@ -129,10 +129,21 @@ void ComponentTransform::SetRotation(const float3& _rotation)
 	}
 }
 
+void ComponentTransform::SetRotation(const Quat& _rotation)
+{
+	if (GetParent() == nullptr || GetParent()->IsStatic() == false)
+	{
+		rotation = _rotation;
+
+		transform_modified = true;
+
+	}
+}
+
 
 void ComponentTransform::SetScale(const float3 & _scale)
 {
-	if (GetParent()->IsStatic() == false)
+	if (GetParent() == nullptr || GetParent()->IsStatic() == false)
 	{
 		scale = _scale;
 

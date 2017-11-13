@@ -194,6 +194,22 @@ Texture * ModuleTextures::LoadToDDS(const char * path, std::string& output_file)
 	return tex;
 }
 
+Texture * ModuleTextures::LoadToDDS(const char * path)
+{
+	Texture* tex = nullptr;
+
+	std::string output_file;
+
+	if (ImportTexture(path, output_file)) {
+		tex = LoadDDSTexture(output_file.c_str());
+	}
+	else {
+		LOG("ERROR Importing texture %s", GetFileFromPath(path).c_str());
+	}
+
+	return tex;
+}
+
 void ModuleTextures::DrawConfigPanel()
 {
 	if (ImGui::CollapsingHeader("textures")) 

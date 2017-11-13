@@ -392,6 +392,8 @@ void GameObject::Serialize(JSON_Doc* doc) {
 	else
 		doc->SetBool("isRoot", false);
 
+	doc->SetBool("static", this->isStatic);
+
 	// UIDs
 	doc->SetNumber("uid", UID);
 	if (parent != nullptr)

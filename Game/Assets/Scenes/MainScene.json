@@ -5,15 +5,30 @@
     "gameobjects": [
         {
             "isRoot": true,
-            "uid": -1652141568,
+            "static": false,
+            "uid": 573782080,
             "parentUID": -1,
             "name": "Scene Root"
+        },
+        {
+            "isRoot": false,
+            "static": false,
+            "uid": 455181152,
+            "parentUID": 573782080,
+            "name": "Chimney"
+        },
+        {
+            "isRoot": false,
+            "static": false,
+            "uid": 2089858304,
+            "parentUID": 573782080,
+            "name": "Baker_house"
         }
     ],
     "components": [
         {
             "type": 2,
-            "parentUID": -1652141568,
+            "parentUID": 573782080,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -30,6 +45,76 @@
                 "y": 1,
                 "z": 1
             }
+        },
+        {
+            "type": 2,
+            "parentUID": 455181152,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.7071068286895752,
+                "y": 0,
+                "z": 0,
+                "w": 0.70710670948028564
+            },
+            "scale": {
+                "x": 100,
+                "y": 100,
+                "z": 100
+            }
+        },
+        {
+            "type": 0,
+            "parentUID": 455181152,
+            "path": "Library\/Meshes\/Untitled.001.mymesh"
+        },
+        {
+            "type": 1,
+            "parentUID": 455181152,
+            "texture_channels": [
+                {
+                    "channel": 0,
+                    "path": "Library\/Textures\/Baker_house.png.dds"
+                }
+            ]
+        },
+        {
+            "type": 2,
+            "parentUID": 2089858304,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.7071068286895752,
+                "y": 0,
+                "z": 0,
+                "w": 0.70710670948028564
+            },
+            "scale": {
+                "x": 100,
+                "y": 100,
+                "z": 100
+            }
+        },
+        {
+            "type": 0,
+            "parentUID": 2089858304,
+            "path": "Library\/Meshes\/Untitled.mymesh"
+        },
+        {
+            "type": 1,
+            "parentUID": 2089858304,
+            "texture_channels": [
+                {
+                    "channel": 0,
+                    "path": "Library\/Textures\/Baker_house.png.dds"
+                }
+            ]
         }
     ],
     "channel": 0,
