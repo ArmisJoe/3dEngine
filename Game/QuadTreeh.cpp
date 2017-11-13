@@ -198,7 +198,10 @@ void Quadtree::Insert(GameObject * go)
 {
 	if (root != nullptr)
 	{
-		if (!go->aabb.ToOBB().Intersects(root->GetBox()))
+		string ska(go->aabb.ToString());
+		string skiski(root->GetBox().ToString());
+
+		if (root->GetBox().Intersects(go->aabb))
 			root->Insert(go);
 	}
 }
