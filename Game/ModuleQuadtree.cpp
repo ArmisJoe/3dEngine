@@ -33,13 +33,6 @@ update_status ModuleQuadtree::Update(float dt)
 	{
 		App->renderer3D->debugger->DrawAABB(AABBvector[i].CenterPoint(), AABBvector[i].Size());
 	}
-/*
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_UP)
-	{
-		GameObject* go = App->scene->GetRoot()->children[0];
-		App->scene->GetRoot()->children[0]->SetStatic(true);
-		quadtreeh->Insert(App->scene->GetRoot()->children[0]);
-	}*/
 
 	Frustum frus = App->camera->curr_camera->GetFrustum();
 	std::vector< GameObject*> objects;

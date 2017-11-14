@@ -36,6 +36,7 @@ public:
 	void CollectIntersectionsFRUSTUM(std::vector<GameObject*>& objects, const Frustum & primitive) const; // frustum has a special way to check collision way more efficient
 
 	AABB GetBox() const { return size; }
+
 private:
 	QuadtreeNode* parent = nullptr;
 	list<GameObject*> elements;
@@ -77,8 +78,11 @@ inline void QuadtreeNode::CollectIntersections(std::vector<GameObject*>& objects
 				}
 
 			}
-			for (int i = 0; i < SUBDIVISIONS; ++i)
-				if (nodes[i] != nullptr) nodes[i]->CollectIntersections(objects, primitive);
+			if (nodes[0]!=nullptr)
+			{
+				for (int i = 0; i < SUBDIVISIONS; ++i)
+					nodes[i]->CollectIntersections(objects, primitive);
+			}
 
 		}
 }
@@ -97,9 +101,10 @@ inline void QuadtreeNode::CollectIntersectionsFRUSTUM(std::vector<GameObject*>& 
 						objects.push_back(*it);
 					}
 			}
-			for (int i = 0; i < SUBDIVISIONS; ++i)
-				if (nodes[i] != nullptr) nodes[i]->CollectIntersections(objects, primitive);
-
+			if (nodes[0] != nullptr) {
+				for (int i = 0; i < SUBDIVISIONS; ++i)
+					nodes[i]->CollectIntersections(objects, primitive);
+			}
 		}
 }
 
