@@ -12,8 +12,8 @@
 //#include <algorithm>
 
 #define MAX_ELEMENTS 1
-#define SUBDIVISIONS 4 
-#define MIN_SIZE 5.0f 
+#define SUBDIVISIONS 8
+#define MIN_SIZE 10.0f 
 #define DEPTH 20
 
 class QuadtreeNode {
