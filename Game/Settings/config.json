@@ -14,7 +14,7 @@
             "resizable": true,
             "borderless": false,
             "w": 1280,
-            "h": 1024
+            "h": 987
         },
         "renderer": {
             "lighting": true,

@@ -462,3 +462,8 @@ void ModuleRenderer3D::DrawMesh(ComponentTransform* trans, ComponentMesh* m, Com
 	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	//glBindBuffer(GL_ARRAY_BUFFER, 0);*/
 }
+
+void ModuleRenderer3D::AddGameObjectToDraw(GameObject * obj)
+{
+	todraw.push_back(obj);
+}

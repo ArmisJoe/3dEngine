@@ -5,11 +5,13 @@ QuadtreeNode::QuadtreeNode()
 {
 	parent = nullptr;
 	nodes[0] = nullptr; nodes[1] = nullptr; nodes[2] = nullptr; nodes[3] = nullptr;
+	nodes[4] = nullptr; nodes[5] = nullptr; nodes[6] = nullptr; nodes[7] = nullptr;
 }
 QuadtreeNode::QuadtreeNode(const AABB & limits){
 	size = limits;
 	parent = nullptr;
 	nodes[0] = nullptr; nodes[1] = nullptr; nodes[2] = nullptr; nodes[3] = nullptr;
+	nodes[4] = nullptr; nodes[5] = nullptr; nodes[6] = nullptr; nodes[7] = nullptr;
 }
 
 QuadtreeNode::QuadtreeNode(const AABB &aabb, QuadtreeNode* node)
@@ -19,6 +21,7 @@ QuadtreeNode::QuadtreeNode(const AABB &aabb, QuadtreeNode* node)
 	}
 
 	nodes[0] = nullptr; nodes[1] = nullptr; nodes[2] = nullptr; nodes[3] = nullptr;
+	nodes[4] = nullptr; nodes[5] = nullptr; nodes[6] = nullptr; nodes[7] = nullptr;
 
 	size = aabb;
 }
@@ -93,6 +96,7 @@ void QuadtreeNode::Redistribute()
 
 	for (std::list<GameObject*>::iterator it = elements.begin(); it != elements.end();)
 	{
+		GameObject* go = (*it);
 		AABB new_box((*it)->aabb);
 
 		bool intersect = true;
@@ -110,10 +114,11 @@ void QuadtreeNode::Redistribute()
 		else
 		{
 			// if it doesn't intersect with all nodes we put it in the ones that does
+			// that's why the house stays in the middle
 			it = elements.erase(it);
 			for (int i = 0; i < SUBDIVISIONS; ++i) {
 				if (nodes[i]->size.Intersects(new_box))
-					nodes[i]->Insert(*it);
+					nodes[i]->Insert(go); //  while the chimney starts subdiving like crazy
 			}
 		}
 	}
@@ -121,56 +126,36 @@ void QuadtreeNode::Redistribute()
 
 void QuadtreeNode::Devide()
 {
-	// We need to subdivide this node ...
-	float3 size(this->size.Size());
-	float3 new_size(size.x*0.5f, size.y, size.z*0.5f); // Octree would subdivide y too
+	AABB box;
+	float3 childs_side_length = size.Size() / 2;
+	float3 center = size.CenterPoint();
 
-	float3 center(this->size.CenterPoint());
-	float3 new_center(center);
-	AABB new_box;
-
-	// NorthEast
-	new_center.x = center.x + size.x * 0.25f;
-	new_center.z = center.z + size.z * 0.25f;
-	new_box.SetFromCenterAndSize(new_center, new_size);
-	nodes[0] = new QuadtreeNode(new_box);
-
-	// SouthEast
-	new_center.x = center.x + size.x * 0.25f;
-	new_center.z = center.z - size.z * 0.25f;
-	new_box.SetFromCenterAndSize(new_center, new_size);
-	nodes[1] = new QuadtreeNode(new_box);
-
-	// SouthWest
-	new_center.x = center.x - size.x * 0.25f;
-	new_center.z = center.z - size.z * 0.25f;
-	new_box.SetFromCenterAndSize(new_center, new_size);
-	nodes[2] = new QuadtreeNode(new_box);
-
-	// NorthWest
-	new_center.x = center.x - size.x * 0.25f;
-	new_center.z = center.z + size.z * 0.25f;
-	new_box.SetFromCenterAndSize(new_center, new_size);
-	nodes[3] = new QuadtreeNode(new_box);
-}
-
-template<typename TYPE>
-inline void QuadtreeNode::CollectIntersections(std::vector<GameObject*>& objects, const TYPE & primitive) const
-{
-	if (primitive.Intersects(box))
+	int child_index = 0;
+	for (int x = 0; x < 2; x++)
 	{
-		for (std::list<GameObject*>::const_iterator it = this->objects.begin(); it != this->objects.end(); ++it)
+		for (int y = 0; y < 2; y++)
 		{
-			if (primitive.Intersects((*it)->global_bbox))
-				objects.push_back(*it);
+			for (int z = 0; z < 2; z++)
+			{
+				float3 min_child_point(
+					size.minPoint.x + z * childs_side_length.x,
+					size.minPoint.y + y * childs_side_length.y,
+					size.minPoint.z + x * childs_side_length.z
+				);
 
+				float3 max_child_point(
+					min_child_point.x + childs_side_length.x,
+					min_child_point.y + childs_side_length.y,
+					min_child_point.z + childs_side_length.z
+				);
+				box.minPoint = min_child_point;
+				box.maxPoint = max_child_point;
+				nodes[child_index] = new QuadtreeNode(box);
+				child_index++;
+			}
 		}
-		for (int i = 0; i < 4; ++i)
-			if (childs[i] != nullptr) childs[i]->CollectIntersections(objects, primitive);
-
 	}
 }
-
 
 // --------------------------------------------------------------------
 //							QUADTREE
@@ -198,7 +183,10 @@ void Quadtree::Insert(GameObject * go)
 {
 	if (root != nullptr)
 	{
-		if (!go->aabb.ToOBB().Intersects(root->GetBox()))
+	//	string ska(go->aabb.ToString());
+		//string skiski(root->GetBox().ToString());
+
+		if (root->GetBox().Intersects(go->aabb))
 			root->Insert(go);
 	}
 }

@@ -28,7 +28,6 @@ private:
 	GameObject* parent = nullptr;
 	std::string name;
 
-
 public:
 	std::vector<Component*> components; // Children Components
 	std::vector<GameObject*> children; // Children GameObjects
@@ -39,7 +38,7 @@ public:
 private:
 	ModuleScene* scene = nullptr;
 	bool isRoot = false;
-	bool isStatic = false;
+	bool isStatic = true;
 public:
 	void Start();
 	void Update(float dt); // Called every ModuleScene->Update(dt) (if they are insied the scene)

@@ -2,6 +2,7 @@
 #include "ModuleQuadtree.h"
 #include "Application.h"
 
+
 ModuleQuadtree::ModuleQuadtree(bool start_enabled) : Module(start_enabled)
 {
 	name = "quadTree";
@@ -14,9 +15,8 @@ ModuleQuadtree::~ModuleQuadtree()
 
 bool ModuleQuadtree::Start()
 {
-	AABB aabb;
-	aabb.SetFromCenterAndSize(float3(0, 0, 0), float3(-500, 100, 500));
-	quadtreeh->SetMaxSize(aabb);
+
+	quadtreeh->SetMaxSize(AABB(float3(-50, 0, -50), float3(50, 30, 50)));
 
 	return true;
 }
@@ -34,14 +34,15 @@ update_status ModuleQuadtree::Update(float dt)
 		App->renderer3D->debugger->DrawAABB(AABBvector[i].CenterPoint(), AABBvector[i].Size());
 	}
 
-	/*if (App->input->GetKey(SDL_SCANCODE_1) == KEY_UP)
-	{
-		App->scene->GetRoot()->children[0]->SetStatic(true);
-		quadtreeh->Insert(App->scene->GetRoot()->children[0]);
-	}*/
+	std::vector< GameObject*> objects;
+	quadtreeh->root->CollectIntersectionsFRUSTUM(objects, App->camera->curr_camera->GetFrustum());
 
+	// end we delete duplicates
+	sort(objects.begin(), objects.end());
+	objects.erase(unique(objects.begin(), objects.end()), objects.end());
 
-	AABBvector.clear();
+	for (uint i = 0; i < objects.size(); ++i)
+		App->renderer3D->AddGameObjectToDraw(objects[i]);
 
 	return UPDATE_CONTINUE;
 }

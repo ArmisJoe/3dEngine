@@ -58,5 +58,9 @@ public:
 	float light_model_ambient = 0.6f;
 	float material_ambient = 1.0f;
 	mat4x4 ProjectionMatrix;
+
+	void AddGameObjectToDraw(GameObject* obj);
+	vector<GameObject*> GetToDraw() const { return todraw; }
+private:
 	vector<GameObject*> todraw;
 };
