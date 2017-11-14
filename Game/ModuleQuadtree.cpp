@@ -2,6 +2,7 @@
 #include "ModuleQuadtree.h"
 #include "Application.h"
 
+
 ModuleQuadtree::ModuleQuadtree(bool start_enabled) : Module(start_enabled)
 {
 	name = "quadTree";
@@ -15,7 +16,7 @@ ModuleQuadtree::~ModuleQuadtree()
 bool ModuleQuadtree::Start()
 {
 
-	quadtreeh->SetMaxSize(AABB(float3(-500, 0, -500), float3(500, 30, 500)));
+	quadtreeh->SetMaxSize(AABB(float3(-50, 0, -50), float3(50, 30, 50)));
 
 	return true;
 }
@@ -40,6 +41,18 @@ update_status ModuleQuadtree::Update(float dt)
 		quadtreeh->Insert(App->scene->GetRoot()->children[0]);
 	}*/
 
+	Frustum frus = App->camera->curr_camera->GetFrustum();
+	std::vector< GameObject*> objects;
+	quadtreeh->root->CollectIntersectionsFRUSTUM(objects, frus);
+
+	// end we delete duplicates
+	sort(objects.begin(), objects.end());
+	objects.erase(unique(objects.begin(), objects.end()), objects.end());
+
+	for (uint i = 0; i < objects.size(); ++i)
+	{
+		App->renderer3D->AddGameObjectToDraw(objects[i]);
+	}
 
 	AABBvector.clear();
 

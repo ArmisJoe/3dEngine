@@ -156,24 +156,6 @@ void QuadtreeNode::Devide()
 	nodes[3] = new QuadtreeNode(new_box);
 }
 
-template<typename TYPE>
-inline void QuadtreeNode::CollectIntersections(std::vector<GameObject*>& objects, const TYPE & primitive) const
-{
-	if (primitive.Intersects(box))
-	{
-		for (std::list<GameObject*>::const_iterator it = this->objects.begin(); it != this->objects.end(); ++it)
-		{
-			if (primitive.Intersects((*it)->global_bbox))
-				objects.push_back(*it);
-
-		}
-		for (int i = 0; i < 4; ++i)
-			if (childs[i] != nullptr) childs[i]->CollectIntersections(objects, primitive);
-
-	}
-}
-
-
 // --------------------------------------------------------------------
 //							QUADTREE
 //---------------------------------------------------------------------

@@ -94,10 +94,6 @@ bool ModuleScene::IteratingElement(GameObject * go)
 			ComponentMesh* mesh = (ComponentMesh*)(*sub_it)->FindComponents(componentType_Mesh)[0];
 			(*sub_it)->UpdateAABBFromMesh(mesh);
 			App->renderer3D->debugger->DrawAABB((*sub_it)->aabb.CenterPoint(), (*sub_it)->aabb.Size());
-
-			CollisionType type = App->camera->curr_camera->GetFrustum().ContainsBox((*sub_it)->aabb);
-			if (type != OUTSIDE)
-				App->renderer3D->todraw.push_back((*sub_it));
 			IteratingElement(*sub_it);
 		}
 		else continue;
