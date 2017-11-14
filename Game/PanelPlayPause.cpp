@@ -1,4 +1,5 @@
 #include "PanelPlayPause.h"
+#include "Globals.h"
 
 void PanelPlayPause::Draw()
 {
@@ -21,5 +22,22 @@ void PanelPlayPause::Draw()
 	if (ImGui::SliderFloat("timeMultiplier", &tm, 0, TIMEMULTIPLIER_LIMIT, "%.0f", TIMEMULTIPLIER_STEP)) {
 		App->game->SetTimeMultiplier((int)tm);
 	}
+	ImGui::Text("Clock:");
+	char realclock[10];
+	char gameclock[10];
+
+	strcpy_s(realclock, std::to_string(App->game->GetRealTimeSc()).c_str());
+	strcpy_s(gameclock, std::to_string(App->game->GetGameTimeSc()).c_str());
+
+	int realclocki = App->game->GetRealTimeSc();
+	int gameclocki = App->game->GetGameTimeSc();
+
+	ImGui::TextColored(COLOR_RED, "Real:");
+	ImGui::SameLine();
+	ImGui::Text(realclock);
+	ImGui::SameLine();
+	ImGui::TextColored(COLOR_RED, "Game:");
+	ImGui::SameLine();
+	ImGui::Text(gameclock);
 	ImGui::End();
 }

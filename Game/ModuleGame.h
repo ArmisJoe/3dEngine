@@ -3,6 +3,7 @@
 #define __MODULE_GAME_H__
 
 #include "Module.h"
+#include "Timer.h"
 
 #define TIMEMULTIPLIER_LIMIT 3.0f
 #define TIMEMULTIPLIER_STEP	1.0f
@@ -28,6 +29,9 @@ public:	// Module::
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
 	bool CleanUp();
+
+	void DrawConfigPanel();
+
 public: // Specific::
 	update_status UpdateGame(float dt);
 	update_status NextFrame();
@@ -46,11 +50,19 @@ public: // Utilities::
 	bool GetPaused() const {
 		return Paused;
 	}
+
+	int GetRealTime();
+	int GetGameTime();
+	int GetRealTimeSc();
+	int GetGameTimeSc();
+
 private:
 	uint gameState = gameState_editor;
 	uint tmp_gamestate = gameState_editor;
 	float timeMultiplier = 1.0f;
 	float dTime = 0;
+	Timer RealTimer;
+	Timer GameTimer;
 protected:
 	bool Paused = false;
 };

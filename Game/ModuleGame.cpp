@@ -13,6 +13,7 @@ ModuleGame::~ModuleGame()
 
 bool ModuleGame::Init()
 {
+	RealTimer.Start();
 	return true;
 }
 
@@ -43,6 +44,11 @@ update_status ModuleGame::PreUpdate(float dt)
 		break;
 	}
 
+	if (Paused)
+		GameTimer.Pause();
+	else
+		GameTimer.UnPause();
+
 	return UPDATE_CONTINUE;
 }
 
@@ -68,14 +74,18 @@ update_status ModuleGame::PostUpdate(float dt)
 		switch (gameState) {
 		case gameState_editor:			// To Editor
 			App->editor->ClearLog();
-			App->scene->LoadScene("__tmp__playsavescene", false);
+			GameTimer.Stop();
+			App->fs->FileDelete(App->scene->LoadScene("__tmp__playsavescene", false));
 			break;
 		case gameState_play:			// To Play
 			App->editor->ClearLog();
-			App->fs->FileDelete(App->scene->Serialize("__tmp__playsavescene"));
+			GameTimer.Start();
+			App->scene->Serialize("__tmp__playsavescene");
 			break;
 		case gameState_noEditor_play:	// To No Editor - Play
 			App->editor->ClearLog();
+			GameTimer.Start();
+			App->scene->Serialize("__tmp__playsavescene");
 			break;
 		default:						// To Unknown
 			break;
@@ -90,6 +100,10 @@ update_status ModuleGame::PostUpdate(float dt)
 bool ModuleGame::CleanUp()
 {
 	return true;
+}
+
+void ModuleGame::DrawConfigPanel()
+{
 }
 
 update_status ModuleGame::UpdateGame(float dt)
@@ -127,3 +141,17 @@ void ModuleGame::SetGameState(uint gs)
 	else
 		LOG("ERROR Setting GameState: [Unknown GameState]");
 }
+
+int ModuleGame::GetRealTime() {
+	return (int)RealTimer.Read();
+}
+int ModuleGame::GetGameTime() {
+	return (int)GameTimer.Read();
+}
+int ModuleGame::GetRealTimeSc() {
+	return (int)RealTimer.ReadSc();
+}
+int ModuleGame::GetGameTimeSc() {
+	return (int)GameTimer.ReadSc();
+}
+

@@ -39,3 +39,12 @@ enum update_status
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
 #define TITLE "3D Physics Playground"
+
+#define COLOR_RED			ImVec4(255, 0, 0, 1)
+#define COLOR_GREEN			ImVec4(0, 255, 0, 1)
+#define COLOR_BLUE			ImVec4(0, 0, 255, 1)
+#define COLOR_CYAN			ImVec4(0, 255, 255, 1)
+#define COLOR_MAGENTA		ImVec4(255, 0, 255, 1)
+#define COLOR_YELLOW		ImVec4(255, 255, 0, 1)
+#define COLOR_BLACK			ImVec4(0, 0, 0, 1)
+#define COLOR_WHITE			ImVec4(255, 255, 255, 1)
