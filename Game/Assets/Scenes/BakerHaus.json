@@ -1,54 +1,34 @@
 {
     "scene": {
-        "name": "MainScene"
+        "name": "BakerHaus"
     },
     "gameobjects": [
         {
             "isRoot": true,
             "static": false,
-            "uid": 573782080,
+            "uid": -2025283840,
             "parentUID": -1,
             "name": "Scene Root"
         },
         {
             "isRoot": false,
             "static": false,
-            "uid": 455181152,
-            "parentUID": 573782080,
+            "uid": 1030332032,
+            "parentUID": -2025283840,
             "name": "Chimney"
         },
         {
             "isRoot": false,
             "static": false,
-            "uid": 2089858304,
-            "parentUID": 573782080,
+            "uid": -740914368,
+            "parentUID": -2025283840,
             "name": "Baker_house"
         }
     ],
     "components": [
         {
             "type": 2,
-            "parentUID": 573782080,
-            "position": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-            },
-            "rotation": {
-                "x": 0,
-                "y": 0,
-                "z": 0,
-                "w": 1
-            },
-            "scale": {
-                "x": 1,
-                "y": 1,
-                "z": 1
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 455181152,
+            "parentUID": 1030332032,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -68,12 +48,12 @@
         },
         {
             "type": 0,
-            "parentUID": 455181152,
+            "parentUID": 1030332032,
             "path": "Library\/Meshes\/Untitled.001.mymesh"
         },
         {
             "type": 1,
-            "parentUID": 455181152,
+            "parentUID": 1030332032,
             "texture_channels": [
                 {
                     "channel": 0,
@@ -83,7 +63,7 @@
         },
         {
             "type": 2,
-            "parentUID": 2089858304,
+            "parentUID": -740914368,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -103,12 +83,12 @@
         },
         {
             "type": 0,
-            "parentUID": 2089858304,
+            "parentUID": -740914368,
             "path": "Library\/Meshes\/Untitled.mymesh"
         },
         {
             "type": 1,
-            "parentUID": 2089858304,
+            "parentUID": -740914368,
             "texture_channels": [
                 {
                     "channel": 0,
@@ -116,7 +96,5 @@
                 }
             ]
         }
-    ],
-    "channel": 0,
-    "path": "Library\/Textures\/Baker_house.png.dds"
+    ]
 }

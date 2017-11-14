@@ -53,7 +53,7 @@ public:
 	bool Init();
 	bool CleanUp();
 
-	JSON_Doc* LoadJSON(const char* path);
+	JSON_Doc* LoadJSON(const char* path, bool create_new = true);
 	JSON_Doc* CreateJSON(const char* path);
 
 

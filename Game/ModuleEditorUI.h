@@ -20,6 +20,8 @@ class PanelConsole;
 class PanelAbout;
 class PanelInspector;
 class PanelSceneTree;
+class PanelSceneSave;
+class PanelSceneLoad;
 
 class ModuleEditorUI : public Module {
 public:
@@ -62,5 +64,7 @@ public:
 	PanelInspector*		inspector = nullptr;
 	PanelAbout*			about = nullptr;
 	PanelSceneTree*		sceneTree = nullptr;
+	PanelSceneSave*		savescene = nullptr;
+	PanelSceneLoad*		loadscene = nullptr;
 };
 	

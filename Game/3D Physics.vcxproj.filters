@@ -71,7 +71,6 @@
     </ClCompile>
     <ClCompile Include="ModuleResources.cpp" />
     <ClCompile Include="MathGeoLib\Geometry\Frustum.cpp" />
-    <ClCompile Include="PanelSceneTree.cpp" />
     <ClCompile Include="MathGeoLib\Algorithm\Random\LCG.cpp" />
     <ClCompile Include="MathGeoLib\Geometry\AABB.cpp" />
     <ClCompile Include="MathGeoLib\Geometry\Capsule.cpp" />
@@ -224,6 +223,15 @@
     <ClCompile Include="ModuleFileSystem.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="PanelSceneLoad.cpp">
+      <Filter>Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelSceneSave.cpp">
+      <Filter>Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelSceneTree.cpp">
+      <Filter>Panels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glew-2.1.0\include\GL\eglew.h" />
@@ -306,7 +314,6 @@
     <ClInclude Include="MathGeoLib\Algorithm\GJK.h" />
     <ClInclude Include="MathGeoLib\Algorithm\SAT.h" />
     <ClInclude Include="MathGeoLib\emscripten\library_system.h" />
-    <ClInclude Include="PanelSceneTree.h" />
     <ClInclude Include="MathGeoLib\Algorithm\GJK.h" />
     <ClInclude Include="MathGeoLib\Algorithm\Random\LCG.h" />
     <ClInclude Include="MathGeoLib\Algorithm\SAT.h" />
@@ -522,6 +529,15 @@
     </ClInclude>
     <ClInclude Include="ModuleFileSystem.h">
       <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelSceneSave.h">
+      <Filter>Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelSceneLoad.h">
+      <Filter>Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelSceneTree.h">
+      <Filter>Panels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

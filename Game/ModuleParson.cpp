@@ -37,7 +37,7 @@ bool ModuleParson::CleanUp()
 	return ret;
 }
 
-JSON_Doc * ModuleParson::LoadJSON(const char * path)
+JSON_Doc * ModuleParson::LoadJSON(const char * path, bool create_new)
 {
 	JSON_Doc* ret = nullptr;
 
@@ -54,7 +54,9 @@ JSON_Doc * ModuleParson::LoadJSON(const char * path)
 	//}
 
 	if (!App->fs->exists(path)) {
-		CreateJSON(path);
+		if(create_new)
+			CreateJSON(path);
+		LOG("File Does not Exist");
 	}
 	if(App->fs->exists(path)){
 		JSON_Value *user_data = json_parse_file(path);

@@ -88,20 +88,23 @@ void ComponentTransform::Update(float dt)
 {
 	if (can_update)
 	{
-		if (!GetParent()->IsRoot())
-		{
-			ComponentTransform* parent_transform = (ComponentTransform*)GetParent()->GetParent()->GetTransform();
-
-			WorldMatrix = WorldMatrix.FromTRS(position, rotation, scale);
-			WorldMatrix = parent_transform->WorldMatrix * WorldMatrix;
-		}
-		else
-		{
-			WorldMatrix = float4x4::FromTRS(position, rotation, scale);
-			for (std::vector<GameObject*>::iterator it = GetParent()->children.begin(); it != GetParent()->children.end(); ++it)
+		if (GetParent() != nullptr) {
+			if (!GetParent()->IsRoot())
 			{
-				ComponentTransform* child_transform = (ComponentTransform*)(*it)->GetTransform();
-				child_transform->Update(dt);
+				ComponentTransform* parent_transform = (ComponentTransform*)GetParent()->GetParent()->GetTransform();
+
+				WorldMatrix = WorldMatrix.FromTRS(position, rotation, scale);
+				if(parent_transform != nullptr)
+					WorldMatrix = parent_transform->WorldMatrix * WorldMatrix;
+			}
+			else
+			{
+				WorldMatrix = float4x4::FromTRS(position, rotation, scale);
+				for (std::vector<GameObject*>::iterator it = GetParent()->children.begin(); it != GetParent()->children.end(); ++it)
+				{
+					ComponentTransform* child_transform = (ComponentTransform*)(*it)->GetTransform();
+					child_transform->Update(dt);
+				}
 			}
 		}
 	}

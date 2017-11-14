@@ -36,7 +36,7 @@ public:
 	bool IteratingElement(GameObject* go);
 
 	void Serialize(const char* scene_name);
-	void LoadScene(const char* scene_name);
+	void LoadScene(const char* scene_name, bool hasExtension = false);
 
 private:
 	GameObject* root;

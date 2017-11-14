@@ -217,14 +217,14 @@ void ModuleScene::Serialize(const char* scene_name) {
 
 }
 
-void ModuleScene::LoadScene(const char* scene_name)
+void ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 {
 	std::string file = "Assets/Scenes/";
 	file += scene_name;
-	if (strcmp(GetCExtension(scene_name), ".json") != 0)
+	if (strcmp(GetCExtension(scene_name), ".json") != 0 && !hasExtension)
 		file += ".json";
 
-	JSON_Doc* scene_doc = App->parson->LoadJSON(file.c_str());
+	JSON_Doc* scene_doc = App->parson->LoadJSON(file.c_str(), false);
 
 	if (scene_doc == nullptr) {
 		LOG("ERROR Loading Scene");

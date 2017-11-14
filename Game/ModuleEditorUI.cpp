@@ -3,6 +3,8 @@
 #include "PanelInspector.h"
 #include "PanelAbout.h"
 #include "PanelSceneTree.h"
+#include "PanelSceneSave.h"
+#include "PanelSceneLoad.h"
 #include "ModulePicker.h"
 #include <iostream> 
 #include <string>
@@ -36,6 +38,8 @@ ModuleEditorUI::~ModuleEditorUI()
 	inspector = nullptr;
 	about = nullptr;
 	sceneTree = nullptr;
+	savescene = nullptr;
+	loadscene = nullptr;
 }
 
 bool ModuleEditorUI::Init()
@@ -50,6 +54,8 @@ bool ModuleEditorUI::Init()
 	AddPanel(inspector = new PanelInspector());
 	AddPanel(about = new PanelAbout());
 	AddPanel(sceneTree = new PanelSceneTree());
+	AddPanel(savescene = new PanelSceneSave());
+	AddPanel(loadscene = new PanelSceneLoad());
 
 	return true;
 }
@@ -59,6 +65,7 @@ bool ModuleEditorUI::Start()
 	console->active = true;
 	inspector->active = true;
 	about->active = false;
+	savescene->active = false;
 
 	sceneTree->SetRoot(App->scene->GetRoot());
 
@@ -113,6 +120,9 @@ update_status ModuleEditorUI::PreUpdate(float dt)
 update_status ModuleEditorUI::Update(float dt)
 {
 
+	if (loadscene->active == false)
+		loadscene->SetDirToOrigin();
+
 	if (App->Logs.size() > 0)
 	{
 		console->ConsoleLog(App->Logs.c_str());
@@ -128,14 +138,10 @@ update_status ModuleEditorUI::Update(float dt)
 		if (ImGui::BeginMenu("File")) {
 			ImGui::MenuItem("Config", "Alt+F1", &config_active);
 			if (ImGui::Button("Save Scene")) {
-				char* scene_name = "MainScene";
-				App->scene->Serialize(scene_name);
-				LOG("Scene Saved as '%s'", scene_name);
+				savescene->active = true;
 			}
 			if (ImGui::Button("Load Scene")) {
-				char* scene_name = "MainScene";
-				App->scene->LoadScene(scene_name);
-				LOG("Scene Loaded '%s'", scene_name);
+				loadscene->active = true;
 			}
 			if (ImGui::Button("Quit")) {
 				App->input->AppQuit(true);
