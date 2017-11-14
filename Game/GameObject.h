@@ -28,7 +28,6 @@ private:
 	GameObject* parent = nullptr;
 	std::string name;
 
-
 public:
 	std::vector<Component*> components; // Children Components
 	std::vector<GameObject*> children; // Children GameObjects

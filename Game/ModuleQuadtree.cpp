@@ -34,20 +34,15 @@ update_status ModuleQuadtree::Update(float dt)
 		App->renderer3D->debugger->DrawAABB(AABBvector[i].CenterPoint(), AABBvector[i].Size());
 	}
 
-	Frustum frus = App->camera->curr_camera->GetFrustum();
 	std::vector< GameObject*> objects;
-	quadtreeh->root->CollectIntersectionsFRUSTUM(objects, frus);
+	quadtreeh->root->CollectIntersectionsFRUSTUM(objects, App->camera->curr_camera->GetFrustum());
 
 	// end we delete duplicates
 	sort(objects.begin(), objects.end());
 	objects.erase(unique(objects.begin(), objects.end()), objects.end());
 
 	for (uint i = 0; i < objects.size(); ++i)
-	{
 		App->renderer3D->AddGameObjectToDraw(objects[i]);
-	}
-
-	AABBvector.clear();
 
 	return UPDATE_CONTINUE;
 }

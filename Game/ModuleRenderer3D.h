@@ -60,7 +60,7 @@ public:
 	mat4x4 ProjectionMatrix;
 
 	void AddGameObjectToDraw(GameObject* obj);
-
+	vector<GameObject*> GetToDraw() const { return todraw; }
 private:
 	vector<GameObject*> todraw;
 };

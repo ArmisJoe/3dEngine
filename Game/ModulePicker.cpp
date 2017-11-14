@@ -45,45 +45,6 @@ GameObject * ModulePicker::RayCast(const LineSegment &segment, float& total_dist
 	App->scene->SetSelected(picked);
 	return ret;
 }
-void ModulePicker::IntersectAABB(const LineSegment & picking, std::vector<GameObject*>& DistanceList)
-{
-	/*GameObject* root = App->scene->GetRoot();
-	GameObject* it = root;
-	vector<GameObject*> visited;
-	do
-	{
-		if (it->children.size() > 0){
-			for (uint i = 0; i < it->children.size(); ++i)
-			{				
-				vector<GameObject*>::iterator iterator = std::find(visited.begin(), visited.end(), it->children[i]);
-				if (iterator == visited.end())
-				{
-					it = it->children[i];
-					visited.push_back(it->children[i]);
-				}
-			}
-		continue;
-		}
-	} while (it != root);
-
-	
-	for (uint i = 0; i < App->scene->GetRoot()->children.size(); i++) {
-		if (App->scene->GetRoot()->children[i]->children.size() > 0) {
-			for (uint j = 0; j < App->scene->GetRoot()->children[i]->children.size(); j++) {
-				if (picking.Intersects(App->scene->GetRoot()->children[i]->children[j]->aabb)) {
-					DistanceList.push_back(App->scene->GetRoot()->children[i]->children[j]);
-					LOG("AABB hit");
-				}
-			}
-		}
-		else {
-			if (picking.Intersects(App->scene->GetRoot()->children[i]->aabb)) {
-				DistanceList.push_back(App->scene->GetRoot()->children[i]);
-				LOG("AABB hit");
-			}
-		}
-	}*/
-}
 
 
 
