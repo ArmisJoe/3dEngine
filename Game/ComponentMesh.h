@@ -18,6 +18,7 @@ public:
 public:
 	//Path
 	std::string path;
+	std::string raw_path;
 	//Vertices
 	unsigned int id_vertices = 0; // id in VRAM
 	unsigned int num_indices = 0;

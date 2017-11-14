@@ -28,6 +28,7 @@ public:
 	GameObject* LoadGeometry(const char* path, const unsigned int pprocess_flag = aiProcessPreset_TargetRealtime_MaxQuality);
 	//Nodes
 	GameObject* LoadNode(const aiNode* node, const aiScene* scene, GameObject* parent = nullptr);
+	GameObject* LoadNode(const aiNode* node, const aiScene* scene, const char* raw_path, GameObject* parent = nullptr);
 	//Components
 	ComponentMesh* LoadRawMesh(const aiMesh* m);
 	ComponentMaterial* LoadMaterial(const aiMaterial* mat);
@@ -35,6 +36,7 @@ public:
 	bool Import(const aiMesh* m, std::string& output_file);
 	bool SaveToOwnFormat(ComponentMesh* m, std::string& output_file); // [FORMAT] -> { nV, nI, nUV, Vs, Is, UVs }
 	ComponentMesh* LoadMyFormatMesh(const char* exported_file);
+	ComponentMesh* LoadToOwnFormat(const char* path, const uint pprocess_flag = aiProcessPreset_TargetRealtime_MaxQuality); // DO NOT USE PLS
 	ComponentMesh* LoadToOwnFormat(const aiMesh* m);
 	ComponentMesh* LoadToOwnFormat(const aiMesh* m, std::string& output_file);
 	bool CleanUp();

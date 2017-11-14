@@ -61,6 +61,6 @@ void ComponentMesh::Serialize(JSON_Doc * doc)
 	doc->SetNumber("type", type);
 	doc->SetNumber("parentUID", (parent != nullptr) ? parent->GetUID() : -1);
 	doc->SetString("path", path.c_str());
-
+	doc->SetString("rawpath", raw_path.c_str());
 }
 ;

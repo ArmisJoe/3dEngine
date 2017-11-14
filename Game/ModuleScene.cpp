@@ -46,27 +46,6 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::PreUpdate(float dt)
 {
-	//[TEST] Assigning textures
-  /*
-	if (root != nullptr) {
-		for (int i = 0; i < root->children.size(); i++) {
-			for (int k = 0; k < root->children[i]->children.size(); k++) {
-				std::vector<Component*> ms = root->children[i]->children[k]->FindComponents(componentType_Material);
-				if (ms.empty()) {
-					root->children[i]->children[k]->AddComponent(componentType_Material);
-					ms = root->children[i]->children[k]->FindComponents(componentType_Material);
-				}
-				for (int it = 0; it < ms.size(); it++) {
-					ComponentMaterial* mat = (ComponentMaterial*)ms[it];
-					if (!App->res->textures.empty()) {
-						if (mat->GetTextureChannel(texType_Diffuse) == nullptr)
-							mat->SetTextureChannel(texType_Diffuse, App->res->textures.back());
-					}
-				}
-			}
-		}
-	}
-	//!_[TEST] Assigning textures*/
   //SetAllToGlobalTransforms();
 	return UPDATE_CONTINUE;
 }
@@ -113,6 +92,7 @@ bool ModuleScene::CleanUp()
 	LOG("Unloading Scene");
 
 	RemoveAllGameObject();
+	root->CleanUp();
 	mdelete root;
 
 	return true;
@@ -282,7 +262,10 @@ void ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 		int aux = 0;
 		switch (type) {
 		case componentType_Mesh:
-			c = App->assimp->LoadMyFormatMesh(scene_doc->GetString("path"));
+			if (App->fs->exists(scene_doc->GetString("path")))
+				c = App->assimp->LoadMyFormatMesh(scene_doc->GetString("path"));
+			else
+				c = App->assimp->LoadToOwnFormat(scene_doc->GetString("rawpath"));
 			if (c != nullptr)
 				App->res->meshes.push_back((ComponentMesh*)c);
 			break;
@@ -291,7 +274,10 @@ void ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 			aux = scene_doc->GetArraySize("texture_channels");
 			for (int i = 0; i < aux; i++) {
 				scene_doc->MoveToSectionInsideArr("texture_channels", i);
-				mat->SetTextureChannel((int)scene_doc->GetNumber("channel"), App->tex->LoadToDDS(scene_doc->GetString("path")));
+				if (App->fs->exists(scene_doc->GetString("path")))
+					mat->SetTextureChannel((int)scene_doc->GetNumber("channel"), App->tex->LoadDDSTexture(scene_doc->GetString("path")));
+				else
+					mat->SetTextureChannel((int)scene_doc->GetNumber("channel"), App->tex->LoadToDDS(scene_doc->GetString("rawpath")));
 			}
 			if (mat != nullptr && mat->HasTextures()) {
 				App->res->materials.push_back(mat);
