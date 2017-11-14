@@ -140,9 +140,6 @@ Texture* ModuleTextures::LoadRawTexture(const char * path)
 			//Texture Specifications
 			glTexImage2D(GL_TEXTURE_2D, 0, new_tex->format, new_tex->w, new_tex->h, 0, new_tex->format, GL_UNSIGNED_BYTE, ilGetData());
 
-			if (new_tex != nullptr)
-				new_tex->path = path;
-
 			App->res->textures.push_back(new_tex);
 			
 			glBindTexture(GL_TEXTURE_2D, 0);
@@ -179,6 +176,20 @@ Texture * ModuleTextures::LoadDDSTexture(const char * path)
 	Texture* tex = nullptr;
 
 	tex = Load(path, tex);
+
+	return tex;
+}
+
+Texture * ModuleTextures::LoadToDDS(const char * path, std::string& output_file)
+{
+	Texture* tex = nullptr;
+
+	if (ImportTexture(path, output_file)) {
+		tex = LoadDDSTexture(output_file.c_str());
+	}
+	else {
+		LOG("ERROR Importing texture %s", GetFileFromPath(path).c_str());
+	}
 
 	return tex;
 }

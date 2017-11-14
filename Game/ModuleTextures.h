@@ -37,6 +37,7 @@ public:
 	Texture* LoadRawTexture(const char* path); // Returns nullptr on failure.
 	bool ImportTexture(const char* path, std::string& output_file); // Imports a Texture into DDS format. Returns [false] on failure;
 	Texture* LoadDDSTexture(const char* path); // Returns nullptr on failure
+	Texture* LoadToDDS(const char* path, std::string& output_file);
 	Texture* LoadToDDS(const char* path);
 	void DrawConfigPanel();
 	void LoadConfig();

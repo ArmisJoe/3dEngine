@@ -1,11 +1,11 @@
 #include "Component.h"
 
 Component::Component(const componentType argtype) : type(argtype) {
-	UID = RandomNumber(DBL_MIN, DBL_MAX);
+	UID = RandomNumber();
 }
 
 Component::Component(componentType argtype, GameObject * argparent) : type(argtype), parent(argparent) {
-	UID = RandomNumber(DBL_MIN, DBL_MAX);
+	UID = RandomNumber();
 }
 
 bool Component::SetParent(GameObject * parent)
@@ -32,5 +32,5 @@ bool Component::SetParent(GameObject * parent)
 }
 
 void Component::Serialize(JSON_Doc* doc) {
-
+	
 }

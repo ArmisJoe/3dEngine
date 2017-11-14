@@ -88,20 +88,23 @@ void ComponentTransform::Update(float dt)
 {
 	if (can_update)
 	{
-		if (!GetParent()->IsRoot())
-		{
-			ComponentTransform* parent_transform = (ComponentTransform*)GetParent()->GetParent()->GetTransform();
-
-			WorldMatrix = WorldMatrix.FromTRS(position, rotation, scale);
-			WorldMatrix = parent_transform->WorldMatrix * WorldMatrix;
-		}
-		else
-		{
-			WorldMatrix = float4x4::FromTRS(position, rotation, scale);
-			for (std::vector<GameObject*>::iterator it = GetParent()->children.begin(); it != GetParent()->children.end(); ++it)
+		if (GetParent() != nullptr) {
+			if (!GetParent()->IsRoot())
 			{
-				ComponentTransform* child_transform = (ComponentTransform*)(*it)->GetTransform();
-				child_transform->Update(dt);
+				ComponentTransform* parent_transform = (ComponentTransform*)GetParent()->GetParent()->GetTransform();
+
+				WorldMatrix = WorldMatrix.FromTRS(position, rotation, scale);
+				if(parent_transform != nullptr)
+					WorldMatrix = parent_transform->WorldMatrix * WorldMatrix;
+			}
+			else
+			{
+				WorldMatrix = float4x4::FromTRS(position, rotation, scale);
+				for (std::vector<GameObject*>::iterator it = GetParent()->children.begin(); it != GetParent()->children.end(); ++it)
+				{
+					ComponentTransform* child_transform = (ComponentTransform*)(*it)->GetTransform();
+					child_transform->Update(dt);
+				}
 			}
 		}
 	}
@@ -109,7 +112,7 @@ void ComponentTransform::Update(float dt)
 
 void ComponentTransform::SetPosition(const float3 & _position)
 {
-	if (GetParent()->IsStatic() == false)
+	if (GetParent() == nullptr || GetParent()->IsStatic() == false)
 	{
 		position = _position;
 		transform_modified = true;
@@ -119,7 +122,7 @@ void ComponentTransform::SetPosition(const float3 & _position)
 
 void ComponentTransform::SetRotation(const float3& _rotation)
 {
-	if (GetParent()->IsStatic() == false)
+	if (GetParent() == nullptr || GetParent()->IsStatic() == false)
 	{
 		Quat mod = Quat::FromEulerXYZ(_rotation.x, _rotation.y, _rotation.z);
 		rotation = mod;
@@ -129,10 +132,21 @@ void ComponentTransform::SetRotation(const float3& _rotation)
 	}
 }
 
+void ComponentTransform::SetRotation(const Quat& _rotation)
+{
+	if (GetParent() == nullptr || GetParent()->IsStatic() == false)
+	{
+		rotation = _rotation;
+
+		transform_modified = true;
+
+	}
+}
+
 
 void ComponentTransform::SetScale(const float3 & _scale)
 {
-	if (GetParent()->IsStatic() == false)
+	if (GetParent() == nullptr || GetParent()->IsStatic() == false)
 	{
 		scale = _scale;
 
@@ -268,4 +282,26 @@ float4x4 ComponentTransform::GetParentTransform() const
 		return parent_transform;
 	}
 	else return transform_matrix;
+}
+
+void ComponentTransform::Serialize(JSON_Doc* doc) {
+	if (doc == nullptr)
+		return;
+	
+	// Type
+	doc->SetNumber("type", type);
+	doc->SetNumber("parentUID", (parent != nullptr) ? parent->GetUID() : -1);
+	// Pos
+	doc->SetNumber("position.x", position.x);
+	doc->SetNumber("position.y", position.y);
+	doc->SetNumber("position.z", position.z);
+	// Rot
+	doc->SetNumber("rotation.x", rotation.x);
+	doc->SetNumber("rotation.y", rotation.y);
+	doc->SetNumber("rotation.z", rotation.z);
+	doc->SetNumber("rotation.w", rotation.w);
+	// Scale
+	doc->SetNumber("scale.x", scale.x);
+	doc->SetNumber("scale.y", scale.y);
+	doc->SetNumber("scale.z", scale.z);
 }

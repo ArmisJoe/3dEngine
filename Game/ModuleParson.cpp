@@ -37,7 +37,7 @@ bool ModuleParson::CleanUp()
 	return ret;
 }
 
-JSON_Doc * ModuleParson::LoadJSON(const char * path)
+JSON_Doc * ModuleParson::LoadJSON(const char * path, bool create_new)
 {
 	JSON_Doc* ret = nullptr;
 
@@ -54,7 +54,9 @@ JSON_Doc * ModuleParson::LoadJSON(const char * path)
 	//}
 
 	if (!App->fs->exists(path)) {
-		CreateJSON(path);
+		if(create_new)
+			CreateJSON(path);
+		LOG("File Does not Exist");
 	}
 	if(App->fs->exists(path)){
 		JSON_Value *user_data = json_parse_file(path);
@@ -125,6 +127,7 @@ JSON_Doc::JSON_Doc(JSON_Value * value, JSON_Object * object, const char * path)
 {
 	this->value = value;
 	this->object = object;
+	this->root = object;
 	this->path = path;
 }
 
@@ -218,6 +221,12 @@ void JSON_Doc::AddNumberArr(const char * arr, double nu)
 		json_array_append_number(jarr, nu);
 }
 
+void JSON_Doc::AddSectionArr(const char* arr) {
+	JSON_Array* jarr = json_object_get_array(object, arr);
+	if (jarr != nullptr)
+		json_array_append_value(jarr, json_value_init_object());
+}
+
 bool JSON_Doc::FindArrayValue(const char * arr, int idx, json_value_type type)
 {
 	bool ret = false;
@@ -229,6 +238,21 @@ bool JSON_Doc::FindArrayValue(const char * arr, int idx, json_value_type type)
 			ret = true;
 	}
 
+
+	return ret;
+}
+
+bool JSON_Doc::MoveToSectionInsideArr(const char * arr, int idx)
+{
+	bool ret = false;
+
+	JSON_Array* jarr = json_object_get_array(object, arr);
+	if (jarr != nullptr) {
+		JSON_Object* jobj = json_array_get_object(jarr, idx);
+		object = jobj;
+
+		ret = true;
+	}
 
 	return ret;
 }
@@ -261,4 +285,21 @@ void JSON_Doc::Save()
 void JSON_Doc::CleanUp()
 {
 	json_value_free(value);
+}
+
+void JSON_Doc::MoveToRootSection() {
+	object = root;
+}
+
+bool JSON_Doc::MoveToSection(const char* section) {
+	bool ret = false;
+
+	JSON_Object* jobj = json_object_get_object(object, section);
+
+	if (jobj != nullptr) {
+		object = jobj;
+		ret = true;
+	}
+
+	return ret;
 }

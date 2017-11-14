@@ -16,14 +16,14 @@ GameObject::GameObject(GameObject * p) : parent(p)
 {
 	name = "GameObject";
 	//this->AddComponent(componentType_Transform);
-	UID = RandomNumber(DBL_MIN, DBL_MAX);
+	UID = RandomNumber();
 }
 
 GameObject::GameObject()
 {
 	name = "GameObject";
     //this->AddComponent(componentType_Transform);
-	UID = RandomNumber(DBL_MIN, DBL_MAX);
+	UID = RandomNumber();
 }
 
 GameObject::~GameObject()
@@ -58,7 +58,7 @@ void GameObject::CleanUp()
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			/*if ((*it) != nullptr) {
 				(*it)->CleanUp();
-				//delete[] (*it); /// -> [EXAMINATE] TRIGGERS AN EXCEPTION (posible deleting what is already deleted [but it shouldn't])*/
+				//mdelete (*it); /// -> [EXAMINATE] TRIGGERS AN EXCEPTION (posible deleting what is already deleted [but it shouldn't])*/
 			}
 		components.clear();
 	}
@@ -69,7 +69,7 @@ void GameObject::CleanUp()
 		for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
 			if ((*it) != nullptr) {
 				(*it)->CleanUp(); 
-				//delete[] (*it); // We have children inside children now R�P --> are we deleting something already deleted??
+				//mdelete (*it); // We have children inside children now R�P --> are we deleting something already deleted??
 			}
 		}
 		children.clear();
@@ -106,7 +106,7 @@ bool GameObject::IsStatic() const
 	return isStatic;
 }
 
-std::vector<Component*> GameObject::FindComponents(componentType type)
+std::vector<Component*> GameObject::FindComponents(const int type)
 {
 	std::vector<Component*> ret;
 
@@ -121,7 +121,7 @@ std::vector<Component*> GameObject::FindComponents(componentType type)
 	return ret;
 }
 
-Component * GameObject::AddComponent(const componentType type, Component * componentPointer, bool fromReference)
+Component * GameObject::AddComponent(const int type, Component * componentPointer, bool fromReference)
 {
 	Component* newComponent = nullptr;
 
@@ -209,6 +209,30 @@ void GameObject::DestroyComponent(Component * componentPointer)
 			}
 		}
 	}
+}
+
+void GameObject::SetParent(GameObject * p)
+{
+
+	parent = p;
+
+	//if (p == nullptr) {
+	//	LOG("ERROR Setting parent to '%s' gameobject. [nullptr parent]", this->name);
+	//	return;
+	//}
+	//
+	//if (parent != nullptr) {
+	//	for (int i = 0; i < parent->children.size(); i++) {
+	//		if (parent->children[i] == this) {
+	//			parent->children.erase(parent->children.begin() + i);
+	//			break;
+	//		}
+	//	}
+	//	parent = nullptr;
+	//}
+	//
+	//parent = p;
+	//p->children.push_back(this);
 }
 
 
@@ -357,7 +381,42 @@ void GameObject::OnHierarchyTree(bool skip_root)
 void GameObject::Serialize(JSON_Doc* doc) {
 	if (doc == nullptr)
 		return;
-	
+
+	doc->MoveToRootSection();
+
+	doc->AddSectionArr("gameobjects");
+	doc->MoveToSectionInsideArr("gameobjects", doc->GetArraySize("gameobjects") - 1);
+
+	if (this == App->scene->GetRoot())
+		doc->SetBool("isRoot", true);
+	else
+		doc->SetBool("isRoot", false);
+
+	doc->SetBool("static", this->isStatic);
+
+	// UIDs
+	doc->SetNumber("uid", UID);
+	if (parent != nullptr)
+		doc->SetNumber("parentUID", parent->UID);
+	else
+		doc->SetNumber("parentUID", -1);
+	// Name
+	doc->SetString("name", name.c_str());
+	// Components
+	for (int i = 0; i < components.size(); i++) {
+		doc->MoveToRootSection();
+		doc->AddSectionArr("components");
+		doc->MoveToSectionInsideArr("components", doc->GetArraySize("components") - 1);
+		components[i]->Serialize(doc);
+	}
+
+
+	// Children
+	for (int i = 0; i < children.size(); i++) {
+		children[i]->Serialize(doc);
+	}
+
+	doc->MoveToRootSection(); // Politeness pls
 }
 
 

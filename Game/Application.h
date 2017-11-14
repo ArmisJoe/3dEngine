@@ -14,6 +14,7 @@
 #include "ModulePhysics3D.h"
 #include "ModulePlayer.h"
 #include "ModuleEditorUI.h"
+#include "ModuleGame.h"
 #include "mmgr\mmgr.h"
 #include "ModuleParson.h"
 #include "ModuleAssimp.h"
@@ -46,6 +47,7 @@ public:
 	ModuleFileSystem* fs;
 	ModulePicker* picker;
 	ModuleQuadtree* quadTree;
+	ModuleGame* game;
 private:
 
 	Timer	ms_timer;

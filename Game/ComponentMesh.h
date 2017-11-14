@@ -14,7 +14,11 @@ public:
 	void Update(float dt);
 	void Draw(const ComponentTransform* trans = nullptr, const ComponentMaterial* mat = nullptr);
 	void OnEditor();
+	void Serialize(JSON_Doc* doc);
 public:
+	//Path
+	std::string path;
+	std::string raw_path;
 	//Vertices
 	unsigned int id_vertices = 0; // id in VRAM
 	unsigned int num_indices = 0;

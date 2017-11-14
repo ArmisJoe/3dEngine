@@ -50,14 +50,27 @@ public:
 	void SetStatic(bool set);
 	bool IsStatic() const;
 
+	double GetUID() const {
+		return UID;
+	}
+	void SetUID(double uid) {
+		UID = uid;
+	}
+	double GetParentUID() const {
+		return parentUID;
+	}
+	void SetParentUID(double puid) {
+		parentUID = puid;
+	}
+
 	void Serialize(JSON_Doc* doc);
 
-	std::vector<Component*> FindComponents(componentType type);
-	Component* AddComponent(const componentType type, Component* componentPointer = nullptr, bool fromReference = true);
+	std::vector<Component*> FindComponents(const int type);
+	Component* AddComponent(const int type, Component* componentPointer = nullptr, bool fromReference = true);
 	void DeleteChild(GameObject* go);
 	void DestroyComponent(Component* componentPointer = nullptr);
 	GameObject* GetParent() const { return parent; }
-	void SetParent(GameObject* p) { parent = p; }
+	void SetParent(GameObject* p);
 	std::string GetName() const { return name; }
 	void CreateAABBFromMesh(ComponentMesh* mesh);
 	void UpdateAABBFromMesh(ComponentMesh* mesh);

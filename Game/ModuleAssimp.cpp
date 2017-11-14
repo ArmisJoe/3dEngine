@@ -53,7 +53,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 		float3 scale = { 1, 1, 1 };
 		position = { translation.x, translation.y, translation.y };
 		Quat rotation2 = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
-		scale = { scaling.x/100, scaling.y/100, scaling.z/100 };
+		scale = { scaling.x, scaling.y, scaling.z };
 		ComponentTransform* trans = new ComponentTransform(new_node, position, rotation2, scale);
 		vector<Component*> tmp = new_node->FindComponents(componentType_Transform);
 		if (!tmp.empty())
@@ -62,11 +62,15 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 
 
 	//LoadMeshes
+		std::string mesh_path;
+		ComponentMesh* new_mesh = nullptr;
 	for (uint i = 0; i < node->mNumMeshes; i++) {
 		//Mesh Load
-		ComponentMesh* new_mesh = LoadToOwnFormat(scene->mMeshes[node->mMeshes[i]]);
-		if (new_mesh != nullptr)
+		new_mesh = LoadToOwnFormat(scene->mMeshes[node->mMeshes[i]], mesh_path);
+		if (new_mesh != nullptr) {
+			new_mesh->path = mesh_path;
 			new_node->AddComponent(componentType_Mesh, new_mesh);
+		}
 		//Material Load
 		if (materials != nullptr && new_mesh != nullptr) {
 			ComponentMaterial* new_material = LoadMaterial(materials[(int)new_mesh->material_index]);
@@ -95,6 +99,81 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 	return new_node;
 }
 
+GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, const char* raw_path, GameObject* parent)
+{
+	assert(node != nullptr);
+	assert(scene != nullptr);
+
+	GameObject* new_node = new GameObject();
+
+	if (parent != nullptr)
+	{
+		new_node->SetParent(parent);
+		//new_node->GetParent()->children.push_back(new_node);
+	}
+	else {
+		new_node->SetParent(App->scene->GetRoot());
+	}
+
+	aiMaterial** materials = nullptr;
+	if (scene->HasMaterials())
+		materials = scene->mMaterials;
+	else
+		LOG("Scene without materials");
+
+	//Transform
+
+	aiVector3D translation, scaling;
+	aiQuaternion rotation(1, 0, 0, 0);
+	node->mTransformation.Decompose(scaling, rotation, translation);
+	float3 position = { 0, 0, 0 };
+	float3 scale = { 1, 1, 1 };
+	position = { translation.x, translation.y, translation.y };
+	Quat rotation2 = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
+	scale = { scaling.x, scaling.y, scaling.z };
+	ComponentTransform* trans = new ComponentTransform(new_node, position, rotation2, scale);
+	vector<Component*> tmp = new_node->FindComponents(componentType_Transform);
+	if (!tmp.empty())
+		new_node->DestroyComponent(tmp[0]);
+	new_node->AddComponent(componentType_Transform, trans, false);
+
+
+	//LoadMeshes
+	std::string mesh_path;
+	ComponentMesh* new_mesh = nullptr;
+	for (uint i = 0; i < node->mNumMeshes; i++) {
+		//Mesh Load
+		new_mesh = LoadToOwnFormat(scene->mMeshes[node->mMeshes[i]], mesh_path);
+		if (new_mesh != nullptr) {
+			new_mesh->path = mesh_path;
+			new_mesh->raw_path = raw_path;
+			new_node->AddComponent(componentType_Mesh, new_mesh);
+		}
+		//Material Load
+		if (materials != nullptr && new_mesh != nullptr) {
+			ComponentMaterial* new_material = LoadMaterial(materials[(int)new_mesh->material_index]);
+			if (new_material != nullptr) {
+				new_node->AddComponent(componentType_Material, new_material);
+			}
+		}
+	}
+
+
+	if (node->mName.length > 0)
+		new_node->SetName(node->mName.C_Str());
+
+
+	//Node Children 'Recursivity'
+	for (uint i = 0; i < node->mNumChildren; i++) {
+		new_node->children.push_back(LoadNode(node->mChildren[i], scene, raw_path, new_node));
+	}
+
+	if (new_node != nullptr)
+		App->res->gameObjects.push_back(new_node);
+
+	return new_node;
+}
+
 GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_flag)
 {
 
@@ -111,7 +190,7 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 		root_node = scene->mRootNode;
 		//Loading All nodes into Root Node
 		if (root_node->mNumChildren > 0) {
-			Geometry = LoadNode(root_node, scene);
+			Geometry = LoadNode(root_node, scene, path);
 		}
 		//Camera Focus
 		//App->camera->FocusMesh(new_mesh->vertices, new_mesh->num_vertices);
@@ -205,7 +284,11 @@ ComponentMaterial * ModuleAssimp::LoadMaterial(const aiMaterial* mat)
 			if (m_path.length > 0) {
 				string fullPath = "Assets\\";
 				fullPath.append(m_path.C_Str());
-				new_mat->SetTextureChannel(texType_Diffuse, App->tex->LoadToDDS(fullPath.c_str()));
+				std::string tex_path;
+				Texture* tmp_tex = App->tex->LoadToDDS(fullPath.c_str(), tex_path);
+				tmp_tex->path = tex_path.c_str();
+				if(new_mat != nullptr)
+					new_mat->SetTextureChannel(texType_Diffuse, tmp_tex);
 			}
 			else {
 				LOG("Unvalid Path from texture: %s", m_path.C_Str());
@@ -217,13 +300,15 @@ ComponentMaterial * ModuleAssimp::LoadMaterial(const aiMaterial* mat)
 	}
 	//All other texture types...
 
-	if (new_mat->HasTextures()) {
+	if (new_mat != nullptr && new_mat->HasTextures()) {
 		App->res->materials.push_back(new_mat);
 	}
 	else {
-		new_mat->CleanUp();
-		mdelete[] new_mat;
-		new_mat = nullptr;
+		if (new_mat != nullptr) {
+			new_mat->CleanUp();
+			mdelete[] new_mat;
+			new_mat = nullptr;
+		}
 	}
 
 	return new_mat;
@@ -240,11 +325,12 @@ bool ModuleAssimp::Import(const aiMesh * m, std::string & output_file)
 
 	ComponentMesh* new_mesh = nullptr;
 
-	//Vertices
 	new_mesh = new ComponentMesh();
+	//Nums
 	new_mesh->material_index = m->mMaterialIndex;
 	new_mesh->num_triangles = m->mNumFaces;
 	new_mesh->num_vertices = m->mNumVertices;
+	//Vertices
 	new_mesh->vertices = new float[new_mesh->num_vertices * 3];
 	memcpy(new_mesh->vertices, m->mVertices, sizeof(float) * new_mesh->num_vertices * 3);
 
@@ -395,6 +481,29 @@ ComponentMesh* ModuleAssimp::LoadMyFormatMesh(const char * exported_file)
 	return new_mesh;
 }
 
+ComponentMesh * ModuleAssimp::LoadToOwnFormat(const char * path, const uint pprocess_flag)
+{
+	ComponentMesh* m = nullptr;
+	
+	App->editor->ClearLog();
+	
+	const aiScene* scene = aiImportFile(path, pprocess_flag);
+	if (scene == nullptr) {
+		LOG("Unvalid Path:\n\t'%s'", path);
+		return nullptr;
+	}
+	const aiNode* node = scene->mRootNode;
+	
+	std::string mesh_path;
+	for (uint i = 0; i < node->mNumMeshes; i++) {
+		m = LoadToOwnFormat(scene->mMeshes[node->mMeshes[i]], mesh_path);
+	}
+
+	aiReleaseImport(scene);
+
+	return m;
+}
+
 ComponentMesh * ModuleAssimp::LoadToOwnFormat(const aiMesh * m)
 {
 	ComponentMesh* new_m = nullptr;
@@ -410,6 +519,28 @@ ComponentMesh * ModuleAssimp::LoadToOwnFormat(const aiMesh * m)
 	}
 
 	if (new_m != nullptr) {
+		//new_m->path = output_file.c_str();
+		App->res->meshes.push_back(new_m);
+	}
+
+	return new_m;
+}
+
+ComponentMesh * ModuleAssimp::LoadToOwnFormat(const aiMesh * m, std::string& output_file)
+{
+	ComponentMesh* new_m = nullptr;
+
+	if (Import(m, output_file)) {
+		new_m = LoadMyFormatMesh(output_file.c_str());
+		if (new_m == nullptr)
+			LOG("ERROR Loading Mesh from '%s' format", MESH_OWN_FORMAT);
+	}
+	else {
+		LOG("ERROR Importing Mesh to '%s' format", MESH_OWN_FORMAT);
+	}
+
+	if (new_m != nullptr) {
+		//new_m->path = output_file.c_str();
 		App->res->meshes.push_back(new_m);
 	}
 

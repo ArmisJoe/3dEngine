@@ -3,6 +3,9 @@
 #include "PanelInspector.h"
 #include "PanelAbout.h"
 #include "PanelSceneTree.h"
+#include "PanelSceneSave.h"
+#include "PanelSceneLoad.h"
+#include "PanelPlayPause.h"
 #include "ModulePicker.h"
 #include <iostream> 
 #include <string>
@@ -36,6 +39,9 @@ ModuleEditorUI::~ModuleEditorUI()
 	inspector = nullptr;
 	about = nullptr;
 	sceneTree = nullptr;
+	savescene = nullptr;
+	loadscene = nullptr;
+	playpause = nullptr;
 }
 
 bool ModuleEditorUI::Init()
@@ -50,6 +56,9 @@ bool ModuleEditorUI::Init()
 	AddPanel(inspector = new PanelInspector());
 	AddPanel(about = new PanelAbout());
 	AddPanel(sceneTree = new PanelSceneTree());
+	AddPanel(savescene = new PanelSceneSave());
+	AddPanel(loadscene = new PanelSceneLoad());
+	AddPanel(playpause = new PanelPlayPause());
 
 	return true;
 }
@@ -59,6 +68,9 @@ bool ModuleEditorUI::Start()
 	console->active = true;
 	inspector->active = true;
 	about->active = false;
+	savescene->active = false;
+	loadscene->active = false;
+	playpause->active = true;
 
 	sceneTree->SetRoot(App->scene->GetRoot());
 
@@ -113,6 +125,11 @@ update_status ModuleEditorUI::PreUpdate(float dt)
 update_status ModuleEditorUI::Update(float dt)
 {
 
+	if (loadscene->active == false)
+		loadscene->SetDirToOrigin();
+	if (savescene->active == false)
+		savescene->SetSceneName(App->scene->curr_scene_name.c_str());
+
 	if (App->Logs.size() > 0)
 	{
 		console->ConsoleLog(App->Logs.c_str());
@@ -127,13 +144,32 @@ update_status ModuleEditorUI::Update(float dt)
 	if (ImGui::BeginMainMenuBar()) {
 		if (ImGui::BeginMenu("File")) {
 			ImGui::MenuItem("Config", "Alt+F1", &config_active);
-			if (ImGui::Button("Save")) {
-				JSON_Doc* config = App->parson->config;
-				config->Save();
-				LOG("Configuration Saved");
+			if (ImGui::Button("Save Scene")) {
+				savescene->active = true;
+			}
+			if (ImGui::Button("Load Scene")) {
+				loadscene->active = true;
 			}
 			if (ImGui::Button("Quit")) {
 				App->input->AppQuit(true);
+			}
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Play")) {
+			bool isplay = (App->game->GetGameState() == gameState_play) ? true : false;
+			if (ImGui::MenuItem("Play Scene", "", &isplay)) {
+				if (App->game->GetGameState() != gameState_play && isplay == true)
+					App->game->SetGameState(gameState_play);
+				if (App->game->GetGameState() == gameState_play && isplay == false)
+					App->game->SetGameState(gameState_editor);
+			}
+			ImGui::MenuItem("Pause Scene", "", &App->game->Paused);
+			if (ImGui::SmallButton("Next Frame")) {
+				App->game->NextFrame();
+			}
+			ImGui::Separator();
+			if (ImGui::SmallButton("NoEditor Play")) {
+				App->game->SetGameState(gameState_noEditor_play);
 			}
 			ImGui::EndMenu();
 		}
@@ -227,8 +263,8 @@ bool ModuleEditorUI::CleanUp()
 
 void ModuleEditorUI::Draw()
 {
-
-	ImGui::Render();
+	if(App->game->GetGameState() != gameState_noEditor_play)
+		ImGui::Render();
 
 }
 

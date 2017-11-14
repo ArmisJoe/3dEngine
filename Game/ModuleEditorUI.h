@@ -20,19 +20,22 @@ class PanelConsole;
 class PanelAbout;
 class PanelInspector;
 class PanelSceneTree;
+class PanelSceneSave;
+class PanelSceneLoad;
+class PanelPlayPause;
 
 class ModuleEditorUI : public Module {
 public:
 	ModuleEditorUI(bool start_enabled = true);
 	~ModuleEditorUI();
-
+public: // Module::
 	bool Init();
 	bool Start();
 	update_status PreUpdate(float dt);
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
 	bool CleanUp();
-
+public: // Specific::
 	void Draw();
 
 	void ConsoleLog(const char* str) const;
@@ -62,5 +65,8 @@ public:
 	PanelInspector*		inspector = nullptr;
 	PanelAbout*			about = nullptr;
 	PanelSceneTree*		sceneTree = nullptr;
+	PanelSceneSave*		savescene = nullptr;
+	PanelSceneLoad*		loadscene = nullptr;
+	PanelPlayPause*		playpause = nullptr;
 };
 	
