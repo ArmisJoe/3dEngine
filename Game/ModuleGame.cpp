@@ -102,6 +102,7 @@ update_status ModuleGame::UpdateGame(float dt)
 
 update_status ModuleGame::NextFrame()
 {
+	App->editor->ClearLog();
 	return UpdateGame(dTime);
 }
 
