@@ -232,6 +232,12 @@
     <ClCompile Include="PanelSceneTree.cpp">
       <Filter>Panels</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleGame.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelPlayPause.cpp">
+      <Filter>Panels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glew-2.1.0\include\GL\eglew.h" />
@@ -538,6 +544,12 @@
     </ClInclude>
     <ClInclude Include="PanelSceneTree.h">
       <Filter>Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelPlayPause.h">
+      <Filter>Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleGame.h">
+      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

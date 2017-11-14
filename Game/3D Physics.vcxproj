@@ -103,6 +103,7 @@
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleEditorUI.h" />
     <ClInclude Include="ModuleFileSystem.h" />
+    <ClInclude Include="ModuleGame.h" />
     <ClInclude Include="ModuleParson.h" />
     <ClInclude Include="ModulePhysics3D.h" />
     <ClInclude Include="ModulePicker.h" />
@@ -120,6 +121,7 @@
     <ClInclude Include="PanelAbout.h" />
     <ClInclude Include="PanelConsole.h" />
     <ClInclude Include="PanelInspector.h" />
+    <ClInclude Include="PanelPlayPause.h" />
     <ClInclude Include="PanelSceneLoad.h" />
     <ClInclude Include="PanelSceneSave.h" />
     <ClInclude Include="PanelSceneTree.h" />
@@ -224,6 +226,7 @@
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleEditorUI.cpp" />
     <ClCompile Include="ModuleFileSystem.cpp" />
+    <ClCompile Include="ModuleGame.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleParson.cpp" />
     <ClCompile Include="ModulePhysics3D.cpp" />
@@ -239,6 +242,7 @@
     <ClCompile Include="PanelAbout.cpp" />
     <ClCompile Include="PanelConsole.cpp" />
     <ClCompile Include="PanelInspector.cpp" />
+    <ClCompile Include="PanelPlayPause.cpp" />
     <ClCompile Include="PanelSceneLoad.cpp" />
     <ClCompile Include="PanelSceneSave.cpp" />
     <ClCompile Include="PanelSceneTree.cpp" />

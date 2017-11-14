@@ -24,6 +24,7 @@ Application::Application()
 	res = new ModuleResources();
 	fs = new ModuleFileSystem();
 	quadTree = new ModuleQuadtree();
+	game = new ModuleGame();
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -42,6 +43,7 @@ Application::Application()
 	AddModule(res);
 	AddModule(fs);
 	AddModule(quadTree);
+	AddModule(game);
 
 	// Scenes
 	AddModule(scene);

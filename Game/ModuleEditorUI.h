@@ -22,6 +22,7 @@ class PanelInspector;
 class PanelSceneTree;
 class PanelSceneSave;
 class PanelSceneLoad;
+class PanelPlayPause;
 
 class ModuleEditorUI : public Module {
 public:
@@ -66,5 +67,6 @@ public:
 	PanelSceneTree*		sceneTree = nullptr;
 	PanelSceneSave*		savescene = nullptr;
 	PanelSceneLoad*		loadscene = nullptr;
+	PanelPlayPause*		playpause = nullptr;
 };
 	

@@ -5,6 +5,7 @@
 #include "PanelSceneTree.h"
 #include "PanelSceneSave.h"
 #include "PanelSceneLoad.h"
+#include "PanelPlayPause.h"
 #include "ModulePicker.h"
 #include <iostream> 
 #include <string>
@@ -40,6 +41,7 @@ ModuleEditorUI::~ModuleEditorUI()
 	sceneTree = nullptr;
 	savescene = nullptr;
 	loadscene = nullptr;
+	playpause = nullptr;
 }
 
 bool ModuleEditorUI::Init()
@@ -56,6 +58,7 @@ bool ModuleEditorUI::Init()
 	AddPanel(sceneTree = new PanelSceneTree());
 	AddPanel(savescene = new PanelSceneSave());
 	AddPanel(loadscene = new PanelSceneLoad());
+	AddPanel(playpause = new PanelPlayPause());
 
 	return true;
 }
@@ -67,6 +70,7 @@ bool ModuleEditorUI::Start()
 	about->active = false;
 	savescene->active = false;
 	loadscene->active = false;
+	playpause->active = true;
 
 	sceneTree->SetRoot(App->scene->GetRoot());
 
