@@ -93,6 +93,7 @@ void QuadtreeNode::Redistribute()
 
 	for (std::list<GameObject*>::iterator it = elements.begin(); it != elements.end();)
 	{
+		GameObject* go = (*it);
 		AABB new_box((*it)->aabb);
 
 		bool intersect = true;
@@ -113,7 +114,7 @@ void QuadtreeNode::Redistribute()
 			it = elements.erase(it);
 			for (int i = 0; i < SUBDIVISIONS; ++i) {
 				if (nodes[i]->size.Intersects(new_box))
-					nodes[i]->Insert(*it);
+					nodes[i]->Insert(go);
 			}
 		}
 	}
@@ -198,8 +199,8 @@ void Quadtree::Insert(GameObject * go)
 {
 	if (root != nullptr)
 	{
-		string ska(go->aabb.ToString());
-		string skiski(root->GetBox().ToString());
+	//	string ska(go->aabb.ToString());
+		//string skiski(root->GetBox().ToString());
 
 		if (root->GetBox().Intersects(go->aabb))
 			root->Insert(go);

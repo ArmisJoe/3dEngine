@@ -5,7 +5,7 @@
 #include <list>
 #include <map>
 
-#define MAX_ELEMENTS 8
+#define MAX_ELEMENTS 1
 #define SUBDIVISIONS 4 
 #define MIN_SIZE 5.0f 
 #define DEPTH 20
