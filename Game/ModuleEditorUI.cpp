@@ -155,6 +155,24 @@ update_status ModuleEditorUI::Update(float dt)
 			}
 			ImGui::EndMenu();
 		}
+		if (ImGui::BeginMenu("Play")) {
+			bool isplay = (App->game->GetGameState() == gameState_play) ? true : false;
+			if (ImGui::MenuItem("Play Scene", "", &isplay)) {
+				if (App->game->GetGameState() != gameState_play && isplay == true)
+					App->game->SetGameState(gameState_play);
+				if (App->game->GetGameState() == gameState_play && isplay == false)
+					App->game->SetGameState(gameState_editor);
+			}
+			ImGui::MenuItem("Pause Scene", "", &App->game->Paused);
+			if (ImGui::SmallButton("Next Frame")) {
+				App->game->NextFrame();
+			}
+			ImGui::Separator();
+			if (ImGui::SmallButton("NoEditor Play")) {
+				App->game->SetGameState(gameState_noEditor_play);
+			}
+			ImGui::EndMenu();
+		}
 		if (ImGui::BeginMenu("Objects")) {
 			if (ImGui::BeginMenu ("Create")) {
 				if (ImGui::Button("Sphere")) {
@@ -245,8 +263,8 @@ bool ModuleEditorUI::CleanUp()
 
 void ModuleEditorUI::Draw()
 {
-
-	ImGui::Render();
+	if(App->game->GetGameState() != gameState_noEditor_play)
+		ImGui::Render();
 
 }
 

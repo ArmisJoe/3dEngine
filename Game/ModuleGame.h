@@ -10,12 +10,14 @@
 enum GameState {
 	gameState_editor = 0,
 	gameState_play,
+	gameState_noEditor_play,
 	// Unknown always last
 	gameState_unknown
 };
 
 class ModuleGame : public Module {
 	friend class PanelPlayPause;
+	friend class ModuleEditorUI;
 public:
 	ModuleGame(bool start_enabled = true);
 	~ModuleGame();

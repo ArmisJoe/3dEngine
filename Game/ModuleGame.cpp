@@ -26,10 +26,16 @@ update_status ModuleGame::PreUpdate(float dt)
 
 	dTime = dt;
 
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && gameState == gameState_noEditor_play) {
+		SetGameState(gameState_editor);
+	}
+
 	switch (gameState) {
 	case gameState_editor:
 		break;
 	case gameState_play:
+		break;
+	case gameState_noEditor_play:
 		break;
 	default:
 		LOG("Unknown Game State --- Returning to [Editor] state");
@@ -47,6 +53,10 @@ update_status ModuleGame::Update(float dt)
 		for (int i = 0; i < (Paused ? 0 : timeMultiplier); i++)
 			UpdateGame(dt);
 	}
+	if (gameState == gameState_noEditor_play) {	// GameState: No Editor - Play
+		for (int i = 0; i < (Paused ? 0 : timeMultiplier); i++)
+			UpdateGame(dt);
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -56,11 +66,16 @@ update_status ModuleGame::PostUpdate(float dt)
 	if (tmp_gamestate != gameState) { // if Game State just Changed
 
 		switch (gameState) {
-		case gameState_editor:	// To Editor
+		case gameState_editor:			// To Editor
+			App->editor->ClearLog();
 			break;
-		case gameState_play:	// To Play
+		case gameState_play:			// To Play
+			App->editor->ClearLog();
 			break;
-		default:				// To Unknown
+		case gameState_noEditor_play:	// To No Editor - Play
+			App->editor->ClearLog();
+			break;
+		default:						// To Unknown
 			break;
 		}
 

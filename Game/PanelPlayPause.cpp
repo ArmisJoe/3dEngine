@@ -8,7 +8,7 @@ void PanelPlayPause::Draw()
 	ImGui::Checkbox("PLAY", &playbutton);
 	if (App->game->GetGameState() != gameState_play && playbutton == true)
 		App->game->SetGameState(gameState_play);
-	if (App->game->GetGameState() != gameState_editor && playbutton == false)
+	if (App->game->GetGameState() == gameState_play && playbutton == false)
 		App->game->SetGameState(gameState_editor);
 	ImGui::SameLine();
 	ImGui::Checkbox("PAUSE", &App->game->Paused);
