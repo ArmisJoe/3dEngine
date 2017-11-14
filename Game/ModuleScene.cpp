@@ -180,7 +180,8 @@ void ModuleScene::Serialize(const char* scene_name) {
 	App->fs->CreateFolder("Assets", "Scenes");
 	std::string file = "Assets/Scenes/";
 	file += scene_name;
-	if(strcmp(GetCExtension(scene_name), ".json") != 0)
+	std::string test = GetExtension(scene_name);
+	if(strcmp(test.c_str(), "json") != 0)
 		file += ".json";
 
 	JSON_Doc* scene_doc = App->parson->LoadJSON(file.c_str());
@@ -201,7 +202,7 @@ void ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 {
 	std::string file = "Assets/Scenes/";
 	file += scene_name;
-	if (strcmp(GetCExtension(scene_name), ".json") != 0 && !hasExtension)
+	if (strcmp(GetCExtension(scene_name), "json") != 0 && !hasExtension)
 		file += ".json";
 
 	JSON_Doc* scene_doc = App->parson->LoadJSON(file.c_str(), false);
@@ -213,6 +214,8 @@ void ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 
 	RemoveAllGameObject();  // RESET SCENE
 
+	// Name
+	curr_scene_name = scene_doc->GetString("scene.name");
 	// GameObjects Load
 	std::vector<GameObject*> tmp_gos;
 	scene_doc->MoveToRootSection();

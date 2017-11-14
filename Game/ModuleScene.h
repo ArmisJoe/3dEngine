@@ -38,6 +38,9 @@ public:
 	void Serialize(const char* scene_name);
 	void LoadScene(const char* scene_name, bool hasExtension = false);
 
+public:
+	std::string curr_scene_name = "scene01";
+
 private:
 	GameObject* root;
 	GameObject* current_selected;

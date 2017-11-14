@@ -66,6 +66,7 @@ bool ModuleEditorUI::Start()
 	inspector->active = true;
 	about->active = false;
 	savescene->active = false;
+	loadscene->active = false;
 
 	sceneTree->SetRoot(App->scene->GetRoot());
 
@@ -122,6 +123,8 @@ update_status ModuleEditorUI::Update(float dt)
 
 	if (loadscene->active == false)
 		loadscene->SetDirToOrigin();
+	if (savescene->active == false)
+		savescene->SetSceneName(App->scene->curr_scene_name.c_str());
 
 	if (App->Logs.size() > 0)
 	{
