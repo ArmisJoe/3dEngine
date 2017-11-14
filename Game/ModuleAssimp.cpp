@@ -483,8 +483,8 @@ ComponentMesh * ModuleAssimp::LoadToOwnFormat(const char * path, const uint ppro
 	App->editor->ClearLog();
 	
 	const aiScene* scene = aiImportFile(path, pprocess_flag);
-	if (scene != nullptr) {
-		LOG("Unvalid Path:\n\t%s", path);
+	if (scene == nullptr) {
+		LOG("Unvalid Path:\n\t'%s'", path);
 		return nullptr;
 	}
 	const aiNode* node = scene->mRootNode;
@@ -493,6 +493,8 @@ ComponentMesh * ModuleAssimp::LoadToOwnFormat(const char * path, const uint ppro
 	for (uint i = 0; i < node->mNumMeshes; i++) {
 		m = LoadToOwnFormat(scene->mMeshes[node->mMeshes[i]], mesh_path);
 	}
+
+	aiReleaseImport(scene);
 
 	return m;
 }

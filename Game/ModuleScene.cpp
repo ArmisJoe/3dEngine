@@ -259,15 +259,21 @@ void ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 		int type = scene_doc->GetNumber("type");
 		Component* c = nullptr;
 		ComponentMaterial* mat = nullptr;
+		ComponentMesh* cmesh = nullptr;
 		int aux = 0;
+			const char* pstr = scene_doc->GetString("path");
 		switch (type) {
 		case componentType_Mesh:
 			if (App->fs->exists(scene_doc->GetString("path")))
-				c = App->assimp->LoadMyFormatMesh(scene_doc->GetString("path"));
+				cmesh = App->assimp->LoadMyFormatMesh(scene_doc->GetString("path"));
 			else
-				c = App->assimp->LoadToOwnFormat(scene_doc->GetString("rawpath"));
-			if (c != nullptr)
-				App->res->meshes.push_back((ComponentMesh*)c);
+				cmesh = App->assimp->LoadToOwnFormat(scene_doc->GetString("rawpath"));
+			if (cmesh != nullptr) {
+				cmesh->path = scene_doc->GetString("path");
+				cmesh->raw_path = scene_doc->GetString("rawpath");
+				App->res->meshes.push_back(cmesh);
+				c = cmesh;
+			}
 			break;
 		case componentType_Material:
 			mat = new ComponentMaterial();
