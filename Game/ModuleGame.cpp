@@ -68,9 +68,11 @@ update_status ModuleGame::PostUpdate(float dt)
 		switch (gameState) {
 		case gameState_editor:			// To Editor
 			App->editor->ClearLog();
+			App->scene->LoadScene("__tmp__playsavescene", false);
 			break;
 		case gameState_play:			// To Play
 			App->editor->ClearLog();
+			App->fs->FileDelete(App->scene->Serialize("__tmp__playsavescene"));
 			break;
 		case gameState_noEditor_play:	// To No Editor - Play
 			App->editor->ClearLog();

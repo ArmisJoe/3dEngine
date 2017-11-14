@@ -174,7 +174,7 @@ update_status ModuleScene::PostUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
-void ModuleScene::Serialize(const char* scene_name) {
+const char* ModuleScene::Serialize(const char* scene_name) {
 	App->fs->CreateFolder("Assets", "Scenes");
 	std::string file = "Assets/Scenes/";
 	file += scene_name;
@@ -194,9 +194,11 @@ void ModuleScene::Serialize(const char* scene_name) {
 
 	scene_doc->Save();
 
+	return file.c_str();
+
 }
 
-void ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
+const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 {
 	std::string file = "Assets/Scenes/";
 	file += scene_name;
@@ -207,7 +209,7 @@ void ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 
 	if (scene_doc == nullptr) {
 		LOG("ERROR Loading Scene");
-		return;
+		return "";
 	}
 
 	RemoveAllGameObject();  // RESET SCENE
@@ -325,4 +327,7 @@ void ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 			}
 		}
 	}
+
+	return file.c_str();
+
 }

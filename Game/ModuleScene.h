@@ -35,8 +35,8 @@ public:
 	void SetAllToGlobalTransforms();
 	bool IteratingElement(GameObject* go);
 
-	void Serialize(const char* scene_name);
-	void LoadScene(const char* scene_name, bool hasExtension = false);
+	const char* Serialize(const char* scene_name);
+	const char* LoadScene(const char* scene_name, bool hasExtension = false);
 
 public:
 	std::string curr_scene_name = "scene01";
