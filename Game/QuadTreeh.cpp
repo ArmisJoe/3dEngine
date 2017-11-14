@@ -111,10 +111,11 @@ void QuadtreeNode::Redistribute()
 		else
 		{
 			// if it doesn't intersect with all nodes we put it in the ones that does
+			// that's why the house stays in the middle
 			it = elements.erase(it);
 			for (int i = 0; i < SUBDIVISIONS; ++i) {
 				if (nodes[i]->size.Intersects(new_box))
-					nodes[i]->Insert(go);
+					nodes[i]->Insert(go); //  while the chimney starts subdiving like crazy
 			}
 		}
 	}
