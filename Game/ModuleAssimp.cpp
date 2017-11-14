@@ -9,6 +9,8 @@
 #include "ModuleFileSystem.h"
 
 #include "HelperFoos.h"
+#include "ModuleQuadtree.h"
+
 
 
 ModuleAssimp::ModuleAssimp(bool start_enabled) : Module(start_enabled)
@@ -84,9 +86,11 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 		new_node->children.push_back(LoadNode(node->mChildren[i], scene, new_node));
 	}
 
-	if(new_node != nullptr)
+	if (new_node != nullptr)
+	{
 		App->res->gameObjects.push_back(new_node);
-
+		App->quadTree->InsertObject(new_node);
+	}
 	return new_node;
 }
 

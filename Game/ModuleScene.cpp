@@ -75,10 +75,10 @@ update_status ModuleScene::Update(float dt)
 	if (root != nullptr)
 		root->Update(dt);
 
-	float3 corners[8];
+	/*float3 corners[8];
 	ComponentCamera* tmp = (ComponentCamera*)App->camera->curr_camera;
 	tmp->GetCorners(corners);
-	App->renderer3D->debugger->DrawFrustum(corners);
+	App->renderer3D->debugger->DrawFrustum(corners);*/
 
 	IteratingElement(root);
 
@@ -95,6 +95,8 @@ bool ModuleScene::IteratingElement(GameObject * go)
 			(*sub_it)->UpdateAABBFromMesh(mesh);
 			App->renderer3D->debugger->DrawAABB((*sub_it)->aabb.CenterPoint(), (*sub_it)->aabb.Size());
 		}
+		else continue;
+
 		CollisionType type = App->camera->curr_camera->GetFrustum().ContainsBox((*sub_it)->aabb);
 		if (type != OUTSIDE)
 		App->renderer3D->todraw.push_back((*sub_it));
