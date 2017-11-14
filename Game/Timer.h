@@ -20,8 +20,9 @@ public:
 	Uint32 Read();
 	Uint32 ReadSc();
 
-private:
+	void SetTimeMultiplier(float tm);
 
+private:
 	bool	running;
 	bool	paused;
 	Uint32	started_at;
@@ -29,6 +30,9 @@ private:
 	Uint32	paused_at;
 	Uint32	unpaused_at;
 	Uint32	pausetime = 0;
+
+	float time_multiplier = 1.0f;
+
 };
 
 #endif //__TIMER_H__

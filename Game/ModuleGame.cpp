@@ -131,6 +131,8 @@ float ModuleGame::SetTimeMultiplier(float tM)
 
 	timeMultiplier = tM;
 
+	GameTimer.SetTimeMultiplier(timeMultiplier);
+
 	return timeMultiplier;
 }
 

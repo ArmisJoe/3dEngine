@@ -50,13 +50,13 @@ Uint32 Timer::Read()
 	if(running == true)
 	{
 		if (paused == true)
-			return (paused_at - started_at);
+			return (paused_at * time_multiplier - started_at);
 		else
-			return (SDL_GetTicks() - started_at) - pausetime;
+			return (SDL_GetTicks() * time_multiplier - started_at) - pausetime;
 	}
 	else
 	{
-		return stopped_at - started_at;
+		return stopped_at * time_multiplier - started_at;
 	}
 }
 Uint32 Timer::ReadSc()
@@ -64,14 +64,20 @@ Uint32 Timer::ReadSc()
 	if (running == true)
 	{
 		if (paused == true)
-			return (paused_at - started_at) / 1000;
+			return ((paused_at * time_multiplier - started_at) / 1000);
 		else
-			return ((SDL_GetTicks() - started_at) - pausetime) / 1000;
+			return (((SDL_GetTicks() * time_multiplier - started_at) - pausetime) / 1000);
 	}
 	else
 	{
-		return (stopped_at - started_at) / 1000;
+		return ((stopped_at * time_multiplier - started_at) / 1000);
 	}
+}
+
+void Timer::SetTimeMultiplier(float tm) {
+	if (tm < 1)
+		tm = 1;
+	time_multiplier = tm;
 }
 
 
