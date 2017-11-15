@@ -176,6 +176,8 @@ Quadtree::~Quadtree()
 void Quadtree::SetMaxSize(const AABB & box)
 {
 	Clear();
+	if (root != nullptr)
+		delete root;
 	root = new QuadtreeNode(box);
 }
 
