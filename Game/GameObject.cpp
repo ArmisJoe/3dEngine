@@ -56,20 +56,18 @@ void GameObject::CleanUp()
 {
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
-			/*if ((*it) != nullptr) {
+			if ((*it) != nullptr && (*it)->type == componentType_Transform) {		// Transform is the only component not passed by reference
 				(*it)->CleanUp();
-				//mdelete (*it); /// -> [EXAMINATE] TRIGGERS AN EXCEPTION (posible deleting what is already deleted [but it shouldn't])*/
+				mdelete(*it);
 			}
+		}
 		components.clear();
 	}
 
-	// Let's do it like this for now.
-	// v	v	v	v	v	v	v	
 	if (!children.empty()) {
 		for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
 			if ((*it) != nullptr) {
-				(*it)->CleanUp(); 
-				//mdelete (*it); // We have children inside children now R�P --> are we deleting something already deleted??
+				(*it)->CleanUp();
 			}
 		}
 		children.clear();
@@ -185,16 +183,6 @@ Component * GameObject::AddComponent(const int type, Component * componentPointe
 	}
 
 	return newComponent;
-}
-
-void GameObject::DeleteChild(GameObject * go)
-{
-	for (int i = 0; i < children.size(); i++) {
-		if (go == children[i]) {
-			children[i]->CleanUp();
-			mdelete[] children[i];
-		}
-	}
 }
 
 void GameObject::DestroyComponent(Component * componentPointer)
@@ -330,10 +318,15 @@ void GameObject::SetScene(ModuleScene * sce)
 
 void GameObject::OnEditor()
 {
+	if(ImGui::Button("Delete GameObject")) {
+		RemoveThis();
+	}
+	ImGui::Separator();
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
-			if((*it) != nullptr)
+			if ((*it) != nullptr) {
 				(*it)->OnEditor();
+			}
 		}
 	}
 }
@@ -417,6 +410,52 @@ void GameObject::Serialize(JSON_Doc* doc) {
 	}
 
 	doc->MoveToRootSection(); // Politeness pls
+}
+
+void GameObject::RemoveThis()
+{
+	if (parent != nullptr)
+		parent->RemoveChild(this);
+	else
+		CleanUp();
+
+}
+
+void GameObject::RemoveChild(GameObject * child)
+{
+	if (child == nullptr)
+		return;
+
+	std::vector<GameObject*> tmp_children;
+
+	for (int i = 0; i < children.size(); i++) {
+		if (children[i] != child)
+			tmp_children.push_back(children[i]);
+		else
+			children[i]->parent = nullptr;
+	}
+
+	children = tmp_children;
+
+	child->CleanUp();
+
+}
+
+void GameObject::RemoveComponent(Component * c)
+{
+	if (c == nullptr)
+		return;
+
+	std::vector<Component*> tmp_components;
+
+	for (int i = 0; i < components.size(); i++) {
+		if (components[i] != c)
+			tmp_components.push_back(components[i]);
+	}
+
+	components = tmp_components;
+
+	c->CleanUp();
 }
 
 

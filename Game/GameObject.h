@@ -65,9 +65,13 @@ public:
 
 	void Serialize(JSON_Doc* doc);
 
+	void RemoveThis();
+	void RemoveChild(GameObject* child);
+
+	void RemoveComponent(Component* c);
+
 	std::vector<Component*> FindComponents(const int type);
 	Component* AddComponent(const int type, Component* componentPointer = nullptr, bool fromReference = true);
-	void DeleteChild(GameObject* go);
 	void DestroyComponent(Component* componentPointer = nullptr);
 	GameObject* GetParent() const { return parent; }
 	void SetParent(GameObject* p);

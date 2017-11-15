@@ -157,6 +157,7 @@ void ComponentTransform::SetScale(const float3 & _scale)
 
 void ComponentTransform::OnEditor()
 {
+	ImGui::TextColored(COLOR_YELLOW, "Transform:");
 		float pos[3];
 		float rot[3];
 		float sca[3];

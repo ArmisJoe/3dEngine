@@ -33,13 +33,14 @@ ComponentMaterial::ComponentMaterial(componentType argtype, GameObject * argpare
 void ComponentMaterial::OnEditor()
 {
 	Texture* tex = nullptr;
-	//Diffuse
-	tex = texture_Channels[texType_Diffuse];
-	if (tex != nullptr) {
-		if (ImGui::CollapsingHeader("Diffuse: ")) {
-			tex->OnEditor();
+	ImGui::TextColored(COLOR_YELLOW, "Material:");
+		//Diffuse
+		tex = texture_Channels[texType_Diffuse];
+		if (tex != nullptr) {
+			if (ImGui::CollapsingHeader("Diffuse: ")) {
+				tex->OnEditor();
+			}
 		}
-	}
 }
 
 bool ComponentMaterial::HasTextures()

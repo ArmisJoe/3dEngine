@@ -56,6 +56,8 @@ public:
 
 	virtual void Serialize(JSON_Doc* doc);
 
+	void RemoveThis(); // NOT WORKING
+
 private: // Serialize Values
 	double UID;
 	double gameObjectUID;

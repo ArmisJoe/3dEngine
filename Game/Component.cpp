@@ -34,3 +34,11 @@ bool Component::SetParent(GameObject * parent)
 void Component::Serialize(JSON_Doc* doc) {
 	
 }
+
+void Component::RemoveThis()
+{
+	if (parent != nullptr)
+		parent->RemoveComponent(this);
+	else
+		CleanUp();
+}

@@ -44,14 +44,15 @@ void ComponentMesh::Draw(const ComponentTransform* trans, const ComponentMateria
 
 void ComponentMesh::OnEditor()
 {
-	std::string str = "Triangles: " + std::to_string(this->num_triangles);
-	ImGui::Text(str.c_str());
-	str = "Vertices: " + std::to_string(this->num_vertices);
-	ImGui::Text(str.c_str());
-	ImGui::SameLine();
-	str = "Indices: " + std::to_string(this->num_indices);
-	ImGui::Text(str.c_str());
-	ImGui::Text(path.c_str());
+	ImGui::TextColored(COLOR_YELLOW, "Mesh:");
+		std::string str = "Triangles: " + std::to_string(this->num_triangles);
+		ImGui::Text(str.c_str());
+		str = "Vertices: " + std::to_string(this->num_vertices);
+		ImGui::Text(str.c_str());
+		ImGui::SameLine();
+		str = "Indices: " + std::to_string(this->num_indices);
+		ImGui::Text(str.c_str());
+		ImGui::Text(path.c_str());
 }
 void ComponentMesh::Serialize(JSON_Doc * doc)
 {

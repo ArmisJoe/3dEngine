@@ -183,6 +183,12 @@ update_status ModuleEditorUI::Update(float dt)
 				}
 				ImGui::EndMenu();
 			}
+			if (ImGui::BeginMenu("Delete")) {
+				if (ImGui::Button("Delete All")) {
+					App->scene->RemoveAllGameObject();
+				}
+				ImGui::EndMenu();
+			}
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Windows")) {

@@ -136,7 +136,7 @@ GameObject * ModuleScene::AddGameObject(GameObject * parent, GameObject * go)
 void ModuleScene::DeleteGameObject(GameObject * go)
 {
 	if (go != nullptr) {
-		go->GetParent()->DeleteChild(go);
+		go->GetParent()->RemoveChild(go);
 	}
 }
 
