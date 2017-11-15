@@ -214,7 +214,8 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 	}
 
 	RemoveAllGameObject();  // RESET SCENE
-
+	App->quadTree->RestartQuadtree();
+	App->renderer3D->GetToDraw().clear();
 	// Name
 	curr_scene_name = scene_doc->GetString("scene.name");
 	// GameObjects Load
@@ -235,6 +236,7 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 				go->SetName(scene_doc->GetString("name"));
 				go->SetStatic(scene_doc->GetBool("static"));
 				tmp_gos.push_back(go);
+				go->SetStatic(true);
 			}
 			else
 				LOG("ERROR Loading gameobject '%s'", scene_doc->GetString("name"));
@@ -328,7 +330,15 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 			}
 		}
 	}
+	// Reimporting obj to quadtree
 
+	for (uint i = 0; i < App->res->gameObjects.size(); ++i)
+	{
+		if (App->res->gameObjects[i]->IsStatic())
+		{
+			App->quadTree->InsertObject(App->res->gameObjects[i]);
+		}
+	}
 	return file.c_str();
 
 }

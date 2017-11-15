@@ -81,7 +81,7 @@ void GameObject::CleanUp()
 		}
 		children.clear();
 	}*/
-
+	//delete this;
 }
 
 void GameObject::SetRoot(bool root)
@@ -322,6 +322,7 @@ void GameObject::SetScene(ModuleScene * sce)
 void GameObject::OnEditor()
 {
 	if(ImGui::Button("Delete GameObject")) {
+		App->quadTree->RemoveObject(this);
 		RemoveThis();
 	}
 	ImGui::Separator();

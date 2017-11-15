@@ -186,6 +186,8 @@ update_status ModuleRenderer3D::Update(float dt)
 	if (!todraw.empty())
 	{
 		for (std::vector<GameObject*>::iterator it = todraw.begin(); it != todraw.end(); ++it) {
+			if (!(*it)->FindComponents(componentType_Mesh).empty())
+			{
 			std::vector<Component*> ms = (*it)->FindComponents(componentType_Mesh);
 			for (std::vector<Component*>::iterator m_it = ms.begin(); m_it != ms.end(); m_it++) {
 				ComponentMesh* m = (ComponentMesh*)(*m_it);
@@ -199,7 +201,9 @@ update_status ModuleRenderer3D::Update(float dt)
 					if (!(*it)->FindComponents(componentType_Transform).empty())
 						trans = (ComponentTransform*)(*it)->FindComponents(componentType_Transform).front();
 					DrawMesh(trans, m, mat);
+
 				}
+			}
 			}
 		}
 	}
