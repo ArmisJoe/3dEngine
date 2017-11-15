@@ -181,13 +181,31 @@ void Quadtree::SetMaxSize(const AABB & box)
 
 void Quadtree::Insert(GameObject * go)
 {
-	if (root != nullptr)
-	{
-	//	string ska(go->aabb.ToString());
-		//string skiski(root->GetBox().ToString());
-
-		if (root->GetBox().Intersects(go->aabb))
-			root->Insert(go);
+	if (root != nullptr && go != nullptr && go->GetParent() != nullptr && go->GetParent()->GetParent()!= nullptr)
+	{	
+		if (Adapt(go->aabb)) {
+			//AABB nn_aabb(root->size.minPoint, root->size.maxPoint);
+			AABB nn_aabb(root->size);
+			delete root;
+			root = new QuadtreeNode(nn_aabb);
+			root->Insert(go);			
+			if (!static_gos.empty())
+			{
+				for (uint i = 0; i < static_gos.size(); ++i)
+				{
+					if (static_gos[i] != nullptr)
+					root->Insert(static_gos[i]);
+				}
+			}
+			static_gos.push_back(go);
+		}
+		else {
+			if (root->GetBox().Intersects(go->aabb))
+			{
+				root->Insert(go);
+				static_gos.push_back(go);
+			}
+		}
 	}
 }
 
@@ -244,5 +262,42 @@ void Quadtree::ClearNode(QuadtreeNode * point)
 			// nvm it does lol
 		}
 	}
+}
+
+bool Quadtree::Adapt(const AABB &aabb)
+{
+	bool adapted = false;
+
+	if (aabb.minPoint.x < root->size.minPoint.x)
+	{
+		root->size.minPoint.x = aabb.minPoint.x;
+		adapted = true;
+	}
+	if (aabb.minPoint.y < root->size.minPoint.y)
+	{
+		root->size.minPoint.y = aabb.minPoint.y;
+		adapted = true;
+	}
+	if (aabb.minPoint.z < root->size.minPoint.z)
+	{
+		root->size.minPoint.z = aabb.minPoint.z;
+		adapted = true;
+	}
+	if (aabb.maxPoint.x > root->size.maxPoint.x)
+	{
+		root->size.maxPoint.x = aabb.maxPoint.x;
+		adapted = true;
+	}
+	if (aabb.maxPoint.y > root->size.maxPoint.y)
+	{
+		root->size.maxPoint.y = aabb.maxPoint.y;
+		adapted = true;
+	}
+	if (aabb.maxPoint.z > root->size.maxPoint.z)
+	{
+		root->size.maxPoint.z = aabb.maxPoint.z;
+		adapted = true;
+	}
+	return adapted;
 }
 

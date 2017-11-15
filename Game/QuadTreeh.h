@@ -59,10 +59,15 @@ public:
 	void CollectAllNodes(vector<AABB>& nodes);
 	void RecursiveNodes(vector<AABB>& nodes, QuadtreeNode* it);
 	void ClearNode(QuadtreeNode* point);
+	bool Adapt(const AABB &aabb);
 
 public:
 	QuadtreeNode* root = nullptr;
 	uint max_divisions = DEPTH;
+private: 
+	vector<GameObject*> static_gos;
+	float3 min_point = float3::zero;
+	float3 max_point = float3::zero;
 };
 
 template<typename TYPE>

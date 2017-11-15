@@ -235,6 +235,8 @@ void GameObject::CreateAABBFromMesh(ComponentMesh* mesh)
 		AABB tmpAABB;
 
 		tmpAABB.SetNegativeInfinity();
+
+
 		tmpAABB.Enclose((float3*)mesh->vertices, mesh->num_vertices);
 		if (GetParent() != nullptr) {
 			std::vector<Component*> cmp_tr = FindComponents(componentType_Transform);
