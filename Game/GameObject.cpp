@@ -74,18 +74,6 @@ void GameObject::CleanUp()
 		}
 		children.clear();
 	}
-<<<<<<< HEAD
-
-	/*if (!aabbs.empty()) {
-		for (std::vector<AABB*>::iterator it = aabbs.begin(); it != aabbs.end(); it++) {
-			if ((*it) != nullptr) {
-				delete[](*it);
-			}
-		}
-		children.clear();
-	}*/
-=======
->>>>>>> origin/master
 }
 
 void GameObject::SetRoot(bool root)

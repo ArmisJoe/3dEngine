@@ -35,12 +35,7 @@ update_status ModuleQuadtree::Update(float dt)
 	
 	std::vector< GameObject*> objects;
 	quadtreeh->root->CollectIntersectionsFRUSTUM(objects, App->camera->curr_camera->GetFrustum());
-<<<<<<< HEAD
 
-
-=======
-	
->>>>>>> origin/master
 	// end we delete duplicates
 	sort(objects.begin(), objects.end());
 	objects.erase(unique(objects.begin(), objects.end()), objects.end());
