@@ -81,7 +81,6 @@ void GameObject::CleanUp()
 		}
 		children.clear();
 	}*/
-	//delete this;
 }
 
 void GameObject::SetRoot(bool root)
@@ -250,6 +249,7 @@ void GameObject::CreateAABBFromMesh(ComponentMesh* mesh)
 			}
 		}
 	}
+	HasAABB = true;
 }
 
 void GameObject::UpdateAABBFromMesh(ComponentMesh * mesh)

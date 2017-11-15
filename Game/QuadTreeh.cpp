@@ -183,33 +183,32 @@ void Quadtree::SetMaxSize(const AABB & box)
 
 void Quadtree::Insert(GameObject * go)
 {
-	if (root != nullptr && go != nullptr && go->GetParent() != nullptr && go->GetParent()->GetParent()!= nullptr)
-	{	
-		if (Adapt(go->aabb)) {
-			//AABB nn_aabb(root->size.minPoint, root->size.maxPoint);
-			AABB nn_aabb(root->size);
-			delete root;
-			root = nullptr;
-			root = new QuadtreeNode(nn_aabb);
-			root->Insert(go);			
-			if (!static_gos.empty())
-			{
-				for (uint i = 0; i < static_gos.size(); ++i)
-				{
-					if (static_gos[i] != nullptr)
-					root->Insert(static_gos[i]);
-				}
-			}
-			static_gos.push_back(go);
-		}
-		else {
-			if (root->GetBox().Intersects(go->aabb))
-			{
+	if (root != nullptr && go != nullptr && go->GetParent() != nullptr && go->GetParent()->GetParent() != nullptr && go->HasAABB == true)
+	{
+			if (Adapt(go->aabb)) {
+				AABB nn_aabb(root->size);
+				delete root;
+				root = nullptr;
+				root = new QuadtreeNode(nn_aabb);
 				root->Insert(go);
+				if (!static_gos.empty())
+				{
+					for (uint i = 0; i < static_gos.size(); ++i)
+					{
+						if (static_gos[i] != nullptr)
+							root->Insert(static_gos[i]);
+					}
+				}
 				static_gos.push_back(go);
 			}
+			else {
+				if (root->GetBox().Intersects(go->aabb))
+				{
+					root->Insert(go);
+					static_gos.push_back(go);
+				}
+			}
 		}
-	}
 }
 
 void Quadtree::Erase(GameObject * go)

@@ -43,6 +43,7 @@ public:
 	void Start();
 	void Update(float dt); // Called every ModuleScene->Update(dt) (if they are insied the scene)
 	void CleanUp(); // Called at App CleanUp
+	bool HasAABB = false;
 
 public:
 	void SetRoot(bool root);

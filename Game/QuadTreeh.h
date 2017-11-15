@@ -14,7 +14,6 @@
 #define MAX_ELEMENTS 1
 #define SUBDIVISIONS 8
 #define MIN_SIZE 10.0f 
-#define DEPTH 20
 
 class QuadtreeNode {
 public:
@@ -63,11 +62,10 @@ public:
 
 public:
 	QuadtreeNode* root = nullptr;
-	uint max_divisions = DEPTH;
+	//uint max_divisions = DEPTH;
 	vector<GameObject*> static_gos;
 
 private: 
-	
 	float3 min_point = float3::zero;
 	float3 max_point = float3::zero;
 };
@@ -100,20 +98,23 @@ inline void QuadtreeNode::CollectIntersectionsFRUSTUM(std::vector<GameObject*>& 
 	CollisionType out_col = primitive.ContainsBox(size);
 		if (out_col != OUTSIDE)
 		{
-			for (std::list<GameObject*>::const_iterator it = this->elements.begin(); it != this->elements.end(); ++it)
+			if (!this->elements.empty())
 			{
-				if ((*it) != nullptr)
+				for (std::list<GameObject*>::const_iterator it = this->elements.begin(); it != this->elements.end(); ++it)
 				{
-					CollisionType in_col = primitive.ContainsBox((*it)->aabb);
-					if (in_col != OUTSIDE)
+					if ((*it) != nullptr)
 					{
-						objects.push_back(*it);
+						CollisionType in_col = primitive.ContainsBox((*it)->aabb);
+						if (in_col != OUTSIDE)
+						{
+							objects.push_back(*it);
+						}
 					}
 				}
 			}
 			if (nodes[0] != nullptr) {
 				for (int i = 0; i < SUBDIVISIONS; ++i)
-					nodes[i]->CollectIntersections(objects, primitive);
+					nodes[i]->CollectIntersectionsFRUSTUM(objects, primitive);
 			}
 		}
 }

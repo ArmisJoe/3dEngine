@@ -178,7 +178,7 @@ void ModuleCamera3D::RotateCamera(float dt)
 
 void ModuleCamera3D::MoveCamera(float dt)
 {
-	float speed = 2.0f * dt;
+	float speed = 15.0f * dt;
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 		speed = 8.0f * dt;
 
