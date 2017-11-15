@@ -107,11 +107,12 @@ bool GameObject::IsStatic() const
 std::vector<Component*> GameObject::FindComponents(const int type)
 {
 	std::vector<Component*> ret;
-
+	if(this != nullptr)
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
-			if ((*it) != nullptr && ((*it)->GetType() == type)) {
-				ret.push_back((*it));
+			if ((*it) != nullptr) {
+				if(((*it)->GetType() == type))
+					ret.push_back((*it));
 			}
 		}
 	}

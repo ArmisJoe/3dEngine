@@ -115,6 +115,7 @@ GameObject * ModuleScene::CreateGameObject()
 	GameObject* new_go = nullptr;
 	new_go = new GameObject();
 	new_go->SetScene(this);
+	App->res->gameObjects.push_back(new_go);
 	return new_go;
 }
 
