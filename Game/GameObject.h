@@ -66,10 +66,6 @@ public:
 
 	void Serialize(JSON_Doc* doc);
 
-	void RemoveThis();
-	void RemoveChild(GameObject* child);
-
-	void RemoveComponent(Component* c);
 
 	std::vector<Component*> FindComponents(const int type);
 	Component* AddComponent(const int type, Component* componentPointer = nullptr, bool fromReference = true);
@@ -87,6 +83,26 @@ public:
 
 	void OnEditor();
 	void OnHierarchyTree(bool skip_root = false);
+
+	void WantToRemoveThis() {
+		to_remove = true;
+	}
+	void WantToRemoveChild(GameObject* child) {
+		if (child == nullptr)
+			return;
+		for (int i = 0; i < children.size(); i++) {
+			if (children[i] == child)
+				children[i]->WantToRemoveThis();
+		}
+	}
+	void RemoveIteration(bool toSelf = true);
+
+private:
+	bool to_remove = false;
+	void RemoveThis();
+	void RemoveChild(GameObject* child);
+
+	void RemoveComponent(Component* c);
 
 private: // Serialization Values
 	double UID;

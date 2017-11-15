@@ -178,7 +178,11 @@ Quadtree::~Quadtree()
 void Quadtree::SetMaxSize(const AABB & box)
 {
 	Clear();
-		root = new QuadtreeNode(box);
+
+	if (root != nullptr)
+		delete root;
+	root = new QuadtreeNode(box);
+
 }
 
 void Quadtree::Insert(GameObject * go)

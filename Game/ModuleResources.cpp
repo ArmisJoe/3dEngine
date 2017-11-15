@@ -45,7 +45,7 @@ bool ModuleResources::CleanUp()
 		for (std::vector<ComponentMesh*>::iterator it = meshes.begin(); it != meshes.end(); it++) {
 			if ((*it) != nullptr) {
 				(*it)->CleanUp();
-				mdelete[](*it);
+				mdelete(*it);
 			}
 		}
 		meshes.clear();
@@ -57,7 +57,7 @@ bool ModuleResources::CleanUp()
 		for (std::vector<ComponentMaterial*>::iterator it = materials.begin(); it != materials.end(); it++) {
 			if ((*it) != nullptr) {
 				(*it)->CleanUp();
-				mdelete[](*it);
+				mdelete(*it);
 			}
 		}
 		materials.clear();
@@ -68,11 +68,21 @@ bool ModuleResources::CleanUp()
 	if (!textures.empty()) {
 		for (std::vector<Texture*>::iterator it = textures.begin(); it != textures.end(); it++) {
 			if ((*it) != nullptr) {
-				mdelete[](*it);
+				mdelete(*it);
 			}
 		}
 	}
 	LOG("All Textures Cleaned Up");
+
+	// GO NOT REMOVE HERE - THEY ARE REMOVED WITH THE SCENE (go only exist on the scene)
+	//f (!gameObjects.empty()) {
+	//	for (int i = 0; i < gameObjects.size(); i++) {
+	//		if (gameObjects[i] != nullptr) {
+	//			gameObjects[i]->CleanUp();
+	//			mdelete gameObjects[i];
+	//		}
+	//	}
+	//
 
 	return true;
 }

@@ -47,6 +47,10 @@ bool ModuleScene::Start()
 update_status ModuleScene::PreUpdate(float dt)
 {
   //SetAllToGlobalTransforms();
+
+	if (root != nullptr)
+		root->RemoveIteration(false);
+
 	return UPDATE_CONTINUE;
 }
 
@@ -62,7 +66,6 @@ update_status ModuleScene::Update(float dt)
 	App->renderer3D->debugger->DrawFrustum(corners);*/
 
 	IteratingElement(root);
-
 
 	return UPDATE_CONTINUE;
 }
@@ -115,6 +118,7 @@ GameObject * ModuleScene::CreateGameObject()
 	GameObject* new_go = nullptr;
 	new_go = new GameObject();
 	new_go->SetScene(this);
+	new_go->SetStatic(true);
 	App->res->gameObjects.push_back(new_go);
 	return new_go;
 }
@@ -137,7 +141,7 @@ GameObject * ModuleScene::AddGameObject(GameObject * parent, GameObject * go)
 void ModuleScene::DeleteGameObject(GameObject * go)
 {
 	if (go != nullptr) {
-		go->GetParent()->RemoveChild(go);
+		go->GetParent()->WantToRemoveChild(go);
 	}
 }
 
@@ -155,7 +159,7 @@ void ModuleScene::SetSelected(GameObject * go)
 void ModuleScene::RemoveAllGameObject()
 {
 	if (root != nullptr) {
-		root->CleanUp();
+		root->RemoveIteration(false);
 	}
 }
 

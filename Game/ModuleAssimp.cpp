@@ -205,6 +205,9 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 	else
 		LOG("Error loading scene %s", path);
 
+	//if (Geometry != nullptr)
+	//	App->res->gameObjects.push_back(Geometry);
+
 	return Geometry;
 
 }

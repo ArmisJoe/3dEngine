@@ -56,9 +56,11 @@ void GameObject::CleanUp()
 {
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
-			if ((*it) != nullptr && (*it)->type == componentType_Transform) {		// Transform is the only component not passed by reference
+			if ((*it) != nullptr && (*it)->type == componentType_Transform) {	// Transform is the only component not passed by reference
 				(*it)->CleanUp();
-				mdelete(*it);
+				if((*it) != nullptr)
+					mdelete(*it);
+				(*it) = nullptr;
 			}
 		}
 		components.clear();
@@ -72,6 +74,7 @@ void GameObject::CleanUp()
 		}
 		children.clear();
 	}
+<<<<<<< HEAD
 
 	/*if (!aabbs.empty()) {
 		for (std::vector<AABB*>::iterator it = aabbs.begin(); it != aabbs.end(); it++) {
@@ -81,6 +84,8 @@ void GameObject::CleanUp()
 		}
 		children.clear();
 	}*/
+=======
+>>>>>>> origin/master
 }
 
 void GameObject::SetRoot(bool root)
@@ -323,7 +328,7 @@ void GameObject::OnEditor()
 {
 	if(ImGui::Button("Delete GameObject")) {
 		App->quadTree->RemoveObject(this);
-		RemoveThis();
+		WantToRemoveThis();
 	}
 	ImGui::Separator();
 	if (!components.empty()) {
@@ -416,6 +421,22 @@ void GameObject::Serialize(JSON_Doc* doc) {
 	doc->MoveToRootSection(); // Politeness pls
 }
 
+void GameObject::RemoveIteration(bool toSelf) {
+
+	if (toSelf)
+		if (to_remove == true) {
+			RemoveThis();
+			to_remove = false;
+		}
+
+	for (int i = 0; i < children.size(); i++) {
+		if (children[i] != nullptr) {
+			children[i]->RemoveIteration(true);
+		}
+	}
+
+}
+
 void GameObject::RemoveThis()
 {
 	if (parent != nullptr)
@@ -435,8 +456,6 @@ void GameObject::RemoveChild(GameObject * child)
 	for (int i = 0; i < children.size(); i++) {
 		if (children[i] != child)
 			tmp_children.push_back(children[i]);
-		else
-			children[i]->parent = nullptr;
 	}
 
 	children = tmp_children;

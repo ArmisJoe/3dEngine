@@ -189,6 +189,7 @@ update_status ModuleRenderer3D::Update(float dt)
 			if (!(*it)->FindComponents(componentType_Mesh).empty())
 			{
 			std::vector<Component*> ms = (*it)->FindComponents(componentType_Mesh);
+			if(!ms.empty())
 			for (std::vector<Component*>::iterator m_it = ms.begin(); m_it != ms.end(); m_it++) {
 				ComponentMesh* m = (ComponentMesh*)(*m_it);
 				if (m != nullptr)
