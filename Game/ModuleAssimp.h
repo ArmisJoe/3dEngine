@@ -39,6 +39,7 @@ public:
 	ComponentMesh* LoadToOwnFormat(const char* path, const uint pprocess_flag = aiProcessPreset_TargetRealtime_MaxQuality); // DO NOT USE PLS
 	ComponentMesh* LoadToOwnFormat(const aiMesh* m);
 	ComponentMesh* LoadToOwnFormat(const aiMesh* m, std::string& output_file);
+	ComponentMesh* LoadMyMeshFile(const char* buffer, const char* filename);
 	bool CleanUp();
 
 };

@@ -267,10 +267,7 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 			const char* pstr = scene_doc->GetString("path");
 		switch (type) {
 		case componentType_Mesh:
-			if (App->fs->exists(scene_doc->GetString("path")))
-				cmesh = App->assimp->LoadMyFormatMesh(scene_doc->GetString("path"));
-			else
-				cmesh = App->assimp->LoadToOwnFormat(scene_doc->GetString("rawpath"));
+			cmesh = App->assimp->LoadMyMeshFile(scene_doc->GetString("meshdoc"), GetFileFromPath(scene_doc->GetString("path")).c_str());
 			if (cmesh != nullptr) {
 				cmesh->path = scene_doc->GetString("path");
 				cmesh->raw_path = scene_doc->GetString("rawpath");

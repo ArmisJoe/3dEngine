@@ -143,15 +143,19 @@ bool ModuleFileSystem::SaveUnique(const char * path, const char * file_content, 
 			file += name;
 			file += "_";
 			file += std::to_string(uniqueID++);
-			file += ".";
-			file += extension;
+			if (strcmp(GetCExtension(name), extension) != 0) {
+				file += ".";
+				file += extension;
+			}
 		} while (exists(file));
 	}
 	else {
 		file = path;
 		file += name;
-		file += ".";
-		file += extension;
+		if (strcmp(GetCExtension(name), extension) != 0) {
+			file += ".";
+			file += extension;
+		}
 	}
 
 	std::ofstream;

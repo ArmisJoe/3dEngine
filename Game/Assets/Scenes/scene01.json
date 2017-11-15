@@ -1,34 +1,34 @@
 {
     "scene": {
-        "name": "__tmp__playsavescene"
+        "name": "scene01.json"
     },
     "gameobjects": [
         {
             "isRoot": true,
             "static": true,
-            "uid": 221839904,
+            "uid": 1076124672,
             "parentUID": -1,
             "name": "Scene Root"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -410602272,
-            "parentUID": 221839904,
+            "uid": 765744448,
+            "parentUID": 1076124672,
             "name": "Chimney"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1676140928,
-            "parentUID": 221839904,
+            "uid": -2026725760,
+            "parentUID": 1076124672,
             "name": "Baker_house"
         }
     ],
     "components": [
         {
             "type": 2,
-            "parentUID": 221839904,
+            "parentUID": 1076124672,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -48,7 +48,7 @@
         },
         {
             "type": 2,
-            "parentUID": -410602272,
+            "parentUID": 765744448,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -61,20 +61,21 @@
                 "w": 0.70710670948028564
             },
             "scale": {
-                "x": 1,
-                "y": 1,
-                "z": 1
+                "x": 100,
+                "y": 100,
+                "z": 100
             }
         },
         {
             "type": 0,
-            "parentUID": -410602272,
+            "parentUID": 765744448,
             "path": "Library\/Meshes\/Untitled.001.mymesh",
-            "rawpath": "C:\\Users\\Usuario\\Documents\\GitHub\\3dEngine\\Game\\Assets\\BakerHouse.fbx"
+            "rawpath": "C:\\Users\\Usuario\\Documents\\GitHub\\3dEngine\\Game\\Assets\\BakerHouse.fbx",
+            "meshdoc": "9af7c117d9de9a06fba7a5f1ea5fcc2d"
         },
         {
             "type": 1,
-            "parentUID": -410602272,
+            "parentUID": 765744448,
             "texture_channels": [
                 {
                     "channel": 0,
@@ -84,7 +85,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1676140928,
+            "parentUID": -2026725760,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -97,20 +98,21 @@
                 "w": 0.70710670948028564
             },
             "scale": {
-                "x": 1,
-                "y": 1,
-                "z": 1
+                "x": 100,
+                "y": 100,
+                "z": 100
             }
         },
         {
             "type": 0,
-            "parentUID": 1676140928,
+            "parentUID": -2026725760,
             "path": "Library\/Meshes\/Untitled.mymesh",
-            "rawpath": "C:\\Users\\Usuario\\Documents\\GitHub\\3dEngine\\Game\\Assets\\BakerHouse.fbx"
+            "rawpath": "C:\\Users\\Usuario\\Documents\\GitHub\\3dEngine\\Game\\Assets\\BakerHouse.fbx",
+            "meshdoc": "a93441e3c91ccfa125f2cdaf07673d80"
         },
         {
             "type": 1,
-            "parentUID": 1676140928,
+            "parentUID": -2026725760,
             "texture_channels": [
                 {
                     "channel": 0,

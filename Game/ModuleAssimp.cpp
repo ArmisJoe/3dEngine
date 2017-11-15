@@ -549,6 +549,18 @@ ComponentMesh * ModuleAssimp::LoadToOwnFormat(const aiMesh * m, std::string& out
 	return new_m;
 }
 
+ComponentMesh * ModuleAssimp::LoadMyMeshFile(const char * buffer, const char* filename)
+{
+	ComponentMesh* cmesh = nullptr;
+
+	std::string out;
+
+	if(App->fs->SaveUnique(LIBRARY_MESHES, buffer, filename, MESH_OWN_FORMAT, strlen(buffer) * sizeof(char), out, false))
+		cmesh = LoadMyFormatMesh(out.c_str());
+
+	return cmesh;
+}
+
 bool ModuleAssimp::CleanUp()
 {
 	return true;

@@ -7,6 +7,8 @@
 
 #include "ComponentTransform.h"
 
+#include "md5.h"
+
 ComponentMesh::ComponentMesh() : Component(componentType_Mesh)
 {
 	name = "Mesh";
@@ -59,9 +61,15 @@ void ComponentMesh::Serialize(JSON_Doc * doc)
 	if (doc == NULL)
 		return;
 
+	char* buffer;
+	App->fs->Load(path.c_str(), &buffer);
+
+	std::string meshdoc = md5(buffer).c_str();
+
 	doc->SetNumber("type", type);
 	doc->SetNumber("parentUID", (parent != nullptr) ? parent->GetUID() : -1);
 	doc->SetString("path", path.c_str());
 	doc->SetString("rawpath", raw_path.c_str());
+	doc->SetString("meshdoc", meshdoc.c_str());
 }
 ;
