@@ -42,7 +42,6 @@ Application::Application()
 	AddModule(tex);
 	AddModule(res);
 	AddModule(fs);
-	AddModule(quadTree);
 	AddModule(game);
 
 	// Scenes
@@ -50,6 +49,7 @@ Application::Application()
 	AddModule(player);
 
 	// Picker
+	AddModule(quadTree);
 	AddModule(picker);
 
 	// Renderer last!

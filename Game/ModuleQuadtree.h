@@ -18,6 +18,7 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 	bool InsertObject(GameObject* go); // Returns false if the object is not static
+	void RemoveObject(GameObject*go);
 	void RestartQuadtree();
 	void ResetQuadtree(AABB aabb);
 	bool GetRoot(AABB* getter) const; // returns false if root is nullptr

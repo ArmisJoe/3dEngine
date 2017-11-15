@@ -33,6 +33,7 @@ QuadtreeNode::~QuadtreeNode()
 		if (nodes[i] != nullptr)
 		{
 			delete(nodes[i]);
+			nodes[i] = nullptr;
 			// I really hope this does not crash
 			// nvm it does lol
 		}
@@ -78,7 +79,7 @@ void QuadtreeNode::Remove(GameObject * go)
 
 	if (Leaf == false)
 	{
-		for (int i = 0; i < 4; ++i)
+		for (int i = 0; i < SUBDIVISIONS; ++i)
 			nodes[i]->Remove(go);
 	}
 
@@ -170,15 +171,18 @@ Quadtree::~Quadtree()
 	if (root != nullptr)
 	{
 		delete root;
+		root = nullptr;
 	}
 }
 
 void Quadtree::SetMaxSize(const AABB & box)
 {
 	Clear();
+
 	if (root != nullptr)
 		delete root;
 	root = new QuadtreeNode(box);
+
 }
 
 void Quadtree::Insert(GameObject * go)
@@ -189,6 +193,7 @@ void Quadtree::Insert(GameObject * go)
 			//AABB nn_aabb(root->size.minPoint, root->size.maxPoint);
 			AABB nn_aabb(root->size);
 			delete root;
+			root = nullptr;
 			root = new QuadtreeNode(nn_aabb);
 			root->Insert(go);			
 			if (!static_gos.empty())
@@ -219,6 +224,10 @@ void Quadtree::Erase(GameObject * go)
 
 void Quadtree::Clear()
 {
+	if (root != nullptr) {
+		delete root;
+		root = nullptr;
+	}
 	//tecnhically de destructor will handle the inside data...
 }
 
@@ -260,6 +269,7 @@ void Quadtree::ClearNode(QuadtreeNode * point)
 		{
 			ClearNode(point->nodes[i]);
 			delete(point->nodes[i]);
+			point->nodes[i] = nullptr;
 			// I really hope this does not crash
 			// nvm it does lol
 		}

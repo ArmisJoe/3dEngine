@@ -64,8 +64,10 @@ public:
 public:
 	QuadtreeNode* root = nullptr;
 	uint max_divisions = DEPTH;
-private: 
 	vector<GameObject*> static_gos;
+
+private: 
+	
 	float3 min_point = float3::zero;
 	float3 max_point = float3::zero;
 };
@@ -100,11 +102,14 @@ inline void QuadtreeNode::CollectIntersectionsFRUSTUM(std::vector<GameObject*>& 
 		{
 			for (std::list<GameObject*>::const_iterator it = this->elements.begin(); it != this->elements.end(); ++it)
 			{
-				CollisionType in_col = primitive.ContainsBox((*it)->aabb);
-				if (in_col != OUTSIDE)
+				if ((*it) != nullptr)
 				{
+					CollisionType in_col = primitive.ContainsBox((*it)->aabb);
+					if (in_col != OUTSIDE)
+					{
 						objects.push_back(*it);
 					}
+				}
 			}
 			if (nodes[0] != nullptr) {
 				for (int i = 0; i < SUBDIVISIONS; ++i)
