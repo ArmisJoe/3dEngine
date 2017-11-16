@@ -12,6 +12,7 @@ public:
 public:
 	void Start();
 	void Update(float dt);
+	void CleanUp();
 	void Draw(const ComponentTransform* trans = nullptr, const ComponentMaterial* mat = nullptr);
 	void OnEditor();
 	void Serialize(JSON_Doc* doc);
@@ -31,7 +32,7 @@ public:
 	unsigned int num_triangles = 0; // A.K.A. num_faces
 	//UVs
 	unsigned int id_UV = 0; // id in VRAM
-	float* textureCoords; // UV Coords
+	float* textureCoords = nullptr; // UV Coords
 	unsigned int num_UV = 0;
 	unsigned int num_UVChannels = 0;
 

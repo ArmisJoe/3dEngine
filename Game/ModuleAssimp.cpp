@@ -136,7 +136,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 	vector<Component*> tmp = new_node->FindComponents(componentType_Transform);
 	if (!tmp.empty())
 		new_node->DestroyComponent(tmp[0]);
-	new_node->AddComponent(componentType_Transform, trans, false);
+	new_node->AddComponent(componentType_Transform, trans, true);
 
 
 	//LoadMeshes
@@ -381,9 +381,7 @@ bool ModuleAssimp::Import(const aiMesh * m, std::string & output_file)
 
 	if (new_mesh != nullptr) {
 		ret = SaveToOwnFormat(new_mesh, output_file);
-	}
-
-	if (new_mesh != nullptr) {
+		new_mesh->CleanUp(); 
 		mdelete new_mesh;
 	}
 

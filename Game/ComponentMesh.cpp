@@ -40,6 +40,16 @@ void ComponentMesh::Update(float dt)
 	}
 }
 
+void ComponentMesh::CleanUp()
+{
+	if (vertices != nullptr)
+		mdelete[] vertices;
+	if (indices != nullptr)
+		mdelete[] indices;
+	if (textureCoords != nullptr)
+		mdelete[] textureCoords;
+}
+
 void ComponentMesh::Draw(const ComponentTransform* trans, const ComponentMaterial * mat)
 {
 }
