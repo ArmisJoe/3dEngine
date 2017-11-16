@@ -351,11 +351,11 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 	}
 	// Reimporting obj to quadtree
 
-	for (uint i = 0; i < App->res->gameObjects.size(); ++i)
+	for (uint i = 0; i < tmp_gos.size(); ++i)
 	{
-		if (App->res->gameObjects[i]->IsStatic())
+		if (tmp_gos[i]->IsStatic())
 		{
-			App->quadTree->InsertObject(App->res->gameObjects[i]);
+			App->quadTree->InsertObject(tmp_gos[i]);
 		}
 	}
 	return file.c_str();

@@ -186,9 +186,14 @@ void GameObject::DestroyComponent(Component * componentPointer)
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) == componentPointer && (*it) != nullptr) {
+				std::vector<Component*> tmp_c;
+				for (int k = 0; k < components.size(); k++) {
+					if (components[k] != (*it))
+						tmp_c.push_back((*it));
+				}
+				components = tmp_c;
 				(*it)->CleanUp();
 				mdelete (*it);
-				components.erase(it);
 				break;
 			}
 		}

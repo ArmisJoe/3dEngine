@@ -192,7 +192,7 @@ void Quadtree::SetMaxSize(const AABB & box)
 
 void Quadtree::Insert(GameObject * go)
 {
-	if (root != nullptr && go != nullptr && go->GetParent() != nullptr && go->GetParent()->GetParent() != nullptr && go->HasAABB == true)
+	if (root != nullptr && go != nullptr && go->HasAABB == true)
 	{
 			if (Adapt(go->aabb)) {
 				AABB nn_aabb(root->size);

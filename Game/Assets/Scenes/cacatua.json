@@ -1,0 +1,124 @@
+{
+    "scene": {
+        "name": "cacatua"
+    },
+    "gameobjects": [
+        {
+            "isRoot": true,
+            "static": true,
+            "uid": -1685477248,
+            "parentUID": -1,
+            "name": "Scene Root"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1579967872,
+            "parentUID": -1685477248,
+            "name": "Chimney"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -2049283072,
+            "parentUID": -1685477248,
+            "name": "Baker_house"
+        }
+    ],
+    "components": [
+        {
+            "type": 2,
+            "parentUID": -1685477248,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1579967872,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.7071068286895752,
+                "y": 0,
+                "z": 0,
+                "w": 0.70710670948028564
+            },
+            "scale": {
+                "x": 100,
+                "y": 100,
+                "z": 100
+            }
+        },
+        {
+            "type": 0,
+            "parentUID": -1579967872,
+            "path": "Library\/Meshes\/Untitled.001.mymesh",
+            "rawpath": "C:\\Users\\Usuario\\Documents\\GitHub\\3dEngine\\Game\\Assets\\BakerHouse.fbx",
+            "meshdoc": "9af7c117d9de9a06fba7a5f1ea5fcc2d"
+        },
+        {
+            "type": 1,
+            "parentUID": -1579967872,
+            "texture_channels": [
+                {
+                    "channel": 0,
+                    "path": "Library\/Textures\/Baker_house.png.dds"
+                }
+            ]
+        },
+        {
+            "type": 2,
+            "parentUID": -2049283072,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 0,
+            "parentUID": -2049283072,
+            "path": "Library\/Meshes\/Untitled.mymesh",
+            "rawpath": "C:\\Users\\Usuario\\Documents\\GitHub\\3dEngine\\Game\\Assets\\BakerHouse.fbx",
+            "meshdoc": "a93441e3c91ccfa125f2cdaf07673d80"
+        },
+        {
+            "type": 1,
+            "parentUID": -2049283072,
+            "texture_channels": [
+                {
+                    "channel": 0,
+                    "path": "Library\/Textures\/Baker_house.png.dds"
+                }
+            ]
+        }
+    ]
+}
