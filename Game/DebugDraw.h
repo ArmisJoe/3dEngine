@@ -20,4 +20,6 @@ public:
 	void DrawAABB(float3 center, float3 size);
 	void Switch();
 	bool active = true;
+public:
+	void SetColor(Color argcol);
 };

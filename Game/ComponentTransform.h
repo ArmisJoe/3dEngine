@@ -38,6 +38,9 @@ public:
 	void Serialize(JSON_Doc* doc);
 
 	bool Transformed = false;
+
+	bool transform_modified = false;
+
 private:
 	float4x4 GetParentTransform()const;
 	float3 position = float3::zero;
@@ -50,8 +53,6 @@ private:
 	float4x4 WorldMatrix;
 	bool can_update = true;
 	int transform_id;
-
-	bool transform_modified = false;
 
 	float4x4 view_matrix_fromCamera;
 	float4x4 proj_matrix_fromCamera;

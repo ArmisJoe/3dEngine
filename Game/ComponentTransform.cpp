@@ -112,7 +112,7 @@ void ComponentTransform::Update(float dt)
 
 void ComponentTransform::SetPosition(const float3 & _position)
 {
-	if (GetParent() == nullptr || GetParent()->IsStatic() == false)
+	if (GetParent() == nullptr)
 	{
 		position = _position;
 		transform_modified = true;
@@ -122,7 +122,7 @@ void ComponentTransform::SetPosition(const float3 & _position)
 
 void ComponentTransform::SetRotation(const float3& _rotation)
 {
-	if (GetParent() == nullptr || GetParent()->IsStatic() == false)
+	if (GetParent() == nullptr)
 	{
 		Quat mod = Quat::FromEulerXYZ(_rotation.x, _rotation.y, _rotation.z);
 		rotation = mod;
@@ -134,7 +134,7 @@ void ComponentTransform::SetRotation(const float3& _rotation)
 
 void ComponentTransform::SetRotation(const Quat& _rotation)
 {
-	if (GetParent() == nullptr || GetParent()->IsStatic() == false)
+	if (GetParent() == nullptr)
 	{
 		rotation = _rotation;
 
@@ -146,7 +146,7 @@ void ComponentTransform::SetRotation(const Quat& _rotation)
 
 void ComponentTransform::SetScale(const float3 & _scale)
 {
-	if (GetParent() == nullptr || GetParent()->IsStatic() == false)
+	if (GetParent() == nullptr)
 	{
 		scale = _scale;
 
@@ -181,12 +181,14 @@ void ComponentTransform::OnEditor()
 			position.x = pos[0];
 			position.y = pos[1];
 			position.z = pos[2];
+			transform_modified = true;
 		}
 		if (ImGui::DragFloat3("Rotation:", rot, 0.1f)) {
 			if (rot[0] != RadToDeg(rotation.ToEulerXYZ().x) || rot[1] != RadToDeg(rotation.ToEulerXYZ().y) || rot[2] != RadToDeg(rotation.ToEulerXYZ().z))
 				Transformed = true;
 
 			rotation = rotation.FromEulerXYZ(DegToRad(rot[0]), DegToRad(rot[1]), DegToRad(rot[2]));
+			transform_modified = true;
 		}
 
 		if (ImGui::DragFloat3("Scale:", sca, 0.1f)) {
@@ -196,6 +198,7 @@ void ComponentTransform::OnEditor()
 			scale.x = sca[0];
 			scale.y = sca[1];
 			scale.z = sca[2];
+			transform_modified = true;
 		}
 	
 	// ImGuizmo
@@ -261,7 +264,7 @@ void ComponentTransform::OnEditor()
 				//new_q.T
 				//rotation = rotation.FromEulerXYZ(DegToRad(new_q.ToEulerXYZ()[0]), DegToRad(new_q.ToEulerXYZ()[1]), DegToRad(new_q.ToEulerXYZ()[2]));
 			}
-
+			transform_modified = true;
 		}
 	}
 	else {
@@ -272,7 +275,7 @@ void ComponentTransform::OnEditor()
 
 float4x4 ComponentTransform::GetParentTransform() const
 {
-	GameObject* g = GetParent()->GetParent();
+	/*GameObject* g = GetParent()->GetParent();
 	float4x4 parent_transform = float4x4::identity;
 
 	if (g != nullptr && g->IsRoot() == false)
@@ -282,7 +285,8 @@ float4x4 ComponentTransform::GetParentTransform() const
 
 		return parent_transform;
 	}
-	else return transform_matrix;
+	else return transform_matrix;*/
+	return float4x4::zero;
 }
 
 void ComponentTransform::Serialize(JSON_Doc* doc) {
@@ -305,4 +309,6 @@ void ComponentTransform::Serialize(JSON_Doc* doc) {
 	doc->SetNumber("scale.x", scale.x);
 	doc->SetNumber("scale.y", scale.y);
 	doc->SetNumber("scale.z", scale.z);
+
+	transform_modified = true;
 }

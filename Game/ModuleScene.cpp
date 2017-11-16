@@ -46,7 +46,7 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::PreUpdate(float dt)
 {
-  //SetAllToGlobalTransforms();
+	//SetAllToGlobalTransforms();
 
 	if (root != nullptr)
 		root->RemoveIteration(false);
@@ -65,6 +65,7 @@ update_status ModuleScene::Update(float dt)
 	tmp->GetCorners(corners);
 	App->renderer3D->debugger->DrawFrustum(corners);*/
 
+	//App->renderer3D->debugger->SetColor(Red);
 	IteratingElement(root);
 
 	return UPDATE_CONTINUE;
@@ -74,13 +75,16 @@ bool ModuleScene::IteratingElement(GameObject * go)
 {
 	for (std::vector<GameObject*>::iterator sub_it = go->children.begin(); sub_it < go->children.end(); ++sub_it)
 	{
-		if (!(*sub_it)->FindComponents(componentType_Mesh).empty()) {
+		if ((*sub_it)->HasAABB == true) {
 			ComponentMesh* mesh = (ComponentMesh*)(*sub_it)->FindComponents(componentType_Mesh)[0];
-			(*sub_it)->UpdateAABBFromMesh(mesh);
+			if ((*sub_it)->GetTransform()->transform_modified == true)
+			{
+				(*sub_it)->UpdateAABBFromMesh(mesh);
+				(*sub_it)->GetTransform()->transform_modified = false;
+			}
 			App->renderer3D->debugger->DrawAABB((*sub_it)->aabb.CenterPoint(), (*sub_it)->aabb.Size());
-			IteratingElement(*sub_it);
 		}
-		else continue;
+		IteratingElement(*sub_it);
 	}
 	return true;
 }

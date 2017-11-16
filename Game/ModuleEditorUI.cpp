@@ -194,6 +194,7 @@ update_status ModuleEditorUI::Update(float dt)
 		if (ImGui::BeginMenu("View")) {
 			ImGui::MenuItem("Show Grid", "", &App->scene->grid_on);
 			ImGui::MenuItem("DebugMode", "", &App->renderer3D->debugger->active);
+			ImGui::MenuItem("Show Quadtree", "only in debug mode", &App->quadTree->visible);
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Windows")) {

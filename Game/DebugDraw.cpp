@@ -22,13 +22,15 @@ void DebugDraw::Draw(float3 * line_points, int size) const
 {
 	if (active)
 	{
+		glColor3f(color.r, color.g, color.b);
+
 		glLineWidth((float)5);
 
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3, GL_FLOAT, 0, (float*)line_points->ptr());
 
 		glEnableClientState(GL_COLOR_ARRAY);
-		glColorPointer(3, GL_FLOAT, 0, &color.r);
+		glColorPointer(3, GL_FLOAT, 0,&color );
 
 
 		glDrawArrays(GL_LINES, 0, size);
@@ -37,6 +39,8 @@ void DebugDraw::Draw(float3 * line_points, int size) const
 		glDisableClientState(GL_COLOR_ARRAY);
 
 		glLineWidth(1);
+
+		glColor3f(255, 255, 255);
 	}
 }
 
@@ -148,4 +152,9 @@ void DebugDraw::Switch()
 {
 	if (active == false) active = true;
 	else active = false;
+}
+
+void DebugDraw::SetColor(Color argcol)
+{
+	color = argcol;
 }

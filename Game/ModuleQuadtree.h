@@ -27,4 +27,5 @@ public:
 private:
 	Quadtree* quadtreeh; // I deadass created the quadtree class when there is one in mathgeolib ok
 protected:
+	bool visible = false;
 };
