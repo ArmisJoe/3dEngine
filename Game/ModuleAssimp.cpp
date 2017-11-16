@@ -87,7 +87,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 
 	//Node Children 'Recursivity'
 	for (uint i = 0; i < node->mNumChildren; i++) {
-		new_node->children.push_back(LoadNode(node->mChildren[i], scene, new_node));
+		new_node->AddChild(LoadNode(node->mChildren[i], scene, new_node));
 	}
 
 
@@ -166,7 +166,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 
 	//Node Children 'Recursivity'
 	for (uint i = 0; i < node->mNumChildren; i++) {
-		new_node->children.push_back(LoadNode(node->mChildren[i], scene, raw_path, new_node));
+		new_node->AddChild(LoadNode(node->mChildren[i], scene, raw_path, new_node));
 	}
 
 	if (new_node != nullptr)
@@ -482,6 +482,7 @@ ComponentMesh* ModuleAssimp::LoadMyFormatMesh(const char * exported_file)
 				LOG("Loaded mesh with %d vertices %d indices %d UVs", new_mesh->num_vertices, new_mesh->num_indices, new_mesh->num_UV);
 			}
 		}
+		mdelete[] buffer;
 	}
 
 	return new_mesh;

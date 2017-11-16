@@ -79,6 +79,8 @@ public:
 	void SetToGlobalTransform();
 	ComponentTransform* GetTransform();
 
+	void AddChild(GameObject* child);
+
 	void SetScene(ModuleScene* sce);
 
 	void OnEditor();

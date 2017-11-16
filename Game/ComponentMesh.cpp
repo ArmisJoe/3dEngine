@@ -81,5 +81,8 @@ void ComponentMesh::Serialize(JSON_Doc * doc)
 	doc->SetString("path", path.c_str());
 	doc->SetString("rawpath", raw_path.c_str());
 	doc->SetString("meshdoc", meshdoc.c_str());
+
+	if (buffer != nullptr)
+		mdelete[] buffer;
 }
 ;

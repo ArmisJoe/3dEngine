@@ -238,9 +238,9 @@ bool ModuleTextures::Import(const char * path, std::string & output_file)
 		ret = Import(buffer, size, output_file, GetFileFromPath(path).c_str());
 	}
 
-	//if (buffer != nullptr) {
-	//	mdelete[] buffer;
-	//}
+	if (buffer != nullptr) {
+		mdelete[] buffer;
+	}
 
 	return ret;
 }
@@ -471,6 +471,9 @@ Texture* ModuleTextures::Load(const char * exported_file, Texture * tex)
 		}
 	}
 	
+	if (buffer != nullptr)
+		mdelete[] buffer;
+
 	LOG("Texture Load End:\n\t%s", exported_file);
 
 	return new_tex;

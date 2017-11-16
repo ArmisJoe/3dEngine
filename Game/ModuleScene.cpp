@@ -110,7 +110,7 @@ GameObject * ModuleScene::CreateGameObject(GameObject* parent)
 		newGameObject = new GameObject(parent);
 		newGameObject->SetScene(this);
 		newGameObject->SetParent(parent);
-		parent->children.push_back(newGameObject);
+		parent->AddChild(newGameObject);
 	}
 	else
 		LOG("ERROR Trying to create a nullptr parent GameObject");
@@ -127,16 +127,25 @@ GameObject * ModuleScene::CreateGameObject()
 	return new_go;
 }
 
-GameObject * ModuleScene::AddGameObject(GameObject * parent, GameObject * go)
+GameObject * ModuleScene::AddGameObject(GameObject * parent, GameObject * go, bool byref)
 {
 	GameObject* new_go = nullptr;
 
-	if (parent != nullptr && go != nullptr) {
+	if (parent == nullptr || go == nullptr)
+		return nullptr;
+
+	if (byref == true) {
+		new_go = go;
+	}
+	else {
 		new_go = new GameObject(parent);
 		memcpy(new_go, go, sizeof(GameObject));
+	}
+
+	if (new_go != nullptr) {
 		new_go->SetParent(parent);
 		new_go->SetScene(this);
-		parent->children.push_back(new_go);
+		parent->AddChild(new_go);
 	}
 
 	return new_go;
@@ -260,7 +269,7 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 			GameObject* checked = tmp_gos[k];
 			if (curr->GetParentUID() == checked->GetUID()) {
 				curr->SetParent(checked);
-				checked->children.push_back(curr);
+				checked->AddChild(curr);
 				break;
 			}
 		}

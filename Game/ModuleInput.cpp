@@ -131,7 +131,7 @@ update_status ModuleInput::PreUpdate(float dt)
 					new_geo = App->assimp->LoadGeometry(dropped_filedir);
 					if (new_geo != nullptr) {
 						for (int i = 0; i < new_geo->children.size(); i++) {
-							App->scene->AddGameObject(App->scene->GetRoot(), new_geo->children[i]);
+							App->scene->AddGameObject(App->scene->GetRoot(), new_geo->children[i], true);
 						}
 					}
 					else {

@@ -310,6 +310,24 @@ ComponentTransform * GameObject::GetTransform()
 	return ret;
 }
 
+void GameObject::AddChild(GameObject * child)
+{
+
+	if (child == nullptr)
+		return;
+
+	bool isUnique = true;
+	for (int i = 0; i < children.size(); i++) {
+		if (children[i] == child) {
+			isUnique = false;
+			break;
+		}
+	}
+
+	if (isUnique)
+		children.push_back(child);
+}
+
 void GameObject::SetScene(ModuleScene * sce)
 {
 	scene = sce;
