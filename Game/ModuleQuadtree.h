@@ -23,9 +23,17 @@ public:
 	void RestartQuadtree();
 	void ResetQuadtree(AABB aabb);
 	bool GetRoot(AABB* getter) const; // returns false if root is nullptr
+	template<typename TYPE>
+	void CollectIntersections(std::vector<GameObject*>& objects, const TYPE & primitive) const;
 
 private:
 	Quadtree* quadtreeh; // I deadass created the quadtree class when there is one in mathgeolib ok
 protected:
 	bool visible = false;
 };
+
+template<typename TYPE>
+inline void ModuleQuadtree::CollectIntersections(std::vector<GameObject*>& objects, const TYPE & primitive) const
+{
+	quadtreeh->root->CollectIntersections(objects, primitive);
+}

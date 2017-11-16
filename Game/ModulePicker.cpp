@@ -72,40 +72,45 @@ GameObject * ModulePicker::Pick()
 
 void ModulePicker::IterativeRayCast(const LineSegment & segment, float &dist, GameObject** tocollide)
 {
+	vector<GameObject*> possible_collisions;
+	App->quadTree->CollectIntersections(possible_collisions, segment);
 
-	for (uint i = 0; i < App->scene->GetRoot()->children.size(); ++i)
+	for (uint i = 0; i < possible_collisions.size(); ++i)
 	{
-		GameObject* go = App->scene->GetRoot()->children[i];
-		vector<Component*> meshes = go->FindComponents(componentType_Mesh);
+		GameObject* go = nullptr;
+		if (possible_collisions[i] != nullptr) {
 
-		if (!meshes.empty())
-		{
-			
-			ComponentMesh* mesh = (ComponentMesh*)meshes[0];
+			go = possible_collisions[i];
 
-			LineSegment segment_local_space(segment);
-
-			// We check the AABB first so we can avoid the whole awkward triangle process
-			if (!segment_local_space.Intersects(go->aabb)) continue;
-
-			segment_local_space.Transform(go->GetTransform()->GetTransformMatrix().Inverted());
-		
-			for (uint i = 0; i < mesh->num_indices; i += 3)
+			if (go->HasAABB == true)
 			{
-				Triangle triangle;
+				vector<Component*> meshes = go->FindComponents(componentType_Mesh);
+				ComponentMesh* mesh = (ComponentMesh*)meshes[0];
 
-				triangle.a.Set(&mesh->vertices[mesh->indices[i++] * 3]);
-				triangle.b.Set(&mesh->vertices[mesh->indices[i++] * 3]);
-				triangle.c.Set(&mesh->vertices[mesh->indices[i++] * 3]);
+				LineSegment segment_local_space(segment);
 
-				float distance;
-				float3 hit_point;
-				if (segment_local_space.Intersects(triangle, &distance, &hit_point))
+				// We check the AABB first so we can avoid the whole awkward triangle process
+				if (!segment_local_space.Intersects(go->aabb)) continue;
+
+				segment_local_space.Transform(go->GetTransform()->GetTransformMatrix().Inverted());
+
+				for (uint i = 0; i < mesh->num_indices; i += 3)
 				{
-					if (distance < dist)
+					Triangle triangle;
+
+					triangle.a.Set(&mesh->vertices[mesh->indices[i++] * 3]);
+					triangle.b.Set(&mesh->vertices[mesh->indices[i++] * 3]);
+					triangle.c.Set(&mesh->vertices[mesh->indices[i++] * 3]);
+
+					float distance;
+					float3 hit_point;
+					if (segment_local_space.Intersects(triangle, &distance, &hit_point))
 					{
-						dist = distance;
-						(*tocollide) = go;
+						if (distance < dist)
+						{
+							dist = distance;
+							(*tocollide) = go;
+						}
 					}
 				}
 			}
