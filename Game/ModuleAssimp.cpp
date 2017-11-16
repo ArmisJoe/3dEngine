@@ -218,7 +218,6 @@ ComponentMesh * ModuleAssimp::LoadRawMesh(const aiMesh* m)
 	
 	new_mesh = new ComponentMesh();
 	new_mesh->material_index = m->mMaterialIndex;
-	new_mesh->num_triangles = m->mNumFaces;
 	new_mesh->num_vertices = m->mNumVertices;
 	//Vertices
 	new_mesh->vertices = new float[new_mesh->num_vertices * 3];
@@ -337,8 +336,7 @@ bool ModuleAssimp::Import(const aiMesh * m, std::string & output_file)
 
 	new_mesh = new ComponentMesh();
 	//Nums
-	new_mesh->material_index = m->mMaterialIndex;
-	new_mesh->num_triangles = m->mNumFaces;
+	new_mesh->material_index = m->mMaterialIndex; 
 	new_mesh->num_vertices = m->mNumVertices;
 	//Vertices
 	new_mesh->vertices = new float[new_mesh->num_vertices * 3];

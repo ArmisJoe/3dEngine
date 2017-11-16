@@ -29,7 +29,9 @@ public:
 	unsigned int num_vertices = 0;
 	float* vertices = nullptr;
 	//Triangles
-	unsigned int num_triangles = 0; // A.K.A. num_faces
+	uint GetTriangles() {
+		return 2 - num_vertices + num_indices;
+	}
 	//UVs
 	unsigned int id_UV = 0; // id in VRAM
 	float* textureCoords = nullptr; // UV Coords

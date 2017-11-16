@@ -74,6 +74,9 @@ void GameObject::CleanUp()
 		}
 		children.clear();
 	}
+
+	App->quadTree->RemoveObject(this);
+
 }
 
 void GameObject::SetRoot(bool root)

@@ -163,7 +163,7 @@ void ModuleScene::SetSelected(GameObject * go)
 void ModuleScene::RemoveAllGameObject()
 {
 	if (root != nullptr) {
-		root->RemoveIteration(false);
+		root->CleanUp();
 	}
 }
 
