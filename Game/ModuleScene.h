@@ -9,6 +9,7 @@
 
 class ModuleScene : public Module
 {
+	friend class ModuleEditorUI;
 public:
 	ModuleScene(bool start_enabled = true);
 	~ModuleScene();
@@ -38,10 +39,16 @@ public:
 	const char* Serialize(const char* scene_name);
 	const char* LoadScene(const char* scene_name, bool hasExtension = false);
 
+	void SetGrid(bool flag) {
+		grid_on = flag;
+	}
+
 public:
 	std::string curr_scene_name = "scene01";
 
 private:
 	GameObject* root;
 	GameObject* current_selected;
+protected:
+	bool grid_on = true;
 };

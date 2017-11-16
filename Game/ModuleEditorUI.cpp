@@ -191,6 +191,11 @@ update_status ModuleEditorUI::Update(float dt)
 			}
 			ImGui::EndMenu();
 		}
+		if (ImGui::BeginMenu("View")) {
+			ImGui::MenuItem("Show Grid", "", &App->scene->grid_on);
+			ImGui::MenuItem("Show QuadTree", "", &App->quadTree->visible);
+			ImGui::EndMenu();
+		}
 		if (ImGui::BeginMenu("Windows")) {
 			ImGui::MenuItem("Object Creation", "O", &object_p);
 			ImGui::MenuItem("Scene Tree", "S", &sceneTree->active);
@@ -391,6 +396,6 @@ void ModuleEditorUI::DrawConfigPanels()
 		}
 
 
-		ImGui::End();
 	}
+		ImGui::End();
 }

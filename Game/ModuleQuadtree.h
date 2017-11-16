@@ -10,6 +10,7 @@
 
 class ModuleQuadtree : public Module
 {
+	friend class ModuleEditorUI;
 public:
 	ModuleQuadtree(bool start_enabled = true);
 	~ModuleQuadtree();
@@ -23,6 +24,12 @@ public:
 	void ResetQuadtree(AABB aabb);
 	bool GetRoot(AABB* getter) const; // returns false if root is nullptr
 
+	void SetVisibility(bool flag) {
+		visible = flag;
+	}
+
 private:
 	Quadtree* quadtreeh; // I deadass created the quadtree class when there is one in mathgeolib ok
+protected:
+	bool visible = false;
 };

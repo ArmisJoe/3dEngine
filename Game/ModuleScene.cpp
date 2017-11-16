@@ -172,9 +172,11 @@ void ModuleScene::SetAllToGlobalTransforms()
 update_status ModuleScene::PostUpdate(float dt)
 {
 	// Creates the Axis and Default Grid
-	bPlane p(0, 1, 0, 0);
-	p.axis = true;
-	p.Render();
+	if (grid_on) {
+		bPlane p(0, 1, 0, 0);
+		p.axis = true;
+		p.Render();
+	}
 
 	return UPDATE_CONTINUE;
 }

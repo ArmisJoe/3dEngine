@@ -129,7 +129,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 	node->mTransformation.Decompose(scaling, rotation, translation);
 	float3 position = { 0, 0, 0 };
 	float3 scale = { 1, 1, 1 };
-	position = { translation.x, translation.y, translation.y };
+	position = { translation.x, translation.y, translation.z };
 	Quat rotation2 = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
 	scale = { scaling.x, scaling.y, scaling.z };
 	ComponentTransform* trans = new ComponentTransform(new_node, position, rotation2, scale);
