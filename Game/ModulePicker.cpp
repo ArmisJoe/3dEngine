@@ -46,7 +46,29 @@ GameObject * ModulePicker::RayCast(const LineSegment &segment, float& total_dist
 	return ret;
 }
 
+GameObject * ModulePicker::Pick()
+{
+	GameObject* ret = nullptr;
 
+	float mousex = App->input->GetMouseX(), mousey = App->input->GetMouseY();
+
+	float dist_w = -(1.0f - (float(mousex * 2.0f)) / App->window->GetWidth());
+	float dist_y = 1.0f - (float(mousey * 2.0f)) / App->window->GetHeight();
+
+	LineSegment picker = App->camera->curr_camera->GetFrustum().UnProjectLineSegment(dist_w, dist_y);
+
+	float distance = 0.f;
+
+	ret = RayCast(picker, distance);
+	if (ret != nullptr && distance != FLOAT_INF)
+	{
+		string PickedObject = "You selected: " + ret->GetName();
+		LOG(PickedObject.c_str());
+	}
+
+
+	return ret;
+}
 
 void ModulePicker::IterativeRayCast(const LineSegment & segment, float &dist, GameObject** tocollide)
 {
@@ -83,29 +105,10 @@ void ModulePicker::IterativeRayCast(const LineSegment & segment, float &dist, Ga
 					if (distance < dist)
 					{
 						dist = distance;
-						*tocollide = go;
+						(*tocollide) = go;
 					}
 				}
 			}
-			/*Triangle triangle;
-			for (uint it = 0; it < mesh->num_indices;)
-			{
-
-				triangle.a.Set(mesh->vertices[mesh->indices[it++]], mesh->vertices[mesh->indices[it++]], mesh->vertices[mesh->indices[it++]]);
-				triangle.b.Set(mesh->vertices[mesh->indices[it++]], mesh->vertices[mesh->indices[it++]], mesh->vertices[mesh->indices[it++]]);
-				triangle.c.Set(mesh->vertices[mesh->indices[it++]], mesh->vertices[mesh->indices[it++]], mesh->vertices[mesh->indices[it++]]);
-
-	
-				if (segment_local_space.Intersects(triangle, &distance, &hit_point))
-				{
-					if (distance < infinite)
-					{
-						dist = distance;
-						*tocollide = (GameObject*)go;
-					}
-				}
-			}
-			*/
 		}
 	}
 }

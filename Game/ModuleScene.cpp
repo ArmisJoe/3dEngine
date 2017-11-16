@@ -78,7 +78,7 @@ bool ModuleScene::IteratingElement(GameObject * go)
 			ComponentMesh* mesh = (ComponentMesh*)(*sub_it)->FindComponents(componentType_Mesh)[0];
 			(*sub_it)->UpdateAABBFromMesh(mesh);
 			App->renderer3D->debugger->DrawAABB((*sub_it)->aabb.CenterPoint(), (*sub_it)->aabb.Size());
-			//IteratingElement(*sub_it);
+			IteratingElement(*sub_it);
 		}
 		else continue;
 	}

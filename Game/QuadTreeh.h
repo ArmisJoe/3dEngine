@@ -11,7 +11,7 @@
 
 //#include <algorithm>
 
-#define MAX_ELEMENTS 1
+#define MAX_ELEMENTS 4
 #define SUBDIVISIONS 8
 #define MIN_SIZE 10.0f 
 

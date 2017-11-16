@@ -18,5 +18,6 @@ private:
 public:
 	void DrawFrustum(float3* vertices);
 	void DrawAABB(float3 center, float3 size);
-	
+	void Switch();
+	bool active = true;
 };

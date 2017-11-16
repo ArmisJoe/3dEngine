@@ -47,7 +47,7 @@ void QuadtreeNode::Insert(GameObject * go)
 	if (nodes[0] == nullptr)
 	{
 		//If it is within the limits of the Quadtree
-		if (elements.size() < MAX_ELEMENTS || (size.HalfSize().LengthSq() <= MIN_SIZE * MIN_SIZE))
+		if (elements.size() < MAX_ELEMENTS /*|| (size.HalfSize().LengthSq() <= MIN_SIZE * MIN_SIZE)*/)
 			elements.push_back(go);
 
 		else
@@ -93,34 +93,39 @@ void QuadtreeNode::Create(const AABB & limits)
 
 void QuadtreeNode::Redistribute()
 {
-	// In my head it makes sense
 
 	for (std::list<GameObject*>::iterator it = elements.begin(); it != elements.end();)
 	{
-		GameObject* go = (*it);
-		AABB new_box((*it)->aabb);
-
-		bool intersect = true;
-		for (int i = 0; i < SUBDIVISIONS; ++i)
+		if ((*it) != nullptr && (*it)->HasAABB == true)
 		{
-			if (nodes[i]->size.Intersects(new_box))
-				continue;
-			else {
-				intersect = false;
-				break;
+			GameObject* go = (*it);
+			AABB new_box((*it)->aabb);
+
+			bool intersect = true;
+			for (int i = 0; i < SUBDIVISIONS; ++i)
+			{
+				if (nodes[i]->size.Intersects(new_box))
+					continue;
+				else {
+					intersect = false;
+					break;
+				}
+			}
+			if (intersect == true)
+				++it;
+			else
+			{
+				// if it doesn't intersect with all nodes we put it in the ones that does
+				it = elements.erase(it);
+				for (int i = 0; i < SUBDIVISIONS; ++i) {
+					if (nodes[i]->size.Intersects(new_box))
+						nodes[i]->Insert(go); //  while the chimney starts subdiving like crazy
+				}
 			}
 		}
-		if (intersect == true)
-			++it;
 		else
 		{
-			// if it doesn't intersect with all nodes we put it in the ones that does
-			// that's why the house stays in the middle
 			it = elements.erase(it);
-			for (int i = 0; i < SUBDIVISIONS; ++i) {
-				if (nodes[i]->size.Intersects(new_box))
-					nodes[i]->Insert(go); //  while the chimney starts subdiving like crazy
-			}
 		}
 	}
 }

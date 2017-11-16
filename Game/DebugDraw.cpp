@@ -20,23 +20,24 @@ void DebugDraw::SetLinesSize(float argsize)
 
 void DebugDraw::Draw(float3 * line_points, int size) const
 {
-	
-	glLineWidth((float)5);
+	if (active)
+	{
+		glLineWidth((float)5);
 
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, (float*)line_points->ptr());
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glVertexPointer(3, GL_FLOAT, 0, (float*)line_points->ptr());
 
-	glEnableClientState(GL_COLOR_ARRAY);
-	glColorPointer(3, GL_FLOAT, 0, &color.r);
-	
+		glEnableClientState(GL_COLOR_ARRAY);
+		glColorPointer(3, GL_FLOAT, 0, &color.r);
 
-	glDrawArrays(GL_LINES, 0, size);
 
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_COLOR_ARRAY);
+		glDrawArrays(GL_LINES, 0, size);
 
-	glLineWidth(1);
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_COLOR_ARRAY);
 
+		glLineWidth(1);
+	}
 }
 
 void DebugDraw::DrawFrustum(float3 * corners)
@@ -141,4 +142,10 @@ void DebugDraw::DrawAABB(float3 center, float3 size)
 
 	delete[] lines;
 	delete[] colors;
+}
+
+void DebugDraw::Switch()
+{
+	if (active == false) active = true;
+	else active = false;
 }

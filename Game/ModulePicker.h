@@ -17,6 +17,7 @@ public:
 	bool CleanUp();
 
 	GameObject* RayCast(const LineSegment &segment, float& total_distance);
+	GameObject * Pick();
 	void IterativeRayCast(const LineSegment& segment, float &dist, GameObject** tocollide);
 	GameObject* GetPicked() const { return picked; }
 	bool TestObject(GameObject* go) { return (go == picked); }
@@ -24,4 +25,5 @@ public:
 private:
 	GameObject* picked = nullptr;
 	const float infinite = FLOAT_INF;
+	LineSegment picker;
 };

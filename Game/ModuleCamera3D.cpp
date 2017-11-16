@@ -58,7 +58,7 @@ update_status ModuleCamera3D::Update(float dt)
 
 		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
 		{
-			GameObject* pick = Pick();
+			GameObject* pick = App->picker->Pick();
 			//if (pick != nullptr)
 				//App->editor->SetSelected(pick, (App->editor->selected == pick));
 		}
@@ -196,29 +196,4 @@ void ModuleCamera3D::MoveCamera(float dt)
 void ModuleCamera3D::CameraZoom(float dt)
 {
 	main_camera->MoveForwards(App->input->GetMouseWheelMotion());
-}
-
-GameObject * ModuleCamera3D::Pick()
-{
-	GameObject* ret = nullptr;
-
-	float mousex = App->input->GetMouseX(), mousey = App->input->GetMouseY();
-
-	float dist_w = -(1.0f - (float (mousex * 2.0f)) / App->window->GetWidth());
-	float dist_y = 1.0f - (float (mousey * 2.0f)) / App->window->GetHeight();
-
-	LineSegment picker = main_camera->GetFrustum().UnProjectLineSegment(dist_w , dist_y);
-
-	float distance = 0.f;
-
-	ret = App->picker->RayCast(picker, distance);
-	if (ret != nullptr && distance != FLOAT_INF)
-	{
-		pickingat = picker.GetPoint(distance);
-		string PickedObject = "You selected: " + ret->GetName();
-		LOG(PickedObject.c_str());
-	}
-
-
-	return ret;
 }

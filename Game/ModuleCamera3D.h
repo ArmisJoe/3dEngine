@@ -29,14 +29,11 @@ public:
 	void LoadConfig();
 
 private:
-	float3 pickingat = float3::zero;
 	bool active_camera = true;
 	void RotateCamera(float dt);
 	void MoveCamera(float dt);
 	void CameraZoom(float dt);
-	GameObject* Pick();
 public:
-	LineSegment picker;
 
 	ComponentCamera* curr_camera;
 	ComponentCamera* main_camera;

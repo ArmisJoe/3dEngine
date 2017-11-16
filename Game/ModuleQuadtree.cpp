@@ -28,7 +28,6 @@ update_status ModuleQuadtree::Update(float dt)
 	
 	quadtreeh->CollectAllNodes(AABBvector);
 	
-	if(visible)	// Only on visible mode
 		for (uint i = 0; i < AABBvector.size(); ++i)
 		{
 			App->renderer3D->debugger->DrawAABB(AABBvector[i].CenterPoint(), AABBvector[i].Size());
