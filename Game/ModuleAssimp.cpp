@@ -367,7 +367,6 @@ bool ModuleAssimp::Import(const aiMesh * m, std::string & output_file)
 		new_mesh->num_UV = m->mNumVertices;
 		new_mesh->textureCoords = new float[new_mesh->num_UV * 3];
 		memcpy(new_mesh->textureCoords, m->mTextureCoords[0], sizeof(float)*new_mesh->num_UV * 3);
-
 	}
 	else
 	{
@@ -466,7 +465,7 @@ ComponentMesh* ModuleAssimp::LoadMyFormatMesh(const char * exported_file)
 			if (new_mesh->num_UV > 0) {
 				it += sizeof(uint) * new_mesh->num_indices; // it = buffer[UVs]
 				new_mesh->textureCoords = new float[new_mesh->num_UV * 3];
-				memcpy(new_mesh->textureCoords, it, sizeof(float) * new_mesh->num_UV);
+				memcpy(new_mesh->textureCoords, it, sizeof(float) * new_mesh->num_UV * 3);
 
 				glGenBuffers(1, (GLuint*)&(new_mesh->id_UV));
 				glBindBuffer(GL_ARRAY_BUFFER, (GLuint)new_mesh->id_UV);
