@@ -67,7 +67,7 @@ update_status ModuleScene::Update(float dt)
 
 	//App->renderer3D->debugger->SetColor(Red);
 	IteratingElement(root);
-
+	dynamic_gos_OnScreen.clear();
 	return UPDATE_CONTINUE;
 }
 
