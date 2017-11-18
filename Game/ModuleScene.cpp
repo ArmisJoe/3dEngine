@@ -83,6 +83,15 @@ bool ModuleScene::IteratingElement(GameObject * go)
 				(*sub_it)->GetTransform()->transform_modified = false;
 			}
 			App->renderer3D->debugger->DrawAABB((*sub_it)->aabb.CenterPoint(), (*sub_it)->aabb.Size());
+			if ((*sub_it)->IsStatic() == false)
+			{
+				CollisionType col = App->camera->curr_camera->GetFrustum().ContainsBox((*sub_it)->aabb);
+				if (col != OUTSIDE)
+				{
+					App->renderer3D->AddGameObjectToDraw((*sub_it));
+					dynamic_gos_OnScreen.push_back((*sub_it));
+				}
+			}
 		}
 		IteratingElement(*sub_it);
 	}

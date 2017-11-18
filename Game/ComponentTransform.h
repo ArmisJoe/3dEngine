@@ -37,8 +37,6 @@ public:
 
 	void Serialize(JSON_Doc* doc);
 
-	bool Transformed = false;
-
 	bool transform_modified = false;
 
 private:

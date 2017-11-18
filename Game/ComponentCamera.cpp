@@ -7,7 +7,7 @@ ComponentCamera::ComponentCamera() : Component(componentType_Camera)
 	name = "Camera";
 	frustum.type = FrustumType::PerspectiveFrustum;
 	frustum.nearPlaneDistance = 0.5f;
-	frustum.farPlaneDistance = 500.f;
+	frustum.farPlaneDistance = 1000.f;
 
 	frustum.verticalFov = DEGTORAD * 60.0f;
 	frustum.horizontalFov = SCREEN_WIDTH / SCREEN_HEIGHT;
@@ -27,7 +27,7 @@ ComponentCamera::ComponentCamera(GameObject * argparent) : Component(componentTy
 	name = "Camera";
 	frustum.type = FrustumType::PerspectiveFrustum;
 	frustum.nearPlaneDistance = 0.5f;
-	frustum.farPlaneDistance = 500.f;
+	frustum.farPlaneDistance = 1000.f;
 
 	frustum.verticalFov = DEGTORAD * 60.0f;
 	frustum.horizontalFov = SCREEN_WIDTH / SCREEN_HEIGHT;
@@ -46,7 +46,7 @@ ComponentCamera::ComponentCamera(componentType argtype, GameObject * argparent) 
 	name = "Camera";
 	frustum.type = FrustumType::PerspectiveFrustum;
 	frustum.nearPlaneDistance = 0.5f;
-	frustum.farPlaneDistance = 500.f;
+	frustum.farPlaneDistance = 1000.f;
 
 	frustum.verticalFov = DEGTORAD * 60.0f;
 	frustum.horizontalFov = SCREEN_WIDTH / SCREEN_HEIGHT;

@@ -78,10 +78,13 @@ float4x4 ComponentTransform::GetTransformMatrix()
 
 void ComponentTransform::SetIdentityTransform()
 {
-	SetPosition({ 0,0,0 });
-	Quat rot;
-	SetRotation({ 0.0f, 0.0f, 0.0f });
-	SetScale({ 1,1,1 });
+	if (GetParent() != nullptr && !GetParent()->IsStatic())
+	{
+		SetPosition({ 0,0,0 });
+		Quat rot;
+		SetRotation({ 0.0f, 0.0f, 0.0f });
+		SetScale({ 1,1,1 });
+	}
 }
 
 void ComponentTransform::Update(float dt)
@@ -112,7 +115,7 @@ void ComponentTransform::Update(float dt)
 
 void ComponentTransform::SetPosition(const float3 & _position)
 {
-	if (GetParent() == nullptr)
+	if (GetParent() != nullptr && !GetParent()->IsStatic())
 	{
 		position = _position;
 		transform_modified = true;
@@ -122,7 +125,7 @@ void ComponentTransform::SetPosition(const float3 & _position)
 
 void ComponentTransform::SetRotation(const float3& _rotation)
 {
-	if (GetParent() == nullptr)
+	if (GetParent() != nullptr && !GetParent()->IsStatic())
 	{
 		Quat mod = Quat::FromEulerXYZ(_rotation.x, _rotation.y, _rotation.z);
 		rotation = mod;
@@ -134,7 +137,7 @@ void ComponentTransform::SetRotation(const float3& _rotation)
 
 void ComponentTransform::SetRotation(const Quat& _rotation)
 {
-	if (GetParent() == nullptr)
+	if (GetParent() != nullptr && !GetParent()->IsStatic())
 	{
 		rotation = _rotation;
 
@@ -146,7 +149,7 @@ void ComponentTransform::SetRotation(const Quat& _rotation)
 
 void ComponentTransform::SetScale(const float3 & _scale)
 {
-	if (GetParent() == nullptr)
+	if (GetParent() != nullptr && !GetParent()->IsStatic())
 	{
 		scale = _scale;
 
@@ -175,34 +178,34 @@ void ComponentTransform::OnEditor()
 		sca[2] = scale.z;
 
 		if (ImGui::DragFloat3("Position:", pos, 0.1f)) {
-			if (pos[0] != position.x || pos[1] != position.y || pos[2] != position.z)
-				Transformed = true;
-
-			position.x = pos[0];
-			position.y = pos[1];
-			position.z = pos[2];
-			transform_modified = true;
+			if (GetParent() != nullptr && !GetParent()->IsStatic())
+			{
+				position.x = pos[0];
+				position.y = pos[1];
+				position.z = pos[2];
+				transform_modified = true;
+			}
 		}
 		if (ImGui::DragFloat3("Rotation:", rot, 0.1f)) {
-			if (rot[0] != RadToDeg(rotation.ToEulerXYZ().x) || rot[1] != RadToDeg(rotation.ToEulerXYZ().y) || rot[2] != RadToDeg(rotation.ToEulerXYZ().z))
-				Transformed = true;
-
-			rotation = rotation.FromEulerXYZ(DegToRad(rot[0]), DegToRad(rot[1]), DegToRad(rot[2]));
-			transform_modified = true;
+			if (GetParent() != nullptr && !GetParent()->IsStatic())
+			{
+				rotation = rotation.FromEulerXYZ(DegToRad(rot[0]), DegToRad(rot[1]), DegToRad(rot[2]));
+				transform_modified = true;
+			}
 		}
 
 		if (ImGui::DragFloat3("Scale:", sca, 0.1f)) {
-			if (sca[0] != scale.x || sca[1] != scale.y || sca[2] != scale.z)
-				Transformed = true;
-
-			scale.x = sca[0];
-			scale.y = sca[1];
-			scale.z = sca[2];
-			transform_modified = true;
+			if (GetParent() != nullptr && !GetParent()->IsStatic())
+			{
+				scale.x = sca[0];
+				scale.y = sca[1];
+				scale.z = sca[2];
+				transform_modified = true;
+			}
 		}
 	
 	// ImGuizmo
-	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT & GetParent() != nullptr && !GetParent()->IsStatic())
 	{
 		App->camera->SetCameraActive(false);
 		ImGuizmo::Enable(true);

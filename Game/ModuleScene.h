@@ -46,6 +46,7 @@ public:
 public:
 	std::string curr_scene_name = "scene01";
 	vector<GameObject*> static_gos;
+	vector<GameObject*> dynamic_gos_OnScreen;
 private:
 	GameObject* root;
 	GameObject* current_selected;

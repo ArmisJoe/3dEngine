@@ -28,14 +28,6 @@ bool ModuleRenderer3D::Init()
 	//	LOG("Creating 3D Renderer context");
 	bool ret = true;
 
-	/*
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);*/
-
 	//Create context
 	context = SDL_GL_CreateContext(App->window->window);
 	if (context == nullptr)
@@ -168,20 +160,6 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 update_status ModuleRenderer3D::Update(float dt)
 {
-	//for (std::list<GameObject*>::iterator go_it = App->scene->gameObjects.begin(); go_it != App->scene->gameObjects.end(); go_it++) {
-	//	std::list<Component*> ms = (*go_it)->GetComponents(componentType_Mesh);
-	//	for (std::list<Component*>::iterator m_it = ms.begin(); m_it != ms.end(); m_it++) {
-	//		Mesh* m = (Mesh*)(*m_it);
-	//		if(m == nullptr)
-	//			LOG("Renderer3D: No Mesh Component Found")
-	//		//HardCode for Assigment01
-	//			if (!App->tex->textures.empty()) {
-	//				m->tex = App->tex->textures.back();
-	//			}
-	//		//!_HardCode for Assigment01
-	//		DrawMesh(m);
-	//	}
-	//}
 
 	if (!todraw.empty())
 	{
@@ -405,67 +383,6 @@ void ModuleRenderer3D::DrawMesh(ComponentTransform* trans, ComponentMesh* m, Com
 
 	if (trans != nullptr)
 		glPopMatrix();
-
-	/*
-	glEnableClientState(GL_VERTEX_ARRAY);
-
-	glBindBuffer(GL_ARRAY_BUFFER, m->id_vertices);
-	glVertexPointer(3, GL_FLOAT, 0, NULL);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m->id_indices);
-
-	if (mat != nullptr) {
-		//Apply UV if exist
-		if (m->num_UV != 0)
-		{
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-			glBindBuffer(GL_ARRAY_BUFFER, m->id_UV);
-			glTexCoordPointer(3, GL_FLOAT, 0, NULL);
-		}
-
-		//glEnable(GL_TEXTURE_2D);
-		if (mat->GetTextureChannel(texType_Diffuse) != nullptr)
-			glBindTexture(GL_TEXTURE_2D, (GLuint)mat->GetTextureChannel(texType_Diffuse)->id);
-
-	}
-
-	if (enable_wireframe)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	else
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-	glDrawElements(GL_TRIANGLES, m->num_indices, GL_UNSIGNED_INT, NULL);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-
-
-	/// Attemp 01
-	//if(mesh->tex != nullptr)
-	//	glBindTexture(GL_TEXTURE_2D, mesh->tex->id);
-	//
-	//glEnableClientState(GL_VERTEX_ARRAY);
-	//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	//glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertices);
-	//glTexCoordPointer(3, GL_FLOAT, 0, NULL);
-	//glVertexPointer(3, GL_FLOAT, 0, NULL);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->id_indices);
-	//
-	//if(enable_wireframe)
-	//	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	//else
-	//	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	//
-	//glDrawElements(GL_TRIANGLES, mesh->num_indices, GL_UNSIGNED_INT, NULL);
-	//glDisableClientState(GL_VERTEX_ARRAY);
-	//glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	//
-	//glBindTexture(GL_TEXTURE_2D, 0);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	//glBindBuffer(GL_ARRAY_BUFFER, 0);*/
 }
 
 void ModuleRenderer3D::AddGameObjectToDraw(GameObject * obj)
