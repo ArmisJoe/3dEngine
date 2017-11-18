@@ -413,7 +413,7 @@ bool ModuleAssimp::SaveToOwnFormat(ComponentMesh * m, std::string & output_file)
 		std::memcpy(it, m->textureCoords, sizeof(float) * m->num_UV * 3); // Allocating UVs
 	}
 
-	ret = App->fs->SaveUnique(LIBRARY_MESHES, buffer, m->name.c_str(), MESH_OWN_FORMAT, bufferSize, output_file, false);
+	ret = App->fs->SaveUnique(LIBRARY_MESHES, buffer, m->name.c_str(), MESH_OWN_FORMAT, bufferSize, output_file, true);
 
 	if (buffer != nullptr)
 		mdelete[] buffer;

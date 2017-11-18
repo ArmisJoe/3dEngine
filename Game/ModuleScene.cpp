@@ -286,7 +286,6 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 		ComponentMaterial* mat = nullptr;
 		ComponentMesh* cmesh = nullptr;
 		int aux = 0;
-			const char* pstr = scene_doc->GetString("path");
 		switch (type) {
 		case componentType_Mesh:
 			if (App->fs->exists(scene_doc->GetString("path")))

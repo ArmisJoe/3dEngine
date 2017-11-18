@@ -35,7 +35,7 @@ public:
 	bool CleanUp();
 
 	Texture* LoadRawTexture(const char* path); // Returns nullptr on failure.
-	bool ImportTexture(const char* path, std::string& output_file); // Imports a Texture into DDS format. Returns [false] on failure;
+	int ImportTexture(const char* path, std::string& output_file); // RETURNS: -1 on already existing tex, 0 on failure and 1 on success. Imports a Texture into DDS format. Returns [false] on failure;
 	Texture* LoadDDSTexture(const char* path); // Returns nullptr on failure
 	Texture* LoadToDDS(const char* path, std::string& output_file);
 	Texture* LoadToDDS(const char* path);
@@ -53,6 +53,9 @@ private: // Configurations
 	int interpolation_type = interpolationTexType_Linear;
 	char* clamping_str = nullptr;
 	char* interpolate_str = nullptr;
+
+private: // Loading Global Vars
+	int curr_tex_state = false;
 
 };
 

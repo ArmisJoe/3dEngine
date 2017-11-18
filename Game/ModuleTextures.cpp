@@ -159,11 +159,20 @@ Texture* ModuleTextures::LoadRawTexture(const char * path)
 	return new_tex;
 }
 
-bool ModuleTextures::ImportTexture(const char * path, std::string& output_file)
+int ModuleTextures::ImportTexture(const char * path, std::string& output_file)
 {
 	bool ret = false;
 
-	ret = Import(path, output_file);
+	std::string checkPath = LIBRARY_TEXTURES;
+	checkPath += GetFileFromPath(path);
+	checkPath += ".dds";
+	if (!App->fs->exists(checkPath))
+		ret = Import(path, output_file);
+	else {
+		LOG("Texture already imported");
+		output_file = checkPath;
+		ret = -1;
+	}
 
 	if (ret == false)
 		LOG("ERROR importing texture %s", path);
@@ -183,12 +192,22 @@ Texture * ModuleTextures::LoadDDSTexture(const char * path)
 Texture * ModuleTextures::LoadToDDS(const char * path, std::string& output_file)
 {
 	Texture* tex = nullptr;
-
-	if (ImportTexture(path, output_file)) {
+	curr_tex_state = ImportTexture(path, output_file);
+	switch (curr_tex_state) {
+	case -1:	// Repeated Tex
+		for (int i = 0; i < App->res->textures.size(); i++) {
+			if (App->res->textures[i]->path == output_file) {
+				tex = App->res->textures[i];
+				break;
+			}
+		}
+		break;
+	case true:	// Success Import
 		tex = LoadDDSTexture(output_file.c_str());
-	}
-	else {
+		break;
+	default:   // Failed Import
 		LOG("ERROR Importing texture %s", GetFileFromPath(path).c_str());
+		break;
 	}
 
 	return tex;
