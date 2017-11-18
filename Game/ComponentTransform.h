@@ -41,10 +41,11 @@ public:
 	void Serialize(JSON_Doc* doc);
 
 	bool transform_modified = false;
-
+	void UpdateTransFromParent(GameObject * parent);
+	void SetLocalTrans(GameObject* parent);
 private:
 	float4x4 GlobalTransMatrix = float4x4::zero;
-
+	float4x4 LocalTransMatrix = float4x4::zero;
 private:
 	//float4x4 GetParentTransform()const;
 	float3 position = float3::zero;
@@ -53,7 +54,6 @@ private:
 	float3 rotinEuler = float3::zero;
 
 	float4x4 transform_matrix;
-	float4x4 prev_local_transform;
 
 	//float4x4 WorldMatrix;
 	int transform_id;

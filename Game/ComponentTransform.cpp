@@ -93,11 +93,67 @@ void ComponentTransform::SetIdentityTransform()
 	}
 }
 
+void ComponentTransform::UpdateTransFromParent(GameObject * parent)
+{
+	if (parent != nullptr)
+	{
+		ComponentTransform* parentTrans = (ComponentTransform*)parent->GetTransform();
+		if (parentTrans != nullptr)
+		{
+			GlobalTransMatrix = parentTrans->LocalTransMatrix * GlobalTransMatrix;
+			float4x4 temp;
+			GlobalTransMatrix.Decompose(position, temp, scale);
+			rotinEuler = temp.ToEulerXYZ();
+
+			rotation = Quat::FromEulerXYZ(DegToRad(rotinEuler.x), DegToRad(rotinEuler.y), DegToRad(rotinEuler.z));
+			GlobalTransMatrix = float4x4::FromQuat(rotation);
+			GlobalTransMatrix = float4x4::Scale(scale, float3(0, 0, 0)) * GlobalTransMatrix;
+			GlobalTransMatrix.float4x4::SetTranslatePart(position.x, position.y, position.z);
+
+			if (GetParent() != nullptr && GetParent()->GetParent() != nullptr)
+			{
+				ComponentTransform* parentTrans = (ComponentTransform*)GetParent()->GetParent()->GetTransform();
+				if (parentTrans != nullptr)
+				{
+					GlobalTransMatrix = parentTrans->GetGlobalMatrix() * GlobalTransMatrix;
+				}
+			}
+		}
+	}
+}
+
+void ComponentTransform::SetLocalTrans(GameObject* parent)
+{
+	if (parent != nullptr)
+	{
+		ComponentTransform* parentTrans = (ComponentTransform*)parent->GetTransform();
+		if (parentTrans != nullptr)
+		{
+			float3 localPos = position - parentTrans->position;
+			Quat localRot = rotation * parentTrans->rotation.Conjugated();
+			float3 localScale = scale.Mul(parentTrans->scale.Recip());
+
+			GlobalTransMatrix = float4x4::FromQuat(localRot);
+			LocalTransMatrix = float4x4::Scale(localScale, float3(0, 0, 0)) * GlobalTransMatrix;
+			LocalTransMatrix.float4x4::SetTranslatePart(localPos.x, localPos.y, localPos.z);
+		}
+		else
+		{
+			LocalTransMatrix = GlobalTransMatrix;
+		}
+	}
+	else
+	{
+		LocalTransMatrix = GlobalTransMatrix;
+	}
+}
+
+
 void ComponentTransform::Update(float dt)
 {
-	if (UpdateNeeded == true || GlobalTransMatrix.Equals(float4x4::zero))
-	{
-		GlobalTransMatrix = GetTransformMatrix();
+	/*if (/*UpdateNeeded == true ||*/// GlobalTransMatrix.Equals(float4x4::zero))
+	//{
+		/*GlobalTransMatrix = GetTransformMatrix();
 
 		if (GetParent() != nullptr && GetParent()->GetParent() != nullptr)
 		{
@@ -108,7 +164,7 @@ void ComponentTransform::Update(float dt)
 		}
 		rotinEuler = RadToDeg(rotation.ToEulerXYX());
 		UpdateNeeded = false;
-	}
+	}*/
 
 	/*
 		if (GetParent()->GetParent() != nullptr) {
@@ -267,7 +323,9 @@ void ComponentTransform::OnEditor()
 		view_matrix1.Transpose();
 		view_matrix.Transpose();
 
-		float4x4 trs_matrix = GlobalTransMatrix.Transposed();
+		//float4x4 trs_matrix = GlobalTransMatrix.Transposed();
+		float4x4 trs_matrix = GetTransformMatrix().Transposed();
+
 		ImGuizmo::Manipulate(view_matrix1.ptr(), view_matrix.ptr(), mCurrentGuizmoOperation, mCurrentGuizmoMode, trs_matrix.ptr());
 
 		if (ImGuizmo::IsUsing())
@@ -278,14 +336,14 @@ void ComponentTransform::OnEditor()
 			//float3 new_rot;
 
 			ImGuizmo::DecomposeMatrixToComponents(trs_matrix.ptr(), position.ptr(), rotinEuler.ptr() , scale.ptr());
-			GlobalTransMatrix.Transpose();
-			ImGuizmo::RecomposeMatrixFromComponents((float*)position.ptr(), (float*)rotinEuler.ptr(), (float*)scale.ptr(), GlobalTransMatrix.ptr());
-			GlobalTransMatrix.Transpose();
+			trs_matrix.Transpose();
+			ImGuizmo::RecomposeMatrixFromComponents((float*)position.ptr(), (float*)rotinEuler.ptr(), (float*)scale.ptr(), trs_matrix.ptr());
+			trs_matrix.Transpose();
 		
 			rotation = rotation.FromEulerXYZ(DegToRad(rotinEuler[0]), DegToRad(rotinEuler[1]), DegToRad(rotinEuler[2]));
 		//	rotation = rotinEuler
 			transform_modified = true;
-			UpdateNeeded = true;
+		UpdateNeeded = true;
 		}
 	}
 	else {
