@@ -73,11 +73,11 @@ void ModuleQuadtree::RemoveObject(GameObject * go)
 {
 	vector<GameObject*> obj;
 	
-	for (uint i = 0; i < quadtreeh->static_gos.size(); ++i)
+	for (uint i = 0; i <App->scene->static_gos.size(); ++i)
 	{
-		if (quadtreeh->static_gos[i]->GetName() != go->GetName())
+		if (App->scene->static_gos[i]->GetName() != go->GetName())
 		{
-			obj.push_back(quadtreeh->static_gos[i]);
+			obj.push_back(App->scene->static_gos[i]);
 		}
 	}
 	
@@ -97,7 +97,7 @@ void ModuleQuadtree::RestartQuadtree()
 	CleanUp();
 	quadtreeh = new Quadtree();
 	quadtreeh->SetMaxSize(AABB(float3(-50, 0, -50), float3(50, 30, 50)));
-	quadtreeh->static_gos.clear();
+	App->scene->static_gos.clear();
 
 }
 
