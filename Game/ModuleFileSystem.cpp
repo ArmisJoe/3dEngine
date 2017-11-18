@@ -222,6 +222,9 @@ uint ModuleFileSystem::Load(const char * path, char ** buffer)
 {
 	uint ret = 0;
 
+	if (path == nullptr)
+		return ret;
+
 	std::ofstream;
 	FILE* load_file = fopen(path, "rb");
 

@@ -13,6 +13,9 @@ std::string GetFileFromPath(const char * path, bool take_extension)
 {
 	std::string ret;
 
+	if (path == nullptr)
+		return ret;
+
 	for (int i = 0; path[i] != '\0'; i++) {
 		if (take_extension == false) {
 			if (path[i] == '.')
