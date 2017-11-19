@@ -12,16 +12,25 @@
 ComponentMesh::ComponentMesh() : Component(componentType_Mesh)
 {
 	name = "Mesh";
+	indices = nullptr;
+	vertices = nullptr;
+	textureCoords = nullptr;
 }
 
 ComponentMesh::ComponentMesh(GameObject* argparent) : Component(componentType_Mesh, argparent)
 {
 	name = "Mesh";
+	indices = nullptr;
+	vertices = nullptr;
+	textureCoords = nullptr;
 }
 
 ComponentMesh::ComponentMesh(componentType argtype, GameObject * argparent) : Component(componentType_Mesh, argparent)
 {
 	name = "Mesh";
+	indices = nullptr;
+	vertices = nullptr;
+	textureCoords = nullptr;
 }
 
 void ComponentMesh::Start()
@@ -31,13 +40,6 @@ void ComponentMesh::Start()
 
 void ComponentMesh::Update(float dt)
 {
-	/**/
-	if (visible) {
-		ComponentMaterial* mat = nullptr;
-		if (!this->GetParent()->FindComponents(componentType_Material).empty()) {
-			mat = (ComponentMaterial*)this->GetParent()->FindComponents(componentType_Material)[0];
-		}
-	}
 }
 
 void ComponentMesh::CleanUp()
@@ -48,6 +50,11 @@ void ComponentMesh::CleanUp()
 		mdelete[] indices;
 	if (textureCoords != nullptr)
 		mdelete[] textureCoords;
+
+	indices = nullptr;
+	vertices = nullptr;
+	textureCoords = nullptr;
+
 }
 
 void ComponentMesh::Draw(const ComponentTransform* trans, const ComponentMaterial * mat)

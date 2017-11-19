@@ -56,7 +56,7 @@ void GameObject::CleanUp()
 {
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
-			if ((*it) != nullptr && (*it)->type == componentType_Transform) {	// Transform is the only component not passed by reference
+			if ((*it) != nullptr && ((*it)->type == componentType_Transform || (*it)->type == componentType_Camera)) {	// Transform is the only component not passed by reference
 				(*it)->CleanUp();
 				if((*it) != nullptr)
 					mdelete(*it);
@@ -138,18 +138,23 @@ Component * GameObject::AddComponent(const int type, Component * componentPointe
 		switch (type) {
 		case componentType_Mesh:
 			newComponent = new ComponentMesh(this);
+			//App->res->meshes.push_back((ComponentMesh*)newComponent);
 			break;
 		case componentType_Material:
-			if (this->FindComponents(type).empty())
+			if (this->FindComponents(type).empty()) {
 				newComponent = new ComponentMaterial(this);
+				//App->res->materials.push_back((ComponentMaterial*)newComponent);
+			}
 			break;
 		case componentType_Transform:
-			if (this->FindComponents(type).empty())
+			if (this->FindComponents(type).empty()) {
 				newComponent = new ComponentTransform(this);
+			}
 			break;
 		case componentType_Camera:
-			if (this->FindComponents(type).empty())
+			if (this->FindComponents(type).empty()) {
 				newComponent = new ComponentCamera(this);
+			}
 			break;
 		}
 
