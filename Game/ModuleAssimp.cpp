@@ -152,7 +152,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 		}
 		//Material Load
 		if (materials != nullptr && new_mesh != nullptr) {
-			ComponentMaterial* new_material = LoadMaterial(materials[(int)new_mesh->material_index]);
+			ComponentMaterial* new_material = LoadMaterial(materials[(int)scene->mMeshes[node->mMeshes[i]]->mMaterialIndex]);
 			if (new_material != nullptr) {
 				new_node->AddComponent(componentType_Material, new_material);
 			}
