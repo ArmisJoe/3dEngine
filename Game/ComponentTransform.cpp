@@ -149,14 +149,17 @@ void ComponentTransform::SetRotation(const Quat& _rotation)
 void ComponentTransform::LoadPosition(const float3& argposition)
 {
 	position = argposition;
+	transform_modified = true;
 }
 void ComponentTransform::LoadRotation(const Quat& argrotation)
 {
 	rotation = argrotation;
+	transform_modified = true;
 }
 void ComponentTransform::LoadScale(const float3& argscale)
 {
 	scale = argscale;
+	transform_modified = true;
 }
 
 void ComponentTransform::SetScale(const float3 & _scale)

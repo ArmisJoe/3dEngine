@@ -264,7 +264,7 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 				go->SetName(scene_doc->GetString("name"));
 				go->SetStatic(scene_doc->GetBool("static"));
 				tmp_gos.push_back(go);
-				//go->SetStatic(true);
+				go->SetStatic(true);
 			}
 			else
 				LOG("ERROR Loading gameobject '%s'", scene_doc->GetString("name"));
