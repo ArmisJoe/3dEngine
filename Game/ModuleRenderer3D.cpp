@@ -345,7 +345,7 @@ void ModuleRenderer3D::DrawMesh(ComponentTransform* trans, ComponentMesh* m, Com
 	
 	if (trans != nullptr) {
 		glPushMatrix();
-		glMultMatrixf((GLfloat*)trans->GetLocalTransformTransposed());
+		glMultMatrixf((GLfloat*)trans->GetLocalTransform());
 	}
 
 	glEnableClientState(GL_VERTEX_ARRAY);

@@ -264,7 +264,7 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 				go->SetName(scene_doc->GetString("name"));
 				go->SetStatic(scene_doc->GetBool("static"));
 				tmp_gos.push_back(go);
-				go->SetStatic(true);
+				//go->SetStatic(true);
 			}
 			else
 				LOG("ERROR Loading gameobject '%s'", scene_doc->GetString("name"));
@@ -335,9 +335,9 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 			float3 p = { (float)scene_doc->GetNumber("position.x"), (float)scene_doc->GetNumber("position.y"), (float)scene_doc->GetNumber("position.z") };
 			Quat r = { (float)scene_doc->GetNumber("rotation.x"), (float)scene_doc->GetNumber("rotation.y"), (float)scene_doc->GetNumber("rotation.z"), (float)scene_doc->GetNumber("rotation.w") };
 			float3 s = { (float)scene_doc->GetNumber("scale.x"), (float)scene_doc->GetNumber("scale.y"), (float)scene_doc->GetNumber("scale.z") };
-			trans->SetPosition(p);
-			trans->SetRotation(r);
-			trans->SetScale(s);
+			trans->LoadPosition(p);
+			trans->LoadRotation(r);
+			trans->LoadScale(s);
 			c = trans;
 			break;
 		}
