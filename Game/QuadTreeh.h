@@ -62,8 +62,6 @@ public:
 
 public:
 	QuadtreeNode* root = nullptr;
-	//uint max_divisions = DEPTH;
-	vector<GameObject*> static_gos;
 
 private: 
 	float3 min_point = float3::zero;

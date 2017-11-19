@@ -18,6 +18,8 @@ public:
 
 
 	float* GetViewMatrix();
+	float* GetProjectionMatrix();
+
 
 	void FocusMesh(const float *vertices, const uint &num_vertices);
 	void LookAt(const float3 &spot);

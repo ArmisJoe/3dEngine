@@ -72,6 +72,11 @@ float* ModuleCamera3D::GetViewMatrix()
 	return main_camera->GetViewMatrix();
 }
 
+float* ModuleCamera3D::GetProjectionMatrix()
+{
+	return main_camera->GetProjectionMatrix();
+}
+
 void ModuleCamera3D::FocusMesh(const float* vertices, const uint &num_vertices)
 {
 	/*

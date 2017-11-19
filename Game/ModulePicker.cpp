@@ -75,6 +75,11 @@ void ModulePicker::IterativeRayCast(const LineSegment & segment, float &dist, Ga
 	vector<GameObject*> possible_collisions;
 	App->quadTree->CollectIntersections(possible_collisions, segment);
 
+	if (!App->scene->dynamic_gos_OnScreen.empty())
+		for (uint i = 0; i < App->scene->dynamic_gos_OnScreen.size(); ++i)
+			possible_collisions.push_back(App->scene->dynamic_gos_OnScreen[i]);
+
+
 	for (uint i = 0; i < possible_collisions.size(); ++i)
 	{
 		GameObject* go = nullptr;

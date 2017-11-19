@@ -1,5 +1,6 @@
 #include "QuadTreeh.h"
 #include "Globals.h"
+#include "Application.h"
 
 QuadtreeNode::QuadtreeNode()
 {
@@ -200,21 +201,21 @@ void Quadtree::Insert(GameObject * go)
 				root = nullptr;
 				root = new QuadtreeNode(nn_aabb);
 				root->Insert(go);
-				if (!static_gos.empty())
+				if (!App->scene->static_gos.empty())
 				{
-					for (uint i = 0; i < static_gos.size(); ++i)
+					for (uint i = 0; i < App->scene->static_gos.size(); ++i)
 					{
-						if (static_gos[i] != nullptr)
-							root->Insert(static_gos[i]);
+						if (App->scene->static_gos[i] != nullptr)
+							root->Insert(App->scene->static_gos[i]);
 					}
 				}
-				static_gos.push_back(go);
+				App->scene->static_gos.push_back(go);
 			}
 			else {
 				if (root->GetBox().Intersects(go->aabb))
 				{
 					root->Insert(go);
-					static_gos.push_back(go);
+					App->scene->static_gos.push_back(go);
 				}
 			}
 		}

@@ -94,6 +94,14 @@ void GameObject::SetStatic(bool set)
 	isStatic = set;
 }
 
+void GameObject::SwitchStatic(bool set)
+{
+	if (set == true)
+		App->quadTree->InsertObject(this);
+	else
+		App->quadTree->RemoveObject(this);
+}
+
 bool GameObject::IsStatic() const
 {
 	return isStatic;
@@ -273,13 +281,6 @@ void GameObject::UpdateAABBFromMesh(ComponentMesh * mesh)
 				transformed_bounding_box.TransformAsAABB(matrix);
 				aabb = transformed_bounding_box;*/
 
-				/*
-				glPushMatrix();
-				glMultMatrixf(GetTransform()->GetWorldMatrix().Transposed().ptr());
-				glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertices);
-				glPopMatrix();
-				glBufferData(GL_ARRAY_BUFFER, sizeof(float) *mesh->num_vertices * 3, mesh->vertices, GL_STATIC_DRAW);*/
-
 				/*// VERSION 3
 				OBB obb = aabb.Transform(GetTransform()->GetWorldMatrix());
 				aabb.SetFrom(obb);*/
@@ -343,6 +344,9 @@ void GameObject::OnEditor()
 	if(ImGui::Button("Delete GameObject")) {
 		App->quadTree->RemoveObject(this);
 		WantToRemoveThis();
+	}
+	if (ImGui::Checkbox("Static", &isStatic)) {
+		SwitchStatic(isStatic);
 	}
 	ImGui::Separator();
 	if (!components.empty()) {

@@ -49,6 +49,7 @@ public:
 	void SetRoot(bool root);
 	bool IsRoot() const;
 	void SetStatic(bool set);
+	void SwitchStatic(bool set);
 	bool IsStatic() const;
 
 	double GetUID() const {
