@@ -11,47 +11,51 @@ ComponentTransform::ComponentTransform() : Component(componentType_Transform)
 {
 	name = "Transform";
 	numMax = 1;
-	position = { 0, 0, 0 };
-	rotation = { 0, 0, 0, 1 };
-	scale = { 1, 1, 1 };
+	position_global = { 0, 0, 0 };
+	rotation_global = { 0, 0, 0, 1 };
+	scale_global = { 1, 1, 1 };
+	rotinEuler_global = RadToDeg(rotation_global.ToEulerXYX());
 }
 
 ComponentTransform::ComponentTransform(GameObject* argparent) : Component(componentType_Transform, argparent)
 {
 	name = "Transform";
 	numMax = 1;
-	position = { 0, 0, 0 };
-	rotation = { 0, 0, 0, 1 };
-	scale = { 1, 1, 1 };
+	position_global = { 0, 0, 0 };
+	rotation_global = { 0, 0, 0, 1 };
+	scale_global = { 1, 1, 1 };
+	rotinEuler_global = RadToDeg(rotation_global.ToEulerXYX());
 }
 
 ComponentTransform::ComponentTransform(componentType argtype, GameObject * argparent) : Component(componentType_Transform, argparent)
 {
 	name = "Transform";
 	numMax = 1;
-	position = { 0, 0, 0 };
-	rotation = { 0, 0, 0, 1 };
-	scale = { 1, 1, 1 };
+	position_global = { 0, 0, 0 };
+	rotation_global = { 0, 0, 0, 1 };
+	scale_global = { 1, 1, 1 };
+	rotinEuler_global = RadToDeg(rotation_global.ToEulerXYX());
 }
 
 ComponentTransform::ComponentTransform(GameObject * argparent, float3 position, Quat rotation, float3 scale) : Component(componentType_Transform, argparent)
 {
-	this->position = position; this->rotation = rotation; this->scale = scale;
+	this->position_global = position; this->rotation_global = rotation; this->scale_global = scale;
+	rotinEuler_global = RadToDeg(rotation_global.ToEulerXYX());
 }
 
 float3 ComponentTransform::GetLocalPosition()const
 {
-	return position;
+	return position_global;
 }
 
 Quat ComponentTransform::GetLocalRotation()const
 {
-	return rotation;
+	return rotation_global;
 }
 
 float3 ComponentTransform::GetLocalScale()const
 {
-	return scale;
+	return scale_global;
 }
 
 void ComponentTransform::SetTransformMatrix()
@@ -59,9 +63,9 @@ void ComponentTransform::SetTransformMatrix()
 
 }
 
-const float* ComponentTransform::GetLocalTransform()
+const float* ComponentTransform::GetGlobalTransformPtr()
 {
-	transform_matrix = transform_matrix.FromTRS(position, rotation, scale);
+	transform_matrix = transform_matrix.FromTRS(position_global, rotation_global, scale_global);
 	return transform_matrix.Transposed().ptr();
 }
 
@@ -70,9 +74,9 @@ int ComponentTransform::GetTransformID()const
 	return transform_id;
 }
 
-float4x4 ComponentTransform::GetTransformMatrix()
+float4x4 ComponentTransform::GetGlobalTransformMatrix()
 {
-	transform_matrix = transform_matrix.FromTRS(position, rotation, scale);
+	transform_matrix = transform_matrix.FromTRS(position_global, rotation_global, scale_global);
 	return transform_matrix;
 }
 
@@ -89,20 +93,20 @@ void ComponentTransform::SetIdentityTransform()
 
 void ComponentTransform::Update(float dt)
 {
-	if (can_update)
+	/*if (can_update)
 	{
 		if (GetParent() != nullptr) {
 			if (!GetParent()->IsRoot())
 			{
 				ComponentTransform* parent_transform = (ComponentTransform*)GetParent()->GetParent()->GetTransform();
 
-				WorldMatrix = WorldMatrix.FromTRS(position, rotation, scale);
+				WorldMatrix = WorldMatrix.FromTRS(position_global, rotation_global, scale);
 				if (parent_transform != nullptr)
 					WorldMatrix = parent_transform->WorldMatrix * WorldMatrix;
 			}
 			else
 			{
-				WorldMatrix = float4x4::FromTRS(position, rotation, scale);
+				WorldMatrix = float4x4::FromTRS(position_global, rotation_global, scale);
 				for (std::vector<GameObject*>::iterator it = GetParent()->children.begin(); it != GetParent()->children.end(); ++it)
 				{
 					ComponentTransform* child_transform = (ComponentTransform*)(*it)->GetTransform();
@@ -110,15 +114,30 @@ void ComponentTransform::Update(float dt)
 				}
 			}
 		}
-	}
+	}*/
 }
+void ComponentTransform::SetLocalTrans(GameObject* parent)
+ {
+	if (parent != nullptr)
+		 {
+		ComponentTransform* parentTrans = (ComponentTransform*)parent->GetTransform();
+		if (parentTrans != nullptr)
+			 {
+			float3 localPos = position_global - parentTrans->position_global;
+			Quat localRot = rotation_global * parentTrans->rotation_global.Conjugated();
+			float3 localScale = scale_global.Mul(parentTrans->scale_global.Recip());
+			}
+		}	
+	}
+
 
 void ComponentTransform::SetPosition(const float3 & _position)
 {
 	if (GetParent() != nullptr && !GetParent()->IsStatic())
 	{
-		position = _position;
+		position_global = _position;
 		transform_modified = true;
+
 	}
 
 }
@@ -128,8 +147,8 @@ void ComponentTransform::SetRotation(const float3& _rotation)
 	if (GetParent() != nullptr && !GetParent()->IsStatic())
 	{
 		Quat mod = Quat::FromEulerXYZ(_rotation.x, _rotation.y, _rotation.z);
-		rotation = mod;
-
+		rotation_global = mod;
+		rotinEuler_global = RadToDeg(rotation_global.ToEulerXYX());
 		transform_modified = true;
 
 	}
@@ -139,7 +158,7 @@ void ComponentTransform::SetRotation(const Quat& _rotation)
 {
 	if (GetParent() != nullptr && !GetParent()->IsStatic())
 	{
-		rotation = _rotation;
+		rotation_global = _rotation;
 
 		transform_modified = true;
 
@@ -148,17 +167,18 @@ void ComponentTransform::SetRotation(const Quat& _rotation)
 
 void ComponentTransform::LoadPosition(const float3& argposition)
 {
-	position = argposition;
+	position_global = argposition;
 	transform_modified = true;
 }
 void ComponentTransform::LoadRotation(const Quat& argrotation)
 {
-	rotation = argrotation;
+	rotation_global = argrotation;
+	rotinEuler_global = RadToDeg(rotation_global.ToEulerXYX());
 	transform_modified = true;
 }
 void ComponentTransform::LoadScale(const float3& argscale)
 {
-	scale = argscale;
+	scale_global = argscale;
 	transform_modified = true;
 }
 
@@ -166,7 +186,7 @@ void ComponentTransform::SetScale(const float3 & _scale)
 {
 	if (GetParent() != nullptr && !GetParent()->IsStatic())
 	{
-		scale = _scale;
+		scale_global = _scale;
 
 		transform_modified = true;
 	}
@@ -180,31 +200,32 @@ void ComponentTransform::OnEditor()
 	float rot[3];
 	float sca[3];
 
-	pos[0] = position.x;
-	pos[1] = position.y;
-	pos[2] = position.z;
+	pos[0] = position_global.x;
+	pos[1] = position_global.y;
+	pos[2] = position_global.z;
 
-	rot[0] = RadToDeg(rotation.ToEulerXYZ().x);
-	rot[1] = RadToDeg(rotation.ToEulerXYZ().y);
-	rot[2] = RadToDeg(rotation.ToEulerXYZ().z);
+	rot[0] = RadToDeg(rotation_global.ToEulerXYZ().x);
+	rot[1] = RadToDeg(rotation_global.ToEulerXYZ().y);
+	rot[2] = RadToDeg(rotation_global.ToEulerXYZ().z);
 
-	sca[0] = scale.x;
-	sca[1] = scale.y;
-	sca[2] = scale.z;
+	sca[0] = scale_global.x;
+	sca[1] = scale_global.y;
+	sca[2] = scale_global.z;
 
 	if (ImGui::DragFloat3("Position:", pos, 0.1f)) {
 		if (GetParent() != nullptr && !GetParent()->IsStatic())
 		{
-			position.x = pos[0];
-			position.y = pos[1];
-			position.z = pos[2];
+			position_global.x = pos[0];
+			position_global.y = pos[1];
+			position_global.z = pos[2];
 			transform_modified = true;
 		}
 	}
 	if (ImGui::DragFloat3("Rotation:", rot, 0.1f)) {
 		if (GetParent() != nullptr && !GetParent()->IsStatic())
 		{
-			rotation = rotation.FromEulerXYZ(DegToRad(rot[0]), DegToRad(rot[1]), DegToRad(rot[2]));
+			rotation_global = rotation_global.FromEulerXYZ(DegToRad(rot[0]), DegToRad(rot[1]), DegToRad(rot[2]));
+			rotinEuler_global = RadToDeg(rotation_global.ToEulerXYX());
 			transform_modified = true;
 		}
 	}
@@ -212,9 +233,9 @@ void ComponentTransform::OnEditor()
 	if (ImGui::DragFloat3("Scale:", sca, 0.1f)) {
 		if (GetParent() != nullptr && !GetParent()->IsStatic())
 		{
-			scale.x = sca[0];
-			scale.y = sca[1];
-			scale.z = sca[2];
+			scale_global.x = sca[0];
+			scale_global.y = sca[1];
+			scale_global.z = sca[2];
 			transform_modified = true;
 		}
 	}
@@ -223,6 +244,54 @@ void ComponentTransform::OnEditor()
 	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT & GetParent() != nullptr && !GetParent()->IsStatic())
 	{
 		App->camera->SetCameraActive(false);
+		ImGuizmo::Enable(true);
+
+		if (ImGui::Button("Translate") || App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+			mCurrentGuizmoOperation = ImGuizmo::TRANSLATE;
+		ImGui::SameLine();
+		if (ImGui::Button("Rotate") || App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+			mCurrentGuizmoOperation = ImGuizmo::ROTATE;
+		ImGui::SameLine();
+		if (ImGui::Button("Scale") || App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+			mCurrentGuizmoOperation = ImGuizmo::SCALE;
+
+
+		ImGuiIO& io = ImGui::GetIO();
+		ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
+
+
+		float4x4 view_matrix = App->camera->main_camera->GetFrustum().ViewProjMatrix();
+		float4x4 view_matrix1 = App->camera->main_camera->GetFrustum().ViewMatrix();
+		view_matrix1.Transpose();
+		view_matrix.Transpose();
+
+		//float4x4 trs_matrix = GlobalTransMatrix.Transposed();
+		float4x4 trs_matrix = GetGlobalTransformMatrix().Transposed();
+
+		ImGuizmo::Manipulate(view_matrix1.ptr(), view_matrix.ptr(), mCurrentGuizmoOperation, mCurrentGuizmoMode, trs_matrix.ptr());
+
+		if (ImGuizmo::IsUsing())
+		{
+			//App->camera->SetCameraActive(false);
+			//float3 new_pos;
+			//float3 new_scale;
+			//float3 new_rot;
+
+
+
+			ImGuizmo::DecomposeMatrixToComponents(trs_matrix.ptr(), position_global.ptr(), (float*) RadToDeg(rotation_global.ToEulerXYZ()).ptr(), scale_global.ptr());
+			trs_matrix.Transpose();
+			ImGuizmo::RecomposeMatrixFromComponents((float*)position_global.ptr(), RadToDeg(rotation_global.ToEulerXYZ()).ptr(), (float*)scale_global.ptr(), trs_matrix.ptr());
+			trs_matrix.Transpose();
+
+
+			//rotation_global = rotation_global.FromEulerXYZ(DegToRad(rotinEuler_global[0]), DegToRad(rotinEuler_global[1]), DegToRad(rotinEuler_global[2]));
+			//	rotation = rotinEuler
+			transform_modified = true;
+			//UpdateNeeded = true;
+		}
+
+		/*App->camera->SetCameraActive(false);
 		ImGuizmo::Enable(true);
 
 		static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::ROTATE);
@@ -259,7 +328,7 @@ void ComponentTransform::OnEditor()
 		view_matrix.Transpose();
 		proj_matrix.Transpose();
 
-		float4x4 trs_matrix = GetTransformMatrix();
+		float4x4 trs_matrix = GetGlobalTransformMatrix();
 
 
 		ImGuizmo::Manipulate(view_matrix.ptr(), proj_matrix.ptr(), mCurrentGizmoOperation, mCurrentGizmoMode, trs_matrix.ptr());
@@ -268,9 +337,9 @@ void ComponentTransform::OnEditor()
 		{
 
 			trs_matrix.Transpose();
-			float3 new_pos = position;
-			float3 new_scale = scale;
-			Quat new_q = rotation;
+			float3 new_pos = position_global;
+			float3 new_scale = scale_global;
+			Quat new_q = rotation_global;
 			trs_matrix.Decompose(new_pos, new_q, new_scale);
 
 			if (mCurrentGizmoOperation == ImGuizmo::TRANSLATE)
@@ -282,8 +351,8 @@ void ComponentTransform::OnEditor()
 				//new_q.T
 				//rotation = rotation.FromEulerXYZ(DegToRad(new_q.ToEulerXYZ()[0]), DegToRad(new_q.ToEulerXYZ()[1]), DegToRad(new_q.ToEulerXYZ()[2]));
 			}
-			transform_modified = true;
-		}
+			transform_modified = true;*/
+		//}
 	}
 	else {
 		ImGuizmo::Enable(false);
@@ -291,19 +360,6 @@ void ComponentTransform::OnEditor()
 	}
 }
 
-float4x4 ComponentTransform::GetParentTransform() const
-{
-	/*GameObject* g = GetParent()->GetParent();
-	float4x4 parent_transform = float4x4::identity;
-	if (g != nullptr && g->IsRoot() == false)
-	{
-	if (g->GetTransform() != nullptr)
-	parent_transform = g->GetTransform()->GetTransformMatrix();
-	return parent_transform;
-	}
-	else return transform_matrix;*/
-	return float4x4::zero;
-}
 
 void ComponentTransform::Serialize(JSON_Doc* doc) {
 	if (doc == nullptr)
@@ -313,18 +369,18 @@ void ComponentTransform::Serialize(JSON_Doc* doc) {
 	doc->SetNumber("type", type);
 	doc->SetNumber("parentUID", (parent != nullptr) ? parent->GetUID() : -1);
 	// Pos
-	doc->SetNumber("position.x", position.x);
-	doc->SetNumber("position.y", position.y);
-	doc->SetNumber("position.z", position.z);
+	doc->SetNumber("position.x", position_global.x);
+	doc->SetNumber("position.y", position_global.y);
+	doc->SetNumber("position.z", position_global.z);
 	// Rot
-	doc->SetNumber("rotation.x", rotation.x);
-	doc->SetNumber("rotation.y", rotation.y);
-	doc->SetNumber("rotation.z", rotation.z);
-	doc->SetNumber("rotation.w", rotation.w);
+	doc->SetNumber("rotation.x", rotation_global.x);
+	doc->SetNumber("rotation.y", rotation_global.y);
+	doc->SetNumber("rotation.z", rotation_global.z);
+	doc->SetNumber("rotation.w", rotation_global.w);
 	// Scale
-	doc->SetNumber("scale.x", scale.x);
-	doc->SetNumber("scale.y", scale.y);
-	doc->SetNumber("scale.z", scale.z);
+	doc->SetNumber("scale.x", scale_global.x);
+	doc->SetNumber("scale.y", scale_global.y);
+	doc->SetNumber("scale.z", scale_global.z);
 
 	transform_modified = true;
 }

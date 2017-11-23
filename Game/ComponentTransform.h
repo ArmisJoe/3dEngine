@@ -1,5 +1,7 @@
 #pragma once
-
+ 
+#include "ImGui\imgui.h"
+#include "ImGuizmo\ImGuizmo.h"
 #include "Component.h"
 
 #include "glmath.h"
@@ -31,31 +33,29 @@ public:
 
 
 	void SetTransformMatrix();
-	const float* GetLocalTransform();
+	const float* GetGlobalTransformPtr();
+	float4x4 GetGlobalTransformMatrix();
+
 	int GetTransformID()const;
 
-	float4x4 GetGlobalMatrix()const { return WorldMatrix; }
-	float4x4 GetTransformMatrix();
 	void SetIdentityTransform();
 	void OnEditor();
-
 	void Serialize(JSON_Doc* doc);
-
 	bool transform_modified = false;
 
+	void SetLocalTrans(GameObject* parent);
 private:
-	float4x4 GetParentTransform()const;
-	float3 position = float3::zero;
-	Quat rotation = Quat::identity;
-	float3 scale = float3::one;
+
+
+	float3 position_global = float3::zero;
+	Quat rotation_global = Quat::identity;
+	float3 scale_global = float3::one;
+	float3 rotinEuler_global = float3::zero;
+
 
 	float4x4 transform_matrix;
-	float4x4 prev_local_transform;
-
-	float4x4 WorldMatrix;
-	bool can_update = true;
 	int transform_id;
 
-	float4x4 view_matrix_fromCamera;
-	float4x4 proj_matrix_fromCamera;
+	ImGuizmo::OPERATION mCurrentGuizmoOperation = ImGuizmo::OPERATION::ROTATE;
+	ImGuizmo::MODE mCurrentGuizmoMode = ImGuizmo::MODE::WORLD;
 };

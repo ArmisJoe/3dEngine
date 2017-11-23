@@ -257,7 +257,7 @@ void GameObject::CreateAABBFromMesh(ComponentMesh* mesh)
 			if (cmp_tr.size() > 0 && cmp_tr[0] != nullptr)
 			{
 				ComponentTransform* tmp = (ComponentTransform*)cmp_tr.back();
-				OBB obb = tmpAABB.Transform(tmp->GetTransformMatrix());
+				OBB obb = tmpAABB.Transform(tmp->GetGlobalTransformMatrix());
 				tmpAABB = obb.MinimalEnclosingAABB();
 				aabb = tmpAABB;
 			}
@@ -272,7 +272,7 @@ void GameObject::UpdateAABBFromMesh(ComponentMesh * mesh)
 
 		aabb.SetNegativeInfinity();
 		aabb.Enclose((float3*)mesh->vertices, mesh->num_vertices);
-		aabb.TransformAsAABB(GetTransform()->GetTransformMatrix());
+		aabb.TransformAsAABB(GetTransform()->GetGlobalTransformMatrix());
 		/*		// VERSION 1
 			aabb.SetNegativeInfinity();
 			aabb.Enclose((float3*)mesh->vertices, mesh->num_vertices);
