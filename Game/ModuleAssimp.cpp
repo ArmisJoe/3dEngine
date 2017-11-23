@@ -332,6 +332,15 @@ bool ModuleAssimp::Import(const aiMesh * m, std::string & output_file)
 		return false;
 	}
 
+	if (m->HasFaces()) {
+		for (int i = 0; i < m->mNumFaces; i++) {
+			if (m->mFaces[i].mNumIndices != 3) {
+				return false;
+				LOG("ERROR Mesh with Face with != 3 indices -- I DON'T PLAY WITH DEMONS");
+			}
+		}
+	}
+
 	ComponentMesh* new_mesh = nullptr;
 
 	new_mesh = new ComponentMesh();

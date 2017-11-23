@@ -216,7 +216,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 bool ModuleRenderer3D::CleanUp()
 {
 	//LOG("Destroying 3D Renderer");
-	mdelete debugger;
+	if(debugger != nullptr)
+		mdelete debugger;
 	SDL_GL_DeleteContext(context);
 
 	return true;
@@ -341,6 +342,11 @@ void ModuleRenderer3D::LoadConfig() {
 
 void ModuleRenderer3D::DrawMesh(ComponentTransform* trans, ComponentMesh* m, ComponentMaterial* mat)
 {
+
+	if (m->id_vertices == 0 || m->id_indices == 0)
+		return;
+
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 	
 	if (trans != nullptr) {
