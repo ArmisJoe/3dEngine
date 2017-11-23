@@ -238,6 +238,7 @@
     <ClCompile Include="PanelPlayPause.cpp">
       <Filter>Panels</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glew-2.1.0\include\GL\eglew.h" />
@@ -551,6 +552,9 @@
     <ClInclude Include="ModuleGame.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceAnimation.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Geometry\KDTree.inl" />
@@ -593,6 +597,9 @@
     </Filter>
     <Filter Include="Tools\ImGuizmo">
       <UniqueIdentifier>{f742ce9a-00a8-49ae-a979-78c488ff3c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{2693aa78-d5a1-4c24-8784-593141a2f82d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
