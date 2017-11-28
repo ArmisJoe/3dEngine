@@ -27,14 +27,15 @@ public:
 	void LoadRotation(const Quat& rotation);
 	void LoadScale(const float3& scale);
 
-	float3 GetLocalPosition()const;
-	Quat GetLocalRotation()const;
-	float3 GetLocalScale()const;
+	float3 GetLocalPosition();
+	Quat GetLocalRotation();
+	float3 GetLocalScale();
 
 
 	void SetTransformMatrix();
 	const float* GetGlobalTransformPtr();
 	float4x4 GetGlobalTransformMatrix();
+	float4x4 GetLocalTransformMatrix();
 
 	int GetTransformID()const;
 
@@ -42,8 +43,9 @@ public:
 	void OnEditor();
 	void Serialize(JSON_Doc* doc);
 	bool transform_modified = false;
+	bool UpdateNeeded = false;
+	void SetLocalTrans();
 
-	void SetLocalTrans(GameObject* parent);
 private:
 
 
@@ -52,6 +54,9 @@ private:
 	float3 scale_global = float3::one;
 	float3 rotinEuler_global = float3::zero;
 
+	float3 localPos = float3::zero;
+	Quat localRot = Quat::identity ;
+	float3 localScale = float3::one;
 
 	float4x4 transform_matrix;
 	int transform_id;

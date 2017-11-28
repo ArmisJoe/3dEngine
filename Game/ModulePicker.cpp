@@ -18,12 +18,6 @@ bool ModulePicker::Start()
 
 update_status ModulePicker::Update(float dt)
 {
-	if (picked != nullptr)
-	{
-	if (!picked->selected)
-		picked->selected = true;
-	}
-
 	return UPDATE_CONTINUE;
 }
 
@@ -38,11 +32,12 @@ GameObject * ModulePicker::RayCast(const LineSegment &segment, float& total_dist
 	total_distance = infinite;
 	IterativeRayCast(segment, total_distance, &ret);
 
+	//picked = ret;
+
 	if (picked != nullptr) {
-		picked->selected = false;
+		//App->scene->SetSelected(picked);
 	}
-	picked = ret;
-	App->scene->SetSelected(picked);
+	
 	return ret;
 }
 
@@ -65,8 +60,6 @@ GameObject * ModulePicker::Pick()
 		string PickedObject = "You selected: " + ret->GetName();
 		LOG(PickedObject.c_str());
 	}
-
-
 	return ret;
 }
 

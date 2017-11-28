@@ -48,8 +48,8 @@ public:
 	vector<GameObject*> static_gos;
 	vector<GameObject*> dynamic_gos_OnScreen;
 private:
-	GameObject* root;
-	GameObject* current_selected;
+	GameObject* root = nullptr;
+	GameObject* current_selected = nullptr;
 protected:
 	bool grid_on = true;
 };

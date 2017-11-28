@@ -365,7 +365,6 @@ void GameObject::OnEditor()
 
 void GameObject::OnHierarchyTree(bool skip_root)
 {
-
 	uint flags = 0;
 
 	if(skip_root == true) {
@@ -381,14 +380,15 @@ void GameObject::OnHierarchyTree(bool skip_root)
 		if (children.empty()) {
 			flags |= ImGuiTreeNodeFlags_Leaf;
 		}
-		if (selected == true) {
+		if (ImGui::IsItemClicked(0)) {
 			flags |= ImGuiTreeNodeFlags_Selected;
 		}
 
 		if (ImGui::TreeNodeEx(name.c_str(), flags)) {
 			if (ImGui::IsItemClicked(0)) {
-				if (scene != nullptr) {
-					scene->SetSelected(this);
+				if (scene != nullptr)
+				{
+				scene->SetSelected(this);
 				}
 			}
 			if (!children.empty()) {

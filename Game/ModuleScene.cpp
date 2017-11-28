@@ -169,13 +169,17 @@ void ModuleScene::DeleteGameObject(GameObject * go)
 
 void ModuleScene::SetSelected(GameObject * go)
 {
-	//if(current_selected != nullptr)
-	//	current_selected->selected = false;
-	current_selected = go;
-	//current_selected->selected = true;
+	if (go != nullptr)
+	{
+		if (current_selected != nullptr)
+			current_selected->selected = false;
 
-	if (App->editor->inspector != nullptr)
-		App->editor->inspector->SetInspected(current_selected);
+		current_selected = go;
+		current_selected->selected = true;
+
+		if (App->editor->inspector != nullptr)
+			App->editor->inspector->SetInspected(current_selected);
+	}
 }
 
 void ModuleScene::RemoveAllGameObject()
@@ -199,7 +203,6 @@ update_status ModuleScene::PostUpdate(float dt)
 		p.axis = true;
 		p.Render();
 	}
-
 	return UPDATE_CONTINUE;
 }
 
