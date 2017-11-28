@@ -239,6 +239,7 @@
       <Filter>Panels</Filter>
     </ClCompile>
     <ClCompile Include="ResourceAnimation.cpp" />
+    <ClCompile Include="ModuleAnimationLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glew-2.1.0\include\GL\eglew.h" />
@@ -554,6 +555,9 @@
     </ClInclude>
     <ClInclude Include="ResourceAnimation.h">
       <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleAnimationLoader.h">
+      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

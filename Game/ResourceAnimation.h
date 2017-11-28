@@ -15,14 +15,18 @@ public:
 	virtual ~Animation();
 public:
 	std::string name;
-	int duration = 0;
-	int tickspersec = 0;
+	uint duration = 0;
+	uint tickspersec = 0;
 	std::vector<Bone*> Channels; // Bones
 
-public:
-	float DurationSec() {
+public: // Utilities
+	float DurationSec() const {
 		return (float)(duration / tickspersec);
 	};
+
+	uint NumChannels() const {
+		return Channels.size();
+	}
 };
 
 class Bone {
@@ -32,13 +36,34 @@ public:
 public:
 	std::string name;
 	TransformKeys transKeys;
+
+public: // Utilities
+	int NumPositionKeys() const {
+		return transKeys.positionKeys.size();
+	}
+	int NumRotationKeys() const {
+		return transKeys.rotationKeys.size();
+	}
+	int NumScalingKeys() const {
+		return transKeys.scalingKeys.size();
+	}
 };
 
 struct TransformKeys {
-	double Time = 0;
-	float3 translationKey;
-	float3 scaleKey;
-	Quat rotationKey;
+	// Key Declarations
+	struct VectorKey {
+		double time = 0;
+		float3 value;
+	};
+	struct QuatKey {
+		double time = 0;
+		Quat value;
+	};
+
+	// Values
+	std::vector<VectorKey> positionKeys;
+	std::vector<QuatKey> rotationKeys;
+	std::vector<VectorKey> scalingKeys;
 };
 
 #endif // !__ANIMATION_H__
