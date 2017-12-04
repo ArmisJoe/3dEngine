@@ -22,7 +22,7 @@ public:	// Module::
 	bool CleanUp();
 public: // AnimationLoader::
 	bool Import(const aiAnimation* anim, std::string& output_file);
-	bool Load(const char* file);
+	bool Load(const char* file, Animation* res);
 	bool Save(const Animation& anim, std::string& output_file);
 	bool LoadAndImport(Animation* anim) const;
 

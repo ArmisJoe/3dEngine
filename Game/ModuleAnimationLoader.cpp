@@ -66,9 +66,119 @@ bool ModuleAnimationLoader::Import(const aiAnimation * anim, std::string & outpu
 	return Save(new_anim, output_file);
 }
 
-bool ModuleAnimationLoader::Load(const char * file)
+bool ModuleAnimationLoader::Load(const char * file, Animation* res)
 {
 	bool ret = false;
+
+	if (file == nullptr) {
+		return false;
+		LOG("AnimationLoad::Load() -> invalid file path");
+	}
+
+	char* buffer = nullptr;
+	uint buffer_size = App->fs->Load(file, &buffer);
+
+	if (buffer != nullptr && buffer_size > 0) {
+		
+		char* it = buffer;
+
+		// Friendly Reminder: Buffer Format
+		// [Ns N Dur TpS nCh Chnls[]]
+
+		// Loading ----
+		// Name Size
+		uint name_size;
+		memcpy(&name_size, it, sizeof(name_size));
+		it += sizeof(name_size);
+		// Name
+		char* tmp_name;
+		memcpy(tmp_name, it, name_size);
+		res->name = tmp_name;
+		it += name_size;
+		// Duration
+		memcpy(&res->duration, it, sizeof(res->duration));
+		it += sizeof(res->duration);
+		// Ticks per Sec
+		memcpy(&res->tickspersec, it, sizeof(res->tickspersec));
+		it += sizeof(res->tickspersec);
+		// Num Channels
+		uint nChannels;
+		memcpy(&nChannels, it, sizeof(uint));
+		it += sizeof(uint);
+		// Channels
+		for (uint i = 0; i < nChannels; i++) {
+			// Friendly Reminder: Channel Buffer Format:
+			// [Ns N nP Pt Pv nR Rt Rv nS St Sv]
+			Bone* new_b = new Bone();
+			// Name Size
+			uint bNameSize;
+			memcpy(&bNameSize, it, sizeof(uint));
+			it += sizeof(uint);
+			// Name
+			char* tmp_bName;
+			memcpy(tmp_bName, it, bNameSize + 1);
+			new_b->name = tmp_bName;
+			it += bNameSize + 1;
+			// Positions
+			// Num Positions
+			int nPos;
+			memcpy(&nPos, it, sizeof(int));
+			it += sizeof(int);
+			for (uint n = 0; n < nPos; n++) {
+				TransformKeys::VectorKey new_pk;
+				// Time
+				memcpy(&new_pk.time, it, sizeof(double));
+				it += sizeof(double);
+				// Value
+				memcpy(&new_pk.value, it, sizeof(float) * 3);
+				it += sizeof(float) * 3;
+
+				new_b->transKeys.positionKeys.push_back(new_pk);
+			}
+			// Rotations
+			// Num Rotations
+			int nRot;
+			memcpy(&nRot, it, sizeof(int));
+			it += sizeof(int);
+			for (uint n = 0; n < nRot; n++) {
+				TransformKeys::QuatKey new_rk;
+				// Time
+				memcpy(&new_rk.time, it, sizeof(double));
+				it += sizeof(double);
+				// Value
+				memcpy(&new_rk.value, it, sizeof(float) * 4);
+				it += sizeof(float) * 4;
+
+				new_b->transKeys.rotationKeys.push_back(new_rk);
+			}
+			// Scaling
+			// Num Scalings
+			int nSca;
+			memcpy(&nSca, it, sizeof(int));
+			it += sizeof(int);
+			for (uint n = 0; n < nSca; n++) {
+				TransformKeys::VectorKey new_sk;
+				// Time
+				memcpy(&new_sk.time, it, sizeof(double));
+				it += sizeof(double);
+				// Value
+				memcpy(&new_sk.value, it, sizeof(float) * 3);
+				it += sizeof(float) * 3;
+
+				new_b->transKeys.scalingKeys.push_back(new_sk);
+			}
+
+			if (new_b != nullptr) {
+				res->Channels.push_back(new_b);
+			}
+
+		}
+
+		if (buffer != nullptr) {
+			mdelete[] buffer;
+		}
+		ret = true;
+	}
 
 	return ret;
 }
@@ -138,8 +248,7 @@ bool ModuleAnimationLoader::Save(const Animation & anim, std::string & output_fi
 	// Num Channels
 	uint tmp_nChnls = anim.NumChannels();
 	memcpy(it, &tmp_nChnls, nchnls_size);
-	if(anim.NumChannels() > 0)
-		it += nchnls_size;
+	it += nchnls_size;
 	// Channels
 	for (uint i = 0; i < anim.NumChannels(); i++) {
 		// Friendly Reminder: Channel Buffer Format:

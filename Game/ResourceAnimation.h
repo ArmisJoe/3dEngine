@@ -14,6 +14,8 @@ public:
 	Animation();
 	virtual ~Animation();
 public:
+	void CleanUp();
+public:
 	std::string name;
 	uint duration = 0;
 	uint tickspersec = 0;
@@ -36,6 +38,8 @@ public:
 public:
 	std::string name;
 	TransformKeys transKeys;
+public:
+	void CleanUp();
 
 public: // Utilities
 	int NumPositionKeys() const {
