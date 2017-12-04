@@ -17,8 +17,8 @@ public:
 	void CleanUp();
 public:
 	std::string name;
-	uint duration = 0;
-	uint tickspersec = 0;
+	unsigned int duration = 0;
+	unsigned int tickspersec = 0;
 	std::vector<Bone*> Channels; // Bones
 
 public: // Utilities
@@ -26,7 +26,7 @@ public: // Utilities
 		return (float)(duration / tickspersec);
 	};
 
-	uint NumChannels() const {
+	unsigned int NumChannels() const {
 		return Channels.size();
 	}
 };
