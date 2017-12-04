@@ -7,6 +7,8 @@
 #include "ResourceAnimation.h"
 #include "Assimp\include\anim.h"
 
+#define EXTENSION_ANIMATIONS "myanim"
+
 class ModuleAnimationLoader : public Module {
 public:
 	ModuleAnimationLoader(bool start_enabled = true);
@@ -22,7 +24,7 @@ public: // AnimationLoader::
 	bool Import(const aiAnimation* anim, std::string& output_file);
 	bool Load(const char* file);
 	bool Save(const Animation& anim, std::string& output_file);
-	bool LoadToImport(Animation* anim) const;
+	bool LoadAndImport(Animation* anim) const;
 
 private:
 	Bone* ImportBone(const aiNodeAnim* node);
