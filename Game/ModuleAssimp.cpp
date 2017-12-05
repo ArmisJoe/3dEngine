@@ -65,8 +65,9 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 		std::string mesh_path;
 		ComponentMesh* new_mesh = nullptr;
 	for (uint i = 0; i < node->mNumMeshes; i++) {
+		aiMesh* aimesh = scene->mMeshes[node->mMeshes[i]];
 		//Mesh Load
-		new_mesh = LoadToOwnFormat(scene->mMeshes[node->mMeshes[i]], mesh_path);
+		new_mesh = LoadToOwnFormat(aimesh, mesh_path);
 		if (new_mesh != nullptr) {
 			new_mesh->path = mesh_path;
 			new_node->AddComponent(componentType_Mesh, new_mesh);
@@ -78,7 +79,18 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 				new_node->AddComponent(componentType_Material, new_material);
 			}
 		}
+		// Animation Load
+		if (aimesh != nullptr && aimesh->HasBones()) {
+			// Bones
+			for (int n = 0; n < aimesh->mNumBones; n++) {
+				aiBone* aibone = aimesh->mBones[n];
+				
+			}
+			// Vertices
+		}
 	}
+
+	
 
 
 	if (node->mName.length > 0)
