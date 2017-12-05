@@ -319,6 +319,32 @@ bool ModuleAnimationLoader::Save(const Animation & anim, std::string & output_fi
 	return ret;
 }
 
+Animation * ModuleAnimationLoader::ImportToLoad(aiAnimation * anim)
+{
+	Animation* new_anim = nullptr;
+
+	std::string output_file;
+
+	if (anim == nullptr) {
+		LOG("ERROR AnimationLoader::ImportToLoad() -> unvalid animation");
+		return nullptr;
+	}
+
+	if (Import(anim, output_file)) {
+		new_anim = new Animation();
+		if (Load(output_file.c_str(), new_anim)) {
+			LOG("Animation Loading Succesful");
+		}
+		else
+			LOG("ERROR loading animation");
+	} 
+	else {
+		LOG("ERROR importing animation");
+	}
+
+	return new_anim;
+}
+
 Bone * ModuleAnimationLoader::ImportBone(const aiNodeAnim * node)
 {
 	if (node == nullptr)
