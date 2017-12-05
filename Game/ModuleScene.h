@@ -29,7 +29,11 @@ public:
 		return root;
 	}
 	GameObject* GetSelected() const {
-		return current_selected;
+		if (current_selected != nullptr)
+		{
+			return current_selected;
+		}
+		else return nullptr;
 	}
 	void SetSelected(GameObject* go);
 	void RemoveAllGameObject();

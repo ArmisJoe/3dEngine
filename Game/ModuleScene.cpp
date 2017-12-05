@@ -60,6 +60,7 @@ update_status ModuleScene::Update(float dt)
 	if (root != nullptr)
 		root->Update(dt);
 
+
 	/*float3 corners[8];
 	ComponentCamera* tmp = (ComponentCamera*)App->camera->curr_camera;
 	tmp->GetCorners(corners);
