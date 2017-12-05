@@ -156,7 +156,8 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 	ComponentMesh* new_mesh = nullptr;
 	for (uint i = 0; i < node->mNumMeshes; i++) {
 		//Mesh Load
-		new_mesh = LoadToOwnFormat(scene->mMeshes[node->mMeshes[i]], mesh_path);
+		aiMesh* aimesh = scene->mMeshes[node->mMeshes[i]];
+		new_mesh = LoadToOwnFormat(aimesh, mesh_path);
 		if (new_mesh != nullptr) {
 			new_mesh->path = mesh_path;
 			new_mesh->raw_path = raw_path;
@@ -169,6 +170,11 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 				new_node->AddComponent(componentType_Material, new_material);
 			}
 		}
+		// Bone Load
+		if (aimesh != nullptr && aimesh->HasBones()) {
+
+		}
+		
 	}
 
 
@@ -208,6 +214,12 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 		//Loading All nodes into Root Node
 		if (root_node->mNumChildren > 0) {
 			Geometry = LoadNode(root_node, scene, path);
+		}
+		//Loading Animations
+		if (scene->HasAnimations()) {
+			for (int i = 0; i < scene->mNumAnimations; i++) {
+				const Animation* new_anim = App->animation->ImportToLoad(scene->mAnimations[i]);
+			}
 		}
 		//Camera Focus
 		//App->camera->FocusMesh(new_mesh->vertices, new_mesh->num_vertices);

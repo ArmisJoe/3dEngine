@@ -242,6 +242,7 @@
     <ClCompile Include="ModuleAnimationLoader.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glew-2.1.0\include\GL\eglew.h" />
@@ -560,6 +561,9 @@
     </ClInclude>
     <ClInclude Include="ModuleAnimationLoader.h">
       <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentAnimation.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

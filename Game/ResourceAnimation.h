@@ -8,6 +8,7 @@
 #include "MathGeoLib\MathGeoLib.h"
 
 struct Bone;
+struct TransformKeys;
 
 class Animation {
 public:
@@ -29,6 +30,23 @@ public: // Utilities
 	unsigned int NumChannels() const {
 		return Channels.size();
 	}
+};
+
+struct TransformKeys {
+	// Key Declarations
+	struct VectorKey {
+		double time = 0;
+		float3 value;
+	};
+	struct QuatKey {
+		double time = 0;
+		Quat value;
+	};
+
+	// Values
+	std::vector<VectorKey> positionKeys;
+	std::vector<QuatKey> rotationKeys;
+	std::vector<VectorKey> scalingKeys;
 };
 
 class Bone {
@@ -53,21 +71,5 @@ public: // Utilities
 	}
 };
 
-struct TransformKeys {
-	// Key Declarations
-	struct VectorKey {
-		double time = 0;
-		float3 value;
-	};
-	struct QuatKey {
-		double time = 0;
-		Quat value;
-	};
-
-	// Values
-	std::vector<VectorKey> positionKeys;
-	std::vector<QuatKey> rotationKeys;
-	std::vector<VectorKey> scalingKeys;
-};
 
 #endif // !__ANIMATION_H__
