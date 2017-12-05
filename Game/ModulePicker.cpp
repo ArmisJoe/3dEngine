@@ -32,11 +32,9 @@ GameObject * ModulePicker::RayCast(const LineSegment &segment, float& total_dist
 	total_distance = infinite;
 	IterativeRayCast(segment, total_distance, &ret);
 
-	//picked = ret;
-
-	if (picked != nullptr) {
-		//App->scene->SetSelected(picked);
-	}
+	picked = ret;
+	App->scene->SetSelected(picked);
+	
 	
 	return ret;
 }

@@ -40,7 +40,7 @@ bool ModuleScene::Init()
 bool ModuleScene::Start()
 {
 	bool ret = true;
-
+	current_selected = nullptr;
 	return ret;
 }
 
