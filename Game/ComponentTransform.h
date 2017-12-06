@@ -23,13 +23,18 @@ public:
 	void SetRotation(const Quat& rotation);
 	void SetScale(const float3& scale);
 
+	void SetPositionFromParent(const float3& position);
+	void SetRotationFromParent(const Quat& rotation);
+	void SetScaleFromParent(const float3& scale);
+
+
 	void LoadPosition(const float3& position);
 	void LoadRotation(const Quat& rotation);
 	void LoadScale(const float3& scale);
 
-	float3 GetLocalPosition();
-	Quat GetLocalRotation();
-	float3 GetLocalScale();
+	float3 GetLocalPosition() const;
+	Quat GetLocalRotation() const ;
+	float3 GetLocalScale()const ;
 
 
 	void SetTransformMatrix();
@@ -45,6 +50,8 @@ public:
 	bool transform_modified = false;
 	bool UpdateNeeded = false;
 	void SetLocalTrans();
+
+	void UpdateChildren(float3 pos_offset, float3 scale_offset, Quat rot_offset);
 
 private:
 
