@@ -386,14 +386,15 @@ void ComponentTransform::OnEditor()
 
 		if (ImGuizmo::IsUsing())
 		{
-			ImGuizmo::DecomposeMatrixToComponents(trs_matrix.ptr(), position_global.ptr(), DegToRad(rotinEuler_global).ptr(), scale_global.ptr());
+			ImGuizmo::DecomposeMatrixToComponents(trs_matrix.ptr(), position_global.ptr(), (rotinEuler_global).ptr(), scale_global.ptr());
 			trs_matrix.Transpose();
-			ImGuizmo::RecomposeMatrixFromComponents((float*)position_global.ptr(), DegToRad(rotinEuler_global).ptr(), (float*)scale_global.ptr(), trs_matrix.ptr());
+			ImGuizmo::RecomposeMatrixFromComponents((float*)position_global.ptr(), (float*)(rotinEuler_global).ptr(), (float*)scale_global.ptr(), trs_matrix.ptr());
 			trs_matrix.Transpose();
 
-			rotation_global = rotation_global * Quat::FromEulerXYZ(DegToRad(rotinEuler_global.x), DegToRad(rotinEuler_global.y), DegToRad(rotinEuler_global.z));
+			rotation_global = Quat::FromEulerXYZ(DegToRad(rotinEuler_global.x), DegToRad(rotinEuler_global.y), DegToRad(rotinEuler_global.z));
+
+			rotinEuler_global = (rotinEuler_global);
 			transform_modified = true;
-			UpdateNeeded = true;
 		}
 	}
 	else {
