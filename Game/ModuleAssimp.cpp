@@ -218,9 +218,10 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 		//Loading All nodes into Root Node
 		if (root_node->mNumChildren > 0) {
 			Geometry = LoadNode(root_node, scene, path);
+			Geometry->SetName(GetFileFromPath(path).c_str());
 		}
 		//Loading Animations
-		if (scene->HasAnimations()) {
+		if (scene->HasAnimations() && Geometry != nullptr) {
 			for (int i = 0; i < scene->mNumAnimations; i++) {
 				Animation* new_anim = App->animation->ImportToLoad(scene->mAnimations[i]);
 				ComponentAnimation* compAnim = new ComponentAnimation(Geometry);

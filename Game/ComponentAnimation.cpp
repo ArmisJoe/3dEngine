@@ -83,7 +83,7 @@ void ComponentAnimation::Disable()
 
 void ComponentAnimation::OnEditor()
 {
-	ImGui::Text("Animation Name: ");
+	ImGui::TextColored(COLOR_YELLOW, "Animation Name: ");
 	ImGui::Text("\t%s", (anim != nullptr) ? anim->name.c_str() : "");
 }
 

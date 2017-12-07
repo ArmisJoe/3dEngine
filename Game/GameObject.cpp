@@ -364,7 +364,10 @@ void GameObject::OnEditor()
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr) {
+				ImGui::TextColored(COLOR_GREEN, (*it)->name.c_str());
+				ImGui::Separator();
 				(*it)->OnEditor();
+				ImGui::Separator();
 			}
 		}
 	}

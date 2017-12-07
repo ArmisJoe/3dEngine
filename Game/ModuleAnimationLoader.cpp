@@ -91,8 +91,9 @@ bool ModuleAnimationLoader::Load(const char * file, Animation* res)
 		memcpy(&name_size, it, sizeof(name_size));
 		it += sizeof(name_size);
 		// Name
-		char* tmp_name = new char[name_size];
+		char* tmp_name = new char[name_size + 1];
 		memcpy(tmp_name, it, name_size);
+		memcpy(&tmp_name[name_size], "\0", 1);
 		res->name = tmp_name;
 		mdelete[] tmp_name;
 		it += name_size;
@@ -117,10 +118,11 @@ bool ModuleAnimationLoader::Load(const char * file, Animation* res)
 			it += sizeof(uint);
 			// Name
 			char* tmp_bName = new char[bNameSize + 1];
-			memcpy(tmp_bName, it, bNameSize + 1);
+			memcpy(tmp_bName, it, bNameSize);
+			memcpy(&tmp_bName[bNameSize], "\0", 1);
 			new_b->name = tmp_bName;
 			mdelete[] tmp_bName;
-			it += bNameSize + 1;
+			it += bNameSize;
 			// Positions
 			// Num Positions
 			int nPos;
@@ -209,7 +211,7 @@ bool ModuleAnimationLoader::Save(const Animation & anim, std::string & output_fi
 		
 		Bone* chnl = anim.Channels[i];
 		buffer_size += sizeof(uint); // Ns Size
-		buffer_size += sizeof(char) * chnl->name.length() + 1; // N Size
+		buffer_size += sizeof(char) * chnl->name.length(); // N Size
 	
 		buffer_size += sizeof(chnl->NumPositionKeys()); // nP Size
 		buffer_size += sizeof(double) * chnl->NumPositionKeys(); // Pt Size
@@ -261,8 +263,8 @@ bool ModuleAnimationLoader::Save(const Animation & anim, std::string & output_fi
 		memcpy(it, &tmp_chNs, sizeof(uint));
 		it += sizeof(uint);
 		// Name
-		memcpy(it, chnl->name.c_str(), sizeof(char) * tmp_chNs + 1);
-		it += sizeof(char) * tmp_chNs + 1;
+		memcpy(it, chnl->name.c_str(), sizeof(char) * tmp_chNs);
+		it += sizeof(char) * tmp_chNs;
 		// Positions -----------------
 		// Num Positions
 		int tmp_npk = chnl->NumPositionKeys();
