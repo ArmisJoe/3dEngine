@@ -19,7 +19,7 @@ void PanelInspector::Draw()
 
 	ImGui::Begin(name, &active, ImGuiWindowFlags_HorizontalScrollbar);
 
-	if (inspected != nullptr)
+	if (inspected != nullptr && inspected->GetParent() != nullptr)
 		inspected->OnEditor();
 
 	ImGui::End();
@@ -27,5 +27,6 @@ void PanelInspector::Draw()
 
 void PanelInspector::SetInspected(GameObject * new_insp)
 {
-	inspected = new_insp;
+	if(new_insp != nullptr)
+		inspected = new_insp;
 }

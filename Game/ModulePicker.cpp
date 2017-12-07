@@ -18,12 +18,6 @@ bool ModulePicker::Start()
 
 update_status ModulePicker::Update(float dt)
 {
-	if (picked != nullptr)
-	{
-	if (!picked->selected)
-		picked->selected = true;
-	}
-
 	return UPDATE_CONTINUE;
 }
 
@@ -38,11 +32,10 @@ GameObject * ModulePicker::RayCast(const LineSegment &segment, float& total_dist
 	total_distance = infinite;
 	IterativeRayCast(segment, total_distance, &ret);
 
-	if (picked != nullptr) {
-		picked->selected = false;
-	}
 	picked = ret;
 	App->scene->SetSelected(picked);
+	
+	
 	return ret;
 }
 
@@ -65,8 +58,6 @@ GameObject * ModulePicker::Pick()
 		string PickedObject = "You selected: " + ret->GetName();
 		LOG(PickedObject.c_str());
 	}
-
-
 	return ret;
 }
 
@@ -97,7 +88,7 @@ void ModulePicker::IterativeRayCast(const LineSegment & segment, float &dist, Ga
 				// We check the AABB first so we can avoid the whole awkward triangle process
 				if (!segment_local_space.Intersects(go->aabb)) continue;
 
-				segment_local_space.Transform(go->GetTransform()->GetTransformMatrix().Inverted());
+				segment_local_space.Transform(go->GetTransform()->GetGlobalTransformMatrix().Inverted());
 
 				for (uint i = 0; i < mesh->num_indices; i += 3)
 				{

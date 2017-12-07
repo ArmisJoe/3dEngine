@@ -264,7 +264,7 @@ void GameObject::CreateAABBFromMesh(ComponentMesh* mesh)
 			if (cmp_tr.size() > 0 && cmp_tr[0] != nullptr)
 			{
 				ComponentTransform* tmp = (ComponentTransform*)cmp_tr.back();
-				OBB obb = tmpAABB.Transform(tmp->GetTransformMatrix());
+				OBB obb = tmpAABB.Transform(tmp->GetGlobalTransformMatrix());
 				tmpAABB = obb.MinimalEnclosingAABB();
 				aabb = tmpAABB;
 			}
@@ -279,7 +279,7 @@ void GameObject::UpdateAABBFromMesh(ComponentMesh * mesh)
 
 		aabb.SetNegativeInfinity();
 		aabb.Enclose((float3*)mesh->vertices, mesh->num_vertices);
-		aabb.TransformAsAABB(GetTransform()->GetTransformMatrix());
+		aabb.TransformAsAABB(GetTransform()->GetGlobalTransformMatrix());
 		/*		// VERSION 1
 			aabb.SetNegativeInfinity();
 			aabb.Enclose((float3*)mesh->vertices, mesh->num_vertices);
@@ -372,7 +372,6 @@ void GameObject::OnEditor()
 
 void GameObject::OnHierarchyTree(bool skip_root)
 {
-
 	uint flags = 0;
 
 	if(skip_root == true) {
@@ -388,24 +387,29 @@ void GameObject::OnHierarchyTree(bool skip_root)
 		if (children.empty()) {
 			flags |= ImGuiTreeNodeFlags_Leaf;
 		}
-		if (selected == true) {
+
+		if (App->scene != nullptr && App->scene->GetSelected() == this) {
 			flags |= ImGuiTreeNodeFlags_Selected;
+			//selected = true;
 		}
 
 		if (ImGui::TreeNodeEx(name.c_str(), flags)) {
-			if (ImGui::IsItemClicked(0)) {
-				if (scene != nullptr) {
-					scene->SetSelected(this);
+
+			if (ImGui::IsItemClicked(1)) {
+				if (App->scene != nullptr)
+				{
+					App->scene->SetSelected(this);
 				}
 			}
-			if (!children.empty()) {
-				for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
-					if ((*it) != nullptr)
-						(*it)->OnHierarchyTree();
+				if (!children.empty()) {
+					for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); it++) {
+						if ((*it) != nullptr)
+							(*it)->OnHierarchyTree();
+					}
 				}
-			}
 			ImGui::TreePop();
 		}
+
 	}
 
 }

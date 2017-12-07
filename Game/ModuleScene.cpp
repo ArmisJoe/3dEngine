@@ -40,7 +40,7 @@ bool ModuleScene::Init()
 bool ModuleScene::Start()
 {
 	bool ret = true;
-
+	current_selected = nullptr;
 	return ret;
 }
 
@@ -59,6 +59,7 @@ update_status ModuleScene::Update(float dt)
 {
 	if (root != nullptr)
 		root->Update(dt);
+
 
 	/*float3 corners[8];
 	ComponentCamera* tmp = (ComponentCamera*)App->camera->curr_camera;
@@ -169,13 +170,17 @@ void ModuleScene::DeleteGameObject(GameObject * go)
 
 void ModuleScene::SetSelected(GameObject * go)
 {
-	//if(current_selected != nullptr)
-	//	current_selected->selected = false;
-	current_selected = go;
-	//current_selected->selected = true;
+	if (go != nullptr)
+	{
+		if (current_selected != nullptr)
+			current_selected->selected = false;
 
-	if (App->editor->inspector != nullptr)
-		App->editor->inspector->SetInspected(current_selected);
+		current_selected = go;
+		current_selected->selected = true;
+
+		if (App->editor->inspector != nullptr)
+			App->editor->inspector->SetInspected(current_selected);
+	}
 }
 
 void ModuleScene::RemoveAllGameObject()
@@ -199,7 +204,6 @@ update_status ModuleScene::PostUpdate(float dt)
 		p.axis = true;
 		p.Render();
 	}
-
 	return UPDATE_CONTINUE;
 }
 

@@ -23,6 +23,7 @@ ModuleAssimp::~ModuleAssimp()
 {
 }
 
+// NOT THE GOOD ONE
 GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, GameObject* parent)
 {
 	assert(node != nullptr);
@@ -113,6 +114,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 	return new_node;
 }
 
+// bingo
 GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, const char* raw_path, GameObject* parent)
 {
 	assert(node != nullptr);
@@ -198,6 +200,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 	return new_node;
 }
 
+// nice
 GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int pprocess_flag)
 {
 
