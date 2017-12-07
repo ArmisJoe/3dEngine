@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "MathGeoLib\MathGeoLib.h"
+#include "ComponentMesh.h"
 
 struct Bone;
 struct TransformKeys;
@@ -21,6 +22,7 @@ public:
 	unsigned int duration = 0;
 	unsigned int tickspersec = 0;
 	std::vector<Bone*> Channels; // Bones
+	ComponentMesh* ResourceMesh = nullptr;
 
 public: // Utilities
 	float DurationSec() const {

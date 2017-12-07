@@ -50,6 +50,8 @@ void ComponentMesh::CleanUp()
 		mdelete[] indices;
 	if (textureCoords != nullptr)
 		mdelete[] textureCoords;
+	/*if (normals != nullptr)
+		mdelete[] normals;*/
 
 	indices = nullptr;
 	vertices = nullptr;
@@ -90,5 +92,8 @@ void ComponentMesh::Serialize(JSON_Doc * doc)
 
 	if (buffer != nullptr)
 		mdelete[] buffer;
+}
+void ComponentMesh::ResetDeformableMesh()
+{
 }
 ;

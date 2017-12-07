@@ -354,41 +354,55 @@ void ModuleRenderer3D::DrawMesh(ComponentTransform* trans, ComponentMesh* m, Com
 		glMultMatrixf((GLfloat*)trans->GetGlobalTransformPtr());
 	}
 
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glBindBuffer(GL_ARRAY_BUFFER, m->id_vertices);
+	if (m->skin != nullptr)
+	{
+			glBindBuffer(GL_ARRAY_BUFFER, m->skin->id_vertices);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m->num_vertices * 3,
+				m->skin->vertices, GL_DYNAMIC_DRAW); // compare to GL_STATIC_DRAW
+			if (m->normals != nullptr)
+			{
+				glBindBuffer(GL_ARRAY_BUFFER, m->skin->id_normals);
+				glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m->skin->num_vertices * 3,
+					m->skin->vertices, GL_DYNAMIC_DRAW);
+			}
+	}
+	else {
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glBindBuffer(GL_ARRAY_BUFFER, m->id_vertices);
 
-	glVertexPointer(3, GL_FLOAT, 0, NULL);
+		glVertexPointer(3, GL_FLOAT, 0, NULL);
 
-	// Applying Material
-	if (mat != nullptr) {
-		//Apply UV if exist
-		if (m->num_UV != 0)
-		{
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-			glBindBuffer(GL_ARRAY_BUFFER, m->id_UV);
-			glTexCoordPointer(3, GL_FLOAT, 0, NULL);
+		// Applying Material
+		if (mat != nullptr) {
+			//Apply UV if exist
+			if (m->num_UV != 0)
+			{
+				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+				glBindBuffer(GL_ARRAY_BUFFER, m->id_UV);
+				glTexCoordPointer(3, GL_FLOAT, 0, NULL);
+			}
+
+			//Diffuse Channel
+			if (mat->GetTextureChannel(texType_Diffuse) != nullptr)
+				glBindTexture(GL_TEXTURE_2D, (GLuint)mat->GetTextureChannel(texType_Diffuse)->id);
+
 		}
 
-		//Diffuse Channel
-		if (mat->GetTextureChannel(texType_Diffuse) != nullptr)
-			glBindTexture(GL_TEXTURE_2D, (GLuint)mat->GetTextureChannel(texType_Diffuse)->id);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m->id_indices);
+		glDrawElements(GL_TRIANGLES, m->num_indices, GL_UNSIGNED_INT, NULL);
 
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+		if (trans != nullptr)
+			glPopMatrix();
 	}
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m->id_indices);
-	glDrawElements(GL_TRIANGLES, m->num_indices, GL_UNSIGNED_INT, NULL);
-
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-
-	if (trans != nullptr)
-		glPopMatrix();
 }
 
 void ModuleRenderer3D::AddGameObjectToDraw(GameObject * obj)
