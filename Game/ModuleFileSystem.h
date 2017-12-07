@@ -7,6 +7,7 @@
 #define LIBRARY_TEXTURES "Library/Textures/"
 #define LIBRARY_MATERIALS "Library/Materials/"
 #define LIBRARY_MESHES "Library/Meshes/"
+#define LIBRARY_ANIMATIONS "Library/Animations/"
 
 #define SETTINGS_DIRECTORY "Settings/"
 
@@ -15,6 +16,7 @@ using namespace std;
 enum ExtensionType {
 	et_texture = 0,
 	et_geometry,
+	et_animation,
 	// unknown always last
 	et_unknown
 };

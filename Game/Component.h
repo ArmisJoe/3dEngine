@@ -15,6 +15,7 @@ enum componentType {
 	componentType_Material,
 	componentType_Transform,
 	componentType_Camera,
+	componentType_Animation,
 	// Unknown ALLWAYS Last
 	componentType_Unknown
 };
@@ -25,7 +26,7 @@ class Component {
 public:
 	Component(const componentType argtype);
 	Component(componentType argtype, GameObject* argparent);
-private:
+protected:
 	bool SetParent(GameObject* parent);
 public:
 	std::string name;

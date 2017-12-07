@@ -23,6 +23,7 @@
 #include "ModuleFileSystem.h"
 #include "ModulePicker.h"
 #include "ModuleQuadtree.h"
+#include "ModuleAnimationLoader.h"
 
 #define LOG(format, ...) App->mylog(__FILE__, __LINE__, format, __VA_ARGS__);
 
@@ -48,6 +49,7 @@ public:
 	ModulePicker* picker;
 	ModuleQuadtree* quadTree;
 	ModuleGame* game;
+	ModuleAnimationLoader* animation;
 private:
 
 	Timer	ms_timer;

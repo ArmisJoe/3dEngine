@@ -5,6 +5,7 @@
 #include "ComponentMaterial.h"
 #include "ComponentMesh.h"
 #include "ComponentTransform.h"
+#include "ComponentAnimation.h"
 
 #include "ModuleFileSystem.h"
 
@@ -66,8 +67,9 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 		std::string mesh_path;
 		ComponentMesh* new_mesh = nullptr;
 	for (uint i = 0; i < node->mNumMeshes; i++) {
+		aiMesh* aimesh = scene->mMeshes[node->mMeshes[i]];
 		//Mesh Load
-		new_mesh = LoadToOwnFormat(scene->mMeshes[node->mMeshes[i]], mesh_path);
+		new_mesh = LoadToOwnFormat(aimesh, mesh_path);
 		if (new_mesh != nullptr) {
 			new_mesh->path = mesh_path;
 			new_node->AddComponent(componentType_Mesh, new_mesh);
@@ -79,7 +81,18 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 				new_node->AddComponent(componentType_Material, new_material);
 			}
 		}
+		// Animation Load
+		if (aimesh != nullptr && aimesh->HasBones()) {
+			// Bones
+			for (int n = 0; n < aimesh->mNumBones; n++) {
+				aiBone* aibone = aimesh->mBones[n];
+				
+			}
+			// Vertices
+		}
 	}
+
+	
 
 
 	if (node->mName.length > 0)
@@ -146,7 +159,8 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 	ComponentMesh* new_mesh = nullptr;
 	for (uint i = 0; i < node->mNumMeshes; i++) {
 		//Mesh Load
-		new_mesh = LoadToOwnFormat(scene->mMeshes[node->mMeshes[i]], mesh_path);
+		aiMesh* aimesh = scene->mMeshes[node->mMeshes[i]];
+		new_mesh = LoadToOwnFormat(aimesh, mesh_path);
 		if (new_mesh != nullptr) {
 			new_mesh->path = mesh_path;
 			new_mesh->raw_path = raw_path;
@@ -159,6 +173,11 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 				new_node->AddComponent(componentType_Material, new_material);
 			}
 		}
+		// Bone Load
+		if (aimesh != nullptr && aimesh->HasBones()) {
+
+		}
+		
 	}
 
 
@@ -199,6 +218,16 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 		//Loading All nodes into Root Node
 		if (root_node->mNumChildren > 0) {
 			Geometry = LoadNode(root_node, scene, path);
+			Geometry->SetName(GetFileFromPath(path).c_str());
+		}
+		//Loading Animations
+		if (scene->HasAnimations() && Geometry != nullptr) {
+			for (int i = 0; i < scene->mNumAnimations; i++) {
+				Animation* new_anim = App->animation->ImportToLoad(scene->mAnimations[i]);
+				ComponentAnimation* compAnim = new ComponentAnimation(Geometry);
+				compAnim->anim = new_anim;
+				Geometry->AddComponent(componentType_Animation, compAnim, true);
+			}
 		}
 		//Camera Focus
 		//App->camera->FocusMesh(new_mesh->vertices, new_mesh->num_vertices);

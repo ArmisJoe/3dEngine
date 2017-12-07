@@ -8,6 +8,7 @@
 #include "ComponentMaterial.h"
 #include "ComponentMesh.h"
 #include "ComponentTransform.h"
+#include "ComponentAnimation.h"
 
 #include "PanelInspector.h"
 #include "ModuleParson.h"
@@ -156,6 +157,9 @@ Component * GameObject::AddComponent(const int type, Component * componentPointe
 				newComponent = new ComponentCamera(this);
 			}
 			break;
+		case componentType_Animation:
+			newComponent = new ComponentAnimation(this);
+			break;
 		}
 
 		// Copy the 'Reference' Component into the New Component
@@ -176,6 +180,9 @@ Component * GameObject::AddComponent(const int type, Component * componentPointe
 				break;
 			case componentType_Camera:
 				bufferSize = sizeof(ComponentCamera);
+				break;
+			case componentType_Animation:
+				bufferSize = sizeof(ComponentAnimation);
 				break;
 			}
 
@@ -357,7 +364,10 @@ void GameObject::OnEditor()
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr) {
+				ImGui::TextColored(COLOR_GREEN, (*it)->name.c_str());
+				ImGui::Separator();
 				(*it)->OnEditor();
+				ImGui::Separator();
 			}
 		}
 	}
