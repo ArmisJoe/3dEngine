@@ -297,6 +297,7 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 		int aux = 0;
 		switch (type) {
 		case componentType_Mesh:
+			if(scene_doc->GetString("path") != nullptr)
 			if (App->fs->exists(scene_doc->GetString("path")))
 				cmesh = App->assimp->LoadMyFormatMesh(scene_doc->GetString("path"));
 			else

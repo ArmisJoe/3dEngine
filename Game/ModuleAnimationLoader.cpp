@@ -91,9 +91,10 @@ bool ModuleAnimationLoader::Load(const char * file, Animation* res)
 		memcpy(&name_size, it, sizeof(name_size));
 		it += sizeof(name_size);
 		// Name
-		char* tmp_name;
+		char* tmp_name = new char[name_size];
 		memcpy(tmp_name, it, name_size);
 		res->name = tmp_name;
+		mdelete[] tmp_name;
 		it += name_size;
 		// Duration
 		memcpy(&res->duration, it, sizeof(res->duration));
@@ -115,9 +116,10 @@ bool ModuleAnimationLoader::Load(const char * file, Animation* res)
 			memcpy(&bNameSize, it, sizeof(uint));
 			it += sizeof(uint);
 			// Name
-			char* tmp_bName;
+			char* tmp_bName = new char[bNameSize + 1];
 			memcpy(tmp_bName, it, bNameSize + 1);
 			new_b->name = tmp_bName;
+			mdelete[] tmp_bName;
 			it += bNameSize + 1;
 			// Positions
 			// Num Positions
@@ -313,8 +315,8 @@ bool ModuleAnimationLoader::Save(const Animation & anim, std::string & output_fi
 	// And FINALLY, we actually save the file... :S
 	ret = App->fs->SaveUnique(LIBRARY_ANIMATIONS, buffer, anim.name.c_str(), EXTENSION_ANIMATIONS, buffer_size, output_file);
 
-	if (buffer != nullptr)
-		mdelete[] buffer;
+	//if (buffer != nullptr)
+	//	mdelete[] buffer;
 
 	return ret;
 }
@@ -341,6 +343,9 @@ Animation * ModuleAnimationLoader::ImportToLoad(aiAnimation * anim)
 	else {
 		LOG("ERROR importing animation");
 	}
+
+	if (new_anim != nullptr)
+		App->res->animations.push_back(new_anim);
 
 	return new_anim;
 }

@@ -8,6 +8,7 @@
 #include "GameObject.h"
 #include "ComponentMaterial.h"
 #include "ComponentMesh.h"
+#include "ComponentAnimation.h"
 
 class ModuleResources : public Module {
 public:
@@ -27,6 +28,7 @@ public:
 	std::vector<ComponentMesh*> meshes;
 	std::vector<ComponentMaterial*> materials;
 	std::vector<Texture*> textures;
+	std::vector<Animation*> animations;
 
 	std::vector<GameObject*> gameObjects;
 };

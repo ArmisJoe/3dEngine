@@ -83,6 +83,8 @@ void ComponentAnimation::Disable()
 
 void ComponentAnimation::OnEditor()
 {
+	ImGui::Text("Animation Name: ");
+	ImGui::Text("\t%s", (anim != nullptr) ? anim->name.c_str() : "");
 }
 
 void ComponentAnimation::Serialize(JSON_Doc * doc)

@@ -74,6 +74,16 @@ bool ModuleResources::CleanUp()
 	}
 	LOG("All Textures Cleaned Up");
 
+	//Textures CleanUp
+	if (!animations.empty()) {
+		for (std::vector<Animation*>::iterator it = animations.begin(); it != animations.end(); it++) {
+			if ((*it) != nullptr) {
+				mdelete(*it);
+			}
+		}
+	}
+	LOG("All Animations Cleaned Up");
+
 	// GO NOT REMOVE HERE - THEY ARE REMOVED WITH THE SCENE (go only exist on the scene)
 	//f (!gameObjects.empty()) {
 	//	for (int i = 0; i < gameObjects.size(); i++) {

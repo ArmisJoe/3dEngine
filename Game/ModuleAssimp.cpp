@@ -5,6 +5,7 @@
 #include "ComponentMaterial.h"
 #include "ComponentMesh.h"
 #include "ComponentTransform.h"
+#include "ComponentAnimation.h"
 
 #include "ModuleFileSystem.h"
 
@@ -218,7 +219,10 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 		//Loading Animations
 		if (scene->HasAnimations()) {
 			for (int i = 0; i < scene->mNumAnimations; i++) {
-				const Animation* new_anim = App->animation->ImportToLoad(scene->mAnimations[i]);
+				Animation* new_anim = App->animation->ImportToLoad(scene->mAnimations[i]);
+				ComponentAnimation* compAnim = new ComponentAnimation(Geometry);
+				compAnim->anim = new_anim;
+				Geometry->AddComponent(componentType_Animation, compAnim, true);
 			}
 		}
 		//Camera Focus
