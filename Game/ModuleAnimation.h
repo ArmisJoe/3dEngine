@@ -3,6 +3,7 @@
 #define __MODULE_ANIMATION_H__
 
 #include "Module.h"
+#include "GameObject.h"
 
 class ModuleAnimation : public Module {
 public:
@@ -15,6 +16,11 @@ public:	// Module::
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+
+private:
+	void ResetAllDeformableMeshes(GameObject* go);
+	void DeformMeshes(GameObject* go);
+	void AdaptToBone(Bone* bone);
 };
 
 #endif // MODULE_ANIMATION

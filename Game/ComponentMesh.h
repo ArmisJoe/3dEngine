@@ -16,6 +16,10 @@ public:
 	void Draw(const ComponentTransform* trans = nullptr, const ComponentMaterial* mat = nullptr);
 	void OnEditor();
 	void Serialize(JSON_Doc* doc);
+
+	// Animation stuff
+	void SetSkin();
+	void DoSkin(GameObject* go);
 	void ResetDeformableMesh();
 
 public:

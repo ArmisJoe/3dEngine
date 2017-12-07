@@ -238,7 +238,6 @@
     <ClCompile Include="PanelPlayPause.cpp">
       <Filter>Panels</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceAnimation.cpp" />
     <ClCompile Include="ModuleAnimationLoader.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -247,6 +246,9 @@
     </ClCompile>
     <ClCompile Include="ModuleAnimation.cpp">
       <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceAnimation.cpp">
+      <Filter>Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

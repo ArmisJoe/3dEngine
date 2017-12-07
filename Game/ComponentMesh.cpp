@@ -52,6 +52,8 @@ void ComponentMesh::CleanUp()
 		mdelete[] textureCoords;
 	/*if (normals != nullptr)
 		mdelete[] normals;*/
+	if (skin != nullptr)
+		mdelete skin;
 
 	indices = nullptr;
 	vertices = nullptr;
@@ -93,7 +95,46 @@ void ComponentMesh::Serialize(JSON_Doc * doc)
 	if (buffer != nullptr)
 		mdelete[] buffer;
 }
+
+// ------------------------- ANIMATION -------------------------
+
+void ComponentMesh::SetSkin()
+{
+	if (skin != nullptr)
+	{
+		skin = new ComponentMesh();
+		// fill the skin here with something like:
+		// skin->FillYourself();
+	}
+}
+
+void ComponentMesh::DoSkin(GameObject* go)
+{
+	//vector<Component*> anims = GetParent()->FindComponents(componentType_Animation);
+	//I need the bones to attach them
+
+	//after this the skin should be re-copied
+	SetSkin();
+	// we send it to the gpu here again
+	// i have no idea how to do that but just a reminder I guess
+
+}
+
 void ComponentMesh::ResetDeformableMesh()
 {
+	if (skin != nullptr)
+	{
+		ComponentMesh* copy = this;
+
+		memset(skin->indices, 0, copy->num_indices * sizeof(uint));
+
+		memcpy(skin->vertices, copy->vertices, skin->num_vertices * sizeof(float) * 3);
+
+		// we still don't have this loaded rip
+		if (copy->normals != nullptr)
+		{
+			memcpy(skin->normals, copy->normals, skin->num_vertices * sizeof(float) * 3);
+		}
+	}
 }
-;
+

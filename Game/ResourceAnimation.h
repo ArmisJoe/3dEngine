@@ -58,9 +58,12 @@ public:
 public:
 	std::string name;
 	TransformKeys transKeys;
+	ComponentMesh* parent;
 public:
 	void CleanUp();
-
+	ComponentMesh* GetParent() const {
+		return parent;
+	}
 public: // Utilities
 	int NumPositionKeys() const {
 		return transKeys.positionKeys.size();
