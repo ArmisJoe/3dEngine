@@ -21,10 +21,11 @@ void ComponentAnimation::Start()
 
 void ComponentAnimation::Update(float dt)
 {
-	if (anim == nullptr || state == as_unloaded) {
+	if (anim == nullptr) {
 		state = as_unloaded;
 		return;
 	}
+	
 
 	// Time Interactions
 	switch (state) {
@@ -48,7 +49,18 @@ void ComponentAnimation::Update(float dt)
 	}
 
 	// Bone Movement
-
+	if (this->HasParent()) {
+		for (int i = 0; i < anim->NumChannels(); i++) {
+			Bone* b = anim->Channels[i];
+			GameObject* targetGo = CheckBoneGoMatch(this->parent, b);
+			if (targetGo != nullptr) { // Now we have the Go ('BoneGo') that will move
+				//[CONTINUE]
+			}
+		}
+	}
+	else {
+		LOG("ERROR No Parent Animation");
+	}
 
 	// Bone Debug Render
 	if (drawBones == true)
@@ -72,7 +84,7 @@ bool ComponentAnimation::isPause() const
 
 void ComponentAnimation::DrawBones()
 {
-	if (anim == nullptr || state == as_unloaded)
+	if (anim == nullptr)
 		return;
 
 	for (int i = 0; i < anim->NumChannels(); i++) {
@@ -87,11 +99,30 @@ void ComponentAnimation::DrawBones()
 		if (pos == nullptr)
 			return;
 
-		bSphere s(0.5);
+		bSphere s(100);
 		s.color.Set(255, 211, 0);
 		s.SetPos(pos->value.x, pos->value.y, pos->value.z);
 		s.Render();
 	}
+}
+
+GameObject* ComponentAnimation::CheckBoneGoMatch(GameObject* go, Bone * b)
+{
+	GameObject* ret = nullptr;
+	
+	if (go == nullptr || b == nullptr)
+		return nullptr;
+
+	if (go->GetName() == b->name)
+		return go;
+	
+	for (int i = 0; i < go->children.size(); i++) {
+		ret = CheckBoneGoMatch(go->children[i], b);
+		if (ret != nullptr)
+			break;
+	}
+
+	return ret;
 }
 
 void ComponentAnimation::Enable()
