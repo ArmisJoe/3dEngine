@@ -238,11 +238,15 @@
     <ClCompile Include="PanelPlayPause.cpp">
       <Filter>Panels</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceAnimation.cpp" />
     <ClCompile Include="ModuleAnimationLoader.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ComponentAnimation.cpp" />
+    <ClCompile Include="ComponentAnimation.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceAnimation.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glew-2.1.0\include\GL\eglew.h" />
