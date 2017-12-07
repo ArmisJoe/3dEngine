@@ -44,6 +44,7 @@ public: // ComponentAnimation::
 private:
 	void DrawBones();
 	GameObject* CheckBoneGoMatch(GameObject* go, Bone* b);
+	
 public:
 	Animation* anim = nullptr;
 	AnimationState state = as_unloaded;
@@ -51,6 +52,7 @@ public:
 	float time = 0.0f;
 
 	bool drawBones = true;
+	bool loop = true;
 };
 
 #endif // !__COMPONENT_ANIMATION_H__

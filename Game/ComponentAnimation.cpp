@@ -1,5 +1,6 @@
 #include "ComponentAnimation.h"
 #include "Application.h"
+#include "ComponentTransform.h"
 
 ComponentAnimation::ComponentAnimation() : Component(componentType_Animation)
 {
@@ -26,11 +27,15 @@ void ComponentAnimation::Update(float dt)
 		return;
 	}
 	
+	if (App->game->GetGameState() == GameState::gameState_play)
+		state = as_play;
+	if (App->game->GetPaused() == true)
+		state = as_pause;
 
 	// Time Interactions
 	switch (state) {
 	case as_play:
-		time += dt * App->game->GetTimeMultiplier();
+		time += (anim->tickspersec * dt) * App->game->GetTimeMultiplier(); // Ticks/sec * sec [* xTime] = ticks
 		break;
 	case as_pause:
 		time = time;
@@ -39,7 +44,6 @@ void ComponentAnimation::Update(float dt)
 		time = 0;
 		break;
 	case as_unloaded:
-		time = 0;
 		break;
 	default:
 		LOG("Unknown State -- going back to [Stop] state");
@@ -48,13 +52,35 @@ void ComponentAnimation::Update(float dt)
 		break;
 	}
 
+	// Looping
+	if (loop == true) {
+		if (time > anim->duration)
+			time -= anim->duration;
+	}
+
 	// Bone Movement
 	if (this->HasParent()) {
 		for (int i = 0; i < anim->NumChannels(); i++) {
 			Bone* b = anim->Channels[i];
 			GameObject* targetGo = CheckBoneGoMatch(this->parent, b);
 			if (targetGo != nullptr) { // Now we have the Go ('BoneGo') that will move
-				//[CONTINUE]
+				ComponentTransform* trans = (ComponentTransform*)targetGo->FindComponent(componentType_Transform);
+				if (trans != nullptr) {
+					TransformKeys::VectorKey* bPos = b->GetPosByTime(this->time);
+					TransformKeys::QuatKey* bRot = b->GetRotByTime(this->time);
+					TransformKeys::VectorKey* bSca = b->GetScaByTime(this->time);
+					// NO INTERPOLATION
+					if (bPos != nullptr) {
+						trans->SetPosition(bPos->value);
+					}
+					if (bRot != nullptr) {
+						trans->SetRotation(bRot->value);
+					}
+					if (bSca != nullptr) {
+						trans->SetScale(bSca->value);
+					}
+
+				}
 			}
 		}
 	}
@@ -143,6 +169,7 @@ void ComponentAnimation::OnEditor()
 	ImGui::Text("\t%s", (anim != nullptr) ? anim->name.c_str() : "");
 	ImGui::TextColored(COLOR_YELLOW, "Time: ");
 	ImGui::SliderFloat("Frames", &time, 0, anim->duration, "%.0f", 1.0f);
+	ImGui::Checkbox("Loop?", &loop);
 }
 
 void ComponentAnimation::Serialize(JSON_Doc * doc)

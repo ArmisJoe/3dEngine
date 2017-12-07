@@ -59,6 +59,11 @@ public:
 public:
 	void CleanUp();
 
+public: // Bone::
+	TransformKeys::VectorKey* GetPosByTime(double time);
+	TransformKeys::QuatKey* GetRotByTime(double time);
+	TransformKeys::VectorKey* GetScaByTime(double time);
+
 public: // Utilities
 	int NumPositionKeys() const {
 		return transKeys.positionKeys.size();

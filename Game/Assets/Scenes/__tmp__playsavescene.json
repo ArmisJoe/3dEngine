@@ -6,442 +6,442 @@
         {
             "isRoot": true,
             "static": true,
-            "uid": 2096243072,
+            "uid": -58288896,
             "parentUID": -1,
             "name": "Scene Root"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1318206592,
-            "parentUID": 2096243072,
+            "uid": 500581472,
+            "parentUID": -58288896,
             "name": "walk.FBX"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -428175648,
-            "parentUID": -1318206592,
+            "uid": 1063254784,
+            "parentUID": 500581472,
             "name": "RPG-Character-Mesh_$AssimpFbx$_Translation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -473189152,
-            "parentUID": -428175648,
+            "uid": -1059294080,
+            "parentUID": 1063254784,
             "name": "RPG-Character-Mesh_$AssimpFbx$_PreRotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1678320768,
-            "parentUID": -473189152,
+            "uid": 2001164288,
+            "parentUID": -1059294080,
             "name": "RPG-Character-Mesh"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1491654656,
-            "parentUID": -1318206592,
+            "uid": 1258115840,
+            "parentUID": 500581472,
             "name": "Motion_$AssimpFbx$_Translation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1583520384,
-            "parentUID": 1491654656,
+            "uid": -437756832,
+            "parentUID": 1258115840,
             "name": "Motion_$AssimpFbx$_PreRotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1754446208,
-            "parentUID": -1583520384,
+            "uid": -629930240,
+            "parentUID": -437756832,
             "name": "Motion_$AssimpFbx$_Rotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1511671936,
-            "parentUID": -1754446208,
+            "uid": 1342390656,
+            "parentUID": -629930240,
             "name": "Motion_$AssimpFbx$_Scaling"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1576166400,
-            "parentUID": 1511671936,
+            "uid": -627534272,
+            "parentUID": 1342390656,
             "name": "Motion"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 48333612,
-            "parentUID": 1576166400,
+            "uid": 665955392,
+            "parentUID": -627534272,
             "name": "B_Pelvis"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -667983552,
-            "parentUID": 48333612,
+            "uid": -1160410624,
+            "parentUID": 665955392,
             "name": "B_Spine"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 310881344,
-            "parentUID": -667983552,
+            "uid": 262893504,
+            "parentUID": -1160410624,
             "name": "B_Spine1"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -730073728,
-            "parentUID": 310881344,
+            "uid": 655818304,
+            "parentUID": 262893504,
             "name": "B_Spine2"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -231281040,
-            "parentUID": -730073728,
+            "uid": 1651036416,
+            "parentUID": 655818304,
             "name": "B_L_Clavicle"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1033436032,
-            "parentUID": -231281040,
+            "uid": -2057622656,
+            "parentUID": 1651036416,
             "name": "B_L_UpperArm"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1578918656,
-            "parentUID": -1033436032,
+            "uid": -807027392,
+            "parentUID": -2057622656,
             "name": "B_L_Forearm"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -260429456,
-            "parentUID": 1578918656,
+            "uid": -940574144,
+            "parentUID": -807027392,
             "name": "B_L_Hand"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -323994688,
-            "parentUID": -260429456,
+            "uid": -141630800,
+            "parentUID": -940574144,
             "name": "B_L_Finger0"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1072025344,
-            "parentUID": -323994688,
+            "uid": 859953728,
+            "parentUID": -141630800,
             "name": "B_L_Finger01"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -2112258304,
-            "parentUID": 1072025344,
+            "uid": 1995438080,
+            "parentUID": 859953728,
             "name": "B_L_Finger02"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1734153856,
-            "parentUID": -260429456,
+            "uid": 1977558144,
+            "parentUID": -940574144,
             "name": "B_L_Finger1"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -2036422144,
-            "parentUID": -1734153856,
+            "uid": 1561709696,
+            "parentUID": 1977558144,
             "name": "B_L_Finger11"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 337128992,
-            "parentUID": -2036422144,
+            "uid": 975508416,
+            "parentUID": 1561709696,
             "name": "B_L_Finger12"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1260555648,
-            "parentUID": -260429456,
+            "uid": -442905088,
+            "parentUID": -940574144,
             "name": "B_L_Finger2"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1712592000,
-            "parentUID": 1260555648,
+            "uid": -382696704,
+            "parentUID": -442905088,
             "name": "B_L_Finger21"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1513741056,
-            "parentUID": -1712592000,
+            "uid": 550957440,
+            "parentUID": -382696704,
             "name": "B_L_Finger22"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 786667392,
-            "parentUID": -260429456,
+            "uid": -1870547072,
+            "parentUID": -940574144,
             "name": "B_L_Finger3"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -841781824,
-            "parentUID": 786667392,
+            "uid": 254068768,
+            "parentUID": -1870547072,
             "name": "B_L_Finger31"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1376148480,
-            "parentUID": -841781824,
+            "uid": -1182534016,
+            "parentUID": 254068768,
             "name": "B_L_Finger32"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1694321536,
-            "parentUID": -260429456,
+            "uid": -194010960,
+            "parentUID": -940574144,
             "name": "B_L_Finger4"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 192988560,
-            "parentUID": 1694321536,
+            "uid": -282885600,
+            "parentUID": -194010960,
             "name": "B_L_Finger41"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1591789824,
-            "parentUID": 192988560,
+            "uid": 921794560,
+            "parentUID": -282885600,
             "name": "B_L_Finger42"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1183749504,
-            "parentUID": -730073728,
+            "uid": 1947276928,
+            "parentUID": 655818304,
             "name": "B_R_Clavicle"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -385986112,
-            "parentUID": 1183749504,
+            "uid": -1380033536,
+            "parentUID": 1947276928,
             "name": "B_R_UpperArm"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1756162176,
-            "parentUID": -385986112,
+            "uid": 1604507520,
+            "parentUID": -1380033536,
             "name": "B_R_Forearm"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1804140288,
-            "parentUID": -1756162176,
+            "uid": 1288865280,
+            "parentUID": 1604507520,
             "name": "B_R_Hand"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -581369216,
-            "parentUID": 1804140288,
+            "uid": -429079648,
+            "parentUID": 1288865280,
             "name": "B_R_Finger0"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1022263744,
-            "parentUID": -581369216,
+            "uid": 578968128,
+            "parentUID": -429079648,
             "name": "B_R_Finger01"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1624523264,
-            "parentUID": 1022263744,
+            "uid": 373136608,
+            "parentUID": 578968128,
             "name": "B_R_Finger02"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -394210304,
-            "parentUID": 1804140288,
+            "uid": -156669728,
+            "parentUID": 1288865280,
             "name": "B_R_Finger1"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1275933824,
-            "parentUID": -394210304,
+            "uid": -615117888,
+            "parentUID": -156669728,
             "name": "B_R_Finger11"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 561123392,
-            "parentUID": 1275933824,
+            "uid": -862264576,
+            "parentUID": -615117888,
             "name": "B_R_Finger12"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 898129216,
-            "parentUID": 1804140288,
+            "uid": -1362800384,
+            "parentUID": 1288865280,
             "name": "B_R_Finger2"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -262852400,
-            "parentUID": 898129216,
+            "uid": -56948048,
+            "parentUID": -1362800384,
             "name": "B_R_Finger21"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1025130752,
-            "parentUID": -262852400,
+            "uid": 1170557696,
+            "parentUID": -56948048,
             "name": "B_R_Finger22"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1946873600,
-            "parentUID": 1804140288,
+            "uid": 753535104,
+            "parentUID": 1288865280,
             "name": "B_R_Finger3"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -923231808,
-            "parentUID": -1946873600,
+            "uid": -2021458304,
+            "parentUID": 753535104,
             "name": "B_R_Finger31"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1634446848,
-            "parentUID": -923231808,
+            "uid": -933031360,
+            "parentUID": -2021458304,
             "name": "B_R_Finger32"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -837957440,
-            "parentUID": 1804140288,
+            "uid": -767839680,
+            "parentUID": 1288865280,
             "name": "B_R_Finger4"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1986107392,
-            "parentUID": -837957440,
+            "uid": 734082496,
+            "parentUID": -767839680,
             "name": "B_R_Finger41"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1475894528,
-            "parentUID": -1986107392,
+            "uid": 1221236224,
+            "parentUID": 734082496,
             "name": "B_R_Finger42"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -681396800,
-            "parentUID": -730073728,
+            "uid": 1863319168,
+            "parentUID": 655818304,
             "name": "B_Neck"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1073204480,
-            "parentUID": -681396800,
+            "uid": -1095831424,
+            "parentUID": 1863319168,
             "name": "B_Head"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1289892224,
-            "parentUID": 48333612,
+            "uid": 569249408,
+            "parentUID": 665955392,
             "name": "B_L_Thigh"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1181181568,
-            "parentUID": -1289892224,
+            "uid": 1593654656,
+            "parentUID": 569249408,
             "name": "B_L_Calf"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 73999800,
-            "parentUID": -1181181568,
+            "uid": -1823295360,
+            "parentUID": 1593654656,
             "name": "B_L_Foot"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 956020864,
-            "parentUID": 73999800,
+            "uid": 1280985216,
+            "parentUID": -1823295360,
             "name": "B_L_Toe0"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -488615200,
-            "parentUID": 48333612,
+            "uid": 49875460,
+            "parentUID": 665955392,
             "name": "B_R_Thigh"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -791958976,
-            "parentUID": -488615200,
+            "uid": -1331842560,
+            "parentUID": 49875460,
             "name": "B_R_Calf"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -771969920,
-            "parentUID": -791958976,
+            "uid": -1986256640,
+            "parentUID": -1331842560,
             "name": "B_R_Foot"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1615396736,
-            "parentUID": -771969920,
+            "uid": -1376274688,
+            "parentUID": -1986256640,
             "name": "B_R_Toe0"
         }
     ],
     "components": [
         {
             "type": 2,
-            "parentUID": 2096243072,
+            "parentUID": -58288896,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -461,7 +461,7 @@
         },
         {
             "type": 2,
-            "parentUID": -1318206592,
+            "parentUID": 500581472,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -479,10 +479,9 @@
                 "z": 1
             }
         },
-        {},
         {
             "type": 2,
-            "parentUID": -428175648,
+            "parentUID": 1063254784,
             "position": {
                 "x": 0.02596735954284668,
                 "y": 0,
@@ -502,7 +501,7 @@
         },
         {
             "type": 2,
-            "parentUID": -473189152,
+            "parentUID": -1059294080,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -522,7 +521,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1678320768,
+            "parentUID": 2001164288,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -542,14 +541,14 @@
         },
         {
             "type": 0,
-            "parentUID": 1678320768,
-            "path": "Library\/Meshes\/_4.mymesh",
+            "parentUID": 2001164288,
+            "path": "Library\/Meshes\/_17.mymesh",
             "rawpath": "C:\\Users\\Usuario\\Documents\\GitHub\\3dEngine\\Game\\Assets\\warrior\\walk.FBX",
             "meshdoc": "036f899787a0e0f79811330742f959f3"
         },
         {
             "type": 2,
-            "parentUID": 1491654656,
+            "parentUID": 1258115840,
             "position": {
                 "x": 9.9258500085852575e-07,
                 "y": 0,
@@ -569,7 +568,7 @@
         },
         {
             "type": 2,
-            "parentUID": -1583520384,
+            "parentUID": -437756832,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -589,7 +588,7 @@
         },
         {
             "type": 2,
-            "parentUID": -1754446208,
+            "parentUID": -629930240,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -609,7 +608,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1511671936,
+            "parentUID": 1342390656,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -629,7 +628,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1576166400,
+            "parentUID": -627534272,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -649,7 +648,7 @@
         },
         {
             "type": 2,
-            "parentUID": 48333612,
+            "parentUID": 665955392,
             "position": {
                 "x": -10.654349327087402,
                 "y": 0.83997923135757446,
@@ -669,7 +668,7 @@
         },
         {
             "type": 2,
-            "parentUID": -667983552,
+            "parentUID": -1160410624,
             "position": {
                 "x": 9.2248077392578125,
                 "y": 3.3955955505371094,
@@ -689,7 +688,7 @@
         },
         {
             "type": 2,
-            "parentUID": 310881344,
+            "parentUID": 262893504,
             "position": {
                 "x": 17.632339477539063,
                 "y": -0.02011871337890625,
@@ -709,7 +708,7 @@
         },
         {
             "type": 2,
-            "parentUID": -730073728,
+            "parentUID": 655818304,
             "position": {
                 "x": 25.268341064453125,
                 "y": -0.016084671020507813,
@@ -729,7 +728,7 @@
         },
         {
             "type": 2,
-            "parentUID": -231281040,
+            "parentUID": 1651036416,
             "position": {
                 "x": 12.008544921875,
                 "y": -1.4548625946044922,
@@ -749,7 +748,7 @@
         },
         {
             "type": 2,
-            "parentUID": -1033436032,
+            "parentUID": -2057622656,
             "position": {
                 "x": 27.203575134277344,
                 "y": 1.9073486328125e-06,
@@ -769,7 +768,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1578918656,
+            "parentUID": -807027392,
             "position": {
                 "x": 35.551223754882813,
                 "y": 0,
@@ -789,7 +788,7 @@
         },
         {
             "type": 2,
-            "parentUID": -260429456,
+            "parentUID": -940574144,
             "position": {
                 "x": 35.4896240234375,
                 "y": -5.7220458984375e-06,
@@ -809,7 +808,7 @@
         },
         {
             "type": 2,
-            "parentUID": -323994688,
+            "parentUID": -141630800,
             "position": {
                 "x": 12.316864013671875,
                 "y": -0.52088165283203125,
@@ -829,7 +828,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1072025344,
+            "parentUID": 859953728,
             "position": {
                 "x": 4.8670883178710938,
                 "y": 0,
@@ -849,7 +848,7 @@
         },
         {
             "type": 2,
-            "parentUID": -2112258304,
+            "parentUID": 1995438080,
             "position": {
                 "x": 4.8670730590820313,
                 "y": 5.7220458984375e-06,
@@ -869,7 +868,7 @@
         },
         {
             "type": 2,
-            "parentUID": -1734153856,
+            "parentUID": 1977558144,
             "position": {
                 "x": 17.315139770507813,
                 "y": -2.6357498168945313,
@@ -889,7 +888,7 @@
         },
         {
             "type": 2,
-            "parentUID": -2036422144,
+            "parentUID": 1561709696,
             "position": {
                 "x": 5.4388885498046875,
                 "y": 3.814697265625e-06,
@@ -909,7 +908,7 @@
         },
         {
             "type": 2,
-            "parentUID": 337128992,
+            "parentUID": 975508416,
             "position": {
                 "x": 5.4388504028320313,
                 "y": -1.52587890625e-05,
@@ -929,7 +928,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1260555648,
+            "parentUID": -442905088,
             "position": {
                 "x": 17.315147399902344,
                 "y": -2.6325759887695313,
@@ -949,7 +948,7 @@
         },
         {
             "type": 2,
-            "parentUID": -1712592000,
+            "parentUID": -382696704,
             "position": {
                 "x": 6.3453216552734375,
                 "y": -3.814697265625e-06,
@@ -969,7 +968,7 @@
         },
         {
             "type": 2,
-            "parentUID": -1513741056,
+            "parentUID": 550957440,
             "position": {
                 "x": 6.3453369140625,
                 "y": 1.9073486328125e-05,
@@ -989,7 +988,7 @@
         },
         {
             "type": 2,
-            "parentUID": 786667392,
+            "parentUID": -1870547072,
             "position": {
                 "x": 17.315139770507813,
                 "y": -2.6293411254882813,
@@ -1009,7 +1008,7 @@
         },
         {
             "type": 2,
-            "parentUID": -841781824,
+            "parentUID": 254068768,
             "position": {
                 "x": 5.438873291015625,
                 "y": 1.9073486328125e-05,
@@ -1029,7 +1028,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1376148480,
+            "parentUID": -1182534016,
             "position": {
                 "x": 5.4388198852539063,
                 "y": 1.52587890625e-05,
@@ -1049,7 +1048,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1694321536,
+            "parentUID": -194010960,
             "position": {
                 "x": 17.315147399902344,
                 "y": -2.62628173828125,
@@ -1069,7 +1068,7 @@
         },
         {
             "type": 2,
-            "parentUID": 192988560,
+            "parentUID": -282885600,
             "position": {
                 "x": 4.5323944091796875,
                 "y": 3.0517578125e-05,
@@ -1089,7 +1088,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1591789824,
+            "parentUID": 921794560,
             "position": {
                 "x": 4.5323638916015625,
                 "y": -9.5367431640625e-06,
@@ -1109,7 +1108,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1183749504,
+            "parentUID": 1947276928,
             "position": {
                 "x": 12.008560180664063,
                 "y": -1.4548263549804688,
@@ -1129,7 +1128,7 @@
         },
         {
             "type": 2,
-            "parentUID": -385986112,
+            "parentUID": -1380033536,
             "position": {
                 "x": 27.20356559753418,
                 "y": 1.9073486328125e-05,
@@ -1149,7 +1148,7 @@
         },
         {
             "type": 2,
-            "parentUID": -1756162176,
+            "parentUID": 1604507520,
             "position": {
                 "x": 35.55120849609375,
                 "y": 1.1444091796875e-05,
@@ -1169,7 +1168,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1804140288,
+            "parentUID": 1288865280,
             "position": {
                 "x": 35.489654541015625,
                 "y": -3.814697265625e-06,
@@ -1189,7 +1188,7 @@
         },
         {
             "type": 2,
-            "parentUID": -581369216,
+            "parentUID": -429079648,
             "position": {
                 "x": 12.316841125488281,
                 "y": -0.5208740234375,
@@ -1209,7 +1208,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1022263744,
+            "parentUID": 578968128,
             "position": {
                 "x": 4.8670806884765625,
                 "y": -7.62939453125e-06,
@@ -1229,7 +1228,7 @@
         },
         {
             "type": 2,
-            "parentUID": -1624523264,
+            "parentUID": 373136608,
             "position": {
                 "x": 4.8670883178710938,
                 "y": 0,
@@ -1249,7 +1248,7 @@
         },
         {
             "type": 2,
-            "parentUID": -394210304,
+            "parentUID": -156669728,
             "position": {
                 "x": 17.315139770507813,
                 "y": -2.6357574462890625,
@@ -1269,7 +1268,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1275933824,
+            "parentUID": -615117888,
             "position": {
                 "x": 5.438873291015625,
                 "y": 3.814697265625e-06,
@@ -1289,7 +1288,7 @@
         },
         {
             "type": 2,
-            "parentUID": 561123392,
+            "parentUID": -862264576,
             "position": {
                 "x": 5.4388504028320313,
                 "y": 7.62939453125e-06,
@@ -1309,7 +1308,7 @@
         },
         {
             "type": 2,
-            "parentUID": 898129216,
+            "parentUID": -1362800384,
             "position": {
                 "x": 17.315139770507813,
                 "y": -2.6325531005859375,
@@ -1329,7 +1328,7 @@
         },
         {
             "type": 2,
-            "parentUID": -262852400,
+            "parentUID": -56948048,
             "position": {
                 "x": 6.3453369140625,
                 "y": -7.62939453125e-06,
@@ -1349,7 +1348,7 @@
         },
         {
             "type": 2,
-            "parentUID": -1025130752,
+            "parentUID": 1170557696,
             "position": {
                 "x": 6.3453140258789063,
                 "y": 0,
@@ -1369,7 +1368,7 @@
         },
         {
             "type": 2,
-            "parentUID": -1946873600,
+            "parentUID": 753535104,
             "position": {
                 "x": 17.315170288085938,
                 "y": -2.62933349609375,
@@ -1389,7 +1388,7 @@
         },
         {
             "type": 2,
-            "parentUID": -923231808,
+            "parentUID": -2021458304,
             "position": {
                 "x": 5.4388198852539063,
                 "y": -7.62939453125e-06,
@@ -1409,7 +1408,7 @@
         },
         {
             "type": 2,
-            "parentUID": -1634446848,
+            "parentUID": -933031360,
             "position": {
                 "x": 5.438873291015625,
                 "y": -7.62939453125e-06,
@@ -1429,7 +1428,7 @@
         },
         {
             "type": 2,
-            "parentUID": -837957440,
+            "parentUID": -767839680,
             "position": {
                 "x": 17.315177917480469,
                 "y": -2.6263198852539063,
@@ -1449,7 +1448,7 @@
         },
         {
             "type": 2,
-            "parentUID": -1986107392,
+            "parentUID": 734082496,
             "position": {
                 "x": 4.5323410034179688,
                 "y": 7.62939453125e-06,
@@ -1469,7 +1468,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1475894528,
+            "parentUID": 1221236224,
             "position": {
                 "x": 4.5324172973632813,
                 "y": 1.9073486328125e-05,
@@ -1489,7 +1488,7 @@
         },
         {
             "type": 2,
-            "parentUID": -681396800,
+            "parentUID": 1863319168,
             "position": {
                 "x": 33.545333862304688,
                 "y": -3.0458526611328125,
@@ -1509,7 +1508,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1073204480,
+            "parentUID": -1095831424,
             "position": {
                 "x": 10.931564331054688,
                 "y": -0.26627349853515625,
@@ -1529,7 +1528,7 @@
         },
         {
             "type": 2,
-            "parentUID": -1289892224,
+            "parentUID": 569249408,
             "position": {
                 "x": -1.52587890625e-05,
                 "y": 2.09808349609375e-05,
@@ -1549,7 +1548,7 @@
         },
         {
             "type": 2,
-            "parentUID": -1181181568,
+            "parentUID": 1593654656,
             "position": {
                 "x": 59.167976379394531,
                 "y": 9.5367431640625e-07,
@@ -1569,7 +1568,7 @@
         },
         {
             "type": 2,
-            "parentUID": 73999800,
+            "parentUID": -1823295360,
             "position": {
                 "x": 59.505092620849609,
                 "y": 0,
@@ -1589,7 +1588,7 @@
         },
         {
             "type": 2,
-            "parentUID": 956020864,
+            "parentUID": 1280985216,
             "position": {
                 "x": 14.912969589233398,
                 "y": 24.276681900024414,
@@ -1609,7 +1608,7 @@
         },
         {
             "type": 2,
-            "parentUID": -488615200,
+            "parentUID": 49875460,
             "position": {
                 "x": 0,
                 "y": -9.5367431640625e-06,
@@ -1629,7 +1628,7 @@
         },
         {
             "type": 2,
-            "parentUID": -791958976,
+            "parentUID": -1331842560,
             "position": {
                 "x": 59.167984008789063,
                 "y": 7.62939453125e-06,
@@ -1649,7 +1648,7 @@
         },
         {
             "type": 2,
-            "parentUID": -771969920,
+            "parentUID": -1986256640,
             "position": {
                 "x": 59.505081176757813,
                 "y": -3.814697265625e-06,
@@ -1669,7 +1668,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1615396736,
+            "parentUID": -1376274688,
             "position": {
                 "x": 14.912970542907715,
                 "y": 24.276681900024414,
