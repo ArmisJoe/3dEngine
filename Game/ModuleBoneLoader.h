@@ -21,11 +21,10 @@ public:	// Module::
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
-public: // AnimationLoader::
+public: // BoneLoader::
 	bool Import(const aiBone* bone, std::string& output_file);
 	bool Load(const char* file, ResourceBone* res);
 	bool Save(const ResourceBone& bone, std::string& output_file);
-	ResourceBone* ImportToLoad(aiBone* bone);
 };
 
 #endif // !__MODULE_BONELOADER_H__

@@ -1,7 +1,12 @@
 #include "ModuleBoneLoader.h"
+#include "ResourceBone.h"
+#include "Assimp/include/mesh.h"
+
+#include "mmgr/mmgr.h"
 
 ModuleBoneLoader::ModuleBoneLoader(bool start_enabled) : Module(start_enabled)
 {
+	name = "Bone Loader";
 }
 
 ModuleBoneLoader::~ModuleBoneLoader()
@@ -40,6 +45,13 @@ bool ModuleBoneLoader::CleanUp()
 
 bool ModuleBoneLoader::Import(const aiBone * bone, std::string & output_file)
 {
+	bool ret = false;
+
+	if (bone == nullptr) // Non-Valid Bone
+		return false;
+
+	ResourceBone tmp_bone;
+
 	return false;
 }
 
@@ -53,9 +65,5 @@ bool ModuleBoneLoader::Save(const ResourceBone & bone, std::string & output_file
 	return false;
 }
 
-ResourceBone * ModuleBoneLoader::ImportToLoad(aiBone * bone)
-{
-	return nullptr;
-}
 
 
