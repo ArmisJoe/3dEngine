@@ -61,7 +61,7 @@ void ComponentAnimation::Update(float dt)
 	// Bone Movement
 	if (this->HasParent()) {
 		for (int i = 0; i < anim->NumChannels(); i++) {
-			Bone* b = anim->Channels[i];
+			AnimNode* b = anim->Channels[i];
 			GameObject* targetGo = CheckBoneGoMatch(this->parent, b);
 			if (targetGo != nullptr) { // Now we have the Go ('BoneGo') that will move
 				ComponentTransform* trans = (ComponentTransform*)targetGo->FindComponent(componentType_Transform);
@@ -71,13 +71,18 @@ void ComponentAnimation::Update(float dt)
 					TransformKeys::VectorKey* bSca = b->GetScaByTime(this->time);
 					// NO INTERPOLATION
 					if (bPos != nullptr) {
-						trans->SetPosition(bPos->value);
+						trans->ChangeLocalPosition(bPos->value);
 					}
 					if (bRot != nullptr) {
-						trans->SetRotation(bRot->value);
+						Quat newQ;
+						newQ.x = bRot->value.x * RADTODEG;
+						newQ.y = bRot->value.y * RADTODEG;
+						newQ.z = bRot->value.z * RADTODEG;
+						newQ.w = bRot->value.w * RADTODEG;
+						trans->ChangeLocalRotation(newQ);
 					}
 					if (bSca != nullptr) {
-						trans->SetScale(bSca->value);
+						trans->ChangeLocalScale(bSca->value);
 					}
 
 				}
@@ -114,7 +119,7 @@ void ComponentAnimation::DrawBones()
 		return;
 
 	for (int i = 0; i < anim->NumChannels(); i++) {
-		Bone* b = anim->Channels[i];
+		AnimNode* b = anim->Channels[i];
 		TransformKeys::VectorKey* pos = nullptr;
 		for (int n = 0; n < b->NumPositionKeys(); n++) {
 			if (b->transKeys.positionKeys[n].time == time) {
@@ -132,7 +137,7 @@ void ComponentAnimation::DrawBones()
 	}
 }
 
-GameObject* ComponentAnimation::CheckBoneGoMatch(GameObject* go, Bone * b)
+GameObject* ComponentAnimation::CheckBoneGoMatch(GameObject* go, AnimNode * b)
 {
 	GameObject* ret = nullptr;
 	

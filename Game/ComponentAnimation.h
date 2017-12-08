@@ -43,7 +43,7 @@ public: // ComponentAnimation::
 	bool isPause() const;
 private:
 	void DrawBones();
-	GameObject* CheckBoneGoMatch(GameObject* go, Bone* b);
+	GameObject* CheckBoneGoMatch(GameObject* go, AnimNode* b);
 	
 public:
 	Animation* anim = nullptr;

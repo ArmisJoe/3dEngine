@@ -240,7 +240,7 @@ void ComponentTransform::ChangeLocalRotation(const Quat & rotation)
 
 	float3 rot = float3::zero;
 
-	rot = RadToDeg(rotation.ToEulerXYX()) - RadToDeg(localRot.ToEulerXYZ());
+	rot = RadToDeg(rotation.ToEulerXYZ()) - RadToDeg(localRot.ToEulerXYZ());
 
 	localRot = rotation;
 

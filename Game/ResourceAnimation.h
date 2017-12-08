@@ -7,7 +7,7 @@
 
 #include "MathGeoLib\MathGeoLib.h"
 
-struct Bone;
+struct AnimNode;
 struct TransformKeys;
 
 class Animation {
@@ -20,7 +20,7 @@ public:
 	std::string name;
 	unsigned int duration = 0;
 	unsigned int tickspersec = 0;
-	std::vector<Bone*> Channels; // Bones
+	std::vector<AnimNode*> Channels; // Bones
 
 public: // Utilities
 	float DurationSec() const {
@@ -49,10 +49,10 @@ struct TransformKeys {
 	std::vector<VectorKey> scalingKeys;
 };
 
-class Bone {
+class AnimNode {
 public:
-	Bone() {};
-	virtual ~Bone() {};
+	AnimNode() {};
+	virtual ~AnimNode() {};
 public:
 	std::string name;
 	TransformKeys transKeys;

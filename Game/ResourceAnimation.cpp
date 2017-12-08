@@ -22,12 +22,12 @@ void Animation::CleanUp()
 }
 
 // [BONE]
-void Bone::CleanUp()
+void AnimNode::CleanUp()
 {
 
 }
 
-TransformKeys::VectorKey * Bone::GetPosByTime(double time)
+TransformKeys::VectorKey * AnimNode::GetPosByTime(double time)
 {
 	TransformKeys::VectorKey* ret = nullptr;
 
@@ -41,7 +41,7 @@ TransformKeys::VectorKey * Bone::GetPosByTime(double time)
 	return ret;
 }
 
-TransformKeys::QuatKey * Bone::GetRotByTime(double time)
+TransformKeys::QuatKey * AnimNode::GetRotByTime(double time)
 {
 	TransformKeys::QuatKey* ret = nullptr;
 
@@ -55,7 +55,7 @@ TransformKeys::QuatKey * Bone::GetRotByTime(double time)
 	return ret;
 }
 
-TransformKeys::VectorKey * Bone::GetScaByTime(double time)
+TransformKeys::VectorKey * AnimNode::GetScaByTime(double time)
 {
 	TransformKeys::VectorKey* ret = nullptr;
 
