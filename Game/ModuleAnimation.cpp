@@ -81,6 +81,15 @@ void ModuleAnimation::DeformMeshes(GameObject* go)
 		{
 			// We should loop onto every bone
 			// and call AdaptToBone((*it));
+			vector<Component*> comps = go->FindComponents(componentType_Bone);
+			if (!comps.empty())
+			{
+				for (uint i = 0; i < comps.size(); ++i)
+				{
+					AdaptToBone((ComponentBone*)comps[i]);
+				}
+			}
+
 			DeformMeshes((*it));
 		}
 	}

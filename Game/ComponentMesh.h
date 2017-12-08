@@ -2,6 +2,8 @@
 
 #include "Component.h"
 
+class ComponentBone;
+
 class ComponentMesh : public Component {
 public:
 	ComponentMesh();
@@ -52,4 +54,5 @@ public:
 	ComponentMesh* skin = nullptr;
 	float* normals;
 	uint id_normals;
+	vector<ComponentBone*> bones;
 };
