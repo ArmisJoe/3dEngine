@@ -104,6 +104,7 @@
     <ClInclude Include="ModuleAnimation.h" />
     <ClInclude Include="ModuleAnimationLoader.h" />
     <ClInclude Include="ModuleAssimp.h" />
+    <ClInclude Include="ModuleBoneLoader.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleEditorUI.h" />
     <ClInclude Include="ModuleFileSystem.h" />
@@ -199,6 +200,7 @@
     <ClInclude Include="MathGeoLib\Time\Clock.h" />
     <ClInclude Include="QuadTreeh.h" />
     <ClInclude Include="ResourceAnimation.h" />
+    <ClInclude Include="ResourceBone.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +234,7 @@
     <ClCompile Include="ModuleAnimationLoader.cpp" />
     <ClCompile Include="ModuleAssimp.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
+    <ClCompile Include="ModuleBoneLoader.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleEditorUI.cpp" />
     <ClCompile Include="ModuleFileSystem.cpp" />

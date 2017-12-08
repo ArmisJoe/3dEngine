@@ -2,6 +2,7 @@
 
 #include "Component.h"
 #include "ComponentMesh.h"
+#include "ResourceBone.h"
 
 class ComponentBone : public Component {
 public:
@@ -22,7 +23,7 @@ public:
 public:
 	ComponentMesh* GetMesh() const { return mesh; }
 public:
-	float4x4 Matrix = float4x4::identity;
+	ResourceBone* bone = nullptr;
 private:
 	ComponentMesh* mesh = nullptr;
 };
