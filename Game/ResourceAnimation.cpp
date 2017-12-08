@@ -22,7 +22,7 @@ void Animation::CleanUp()
 }
 
 // [BONE]
-void Bone::CleanUp()
+void AnimationNode::CleanUp()
 {
 
 }

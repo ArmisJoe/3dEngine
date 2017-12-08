@@ -51,7 +51,7 @@ void ComponentAnimation::DrawBones()
 		return;
 
 	for (int i = 0; i < anim->NumChannels(); i++) {
-		Bone* b = anim->Channels[i];
+		AnimationNode* b = anim->Channels[i];
 		TransformKeys::VectorKey* pos = nullptr;
 		for (int n = 0; n < b->NumPositionKeys(); n++) {
 			if (b->transKeys.positionKeys[n].time == time) {

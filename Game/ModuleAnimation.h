@@ -4,6 +4,7 @@
 
 #include "Module.h"
 #include "GameObject.h"
+#include "ComponentBone.h"
 
 class ModuleAnimation : public Module {
 public:
@@ -20,7 +21,7 @@ public:	// Module::
 private:
 	void ResetAllDeformableMeshes(GameObject* go);
 	void DeformMeshes(GameObject* go);
-	void AdaptToBone(Bone* bone);
+	void AdaptToBone(ComponentBone* bone);
 };
 
 #endif // MODULE_ANIMATION

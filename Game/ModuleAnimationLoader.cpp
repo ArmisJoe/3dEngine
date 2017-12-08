@@ -58,7 +58,7 @@ bool ModuleAnimationLoader::Import(const aiAnimation * anim, std::string & outpu
 	new_anim.tickspersec = anim->mTicksPerSecond;
 	
 	for (uint i = 0; i < anim->mNumChannels; i++) {
-		Bone* new_bone = ImportBone(anim->mChannels[i]);
+		AnimationNode* new_bone = ImportBone(anim->mChannels[i]);
 		if(new_bone != nullptr)
 			new_anim.Channels.push_back(new_bone);
 	}
@@ -111,7 +111,7 @@ bool ModuleAnimationLoader::Load(const char * file, Animation* res)
 		for (uint i = 0; i < nChannels; i++) {
 			// Friendly Reminder: Channel Buffer Format:
 			// [Ns N nP Pt Pv nR Rt Rv nS St Sv]
-			Bone* new_b = new Bone();
+			AnimationNode* new_b = new AnimationNode();
 			// Name Size
 			uint bNameSize;
 			memcpy(&bNameSize, it, sizeof(uint));
@@ -209,7 +209,7 @@ bool ModuleAnimationLoader::Save(const Animation & anim, std::string & output_fi
 	// [Ns N nP Pt Pv nR Rt Rv nS St Sv]
 	for (int i = 0; i < nchnls; i++) {
 		
-		Bone* chnl = anim.Channels[i];
+		AnimationNode* chnl = anim.Channels[i];
 		buffer_size += sizeof(uint); // Ns Size
 		buffer_size += sizeof(char) * chnl->name.length(); // N Size
 	
@@ -257,7 +257,7 @@ bool ModuleAnimationLoader::Save(const Animation & anim, std::string & output_fi
 	for (uint i = 0; i < anim.NumChannels(); i++) {
 		// Friendly Reminder: Channel Buffer Format:
 		// [Ns N nP Pt Pv nR Rt Rv nS St Sv]
-		Bone* chnl = anim.Channels[i];
+		AnimationNode* chnl = anim.Channels[i];
 		// Name Size
 		uint tmp_chNs = chnl->name.size();
 		memcpy(it, &tmp_chNs, sizeof(uint));
@@ -352,12 +352,12 @@ Animation * ModuleAnimationLoader::ImportToLoad(aiAnimation * anim)
 	return new_anim;
 }
 
-Bone * ModuleAnimationLoader::ImportBone(const aiNodeAnim * node)
+AnimationNode * ModuleAnimationLoader::ImportBone(const aiNodeAnim * node)
 {
 	if (node == nullptr)
 		return nullptr;
 
-	Bone* new_b = new Bone();
+	AnimationNode* new_b = new AnimationNode();
 
 	new_b->name = node->mNodeName.C_Str();
 	

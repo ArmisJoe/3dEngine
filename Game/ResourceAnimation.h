@@ -8,7 +8,7 @@
 #include "MathGeoLib\MathGeoLib.h"
 #include "ComponentMesh.h"
 
-struct Bone;
+struct AnimationNode;
 struct TransformKeys;
 
 class Animation {
@@ -21,7 +21,7 @@ public:
 	std::string name;
 	unsigned int duration = 0;
 	unsigned int tickspersec = 0;
-	std::vector<Bone*> Channels; // Bones
+	std::vector<AnimationNode*> Channels; // Bones
 	ComponentMesh* ResourceMesh = nullptr;
 
 public: // Utilities
@@ -51,19 +51,16 @@ struct TransformKeys {
 	std::vector<VectorKey> scalingKeys;
 };
 
-class Bone {
+class AnimationNode {
 public:
-	Bone() {};
-	virtual ~Bone() {};
+	AnimationNode() {};
+	virtual ~AnimationNode() {};
 public:
 	std::string name;
 	TransformKeys transKeys;
-	ComponentMesh* parent;
 public:
 	void CleanUp();
-	ComponentMesh* GetParent() const {
-		return parent;
-	}
+
 public: // Utilities
 	int NumPositionKeys() const {
 		return transKeys.positionKeys.size();

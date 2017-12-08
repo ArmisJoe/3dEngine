@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ResourceAnimation.h"
 #include "ComponentTransform.h"
+#include "ComponentBone.h"
 
 ModuleAnimation::ModuleAnimation(bool start_enabled) : Module(start_enabled)
 {
@@ -85,17 +86,17 @@ void ModuleAnimation::DeformMeshes(GameObject* go)
 	}
 }
 
-void ModuleAnimation::AdaptToBone(Bone * bone)
+void ModuleAnimation::AdaptToBone(ComponentBone * bone)
 {
 	if (bone != nullptr)
 		return;
 
-	ComponentMesh* m = bone->GetParent();
+	/*ComponentMesh* m = bone->GetParent();
 	if (m != nullptr)
 		return;
 			
 	float4x4 trans = m->GetParent()->GetTransform()->GetGlobalTransformMatrix();
 	trans = trans * m->GetParent()->GetTransform()->GetLocalTransformMatrix().Inverted();
-	//trans = trans * rbone->offset; // OFFSET?¿?¿?¿?
+	//trans = trans * rbone->offset; // OFFSET?¿?¿?¿?*/
 
 }
