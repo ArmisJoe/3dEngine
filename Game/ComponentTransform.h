@@ -27,6 +27,9 @@ public:
 	void SetRotationFromParent(const Quat& rotation);
 	void SetScaleFromParent(const float3& scale);
 
+	void ChangeLocalPosition(const float3& position);
+	void ChangeLocalRotation(const Quat& rotation);
+	void ChangeLocalScale(const float3& scale);
 
 	void LoadPosition(const float3& position);
 	void LoadRotation(const Quat& rotation);
