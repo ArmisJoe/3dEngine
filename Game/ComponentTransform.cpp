@@ -112,20 +112,20 @@ void ComponentTransform::Update(float dt)
 }
 
 void ComponentTransform::SetLocalTrans()
- {
+{
 	if (GetParent() != nullptr && GetParent()->GetParent() != nullptr)
-		 {
+	{
 		ComponentTransform* parentTrans = (ComponentTransform*)GetParent()->GetParent()->GetTransform();
 		if (parentTrans != nullptr)
-			 {
+		{
 			localPos = position_global - parentTrans->position_global;
 			localRot = rotation_global * parentTrans->rotation_global.Conjugated();
 			localScale = scale_global.Mul(parentTrans->scale_global.Recip());
 			GetParent()->GetParent()->GetTransform()->SetLocalTrans();
 			UpdateNeeded = false;
-			}
-		}	
+		}
 	}
+}
 
 void ComponentTransform::UpdateChildren(float3 pos_offset, float3 scale_offset, Quat rot_offset)
 {
@@ -137,7 +137,7 @@ void ComponentTransform::UpdateChildren(float3 pos_offset, float3 scale_offset, 
 			{
 				GameObject* curr = (*it);
 				ComponentTransform* transform = curr->GetTransform();
-				
+
 				transform->SetPositionFromParent(pos_offset);
 				transform->SetScaleFromParent(scale_offset);
 				transform->SetRotationFromParent(rot_offset);
@@ -226,6 +226,40 @@ void ComponentTransform::SetScaleFromParent(const float3 & scale)
 	scale_global += scale;
 	transform_modified = true;
 }
+void ComponentTransform::ChangeLocalPosition(const float3 & position)
+{
+	float3 pos = float3::zero;
+	pos = position - localPos;
+	localPos = position;
+	position_global += pos;
+	transform_modified = true;
+}
+
+void ComponentTransform::ChangeLocalRotation(const Quat & rotation)
+{
+
+	float3 rot = float3::zero;
+
+	rot = RadToDeg(rotation.ToEulerXYX()) - RadToDeg(localRot.ToEulerXYZ());
+
+	localRot = rotation;
+
+	rotinEuler_global += rot;
+
+	rotation_global = Quat::FromEulerXYZ(DegToRad(rotinEuler_global.x), DegToRad(rotinEuler_global.y), DegToRad(rotinEuler_global.z));
+
+	transform_modified = true;
+}
+
+void ComponentTransform::ChangeLocalScale(const float3 & scale)
+{
+	float3 sca = float3::zero;
+	sca = scale - localScale;
+	localScale = scale;
+	scale_global += sca;
+	transform_modified = true;
+}
+
 void ComponentTransform::SetRotationFromParent(const Quat& rot)
 {
 	rotation_global = rotation_global * rot.Normalized();
@@ -302,8 +336,8 @@ void ComponentTransform::OnEditor()
 		}
 	}
 
-	if (off_pos.x != 0 || off_pos.y != 0 || off_pos.z != 0 || off_sca.x != 0 || off_sca.y != 0 || off_sca.z != 0 || off_rot.x != 0|| off_rot.y != 0|| off_rot.z != 0)		
-	UpdateChildren(off_pos, off_sca, off_rot);
+	if (off_pos.x != 0 || off_pos.y != 0 || off_pos.z != 0 || off_sca.x != 0 || off_sca.y != 0 || off_sca.z != 0 || off_rot.x != 0 || off_rot.y != 0 || off_rot.z != 0)
+		UpdateChildren(off_pos, off_sca, off_rot);
 
 	ImGui::TextColored(COLOR_YELLOW, "Local Transform:");
 	float lpos[3];
@@ -335,7 +369,7 @@ void ComponentTransform::OnEditor()
 	if (ImGui::DragFloat3("LRotation:", lrot, 0.1f)) {
 		if (GetParent() != nullptr && !GetParent()->IsStatic())
 		{
-		/*	rotation_global = rotation_global.FromEulerXYZ(DegToRad(lrot[0]), DegToRad(lrot[1]), DegToRad(lrot[2]));
+			/*	rotation_global = rotation_global.FromEulerXYZ(DegToRad(lrot[0]), DegToRad(lrot[1]), DegToRad(lrot[2]));
 			rotinEuler_global = RadToDeg(rotation_global.ToEulerXYX());
 			transform_modified = true;
 			UpdateNeeded = true;*/
