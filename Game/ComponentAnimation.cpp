@@ -71,12 +71,7 @@ void ComponentAnimation::Update(float dt)
 					TransformKeys::VectorKey bSca = b->GetScaByTime(this->time);
 					// NO INTERPOLATION
 					trans->ChangeLocalPosition(bPos.value);
-					Quat newQ;
-					newQ.x = bRot.value.x * RADTODEG;
-					newQ.y = bRot.value.y * RADTODEG;
-					newQ.z = bRot.value.z * RADTODEG;
-					newQ.w = bRot.value.w * RADTODEG;
-					trans->ChangeLocalRotation(newQ);
+					trans->ChangeLocalRotation(bRot.value);
 					trans->ChangeLocalScale(bSca.value);
 
 				}
