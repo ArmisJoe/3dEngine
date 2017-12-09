@@ -253,7 +253,9 @@
     <ClCompile Include="ComponentBone.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleBoneLoader.cpp" />
+    <ClCompile Include="ModuleBoneLoader.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glew-2.1.0\include\GL\eglew.h" />

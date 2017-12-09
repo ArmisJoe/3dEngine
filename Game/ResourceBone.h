@@ -7,9 +7,11 @@
 
 #include "MathGeoLib\MathGeoLib.h"
 
+using namespace std;
+
 class ResourceBone {
 public:
-
+	string name = nullptr;
 	float3 position = float3::zero;
 	// texture coordinates ??¿?¿?¿?¿?
 	// Normal?¿?¿?

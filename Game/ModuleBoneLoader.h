@@ -5,10 +5,11 @@
 #include "Module.h"
 
 #include "ResourceBone.h"
+#include "Application.h"
 
 struct aiBone;
 
-#define EXTENSION_ANIMATIONS "mybone"
+#define EXTENSION_BONES "mybone"
 
 class ModuleBoneLoader : public Module {
 public:

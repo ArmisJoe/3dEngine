@@ -8,6 +8,7 @@
 #define LIBRARY_MATERIALS "Library/Materials/"
 #define LIBRARY_MESHES "Library/Meshes/"
 #define LIBRARY_ANIMATIONS "Library/Animations/"
+#define LIBRARY_BONES "Library/Animations/Bones"
 
 #define SETTINGS_DIRECTORY "Settings/"
 
