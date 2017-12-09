@@ -66,24 +66,18 @@ void ComponentAnimation::Update(float dt)
 			if (targetGo != nullptr) { // Now we have the Go ('BoneGo') that will move
 				ComponentTransform* trans = (ComponentTransform*)targetGo->FindComponent(componentType_Transform);
 				if (trans != nullptr) {
-					TransformKeys::VectorKey* bPos = b->GetPosByTime(this->time);
-					TransformKeys::QuatKey* bRot = b->GetRotByTime(this->time);
-					TransformKeys::VectorKey* bSca = b->GetScaByTime(this->time);
+					TransformKeys::VectorKey bPos = b->GetPosByTime(this->time);
+					TransformKeys::QuatKey bRot = b->GetRotByTime(this->time);
+					TransformKeys::VectorKey bSca = b->GetScaByTime(this->time);
 					// NO INTERPOLATION
-					if (bPos != nullptr) {
-						trans->ChangeLocalPosition(bPos->value);
-					}
-					if (bRot != nullptr) {
-						Quat newQ;
-						newQ.x = bRot->value.x * RADTODEG;
-						newQ.y = bRot->value.y * RADTODEG;
-						newQ.z = bRot->value.z * RADTODEG;
-						newQ.w = bRot->value.w * RADTODEG;
-						trans->ChangeLocalRotation(newQ);
-					}
-					if (bSca != nullptr) {
-						trans->ChangeLocalScale(bSca->value);
-					}
+					trans->ChangeLocalPosition(bPos.value);
+					Quat newQ;
+					newQ.x = bRot.value.x * RADTODEG;
+					newQ.y = bRot.value.y * RADTODEG;
+					newQ.z = bRot.value.z * RADTODEG;
+					newQ.w = bRot.value.w * RADTODEG;
+					trans->ChangeLocalRotation(newQ);
+					trans->ChangeLocalScale(bSca.value);
 
 				}
 			}
