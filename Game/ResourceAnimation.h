@@ -67,8 +67,8 @@ public: // Bone::
 public: // Utilities
 
 	TransformKeys::VectorKey InterpolatePos(TransformKeys::VectorKey from, TransformKeys::VectorKey to, float time);
-	TransformKeys::QuatKey InterpolateRot(TransformKeys::QuatKey* from, TransformKeys::QuatKey* to, float time);
-	TransformKeys::VectorKey InterpolateSca(TransformKeys::VectorKey* from, TransformKeys::VectorKey* to, float time);
+	TransformKeys::QuatKey InterpolateRot(TransformKeys::QuatKey from, TransformKeys::QuatKey to, float time);
+	TransformKeys::VectorKey InterpolateSca(TransformKeys::VectorKey from, TransformKeys::VectorKey to, float time);
 
 	int NumPositionKeys() const {
 		return transKeys.positionKeys.size();
