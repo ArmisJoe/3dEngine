@@ -4,7 +4,7 @@
 
 #include <string>
 #include <vector>
-
+#include "ComponentMesh.h"
 #include "MathGeoLib\MathGeoLib.h"
 
 using namespace std;
@@ -12,13 +12,12 @@ using namespace std;
 class ResourceBone {
 public:
 	string name = nullptr;
-	float3 position = float3::zero;
 	// texture coordinates ??¿?¿?¿?¿?
 	// Normal?¿?¿?
 	uint num_weigths = 0;
 	uint* indices = nullptr;
 	float* weigths = nullptr;
-	//ComponentMesh* mesh = nullptr;
+	ComponentMesh* mesh = nullptr;
 
 	// The reason why we need this matrix is because 
 	// the vertices are stored in the usual local space. 

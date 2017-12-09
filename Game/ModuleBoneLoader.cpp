@@ -74,7 +74,65 @@ bool ModuleBoneLoader::Import(const aiBone * bone, std::string & output_file)
 
 bool ModuleBoneLoader::Load(const char * file, ResourceBone * res)
 {
-	return false;
+	bool ret = false;
+	if (res == nullptr)
+	{
+		LOG("BonesLoad::Load() -> invalid file path");
+		return false;
+	}
+
+	char* buffer = nullptr;
+	uint buffer_size = App->fs->Load(file, &buffer);
+
+	if (buffer == nullptr)
+		return false;
+	if (buffer_size <= 0)
+		return false;
+
+	char* it = buffer;
+
+	// need to load componentmesh
+	// [Ns N NWs Ts Is Ws]
+
+	//name size
+	uint name_size;
+	memcpy(&name_size, it, sizeof(name_size));
+	it += sizeof(name_size);
+
+	//name
+	char* tmp_name = new char[name_size + 1];
+	memcpy(tmp_name, it, name_size);
+	memcpy(&tmp_name[name_size], "\0", 1);
+	res->name = tmp_name;
+	mdelete[] tmp_name;
+	it += name_size;
+	//number of weights
+	memcpy(&res->num_weigths, it, sizeof(res->num_weigths));
+	it += sizeof(res->num_weigths);
+	//trans
+	memcpy(&res->trans, it, sizeof(res->trans));
+	it += sizeof(res->trans);
+	//alloc
+	uint size = name_size + sizeof(res->num_weigths) + sizeof(res->trans) 
+		+ sizeof(uint) * res->num_weigths + sizeof(float) * res->num_weigths;
+	
+	res->indices = new uint[res->num_weigths];
+	res->weigths = new float[res->num_weigths];
+
+	//indices
+	memcpy(&res->indices, it, sizeof(res->indices));
+	it += sizeof(res->indices);
+	//weights
+	memcpy(&res->weigths, it, sizeof(res->weigths));
+	it += sizeof(res->weigths);	
+
+
+	if (buffer != nullptr)
+		mdelete[] buffer;
+
+	ret = true;
+
+	return ret;
 }
 
 bool ModuleBoneLoader::Save(const ResourceBone & bone, std::string & output_file)
