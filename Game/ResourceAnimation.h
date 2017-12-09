@@ -8,7 +8,8 @@
 #include "MathGeoLib\MathGeoLib.h"
 #include "ComponentMesh.h"
 
-struct AnimationNode;
+struct AnimNode;
+
 struct TransformKeys;
 
 class Animation {
@@ -21,9 +22,9 @@ public:
 	std::string name;
 	unsigned int duration = 0;
 	unsigned int tickspersec = 0;
-	std::vector<AnimationNode*> Channels; // Bones
-	ComponentMesh* ResourceMesh = nullptr;
-
+  
+	std::vector<AnimNode*> Channels; // Bones
+  
 public: // Utilities
 	float DurationSec() const {
 		return (float)(duration / tickspersec);
@@ -51,17 +52,27 @@ struct TransformKeys {
 	std::vector<VectorKey> scalingKeys;
 };
 
-class AnimationNode {
+class AnimNode {
 public:
-	AnimationNode() {};
-	virtual ~AnimationNode() {};
+	AnimNode() {};
+	virtual ~AnimNode() {};
 public:
 	std::string name;
 	TransformKeys transKeys;
 public:
 	void CleanUp();
 
+public: // Bone::
+	TransformKeys::VectorKey GetPosByTime(double time);
+	TransformKeys::QuatKey GetRotByTime(double time);
+	TransformKeys::VectorKey GetScaByTime(double time);
+
 public: // Utilities
+
+	TransformKeys::VectorKey InterpolatePos(TransformKeys::VectorKey from, TransformKeys::VectorKey to, float time);
+	TransformKeys::QuatKey InterpolateRot(TransformKeys::QuatKey from, TransformKeys::QuatKey to, float time);
+	TransformKeys::VectorKey InterpolateSca(TransformKeys::VectorKey from, TransformKeys::VectorKey to, float time);
+
 	int NumPositionKeys() const {
 		return transKeys.positionKeys.size();
 	}

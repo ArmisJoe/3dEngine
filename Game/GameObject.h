@@ -67,7 +67,7 @@ public:
 
 	void Serialize(JSON_Doc* doc);
 
-
+	Component* FindComponent(const int type);
 	std::vector<Component*> FindComponents(const int type);
 	Component* AddComponent(const int type, Component* componentPointer = nullptr, bool fromReference = true);
 	void DestroyComponent(Component* componentPointer = nullptr);

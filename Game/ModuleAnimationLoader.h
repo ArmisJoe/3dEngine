@@ -27,8 +27,7 @@ public: // AnimationLoader::
 	Animation* ImportToLoad(aiAnimation* anim);
 
 private:
-	AnimationNode* ImportBone(const aiNodeAnim* node);
-
+	AnimNode* ImportBone(const aiNodeAnim* node);
 };
 
 #endif // !__MODULE_ANIMATIONLOADER_H__
