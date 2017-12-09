@@ -9,6 +9,7 @@
 #include "ComponentMesh.h"
 #include "ComponentTransform.h"
 #include "ComponentAnimation.h"
+#include "ComponentBone.h"
 
 #include "PanelInspector.h"
 #include "ModuleParson.h"
@@ -180,6 +181,9 @@ Component * GameObject::AddComponent(const int type, Component * componentPointe
 		case componentType_Animation:
 			newComponent = new ComponentAnimation(this);
 			break;
+		case componentType_Bone:
+			newComponent = new ComponentBone(this);
+			break;
 		}
 
 		// Copy the 'Reference' Component into the New Component
@@ -203,6 +207,9 @@ Component * GameObject::AddComponent(const int type, Component * componentPointe
 				break;
 			case componentType_Animation:
 				bufferSize = sizeof(ComponentAnimation);
+				break;
+			case componentType_Bone:
+				bufferSize = sizeof(ComponentBone);
 				break;
 			}
 

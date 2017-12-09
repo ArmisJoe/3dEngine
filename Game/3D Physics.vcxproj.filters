@@ -244,9 +244,16 @@
     <ClCompile Include="ComponentAnimation.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleAnimation.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
     <ClCompile Include="ResourceAnimation.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentBone.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleBoneLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glew-2.1.0\include\GL\eglew.h" />
@@ -568,6 +575,18 @@
     </ClInclude>
     <ClInclude Include="ComponentAnimation.h">
       <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleAnimation.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentBone.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceBone.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleBoneLoader.h">
+      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

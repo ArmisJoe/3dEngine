@@ -16,7 +16,8 @@ enum componentType {
 	componentType_Transform,
 	componentType_Camera,
 	componentType_Animation,
-	// Unknown ALLWAYS Last
+	componentType_Bone,
+	// Unknown ALWAYS Last
 	componentType_Unknown
 };
 

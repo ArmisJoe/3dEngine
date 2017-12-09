@@ -92,9 +92,6 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 		}
 	}
 
-	
-
-
 	if (node->mName.length > 0)
 		new_node->SetName(node->mName.C_Str());
 
@@ -179,7 +176,6 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 		}
 		
 	}
-
 
 	if (node->mName.length > 0)
 		new_node->SetName(node->mName.C_Str());
@@ -372,7 +368,6 @@ bool ModuleAssimp::Import(const aiMesh * m, std::string & output_file)
 			}
 		}
 	}
-
 	ComponentMesh* new_mesh = nullptr;
 
 	new_mesh = new ComponentMesh();
@@ -394,13 +389,24 @@ bool ModuleAssimp::Import(const aiMesh * m, std::string & output_file)
 				LOG("Mesh face with != 3 indices!");
 			}
 			else
+			{
 				memcpy(&new_mesh->indices[i * 3], m->mFaces[i].mIndices, 3 * sizeof(uint));
+
+				//Normals
+				//don't mind me I'm just loading normals in here.
+				/*if (m->HasNormals()) {
+					new_mesh->normals = new float[new_mesh->num_vertices];
+					memcpy(new_mesh->normals, m->mNormals, sizeof(float) * 3 * new_mesh->num_vertices);*/
+				//}
+			}
 		}
 
 	}
 	else {
 		LOG("Mesh with no Faces");
 	}
+
+	//Normals
 
 	//UVS
 	if (m->HasTextureCoords(0))

@@ -6,8 +6,10 @@
 #include <vector>
 
 #include "MathGeoLib\MathGeoLib.h"
+#include "ComponentMesh.h"
 
 struct AnimNode;
+
 struct TransformKeys;
 
 class Animation {
@@ -20,8 +22,9 @@ public:
 	std::string name;
 	unsigned int duration = 0;
 	unsigned int tickspersec = 0;
+  
 	std::vector<AnimNode*> Channels; // Bones
-
+  
 public: // Utilities
 	float DurationSec() const {
 		return (float)(duration / tickspersec);
