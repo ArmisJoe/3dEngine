@@ -273,6 +273,8 @@ int ModuleFileSystem::GetTypeFromExtension(const char * ext)
 		ret = et_texture;
 	if (strcmp(ext, "FBX") == 0 || strcmp(ext, "fbx") == 0)
 		ret = et_geometry;
+	if (strcmp(ext, "DAE") == 0 || strcmp(ext, "dae") == 0)
+		ret = et_geometry;
 
 	return ret;
 }
