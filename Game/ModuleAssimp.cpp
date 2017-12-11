@@ -6,6 +6,7 @@
 #include "ComponentMesh.h"
 #include "ComponentTransform.h"
 #include "ComponentAnimation.h"
+#include "ComponentBone.h"
 
 #include "ModuleFileSystem.h"
 
@@ -171,8 +172,15 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 			}
 		}
 		// Bone Load
-		if (aimesh != nullptr && aimesh->HasBones()) {
-
+		if (new_mesh != nullptr && aimesh->HasBones()) {
+			ComponentBone* new_b = (ComponentBone*)new_node->AddComponent(componentType_Bone);
+			new_b->SetMesh(new_mesh);
+			for (int n = 0; n < aimesh->mNumBones; n++) {
+				ResourceBone* new_resB = new ResourceBone();
+				if (App->bone_loader->ImportToLoad(aimesh->mBones[n], new_resB)) {
+					new_b->skeleton.push_back(new_resB);
+				}
+			}
 		}
 		
 	}

@@ -5,7 +5,6 @@
 #include "Module.h"
 
 #include "ResourceBone.h"
-#include "Application.h"
 
 struct aiBone;
 
@@ -25,6 +24,8 @@ public:	// Module::
 public: // BoneLoader::
 	bool Import(const aiBone* bone, std::string& output_file);
 	bool Load(const char* file, ResourceBone* res);
+	bool ImportToLoad(const aiBone* bone, ResourceBone* res);
+
 	bool Save(const ResourceBone& bone, std::string& output_file);
 };
 

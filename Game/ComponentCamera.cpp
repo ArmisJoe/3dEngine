@@ -4,6 +4,7 @@
 
 ComponentCamera::ComponentCamera() : Component(componentType_Camera)
 {
+	typeName = "Camera";
 	name = "Camera";
 	frustum.type = FrustumType::PerspectiveFrustum;
 	frustum.nearPlaneDistance = 0.5f;
@@ -24,6 +25,7 @@ ComponentCamera::ComponentCamera() : Component(componentType_Camera)
 
 ComponentCamera::ComponentCamera(GameObject * argparent) : Component(componentType_Camera, argparent)
 {
+	typeName = "Camera";
 	name = "Camera";
 	frustum.type = FrustumType::PerspectiveFrustum;
 	frustum.nearPlaneDistance = 0.5f;
@@ -43,6 +45,7 @@ ComponentCamera::ComponentCamera(GameObject * argparent) : Component(componentTy
 
 ComponentCamera::ComponentCamera(componentType argtype, GameObject * argparent) : Component(componentType_Camera, argparent)
 {
+	typeName = "Camera";
 	name = "Camera";
 	frustum.type = FrustumType::PerspectiveFrustum;
 	frustum.nearPlaneDistance = 0.5f;
@@ -62,6 +65,7 @@ ComponentCamera::ComponentCamera(componentType argtype, GameObject * argparent) 
 
 ComponentCamera::~ComponentCamera()
 {
+	typeName = "Camera";
 }
 
 void ComponentCamera::OnEditor()

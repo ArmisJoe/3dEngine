@@ -4,16 +4,19 @@
 
 ComponentAnimation::ComponentAnimation() : Component(componentType_Animation)
 {
+	typeName = "Animation";
 	name = "Animation";
 }
 
 ComponentAnimation::ComponentAnimation(GameObject * argparent) : Component(componentType_Animation, argparent)
 {
+	typeName = "Animation";
 	name = "Animation";
 }
 
 ComponentAnimation::~ComponentAnimation()
 {
+	typeName = "Animation";
 }
 
 void ComponentAnimation::Start()

@@ -9,6 +9,7 @@
 
 ComponentTransform::ComponentTransform() : Component(componentType_Transform)
 {
+	typeName = "Transform";
 	name = "Transform";
 	numMax = 1;
 	position_global = { 0, 0, 0 };
@@ -20,6 +21,7 @@ ComponentTransform::ComponentTransform() : Component(componentType_Transform)
 
 ComponentTransform::ComponentTransform(GameObject* argparent) : Component(componentType_Transform, argparent)
 {
+	typeName = "Transform";
 	name = "Transform";
 	numMax = 1;
 	position_global = { 0, 0, 0 };
@@ -31,6 +33,7 @@ ComponentTransform::ComponentTransform(GameObject* argparent) : Component(compon
 
 ComponentTransform::ComponentTransform(componentType argtype, GameObject * argparent) : Component(componentType_Transform, argparent)
 {
+	typeName = "Transform";
 	name = "Transform";
 	numMax = 1;
 	position_global = { 0, 0, 0 };
@@ -42,6 +45,8 @@ ComponentTransform::ComponentTransform(componentType argtype, GameObject * argpa
 
 ComponentTransform::ComponentTransform(GameObject * argparent, float3 position, Quat rotation, float3 scale) : Component(componentType_Transform, argparent)
 {
+	typeName = "Transform";
+	name = "Transform";
 	this->position_global = position; this->rotation_global = rotation; this->scale_global = scale;
 	rotinEuler_global = RadToDeg(rotation_global.ToEulerXYX());
 	UpdateNeeded = true;

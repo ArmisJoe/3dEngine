@@ -5,6 +5,7 @@
 
 ComponentMaterial::ComponentMaterial() : Component(componentType_Material)
 {
+	typeName = "Material";
 	name = "Material";
 	numMax = 1;
 	for (int i = 0; i < texType_Unknown; i++) {
@@ -14,6 +15,7 @@ ComponentMaterial::ComponentMaterial() : Component(componentType_Material)
 
 ComponentMaterial::ComponentMaterial(GameObject* argparent) : Component(componentType_Material, argparent)
 {
+	typeName = "Material";
 	name = "Material";
 	numMax = 1;
 	for (int i = 0; i < texType_Unknown; i++) {
@@ -23,6 +25,7 @@ ComponentMaterial::ComponentMaterial(GameObject* argparent) : Component(componen
 
 ComponentMaterial::ComponentMaterial(componentType argtype, GameObject * argparent) : Component(componentType_Material, argparent)
 {
+	typeName = "Material";
 	name = "Material";
 	numMax = 1;
 	for (int i = 0; i < texType_Unknown; i++) {

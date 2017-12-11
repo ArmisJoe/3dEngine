@@ -11,8 +11,7 @@ using namespace std;
 
 class ResourceBone {
 public:
-	string name = nullptr;
-	// texture coordinates ??¿?¿?¿?¿?
+	string name;
 	// Normal?¿?¿?
 	uint num_weigths = 0;
 	uint* indices = nullptr;

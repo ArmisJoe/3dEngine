@@ -11,6 +11,7 @@
 
 ComponentMesh::ComponentMesh() : Component(componentType_Mesh)
 {
+	typeName = "Mesh";
 	name = "Mesh";
 	indices = nullptr;
 	vertices = nullptr;
@@ -19,6 +20,7 @@ ComponentMesh::ComponentMesh() : Component(componentType_Mesh)
 
 ComponentMesh::ComponentMesh(GameObject* argparent) : Component(componentType_Mesh, argparent)
 {
+	typeName = "Mesh";
 	name = "Mesh";
 	indices = nullptr;
 	vertices = nullptr;
@@ -27,6 +29,7 @@ ComponentMesh::ComponentMesh(GameObject* argparent) : Component(componentType_Me
 
 ComponentMesh::ComponentMesh(componentType argtype, GameObject * argparent) : Component(componentType_Mesh, argparent)
 {
+	typeName = "Mesh";
 	name = "Mesh";
 	indices = nullptr;
 	vertices = nullptr;

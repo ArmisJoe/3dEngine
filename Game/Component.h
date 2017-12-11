@@ -28,6 +28,7 @@ public:
 	Component(const componentType argtype);
 	Component(componentType argtype, GameObject* argparent);
 protected:
+	const char* typeName = "Component";
 	bool SetParent(GameObject* parent);
 public:
 	std::string name;

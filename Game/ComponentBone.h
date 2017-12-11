@@ -20,10 +20,11 @@ public:
 	void Disable();
 
 	void OnEditor();
-public:
-	ComponentMesh* GetMesh() const { return mesh; }
-public:
-	ResourceBone* bone = nullptr;
 private:
 	ComponentMesh* mesh = nullptr;
+public:
+	ComponentMesh* GetMesh() const;
+	void SetMesh(ComponentMesh* m);
+public:
+	std::vector<ResourceBone*> skeleton;
 };

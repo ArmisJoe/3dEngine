@@ -2,6 +2,8 @@
 #include "ResourceBone.h"
 #include "Assimp/include/mesh.h"
 
+#include "Application.h"
+
 #include "mmgr/mmgr.h"
 
 
@@ -135,6 +137,25 @@ bool ModuleBoneLoader::Load(const char * file, ResourceBone * res)
 	return ret;
 }
 
+bool ModuleBoneLoader::ImportToLoad(const aiBone * bone, ResourceBone * res)
+{
+	bool ret = true;
+
+	if (bone == nullptr || res == nullptr)
+		return false;
+
+	std::string file;
+
+	if (Import(bone, file)) {
+		if (!Load(file.c_str(), res))
+			ret = false;
+	}
+	else
+		ret = false;
+
+	return ret;
+}
+
 bool ModuleBoneLoader::Save(const ResourceBone & bone, std::string & output_file)
 {
 	bool ret = false;
@@ -184,7 +205,7 @@ bool ModuleBoneLoader::Save(const ResourceBone & bone, std::string & output_file
 	// And FINALLY, we actually save the file... :S
 	ret = App->fs->SaveUnique(LIBRARY_BONES, buffer, bone.name.c_str(), EXTENSION_BONES, buffer_size, output_file);
 
-	return false;
+	return ret;
 }
 
 

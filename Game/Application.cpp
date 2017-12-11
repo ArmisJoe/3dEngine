@@ -26,6 +26,7 @@ Application::Application()
 	quadTree = new ModuleQuadtree();
 	game = new ModuleGame();
 	animation = new ModuleAnimationLoader();
+	bone_loader = new ModuleBoneLoader();
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
