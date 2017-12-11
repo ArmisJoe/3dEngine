@@ -23,6 +23,10 @@ public:
 	void SetRotation(const Quat& rotation);
 	void SetScale(const float3& scale);
 
+	float3 GetPosition();
+	Quat GetRotation();
+	float3 GetScale();
+
 	void SetPositionFromParent(const float3& position);
 	void SetRotationFromParent(const Quat& rotation);
 	void SetScaleFromParent(const float3& scale);

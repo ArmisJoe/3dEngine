@@ -79,15 +79,15 @@ void ComponentAnimation::Update(float dt)
 
 				}
 			}
+			// Bone Debug Render
+			if (drawBones == true)
+				DrawBones(targetGo);
 		}
 	}
 	else {
 		LOG("ERROR No Parent Animation");
 	}
 
-	// Bone Debug Render
-	if (drawBones == true)
-		DrawBones();
 
 }
 
@@ -105,28 +105,19 @@ bool ComponentAnimation::isPause() const
 	return state == as_pause;
 }
 
-void ComponentAnimation::DrawBones()
+void ComponentAnimation::DrawBones(GameObject* boneGO)
 {
 	if (anim == nullptr)
 		return;
+	ComponentTransform* t = (ComponentTransform*)boneGO->FindComponent(componentType_Transform);
+	if (t == nullptr)
+		return;
 
-	for (int i = 0; i < anim->NumChannels(); i++) {
-		AnimNode* b = anim->Channels[i];
-		TransformKeys::VectorKey* pos = nullptr;
-		for (int n = 0; n < b->NumPositionKeys(); n++) {
-			if (b->transKeys.positionKeys[n].time == time) {
-				pos = &b->transKeys.positionKeys[n];
-				break;
-			}
-		}
-		if (pos == nullptr)
-			return;
-
-		bSphere s(100);
-		s.color.Set(255, 211, 0);
-		s.SetPos(pos->value.x, pos->value.y, pos->value.z);
-		s.Render();
-	}
+	bSphere s(boneDebugSize);
+	s.color.Set(255, 211, 0);
+	s.SetPos(t->GetPosition().x, t->GetPosition().y, t->GetPosition().z);
+	s.Render();
+	
 }
 
 GameObject* ComponentAnimation::CheckBoneGoMatch(GameObject* go, AnimNode * b)

@@ -221,6 +221,21 @@ void ComponentTransform::SetScale(const float3 & _scale)
 	}
 }
 
+float3 ComponentTransform::GetPosition()
+{
+	return position_global;
+}
+
+Quat ComponentTransform::GetRotation()
+{
+	return rotation_global;
+}
+
+float3 ComponentTransform::GetScale()
+{
+	return scale_global;
+}
+
 void ComponentTransform::SetPositionFromParent(const float3 & position)
 {
 	position_global += position;

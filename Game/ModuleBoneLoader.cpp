@@ -71,7 +71,16 @@ bool ModuleBoneLoader::Import(const aiBone * bone, std::string & output_file)
 		new_bone.weigths[i] = bone->mWeights[i].mWeight;
 	}
 
-	return Save(new_bone, output_file);
+	ret = Save(new_bone, output_file);
+
+	if (new_bone.weigths != nullptr) {
+		mdelete[] new_bone.weigths;
+	}
+	if (new_bone.indices != nullptr) {
+		mdelete[] new_bone.indices;
+	}
+
+	return ret;
 }
 
 bool ModuleBoneLoader::Load(const char * file, ResourceBone * res)
@@ -204,6 +213,9 @@ bool ModuleBoneLoader::Save(const ResourceBone & bone, std::string & output_file
 
 	// And FINALLY, we actually save the file... :S
 	ret = App->fs->SaveUnique(LIBRARY_BONES, buffer, bone.name.c_str(), EXTENSION_BONES, buffer_size, output_file);
+
+	//if (buffer != nullptr)
+	//	mdelete[] buffer;
 
 	return ret;
 }

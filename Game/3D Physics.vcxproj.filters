@@ -256,6 +256,7 @@
     <ClCompile Include="ModuleBoneLoader.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceBone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glew-2.1.0\include\GL\eglew.h" />

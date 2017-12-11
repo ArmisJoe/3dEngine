@@ -231,7 +231,7 @@ Texture * ModuleTextures::LoadToDDS(const char * path)
 
 void ModuleTextures::DrawConfigPanel()
 {
-	if (ImGui::CollapsingHeader("textures")) 
+	if (ImGui::CollapsingHeader("Textures")) 
 	{
 		if(clamping_str != nullptr)
 			if (ImGui::Combo("Clamping Method", &clamp_type, clamping_str)) {

@@ -1,6 +1,7 @@
 #include "ComponentBone.h"
 
 #include "imgui/imgui.h"
+#include "mmgr\mmgr.h"
 
 ComponentBone::ComponentBone() : Component(componentType_Bone)
 {
@@ -35,6 +36,12 @@ void ComponentBone::Update(float dt)
 
 void ComponentBone::CleanUp()
 {
+	for (int i = 0; i < skeleton.size(); i++) {
+		if (skeleton[i] != nullptr) {
+			skeleton[i]->CleanUp();
+			mdelete skeleton[i];
+		}
+	}
 }
 
 void ComponentBone::Enable()

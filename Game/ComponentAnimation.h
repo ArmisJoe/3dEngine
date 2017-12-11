@@ -42,7 +42,7 @@ public: // ComponentAnimation::
 	bool isPlay() const;
 	bool isPause() const;
 private:
-	void DrawBones();
+	void DrawBones(GameObject* boneGO);
 	GameObject* CheckBoneGoMatch(GameObject* go, AnimNode* b);
 	
 public:
@@ -52,6 +52,8 @@ public:
 	float time = 0.0f;
 
 	bool drawBones = true;
+	float boneDebugSize = 1.0f;
+
 	bool loop = true;
 };
 

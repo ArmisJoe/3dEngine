@@ -23,6 +23,8 @@ public:
 	// This means that even without skeletal animation support 
 	// our existing code base can load the model and render it correctly.
 	float4x4 trans = float4x4::identity; // ?¿?¿? the website says I need this. EDIT: oh
+public:
+	void CleanUp();
 };
 
 // for later:
