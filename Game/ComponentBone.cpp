@@ -1,5 +1,7 @@
 #include "ComponentBone.h"
 
+#include "imgui/imgui.h"
+
 ComponentBone::ComponentBone() : Component(componentType_Bone)
 {
 	typeName = "Skeleton";
@@ -47,6 +49,17 @@ void ComponentBone::Disable()
 
 void ComponentBone::OnEditor()
 {
+	int num_bones = skeleton.size();
+	ImGui::TextColored(COLOR_YELLOW, "Num Bones:");
+	ImGui::InputInt("const", &num_bones);
+	ImGui::TextColored(COLOR_YELLOW, "Bones:");
+	if (ImGui::CollapsingHeader("Bones:")) {
+		for (int i = 0; i < skeleton.size(); i++) {
+			ImGui::TextColored(COLOR_YELLOW, "%i: ", i);
+			ImGui::SameLine();
+			ImGui::Text(skeleton[i]->name.c_str());
+		}
+	}
 }
 
 ComponentMesh * ComponentBone::GetMesh() const
