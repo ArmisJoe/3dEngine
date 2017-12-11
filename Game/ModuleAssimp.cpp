@@ -178,6 +178,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 			for (int n = 0; n < aimesh->mNumBones; n++) {
 				ResourceBone* new_resB = new ResourceBone();
 				if (App->bone_loader->ImportToLoad(aimesh->mBones[n], new_resB)) {
+					new_resB->mesh = new_mesh;
 					new_b->skeleton.push_back(new_resB);
 				}
 			}
