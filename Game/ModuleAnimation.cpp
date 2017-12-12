@@ -110,7 +110,7 @@ void ModuleAnimation::AdaptToBone(ComponentBone * skeleton)
 		ResourceBone* b = skeleton->skeleton[i];
 		GameObject* boneGO = nullptr;
 		boneGO = CheckGoBoneMatch(App->scene->GetRoot(), b);
-		if (boneGO == nullptr)
+		if (boneGO == nullptr || skeleton->GetMesh()->GetParent() == nullptr)
 			return;
 
 		float4x4 trans = boneGO->GetTransform()->GetGlobalTransformMatrix(); // Gets the boneGO trans

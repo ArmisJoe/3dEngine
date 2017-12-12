@@ -346,8 +346,11 @@ void GameObject::SetToGlobalTransform()
 ComponentTransform * GameObject::GetTransform()
 {
 	ComponentTransform* ret = nullptr;
-	if (!components.empty()) {
-		ComponentTransform* ret = (ComponentTransform*)FindComponent(componentType_Transform);
+	if (components.empty() == false) {
+		std::vector<Component*> cts = FindComponents(componentType_Transform);
+		if (!cts.empty()) {
+			ret = (ComponentTransform*)cts[0];
+		}
 	}
 	return ret;
 }
