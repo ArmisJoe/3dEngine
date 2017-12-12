@@ -124,6 +124,8 @@ void ComponentMesh::BindSkin()
 		glGenBuffers(1, (GLuint*)&(skin->id_UV));
 		glBindBuffer(GL_ARRAY_BUFFER, (GLuint)skin->id_UV);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(uint) * skin->num_UV * 3, skin->textureCoords, GL_DYNAMIC_DRAW);
+		
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
 }

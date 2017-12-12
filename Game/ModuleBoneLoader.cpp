@@ -131,11 +131,11 @@ bool ModuleBoneLoader::Load(const char * file, ResourceBone * res)
 	res->weigths = new float[res->num_weigths];
 
 	//indices
-	memcpy(&res->indices, it, sizeof(res->indices));
-	it += sizeof(res->indices);
+	memcpy(res->indices, it, sizeof(res->indices) * res->num_weigths);
+	it += sizeof(res->indices) * res->num_weigths;
 	//weights
-	memcpy(&res->weigths, it, sizeof(res->weigths));
-	it += sizeof(res->weigths);	
+	memcpy(res->weigths, it, sizeof(res->weigths) * res->num_weigths);
+	it += sizeof(res->weigths) * res->num_weigths;
 
 
 	if (buffer != nullptr)
@@ -204,11 +204,11 @@ bool ModuleBoneLoader::Save(const ResourceBone & bone, std::string & output_file
 	it += trans_size;
 
 	//Indices
-	memcpy(it, &bone.indices, indices_size);
+	memcpy(it, bone.indices, indices_size);
 	it += indices_size;
 
 	//Weights
-	memcpy(it, &bone.weigths, weights_size);
+	memcpy(it, bone.weigths, weights_size);
 	it += weights_size;
 
 	// And FINALLY, we actually save the file... :S

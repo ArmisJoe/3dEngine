@@ -179,8 +179,10 @@ update_status ModuleRenderer3D::Update(float dt)
 					ComponentTransform* trans = nullptr;
 					if (!(*it)->FindComponents(componentType_Transform).empty())
 						trans = (ComponentTransform*)(*it)->FindComponents(componentType_Transform).front();
-					DrawMesh(trans, m, mat);
-
+					
+					if(m->skin != nullptr)
+						DrawMesh(trans, (m->skin != nullptr ? m->skin : m), mat);
+					//DrawMesh(trans, m, mat);
 				}
 			}
 			}
