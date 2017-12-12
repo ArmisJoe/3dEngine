@@ -1,4 +1,5 @@
 #include "ComponentBone.h"
+#include "Application.h"
 
 #include "imgui/imgui.h"
 #include "mmgr\mmgr.h"
@@ -32,6 +33,13 @@ void ComponentBone::Start()
 
 void ComponentBone::Update(float dt)
 {
+	for (uint i = 0; i < skeleton.size(); ++i)
+	{
+		float3 position, scale;
+		float4x4 rot;
+		skeleton[i]->offsetMat.Decompose(position, rot, scale);
+		App->renderer3D->debugger->DrawAABB(position, scale);
+	}
 }
 
 void ComponentBone::CleanUp()

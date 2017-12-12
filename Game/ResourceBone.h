@@ -30,5 +30,5 @@ public:
 // for later:
 // http://ogldev.atspace.co.uk/www/tutorial38/tutorial38.html
 
-#endif // !__ANIMATION_H__
+#endif // !__BONE_H__
 #pragma once
