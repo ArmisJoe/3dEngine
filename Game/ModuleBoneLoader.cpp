@@ -18,32 +18,32 @@ ModuleBoneLoader::~ModuleBoneLoader()
 
 bool ModuleBoneLoader::Init()
 {
-	return false;
+	return true;
 }
 
 bool ModuleBoneLoader::Start()
 {
-	return false;
+	return true;
 }
 
-update_status ModuleBoneLoader::PreUpdate()
+update_status ModuleBoneLoader::PreUpdate(float dt)
 {
-	return update_status();
+	return UPDATE_CONTINUE;
 }
 
-update_status ModuleBoneLoader::Update()
+update_status ModuleBoneLoader::Update(float dt)
 {
-	return update_status();
+	return UPDATE_CONTINUE;
 }
 
-update_status ModuleBoneLoader::PostUpdate()
+update_status ModuleBoneLoader::PostUpdate(float dt)
 {
-	return update_status();
+	return UPDATE_CONTINUE;
 }
 
 bool ModuleBoneLoader::CleanUp()
 {
-	return false;
+	return true;
 }
 
 bool ModuleBoneLoader::Import(const aiBone * bone, std::string & output_file)
@@ -58,7 +58,7 @@ bool ModuleBoneLoader::Import(const aiBone * bone, std::string & output_file)
 	ResourceBone new_bone;
 	new_bone.name = bone->mName.C_Str();
 
-	memcpy(new_bone.trans.v, &bone->mOffsetMatrix.a1, sizeof(float) * 16);
+	memcpy(new_bone.offsetMat.v, &bone->mOffsetMatrix.a1, sizeof(float) * 16);
 	new_bone.num_weigths = bone->mNumWeights;
 
 	new_bone.weigths = new float[bone->mNumWeights];
@@ -121,10 +121,10 @@ bool ModuleBoneLoader::Load(const char * file, ResourceBone * res)
 	memcpy(&res->num_weigths, it, sizeof(res->num_weigths));
 	it += sizeof(res->num_weigths);
 	//trans
-	memcpy(&res->trans, it, sizeof(res->trans));
-	it += sizeof(res->trans);
+	memcpy(&res->offsetMat, it, sizeof(res->offsetMat));
+	it += sizeof(res->offsetMat);
 	//alloc
-	uint size = name_size + sizeof(res->num_weigths) + sizeof(res->trans) 
+	uint size = name_size + sizeof(res->num_weigths) + sizeof(res->offsetMat) 
 		+ sizeof(uint) * res->num_weigths + sizeof(float) * res->num_weigths;
 	
 	res->indices = new uint[res->num_weigths];
@@ -175,7 +175,7 @@ bool ModuleBoneLoader::Save(const ResourceBone & bone, std::string & output_file
 		// [Ns N NWs Ts Is Ws]
 	uint name_size = sizeof(char) * bone.name.length();
 	uint n_weights_size = sizeof(bone.num_weigths);
-	uint trans_size = sizeof(bone.trans);
+	uint trans_size = sizeof(bone.offsetMat);
 	uint indices_size = sizeof(uint) * bone.num_weigths;
 	uint weights_size = sizeof(float) * bone.num_weigths;
 
@@ -200,7 +200,7 @@ bool ModuleBoneLoader::Save(const ResourceBone & bone, std::string & output_file
 	it += n_weights_size;
 
 	// Trans
-	memcpy(it, &bone.trans, trans_size);
+	memcpy(it, &bone.offsetMat, trans_size);
 	it += trans_size;
 
 	//Indices

@@ -27,6 +27,7 @@ Application::Application()
 	game = new ModuleGame();
 	animation = new ModuleAnimationLoader();
 	bone_loader = new ModuleBoneLoader();
+	skeletal_anim = new ModuleAnimation();
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -46,6 +47,7 @@ Application::Application()
 	AddModule(fs);
 	AddModule(game);
 	AddModule(animation);
+	AddModule(skeletal_anim);
 
 	// Scenes
 	AddModule(scene);

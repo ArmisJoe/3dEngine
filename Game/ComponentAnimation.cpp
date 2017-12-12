@@ -16,11 +16,11 @@ ComponentAnimation::ComponentAnimation(GameObject * argparent) : Component(compo
 
 ComponentAnimation::~ComponentAnimation()
 {
-	typeName = "Animation";
 }
 
 void ComponentAnimation::Start()
 {
+	
 }
 
 void ComponentAnimation::Update(float dt)
@@ -72,7 +72,7 @@ void ComponentAnimation::Update(float dt)
 					TransformKeys::VectorKey bPos = b->GetPosByTime(this->time);
 					TransformKeys::QuatKey bRot = b->GetRotByTime(this->time);
 					TransformKeys::VectorKey bSca = b->GetScaByTime(this->time);
-					// NO INTERPOLATION
+	
 					trans->ChangeLocalPosition(bPos.value);
 					trans->ChangeLocalRotation(bRot.value);
 					trans->ChangeLocalScale(bSca.value);

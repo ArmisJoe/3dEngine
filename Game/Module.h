@@ -23,7 +23,7 @@ protected:
 	bool menu_open = false;
 
 public:
-	char* name;
+	char* name = "Module";
 
 	Module(bool start_enabled = true)
 	{}
