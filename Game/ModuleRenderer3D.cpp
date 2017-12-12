@@ -180,9 +180,15 @@ update_status ModuleRenderer3D::Update(float dt)
 					if (!(*it)->FindComponents(componentType_Transform).empty())
 						trans = (ComponentTransform*)(*it)->FindComponents(componentType_Transform).front();
 					
-					if(m->skin != nullptr)
-						DrawMesh(trans, (m->skin != nullptr ? m->skin : m), mat);
-					//DrawMesh(trans, m, mat);
+					if ((*it)->FindComponent(componentType_Bone) != nullptr) {
+						m->ResetDeformableMesh();
+						ComponentBone* skeleton = (ComponentBone*)(*it)->FindComponent(componentType_Bone);
+						if (skeleton != nullptr) {
+							App->skeletal_anim->AdaptMeshToBone(skeleton, m);
+						}
+					}
+					//DrawMesh(trans, (m->skin != nullptr ? m->skin : m), mat);
+					DrawMesh(trans, m, mat);
 				}
 			}
 			}

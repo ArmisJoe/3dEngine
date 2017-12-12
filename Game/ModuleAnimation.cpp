@@ -26,16 +26,16 @@ bool ModuleAnimation::Start()
 
 update_status ModuleAnimation::PreUpdate(float dt)
 {
+	if (App->scene->GetRoot() != nullptr) {
+		ResetAllDeformableMeshes(App->scene->GetRoot());
+		DeformMeshes(App->scene->GetRoot());
+	}
 	return UPDATE_CONTINUE;
 }
 
 update_status ModuleAnimation::Update(float dt)
 {
 
-	if (App->scene->GetRoot() != nullptr) {
-		ResetAllDeformableMeshes(App->scene->GetRoot());
-		DeformMeshes(App->scene->GetRoot());
-	}
 
 	//for (vector<GameObject*>::iterator it = App->scene->GetRoot()->children.begin(); it != App->scene->GetRoot()->children.end(); ++it)
 	//{
@@ -133,6 +133,41 @@ void ModuleAnimation::AdaptToBone(ComponentBone * skeleton)
 	}
 
 	skeleton->GetMesh()->BindSkin();  // Skin Bind
+
+}
+
+void ModuleAnimation::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * mesh)
+{
+	if (skeleton == nullptr || mesh == nullptr)
+		return;
+
+	mesh->ResetDeformableMesh(); // Skin Reset
+
+	ComponentMesh* deformable = mesh->skin;
+
+	for (int i = 0; i < skeleton->skeleton.size(); i++) {
+		ResourceBone* b = skeleton->skeleton[i];
+		GameObject* boneGO = nullptr;
+		boneGO = CheckGoBoneMatch(App->scene->GetRoot(), b);
+		if (boneGO == nullptr)
+			return;
+
+		float4x4 trans = boneGO->GetTransform()->GetGlobalTransformMatrix(); // Gets the boneGO trans
+		trans = trans * skeleton->GetParent()->GetTransform()->GetLocalTransformMatrix().Inverted(); // Applies Mesh Transformations
+		trans = trans * b->offsetMat; // Applies offset
+
+		for (int k = 0; k < b->num_weigths; k++) {
+			uint idx = b->indices[i];
+			float3 originalV(&mesh->vertices[idx * 3]);
+			float3 addV = trans.TransformPos(originalV);
+			deformable->vertices[idx * 3] += addV.x * b->weigths[i];
+			deformable->vertices[idx * 3 + 1] += addV.y * b->weigths[i];
+			deformable->vertices[idx * 3 + 2] += addV.z * b->weigths[i];
+		}
+
+	}
+
+	mesh->BindSkin();  // Skin Bind
 
 }
 

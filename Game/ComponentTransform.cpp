@@ -290,7 +290,7 @@ void ComponentTransform::SetRotationFromParent(const Quat& rot)
 
 void ComponentTransform::OnEditor()
 {
-	UpdateNeeded = true;
+	//UpdateNeeded = true;
 	ImGui::TextColored(COLOR_YELLOW, "Global Transform:");
 	float pos[3];
 	float rot[3];
