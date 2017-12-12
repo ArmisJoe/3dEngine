@@ -101,53 +101,31 @@ void ComponentMesh::Serialize(JSON_Doc * doc)
 
 // ------------------------- ANIMATION -------------------------
 
-void ComponentMesh::SetSkin()
+void ComponentMesh::BindSkin()
 {
-	if (skin != nullptr)
-	{
-		skin = new ComponentMesh();
-		// fill the skin here with something like:
-		// skin->FillYourself(); [DEPRECATED] -> now FeelYourself();
+	
+	// Bind Skin
+	// Vertices
+	glGenBuffers(1, (GLuint*) &(skin->id_vertices));
+	glBindBuffer(GL_ARRAY_BUFFER, skin->id_vertices);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * skin->num_vertices * 3, skin->vertices, GL_DYNAMIC_DRAW);
 
-		skin->num_vertices = num_vertices;
-		skin->num_indices = num_indices;
-		skin->num_UV = num_UV;
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-		skin->vertices = new float[num_vertices * 3];
-		skin->indices = new uint[num_indices];
-		skin->textureCoords = new float[skin->num_UV * 3];
+	// Indices
+	glGenBuffers(1, (GLuint*) &(skin->id_indices));
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, skin->id_indices);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * skin->num_indices, skin->indices, GL_DYNAMIC_DRAW);
 
-		memcpy(skin->vertices, this->vertices, sizeof(float) * num_vertices * 3);
-		memcpy(skin->indices, this->indices, sizeof(uint) * num_indices);
-		memcpy(skin->textureCoords, this->textureCoords, sizeof(float) * num_UV * 3);
-		//normals here
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-		// Bind Skin
-		// Vertices
-		glGenBuffers(1, (GLuint*) &(skin->id_vertices));
-		glBindBuffer(GL_ARRAY_BUFFER, skin->id_vertices);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * skin->num_vertices * 3, skin->vertices, GL_DYNAMIC_DRAW);
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-		// Indices
-		glGenBuffers(1, (GLuint*) &(skin->id_indices));
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, skin->id_indices);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * skin->num_indices, skin->indices, GL_DYNAMIC_DRAW);
-
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-		// UVs
-		if (skin->num_UV > 0) {
-			glGenBuffers(1, (GLuint*)&(skin->id_UV));
-			glBindBuffer(GL_ARRAY_BUFFER, (GLuint)skin->id_UV);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(uint) * skin->num_UV * 3, skin->textureCoords, GL_STATIC_DRAW);
-		}
-
-		// Name
-		skin->name = name;
-
+	// UVs
+	if (skin->num_UV > 0) {
+		glGenBuffers(1, (GLuint*)&(skin->id_UV));
+		glBindBuffer(GL_ARRAY_BUFFER, (GLuint)skin->id_UV);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(uint) * skin->num_UV * 3, skin->textureCoords, GL_DYNAMIC_DRAW);
 	}
+
 }
 
 void ComponentMesh::DoSkin(GameObject* go)
@@ -156,7 +134,7 @@ void ComponentMesh::DoSkin(GameObject* go)
 	//I need the bones to attach them
 
 	//after this the skin should be re-copied
-	SetSkin();
+	//SetSkin();
 	// we send it to the gpu here again
 	// i have no idea how to do that but just a reminder I guess
 
@@ -164,19 +142,33 @@ void ComponentMesh::DoSkin(GameObject* go)
 
 void ComponentMesh::ResetDeformableMesh()
 {
-	if (skin != nullptr)
-	{
-		ComponentMesh* copy = this; // Should be reource but meh...
-
-		memset(skin->indices, 0, copy->num_indices * sizeof(uint));
-
-		memcpy(skin->vertices, copy->vertices, skin->num_vertices * sizeof(float) * 3);
-
-		// we still don't have this loaded rip
-		if (copy->normals != nullptr)
-		{
-			memcpy(skin->normals, copy->normals, skin->num_vertices * sizeof(float) * 3);
-		}
+	if (skin != nullptr) {
+		skin->CleanUp();
+		mdelete skin;
 	}
+	skin = new ComponentMesh();
+	// fill the skin here with something like:
+	// skin->FillYourself(); [DEPRECATED] -> now FeelYourself();
+
+	skin->num_vertices = num_vertices;
+	skin->num_indices = num_indices;
+	skin->num_UV = num_UV;
+
+	skin->vertices = new float[num_vertices * 3];
+	skin->indices = new uint[num_indices];
+	skin->textureCoords = new float[skin->num_UV * 3];
+
+	memcpy(skin->vertices, this->vertices, sizeof(float) * num_vertices * 3);
+	memcpy(skin->indices, this->indices, sizeof(uint) * num_indices);
+	memcpy(skin->textureCoords, this->textureCoords, sizeof(float) * num_UV * 3);
+	//normals here
+
+	// Name
+	skin->name = name;
+
+	// Parent -- Since it is a tmp mesh, we don't need to put it on the component list of the parent. 
+	//    So links go like this -- skin -> parent -x> skin
+	skin->parent = this->GetParent();
+
 }
 

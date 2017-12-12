@@ -20,7 +20,7 @@ public:
 	void Serialize(JSON_Doc* doc);
 
 	// Animation stuff
-	void SetSkin();
+	void BindSkin();
 	void DoSkin(GameObject* go);
 	void ResetDeformableMesh();
 

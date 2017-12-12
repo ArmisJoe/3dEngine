@@ -105,35 +105,36 @@ void ModuleAnimation::AdaptToBone(ComponentBone * skeleton)
 {
 	if (skeleton == nullptr || skeleton->GetMesh() == nullptr)
 		return;
-		
+	
+	skeleton->GetMesh()->ResetDeformableMesh(); // Skin Reset
+
+	ComponentMesh* deformable = skeleton->GetMesh()->skin;
+
 	for (int i = 0; i < skeleton->skeleton.size(); i++) {
 		ResourceBone* b = skeleton->skeleton[i];
 		GameObject* boneGO = nullptr;
 		boneGO = CheckGoBoneMatch(App->scene->GetRoot(), b);
-		if (boneGO == nullptr || skeleton->GetParent() == nullptr)
+		if (boneGO == nullptr || deformable->GetParent() == nullptr)
 			return;
 
 		float4x4 trans = boneGO->GetTransform()->GetGlobalTransformMatrix(); // Gets the boneGO trans
 		trans = trans * skeleton->GetParent()->GetTransform()->GetLocalTransformMatrix().Inverted(); // Applies Mesh Transformations
 		trans = trans * b->offsetMat; // Applies offset
 
-		ComponentMesh* m = skeleton->GetMesh();
-		for (int k = 0; k < m->num_vertices; m++) {
+		for (int k = 0; k < deformable->num_vertices; deformable++) {
 			float3 originalV;
 			originalV.x = skeleton->GetMesh()->vertices[k * 3];
 			originalV.y = skeleton->GetMesh()->vertices[k * 3 + 1];
 			originalV.z = skeleton->GetMesh()->vertices[k * 3 + 2];
 
-			skeleton->GetMesh()->vertices[k * 3] += trans.TransformPos(originalV).x * b->weigths[i];
-			skeleton->GetMesh()->vertices[k * 3 + 1] += trans.TransformPos(originalV).y * b->weigths[i];
-			skeleton->GetMesh()->vertices[k * 3 + 2] += trans.TransformPos(originalV).z * b->weigths[i];
+			deformable->vertices[k * 3] += trans.TransformPos(originalV).x * b->weigths[i];
+			deformable->vertices[k * 3 + 1] += trans.TransformPos(originalV).y * b->weigths[i];
+			deformable->vertices[k * 3 + 2] += trans.TransformPos(originalV).z * b->weigths[i];
 		}
 
 	}
 
-	//float4x4 trans = skeleton->GetMesh()->GetParent()->GetTransform()->GetGlobalTransformMatrix();
-	//trans = trans * skeleton->GetMesh()->GetParent()->GetTransform()->GetLocalTransformMatrix().Inverted();
-	//trans = trans * rbone->offset; // OFFSET?¿?¿?¿? yes, offset, keep calm
+	skeleton->GetMesh()->BindSkin();  // Skin Bind
 
 }
 
