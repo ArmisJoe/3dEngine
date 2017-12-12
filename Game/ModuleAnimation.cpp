@@ -110,23 +110,23 @@ void ModuleAnimation::AdaptToBone(ComponentBone * skeleton)
 		ResourceBone* b = skeleton->skeleton[i];
 		GameObject* boneGO = nullptr;
 		boneGO = CheckGoBoneMatch(App->scene->GetRoot(), b);
-		if (boneGO == nullptr || skeleton->GetMesh()->GetParent() == nullptr)
+		if (boneGO == nullptr || skeleton->GetParent() == nullptr)
 			return;
 
 		float4x4 trans = boneGO->GetTransform()->GetGlobalTransformMatrix(); // Gets the boneGO trans
-		trans = trans * skeleton->GetMesh()->GetParent()->GetTransform()->GetLocalTransformMatrix().Inverted(); // Applies Mesh Transformations
+		trans = trans * skeleton->GetParent()->GetTransform()->GetLocalTransformMatrix().Inverted(); // Applies Mesh Transformations
 		trans = trans * b->offsetMat; // Applies offset
 
 		ComponentMesh* m = skeleton->GetMesh();
 		for (int k = 0; k < m->num_vertices; m++) {
 			float3 originalV;
-			originalV.x = m->vertices[k * 3];
-			originalV.y = m->vertices[k * 3 + 1];
-			originalV.z = m->vertices[k * 3 + 2];
+			originalV.x = skeleton->GetMesh()->vertices[k * 3];
+			originalV.y = skeleton->GetMesh()->vertices[k * 3 + 1];
+			originalV.z = skeleton->GetMesh()->vertices[k * 3 + 2];
 
-			m->vertices[k * 3] += trans.TransformPos(originalV).x * b->weigths[i];
-			m->vertices[k * 3 + 1] += trans.TransformPos(originalV).y * b->weigths[i];
-			m->vertices[k * 3 + 2] += trans.TransformPos(originalV).z * b->weigths[i];
+			skeleton->GetMesh()->vertices[k * 3] += trans.TransformPos(originalV).x * b->weigths[i];
+			skeleton->GetMesh()->vertices[k * 3 + 1] += trans.TransformPos(originalV).y * b->weigths[i];
+			skeleton->GetMesh()->vertices[k * 3 + 2] += trans.TransformPos(originalV).z * b->weigths[i];
 		}
 
 	}

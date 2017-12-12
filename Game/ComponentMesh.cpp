@@ -107,7 +107,46 @@ void ComponentMesh::SetSkin()
 	{
 		skin = new ComponentMesh();
 		// fill the skin here with something like:
-		// skin->FillYourself();
+		// skin->FillYourself(); [DEPRECATED] -> now FeelYourself();
+
+		skin->num_vertices = num_vertices;
+		skin->num_indices = num_indices;
+		skin->num_UV = num_UV;
+
+		skin->vertices = new float[num_vertices * 3];
+		skin->indices = new uint[num_indices];
+		skin->textureCoords = new float[skin->num_UV * 3];
+
+		memcpy(skin->vertices, this->vertices, sizeof(float) * num_vertices * 3);
+		memcpy(skin->indices, this->indices, sizeof(uint) * num_indices);
+		memcpy(skin->textureCoords, this->textureCoords, sizeof(float) * num_UV * 3);
+		//normals here
+
+		// Bind Skin
+		// Vertices
+		glGenBuffers(1, (GLuint*) &(skin->id_vertices));
+		glBindBuffer(GL_ARRAY_BUFFER, skin->id_vertices);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * skin->num_vertices * 3, skin->vertices, GL_DYNAMIC_DRAW);
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		// Indices
+		glGenBuffers(1, (GLuint*) &(skin->id_indices));
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, skin->id_indices);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * skin->num_indices, skin->indices, GL_DYNAMIC_DRAW);
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+		// UVs
+		if (skin->num_UV > 0) {
+			glGenBuffers(1, (GLuint*)&(skin->id_UV));
+			glBindBuffer(GL_ARRAY_BUFFER, (GLuint)skin->id_UV);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(uint) * skin->num_UV * 3, skin->textureCoords, GL_STATIC_DRAW);
+		}
+
+		// Name
+		skin->name = name;
+
 	}
 }
 
@@ -127,7 +166,7 @@ void ComponentMesh::ResetDeformableMesh()
 {
 	if (skin != nullptr)
 	{
-		ComponentMesh* copy = this;
+		ComponentMesh* copy = this; // Should be reource but meh...
 
 		memset(skin->indices, 0, copy->num_indices * sizeof(uint));
 
