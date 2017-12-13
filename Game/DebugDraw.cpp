@@ -18,10 +18,11 @@ void DebugDraw::SetLinesSize(float argsize)
 	if (argsize > 0) line_size = argsize;
 }
 
-void DebugDraw::Draw(float3 * line_points, int size) const
+void DebugDraw::Draw(float3 * line_points, int size, float3 rgb, float a) const
 {
 	if (active)
 	{
+		
 		glColor3f(color.r, color.g, color.b);
 
 		glLineWidth((float)5);
@@ -96,7 +97,7 @@ void DebugDraw::DrawFrustum(float3 * corners)
 
 }
 
-void DebugDraw::DrawAABB(float3 center, float3 size)
+void DebugDraw::DrawAABB(float3 center, float3 size, float3 rgb, float a)
 {
 	int s = 24;
 
@@ -142,7 +143,7 @@ void DebugDraw::DrawAABB(float3 center, float3 size)
 	lines[23] = float3(center.x + half_size.x, center.y - half_size.y, center.z - half_size.z);
 
 
-	Draw(lines, s);
+	Draw(lines, s, rgb, a);
 
 	delete[] lines;
 	delete[] colors;

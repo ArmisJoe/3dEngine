@@ -113,10 +113,7 @@ void ComponentAnimation::DrawBones(GameObject* boneGO)
 	if (t == nullptr)
 		return;
 
-	bSphere s(boneDebugSize);
-	s.color.Set(255, 211, 0);
-	s.SetPos(t->GetPosition().x, t->GetPosition().y, t->GetPosition().z);
-	s.Render();
+	App->renderer3D->debugger->DrawAABB(boneGO->GetTransform()->GetPosition(), boneGO->GetTransform()->GetScale());
 	
 }
 

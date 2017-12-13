@@ -252,6 +252,7 @@ void ComponentTransform::ChangeLocalPosition(const float3 & position)
 	pos = position - localPos;
 	localPos = position;
 	position_global += pos;
+
 	transform_modified = true;
 }
 

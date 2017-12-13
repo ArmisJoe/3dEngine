@@ -188,7 +188,7 @@ update_status ModuleRenderer3D::Update(float dt)
 						}
 					}
 					//DrawMesh(trans, (m->skin != nullptr ? m->skin : m), mat);
-					DrawMesh(trans, m, mat);
+					//DrawMesh(trans, m, mat);
 				}
 			}
 			}
@@ -362,7 +362,7 @@ void ModuleRenderer3D::DrawMesh(ComponentTransform* trans, ComponentMesh* m, Com
 		glMultMatrixf((GLfloat*)trans->GetGlobalTransformPtr());
 	}
 
-	if (m->skin != nullptr)
+	if (false)
 	{
 			glBindBuffer(GL_ARRAY_BUFFER, m->skin->id_vertices);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m->num_vertices * 3,

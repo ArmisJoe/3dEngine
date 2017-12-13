@@ -157,12 +157,12 @@ void ModuleAnimation::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * 
 		trans = trans * b->offsetMat; // Applies offset
 
 		for (int k = 0; k < b->num_weigths; k++) {
-			uint idx = b->indices[i];
+			uint idx = b->indices[k];
 			float3 originalV(&mesh->vertices[idx * 3]);
 			float3 addV = trans.TransformPos(originalV);
-			deformable->vertices[idx * 3] += addV.x * b->weigths[i];
-			deformable->vertices[idx * 3 + 1] += addV.y * b->weigths[i];
-			deformable->vertices[idx * 3 + 2] += addV.z * b->weigths[i];
+			deformable->vertices[idx * 3] += addV.x * b->weigths[k];
+			deformable->vertices[idx * 3 + 1] += addV.y * b->weigths[k];
+			deformable->vertices[idx * 3 + 2] += addV.z * b->weigths[k];
 		}
 
 	}
