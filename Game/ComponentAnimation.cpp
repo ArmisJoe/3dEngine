@@ -68,7 +68,10 @@ void ComponentAnimation::Update(float dt)
 	if (this->HasParent()) {
 		for (int i = 0; i < anim->NumChannels(); i++) {
 				AnimNode* b = anim->Channels[i];
-				GameObject* targetGo = CheckBoneGoMatch(this->parent, b);
+				GameObject* targetGo = nullptr;
+				GetGOFromNodes();
+				targetGo = b->object;
+				//GameObject* targetGo = CheckBoneGoMatch(this->parent, b);
 				if (targetGo != nullptr) { // Now we have the Go ('BoneGo') that will move
 					// Bone Debug Render
 					if (drawBones == true)
@@ -121,6 +124,18 @@ bool ComponentAnimation::isPause() const
 	return state == as_pause;
 }
 
+void ComponentAnimation::GetGOFromNodes()
+{
+	if (gos_filled == false)
+	{
+		for (int i = 0; i < anim->NumChannels(); ++i)
+		{
+			CollectGOs(anim->Channels[i], this->parent);
+		}
+		gos_filled = true;
+	}
+}
+
 void ComponentAnimation::DrawBones(GameObject* boneGO)
 {
 	if (anim == nullptr)
@@ -162,6 +177,23 @@ GameObject* ComponentAnimation::CheckBoneGoMatch(GameObject* go, AnimNode * b)
 	}
 
 	return ret;
+}
+
+void ComponentAnimation::CollectGOs(AnimNode * node, GameObject * go)
+{
+	if (node == nullptr || go == nullptr)
+		return;
+
+	if (go->GetName() == node->name)
+	{
+		node->object = go;
+		return;
+	}
+
+	for (uint i = 0; i < go->children.size(); ++i)
+	{
+		CollectGOs(node, go->children[i]);
+	}
 }
 
 void ComponentAnimation::Enable()

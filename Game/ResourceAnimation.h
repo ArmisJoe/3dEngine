@@ -59,6 +59,7 @@ public:
 public:
 	std::string name;
 	TransformKeys transKeys;
+	GameObject* object = nullptr;
 public:
 	void CleanUp();
 

@@ -41,10 +41,11 @@ public: // ComponentAnimation::
 
 	bool isPlay() const;
 	bool isPause() const;
+	void GetGOFromNodes();
 private:
 	void DrawBones(GameObject* boneGO);
 	GameObject* CheckBoneGoMatch(GameObject* go, AnimNode* b);
-	
+	void CollectGOs(AnimNode* node, GameObject* go);
 public:
 	Animation* anim = nullptr;
 	AnimationState state = as_unloaded;
@@ -55,6 +56,7 @@ public:
 	float boneDebugSize = 1.0f;
 
 	bool loop = true;
+	bool gos_filled = false;
 };
 
 #endif // !__COMPONENT_ANIMATION_H__
