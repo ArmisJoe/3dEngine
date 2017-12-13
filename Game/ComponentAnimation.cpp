@@ -88,10 +88,12 @@ void ComponentAnimation::Update(float dt)
 						//	tmprot = Quat::FromEulerXYZ(tmp.x, tmp.y, tmp.z);
 						//}
 
-
-						trans->ChangeLocalPosition(bPos.value);
-						trans->ChangeLocalRotation(tmprot);
-						trans->ChangeLocalScale(bSca.value);
+						trans->SetGlobalPosition(bPos.value + targetGo->GetParent()->GetTransform()->GetPosition());
+						trans->SetGlobalRotation(bRot.value * targetGo->GetParent()->GetTransform()->GetRotation());
+						trans->SetGlobalScale(bSca.value);
+						//trans->ChangeLocalPosition(bPos.value);
+						//trans->ChangeLocalRotation(tmprot);
+						//trans->ChangeLocalScale(bSca.value);
 
 					}
 				}

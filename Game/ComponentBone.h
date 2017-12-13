@@ -21,10 +21,24 @@ public:
 
 	void OnEditor();
 private:
+	bool gos_filled = false;
+	bool pairs_filled = false;
 	ComponentMesh* mesh = nullptr;
+	void CollectGOs(GameObject* go);
+	bool insert_BoneToIterate(ResourceBone* bone);
+
 public:
+	void GetGOFromBones();
 	ComponentMesh* GetMesh() const;
 	void SetMesh(ComponentMesh* m);
 public:
+	struct PairedGOToBones {
+		string name;
+		GameObject* object = nullptr;
+		vector<ResourceBone*> bones;
+	};
+
+	std::vector<PairedGOToBones> pairedgotobones;
+
 	std::vector<ResourceBone*> skeleton;
 };

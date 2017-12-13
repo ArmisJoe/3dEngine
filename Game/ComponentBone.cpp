@@ -86,3 +86,55 @@ void ComponentBone::SetMesh(ComponentMesh * m)
 {
 	mesh = m;
 }
+void ComponentBone::CollectGOs(GameObject * go)
+{
+	PairedGOToBones tmp;
+	tmp.object = go;
+	tmp.name = go->GetName();
+	pairedgotobones.push_back(tmp);
+
+	for (uint i = 0; i < go->children.size(); ++i)
+		CollectGOs(go->children[i]);
+}
+bool ComponentBone::insert_BoneToIterate(ResourceBone * bone)
+{
+	if (bone == nullptr || gos_filled == false)
+		return false;
+
+	for (uint i = 0; i < pairedgotobones.size(); ++i) {
+		if (pairedgotobones[i].name == bone->name)
+		{
+			pairedgotobones[i].bones.push_back(bone);
+			bone->object = pairedgotobones[i].object;
+			return true;
+		}
+	}
+	return false;
+}
+
+void ComponentBone::GetGOFromBones()
+{
+	if (gos_filled == false)
+	{
+		CollectGOs(App->scene->GetRoot());
+		gos_filled = true;
+	}
+
+	if (pairs_filled == false)
+	{
+		for (uint i = 0; i < skeleton.size(); ++i)
+		{
+			insert_BoneToIterate(skeleton[i]);
+		}
+
+		/*for (vector<PairedGOToBones>::iterator it = pairedgotobones.begin(); it != pairedgotobones.end();)
+		{
+			if ((*it).bones.empty() == true)
+				it = pairedgotobones.erase(it);
+
+			++it;
+		}*/
+		pairs_filled = true;
+	}
+}
+

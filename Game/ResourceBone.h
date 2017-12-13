@@ -17,7 +17,7 @@ public:
 	uint* indices = nullptr;
 	float* weigths = nullptr;
 	ComponentMesh* mesh = nullptr;
-
+	GameObject* object;
 	// The reason why we need this matrix is because 
 	// the vertices are stored in the usual local space. 
 	// This means that even without skeletal animation support 

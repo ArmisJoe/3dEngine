@@ -113,7 +113,9 @@ void ModuleAnimation::AdaptToBone(ComponentBone * skeleton)
 	for (int i = 0; i < skeleton->skeleton.size(); i++) {
 		ResourceBone* b = skeleton->skeleton[i];
 		GameObject* boneGO = nullptr;
-		boneGO = CheckGoBoneMatch(App->scene->GetRoot(), b);
+		skeleton->GetGOFromBones();
+		boneGO = b->object;
+		//boneGO = CheckGoBoneMatch(App->scene->GetRoot(), b);
 		if (boneGO == nullptr)
 			return;
 
@@ -148,7 +150,10 @@ void ModuleAnimation::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * 
 	for (int i = 0; i < skeleton->skeleton.size(); i++) {
 		ResourceBone* b = skeleton->skeleton[i];
 		GameObject* boneGO = nullptr;
-		boneGO = CheckGoBoneMatch(App->scene->GetRoot(), b);
+		skeleton->GetGOFromBones();
+		boneGO = b->object;
+
+		//boneGO = CheckGoBoneMatch(App->scene->GetRoot(), b);
 		if (boneGO == nullptr)
 			return;
 
