@@ -27,8 +27,8 @@ bool ModuleAnimation::Start()
 update_status ModuleAnimation::PreUpdate(float dt)
 {
 	if (App->scene->GetRoot() != nullptr) {
-		ResetAllDeformableMeshes(App->scene->GetRoot());
-		DeformMeshes(App->scene->GetRoot());
+		//ResetAllDeformableMeshes(App->scene->GetRoot());
+		//DeformMeshes(App->scene->GetRoot());
 	}
 	return UPDATE_CONTINUE;
 }

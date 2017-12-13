@@ -12,7 +12,7 @@ public:
 	void SetLinesColor(Color argcolor) { color = argcolor; }
 	void SetLinesSize(float argsize);	
 private:
-	void Draw(float3 * line_points, int size, float3 rgba = float3(255, 255, 255), float a = 1) const;
+	void Draw(float3 * line_points, int size, float3 rgba = float3(255, 255, 255), float a = 1);
 	Color color = White;
 	float line_size = 1.0f;
 public:

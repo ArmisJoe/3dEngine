@@ -156,6 +156,111 @@ void ComponentTransform::UpdateChildren(float3 pos_offset, float3 scale_offset, 
 
 }
 
+void ComponentTransform::SetGlobalPosition(float3 newpos)
+{
+	if (GetParent() == nullptr)
+		return;
+
+	float3 dpos = newpos - position_global;
+
+	position_global = newpos;
+
+	for (int i = 0; i < GetParent()->children.size(); i++) {
+		ComponentTransform* cTrans = GetParent()->children[i]->GetTransform();
+		cTrans->SetGlobalPosition(cTrans->GetPosition() + dpos);
+	}
+
+	transform_modified = true;
+}
+
+void ComponentTransform::SetGlobalRotation(Quat newrot)
+{
+	if (GetParent() == nullptr)
+		return;
+
+	float3 eulerrot = rotation_global.ToEulerXYZ();
+	float3 eulernewrot = newrot.ToEulerXYZ();
+
+	float3 drot = eulernewrot - eulerrot;
+
+	rotation_global = newrot;
+
+	for (int i = 0; i < GetParent()->children.size(); i++) {
+		ComponentTransform* cTrans = GetParent()->children[i]->GetTransform();
+		// Children Pos Set
+		float3 cnewpos;
+		float3 dirdistance = cTrans->GetPosition() - GetParent()->GetTransform()->GetPosition();
+		float distance = dirdistance.LengthSq();
+		// drot == dangle !
+
+		float3 newdistance = dirdistance;
+		// rot X axis
+		newdistance.x = newdistance.x * Cos(drot.x) - newdistance.y * Sin(drot.x);
+		newdistance.y = newdistance.x * Sin(drot.x) + newdistance.y * Cos(drot.x);
+		newdistance.z = newdistance.z;
+		// rot Y axis
+		newdistance.x = newdistance.x * Cos(drot.y) + newdistance.z * Sin(drot.y);
+		newdistance.y = newdistance.y;
+		newdistance.z = -newdistance.x * Sin(drot.y) + newdistance.z * Cos(drot.y);
+		// rot Z axis
+		newdistance.x = newdistance.x;
+		newdistance.y = newdistance.y * Cos(drot.z) - newdistance.z * Sin(drot.z);
+		newdistance.z = newdistance.y * Sin(drot.z) + newdistance.z * Cos(drot.z);
+		
+		cnewpos = GetParent()->GetTransform()->GetPosition() + newdistance;
+
+		cTrans->SetGlobalPosition(cnewpos);
+
+		// Children Recursivity
+		float3 ceulerrot = cTrans->GetRotation().ToEulerXYZ();
+		float3 totalrot = ceulerrot + drot;
+		Quat totalquatrot = Quat::FromEulerXYZ(totalrot.x, totalrot.y, totalrot.x);
+		cTrans->SetGlobalRotation(totalquatrot);
+	}
+
+	transform_modified = true;
+
+}
+
+void ComponentTransform::SetGlobalScale(float3 newsca)
+{
+	if (GetParent() == nullptr)
+		return;
+
+	float3 dsca = newsca - scale_global;
+
+	scale_global = newsca;
+
+	for (int i = 0; i < GetParent()->children.size(); i++) {
+		ComponentTransform* cTrans = GetParent()->children[i]->GetTransform();
+		cTrans->SetGlobalScale(cTrans->GetScale() + dsca);
+	}
+
+	transform_modified = true;
+}
+
+void ComponentTransform::SetRotationHyerarchy(Quat newrot)
+{
+	float3 nRot = float3::zero;
+
+	float3 rot = RadToDeg(newrot.ToEulerXYZ());
+
+	nRot[0] = DegToRad(rot[0]) - DegToRad(rotinEuler_global.x);
+	nRot[1] = DegToRad(rot[1]) - DegToRad(rotinEuler_global.y);
+	nRot[2] = DegToRad(rot[2]) - DegToRad(rotinEuler_global.z);
+
+	Quat off_rot = Quat::FromEulerXYZ((nRot[0]),/* DegToRad*/(nRot[1]), (nRot[2]));
+
+	rotation_global = rotation_global * off_rot;
+
+	rotinEuler_global.x = rot[0];
+	rotinEuler_global.y = rot[1];
+	rotinEuler_global.z = rot[2];
+
+
+	transform_modified = true;
+}
+
 
 void ComponentTransform::SetPosition(const float3 & _position)
 {
@@ -340,6 +445,7 @@ void ComponentTransform::OnEditor()
 			rotinEuler_global.x = rot[0];
 			rotinEuler_global.y = rot[1];
 			rotinEuler_global.z = rot[2];
+
 
 			transform_modified = true;
 		}

@@ -60,6 +60,12 @@ public:
 
 	void UpdateChildren(float3 pos_offset, float3 scale_offset, Quat rot_offset);
 
+	// [PAU] gonna fix this mess :S
+	void SetGlobalPosition(float3 newpos);
+	void SetGlobalRotation(Quat newrot);
+	void SetGlobalScale(float3 newsca);
+
+	void SetRotationHyerarchy(Quat newrot);
 private:
 
 

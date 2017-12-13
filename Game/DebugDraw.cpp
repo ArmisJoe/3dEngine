@@ -18,11 +18,15 @@ void DebugDraw::SetLinesSize(float argsize)
 	if (argsize > 0) line_size = argsize;
 }
 
-void DebugDraw::Draw(float3 * line_points, int size, float3 rgb, float a) const
+void DebugDraw::Draw(float3 * line_points, int size, float3 rgb, float a)
 {
 	if (active)
 	{
 		
+		rgb /= 255;
+
+		color.Set(rgb.x, rgb.y, rgb.z, a);
+
 		glColor3f(color.r, color.g, color.b);
 
 		glLineWidth((float)5);

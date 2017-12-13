@@ -29,7 +29,7 @@ void ComponentAnimation::Update(float dt)
 		state = as_unloaded;
 		return;
 	}
-	
+
 	if (App->game->GetGameState() == GameState::gameState_play)
 		state = as_play;
 	if (App->game->GetPaused() == true)
@@ -60,28 +60,42 @@ void ComponentAnimation::Update(float dt)
 		if (time > anim->duration)
 			time -= anim->duration;
 	}
+	else
+		if (time > anim->duration)
+			time = anim->duration;
 
 	// Bone Movement
 	if (this->HasParent()) {
 		for (int i = 0; i < anim->NumChannels(); i++) {
-			AnimNode* b = anim->Channels[i];
-			GameObject* targetGo = CheckBoneGoMatch(this->parent, b);
-			if (targetGo != nullptr) { // Now we have the Go ('BoneGo') that will move
-				ComponentTransform* trans = (ComponentTransform*)targetGo->FindComponent(componentType_Transform);
-				if (trans != nullptr) {
-					TransformKeys::VectorKey bPos = b->GetPosByTime(this->time);
-					TransformKeys::QuatKey bRot = b->GetRotByTime(this->time);
-					TransformKeys::VectorKey bSca = b->GetScaByTime(this->time);
-	
-					trans->ChangeLocalPosition(bPos.value);
-					trans->ChangeLocalRotation(bRot.value);
-					trans->ChangeLocalScale(bSca.value);
+				AnimNode* b = anim->Channels[i];
+				GameObject* targetGo = CheckBoneGoMatch(this->parent, b);
+				if (targetGo != nullptr) { // Now we have the Go ('BoneGo') that will move
+					// Bone Debug Render
+					if (drawBones == true)
+						DrawBones(targetGo);
+					ComponentTransform* trans = (ComponentTransform*)targetGo->FindComponent(componentType_Transform);
+					if (trans != nullptr) {
 
+						TransformKeys::VectorKey bPos = b->GetPosByTime(this->time);
+						TransformKeys::QuatKey bRot = b->GetRotByTime(this->time);
+						TransformKeys::VectorKey bSca = b->GetScaByTime(this->time);
+
+						// Rot to Global ->
+						Quat tmprot = bRot.value;
+						//if (targetGo->GetParent() != nullptr) {
+						//	float3 tmp = tmprot.ToEulerXYZ();
+						//	tmp = targetGo->GetParent()->GetTransform()->GetRotation().ToEulerXYZ().Mul(tmp);
+						//	tmprot = Quat::FromEulerXYZ(tmp.x, tmp.y, tmp.z);
+						//}
+
+
+						trans->ChangeLocalPosition(bPos.value);
+						trans->ChangeLocalRotation(tmprot);
+						trans->ChangeLocalScale(bSca.value);
+
+					}
 				}
-			}
-			// Bone Debug Render
-			if (drawBones == true)
-				DrawBones(targetGo);
+			
 		}
 	}
 	else {
@@ -113,7 +127,19 @@ void ComponentAnimation::DrawBones(GameObject* boneGO)
 	if (t == nullptr)
 		return;
 
-	App->renderer3D->debugger->DrawAABB(boneGO->GetTransform()->GetPosition(), boneGO->GetTransform()->GetScale());
+	App->renderer3D->debugger->DrawAABB(boneGO->GetTransform()->GetPosition(), float3(0.1, 0.1, 0.1));
+	
+	for (int i = 0; i < boneGO->children.size(); i++) {
+		float line_vertex[] = { t->GetPosition().x, t->GetPosition().y, t->GetPosition().z, boneGO->children[i]->GetTransform()->GetPosition().x, boneGO->children[i]->GetTransform()->GetPosition().y, boneGO->children[i]->GetTransform()->GetPosition().z };
+		
+		glLineWidth(1);
+		glColor3f(1.0, 1.0, 0.0);
+		glBegin(GL_LINES);
+		glVertex3f(line_vertex[0], line_vertex[1], line_vertex[2]);
+		glVertex3f(line_vertex[3], line_vertex[4], line_vertex[5]);
+		glEnd();
+
+	}
 	
 }
 

@@ -6,442 +6,1345 @@
         {
             "isRoot": true,
             "static": true,
-            "uid": 1533034112,
+            "uid": -231463808,
             "parentUID": -1,
             "name": "Scene Root"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1978508928,
-            "parentUID": 1533034112,
-            "name": "walk.FBX"
+            "uid": 592216832,
+            "parentUID": -231463808,
+            "name": "runalien.fbx"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 701162880,
-            "parentUID": 1978508928,
-            "name": "RPG-Character-Mesh_$AssimpFbx$_Translation"
+            "uid": -493605792,
+            "parentUID": 592216832,
+            "name": "Marciano:grp_geometry"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -673411968,
-            "parentUID": 701162880,
-            "name": "RPG-Character-Mesh_$AssimpFbx$_PreRotation"
+            "uid": 1388862464,
+            "parentUID": -493605792,
+            "name": "Marciano:geo_eye_L_$AssimpFbx$_Translation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1435392640,
-            "parentUID": -673411968,
-            "name": "RPG-Character-Mesh"
+            "uid": 971638528,
+            "parentUID": 1388862464,
+            "name": "Marciano:geo_eye_L_$AssimpFbx$_RotationOffset"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 616427584,
-            "parentUID": 1978508928,
-            "name": "Motion_$AssimpFbx$_Translation"
+            "uid": 1116359168,
+            "parentUID": 971638528,
+            "name": "Marciano:geo_eye_L_$AssimpFbx$_RotationPivot"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1756650368,
-            "parentUID": 616427584,
-            "name": "Motion_$AssimpFbx$_PreRotation"
+            "uid": 1995498240,
+            "parentUID": 1116359168,
+            "name": "Marciano:geo_eye_L_$AssimpFbx$_Rotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1408774912,
-            "parentUID": 1756650368,
-            "name": "Motion_$AssimpFbx$_Rotation"
+            "uid": 1094494720,
+            "parentUID": 1995498240,
+            "name": "Marciano:geo_eye_L_$AssimpFbx$_RotationPivotInverse"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -420555168,
-            "parentUID": -1408774912,
-            "name": "Motion_$AssimpFbx$_Scaling"
+            "uid": -817947264,
+            "parentUID": 1094494720,
+            "name": "Marciano:geo_eye_L_$AssimpFbx$_ScalingOffset"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 966084096,
-            "parentUID": -420555168,
-            "name": "Motion"
+            "uid": -1228813824,
+            "parentUID": -817947264,
+            "name": "Marciano:geo_eye_L_$AssimpFbx$_ScalingPivot"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1328324736,
-            "parentUID": 966084096,
-            "name": "B_Pelvis"
+            "uid": -1619232768,
+            "parentUID": -1228813824,
+            "name": "Marciano:geo_eye_L_$AssimpFbx$_Scaling"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 589478208,
-            "parentUID": -1328324736,
-            "name": "B_Spine"
+            "uid": 341645600,
+            "parentUID": -1619232768,
+            "name": "Marciano:geo_eye_L_$AssimpFbx$_ScalingPivotInverse"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -905759360,
-            "parentUID": 589478208,
-            "name": "B_Spine1"
+            "uid": -1279910528,
+            "parentUID": 341645600,
+            "name": "Marciano:geo_eye_L"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -2016701696,
-            "parentUID": -905759360,
-            "name": "B_Spine2"
+            "uid": -411564672,
+            "parentUID": -493605792,
+            "name": "Marciano:geo_eye_R_$AssimpFbx$_Translation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -712086976,
-            "parentUID": -2016701696,
-            "name": "B_L_Clavicle"
+            "uid": 765384448,
+            "parentUID": -411564672,
+            "name": "Marciano:geo_eye_R_$AssimpFbx$_RotationOffset"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -25238680,
-            "parentUID": -712086976,
-            "name": "B_L_UpperArm"
+            "uid": -1032093952,
+            "parentUID": 765384448,
+            "name": "Marciano:geo_eye_R_$AssimpFbx$_RotationPivot"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1459113472,
-            "parentUID": -25238680,
-            "name": "B_L_Forearm"
+            "uid": 1584338304,
+            "parentUID": -1032093952,
+            "name": "Marciano:geo_eye_R_$AssimpFbx$_Rotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 946667520,
-            "parentUID": 1459113472,
-            "name": "B_L_Hand"
+            "uid": 292805344,
+            "parentUID": 1584338304,
+            "name": "Marciano:geo_eye_R_$AssimpFbx$_RotationPivotInverse"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -930575744,
-            "parentUID": 946667520,
-            "name": "B_L_Finger0"
+            "uid": -1419426560,
+            "parentUID": 292805344,
+            "name": "Marciano:geo_eye_R_$AssimpFbx$_ScalingOffset"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -934573440,
-            "parentUID": -930575744,
-            "name": "B_L_Finger01"
+            "uid": -935819648,
+            "parentUID": -1419426560,
+            "name": "Marciano:geo_eye_R_$AssimpFbx$_ScalingPivot"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1282142336,
-            "parentUID": -934573440,
-            "name": "B_L_Finger02"
+            "uid": 337980544,
+            "parentUID": -935819648,
+            "name": "Marciano:geo_eye_R_$AssimpFbx$_Scaling"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -2087276416,
-            "parentUID": 946667520,
-            "name": "B_L_Finger1"
+            "uid": -611186624,
+            "parentUID": 337980544,
+            "name": "Marciano:geo_eye_R_$AssimpFbx$_ScalingPivotInverse"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 883831744,
-            "parentUID": -2087276416,
-            "name": "B_L_Finger11"
+            "uid": -543798976,
+            "parentUID": -611186624,
+            "name": "Marciano:geo_eye_R"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -703273024,
-            "parentUID": 883831744,
-            "name": "B_L_Finger12"
+            "uid": -1458872320,
+            "parentUID": -493605792,
+            "name": "Marciano:geo_alien"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -38824640,
-            "parentUID": 946667520,
-            "name": "B_L_Finger2"
+            "uid": 484211584,
+            "parentUID": 592216832,
+            "name": "Marciano:Character1_Reference"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1750991488,
-            "parentUID": -38824640,
-            "name": "B_L_Finger21"
+            "uid": -1751767296,
+            "parentUID": 484211584,
+            "name": "Marciano:Character1_Hips"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -163281792,
-            "parentUID": 1750991488,
-            "name": "B_L_Finger22"
+            "uid": -1020363904,
+            "parentUID": -1751767296,
+            "name": "Marciano:joint8_$AssimpFbx$_Translation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1626014464,
-            "parentUID": 946667520,
-            "name": "B_L_Finger3"
+            "uid": 1709572864,
+            "parentUID": -1020363904,
+            "name": "Marciano:joint8_$AssimpFbx$_PreRotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 837583808,
-            "parentUID": 1626014464,
-            "name": "B_L_Finger31"
+            "uid": -1351765760,
+            "parentUID": 1709572864,
+            "name": "Marciano:joint8_$AssimpFbx$_Rotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 651356032,
-            "parentUID": 837583808,
-            "name": "B_L_Finger32"
+            "uid": 56740484,
+            "parentUID": -1351765760,
+            "name": "Marciano:joint8"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 174967536,
-            "parentUID": 946667520,
-            "name": "B_L_Finger4"
+            "uid": -901171520,
+            "parentUID": 56740484,
+            "name": "Marciano:joint9_$AssimpFbx$_Translation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 133798480,
-            "parentUID": 174967536,
-            "name": "B_L_Finger41"
+            "uid": -832422976,
+            "parentUID": -901171520,
+            "name": "Marciano:joint9_$AssimpFbx$_PreRotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -504619936,
-            "parentUID": 133798480,
-            "name": "B_L_Finger42"
+            "uid": -1263533952,
+            "parentUID": -832422976,
+            "name": "Marciano:joint9_$AssimpFbx$_Rotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1257296512,
-            "parentUID": -2016701696,
-            "name": "B_R_Clavicle"
+            "uid": 1595651200,
+            "parentUID": -1263533952,
+            "name": "Marciano:joint9"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -981982272,
-            "parentUID": -1257296512,
-            "name": "B_R_UpperArm"
+            "uid": 1785079424,
+            "parentUID": -1751767296,
+            "name": "Marciano:joint13_$AssimpFbx$_Translation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1064123200,
-            "parentUID": -981982272,
-            "name": "B_R_Forearm"
+            "uid": -1285197312,
+            "parentUID": 1785079424,
+            "name": "Marciano:joint13_$AssimpFbx$_PreRotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 678855296,
-            "parentUID": -1064123200,
-            "name": "B_R_Hand"
+            "uid": -237573664,
+            "parentUID": -1285197312,
+            "name": "Marciano:joint13_$AssimpFbx$_Rotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -617825024,
-            "parentUID": 678855296,
-            "name": "B_R_Finger0"
+            "uid": -1039384512,
+            "parentUID": -237573664,
+            "name": "Marciano:joint13"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1980211200,
-            "parentUID": -617825024,
-            "name": "B_R_Finger01"
+            "uid": -962199808,
+            "parentUID": -1039384512,
+            "name": "Marciano:joint9_$AssimpFbx$_Translation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1743160064,
-            "parentUID": 1980211200,
-            "name": "B_R_Finger02"
+            "uid": -1885042688,
+            "parentUID": -962199808,
+            "name": "Marciano:joint9_$AssimpFbx$_PreRotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 487719296,
-            "parentUID": 678855296,
-            "name": "B_R_Finger1"
+            "uid": 1521230208,
+            "parentUID": -1885042688,
+            "name": "Marciano:joint9_$AssimpFbx$_Rotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1588503936,
-            "parentUID": 487719296,
-            "name": "B_R_Finger11"
+            "uid": -490202624,
+            "parentUID": 1521230208,
+            "name": "Marciano:joint9"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 2141737856,
-            "parentUID": -1588503936,
-            "name": "B_R_Finger12"
+            "uid": 779317504,
+            "parentUID": -1751767296,
+            "name": "Marciano:Character1_LeftUpLeg"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -966783168,
-            "parentUID": 678855296,
-            "name": "B_R_Finger2"
+            "uid": -1630112896,
+            "parentUID": 779317504,
+            "name": "Marciano:ikHandle6"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1836071808,
-            "parentUID": -966783168,
-            "name": "B_R_Finger21"
+            "uid": -1196081664,
+            "parentUID": 779317504,
+            "name": "Marciano:hlp_jt_twist_upperLeg_L_$AssimpFbx$_Translation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 929534592,
-            "parentUID": -1836071808,
-            "name": "B_R_Finger22"
+            "uid": 2133363456,
+            "parentUID": -1196081664,
+            "name": "Marciano:hlp_jt_twist_upperLeg_L_$AssimpFbx$_PreRotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1067317312,
-            "parentUID": 678855296,
-            "name": "B_R_Finger3"
+            "uid": -1924296704,
+            "parentUID": 2133363456,
+            "name": "Marciano:hlp_jt_twist_upperLeg_L_$AssimpFbx$_Rotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1142129024,
-            "parentUID": 1067317312,
-            "name": "B_R_Finger31"
+            "uid": -844761536,
+            "parentUID": -1924296704,
+            "name": "Marciano:hlp_jt_twist_upperLeg_L"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 162200160,
-            "parentUID": 1142129024,
-            "name": "B_R_Finger32"
+            "uid": -910800640,
+            "parentUID": 779317504,
+            "name": "Marciano:Character1_LeftLeg"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1356447488,
-            "parentUID": 678855296,
-            "name": "B_R_Finger4"
+            "uid": 1026956992,
+            "parentUID": -910800640,
+            "name": "Marciano:hlp_jt_twist_lowerLeg_L_$AssimpFbx$_Translation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 520155488,
-            "parentUID": -1356447488,
-            "name": "B_R_Finger41"
+            "uid": -283163424,
+            "parentUID": 1026956992,
+            "name": "Marciano:hlp_jt_twist_lowerLeg_L_$AssimpFbx$_PreRotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 901227008,
-            "parentUID": 520155488,
-            "name": "B_R_Finger42"
+            "uid": 867753536,
+            "parentUID": -283163424,
+            "name": "Marciano:hlp_jt_twist_lowerLeg_L_$AssimpFbx$_Rotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -483177184,
-            "parentUID": -2016701696,
-            "name": "B_Neck"
+            "uid": -1644320000,
+            "parentUID": 867753536,
+            "name": "Marciano:hlp_jt_twist_lowerLeg_L"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 173777664,
-            "parentUID": -483177184,
-            "name": "B_Head"
+            "uid": 2042109824,
+            "parentUID": -1644320000,
+            "name": "Marciano:joint7_$AssimpFbx$_Translation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1769579264,
-            "parentUID": -1328324736,
-            "name": "B_L_Thigh"
+            "uid": 1380728704,
+            "parentUID": 2042109824,
+            "name": "Marciano:joint7_$AssimpFbx$_PreRotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1201219456,
-            "parentUID": -1769579264,
-            "name": "B_L_Calf"
+            "uid": 1525424640,
+            "parentUID": 1380728704,
+            "name": "Marciano:joint7_$AssimpFbx$_Rotation"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -1873819648,
-            "parentUID": 1201219456,
-            "name": "B_L_Foot"
+            "uid": -401309728,
+            "parentUID": 1525424640,
+            "name": "Marciano:joint7"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 209026896,
-            "parentUID": -1873819648,
-            "name": "B_L_Toe0"
+            "uid": 1846935808,
+            "parentUID": -910800640,
+            "name": "Marciano:Character1_LeftFoot"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 801716672,
-            "parentUID": -1328324736,
-            "name": "B_R_Thigh"
+            "uid": -1804746624,
+            "parentUID": 1846935808,
+            "name": "Marciano:ikHandle5"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 1507334144,
-            "parentUID": 801716672,
-            "name": "B_R_Calf"
+            "uid": 318998784,
+            "parentUID": 1846935808,
+            "name": "Marciano:Character1_LeftToeBase"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": -2101750784,
-            "parentUID": 1507334144,
-            "name": "B_R_Foot"
+            "uid": 2043497088,
+            "parentUID": 318998784,
+            "name": "Marciano:Character1_LeftFootMiddle1"
         },
         {
             "isRoot": false,
             "static": true,
-            "uid": 415197056,
-            "parentUID": -2101750784,
-            "name": "B_R_Toe0"
+            "uid": 1963478784,
+            "parentUID": 2043497088,
+            "name": "Marciano:Character1_LeftFootMiddle2"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 2080215424,
+            "parentUID": 779317504,
+            "name": "Marciano:hlp_hip_L_blendshape_forward_source"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1300579456,
+            "parentUID": -1751767296,
+            "name": "Marciano:Character1_RightUpLeg"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 665239168,
+            "parentUID": -1300579456,
+            "name": "Marciano:hlp_jt_twist_upperLeg_R_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -247132464,
+            "parentUID": 665239168,
+            "name": "Marciano:hlp_jt_twist_upperLeg_R_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 884897664,
+            "parentUID": -247132464,
+            "name": "Marciano:hlp_jt_twist_upperLeg_R_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -2092446208,
+            "parentUID": 884897664,
+            "name": "Marciano:hlp_jt_twist_upperLeg_R"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -754062528,
+            "parentUID": -1300579456,
+            "name": "Marciano:ikHandle6"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 2102650880,
+            "parentUID": -1300579456,
+            "name": "Marciano:Character1_RightLeg"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1220330624,
+            "parentUID": 2102650880,
+            "name": "Marciano:hlp_jt_twist_lowerLeg_R_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1592705536,
+            "parentUID": 1220330624,
+            "name": "Marciano:hlp_jt_twist_lowerLeg_R_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -701783552,
+            "parentUID": -1592705536,
+            "name": "Marciano:hlp_jt_twist_lowerLeg_R_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 843495552,
+            "parentUID": -701783552,
+            "name": "Marciano:hlp_jt_twist_lowerLeg_R"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1591090432,
+            "parentUID": 843495552,
+            "name": "Marciano:joint7_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1578175488,
+            "parentUID": -1591090432,
+            "name": "Marciano:joint7_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -240903152,
+            "parentUID": 1578175488,
+            "name": "Marciano:joint7_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -440267488,
+            "parentUID": -240903152,
+            "name": "Marciano:joint7"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1482932992,
+            "parentUID": 2102650880,
+            "name": "Marciano:Character1_RightFoot"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 975514624,
+            "parentUID": -1482932992,
+            "name": "Marciano:ikHandle7"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1294777600,
+            "parentUID": -1482932992,
+            "name": "Marciano:Character1_RightToeBase"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1900344064,
+            "parentUID": 1294777600,
+            "name": "Marciano:Character1_RightFootMiddle1"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 556804672,
+            "parentUID": 1900344064,
+            "name": "Marciano:Character1_RightFootMiddle2_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 498791296,
+            "parentUID": 556804672,
+            "name": "Marciano:Character1_RightFootMiddle2_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 179189616,
+            "parentUID": 498791296,
+            "name": "Marciano:Character1_RightFootMiddle2_$AssimpFbx$_Scaling"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -438721056,
+            "parentUID": 179189616,
+            "name": "Marciano:Character1_RightFootMiddle2"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -773640128,
+            "parentUID": -1751767296,
+            "name": "Marciano:Character1_Spine"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1119907968,
+            "parentUID": -773640128,
+            "name": "Marciano:Character1_Spine1"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 36866652,
+            "parentUID": 1119907968,
+            "name": "Marciano:Character1_Spine2"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 2102016128,
+            "parentUID": 36866652,
+            "name": "Marciano:Character1_LeftShoulder"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -408503072,
+            "parentUID": 2102016128,
+            "name": "Marciano:hlp_jt_twist_upperArm_L_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -10748448,
+            "parentUID": -408503072,
+            "name": "Marciano:hlp_jt_twist_upperArm_L_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1085830016,
+            "parentUID": -10748448,
+            "name": "Marciano:hlp_jt_twist_upperArm_L_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -710372096,
+            "parentUID": -1085830016,
+            "name": "Marciano:hlp_jt_twist_upperArm_L"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1125328000,
+            "parentUID": -710372096,
+            "name": "Marciano:joint4_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 937373184,
+            "parentUID": 1125328000,
+            "name": "Marciano:joint4_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 380514144,
+            "parentUID": 937373184,
+            "name": "Marciano:joint4_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 287456896,
+            "parentUID": 380514144,
+            "name": "Marciano:joint4"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 716420288,
+            "parentUID": 2102016128,
+            "name": "Marciano:Character1_LeftArm"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1159769600,
+            "parentUID": 716420288,
+            "name": "Marciano:ikHandle2"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -675817600,
+            "parentUID": 716420288,
+            "name": "Marciano:hlp_jt_twist_upperArm_L_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -143674832,
+            "parentUID": -675817600,
+            "name": "Marciano:hlp_jt_twist_upperArm_L_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1511944448,
+            "parentUID": -143674832,
+            "name": "Marciano:hlp_jt_twist_upperArm_L_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1753420800,
+            "parentUID": -1511944448,
+            "name": "Marciano:hlp_jt_twist_upperArm_L"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 537492096,
+            "parentUID": 716420288,
+            "name": "Marciano:Character1_LeftForeArm"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1100411776,
+            "parentUID": 537492096,
+            "name": "Marciano:hlp_jt_twist_lowerArm_L_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1729481728,
+            "parentUID": -1100411776,
+            "name": "Marciano:hlp_jt_twist_lowerArm_L_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1766109056,
+            "parentUID": 1729481728,
+            "name": "Marciano:hlp_jt_twist_lowerArm_L_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -526876160,
+            "parentUID": -1766109056,
+            "name": "Marciano:hlp_jt_twist_lowerArm_L"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -161969088,
+            "parentUID": -526876160,
+            "name": "Marciano:joint2_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -740477824,
+            "parentUID": -161969088,
+            "name": "Marciano:joint2_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1596317824,
+            "parentUID": -740477824,
+            "name": "Marciano:joint2_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1502714624,
+            "parentUID": -1596317824,
+            "name": "Marciano:joint2"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -81439448,
+            "parentUID": 537492096,
+            "name": "Marciano:Character1_LeftHand"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1360265344,
+            "parentUID": -81439448,
+            "name": "Marciano:ikHandle1"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1049271488,
+            "parentUID": -81439448,
+            "name": "Marciano:Character1_LeftHandThumb1"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1451586304,
+            "parentUID": -1049271488,
+            "name": "Marciano:Character1_LeftHandThumb2"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1126576640,
+            "parentUID": 1451586304,
+            "name": "Marciano:Character1_LeftHandThumb3"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -390989600,
+            "parentUID": 1126576640,
+            "name": "Marciano:Character1_LeftHandThumb4"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -121939656,
+            "parentUID": -81439448,
+            "name": "Marciano:Character1_LeftHandIndex1"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1603448064,
+            "parentUID": -121939656,
+            "name": "Marciano:Character1_LeftHandIndex2"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1250127872,
+            "parentUID": -1603448064,
+            "name": "Marciano:Character1_LeftHandIndex3_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1685306240,
+            "parentUID": 1250127872,
+            "name": "Marciano:Character1_LeftHandIndex3_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -114594904,
+            "parentUID": 1685306240,
+            "name": "Marciano:Character1_LeftHandIndex3_$AssimpFbx$_Scaling"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 586520192,
+            "parentUID": -114594904,
+            "name": "Marciano:Character1_LeftHandIndex3"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -46399784,
+            "parentUID": 586520192,
+            "name": "Marciano:Character1_LeftHandIndex4_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1779923072,
+            "parentUID": -46399784,
+            "name": "Marciano:Character1_LeftHandIndex4_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1247885184,
+            "parentUID": 1779923072,
+            "name": "Marciano:Character1_LeftHandIndex4_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1326711552,
+            "parentUID": 1247885184,
+            "name": "Marciano:Character1_LeftHandIndex4_$AssimpFbx$_Scaling"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -865579008,
+            "parentUID": 1326711552,
+            "name": "Marciano:Character1_LeftHandIndex4"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1837698048,
+            "parentUID": -81439448,
+            "name": "Marciano:Character1_LeftHandMiddle1"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 881654656,
+            "parentUID": -1837698048,
+            "name": "Marciano:Character1_LeftHandMiddle2"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 307929216,
+            "parentUID": 881654656,
+            "name": "Marciano:Character1_LeftHandMiddle3"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1101684224,
+            "parentUID": 307929216,
+            "name": "Marciano:Character1_LeftHandMiddle4"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 42464152,
+            "parentUID": 36866652,
+            "name": "Marciano:Character1_RightShoulder"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -943794816,
+            "parentUID": 42464152,
+            "name": "Marciano:hlp_jt_twist_upperArm_R_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1179142784,
+            "parentUID": -943794816,
+            "name": "Marciano:hlp_jt_twist_upperArm_R_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -557295808,
+            "parentUID": -1179142784,
+            "name": "Marciano:hlp_jt_twist_upperArm_R_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1143869696,
+            "parentUID": -557295808,
+            "name": "Marciano:hlp_jt_twist_upperArm_R"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -144663424,
+            "parentUID": 1143869696,
+            "name": "Marciano:joint4_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -933051584,
+            "parentUID": -144663424,
+            "name": "Marciano:joint4_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1629740928,
+            "parentUID": -933051584,
+            "name": "Marciano:joint4_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1964644608,
+            "parentUID": -1629740928,
+            "name": "Marciano:joint4"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -13096694,
+            "parentUID": 42464152,
+            "name": "Marciano:Character1_RightArm"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1159962240,
+            "parentUID": -13096694,
+            "name": "Marciano:hlp_jt_twist_upperArm_R_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1295515136,
+            "parentUID": 1159962240,
+            "name": "Marciano:hlp_jt_twist_upperArm_R_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1614785152,
+            "parentUID": 1295515136,
+            "name": "Marciano:hlp_jt_twist_upperArm_R_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 544545664,
+            "parentUID": 1614785152,
+            "name": "Marciano:hlp_jt_twist_upperArm_R"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1884433792,
+            "parentUID": -13096694,
+            "name": "Marciano:ikHandle3"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1950370944,
+            "parentUID": -13096694,
+            "name": "Marciano:Character1_RightForeArm"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -46872584,
+            "parentUID": 1950370944,
+            "name": "Marciano:hlp_jt_twist_lowerArm_R_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1448606336,
+            "parentUID": -46872584,
+            "name": "Marciano:hlp_jt_twist_lowerArm_R_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 326261152,
+            "parentUID": -1448606336,
+            "name": "Marciano:hlp_jt_twist_lowerArm_R_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 2027693056,
+            "parentUID": 326261152,
+            "name": "Marciano:hlp_jt_twist_lowerArm_R"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1739191936,
+            "parentUID": 2027693056,
+            "name": "Marciano:joint2_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1268852736,
+            "parentUID": 1739191936,
+            "name": "Marciano:joint2_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1650650368,
+            "parentUID": -1268852736,
+            "name": "Marciano:joint2_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1587213696,
+            "parentUID": 1650650368,
+            "name": "Marciano:joint2"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 902806912,
+            "parentUID": 1950370944,
+            "name": "Marciano:Character1_RightHand"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 982380352,
+            "parentUID": 902806912,
+            "name": "Marciano:ikHandle4"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -18077244,
+            "parentUID": 902806912,
+            "name": "Marciano:Character1_RightHandThumb1"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 864428992,
+            "parentUID": -18077244,
+            "name": "Marciano:Character1_RightHandThumb2"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 409733760,
+            "parentUID": 864428992,
+            "name": "Marciano:Character1_RightHandThumb3"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -175705696,
+            "parentUID": 409733760,
+            "name": "Marciano:Character1_RightHandThumb4"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1659098240,
+            "parentUID": 902806912,
+            "name": "Marciano:Character1_RightHandIndex1"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1288745344,
+            "parentUID": 1659098240,
+            "name": "Marciano:Character1_RightHandIndex2"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -2054964480,
+            "parentUID": 1288745344,
+            "name": "Marciano:Character1_RightHandIndex3_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 159130640,
+            "parentUID": -2054964480,
+            "name": "Marciano:Character1_RightHandIndex3_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1586307968,
+            "parentUID": 159130640,
+            "name": "Marciano:Character1_RightHandIndex3_$AssimpFbx$_Scaling"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1961263232,
+            "parentUID": 1586307968,
+            "name": "Marciano:Character1_RightHandIndex3"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1303276160,
+            "parentUID": -1961263232,
+            "name": "Marciano:Character1_RightHandIndex4_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1517227136,
+            "parentUID": 1303276160,
+            "name": "Marciano:Character1_RightHandIndex4_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1684526848,
+            "parentUID": -1517227136,
+            "name": "Marciano:Character1_RightHandIndex4_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 554441920,
+            "parentUID": -1684526848,
+            "name": "Marciano:Character1_RightHandIndex4_$AssimpFbx$_Scaling"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 519002944,
+            "parentUID": 554441920,
+            "name": "Marciano:Character1_RightHandIndex4"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1617633024,
+            "parentUID": 902806912,
+            "name": "Marciano:Character1_RightHandMiddle1"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -956497792,
+            "parentUID": 1617633024,
+            "name": "Marciano:Character1_RightHandMiddle2"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1030363008,
+            "parentUID": -956497792,
+            "name": "Marciano:Character1_RightHandMiddle3_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1859946112,
+            "parentUID": -1030363008,
+            "name": "Marciano:Character1_RightHandMiddle3_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1297365120,
+            "parentUID": 1859946112,
+            "name": "Marciano:Character1_RightHandMiddle3_$AssimpFbx$_Scaling"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1176509824,
+            "parentUID": -1297365120,
+            "name": "Marciano:Character1_RightHandMiddle3"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1025376960,
+            "parentUID": -1176509824,
+            "name": "Marciano:Character1_RightHandMiddle4_$AssimpFbx$_Translation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 146854976,
+            "parentUID": 1025376960,
+            "name": "Marciano:Character1_RightHandMiddle4_$AssimpFbx$_PreRotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 31134210,
+            "parentUID": 146854976,
+            "name": "Marciano:Character1_RightHandMiddle4_$AssimpFbx$_Rotation"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1600335104,
+            "parentUID": 31134210,
+            "name": "Marciano:Character1_RightHandMiddle4_$AssimpFbx$_Scaling"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -2025565440,
+            "parentUID": 1600335104,
+            "name": "Marciano:Character1_RightHandMiddle4"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1342702976,
+            "parentUID": 36866652,
+            "name": "Marciano:Character1_Neck"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": 1693115264,
+            "parentUID": 1342702976,
+            "name": "Marciano:Character1_Head"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1638400256,
+            "parentUID": -1751767296,
+            "name": "Marciano:hlp_hip_L_blendshape_sideways_target"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -1127581696,
+            "parentUID": -1751767296,
+            "name": "Marciano:hlp_hip_L_blendshape_forward_target"
+        },
+        {
+            "isRoot": false,
+            "static": true,
+            "uid": -600008448,
+            "parentUID": 592216832,
+            "name": "Marciano:Character1_Ctrl_Reference"
         }
     ],
     "components": [
         {
             "type": 2,
-            "parentUID": 1533034112,
+            "parentUID": -231463808,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -461,7 +1364,7 @@
         },
         {
             "type": 2,
-            "parentUID": 1978508928,
+            "parentUID": 592216832,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -482,11 +1385,11 @@
         {},
         {
             "type": 2,
-            "parentUID": 701162880,
+            "parentUID": -493605792,
             "position": {
-                "x": 0.02596735954284668,
+                "x": 0,
                 "y": 0,
-                "z": -0
+                "z": 0
             },
             "rotation": {
                 "x": 0,
@@ -502,17 +1405,17 @@
         },
         {
             "type": 2,
-            "parentUID": -673411968,
+            "parentUID": 1388862464,
             "position": {
-                "x": 0,
-                "y": 0,
-                "z": 0
+                "x": -1.0947668405509704e-17,
+                "y": -8.9179239273071289,
+                "z": 0.089394502341747284
             },
             "rotation": {
-                "x": -0.70710676908493042,
+                "x": 0,
                 "y": 0,
                 "z": 0,
-                "w": 0.70710676908493042
+                "w": 1
             },
             "scale": {
                 "x": 1,
@@ -522,7 +1425,167 @@
         },
         {
             "type": 2,
-            "parentUID": -1435392640,
+            "parentUID": 971638528,
+            "position": {
+                "x": 1.531644044619918e-15,
+                "y": 0,
+                "z": -0.17878900468349457
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1116359168,
+            "position": {
+                "x": -7.6034823070700568e-16,
+                "y": 8.9179239273071289,
+                "z": 0.089394502341747284
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1995498240,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 1,
+                "z": 0,
+                "w": -4.3711388286737929e-08
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1094494720,
+            "position": {
+                "x": 7.6034823070700568e-16,
+                "y": -8.9179239273071289,
+                "z": -0.089394502341747284
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -817947264,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0.17878900468349457
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1228813824,
+            "position": {
+                "x": -7.6034823070700568e-16,
+                "y": 8.9179239273071289,
+                "z": -0.089394502341747284
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1619232768,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0,
+                "y": -0,
+                "z": 1,
+                "w": 0
+            },
+            "scale": {
+                "x": -1,
+                "y": -1,
+                "z": -1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 341645600,
+            "position": {
+                "x": 7.6034823070700568e-16,
+                "y": -8.9179239273071289,
+                "z": 0.089394502341747284
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1279910528,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -542,19 +1605,19 @@
         },
         {
             "type": 0,
-            "parentUID": -1435392640,
-            "path": "Library\/Meshes\/_48.mymesh",
-            "rawpath": "C:\\Users\\Usuario\\Documents\\GitHub\\3dEngine\\Game\\Assets\\warrior\\walk.FBX",
-            "meshdoc": "036f899787a0e0f79811330742f959f3"
+            "parentUID": -1279910528,
+            "path": "Library\/Meshes\/_163.mymesh",
+            "rawpath": "C:\\Users\\Usuario\\Desktop\\runalien.fbx",
+            "meshdoc": "cf262fd9f60b40df7d6e7940065608ef"
         },
         {},
         {
             "type": 2,
-            "parentUID": 616427584,
+            "parentUID": -411564672,
             "position": {
-                "x": 9.9258500085852575e-07,
-                "y": 0,
-                "z": -0.17328988015651703
+                "x": -1.0947668405509704e-17,
+                "y": -8.9179239273071289,
+                "z": 0.089394502341747284
             },
             "rotation": {
                 "x": 0,
@@ -570,17 +1633,17 @@
         },
         {
             "type": 2,
-            "parentUID": 1756650368,
+            "parentUID": 765384448,
             "position": {
-                "x": 0.00014690271927975118,
+                "x": 1.0320436835385975e-15,
                 "y": 0,
-                "z": -25.646862030029297
+                "z": -0.17878900468349457
             },
             "rotation": {
-                "x": -0.70710676908493042,
+                "x": 0,
                 "y": 0,
                 "z": 0,
-                "w": 0.70710676908493042
+                "w": 1
             },
             "scale": {
                 "x": 1,
@@ -590,17 +1653,17 @@
         },
         {
             "type": 2,
-            "parentUID": -1408774912,
+            "parentUID": -1032093952,
             "position": {
-                "x": 9.9258500085852575e-07,
-                "y": 0,
-                "z": -0.17328989505767822
+                "x": -5.1054805016634546e-16,
+                "y": 8.9179239273071289,
+                "z": 0.089394502341747284
             },
             "rotation": {
-                "x": -0.50000041723251343,
-                "y": 0.49999967217445374,
-                "z": -0.49999967217445374,
-                "w": 0.50000041723251343
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
             },
             "scale": {
                 "x": 1,
@@ -610,27 +1673,183 @@
         },
         {
             "type": 2,
-            "parentUID": -420555168,
+            "parentUID": 1584338304,
             "position": {
                 "x": 0,
                 "y": 0,
                 "z": 0
             },
             "rotation": {
-                "x": -0.50000083446502686,
-                "y": -0.49999919533729553,
-                "z": -0.5,
-                "w": 0.5
+                "x": 0,
+                "y": 1,
+                "z": 0,
+                "w": -4.3711388286737929e-08
             },
             "scale": {
                 "x": 1,
                 "y": 1,
-                "z": -6.2601255278356726e+18
+                "z": 1
             }
         },
         {
             "type": 2,
-            "parentUID": 966084096,
+            "parentUID": 292805344,
+            "position": {
+                "x": 5.1054805016634546e-16,
+                "y": -8.9179239273071289,
+                "z": -0.089394502341747284
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1419426560,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0.17878900468349457
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -935819648,
+            "position": {
+                "x": -5.1054805016634546e-16,
+                "y": 8.9179239273071289,
+                "z": -0.089394502341747284
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 337980544,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0,
+                "y": -0,
+                "z": 1,
+                "w": 0
+            },
+            "scale": {
+                "x": -1,
+                "y": -1,
+                "z": -1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -611186624,
+            "position": {
+                "x": 5.1054805016634546e-16,
+                "y": -8.9179239273071289,
+                "z": 0.089394502341747284
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -543798976,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 0,
+            "parentUID": -543798976,
+            "path": "Library\/Meshes\/_164.mymesh",
+            "rawpath": "C:\\Users\\Usuario\\Desktop\\runalien.fbx",
+            "meshdoc": "cf262fd9f60b40df7d6e7940065608ef"
+        },
+        {},
+        {
+            "type": 2,
+            "parentUID": -1458872320,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 0,
+            "parentUID": -1458872320,
+            "path": "Library\/Meshes\/_165.mymesh",
+            "rawpath": "C:\\Users\\Usuario\\Desktop\\runalien.fbx",
+            "meshdoc": "84688500fab5a9248517554983c1238b"
+        },
+        {},
+        {
+            "type": 2,
+            "parentUID": 484211584,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -650,17 +1869,1417 @@
         },
         {
             "type": 2,
-            "parentUID": -1328324736,
+            "parentUID": -1751767296,
             "position": {
-                "x": 5.4362149238586426,
-                "y": 0.85662513971328735,
-                "z": 132.49259948730469
+                "x": 4.7180640194710577e-07,
+                "y": 4.5535249710083008,
+                "z": -9.7616160928737372e-05
             },
             "rotation": {
-                "x": 0.48572897911071777,
-                "y": 0.47537815570831299,
-                "z": 0.45957878232002258,
-                "w": -0.57172578573226929
+                "x": 0.25364968180656433,
+                "y": -0.079672090709209442,
+                "z": -0.023610906675457954,
+                "w": 0.96372026205062866
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1020363904,
+            "position": {
+                "x": 1.3073379993438721,
+                "y": 0.74527794122695923,
+                "z": -0.14803381264209747
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1709572864,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.44864434003829956,
+                "y": -0.54655122756958008,
+                "z": -0.44864434003829956,
+                "w": 0.54655122756958008
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1351765760,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.55234193801879883,
+                "y": 0.45571702718734741,
+                "z": -0.5406680703163147,
+                "w": 0.44149580597877502
+            },
+            "scale": {
+                "x": 0.99999988079071045,
+                "y": 0.99999988079071045,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 56740484,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -901171520,
+            "position": {
+                "x": 0.75964254140853882,
+                "y": -8.3266726846886741e-17,
+                "z": 2.0857086434416392e-19
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -832422976,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.44864434003829956,
+                "y": 0.54655122756958008,
+                "z": 0.44864436984062195,
+                "w": 0.54655122756958008
+            },
+            "scale": {
+                "x": 1,
+                "y": 0.99999994039535522,
+                "z": 0.99999994039535522
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1263533952,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.44864431023597717,
+                "y": 0.54655128717422485,
+                "z": -0.44864431023597717,
+                "w": 0.54655128717422485
+            },
+            "scale": {
+                "x": 1,
+                "y": 0.99999988079071045,
+                "z": -6.2601249780798587e+18
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1595651200,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1785079424,
+            "position": {
+                "x": -1.3073400259017944,
+                "y": 0.74527835845947266,
+                "z": -0.14803400635719299
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1285197312,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.54655122756958008,
+                "y": -0.44864439964294434,
+                "z": 0.54655122756958008,
+                "w": 0.44864434003829956
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -237573664,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.40267151594161987,
+                "y": 0.50822234153747559,
+                "z": 0.49164023995399475,
+                "w": 0.58125346899032593
+            },
+            "scale": {
+                "x": 0.99999988079071045,
+                "y": 0.99999988079071045,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1039384512,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -962199808,
+            "position": {
+                "x": -0.75964349508285522,
+                "y": -5.2343538392563005e-09,
+                "z": -4.4408920985006262e-16
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1885042688,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.44864434003829956,
+                "y": 0.54655122756958008,
+                "z": 0.44864436984062195,
+                "w": 0.54655122756958008
+            },
+            "scale": {
+                "x": 1,
+                "y": 0.99999994039535522,
+                "z": 0.99999994039535522
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1521230208,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -490202624,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 779317504,
+            "position": {
+                "x": 1.3073426485061646,
+                "y": 8.835515022277832,
+                "z": -0.00020011440210510045
+            },
+            "rotation": {
+                "x": -0.54711955785751343,
+                "y": 0.43045437335968018,
+                "z": -0.25585299730300903,
+                "w": -0.67075216770172119
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1630112896,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.44864434003829956,
+                "y": -0.54655122756958008,
+                "z": -0.44864434003829956,
+                "w": 0.54655122756958008
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1196081664,
+            "position": {
+                "x": 3.5790375108035732e-08,
+                "y": -0.86840981245040894,
+                "z": 0.17253744602203369
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 2133363456,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.44864434003829956,
+                "y": -0.54655122756958008,
+                "z": -0.44864434003829956,
+                "w": 0.54655122756958008
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1924296704,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.54066812992095947,
+                "y": 0.44149583578109741,
+                "z": -0.55234181880950928,
+                "w": 0.45571690797805786
+            },
+            "scale": {
+                "x": 0.99999988079071045,
+                "y": 0.99999988079071045,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -844761536,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -910800640,
+            "position": {
+                "x": 2.6146814823150635,
+                "y": -1.7994754314422607,
+                "z": 0.3747020959854126
+            },
+            "rotation": {
+                "x": 0.21785464882850647,
+                "y": 0.017200566828250885,
+                "z": -0.57042217254638672,
+                "w": 0.79174625873565674
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 1,
+                "z": 0.99999988079071045
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1026956992,
+            "position": {
+                "x": 3.5790371555322054e-08,
+                "y": -0.81359738111495972,
+                "z": -0.21915002167224884
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -283163424,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.43124169111251831,
+                "y": 0.56038433313369751,
+                "z": -0.43124169111251831,
+                "w": 0.56038433313369751
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 867753536,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.54921853542327881,
+                "y": -0.41682839393615723,
+                "z": -0.57118654251098633,
+                "w": 0.44537520408630371
+            },
+            "scale": {
+                "x": 0.99999988079071045,
+                "y": 0.99999988079071045,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1644320000,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 2042109824,
+            "position": {
+                "x": 0.99262142181396484,
+                "y": -1.6653345369377348e-16,
+                "z": -1.1020311572340234e-16
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1380728704,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.4312417209148407,
+                "y": -0.56038433313369751,
+                "z": 0.43124175071716309,
+                "w": 0.56038427352905273
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1525424640,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.43124181032180786,
+                "y": -0.56038433313369751,
+                "z": -0.43124181032180786,
+                "w": 0.56038433313369751
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -401309728,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1846935808,
+            "position": {
+                "x": -2.8894741262774915e-05,
+                "y": -5.3728609085083008,
+                "z": 0.27599868178367615
+            },
+            "rotation": {
+                "x": 0.059883654117584229,
+                "y": 0.52531170845031738,
+                "z": -0.082266278564929962,
+                "w": 0.84480404853820801
+            },
+            "scale": {
+                "x": 0.99999988079071045,
+                "y": 0.99999988079071045,
+                "z": 0.99999988079071045
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1804746624,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.43124169111251831,
+                "y": 0.56038433313369751,
+                "z": -0.43124169111251831,
+                "w": 0.56038433313369751
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 318998784,
+            "position": {
+                "x": 1.8639917698237696e-07,
+                "y": -4.6410346031188965,
+                "z": 1.0844273567199707
+            },
+            "rotation": {
+                "x": -0.54200750589370728,
+                "y": 0.39068004488945007,
+                "z": -0.23132415115833282,
+                "w": 0.70716768503189087
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 2043497088,
+            "position": {
+                "x": 0.00067344994749873877,
+                "y": -2.1896226406097412,
+                "z": 4.0623888969421387
+            },
+            "rotation": {
+                "x": -0.40404096245765686,
+                "y": 0,
+                "z": 0,
+                "w": 0.9147409200668335
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1963478784,
+            "position": {
+                "x": 0.00067151780240237713,
+                "y": 6.0378994248821982e-08,
+                "z": 1.2044209241867065
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 2080215424,
+            "position": {
+                "x": 3.5790371555322054e-08,
+                "y": -1.7998734712600708,
+                "z": 0.38774123787879944
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1300579456,
+            "position": {
+                "x": -1.3073344230651855,
+                "y": 8.835515022277832,
+                "z": -0.00020039356604684144
+            },
+            "rotation": {
+                "x": 0.65474218130111694,
+                "y": -0.31174606084823608,
+                "z": 0.58947509527206421,
+                "w": -0.35587385296821594
+            },
+            "scale": {
+                "x": 0.99999988079071045,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 665239168,
+            "position": {
+                "x": -2.0364464035083074e-06,
+                "y": -0.86841040849685669,
+                "z": 0.17253699898719788
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -247132464,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.54655122756958008,
+                "y": -0.44864439964294434,
+                "z": 0.54655122756958008,
+                "w": 0.44864434003829956
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 884897664,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.4916398823261261,
+                "y": 0.58125334978103638,
+                "z": 0.40267190337181091,
+                "w": 0.50822252035140991
+            },
+            "scale": {
+                "x": 0.99999988079071045,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -2092446208,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -754062528,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.54655122756958008,
+                "y": -0.44864439964294434,
+                "z": 0.54655122756958008,
+                "w": 0.44864434003829956
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 2102650880,
+            "position": {
+                "x": -2.6146361827850342,
+                "y": -1.7994775772094727,
+                "z": 0.37469768524169922
+            },
+            "rotation": {
+                "x": 0.40064942836761475,
+                "y": 0.55708932876586914,
+                "z": 0.3742101788520813,
+                "w": 0.62377744913101196
+            },
+            "scale": {
+                "x": 0.99999988079071045,
+                "y": 1,
+                "z": 0.99999994039535522
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1220330624,
+            "position": {
+                "x": -2.0364464035083074e-06,
+                "y": -0.81359702348709106,
+                "z": -0.21914997696876526
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1592705536,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.56038433313369751,
+                "y": 0.43124175071716309,
+                "z": 0.56038433313369751,
+                "w": 0.43124169111251831
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -701783552,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.47913694381713867,
+                "y": -0.59634530544281006,
+                "z": 0.3799634575843811,
+                "w": 0.52002686262130737
+            },
+            "scale": {
+                "x": 0.99999988079071045,
+                "y": 0.99999988079071045,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 843495552,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1591090432,
+            "position": {
+                "x": -0.99261957406997681,
+                "y": -5.7010015552805271e-07,
+                "z": 4.4408920985006262e-16
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1578175488,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.4312417209148407,
+                "y": -0.56038433313369751,
+                "z": 0.43124175071716309,
+                "w": 0.56038427352905273
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -240903152,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -440267488,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1482932992,
+            "position": {
+                "x": 5.0086964620277286e-07,
+                "y": -5.3728594779968262,
+                "z": 0.27601346373558044
+            },
+            "rotation": {
+                "x": 0.72690087556838989,
+                "y": -0.35686469078063965,
+                "z": 0.5827222466468811,
+                "w": -0.068539328873157501
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 0.99999994039535522,
+                "z": 0.99999988079071045
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 975514624,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.56038433313369751,
+                "y": 0.43124175071716309,
+                "z": 0.56038433313369751,
+                "w": 0.43124169111251831
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1294777600,
+            "position": {
+                "x": 1.0986070719809504e-08,
+                "y": -4.6410317420959473,
+                "z": 1.0844278335571289
+            },
+            "rotation": {
+                "x": 0.2703167200088501,
+                "y": -0.27683636546134949,
+                "z": 0.29565984010696411,
+                "w": 0.87342756986618042
+            },
+            "scale": {
+                "x": 0.99999988079071045,
+                "y": 0.9999997615814209,
+                "z": 0.99999988079071045
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1900344064,
+            "position": {
+                "x": -0.00067261140793561935,
+                "y": -2.1896209716796875,
+                "z": 4.0623846054077148
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 556804672,
+            "position": {
+                "x": -0.00066972326021641493,
+                "y": 1.2696055762262404e-07,
+                "z": 1.2044210433959961
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 498791296,
+            "position": {
+                "x": 3.6243104659661185e-06,
+                "y": 5.8413985470906482e-07,
+                "z": 2.4088408946990967
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 179189616,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -438721056,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -773640128,
+            "position": {
+                "x": 4.231430466461461e-06,
+                "y": 10.023508071899414,
+                "z": -0.00020070331811439246
+            },
+            "rotation": {
+                "x": 9.7146852340301848e-08,
+                "y": 0.88528889417648315,
+                "z": -0.46504151821136475,
+                "w": 2.3375153546112415e-07
+            },
+            "scale": {
+                "x": 0.99999988079071045,
+                "y": 0.99999988079071045,
+                "z": 0.99999988079071045
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1119907968,
+            "position": {
+                "x": -7.1245506205741549e-07,
+                "y": 3.949131965637207,
+                "z": -1.2393869610605179e-06
+            },
+            "rotation": {
+                "x": 0.13222929835319519,
+                "y": 0,
+                "z": 0,
+                "w": 0.991219162940979
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 36866652,
+            "position": {
+                "x": -6.4903747443167958e-07,
+                "y": 4.7182440757751465,
+                "z": 4.4087886408306076e-07
+            },
+            "rotation": {
+                "x": 0.17135235667228699,
+                "y": 0,
+                "z": 0,
+                "w": 0.98520982265472412
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 2102016128,
+            "position": {
+                "x": 0.20696808397769928,
+                "y": 4.6263189315795898,
+                "z": 8.1038331245508743e-07
+            },
+            "rotation": {
+                "x": 0.079085849225521088,
+                "y": 0,
+                "z": 0,
+                "w": 0.996867835521698
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -408503072,
+            "position": {
+                "x": 0.16009247303009033,
+                "y": 0.30079108476638794,
+                "z": -0.070138059556484222
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -10748448,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.013970833271741867,
+                "y": 0.027705082669854164,
+                "z": -0.45004415512084961,
+                "w": 0.89246708154678345
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 0.99999994039535522
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1085830016,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.23346878588199615,
+                "y": 0.13775412738323212,
+                "z": -0.42933803796768188,
+                "w": 0.86150169372558594
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 0.99999988079071045
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -710372096,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1125328000,
+            "position": {
+                "x": 0.72214668989181519,
+                "y": -1.2490009027033011e-16,
+                "z": -1.0140951414130626e-17
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 937373184,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.013970835134387016,
+                "y": -0.027705084532499313,
+                "z": 0.45004415512084961,
+                "w": 0.89246708154678345
             },
             "scale": {
                 "x": 0.99999994039535522,
@@ -670,1021 +3289,1901 @@
         },
         {
             "type": 2,
-            "parentUID": 589478208,
+            "parentUID": 380514144,
             "position": {
-                "x": -203.85025024414063,
-                "y": 20.195287704467773,
-                "z": 2664.664794921875
+                "x": 0,
+                "y": 0,
+                "z": 0
             },
             "rotation": {
-                "x": -0.51960712671279907,
-                "y": 0.54634261131286621,
-                "z": 0.37071391940116882,
-                "w": 0.54230016469955444
-            },
-            "scale": {
-                "x": 1,
-                "y": 0.99999988079071045,
-                "z": 0.9999997615814209
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -905759360,
-            "position": {
-                "x": -85.5389404296875,
-                "y": 90.571212768554688,
-                "z": 3612.6494140625
-            },
-            "rotation": {
-                "x": -0.00788092240691185,
-                "y": 0.99996477365493774,
-                "z": -0.0024485690519213676,
-                "w": -0.0015553549164906144
+                "x": -0.01397083792835474,
+                "y": -0.027705086395144463,
+                "z": 0.45004421472549438,
+                "w": 0.892467200756073
             },
             "scale": {
                 "x": 0.99999988079071045,
-                "y": 0.99999988079071045,
-                "z": 1
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -2016701696,
-            "position": {
-                "x": 243.42843627929688,
-                "y": 121.50183868408203,
-                "z": 4817.1396484375
-            },
-            "rotation": {
-                "x": 2.4358672817470506e-05,
-                "y": 0.99998331069946289,
-                "z": -0.0049019157886505127,
-                "w": -0.0030876935925334692
-            },
-            "scale": {
-                "x": 0.9999997615814209,
-                "y": 1.0000002384185791,
-                "z": 1
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -712086976,
-            "position": {
-                "x": 1411.6090087890625,
-                "y": 99.072708129882813,
-                "z": 3221.60302734375
-            },
-            "rotation": {
-                "x": -0.72792363166809082,
-                "y": 0.0020460023079067469,
-                "z": 0.68564647436141968,
-                "w": -0.0034697656519711018
-            },
-            "scale": {
-                "x": 1.0000009536743164,
-                "y": 1.0000004768371582,
-                "z": 1
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -25238680,
-            "position": {
-                "x": 3313.92431640625,
-                "y": 83.867752075195313,
-                "z": 6412.3642578125
-            },
-            "rotation": {
-                "x": 0.30569684505462646,
-                "y": 0.27274233102798462,
-                "z": -0.33923342823982239,
-                "w": 0.84680682420730591
-            },
-            "scale": {
-                "x": 0.99999964237213135,
-                "y": 0.9999995231628418,
-                "z": 0.9999997615814209
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 1459113472,
-            "position": {
-                "x": 5309.9091796875,
-                "y": 110.05545043945313,
-                "z": 6316.90625
-            },
-            "rotation": {
-                "x": -0.81346797943115234,
-                "y": 0.13068060576915741,
-                "z": -0.43861198425292969,
-                "w": 0.35890412330627441
-            },
-            "scale": {
-                "x": 0.9999997615814209,
-                "y": 0.99999982118606567,
-                "z": 1.0000004768371582
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 946667520,
-            "position": {
-                "x": 11740.26953125,
-                "y": 142.33329772949219,
-                "z": 9782.470703125
-            },
-            "rotation": {
-                "x": -0.37344038486480713,
-                "y": 0.76017481088638306,
-                "z": 0.20801891386508942,
-                "w": -0.48929023742675781
-            },
-            "scale": {
-                "x": 0.99999964237213135,
-                "y": 0.99999970197677612,
-                "z": 1.0000001192092896
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -930575744,
-            "position": {
-                "x": 11298.6171875,
-                "y": 124.08250427246094,
-                "z": 6254.291015625
-            },
-            "rotation": {
-                "x": 0.033855203539133072,
-                "y": -0.22372496128082275,
-                "z": 0.96913653612136841,
-                "w": 0.097853884100914001
-            },
-            "scale": {
-                "x": 1.0000007152557373,
-                "y": 0.9999995231628418,
-                "z": 1.0000009536743164
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -934573440,
-            "position": {
-                "x": 21828.5,
-                "y": 110.378662109375,
-                "z": 9281.640625
-            },
-            "rotation": {
-                "x": 0.4735274612903595,
-                "y": 0.83062756061553955,
-                "z": 0.019649684429168701,
-                "w": -0.29230716824531555
-            },
-            "scale": {
-                "x": 1.0000005960464478,
-                "y": 0.9999992847442627,
-                "z": 0.99999964237213135
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -1282142336,
-            "position": {
-                "x": 32735.244140625,
-                "y": 112.40921020507813,
-                "z": 12629.888671875
-            },
-            "rotation": {
-                "x": 0.57347577810287476,
-                "y": 0.41367319226264954,
-                "z": -0.21161365509033203,
-                "w": 0.67469978332519531
-            },
-            "scale": {
-                "x": 1.0000008344650269,
-                "y": 0.99999988079071045,
-                "z": 0.99999916553497314
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -2087276416,
-            "position": {
-                "x": 11304.3857421875,
-                "y": 121.96766662597656,
-                "z": 6258.96875
-            },
-            "rotation": {
-                "x": -0.090062856674194336,
-                "y": -0.25639918446540833,
-                "z": -0.89513355493545532,
-                "w": -0.35338950157165527
-            },
-            "scale": {
-                "x": 1.0000004768371582,
-                "y": 0.99999988079071045,
-                "z": 1.0000007152557373
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 883831744,
-            "position": {
-                "x": 22489.51171875,
-                "y": -168.83158874511719,
-                "z": 9896.390625
-            },
-            "rotation": {
-                "x": 0.44113373756408691,
-                "y": 0.52289783954620361,
-                "z": -0.23811683058738708,
-                "w": 0.68940502405166626
-            },
-            "scale": {
-                "x": 0.99999988079071045,
-                "y": 1.0000002384185791,
-                "z": 0.99999958276748657
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -703273024,
-            "position": {
-                "x": 33961.203125,
-                "y": -374.05328369140625,
-                "z": 13701.02734375
-            },
-            "rotation": {
-                "x": 0.57347595691680908,
-                "y": 0.41367292404174805,
-                "z": -0.21161335706710815,
-                "w": 0.67469978332519531
-            },
-            "scale": {
-                "x": 0.99999964237213135,
-                "y": 0.9999995231628418,
-                "z": 1
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -38824640,
-            "position": {
-                "x": 11304.3857421875,
-                "y": 121.97084045410156,
-                "z": 6262.998046875
-            },
-            "rotation": {
-                "x": -0.090063780546188354,
-                "y": -0.2563985288143158,
-                "z": -0.89513349533081055,
-                "w": -0.35338979959487915
-            },
-            "scale": {
-                "x": 1.0000002384185791,
-                "y": 1,
-                "z": 1.0000009536743164
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 1750991488,
-            "position": {
-                "x": 22490.419921875,
-                "y": -168.34114074707031,
-                "z": 10425.3779296875
-            },
-            "rotation": {
-                "x": 0.44113263487815857,
-                "y": 0.5228998064994812,
-                "z": -0.23811322450637817,
-                "w": 0.68940544128417969
-            },
-            "scale": {
-                "x": 1.0000003576278687,
-                "y": 1.0000004768371582,
-                "z": 0.9999995231628418
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -163281792,
-            "position": {
-                "x": 34082.1796875,
-                "y": -373.25857543945313,
-                "z": 14622.7646484375
-            },
-            "rotation": {
-                "x": 0.57347625494003296,
-                "y": 0.41367202997207642,
-                "z": -0.21161440014839172,
-                "w": 0.67469984292984009
-            },
-            "scale": {
-                "x": 1.0000004768371582,
-                "y": 0.99999994039535522,
-                "z": 0.99999964237213135
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 1626014464,
-            "position": {
-                "x": 11304.3857421875,
-                "y": 121.97407531738281,
-                "z": 6267.0205078125
-            },
-            "rotation": {
-                "x": -0.090063787996768951,
-                "y": -0.25639912486076355,
-                "z": -0.89513343572616577,
-                "w": -0.35338959097862244
-            },
-            "scale": {
-                "x": 1.0000002384185791,
-                "y": 0.9999997615814209,
-                "z": 1.0000008344650269
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 837583808,
-            "position": {
-                "x": 22489.51171875,
-                "y": -167.93772888183594,
-                "z": 10959.1806640625
-            },
-            "rotation": {
-                "x": 0.44113257527351379,
-                "y": 0.52289944887161255,
-                "z": -0.23811487853527069,
-                "w": 0.68940532207489014
-            },
-            "scale": {
-                "x": 1,
-                "y": 0.99999982118606567,
-                "z": 1
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 651356032,
-            "position": {
-                "x": 33961.203125,
-                "y": -372.53411865234375,
-                "z": 15552.8720703125
-            },
-            "rotation": {
-                "x": 0.57347649335861206,
-                "y": 0.41367244720458984,
-                "z": -0.21161532402038574,
-                "w": 0.67469912767410278
-            },
-            "scale": {
-                "x": 1.0000001192092896,
-                "y": 0.99999916553497314,
-                "z": 1.0000004768371582
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 174967536,
-            "position": {
-                "x": 11304.3857421875,
-                "y": 121.97712707519531,
-                "z": 6270.88671875
-            },
-            "rotation": {
-                "x": -0.090063825249671936,
-                "y": -0.25639963150024414,
-                "z": -0.89513319730758667,
-                "w": -0.35339000821113586
-            },
-            "scale": {
-                "x": 1.0000004768371582,
-                "y": 0.99999988079071045,
-                "z": 1.0000008344650269
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 133798480,
-            "position": {
-                "x": 22488.60546875,
-                "y": -167.53376770019531,
-                "z": 11466.6826171875
-            },
-            "rotation": {
-                "x": 0.4411323070526123,
-                "y": 0.52289938926696777,
-                "z": -0.23811626434326172,
-                "w": 0.68940496444702148
-            },
-            "scale": {
-                "x": 1.0000004768371582,
-                "y": 1.0000004768371582,
-                "z": 0.99999964237213135
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -504619936,
-            "position": {
-                "x": 33840.984375,
-                "y": -371.82879638671875,
-                "z": 16437.13671875
-            },
-            "rotation": {
-                "x": 0.57347732782363892,
-                "y": 0.41367325186729431,
-                "z": -0.21161466836929321,
-                "w": 0.67469805479049683
-            },
-            "scale": {
-                "x": 0.9999992847442627,
-                "y": 1,
-                "z": 0.99999916553497314
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -1257296512,
-            "position": {
-                "x": 1175.806884765625,
-                "y": 50.186176300048828,
-                "z": 1337.9637451171875
-            },
-            "rotation": {
-                "x": 0.88812839984893799,
-                "y": -0.0099575286731123924,
-                "z": -0.4583858847618103,
-                "w": 0.031799919903278351
-            },
-            "scale": {
-                "x": 1.0000008344650269,
-                "y": 1.0000001192092896,
-                "z": 0.9999997615814209
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -981982272,
-            "position": {
-                "x": 2446.00732421875,
-                "y": 16.283416748046875,
-                "z": 2520.44677734375
-            },
-            "rotation": {
-                "x": 0.13053171336650848,
-                "y": 0.67571341991424561,
-                "z": -0.069435447454452515,
-                "w": -0.72218537330627441
-            },
-            "scale": {
-                "x": 1.0000005960464478,
-                "y": 0.9999995231628418,
-                "z": 0.99999904632568359
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -1064123200,
-            "position": {
-                "x": 3798.97314453125,
-                "y": 42.81781005859375,
-                "z": 2379.68798828125
-            },
-            "rotation": {
-                "x": -0.8412022590637207,
-                "y": -0.44810712337493896,
-                "z": -0.23298059403896332,
-                "w": -0.19312895834445953
-            },
-            "scale": {
-                "x": 1,
-                "y": 1.0000004768371582,
-                "z": 0.99999964237213135
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 678855296,
-            "position": {
-                "x": 8394.87890625,
-                "y": 52.033821105957031,
-                "z": 4075.57373046875
-            },
-            "rotation": {
-                "x": -0.64728927612304688,
-                "y": -0.40200459957122803,
-                "z": 0.55207020044326782,
-                "w": 0.33856675028800964
-            },
-            "scale": {
-                "x": 0.9999992847442627,
-                "y": 1.0000002384185791,
-                "z": 1.0000004768371582
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -617825024,
-            "position": {
-                "x": 7273.701171875,
-                "y": 54.627662658691406,
-                "z": 1959.255859375
-            },
-            "rotation": {
-                "x": -0.28191840648651123,
-                "y": 0.44232583045959473,
-                "z": 0.84109097719192505,
-                "w": 0.13204500079154968
-            },
-            "scale": {
-                "x": 1.0000004768371582,
-                "y": 0.99999946355819702,
-                "z": 0.9999992847442627
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 1980211200,
-            "position": {
-                "x": 14034.048828125,
-                "y": 22.37811279296875,
-                "z": 5228.34228515625
-            },
-            "rotation": {
-                "x": -0.33145269751548767,
-                "y": -0.3266461193561554,
-                "z": -0.86801731586456299,
-                "w": -0.1731688529253006
-            },
-            "scale": {
-                "x": 1.0000007152557373,
-                "y": 0.9999995231628418,
-                "z": 0.99999892711639404
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -1743160064,
-            "position": {
-                "x": 21199.4296875,
-                "y": 4.299163818359375,
-                "z": 8205.212890625
-            },
-            "rotation": {
-                "x": 0.57347589731216431,
-                "y": 0.4136735200881958,
-                "z": -0.21161295473575592,
-                "w": 0.67469972372055054
-            },
-            "scale": {
-                "x": 1.0000001192092896,
-                "y": 1.0000003576278687,
-                "z": 1.0000002384185791
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 487719296,
-            "position": {
-                "x": 7278.7041015625,
-                "y": 52.51263427734375,
-                "z": 1954.5986328125
-            },
-            "rotation": {
-                "x": -0.058681804686784744,
-                "y": -0.050297334790229797,
-                "z": -0.98420882225036621,
-                "w": -0.1592475026845932
-            },
-            "scale": {
-                "x": 1.0000002384185791,
-                "y": 1,
-                "z": 0.9999997615814209
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -1588503936,
-            "position": {
-                "x": 14584.44921875,
-                "y": -210.25927734375,
-                "z": 4716.07177734375
-            },
-            "rotation": {
-                "x": 0.44220376014709473,
-                "y": 0.52330690622329712,
-                "z": -0.23681052029132843,
-                "w": 0.68885892629623413
-            },
-            "scale": {
-                "x": 0.99999988079071045,
-                "y": 1.0000004768371582,
-                "z": 1.0000002384185791
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 2141737856,
-            "position": {
-                "x": 22207.513671875,
-                "y": -395.41262817382813,
-                "z": 7325.01904296875
-            },
-            "rotation": {
-                "x": 0.57347565889358521,
-                "y": 0.41367316246032715,
-                "z": -0.21161311864852905,
-                "w": 0.67470008134841919
-            },
-            "scale": {
-                "x": 1.0000007152557373,
-                "y": 1,
-                "z": 1.0000002384185791
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -966783168,
-            "position": {
-                "x": 7278.7041015625,
-                "y": 52.515838623046875,
-                "z": 1950.59130859375
-            },
-            "rotation": {
-                "x": -0.05868171900510788,
-                "y": -0.050297319889068604,
-                "z": -0.98420876264572144,
-                "w": -0.15924736857414246
-            },
-            "scale": {
-                "x": 1.0000002384185791,
-                "y": 0.99999988079071045,
-                "z": 0.99999964237213135
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -1836071808,
-            "position": {
-                "x": 14585.375,
-                "y": -209.90635681152344,
-                "z": 4275.24169921875
-            },
-            "rotation": {
-                "x": 0.44220376014709473,
-                "y": 0.52330672740936279,
-                "z": -0.23681066930294037,
-                "w": 0.68885904550552368
-            },
-            "scale": {
-                "x": 0.9999997615814209,
-                "y": 1.0000007152557373,
-                "z": 1
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 929534592,
-            "position": {
-                "x": 22308.234375,
-                "y": -394.80804443359375,
-                "z": 6567.61767578125
-            },
-            "rotation": {
-                "x": 0.57347607612609863,
-                "y": 0.41367295384407043,
-                "z": -0.21161389350891113,
-                "w": 0.67469954490661621
-            },
-            "scale": {
-                "x": 1.0000002384185791,
-                "y": 1.0000001192092896,
-                "z": 1.0000002384185791
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 1067317312,
-            "position": {
-                "x": 7278.7041015625,
-                "y": 52.519210815429688,
-                "z": 1946.54736328125
-            },
-            "rotation": {
-                "x": -0.058681715279817581,
-                "y": -0.050297241657972336,
-                "z": -0.98420876264572144,
-                "w": -0.15924736857414246
-            },
-            "scale": {
-                "x": 1.0000002384185791,
                 "y": 1,
                 "z": 0.99999988079071045
             }
         },
         {
             "type": 2,
-            "parentUID": 1142129024,
+            "parentUID": 287456896,
             "position": {
-                "x": 14584.4296875,
-                "y": -209.55230712890625,
-                "z": 3830.40771484375
+                "x": 0,
+                "y": 0,
+                "z": 0
             },
             "rotation": {
-                "x": 0.44220364093780518,
-                "y": 0.52330726385116577,
-                "z": -0.23680968582630157,
-                "w": 0.68885892629623413
-            },
-            "scale": {
-                "x": 1,
-                "y": 1.0000009536743164,
-                "z": 1.0000004768371582
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 162200160,
-            "position": {
-                "x": 22207.53515625,
-                "y": -394.19903564453125,
-                "z": 5803.30224609375
-            },
-            "rotation": {
-                "x": 0.57347613573074341,
-                "y": 0.41367310285568237,
-                "z": -0.2116130143404007,
-                "w": 0.67469960451126099
-            },
-            "scale": {
-                "x": 1.0000002384185791,
-                "y": 1.0000002384185791,
-                "z": 1.0000009536743164
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -1356447488,
-            "position": {
-                "x": 7278.7041015625,
-                "y": 52.522064208984375,
-                "z": 1942.70263671875
-            },
-            "rotation": {
-                "x": -0.058681778609752655,
-                "y": -0.05029725655913353,
-                "z": -0.98420882225036621,
-                "w": -0.1592475026845932
-            },
-            "scale": {
-                "x": 1.0000005960464478,
-                "y": 1.0000007152557373,
-                "z": 1.0000005960464478
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 520155488,
-            "position": {
-                "x": 14583.54296875,
-                "y": -209.22059631347656,
-                "z": 3407.49755859375
-            },
-            "rotation": {
-                "x": 0.44220373034477234,
-                "y": 0.52330666780471802,
-                "z": -0.23681044578552246,
-                "w": 0.68885910511016846
-            },
-            "scale": {
-                "x": 1.0000008344650269,
-                "y": 1.0000019073486328,
-                "z": 1.0000021457672119
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 901227008,
-            "position": {
-                "x": 22106.9296875,
-                "y": -393.58544921875,
-                "z": 5076.67236328125
-            },
-            "rotation": {
-                "x": 0.57347583770751953,
-                "y": 0.41367292404174805,
-                "z": -0.21161380410194397,
-                "w": 0.67469990253448486
-            },
-            "scale": {
-                "x": 1.0000005960464478,
-                "y": 1.0000004768371582,
-                "z": 1.0000002384185791
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -483177184,
-            "position": {
-                "x": 1433.144775390625,
-                "y": 97.481735229492188,
-                "z": 3216.29638671875
-            },
-            "rotation": {
-                "x": 3.9772621676092967e-05,
-                "y": 0.9999997615814209,
-                "z": -0.0006895819678902626,
-                "w": -6.0984217498116777e-07
-            },
-            "scale": {
-                "x": 1.0000007152557373,
-                "y": 1.0000001192092896,
-                "z": 1.0000002384185791
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 173777664,
-            "position": {
-                "x": 4075.39501953125,
-                "y": -133.74223327636719,
-                "z": 3618.342041015625
-            },
-            "rotation": {
-                "x": 0.015232623554766178,
-                "y": 0.012164763174951077,
-                "z": -0.059437267482280731,
-                "w": 0.99804168939590454
-            },
-            "scale": {
-                "x": 0.9999995231628418,
-                "y": 0.9999995231628418,
-                "z": 0.99999988079071045
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": -1769579264,
-            "position": {
-                "x": -250.26821899414063,
-                "y": 21.016143798828125,
-                "z": 3340.94970703125
-            },
-            "rotation": {
-                "x": 0.611522376537323,
-                "y": 0.45334747433662415,
-                "z": -0.25334873795509338,
-                "w": -0.59693461656570435
-            },
-            "scale": {
-                "x": 0.99999988079071045,
-                "y": 0.99999994039535522,
-                "z": 0.9999997615814209
-            }
-        },
-        {
-            "type": 2,
-            "parentUID": 1201219456,
-            "position": {
-                "x": -180.4464111328125,
-                "y": 20.176895141601563,
-                "z": 3615.58154296875
-            },
-            "rotation": {
-                "x": -0.68075817823410034,
-                "y": 0.19529938697814941,
-                "z": -0.25052037835121155,
-                "w": -0.66005003452301025
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
             },
             "scale": {
                 "x": 1,
                 "y": 1,
-                "z": 1.0000001192092896
+                "z": 1
             }
         },
         {
             "type": 2,
-            "parentUID": -1873819648,
+            "parentUID": 716420288,
             "position": {
-                "x": 2091.85693359375,
-                "y": 36.977005004882813,
-                "z": 6559.24169921875
+                "x": 1.0025413036346436,
+                "y": 2.681779146194458,
+                "z": -0.096767276525497437
             },
             "rotation": {
-                "x": 0.67640179395675659,
-                "y": -0.14095687866210938,
-                "z": 0.69229447841644287,
-                "w": 0.20818307995796204
+                "x": -0.068324528634548187,
+                "y": -0.65410935878753662,
+                "z": -0.089873068034648895,
+                "w": -0.74792754650115967
             },
             "scale": {
-                "x": 0.9999997615814209,
-                "y": 0.99999982118606567,
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1159769600,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.013970833271741867,
+                "y": 0.027705082669854164,
+                "z": -0.45004415512084961,
+                "w": 0.89246708154678345
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
                 "z": 0.99999994039535522
             }
         },
         {
             "type": 2,
-            "parentUID": 209026896,
+            "parentUID": -675817600,
             "position": {
-                "x": 4482.470703125,
-                "y": 84.773284912109375,
-                "z": 10393.5
+                "x": 0.87653625011444092,
+                "y": -1.1967500448226929,
+                "z": -0.047005206346511841
             },
             "rotation": {
-                "x": 0.25248584151268005,
-                "y": 0.70138394832611084,
-                "z": 0.2591569721698761,
-                "w": 0.61412477493286133
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
             },
             "scale": {
-                "x": 0.99999970197677612,
-                "y": 0.9999997615814209,
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -143674832,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.013970833271741867,
+                "y": 0.027705082669854164,
+                "z": -0.45004415512084961,
+                "w": 0.89246708154678345
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 0.99999994039535522
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1511944448,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.30928102135658264,
+                "y": 0,
+                "z": 0,
+                "w": 0.95097070932388306
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1753420800,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 537492096,
+            "position": {
+                "x": 2.9104475975036621,
+                "y": -2.9096662998199463,
+                "z": -0.28033539652824402
+            },
+            "rotation": {
+                "x": 0.63745027780532837,
+                "y": -0.15387819707393646,
+                "z": -0.61164343357086182,
+                "w": 0.44257324934005737
+            },
+            "scale": {
+                "x": 0.9999997615814209,
+                "y": 0.99999988079071045,
+                "z": 0.99999988079071045
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1100411776,
+            "position": {
+                "x": 0.85344600677490234,
+                "y": -1.1749505996704102,
+                "z": 0.32607850432395935
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1729481728,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.076842673122882843,
+                "y": -0.15983131527900696,
+                "z": -0.42642930150032043,
+                "w": 0.88696515560150146
+            },
+            "scale": {
+                "x": 1,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1766109056,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.21805354952812195,
+                "y": -0.22613140940666199,
+                "z": -0.39528927206993103,
+                "w": 0.86317068338394165
+            },
+            "scale": {
+                "x": 1,
+                "y": 0.99999988079071045,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -526876160,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -161969088,
+            "position": {
+                "x": 1.4348434209823608,
+                "y": 1.457167719820518e-16,
+                "z": -1.1623850340527505e-16
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -740477824,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.076842643320560455,
+                "y": 0.15983131527900696,
+                "z": 0.42642933130264282,
+                "w": 0.88696515560150146
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1596317824,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.076842658221721649,
+                "y": 0.15983130037784576,
+                "z": 0.42642930150032043,
+                "w": 0.88696521520614624
+            },
+            "scale": {
+                "x": 0.99999988079071045,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1502714624,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -81439448,
+            "position": {
+                "x": 5.1596193313598633,
+                "y": -6.9954662322998047,
+                "z": 0.46532946825027466
+            },
+            "rotation": {
+                "x": -0.06814110279083252,
+                "y": 0.43077188730239868,
+                "z": -0.41011419892311096,
+                "w": -0.80099862813949585
+            },
+            "scale": {
+                "x": 1.0000001192092896,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1360265344,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.076842673122882843,
+                "y": -0.15983131527900696,
+                "z": -0.42642930150032043,
+                "w": 0.88696515560150146
+            },
+            "scale": {
+                "x": 1,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1049271488,
+            "position": {
+                "x": 3.3446028232574463,
+                "y": -5.0035715103149414,
+                "z": 1.7312201261520386
+            },
+            "rotation": {
+                "x": -0.58994275331497192,
+                "y": -0.38779622316360474,
+                "z": -0.58781903982162476,
+                "w": 0.39503216743469238
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1451586304,
+            "position": {
+                "x": -0.29016542434692383,
+                "y": -1.1124143600463867,
+                "z": 1.1985514163970947
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1126576640,
+            "position": {
+                "x": -0.53726965188980103,
+                "y": -0.87702107429504395,
+                "z": 0.76125192642211914
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -390989600,
+            "position": {
+                "x": -0.39832264184951782,
+                "y": -0.99495309591293335,
+                "z": 0.46167007088661194
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -121939656,
+            "position": {
+                "x": 3.7430198192596436,
+                "y": -5.8182644844055176,
+                "z": 1.7648161649703979
+            },
+            "rotation": {
+                "x": -0.58994275331497192,
+                "y": -0.38779622316360474,
+                "z": -0.58781903982162476,
+                "w": 0.39503216743469238
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1603448064,
+            "position": {
+                "x": 0.65388834476470947,
+                "y": -2.9475290775299072,
+                "z": 0.98895418643951416
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1250127872,
+            "position": {
+                "x": -0.28129172325134277,
+                "y": -1.3822896480560303,
+                "z": -0.0021058619022369385
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1685306240,
+            "position": {
+                "x": -0.32442396879196167,
+                "y": -0.79101705551147461,
+                "z": -0.063087478280067444
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -114594904,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 586520192,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -46399784,
+            "position": {
+                "x": -0.21745368838310242,
+                "y": -0.33433753252029419,
+                "z": -0.029786091297864914
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1779923072,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0.0084851561114192009,
+                "z": 0,
+                "w": 0.99996399879455566
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 1,
+                "z": 0.99999994039535522
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1247885184,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0.0084851561114192009,
+                "z": 0,
+                "w": 0.99996399879455566
+            },
+            "scale": {
+                "x": 0.99999988079071045,
+                "y": 1,
+                "z": 0.99999988079071045
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1326711552,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -865579008,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1837698048,
+            "position": {
+                "x": 3.6889150142669678,
+                "y": -5.8202629089355469,
+                "z": 1.0200521945953369
+            },
+            "rotation": {
+                "x": -0.58994275331497192,
+                "y": -0.38779622316360474,
+                "z": -0.58781903982162476,
+                "w": 0.39503216743469238
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 881654656,
+            "position": {
+                "x": 0.52070325613021851,
+                "y": -2.982792854309082,
+                "z": -0.48721370100975037
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 307929216,
+            "position": {
+                "x": -0.32072621583938599,
+                "y": -1.3443297147750854,
+                "z": 0.096157029271125793
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1101684224,
+            "position": {
+                "x": -0.4883037805557251,
+                "y": -0.8843732476234436,
+                "z": 0.15021443367004395
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 42464152,
+            "position": {
+                "x": -0.20696958899497986,
+                "y": 4.6263184547424316,
+                "z": 8.970076805780991e-07
+            },
+            "rotation": {
+                "x": 0.079085849225521088,
+                "y": 0,
+                "z": 0,
+                "w": 0.996867835521698
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -943794816,
+            "position": {
+                "x": -0.16009223461151123,
+                "y": 0.30082783102989197,
+                "z": -0.070138096809387207
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1179142784,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.89246708154678345,
+                "y": 0.45004415512084961,
+                "z": 0.027705106884241104,
+                "w": 0.013970873318612576
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 0.99999988079071045
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -557295808,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.89209836721420288,
+                "y": -0.44950535893440247,
+                "z": -0.035387083888053894,
+                "w": -0.029210716485977173
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 0.99999988079071045
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1143869696,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -144663424,
+            "position": {
+                "x": -0.72218018770217896,
+                "y": 2.3875922124716453e-05,
+                "z": -7.6841814689032617e-08
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -933051584,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.013970835134387016,
+                "y": -0.027705084532499313,
+                "z": 0.45004415512084961,
+                "w": 0.89246708154678345
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 1,
+                "z": 0.99999994039535522
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1629740928,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1964644608,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -13096694,
+            "position": {
+                "x": -1.0025420188903809,
+                "y": 2.6817784309387207,
+                "z": -0.096767723560333252
+            },
+            "rotation": {
+                "x": -0.21863849461078644,
+                "y": 0.09653809666633606,
+                "z": -0.26762551069259644,
+                "w": 0.93340998888015747
+            },
+            "scale": {
+                "x": 1,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1159962240,
+            "position": {
+                "x": -0.87653744220733643,
+                "y": -1.1967542171478271,
+                "z": -0.047005511820316315
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1295515136,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.89246708154678345,
+                "y": 0.45004415512084961,
+                "z": 0.027705106884241104,
+                "w": 0.013970873318612576
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 0.99999988079071045
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1614785152,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.22651709616184235,
+                "y": 0,
+                "z": 0,
+                "w": 0.97400718927383423
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 544545664,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1884433792,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.89246708154678345,
+                "y": 0.45004415512084961,
+                "z": 0.027705106884241104,
+                "w": 0.013970873318612576
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 0.99999988079071045
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1950370944,
+            "position": {
+                "x": -2.9104371070861816,
+                "y": -2.9096775054931641,
+                "z": -0.28029537200927734
+            },
+            "rotation": {
+                "x": 0.52607589960098267,
+                "y": -0.50580114126205444,
+                "z": -0.54048728942871094,
+                "w": 0.41866821050643921
+            },
+            "scale": {
+                "x": 0.99999988079071045,
+                "y": 0.99999988079071045,
                 "z": 0.9999997615814209
             }
         },
         {
             "type": 2,
-            "parentUID": 801716672,
+            "parentUID": -46872584,
             "position": {
-                "x": -213.0869140625,
-                "y": 16.799571990966797,
-                "z": 2652.3525390625
+                "x": -0.85344409942626953,
+                "y": -1.17494797706604,
+                "z": 0.32607820630073547
             },
             "rotation": {
-                "x": 0.898964524269104,
-                "y": 0.27161070704460144,
-                "z": -0.17111815512180328,
-                "w": 0.29800859093666077
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
             },
             "scale": {
-                "x": 0.9999997615814209,
-                "y": 0.9999997615814209,
-                "z": 0.99999964237213135
+                "x": 1,
+                "y": 1,
+                "z": 1
             }
         },
         {
             "type": 2,
-            "parentUID": 1507334144,
+            "parentUID": -1448606336,
             "position": {
-                "x": -63.466140747070313,
-                "y": 8.3829078674316406,
-                "z": 1041.403076171875
+                "x": 0,
+                "y": 0,
+                "z": 0
             },
             "rotation": {
-                "x": -0.49824723601341248,
-                "y": -0.53661084175109863,
-                "z": -0.48632133007049561,
-                "w": -0.4767494797706604
+                "x": 0.88696515560150146,
+                "y": 0.42642930150032043,
+                "z": -0.15983133018016815,
+                "w": -0.076842702925205231
             },
             "scale": {
                 "x": 1,
-                "y": 1.0000001192092896,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 326261152,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.86721760034561157,
+                "y": 0.39957726001739502,
+                "z": -0.2184605598449707,
+                "w": -0.20136240124702454
+            },
+            "scale": {
+                "x": 1,
+                "y": 0.99999988079071045,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 2027693056,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1739191936,
+            "position": {
+                "x": -1.4348458051681519,
+                "y": -4.3563450162764639e-06,
+                "z": 1.638685944271856e-06
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1268852736,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": -0.076842643320560455,
+                "y": 0.15983131527900696,
+                "z": 0.42642933130264282,
+                "w": 0.88696515560150146
+            },
+            "scale": {
+                "x": 0.99999994039535522,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1650650368,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1587213696,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 902806912,
+            "position": {
+                "x": -5.1596498489379883,
+                "y": -6.995448112487793,
+                "z": 0.46539950370788574
+            },
+            "rotation": {
+                "x": 0.48986011743545532,
+                "y": 0.32297626137733459,
+                "z": -0.80974447727203369,
+                "w": -0.0061232605949044228
+            },
+            "scale": {
+                "x": 1,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 982380352,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0.88696515560150146,
+                "y": 0.42642930150032043,
+                "z": -0.15983133018016815,
+                "w": -0.076842702925205231
+            },
+            "scale": {
+                "x": 1,
+                "y": 0.99999994039535522,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -18077244,
+            "position": {
+                "x": -3.3445994853973389,
+                "y": -5.0035591125488281,
+                "z": 1.7312543392181396
+            },
+            "rotation": {
+                "x": 7.5934927735943347e-05,
+                "y": 0.86510157585144043,
+                "z": 0.50150340795516968,
+                "w": 0.0096822464838624001
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
                 "z": 0.99999988079071045
             }
         },
         {
             "type": 2,
-            "parentUID": -2101750784,
+            "parentUID": 864428992,
             "position": {
-                "x": 1637.33154296875,
-                "y": 14.262945175170898,
-                "z": 1857.280517578125
+                "x": 0.29016557335853577,
+                "y": -1.1124149560928345,
+                "z": 1.1985514163970947
             },
             "rotation": {
-                "x": -0.54109859466552734,
-                "y": -0.45363035798072815,
-                "z": -0.43640914559364319,
-                "w": 0.55765485763549805
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
             },
             "scale": {
-                "x": 1.0000003576278687,
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 409733760,
+            "position": {
+                "x": 0.53726941347122192,
+                "y": -0.87702035903930664,
+                "z": 0.76125240325927734
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -175705696,
+            "position": {
+                "x": 0.39832189679145813,
+                "y": -0.99495351314544678,
+                "z": 0.46167027950286865
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1659098240,
+            "position": {
+                "x": -3.7430167198181152,
+                "y": -5.8182516098022461,
+                "z": 1.7648502588272095
+            },
+            "rotation": {
+                "x": 7.5934927735943347e-05,
+                "y": 0.86510157585144043,
+                "z": 0.50150340795516968,
+                "w": 0.0096822464838624001
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 0.99999988079071045
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1288745344,
+            "position": {
+                "x": -0.65388935804367065,
+                "y": -2.9475293159484863,
+                "z": 0.98895496129989624
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
                 "y": 1.0000002384185791,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -2054964480,
+            "position": {
+                "x": 0.28129231929779053,
+                "y": -1.382290244102478,
+                "z": -0.0021022893488407135
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 159130640,
+            "position": {
+                "x": 0.32442536950111389,
+                "y": -0.79101657867431641,
+                "z": -0.063080266118049622
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1586307968,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1961263232,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1303276160,
+            "position": {
+                "x": 0.21741810441017151,
+                "y": -0.33433741331100464,
+                "z": -0.03004501573741436
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1517227136,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0.0084854299202561378,
+                "z": 0,
+                "w": 0.99996399879455566
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1684526848,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0.0084854289889335632,
+                "z": 0,
+                "w": 0.99996399879455566
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 554441920,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 519002944,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1617633024,
+            "position": {
+                "x": -3.6889111995697021,
+                "y": -5.8202495574951172,
+                "z": 1.0200865268707275
+            },
+            "rotation": {
+                "x": 7.5934927735943347e-05,
+                "y": 0.86510157585144043,
+                "z": 0.50150340795516968,
+                "w": 0.0096822464838624001
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
                 "z": 0.99999988079071045
             }
         },
         {
             "type": 2,
-            "parentUID": 415197056,
+            "parentUID": -956497792,
             "position": {
-                "x": 3049.8857421875,
-                "y": 56.195716857910156,
-                "z": 4642.34521484375
+                "x": -0.52070373296737671,
+                "y": -2.9827938079833984,
+                "z": -0.48721346259117126
             },
             "rotation": {
-                "x": -0.04865313321352005,
-                "y": 0.47713261842727661,
-                "z": 0.8416435718536377,
-                "w": 0.24822054803371429
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
             },
             "scale": {
                 "x": 1,
-                "y": 0.99999964237213135,
+                "y": 1.0000002384185791,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1030363008,
+            "position": {
+                "x": 0.32072544097900391,
+                "y": -1.3443300724029541,
+                "z": 0.096158891916275024
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1859946112,
+            "position": {
+                "x": 0.30339053273200989,
+                "y": -0.59003198146820068,
+                "z": 0.080005072057247162
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1297365120,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1176509824,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1025376960,
+            "position": {
+                "x": 0.184954434633255,
+                "y": -0.2943413257598877,
+                "z": 0.070103287696838379
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 146854976,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0.0084854299202561378,
+                "z": 0,
+                "w": 0.99996399879455566
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 31134210,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0.0084854289889335632,
+                "z": 0,
+                "w": 0.99996399879455566
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1600335104,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -2025565440,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1342702976,
+            "position": {
+                "x": -6.6597164050108404e-07,
+                "y": 4.7182435989379883,
+                "z": 8.5523436155199306e-07
+            },
+            "rotation": {
+                "x": 0.096264004707336426,
+                "y": 0.12296687066555023,
+                "z": -0.12060868740081787,
+                "w": 0.98033970594406128
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": 1693115264,
+            "position": {
+                "x": -1.1167469438078115e-06,
+                "y": 4.7305469512939453,
+                "z": 0.29454714059829712
+            },
+            "rotation": {
+                "x": -0.12142057716846466,
+                "y": 0.58135026693344116,
+                "z": -0.070242121815681458,
+                "w": 0.80147045850753784
+            },
+            "scale": {
+                "x": 0.99999988079071045,
+                "y": 0.99999988079071045,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1638400256,
+            "position": {
+                "x": 3.0770299434661865,
+                "y": -0.3280312716960907,
+                "z": 0.38774123787879944
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0.63938921689987183,
+                "w": 0.76888322830200195
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -1127581696,
+            "position": {
+                "x": 1.3073379993438721,
+                "y": -0.40782546997070313,
+                "z": 1.7765474319458008
+            },
+            "rotation": {
+                "x": -0.53729963302612305,
+                "y": 0,
+                "z": 0,
+                "w": 0.84339141845703125
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 2,
+            "parentUID": -600008448,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
                 "z": 1
             }
         }

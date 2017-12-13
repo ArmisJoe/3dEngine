@@ -71,6 +71,7 @@ void ComponentMesh::Draw(const ComponentTransform* trans, const ComponentMateria
 void ComponentMesh::OnEditor()
 {
 	ImGui::TextColored(COLOR_YELLOW, "Mesh:");
+	ImGui::Checkbox("Visible?", &visible);
 		std::string str = "Triangles: " + std::to_string(this->GetTriangles());
 		ImGui::Text(str.c_str());
 		str = "Vertices: " + std::to_string(this->num_vertices);

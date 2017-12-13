@@ -20,9 +20,9 @@
             "lighting": true,
             "material_color": false,
             "2D_textures": true,
-            "wireframe": false,
+            "wireframe": true,
             "depth_test": true,
-            "cull_face": false
+            "cull_face": true
         },
         "textures": {
             "interpolation": 1,

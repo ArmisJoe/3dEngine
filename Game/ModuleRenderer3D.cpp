@@ -187,7 +187,8 @@ update_status ModuleRenderer3D::Update(float dt)
 							App->skeletal_anim->AdaptMeshToBone(skeleton, m);
 						}
 					}
-					//DrawMesh(trans, (m->skin != nullptr ? m->skin : m), mat);
+					if(m->visible)
+						DrawMesh(trans, (m->skin != nullptr ? m->skin : m), mat);
 					//DrawMesh(trans, m, mat);
 				}
 			}
