@@ -62,7 +62,7 @@ public:
 
 	// [PAU] gonna fix this mess :S
 	void SetGlobalPosition(float3 newpos);
-	void SetGlobalRotation(Quat newrot);
+	void SetGlobalRotation(Quat newrot, bool toSelf = true);
 	void SetGlobalScale(float3 newsca);
 
 	void SetRotationHyerarchy(Quat newrot);

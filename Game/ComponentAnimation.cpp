@@ -83,21 +83,13 @@ void ComponentAnimation::Update(float dt)
 						TransformKeys::QuatKey bRot = b->GetRotByTime(this->time);
 						TransformKeys::VectorKey bSca = b->GetScaByTime(this->time);
 
-						// Rot to Global ->
-						Quat tmprot = bRot.value;
-						//if (targetGo->GetParent() != nullptr) {
-						//	float3 tmp = tmprot.ToEulerXYZ();
-						//	tmp = targetGo->GetParent()->GetTransform()->GetRotation().ToEulerXYZ().Mul(tmp);
-						//	tmprot = Quat::FromEulerXYZ(tmp.x, tmp.y, tmp.z);
-						//}
-
 						trans->SetGlobalPosition(bPos.value + targetGo->GetParent()->GetTransform()->GetPosition());
 						trans->SetGlobalRotation(bRot.value * targetGo->GetParent()->GetTransform()->GetRotation());
 						trans->SetGlobalScale(bSca.value);
 						//trans->ChangeLocalPosition(bPos.value);
 						//trans->ChangeLocalRotation(tmprot);
 						//trans->ChangeLocalScale(bSca.value);
-
+						
 					}
 				}
 			

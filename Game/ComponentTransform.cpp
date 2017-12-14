@@ -173,7 +173,7 @@ void ComponentTransform::SetGlobalPosition(float3 newpos)
 	transform_modified = true;
 }
 
-void ComponentTransform::SetGlobalRotation(Quat newrot)
+void ComponentTransform::SetGlobalRotation(Quat newrot, bool toSelf)
 {
 	if (GetParent() == nullptr)
 		return;
@@ -182,8 +182,8 @@ void ComponentTransform::SetGlobalRotation(Quat newrot)
 	float3 eulernewrot = newrot.ToEulerXYZ();
 
 	float3 drot = eulernewrot - eulerrot;
-
-	rotation_global = newrot;
+	if(toSelf)
+		rotation_global = newrot;
 
 	for (int i = 0; i < GetParent()->children.size(); i++) {
 		ComponentTransform* cTrans = GetParent()->children[i]->GetTransform();
@@ -206,7 +206,7 @@ void ComponentTransform::SetGlobalRotation(Quat newrot)
 		newdistance.x = newdistance.x;
 		newdistance.y = newdistance.y * Cos(drot.z) - newdistance.z * Sin(drot.z);
 		newdistance.z = newdistance.y * Sin(drot.z) + newdistance.z * Cos(drot.z);
-		
+
 		cnewpos = GetParent()->GetTransform()->GetPosition() + newdistance;
 
 		cTrans->SetGlobalPosition(cnewpos);
@@ -215,7 +215,7 @@ void ComponentTransform::SetGlobalRotation(Quat newrot)
 		float3 ceulerrot = cTrans->GetRotation().ToEulerXYZ();
 		float3 totalrot = ceulerrot + drot;
 		Quat totalquatrot = Quat::FromEulerXYZ(totalrot.x, totalrot.y, totalrot.x);
-		cTrans->SetGlobalRotation(totalquatrot);
+		cTrans->SetGlobalRotation(totalquatrot, false);
 	}
 
 	transform_modified = true;
