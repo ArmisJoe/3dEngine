@@ -386,6 +386,12 @@ bool ModuleAssimp::Import(const aiMesh * m, std::string & output_file)
 	//Vertices
 	new_mesh->vertices = new float[new_mesh->num_vertices * 3];
 	memcpy(new_mesh->vertices, m->mVertices, sizeof(float) * new_mesh->num_vertices * 3);
+	//Normals
+	if (m->HasNormals()) {
+		new_mesh->num_normals = m->mNumVertices;
+		new_mesh->normals = new float[new_mesh->num_normals * 3];
+		memcpy(new_mesh->normals, m->mNormals, sizeof(float) * new_mesh->num_normals * 3);
+	}
 
 	//Indices
 	if (m->HasFaces()) {
@@ -448,6 +454,7 @@ bool ModuleAssimp::SaveToOwnFormat(ComponentMesh * m, std::string & output_file)
 	int bufferIdx[NUM_MESH_IDX] = { // Setting the buffer Indexes
 		m->num_vertices,
 		m->num_indices,
+		m->num_normals,
 		m->num_UV
 	};
 	
@@ -455,6 +462,7 @@ bool ModuleAssimp::SaveToOwnFormat(ComponentMesh * m, std::string & output_file)
 	bufferSize += sizeof(bufferIdx);
 	bufferSize += sizeof(float) * m->num_vertices * 3;
 	bufferSize += sizeof(unsigned int) * m->num_indices;
+	bufferSize += sizeof(float) * m->num_normals * 3;
 	bufferSize += sizeof(float) * m->num_UV * 3;
 
 	char* buffer = new char[bufferSize]; // Creating the Buffer
@@ -464,8 +472,10 @@ bool ModuleAssimp::SaveToOwnFormat(ComponentMesh * m, std::string & output_file)
 	std::memcpy(it, m->vertices, sizeof(float) * m->num_vertices * 3); // Allocating vertices
 	it += sizeof(float) * m->num_vertices * 3;
 	std::memcpy(it, m->indices, sizeof(unsigned int) * m->num_indices); // Allocating indices
+	it += sizeof(unsigned int) * m->num_indices;
+	std::memcpy(it, m->normals, sizeof(float) * m->num_normals * 3); // Allocating normals
 	if (m->num_UV > 0) {
-		it += sizeof(unsigned int) * m->num_indices;
+		it += sizeof(float) * m->num_normals * 3;
 		std::memcpy(it, m->textureCoords, sizeof(float) * m->num_UV * 3); // Allocating UVs
 	}
 
@@ -495,11 +505,13 @@ ComponentMesh* ModuleAssimp::LoadMyFormatMesh(const char * exported_file)
 	int bufferSize = App->fs->Load(exported_file, &buffer);
 	if (buffer != nullptr) {
 		if (bufferSize > 0) {
-			// [FORMAT] nV nI nUV - Vs Is UVs
+			// [FORMAT] nV nI nN nUV - Vs Is Ns UVs
 			new_mesh = new ComponentMesh();
-			memcpy(&new_mesh->num_vertices, buffer, sizeof(uint));
-			memcpy(&new_mesh->num_indices, buffer + sizeof(uint), sizeof(uint));
-			memcpy(&new_mesh->num_UV, buffer + 2 * sizeof(uint), sizeof(uint));
+			int numIt = 0;
+			memcpy(&new_mesh->num_vertices, buffer + numIt++ * sizeof(uint), sizeof(uint));
+			memcpy(&new_mesh->num_indices, buffer + numIt++ * sizeof(uint), sizeof(uint));
+			memcpy(&new_mesh->num_normals, buffer + numIt++ * sizeof(uint), sizeof(uint));
+			memcpy(&new_mesh->num_UV, buffer + numIt++ * sizeof(uint), sizeof(uint));
 			char* it = buffer;
 			// Vertices
 			it = buffer + sizeof(uint) * NUM_MESH_IDX; // it = buffer[Vs]
@@ -509,17 +521,25 @@ ComponentMesh* ModuleAssimp::LoadMyFormatMesh(const char * exported_file)
 			glBindBuffer(GL_ARRAY_BUFFER, new_mesh->id_vertices);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * new_mesh->num_vertices * 3, new_mesh->vertices, GL_STATIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
-			// Indices
 			it += sizeof(float) * new_mesh->num_vertices * 3; // it = buffer[Is]
+			// Indices
 			new_mesh->indices = new uint[new_mesh->num_indices];
 			memcpy(new_mesh->indices, it, sizeof(uint) * new_mesh->num_indices);
 			glGenBuffers(1, (GLuint*) &(new_mesh->id_indices));
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, new_mesh->id_indices);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * new_mesh->num_indices, new_mesh->indices, GL_STATIC_DRAW);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+			it += sizeof(uint) * new_mesh->num_indices; // it = buffer[Ns]
+			// Normals
+			new_mesh->normals = new float[new_mesh->num_normals * 3];
+			memcpy(new_mesh->normals, it, sizeof(float) * new_mesh->num_normals * 3);
+			glGenBuffers(1, (GLuint*)&(new_mesh->id_normals));
+			glBindBuffer(GL_ARRAY_BUFFER, new_mesh->id_normals);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * new_mesh->num_normals * 3, new_mesh->normals, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
 			// UVs
 			if (new_mesh->num_UV > 0) {
-				it += sizeof(uint) * new_mesh->num_indices; // it = buffer[UVs]
+				it += sizeof(float) * new_mesh->num_normals * 3; // it = buffer[UVs]
 				new_mesh->textureCoords = new float[new_mesh->num_UV * 3];
 				memcpy(new_mesh->textureCoords, it, sizeof(float) * new_mesh->num_UV * 3);
 

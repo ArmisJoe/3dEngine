@@ -4,27 +4,27 @@
 #include "ComponentTransform.h"
 #include "ComponentBone.h"
 
-ModuleAnimation::ModuleAnimation(bool start_enabled) : Module(start_enabled)
+ModuleSkinning::ModuleSkinning(bool start_enabled) : Module(start_enabled)
 {
 	name = "Animation";
 }
 
 
-ModuleAnimation::~ModuleAnimation()
+ModuleSkinning::~ModuleSkinning()
 {
 }
 
-bool ModuleAnimation::Init()
-{
-	return true;
-}
-
-bool ModuleAnimation::Start()
+bool ModuleSkinning::Init()
 {
 	return true;
 }
 
-update_status ModuleAnimation::PreUpdate(float dt)
+bool ModuleSkinning::Start()
+{
+	return true;
+}
+
+update_status ModuleSkinning::PreUpdate(float dt)
 {
 	if (App->scene->GetRoot() != nullptr) {
 		//ResetAllDeformableMeshes(App->scene->GetRoot());
@@ -33,7 +33,7 @@ update_status ModuleAnimation::PreUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleAnimation::Update(float dt)
+update_status ModuleSkinning::Update(float dt)
 {
 
 
@@ -50,17 +50,17 @@ update_status ModuleAnimation::Update(float dt)
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleAnimation::PostUpdate(float dt)
+update_status ModuleSkinning::PostUpdate(float dt)
 {
 	return UPDATE_CONTINUE;
 }
 
-bool ModuleAnimation::CleanUp()
+bool ModuleSkinning::CleanUp()
 {
 	return true;
 }
 
-void ModuleAnimation::ResetAllDeformableMeshes(GameObject* go)
+void ModuleSkinning::ResetAllDeformableMeshes(GameObject* go)
 {
 	for (vector<GameObject*>::iterator it = go->children.begin(); it != go->children.end(); ++it)
 	{
@@ -80,7 +80,7 @@ void ModuleAnimation::ResetAllDeformableMeshes(GameObject* go)
 	}
 }
 
-void ModuleAnimation::DeformMeshes(GameObject* go)
+void ModuleSkinning::DeformMeshes(GameObject* go)
 {
 	if (go == nullptr)
 		return;
@@ -101,7 +101,7 @@ void ModuleAnimation::DeformMeshes(GameObject* go)
 	}
 }
 
-void ModuleAnimation::AdaptToBone(ComponentBone * skeleton)
+void ModuleSkinning::AdaptToBone(ComponentBone * skeleton)
 {
 	if (skeleton == nullptr || skeleton->GetMesh() == nullptr)
 		return;
@@ -130,6 +130,7 @@ void ModuleAnimation::AdaptToBone(ComponentBone * skeleton)
 			deformable->vertices[idx * 3] += addV.x * b->weigths[i];
 			deformable->vertices[idx * 3 + 1] += addV.y * b->weigths[i];
 			deformable->vertices[idx * 3 + 2] += addV.z * b->weigths[i];
+
 		}
 
 	}
@@ -138,7 +139,7 @@ void ModuleAnimation::AdaptToBone(ComponentBone * skeleton)
 
 }
 
-void ModuleAnimation::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * mesh)
+void ModuleSkinning::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * mesh)
 {
 	if (skeleton == nullptr || mesh == nullptr)
 		return;
@@ -149,26 +150,41 @@ void ModuleAnimation::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * 
 
 	for (int i = 0; i < skeleton->skeleton.size(); i++) {
 		ResourceBone* b = skeleton->skeleton[i];
-		GameObject* boneGO = nullptr;
-		skeleton->GetGOFromBones();
-		boneGO = b->object;
-
-		//boneGO = CheckGoBoneMatch(App->scene->GetRoot(), b);
-		if (boneGO == nullptr)
+		if (b->object == nullptr)
+			skeleton->GetGOFromBones();
+		if (b->object == nullptr)
 			return;
 
-		float4x4 trans = boneGO->GetTransform()->GetGlobalTransformMatrix(); // Gets the boneGO trans
-		trans = trans * skeleton->GetParent()->GetTransform()->GetLocalTransformMatrix().Inverted(); // Applies Mesh Transformations
-		trans = trans * b->offsetMat; // Applies offset
+		float4x4 mat = App->scene->GetRoot()->GetTransform()->GetGlobalTransformMatrix().Inverted() * b->object->GetTransform()->GetGlobalTransformMatrix();
+		mat = mesh->GetParent()->GetTransform()->GetLocalTransformMatrix().Inverted() * mat;
+		mat = mat * b->offsetMat;
 
-		for (int k = 0; k < b->num_weigths; k++) {
-			uint idx = b->indices[k];
-			float3 originalV(&mesh->vertices[idx * 3]);
-			float3 addV = trans.TransformPos(originalV);
-			deformable->vertices[idx * 3] += addV.x * b->weigths[k];
-			deformable->vertices[idx * 3 + 1] += addV.y * b->weigths[k];
-			deformable->vertices[idx * 3 + 2] += addV.z * b->weigths[k];
+		for (int n = 0; n < b->num_weigths; n++) {
+			uint index = b->indices[n];
+			float3 originalV(&mesh->vertices[index * 3]);
+
+			float3 addV = mat.TransformPos(originalV);
+
+			deformable->vertices[index * 3] += addV.x * b->weigths[n];
+			deformable->vertices[index * 3 + 1] += addV.y * b->weigths[n];
+			deformable->vertices[index * 3 + 2] += addV.z * b->weigths[n];
+			// Normals
+			if (mesh->num_normals > 0) {
+				addV = mat.TransformPos(float3(&mesh->normals[index * 3]));
+				deformable->normals[index * 3] += addV.x * b->weigths[n];
+				deformable->normals[index * 3 + 1] += addV.y * b->weigths[n];
+				deformable->normals[index * 3 + 2] += addV.z * b->weigths[n];
+			}
 		}
+
+		//for (int k = 0; k < b->num_weigths; k++) {
+		//	uint idx = b->indices[k];
+		//	float3 originalV(&mesh->vertices[idx * 3]);
+		//	float3 addV = trans.TransformPos(originalV);
+		//	deformable->vertices[idx * 3] += addV.x * b->weigths[k];
+		//	deformable->vertices[idx * 3 + 1] += addV.y * b->weigths[k];
+		//	deformable->vertices[idx * 3 + 2] += addV.z * b->weigths[k];
+		//}
 
 	}
 
@@ -176,7 +192,7 @@ void ModuleAnimation::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * 
 
 }
 
-GameObject * ModuleAnimation::CheckGoBoneMatch(GameObject * go, ResourceBone * b)
+GameObject * ModuleSkinning::CheckGoBoneMatch(GameObject * go, ResourceBone * b)
 {
 	GameObject* ret = nullptr;
 

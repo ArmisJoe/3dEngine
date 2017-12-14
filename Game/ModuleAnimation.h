@@ -6,10 +6,10 @@
 #include "GameObject.h"
 #include "ComponentBone.h"
 
-class ModuleAnimation : public Module {
+class ModuleSkinning : public Module {
 public:
-	ModuleAnimation(bool start_enabled = true);
-	~ModuleAnimation();
+	ModuleSkinning(bool start_enabled = true);
+	~ModuleSkinning();
 public:	// Module::
 	bool Init();
 	bool Start();

@@ -42,6 +42,9 @@ public: // ComponentAnimation::
 	bool isPlay() const;
 	bool isPause() const;
 	void GetGOFromNodes();
+
+	GameObject* GetRootBoneGO();
+
 private:
 	void DrawBones(GameObject* boneGO);
 	GameObject* CheckBoneGoMatch(GameObject* go, AnimNode* b);
@@ -57,6 +60,9 @@ public:
 
 	bool loop = true;
 	bool gos_filled = false;
+
+private:
+	GameObject* rootBoneGO = nullptr;
 };
 
 #endif // !__COMPONENT_ANIMATION_H__

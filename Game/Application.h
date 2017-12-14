@@ -53,7 +53,7 @@ public:
 	ModuleGame* game;
 	ModuleAnimationLoader* animation;
 	ModuleBoneLoader* bone_loader;
-	ModuleAnimation* skeletal_anim;
+	ModuleSkinning* skinning;
 private:
 
 	Timer	ms_timer;

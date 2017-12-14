@@ -53,8 +53,8 @@ void ComponentMesh::CleanUp()
 		mdelete[] indices;
 	if (textureCoords != nullptr)
 		mdelete[] textureCoords;
-	/*if (normals != nullptr)
-		mdelete[] normals;*/
+	if (normals != nullptr)
+		mdelete[] normals;
 	if (skin != nullptr)
 		mdelete skin;
 
@@ -120,6 +120,13 @@ void ComponentMesh::BindSkin()
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+	// Normals
+	glGenBuffers(1, (GLuint*) &(skin->id_normals));
+	glBindBuffer(GL_ARRAY_BUFFER, (GLuint)skin->id_normals);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * skin->num_normals * 3, skin->normals, GL_DYNAMIC_DRAW);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 	// UVs
 	if (skin->num_UV > 0) {
 		glGenBuffers(1, (GLuint*)&(skin->id_UV));
@@ -155,14 +162,17 @@ void ComponentMesh::ResetDeformableMesh()
 
 	skin->num_vertices = num_vertices;
 	skin->num_indices = num_indices;
+	skin->num_normals = num_normals;
 	skin->num_UV = num_UV;
 
 	skin->vertices = new float[num_vertices * 3];
 	skin->indices = new uint[num_indices];
+	skin->normals = new float[num_normals * 3];
 	skin->textureCoords = new float[skin->num_UV * 3];
 
 	memcpy(skin->vertices, this->vertices, sizeof(float) * num_vertices * 3);
 	memcpy(skin->indices, this->indices, sizeof(uint) * num_indices);
+	memcpy(skin->normals, this->normals, sizeof(float) * num_normals * 3);
 	memcpy(skin->textureCoords, this->textureCoords, sizeof(float) * num_UV * 3);
 	//normals here
 

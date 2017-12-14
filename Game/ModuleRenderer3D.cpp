@@ -181,10 +181,9 @@ update_status ModuleRenderer3D::Update(float dt)
 						trans = (ComponentTransform*)(*it)->FindComponents(componentType_Transform).front();
 					
 					if ((*it)->FindComponent(componentType_Bone) != nullptr) {
-						m->ResetDeformableMesh();
 						ComponentBone* skeleton = (ComponentBone*)(*it)->FindComponent(componentType_Bone);
 						if (skeleton != nullptr) {
-							App->skeletal_anim->AdaptMeshToBone(skeleton, m);
+							App->skinning->AdaptMeshToBone(skeleton, m);
 						}
 					}
 					if(m->visible)

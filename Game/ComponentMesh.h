@@ -45,6 +45,10 @@ public:
 	float* textureCoords = nullptr; // UV Coords
 	uint num_UV = 0;
 	uint num_UVChannels = 0;
+	//Normals
+	uint id_normals = 0; // id in VRAM
+	float* normals = nullptr;
+	uint num_normals = 0;
 
 	float material_index = 0; // material ID
 
@@ -52,7 +56,5 @@ public:
 
 	//Animation
 	ComponentMesh* skin = nullptr;
-	float* normals;
-	uint id_normals;
 	vector<ComponentBone*> bones;
 };

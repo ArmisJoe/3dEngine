@@ -15,7 +15,7 @@
 #include "GameObject.h"
 
 #define MESH_OWN_FORMAT "mymesh"
-#define NUM_MESH_IDX 3
+#define NUM_MESH_IDX 4
 
 class ModuleAssimp : public Module {
 

@@ -26,6 +26,9 @@ public:
 	std::vector<AnimNode*> Channels; // Bones
   
 public: // Utilities
+	AnimNode* GetRootBone() {
+		return (Channels.empty() ? nullptr : Channels[0]);
+	}
 	float DurationSec() const {
 		return (float)(duration / tickspersec);
 	};

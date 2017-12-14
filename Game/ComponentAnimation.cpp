@@ -20,11 +20,21 @@ ComponentAnimation::~ComponentAnimation()
 
 void ComponentAnimation::Start()
 {
-	
+	GetGOFromNodes();
 }
 
 void ComponentAnimation::Update(float dt)
 {
+	// [TEST]
+	if (anim != nullptr)
+		for (int i = 0; i < anim->Channels.size(); i++) {
+			AnimNode* b = anim->Channels[i];
+			b->object->GetTransform()->LoadPosition(b->object->GetParent()->GetTransform()->GetPosition() + b->transKeys.positionKeys[0].value);
+			DrawBones(b->object);
+		}
+	return;
+	// [!TEST]
+
 	if (anim == nullptr) {
 		state = as_unloaded;
 		return;
@@ -128,6 +138,26 @@ void ComponentAnimation::GetGOFromNodes()
 	}
 }
 
+GameObject * ComponentAnimation::GetRootBoneGO()
+{
+	GameObject* ret = nullptr;
+
+	if (rootBoneGO != nullptr)
+		return rootBoneGO;
+
+	if (GetParent() == nullptr || anim == nullptr || anim->GetRootBone() == nullptr)
+		return nullptr;
+
+	for (int i = 0; i < GetParent()->children.size(); i++) {
+		if (GetParent()->children[i]->GetName() == anim->GetRootBone()->name) {
+			rootBoneGO = GetParent()->children[i];
+			return rootBoneGO;
+		}
+	}
+
+	return ret;
+}
+
 void ComponentAnimation::DrawBones(GameObject* boneGO)
 {
 	if (anim == nullptr)
@@ -141,13 +171,13 @@ void ComponentAnimation::DrawBones(GameObject* boneGO)
 	for (int i = 0; i < boneGO->children.size(); i++) {
 		float line_vertex[] = { t->GetPosition().x, t->GetPosition().y, t->GetPosition().z, boneGO->children[i]->GetTransform()->GetPosition().x, boneGO->children[i]->GetTransform()->GetPosition().y, boneGO->children[i]->GetTransform()->GetPosition().z };
 		
-		glLineWidth(1);
-		glColor3f(1.0, 1.0, 0.0);
-		glBegin(GL_LINES);
-		glVertex3f(line_vertex[0], line_vertex[1], line_vertex[2]);
-		glVertex3f(line_vertex[3], line_vertex[4], line_vertex[5]);
-		glEnd();
-
+		//glLineWidth(1);
+		//glColor3f(1.0, 1.0, 0.0);
+		//glBegin(GL_LINES);
+		//glVertex3f(line_vertex[0], line_vertex[1], line_vertex[2]);
+		//glVertex3f(line_vertex[3], line_vertex[4], line_vertex[5]);
+		//glEnd();
+	
 	}
 	
 }
