@@ -27,6 +27,9 @@ private:
 	void CollectGOs(GameObject* go);
 	bool insert_BoneToIterate(ResourceBone* bone);
 
+	ResourceBone*	GetRootBone();
+	GameObject*		GetRootBoneGO();
+
 public:
 	void GetGOFromBones();
 	ComponentMesh* GetMesh() const;
@@ -41,4 +44,7 @@ public:
 	std::vector<PairedGOToBones> pairedgotobones;
 
 	std::vector<ResourceBone*> skeleton;
+
+private:
+	GameObject* rootBoneGO = nullptr;
 };

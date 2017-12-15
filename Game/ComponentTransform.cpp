@@ -178,7 +178,28 @@ void ComponentTransform::SetScale(float3 scale)
 
 void ComponentTransform::SetQuatRotation(Quat rotation)
 {
+	Quat drot = rotation * this->rotation.Inverted();
+
 	this->rotation = rotation;
+
+	for (int i = 0; i < GetParent()->children.size(); i++) {
+		ComponentTransform* cTrans = GetParent()->children[i]->GetTransform();
+		// Children Pos Set
+		float3 cnewpos;
+		float3 dirdistance = cTrans->GetPosition() - GetPosition();
+		float distance = dirdistance.Length();
+		// drot == dangle !
+		float3 newdistance = drot * dirdistance;
+		cnewpos = newdistance + GetPosition();
+
+		if (!newdistance.Equals(dirdistance))
+			cTrans->SetPosition(cnewpos);
+
+		// Children Recursivity
+		//cTrans->SetQuatRotation(this->rotation);
+
+	}
+
 	UpdateEulerAngles();
 	UpdateTransform();
 }

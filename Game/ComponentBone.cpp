@@ -112,6 +112,28 @@ bool ComponentBone::insert_BoneToIterate(ResourceBone * bone)
 	return false;
 }
 
+ResourceBone * ComponentBone::GetRootBone()
+{
+	return skeleton.empty() ? nullptr : skeleton[0];
+}
+
+GameObject * ComponentBone::GetRootBoneGO()
+{
+
+	if (rootBoneGO != nullptr)
+		return rootBoneGO;
+
+	for (int i = 0; i < GetParent()->children.size(); i++) {
+		GameObject* child = GetParent()->children[i];
+		if (child->GetName() == GetRootBone()->name) {
+			rootBoneGO = child;
+			return rootBoneGO;
+		}
+	}
+
+	return nullptr;
+}
+
 void ComponentBone::GetGOFromBones()
 {
 	if (gos_filled == false)
