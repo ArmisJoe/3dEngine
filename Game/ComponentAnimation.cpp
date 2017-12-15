@@ -26,13 +26,13 @@ void ComponentAnimation::Start()
 void ComponentAnimation::Update(float dt)
 {
 	// [TEST]
-	if (anim != nullptr)
-		for (int i = 0; i < anim->Channels.size(); i++) {
-			AnimNode* b = anim->Channels[i];
-			b->object->GetTransform()->SetPosition(b->object->GetParent()->GetTransform()->GetPosition() + b->transKeys.positionKeys[0].value);
-			DrawBones(b->object);
-		}
-	return;
+	//if (anim != nullptr)
+	//	for (int i = 0; i < anim->Channels.size(); i++) {
+	//		AnimNode* b = anim->Channels[i];
+	//		b->object->GetTransform()->SetPosition(b->object->GetParent()->GetTransform()->GetPosition() + b->transKeys.positionKeys[0].value);
+	//		DrawBones(b->object);
+	//	}
+	//return;
 	// [!TEST]
 
 	if (anim == nullptr) {
@@ -92,6 +92,10 @@ void ComponentAnimation::Update(float dt)
 						TransformKeys::VectorKey bPos = b->GetPosByTime(this->time);
 						TransformKeys::QuatKey bRot = b->GetRotByTime(this->time);
 						TransformKeys::VectorKey bSca = b->GetScaByTime(this->time);
+
+						trans->SetPosition(bPos.value);
+						trans->SetQuatRotation(bRot.value);
+						trans->SetScale(bSca.value);
 
 						//trans->SetGlobalPosition(bPos.value + targetGo->GetParent()->GetTransform()->GetPosition());
 						//trans->SetGlobalRotation(bRot.value * targetGo->GetParent()->GetTransform()->GetRotation());
