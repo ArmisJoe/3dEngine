@@ -17,7 +17,7 @@ public:
 	~ComponentTransform() {};
 
 	void Update(float dt);
-
+	void OnEditor();
 	void Serialize(JSON_Doc* doc);
 
 	// Local

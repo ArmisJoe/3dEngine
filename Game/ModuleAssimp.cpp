@@ -157,7 +157,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 
 		new_node->GetTransform()->SetPosition(position - pos);
 		new_node->GetTransform()->SetQuatRotation(rotationQuat.Inverted() * q);
-		new_node->GetTransform()->SetScale(sca);
+		new_node->GetTransform()->SetScale(scale);
 	}
 	else {
 		new_node->GetTransform()->SetPosition(position);

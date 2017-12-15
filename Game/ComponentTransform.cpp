@@ -204,11 +204,91 @@ void ComponentTransform::SetGlobalTransform(float4x4 transform)
 void ComponentTransform::OnUpdateTransform(const float4x4 & global, const float4x4 & parent_global)
 {
 	global_transform = parent_global.Inverted() * transform;
-	transform_modified = true;
 }
 
 void ComponentTransform::LoadGlobalTransform(float4x4 transform)
 {
 	global_transform = transform;
 	transform_modified = true;
+}
+
+void ComponentTransform::OnEditor()
+{
+	//UpdateNeeded = true;
+	ImGui::TextColored(COLOR_YELLOW, "Global Transform:");
+	float pos[3];
+	float rot[3];
+	float sca[3];
+
+	float3 posi, skya, rotis;
+	Quat q;
+
+	global_transform.Decompose(posi, q, skya);
+
+	rotis = RadToDeg(q.ToEulerXYZ());
+
+	pos[0] = posi.x;
+	pos[1] = posi.y;
+	pos[2] = posi.z;
+
+	rot[0] = (rotis.x);
+	rot[1] = (rotis.y);
+	rot[2] = (rotis.z);
+
+	sca[0] = skya.x;
+	sca[1] = skya.y;
+	sca[2] = skya.z;
+
+	float3 off_pos = float3::zero, off_sca = float3::zero;
+	Quat off_rot = Quat::identity;
+
+	if (ImGui::DragFloat3("Position:", pos, 0.1f)) {
+		if (GetParent() != nullptr && !GetParent()->IsStatic())
+		{
+		}
+	}
+	if (ImGui::DragFloat3("Rotation:", rot, 0.1f)) {
+		if (GetParent() != nullptr && !GetParent()->IsStatic())
+		{
+		}
+	}
+	if (ImGui::DragFloat3("Scale:", sca, 0.1f)) {
+		if (GetParent() != nullptr && !GetParent()->IsStatic())
+		{
+		}
+	}
+
+	ImGui::TextColored(COLOR_YELLOW, "Local Transform:");
+	float lpos[3];
+	float lrot[3];
+	float lsca[3];
+
+	lpos[0] = position.x;
+	lpos[1] = position.y;
+	lpos[2] = position.z;
+
+	lrot[0] = rotinEuler.x;
+	lrot[1] = rotinEuler.y;
+	lrot[2] = rotinEuler.z;
+
+	lsca[0] = scale.x;
+	lsca[1] = scale.y;
+	lsca[2] = scale.z;
+
+	if (ImGui::DragFloat3("LPosition:", lpos, 0.1f)) {
+		if (GetParent() != nullptr && !GetParent()->IsStatic())
+		{
+		}
+	}
+	if (ImGui::DragFloat3("LRotation:", lrot, 0.1f)) {
+		if (GetParent() != nullptr && !GetParent()->IsStatic())
+		{
+		}
+	}
+
+	if (ImGui::DragFloat3("LScale:", lsca, 0.1f)) {
+		if (GetParent() != nullptr && !GetParent()->IsStatic())
+		{
+		}
+	}
 }
