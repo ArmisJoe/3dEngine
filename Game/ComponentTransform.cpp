@@ -36,18 +36,6 @@ ComponentTransform::ComponentTransform(componentType argtype, GameObject * argpa
 
 }
 
-ComponentTransform::ComponentTransform(GameObject * argparent, float3 position, Quat rotation, float3 scale) : Component(componentType_Transform, argparent)
-{
-	typeName = "Transform";
-	name = "Transform";
-	transform = float4x4::FromTRS(position, rotation, scale);
-	UpdateEulerAngles();
-
-	/*this->position_global = position; this->rotation_global = rotation; this->scale_global = scale;
-	rotinEuler_global = RadToDeg(rotation_global.ToEulerXYX());
-	UpdateNeeded = true;*/
-}
-
 void ComponentTransform::Update(float dt)
 {
 	/*if (UpdateNeeded == true && GetParent() != nullptr && GetParent()->GetParent() != nullptr)
@@ -109,19 +97,12 @@ float4x4 ComponentTransform::GetGlobalTransform() const
 	return global_transform;
 }
 
-float4x4 ComponentTransform::GetGlobalTransformT() const
-{
-	return global_transform.Transposed();
-}
-
 float3 ComponentTransform::GetGlobalPosition() const
 {
-	float3 pos, sca;
-	Quat rot;
-	GetGlobalTransform().Decompose(pos, rot, sca);
-	return pos;
+	float4x4 global_transform = GetGlobalTransform();
+	return float3(global_transform[0][3], global_transform[1][3], global_transform[2][3]);
 }
-
+/*
 Quat ComponentTransform::GetGlobalQuatRotation() const
 {
 	float3 pos, sca;
@@ -137,7 +118,8 @@ float3 ComponentTransform::GetGlobalEulerRotation() const
 	GetGlobalTransform().Decompose(pos, rot, sca);
 	return rot.ToEulerXYZ();
 }
-
+*/
+/*
 float3 ComponentTransform::GetGlobalScale() const
 {
 	float3 pos, sca;
@@ -145,6 +127,7 @@ float3 ComponentTransform::GetGlobalScale() const
 	GetGlobalTransform().Decompose(pos, rot, sca);
 	return sca;
 }
+*/
 
 void ComponentTransform::UpdateEulerAngles()
 {
@@ -161,12 +144,7 @@ void ComponentTransform::UpdateTransform()
 
 void ComponentTransform::SetPosition(float3 position)
 {
-	float3 diff = position - this->position;
 	this->position = position;
-	//for (int i = 0; i < GetParent()->children.size(); i++) {
-	//	ComponentTransform* cTrans = GetParent()->children[i]->GetTransform();
-	//	cTrans->SetPosition(cTrans->GetPosition() + diff);
-	//}
 	UpdateTransform();
 }
 
@@ -178,28 +156,7 @@ void ComponentTransform::SetScale(float3 scale)
 
 void ComponentTransform::SetQuatRotation(Quat rotation)
 {
-	Quat drot = rotation * this->rotation.Inverted();
-
 	this->rotation = rotation;
-
-	for (int i = 0; i < GetParent()->children.size(); i++) {
-		ComponentTransform* cTrans = GetParent()->children[i]->GetTransform();
-		// Children Pos Set
-		float3 cnewpos;
-		float3 dirdistance = cTrans->GetPosition() - GetPosition();
-		float distance = dirdistance.Length();
-		// drot == dangle !
-		float3 newdistance = drot * dirdistance;
-		cnewpos = newdistance + GetPosition();
-
-		if (!newdistance.Equals(dirdistance))
-			cTrans->SetPosition(cnewpos);
-
-		// Children Recursivity
-		//cTrans->SetQuatRotation(this->rotation);
-
-	}
-
 	UpdateEulerAngles();
 	UpdateTransform();
 }
@@ -226,6 +183,16 @@ void ComponentTransform::SetGlobalTransform(float4x4 transform)
 		}
 	}
 }
+void ComponentTransform::Restart()
+{
+	position = float3::zero;
+	scale = float3::one;
+	rotation = Quat::identity;
+
+	UpdateEulerAngles();
+	UpdateTransform();
+}
+
 
 void ComponentTransform::OnUpdateTransform(const float4x4 & global, const float4x4 & parent_global)
 {

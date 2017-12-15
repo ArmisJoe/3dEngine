@@ -13,7 +13,6 @@ public:
 	ComponentTransform();
 	ComponentTransform(GameObject* argparent);
 	ComponentTransform(componentType argtype, GameObject* argparent);
-	ComponentTransform(GameObject* argparent, float3 position, Quat rotation, float3 scale);
 	~ComponentTransform() {};
 
 	void Update(float dt);
@@ -28,11 +27,7 @@ public:
 	float3		GetScale() const;
 	// Global
 	float4x4	GetGlobalTransform() const;
-	float4x4	GetGlobalTransformT() const;
 	float3		GetGlobalPosition() const;
-	Quat		GetGlobalQuatRotation() const;
-	float3		GetGlobalEulerRotation() const;
-	float3		GetGlobalScale() const;
 
 private:
 	void UpdateEulerAngles();
@@ -44,6 +39,8 @@ public:
 	void SetQuatRotation(Quat rotation);
 	void SetEulerRotation(float3 euler_angles);
 	void SetGlobalTransform(float4x4 transform);
+
+	void Restart();
 	
 	void OnUpdateTransform(const float4x4& global, const float4x4& parent_global = float4x4::identity);
 

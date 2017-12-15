@@ -25,9 +25,10 @@ ModuleAssimp::~ModuleAssimp()
 }
 
 // NOT THE GOOD ONE
+
 GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, GameObject* parent)
 {
-	assert(node != nullptr);
+	/*assert(node != nullptr);
 	assert(scene != nullptr);
 
 	GameObject* new_node = new GameObject();
@@ -109,7 +110,8 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 		new_node->SetStatic(true);
 		App->quadTree->InsertObject(new_node);
 	}
-	return new_node;
+	return new_node;*/
+	return nullptr;
 }
 
 // bingo
