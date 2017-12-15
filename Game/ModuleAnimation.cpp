@@ -178,6 +178,17 @@ void ModuleSkinning::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * m
 			}
 		}
 
+		for (int n = 0; n < deformable->num_vertices; n++) {
+			float* deformV = &deformable->vertices[n * 3];
+			float* meshV = &mesh->vertices[n * 3];
+			for (int idx = 0; idx < 3; idx++) {
+				if (Abs(deformV[idx] - meshV[idx]) > 10) {
+					deformV[idx] = meshV[idx];
+				}
+			}
+			
+		}
+
 		//for (int k = 0; k < b->num_weigths; k++) {
 		//	uint idx = b->indices[k];
 		//	float3 originalV(&mesh->vertices[idx * 3]);
