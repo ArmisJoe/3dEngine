@@ -50,7 +50,10 @@ ComponentTransform::ComponentTransform(GameObject * argparent, float3 position, 
 
 void ComponentTransform::Update(float dt)
 {
-	
+	/*if (UpdateNeeded == true && GetParent() != nullptr && GetParent()->GetParent() != nullptr)
+	{
+		SetLocalTrans();
+	}*/
 }
 
 
@@ -201,6 +204,7 @@ void ComponentTransform::SetGlobalTransform(float4x4 transform)
 void ComponentTransform::OnUpdateTransform(const float4x4 & global, const float4x4 & parent_global)
 {
 	global_transform = parent_global.Inverted() * transform;
+	transform_modified = true;
 }
 
 void ComponentTransform::LoadGlobalTransform(float4x4 transform)
