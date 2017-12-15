@@ -159,16 +159,6 @@ void ModuleSkinning::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * m
 		mat = mesh->GetParent()->GetTransform()->GetTransform().Inverted() * mat;
 		mat = mat * b->offsetMat;
 
-		for (int x = 0; x < 4; x++) {
-			for (int y = 0; y < 4; y++) {
-				if (mat.At(x, y) < 0.01f && mat.At(x, y) > -0.01f) {
-					float4 newcol(mat.Col(y));
-					newcol[x] = 0;
-					mat.SetCol(y, newcol);
-				}
-			}
-		}
-
 		for (int n = 0; n < b->num_weigths; n++) {
 			uint index = b->indices[n];
 			float3 originalV(&mesh->vertices[index * 3]);
