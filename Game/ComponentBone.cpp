@@ -112,12 +112,12 @@ bool ComponentBone::insert_BoneToIterate(ResourceBone * bone)
 	return false;
 }
 
-ResourceBone * ComponentBone::GetRootBone()
+ResourceBone * ComponentBone::GetRootBone() const
 {
 	return skeleton.empty() ? nullptr : skeleton[0];
 }
 
-GameObject * ComponentBone::GetRootBoneGO()
+const GameObject * ComponentBone::GetRootBoneGO()
 {
 
 	if (rootBoneGO != nullptr)

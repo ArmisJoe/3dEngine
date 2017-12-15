@@ -27,8 +27,9 @@ private:
 	void CollectGOs(GameObject* go);
 	bool insert_BoneToIterate(ResourceBone* bone);
 
-	ResourceBone*	GetRootBone();
-	GameObject*		GetRootBoneGO();
+public:
+	ResourceBone*	GetRootBone() const;
+	const GameObject*		GetRootBoneGO();
 
 public:
 	void GetGOFromBones();
