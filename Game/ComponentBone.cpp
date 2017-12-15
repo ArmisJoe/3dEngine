@@ -122,6 +122,8 @@ GameObject * ComponentBone::GetRootBoneGO()
 
 	if (rootBoneGO != nullptr)
 		return rootBoneGO;
+	if (GetRootBone() == nullptr)
+		return nullptr;
 
 	for (int i = 0; i < GetParent()->children.size(); i++) {
 		GameObject* child = GetParent()->children[i];
