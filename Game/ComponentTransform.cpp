@@ -161,7 +161,12 @@ void ComponentTransform::UpdateTransform()
 
 void ComponentTransform::SetPosition(float3 position)
 {
+	float3 diff = position - this->position;
 	this->position = position;
+	//for (int i = 0; i < GetParent()->children.size(); i++) {
+	//	ComponentTransform* cTrans = GetParent()->children[i]->GetTransform();
+	//	cTrans->SetPosition(cTrans->GetPosition() + diff);
+	//}
 	UpdateTransform();
 }
 

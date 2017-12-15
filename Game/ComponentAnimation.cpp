@@ -93,10 +93,7 @@ void ComponentAnimation::Update(float dt)
 						TransformKeys::QuatKey bRot = b->GetRotByTime(this->time);
 						TransformKeys::VectorKey bSca = b->GetScaByTime(this->time);
 
-						if (i = 0)
-							int a = 0;
-
-						trans->SetPosition(bPos.value);
+						trans->SetPosition(bPos.value + targetGo->GetParent()->GetTransform()->GetPosition());
 						trans->SetQuatRotation(bRot.value);
 						trans->SetScale(bSca.value);
 
