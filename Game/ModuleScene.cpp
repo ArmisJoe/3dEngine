@@ -78,10 +78,10 @@ bool ModuleScene::IteratingElement(GameObject * go)
 	{
 		if ((*sub_it)->HasAABB == true) {
 			ComponentMesh* mesh = (ComponentMesh*)(*sub_it)->FindComponents(componentType_Mesh)[0];
-			if ((*sub_it)->GetTransform()->transform_modified == true)
+			if ((*sub_it)->AABBneedsUpdate)
 			{
 				(*sub_it)->UpdateAABBFromMesh(mesh);
-				(*sub_it)->GetTransform()->transform_modified = false;
+				(*sub_it)->AABBneedsUpdate = false;
 			}
 			App->renderer3D->debugger->DrawAABB((*sub_it)->aabb.CenterPoint(), (*sub_it)->aabb.Size());
 			if ((*sub_it)->IsStatic() == false)
@@ -132,7 +132,7 @@ GameObject * ModuleScene::CreateGameObject()
 	GameObject* new_go = nullptr;
 	new_go = new GameObject();
 	new_go->SetScene(this);
-	new_go->SetStatic(true);
+	new_go->SetStatic(false);
 	App->res->gameObjects.push_back(new_go);
 	return new_go;
 }
@@ -268,7 +268,7 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 				go->SetName(scene_doc->GetString("name"));
 				go->SetStatic(scene_doc->GetBool("static"));
 				tmp_gos.push_back(go);
-				go->SetStatic(true);
+				go->SetStatic(false);
 			}
 			else
 				LOG("ERROR Loading gameobject '%s'", scene_doc->GetString("name"));
@@ -340,9 +340,9 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 			float3 p = { (float)scene_doc->GetNumber("position.x"), (float)scene_doc->GetNumber("position.y"), (float)scene_doc->GetNumber("position.z") };
 			Quat r = { (float)scene_doc->GetNumber("rotation.x"), (float)scene_doc->GetNumber("rotation.y"), (float)scene_doc->GetNumber("rotation.z"), (float)scene_doc->GetNumber("rotation.w") };
 			float3 s = { (float)scene_doc->GetNumber("scale.x"), (float)scene_doc->GetNumber("scale.y"), (float)scene_doc->GetNumber("scale.z") };
-			trans->LoadPosition(p);
-			trans->LoadRotation(r);
-			trans->LoadScale(s);
+			trans->SetPosition(p);
+			trans->SetQuatRotation(r);
+			trans->SetScale(s);
 			c = trans;
 			break;
 		}

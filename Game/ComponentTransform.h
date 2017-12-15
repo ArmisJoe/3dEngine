@@ -18,69 +18,41 @@ public:
 
 	void Update(float dt);
 
-	void SetPosition(const float3& position);
-	void SetRotation(const float3& rotation);
-	void SetRotation(const Quat& rotation);
-	void SetScale(const float3& scale);
-
-	float3 GetPosition();
-	Quat GetRotation();
-	float3 GetScale();
-
-	void SetPositionFromParent(const float3& position);
-	void SetRotationFromParent(const Quat& rotation);
-	void SetScaleFromParent(const float3& scale);
-
-	void ChangeLocalPosition(const float3& position);
-	void ChangeLocalRotation(const Quat& rotation);
-	void ChangeLocalScale(const float3& scale);
-
-	void LoadPosition(const float3& position);
-	void LoadRotation(const Quat& rotation);
-	void LoadScale(const float3& scale);
-
-	float3 GetLocalPosition() const;
-	Quat GetLocalRotation() const ;
-	float3 GetLocalScale()const ;
-
-
-	void SetTransformMatrix();
-	const float* GetGlobalTransformPtr();
-	float4x4 GetGlobalTransformMatrix();
-	float4x4 GetLocalTransformMatrix();
-
-	int GetTransformID()const;
-
-	void SetIdentityTransform();
-	void OnEditor();
 	void Serialize(JSON_Doc* doc);
-	bool transform_modified = false;
-	bool UpdateNeeded = false;
-	void SetLocalTrans();
 
-	void UpdateChildren(float3 pos_offset, float3 scale_offset, Quat rot_offset);
+	float4x4	GetTransform() const;
+	float3		GetPosition() const;
+	Quat		GetQuatRotation() const;
+	float3		GetEulerRotation() const;
+	float3		GetScale() const;
+	float4x4	GetGlobalTransform() const;
+	float4x4	GetGlobalTransformT() const;
 
-	// [PAU] gonna fix this mess :S
-	void SetGlobalPosition(float3 newpos);
-	void SetGlobalRotation(Quat newrot, bool toSelf = true);
-	void SetGlobalScale(float3 newsca);
-
-	void SetRotationHyerarchy(Quat newrot);
 private:
+	void UpdateEulerAngles();
+	void UpdateTransform();
+public:
+
+	void SetPosition(float3 position);
+	void SetScale(float3 scale);
+	void SetQuatRotation(Quat rotation);
+	void SetEulerRotation(float3 euler_angles);
+	void SetGlobalTransform(float4x4 transform);
+	
+	void OnUpdateTransform(const float4x4& global, const float4x4& parent_global = float4x4::identity);
+
+	void LoadGlobalTransform(float4x4 transform);
 
 
-	float3 position_global = float3::zero;
-	Quat rotation_global = Quat::identity;
-	float3 scale_global = float3::one;
-	float3 rotinEuler_global = float3::zero;
+private:
+	float4x4	transform = float4x4::identity;
+	float4x4	global_transform = float4x4::identity;
 
-	float3 localPos = float3::zero;
-	Quat localRot = Quat::identity ;
-	float3 localScale = float3::one;
+	float3		position = float3::zero;
+	float3		scale = float3::zero;
+	Quat		rotation = Quat::identity;
+	float3		rotinEuler = float3::zero;
 
-	float4x4 transform_matrix;
-	int transform_id;
-
-	ImGuizmo::OPERATION mCurrentGuizmoOperation = ImGuizmo::OPERATION::ROTATE;
-	ImGuizmo::MODE mCurrentGuizmoMode = ImGuizmo::MODE::WORLD;
+public:
+	bool		transform_modified = true;
 };

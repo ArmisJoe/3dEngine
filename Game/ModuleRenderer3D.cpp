@@ -359,7 +359,7 @@ void ModuleRenderer3D::DrawMesh(ComponentTransform* trans, ComponentMesh* m, Com
 	
 	if (trans != nullptr) {
 		glPushMatrix();
-		glMultMatrixf((GLfloat*)trans->GetGlobalTransformPtr());
+		glMultMatrixf((GLfloat*)trans->GetGlobalTransform().Transposed().ptr());
 	}
 
 	if (false)

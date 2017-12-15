@@ -106,7 +106,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 	if (new_node != nullptr)
 	{
 		App->res->gameObjects.push_back(new_node);
-		new_node->SetStatic(true);
+		new_node->SetStatic(false);
 		App->quadTree->InsertObject(new_node);
 	}
 	return new_node;
@@ -145,11 +145,36 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 	position = { translation.x, translation.y, translation.z };
 	Quat rotation2 = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
 	scale = { scaling.x, scaling.y, scaling.z };
-	ComponentTransform* trans = new ComponentTransform(new_node, position, rotation2, scale);
-	vector<Component*> tmp = new_node->FindComponents(componentType_Transform);
-	if (!tmp.empty())
-		new_node->DestroyComponent(tmp[0]);
-	new_node->AddComponent(componentType_Transform, trans, true);
+	
+	if (parent != nullptr)
+	{
+		new_node->GetTransform()->SetPosition(parent->GetTransform()->GetPosition() - position);
+		new_node->GetTransform()->SetQuatRotation(parent->GetTransform()->GetQuatRotation() * rotation2.Inverted());
+		new_node->GetTransform()->SetScale(parent->GetTransform()->GetScale() - scale);
+	}
+	else {
+		new_node->GetTransform()->SetPosition(position);
+		new_node->GetTransform()->SetQuatRotation(rotation2);
+		new_node->GetTransform()->SetScale(scale);
+	}
+
+	
+	float4x4 nGlobalMat = float4x4::FromTRS(position, rotation2, scale);
+	new_node->GetTransform()->LoadGlobalTransform(nGlobalMat);
+
+	/*float4x4 global = new_node->GetTransform()->GetTransform();
+	if (parent != nullptr)
+		global = new_node->GetTransform()->GetGlobalTransform();
+
+	new_node->GetTransform()->SetGlobalTransform(global);
+	*/
+
+	//ComponentTransform* trans = new ComponentTransform(new_node, position, rotation2, scale);
+
+	//vector<Component*> tmp = new_node->FindComponents(componentType_Transform);
+	//if (!tmp.empty())
+		//new_node->DestroyComponent(tmp[0]);
+	//new_node->AddComponent(componentType_Transform, trans, true);
 
 
 	//LoadMeshes
@@ -162,7 +187,8 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 		if (new_mesh != nullptr) {
 			new_mesh->path = mesh_path;
 			new_mesh->raw_path = raw_path;
-			new_node->AddComponent(componentType_Mesh, new_mesh);
+			Component* compi = new_node->AddComponent(componentType_Mesh, new_mesh);
+			new_node->CreateAABBFromMesh((ComponentMesh*)compi);
 		}
 		//Material Load
 		if (materials != nullptr && new_mesh != nullptr) {
@@ -198,7 +224,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 	if (new_node != nullptr)
 	{
 		App->res->gameObjects.push_back(new_node);
-		new_node->SetStatic(true);
+		new_node->SetStatic(false);
 		App->quadTree->InsertObject(new_node);
 	}
 

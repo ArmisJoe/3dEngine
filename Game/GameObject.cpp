@@ -17,14 +17,14 @@
 GameObject::GameObject(GameObject * p) : parent(p)
 {
 	name = "GameObject";
-	//this->AddComponent(componentType_Transform);
+	this->AddComponent(componentType_Transform);
 	UID = RandomNumber();
 }
 
 GameObject::GameObject()
 {
 	name = "GameObject";
-    //this->AddComponent(componentType_Transform);
+    this->AddComponent(componentType_Transform);
 	UID = RandomNumber();
 }
 
@@ -38,6 +38,17 @@ void GameObject::Start()
 
 void GameObject::Update(float dt)
 {
+
+	if (GetTransform() != nullptr)
+	{
+		if (GetTransform()->transform_modified == true)
+		{
+			OnUpdateTransform();
+			AABBneedsUpdate = true;
+		}
+	}
+
+
 	if (!components.empty()) {
 		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
 			if ((*it) != nullptr) {
@@ -291,7 +302,7 @@ void GameObject::CreateAABBFromMesh(ComponentMesh* mesh)
 			if (cmp_tr.size() > 0 && cmp_tr[0] != nullptr)
 			{
 				ComponentTransform* tmp = (ComponentTransform*)cmp_tr.back();
-				OBB obb = tmpAABB.Transform(tmp->GetGlobalTransformMatrix());
+				OBB obb = tmpAABB.Transform(tmp->GetGlobalTransform());
 				tmpAABB = obb.MinimalEnclosingAABB();
 				aabb = tmpAABB;
 			}
@@ -306,7 +317,7 @@ void GameObject::UpdateAABBFromMesh(ComponentMesh * mesh)
 
 		aabb.SetNegativeInfinity();
 		aabb.Enclose((float3*)mesh->vertices, mesh->num_vertices);
-		aabb.TransformAsAABB(GetTransform()->GetGlobalTransformMatrix());
+		aabb.TransformAsAABB(GetTransform()->GetGlobalTransform());
 		/*		// VERSION 1
 			aabb.SetNegativeInfinity();
 			aabb.Enclose((float3*)mesh->vertices, mesh->num_vertices);
@@ -543,6 +554,18 @@ void GameObject::RemoveComponent(Component * c)
 	components = tmp_components;
 
 	c->CleanUp();
+}
+
+void GameObject::OnUpdateTransform()
+{
+	float4x4 global_parent = float4x4::identity;
+
+	if (parent != nullptr && parent->GetTransform() != nullptr)
+	{
+		global_parent = parent->GetTransform()->GetGlobalTransform();
+	}
+	if (GetTransform() != nullptr)
+		GetTransform()->OnUpdateTransform(GetTransform()->GetGlobalTransform(), global_parent);
 }
 
 

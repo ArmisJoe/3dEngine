@@ -39,12 +39,13 @@ private:
 	ModuleScene* scene = nullptr;
 	bool isRoot = false;
 	bool isStatic = true;
+
 public:
 	void Start();
 	void Update(float dt); // Called every ModuleScene->Update(dt) (if they are insied the scene)
 	void CleanUp(); // Called at App CleanUp
 	bool HasAABB = false;
-
+	bool AABBneedsUpdate = false;
 public:
 	void SetRoot(bool root);
 	bool IsRoot() const;
@@ -106,6 +107,8 @@ private:
 	void RemoveChild(GameObject* child);
 
 	void RemoveComponent(Component* c);
+
+	void OnUpdateTransform();
 
 private: // Serialization Values
 	double UID;

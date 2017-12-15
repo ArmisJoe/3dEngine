@@ -29,7 +29,7 @@ void ComponentAnimation::Update(float dt)
 	if (anim != nullptr)
 		for (int i = 0; i < anim->Channels.size(); i++) {
 			AnimNode* b = anim->Channels[i];
-			b->object->GetTransform()->LoadPosition(b->object->GetParent()->GetTransform()->GetPosition() + b->transKeys.positionKeys[0].value);
+			b->object->GetTransform()->SetPosition(b->object->GetParent()->GetTransform()->GetPosition() + b->transKeys.positionKeys[0].value);
 			DrawBones(b->object);
 		}
 	return;
@@ -93,9 +93,9 @@ void ComponentAnimation::Update(float dt)
 						TransformKeys::QuatKey bRot = b->GetRotByTime(this->time);
 						TransformKeys::VectorKey bSca = b->GetScaByTime(this->time);
 
-						trans->SetGlobalPosition(bPos.value + targetGo->GetParent()->GetTransform()->GetPosition());
-						trans->SetGlobalRotation(bRot.value * targetGo->GetParent()->GetTransform()->GetRotation());
-						trans->SetGlobalScale(bSca.value);
+						//trans->SetGlobalPosition(bPos.value + targetGo->GetParent()->GetTransform()->GetPosition());
+						//trans->SetGlobalRotation(bRot.value * targetGo->GetParent()->GetTransform()->GetRotation());
+						//trans->SetGlobalScale(bSca.value);
 						//trans->ChangeLocalPosition(bPos.value);
 						//trans->ChangeLocalRotation(tmprot);
 						//trans->ChangeLocalScale(bSca.value);
