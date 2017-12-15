@@ -151,21 +151,14 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 
 	if (parent != nullptr)
 	{
-		float3 pos, sca;
-		Quat q;
-		float4x4 pTrans = parent->GetTransform()->GetGlobalTransform();
-
-		pTrans.Decompose(pos, q, sca);
-
-		new_node->GetTransform()->SetPosition(position - pos);
-		new_node->GetTransform()->SetQuatRotation(rotationQuat.Inverted() * q);
-		new_node->GetTransform()->SetScale(scale);
+		new_node->GetTransform()->LoadGlobalTransform(float4x4::FromTRS(position, rotationQuat, scale));
 	}
-	else {
 		new_node->GetTransform()->SetPosition(position);
 		new_node->GetTransform()->SetQuatRotation(rotationQuat);
 		new_node->GetTransform()->SetScale(scale);
-	}
+
+		new_node->GetTransform()->transform_modified = true;
+//	new_node->OnUpdateTransform();
 
 	//LoadMeshes
 	std::string mesh_path;
@@ -178,7 +171,6 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 			new_mesh->path = mesh_path;
 			new_mesh->raw_path = raw_path;
 			Component* compi = new_node->AddComponent(componentType_Mesh, new_mesh);
-			new_node->CreateAABBFromMesh((ComponentMesh*)compi);
 		}
 		//Material Load
 		if (materials != nullptr && new_mesh != nullptr) {

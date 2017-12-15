@@ -382,6 +382,8 @@ void GameObject::AddChild(GameObject * child)
 
 	if (isUnique)
 		children.push_back(child);
+
+	OnUpdateTransform();
 }
 
 void GameObject::SetScene(ModuleScene * sce)

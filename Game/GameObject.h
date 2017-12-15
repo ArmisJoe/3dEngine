@@ -108,6 +108,7 @@ private:
 
 	void RemoveComponent(Component* c);
 
+public:
 	void OnUpdateTransform();
 
 private: // Serialization Values
