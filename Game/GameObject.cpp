@@ -45,7 +45,6 @@ void GameObject::Update(float dt)
 		{
 			OnUpdateTransform();
 			AABBneedsUpdate = true;
-			GetTransform()->transform_modified = false;
 		}
 	}
 
@@ -567,6 +566,9 @@ void GameObject::OnUpdateTransform()
 	}
 	if (GetTransform() != nullptr)
 		GetTransform()->OnUpdateTransform(GetTransform()->GetGlobalTransform(), global_parent);
+
+	for (uint i = 0; i < children.size(); ++i)
+		children[i]->OnUpdateTransform();
 }
 
 

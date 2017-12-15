@@ -230,7 +230,7 @@ void ComponentTransform::SetGlobalTransform(float4x4 transform)
 void ComponentTransform::OnUpdateTransform(const float4x4 & global, const float4x4 & parent_global)
 {
 	global_transform = parent_global.Inverted() * transform;
-	transform_modified = true;
+	transform_modified = false;
 }
 
 void ComponentTransform::LoadGlobalTransform(float4x4 transform)

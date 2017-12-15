@@ -93,7 +93,7 @@ void ComponentAnimation::Update(float dt)
 						TransformKeys::QuatKey bRot = b->GetRotByTime(this->time);
 						TransformKeys::VectorKey bSca = b->GetScaByTime(this->time);
 
-						trans->SetPosition(bPos.value + targetGo->GetParent()->GetTransform()->GetPosition());
+						trans->SetPosition(bPos.value);
 						trans->SetQuatRotation(bRot.value);
 						trans->SetScale(bSca.value);
 
@@ -170,11 +170,11 @@ void ComponentAnimation::DrawBones(GameObject* boneGO)
 	if (t == nullptr)
 		return;
 
-	App->renderer3D->debugger->DrawAABB(boneGO->GetTransform()->GetPosition(), float3(0.1, 0.1, 0.1));
+	App->renderer3D->debugger->DrawAABB(boneGO->GetTransform()->GetGlobalPosition(), float3(0.1, 0.1, 0.1));
 	
-	for (int i = 0; i < boneGO->children.size(); i++) {
+	/*for (int i = 0; i < boneGO->children.size(); i++) {
 		float line_vertex[] = { t->GetPosition().x, t->GetPosition().y, t->GetPosition().z, boneGO->children[i]->GetTransform()->GetPosition().x, boneGO->children[i]->GetTransform()->GetPosition().y, boneGO->children[i]->GetTransform()->GetPosition().z };
-		
+		*/
 		//glLineWidth(1);
 		//glColor3f(1.0, 1.0, 0.0);
 		//glBegin(GL_LINES);
@@ -182,7 +182,6 @@ void ComponentAnimation::DrawBones(GameObject* boneGO)
 		//glVertex3f(line_vertex[3], line_vertex[4], line_vertex[5]);
 		//glEnd();
 	
-	}
 	
 }
 
