@@ -109,21 +109,21 @@ void ComponentMesh::BindSkin()
 	// Vertices
 	glGenBuffers(1, (GLuint*) &(skin->id_vertices));
 	glBindBuffer(GL_ARRAY_BUFFER, (GLuint)skin->id_vertices);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * skin->num_vertices * 3, skin->vertices, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * skin->num_vertices * 3, skin->vertices, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	// Indices
 	glGenBuffers(1, (GLuint*) &(skin->id_indices));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, (GLuint)skin->id_indices);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * skin->num_indices, skin->indices, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * skin->num_indices, skin->indices, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	// Normals
 	glGenBuffers(1, (GLuint*) &(skin->id_normals));
 	glBindBuffer(GL_ARRAY_BUFFER, (GLuint)skin->id_normals);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * skin->num_normals * 3, skin->normals, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * skin->num_normals * 3, skin->normals, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -131,7 +131,7 @@ void ComponentMesh::BindSkin()
 	if (skin->num_UV > 0) {
 		glGenBuffers(1, (GLuint*)&(skin->id_UV));
 		glBindBuffer(GL_ARRAY_BUFFER, (GLuint)skin->id_UV);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * skin->num_UV * 3, skin->textureCoords, GL_DYNAMIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * skin->num_UV * 3, skin->textureCoords, GL_STATIC_DRAW);
 		
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}

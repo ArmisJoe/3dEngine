@@ -155,9 +155,24 @@ void ModuleSkinning::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * m
 		if (b->object == nullptr)
 			return;
 
+<<<<<<< HEAD
 		float4x4 mat = App->scene->GetRoot()->GetTransform()->GetGlobalTransform().Inverted() * b->object->GetTransform()->GetGlobalTransform();
 		mat = mesh->GetParent()->GetTransform()->GetTransform().Inverted() * mat;
+=======
+		float4x4 mat = App->scene->GetRoot()->GetTransform()->GetGlobalTransformMatrix().Inverted() * b->object->GetTransform()->GetGlobalTransformMatrix();
+		mat = mesh->GetParent()->GetTransform()->GetLocalTransformMatrix() * mat;
+>>>>>>> origin/master
 		mat = mat * b->offsetMat;
+
+		for (int x = 0; x < 4; x++) {
+			for (int y = 0; y < 4; y++) {
+				if (mat.At(x, y) < 0.01f && mat.At(x, y) > -0.01f) {
+					float4 newcol(mat.Col(y));
+					newcol[x] = 0;
+					mat.SetCol(y, newcol);
+				}
+			}
+		}
 
 		for (int n = 0; n < b->num_weigths; n++) {
 			uint index = b->indices[n];
@@ -168,6 +183,7 @@ void ModuleSkinning::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * m
 			deformable->vertices[index * 3] += addV.x * b->weigths[n];
 			deformable->vertices[index * 3 + 1] += addV.y * b->weigths[n];
 			deformable->vertices[index * 3 + 2] += addV.z * b->weigths[n];
+
 			// Normals
 			if (mesh->num_normals > 0) {
 				addV = mat.TransformPos(float3(&mesh->normals[index * 3]));
