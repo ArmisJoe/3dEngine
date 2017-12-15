@@ -106,7 +106,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, G
 	if (new_node != nullptr)
 	{
 		App->res->gameObjects.push_back(new_node);
-		new_node->SetStatic(false);
+		new_node->SetStatic(true);
 		App->quadTree->InsertObject(new_node);
 	}
 	return new_node;
@@ -224,7 +224,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 	if (new_node != nullptr)
 	{
 		App->res->gameObjects.push_back(new_node);
-		new_node->SetStatic(false);
+		new_node->SetStatic(true);
 		App->quadTree->InsertObject(new_node);
 	}
 

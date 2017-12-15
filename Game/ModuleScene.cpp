@@ -132,7 +132,7 @@ GameObject * ModuleScene::CreateGameObject()
 	GameObject* new_go = nullptr;
 	new_go = new GameObject();
 	new_go->SetScene(this);
-	new_go->SetStatic(false);
+	new_go->SetStatic(true);
 	App->res->gameObjects.push_back(new_go);
 	return new_go;
 }
@@ -268,7 +268,7 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 				go->SetName(scene_doc->GetString("name"));
 				go->SetStatic(scene_doc->GetBool("static"));
 				tmp_gos.push_back(go);
-				go->SetStatic(false);
+				go->SetStatic(true);
 			}
 			else
 				LOG("ERROR Loading gameobject '%s'", scene_doc->GetString("name"));
