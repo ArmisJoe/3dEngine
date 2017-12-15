@@ -119,7 +119,7 @@ void ModuleSkinning::AdaptToBone(ComponentBone * skeleton)
 		if (boneGO == nullptr)
 			return;
 
-		float4x4 trans = boneGO->GetTransform()->GetGlobalTransform(); // Gets the boneGO trans
+		float4x4 trans = skeleton->GetRootBoneGO()->GetTransform()->GetGlobalTransform(); // Gets the boneGO trans
 		trans = trans * skeleton->GetParent()->GetTransform()->GetTransform().Inverted(); // Applies Mesh Transformations
 		trans = trans * b->offsetMat; // Applies offset
 

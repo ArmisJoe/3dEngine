@@ -111,33 +111,39 @@ bool ComponentBone::insert_BoneToIterate(ResourceBone * bone)
 	}
 	return false;
 }
-
-ResourceBone * ComponentBone::GetRootBone() const
+void ComponentBone::GetRootBone(GameObject* go)
 {
-	return skeleton.empty() ? nullptr : skeleton[0];
+	if (rootBoneGO != nullptr)
+		return;
+	for (uint i = 0; i < go->children.size(); ++i)
+	{
+		if (rootBoneGO != nullptr)
+			return;
+		for (uint j = 0; j < skeleton.size(); ++j)
+		{
+			if (rootBoneGO != nullptr)
+				return;
+			if (skeleton[j]->name == go->children[i]->GetName())
+			{
+				rootBoneGO = go->children[i];
+				return;
+			}
+		}
+		GetRootBone(go->children[i]);
+	}
+
 }
 
-const GameObject * ComponentBone::GetRootBoneGO()
+GameObject * ComponentBone::GetRootBoneGO()
 {
+	if (rootBoneGO != nullptr)
+		return rootBoneGO;
+	GetRootBone(App->scene->GetRoot());
 
 	if (rootBoneGO != nullptr)
 		return rootBoneGO;
-	if (GetRootBone() == nullptr)
-		return nullptr;
-
-	for (int i = 0; i < App->scene->GetRoot()->children.size(); i++) {
-		for (int k = 0; k < App->scene->GetRoot()->children[i]->children.size(); k++) {
-			GameObject* child = App->scene->GetRoot()->children[i]->children[k];
-			if (child->GetName() == GetRootBone()->name) {
-				rootBoneGO = child;
-				return rootBoneGO;
-			}
-		}
-	}
-
 	return nullptr;
 }
-
 void ComponentBone::GetGOFromBones()
 {
 	if (gos_filled == false)

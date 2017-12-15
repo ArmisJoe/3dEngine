@@ -28,8 +28,8 @@ private:
 	bool insert_BoneToIterate(ResourceBone* bone);
 
 public:
-	ResourceBone*	GetRootBone() const;
-	const GameObject*		GetRootBoneGO();
+	void	GetRootBone(GameObject*);
+	GameObject*		GetRootBoneGO();
 
 public:
 	void GetGOFromBones();
