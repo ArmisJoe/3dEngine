@@ -125,11 +125,13 @@ const GameObject * ComponentBone::GetRootBoneGO()
 	if (GetRootBone() == nullptr)
 		return nullptr;
 
-	for (int i = 0; i < GetParent()->children.size(); i++) {
-		GameObject* child = GetParent()->children[i];
-		if (child->GetName() == GetRootBone()->name) {
-			rootBoneGO = child;
-			return rootBoneGO;
+	for (int i = 0; i < App->scene->GetRoot()->children.size(); i++) {
+		for (int k = 0; k < App->scene->GetRoot()->children[i]->children.size(); k++) {
+			GameObject* child = App->scene->GetRoot()->children[i]->children[k];
+			if (child->GetName() == GetRootBone()->name) {
+				rootBoneGO = child;
+				return rootBoneGO;
+			}
 		}
 	}
 
