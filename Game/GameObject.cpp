@@ -45,6 +45,7 @@ void GameObject::Update(float dt)
 		{
 			OnUpdateTransform();
 			AABBneedsUpdate = true;
+			GetTransform()->transform_modified = false;
 		}
 	}
 

@@ -145,37 +145,25 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 	position = { translation.x, translation.y, translation.z };
 	Quat rotationQuat = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
 	scale = { scaling.x, scaling.y, scaling.z };
-	
+
+
 	if (parent != nullptr)
 	{
-		new_node->GetTransform()->SetPosition(position - parent->GetTransform()->GetPosition());
-		new_node->GetTransform()->SetQuatRotation(rotationQuat * parent->GetTransform()->GetQuatRotation().Inverted());
-		new_node->GetTransform()->SetScale(scale - parent->GetTransform()->GetScale());
+		float3 pos, sca;
+		Quat q;
+		float4x4 pTrans = parent->GetTransform()->GetGlobalTransform();
+
+		pTrans.Decompose(pos, q, sca);
+
+		new_node->GetTransform()->SetPosition(position - pos);
+		new_node->GetTransform()->SetQuatRotation(rotationQuat.Inverted() * q);
+		new_node->GetTransform()->SetScale(sca);
 	}
 	else {
 		new_node->GetTransform()->SetPosition(position);
 		new_node->GetTransform()->SetQuatRotation(rotationQuat);
 		new_node->GetTransform()->SetScale(scale);
 	}
-
-	
-	float4x4 nGlobalMat = float4x4::FromTRS(new_node->GetTransform()->GetPosition(), new_node->GetTransform()->GetQuatRotation(), new_node->GetTransform()->GetScale());
-	new_node->GetTransform()->LoadGlobalTransform(nGlobalMat);
-
-	/*float4x4 global = new_node->GetTransform()->GetTransform();
-	if (parent != nullptr)
-		global = new_node->GetTransform()->GetGlobalTransform();
-
-	new_node->GetTransform()->SetGlobalTransform(global);
-	*/
-
-	//ComponentTransform* trans = new ComponentTransform(new_node, position, rotation2, scale);
-
-	//vector<Component*> tmp = new_node->FindComponents(componentType_Transform);
-	//if (!tmp.empty())
-		//new_node->DestroyComponent(tmp[0]);
-	//new_node->AddComponent(componentType_Transform, trans, true);
-
 
 	//LoadMeshes
 	std::string mesh_path;
