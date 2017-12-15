@@ -143,23 +143,23 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 	float3 position = { 0, 0, 0 };
 	float3 scale = { 1, 1, 1 };
 	position = { translation.x, translation.y, translation.z };
-	Quat rotation2 = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
+	Quat rotationQuat = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
 	scale = { scaling.x, scaling.y, scaling.z };
 	
 	if (parent != nullptr)
 	{
-		new_node->GetTransform()->SetPosition(parent->GetTransform()->GetPosition() - position);
-		new_node->GetTransform()->SetQuatRotation(parent->GetTransform()->GetQuatRotation() * rotation2.Inverted());
-		new_node->GetTransform()->SetScale(parent->GetTransform()->GetScale() - scale);
+		new_node->GetTransform()->SetPosition(position - parent->GetTransform()->GetPosition());
+		new_node->GetTransform()->SetQuatRotation(rotationQuat * parent->GetTransform()->GetQuatRotation().Inverted());
+		new_node->GetTransform()->SetScale(scale - parent->GetTransform()->GetScale());
 	}
 	else {
 		new_node->GetTransform()->SetPosition(position);
-		new_node->GetTransform()->SetQuatRotation(rotation2);
+		new_node->GetTransform()->SetQuatRotation(rotationQuat);
 		new_node->GetTransform()->SetScale(scale);
 	}
 
 	
-	float4x4 nGlobalMat = float4x4::FromTRS(position, rotation2, scale);
+	float4x4 nGlobalMat = float4x4::FromTRS(new_node->GetTransform()->GetPosition(), new_node->GetTransform()->GetQuatRotation(), new_node->GetTransform()->GetScale());
 	new_node->GetTransform()->LoadGlobalTransform(nGlobalMat);
 
 	/*float4x4 global = new_node->GetTransform()->GetTransform();

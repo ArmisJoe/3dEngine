@@ -155,13 +155,8 @@ void ModuleSkinning::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * m
 		if (b->object == nullptr)
 			return;
 
-<<<<<<< HEAD
 		float4x4 mat = App->scene->GetRoot()->GetTransform()->GetGlobalTransform().Inverted() * b->object->GetTransform()->GetGlobalTransform();
 		mat = mesh->GetParent()->GetTransform()->GetTransform().Inverted() * mat;
-=======
-		float4x4 mat = App->scene->GetRoot()->GetTransform()->GetGlobalTransformMatrix().Inverted() * b->object->GetTransform()->GetGlobalTransformMatrix();
-		mat = mesh->GetParent()->GetTransform()->GetLocalTransformMatrix() * mat;
->>>>>>> origin/master
 		mat = mat * b->offsetMat;
 
 		for (int x = 0; x < 4; x++) {
