@@ -20,13 +20,19 @@ public:
 
 	void Serialize(JSON_Doc* doc);
 
+	// Local
 	float4x4	GetTransform() const;
 	float3		GetPosition() const;
 	Quat		GetQuatRotation() const;
 	float3		GetEulerRotation() const;
 	float3		GetScale() const;
+	// Global
 	float4x4	GetGlobalTransform() const;
 	float4x4	GetGlobalTransformT() const;
+	float3		GetGlobalPosition() const;
+	Quat		GetGlobalQuatRotation() const;
+	float3		GetGlobalEulerRotation() const;
+	float3		GetGlobalScale() const;
 
 private:
 	void UpdateEulerAngles();

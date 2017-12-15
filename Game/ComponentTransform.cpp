@@ -114,6 +114,38 @@ float4x4 ComponentTransform::GetGlobalTransformT() const
 	return global_transform.Transposed();
 }
 
+float3 ComponentTransform::GetGlobalPosition() const
+{
+	float3 pos, sca;
+	Quat rot;
+	GetGlobalTransform().Decompose(pos, rot, sca);
+	return pos;
+}
+
+Quat ComponentTransform::GetGlobalQuatRotation() const
+{
+	float3 pos, sca;
+	Quat rot;
+	GetGlobalTransform().Decompose(pos, rot, sca);
+	return rot;
+}
+
+float3 ComponentTransform::GetGlobalEulerRotation() const
+{
+	float3 pos, sca;
+	Quat rot;
+	GetGlobalTransform().Decompose(pos, rot, sca);
+	return rot.ToEulerXYZ();
+}
+
+float3 ComponentTransform::GetGlobalScale() const
+{
+	float3 pos, sca;
+	Quat rot;
+	GetGlobalTransform().Decompose(pos, rot, sca);
+	return sca;
+}
+
 void ComponentTransform::UpdateEulerAngles()
 {
 	rotinEuler = rotation.ToEulerXYZ();
