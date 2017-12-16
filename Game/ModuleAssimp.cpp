@@ -24,96 +24,6 @@ ModuleAssimp::~ModuleAssimp()
 {
 }
 
-// NOT THE GOOD ONE
-
-GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, GameObject* parent)
-{
-	/*assert(node != nullptr);
-	assert(scene != nullptr);
-
-	GameObject* new_node = new GameObject();
-
-	if (parent != nullptr)
-	{
-		new_node->SetParent(parent);
-		//new_node->GetParent()->children.push_back(new_node);
-	}
-	else {
-		new_node->SetParent(App->scene->GetRoot());
-	}
-
-	aiMaterial** materials = nullptr;
-	if (scene->HasMaterials())
-		materials = scene->mMaterials;
-	else
-		LOG("Scene without materials");
-	
-	//Transform
-
-		aiVector3D translation, scaling;
-		aiQuaternion rotation(1, 0, 0, 0);
-		node->mTransformation.Decompose(scaling, rotation, translation);
-		float3 position = { 0, 0, 0 };
-		float3 scale = { 1, 1, 1 };
-		position = { translation.x, translation.y, translation.y };
-		Quat rotation2 = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
-		scale = { scaling.x, scaling.y, scaling.z };
-		ComponentTransform* trans = new ComponentTransform(new_node, position, rotation2, scale);
-		vector<Component*> tmp = new_node->FindComponents(componentType_Transform);
-		if (!tmp.empty())
-			new_node->DestroyComponent(tmp[0]);
-		new_node->AddComponent(componentType_Transform, trans, false);
-
-
-	//LoadMeshes
-		std::string mesh_path;
-		ComponentMesh* new_mesh = nullptr;
-	for (uint i = 0; i < node->mNumMeshes; i++) {
-		aiMesh* aimesh = scene->mMeshes[node->mMeshes[i]];
-		//Mesh Load
-		new_mesh = LoadToOwnFormat(aimesh, mesh_path);
-		if (new_mesh != nullptr) {
-			new_mesh->path = mesh_path;
-			new_node->AddComponent(componentType_Mesh, new_mesh);
-		}
-		//Material Load
-		if (materials != nullptr && new_mesh != nullptr) {
-			ComponentMaterial* new_material = LoadMaterial(materials[(int)new_mesh->material_index]);
-			if (new_material != nullptr) {
-				new_node->AddComponent(componentType_Material, new_material);
-			}
-		}
-		// Animation Load
-		if (aimesh != nullptr && aimesh->HasBones()) {
-			// Bones
-			for (int n = 0; n < aimesh->mNumBones; n++) {
-				aiBone* aibone = aimesh->mBones[n];
-				
-			}
-			// Vertices
-		}
-	}
-
-	if (node->mName.length > 0)
-		new_node->SetName(node->mName.C_Str());
-
-
-	//Node Children 'Recursivity'
-	for (uint i = 0; i < node->mNumChildren; i++) {
-		new_node->AddChild(LoadNode(node->mChildren[i], scene, new_node));
-	}
-
-
-	if (new_node != nullptr)
-	{
-		App->res->gameObjects.push_back(new_node);
-		new_node->SetStatic(true);
-		App->quadTree->InsertObject(new_node);
-	}
-	return new_node;*/
-	return nullptr;
-}
-
 // bingo
 GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, const char* raw_path, GameObject* parent)
 {
@@ -122,6 +32,10 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 
 	GameObject* new_node = new GameObject();
 
+	static string name;
+	name = (node->mName.length > 0) ? node->mName.C_Str() : "Unnamed";
+	new_node->SetName(name.c_str());
+
 	if (parent != nullptr)
 	{
 		new_node->SetParent(parent);
@@ -138,42 +52,41 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 		LOG("Scene without materials");
 
 	//Transform
+	aiVector3D translation;
+	aiVector3D scaling;
+	aiQuaternion rotation;
 
-	aiVector3D translation, scaling;
-	aiQuaternion rotation(1, 0, 0, 0);
 	node->mTransformation.Decompose(scaling, rotation, translation);
-	float3 position = { 0, 0, 0 };
-	float3 scale = { 1, 1, 1 };
-	position = { translation.x, translation.y, translation.z };
-	Quat rotationQuat = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
-	scale = { scaling.x, scaling.y, scaling.z };
+
+	float3 pos(translation.x, translation.y, translation.z);
+	float3 scale(scaling.x, scaling.y, scaling.z);
+	Quat rot(rotation.x, rotation.y, rotation.z, rotation.w);
 
 
-	/*if (parent == nullptr)
+	static const char* dummies[5] = {
+		"$AssimpFbx$_PreRotation", "$AssimpFbx$_Rotation", "$AssimpFbx$_PostRotation",
+		"$AssimpFbx$_Scaling", "$AssimpFbx$_Translation" };
+
+	for (int i = 0; i < 5; ++i)
 	{
-		new_node->GetTransform()->LoadGlobalTransform(float4x4::FromTRS(position, rotationQuat, scale));
-	}*/
-	if (parent != nullptr)
-	{
-		float3 pos, sca;
-		Quat q;
+		if (name.find(dummies[i]) != string::npos && node->mNumChildren == 1)
+		{
+			node = node->mChildren[0];
 
-		parent->GetTransform()->GetGlobalTransform().Decompose(pos, q, sca);
+			node->mTransformation.Decompose(scaling, rotation, translation);
+			pos += float3(translation.x, translation.y, translation.z);
+			scale = float3(scale.x * scaling.x, scale.y * scaling.y, scale.z * scaling.z);
+			rot = rot * Quat(rotation.x, rotation.y, rotation.z, rotation.w);
 
-		new_node->GetTransform()->SetPosition(position + pos);
-		new_node->GetTransform()->SetQuatRotation(rotationQuat * q);
-		new_node->GetTransform()->SetScale(scale);
-
-		new_node->GetTransform()->LoadGlobalTransform(float4x4::FromTRS(position, rotationQuat, scale));
-	}
-	else {
-		new_node->GetTransform()->SetPosition(position);
-		new_node->GetTransform()->SetQuatRotation(rotationQuat);
-		new_node->GetTransform()->SetScale(scale);
-
-		new_node->GetTransform()->LoadGlobalTransform(float4x4::FromTRS(position, rotationQuat, scale));
+			name = node->mName.C_Str();
+			i = -1; 
+		}
 	}
 
+	new_node->GetTransform()->SetPosition(pos);
+	new_node->GetTransform()->SetQuatRotation(rot);
+	new_node->GetTransform()->SetScale(scale);
+	
 		new_node->OnUpdateTransform();
 
 	//LoadMeshes
@@ -209,9 +122,6 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 		}
 		
 	}
-
-	if (node->mName.length > 0)
-		new_node->SetName(node->mName.C_Str());
 
 
 	//Node Children 'Recursivity'

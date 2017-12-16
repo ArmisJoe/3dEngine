@@ -12,8 +12,8 @@ ComponentTransform::ComponentTransform() : Component(componentType_Transform)
 	typeName = "Transform";
 	name = "Transform";
 	numMax = 1;
-	transform = float4x4::FromTRS(position, rotation, scale);
-	UpdateEulerAngles();
+	//transform = float4x4::FromTRS(position, rotation, scale);
+	//UpdateEulerAngles();
 }
 
 ComponentTransform::ComponentTransform(GameObject* argparent) : Component(componentType_Transform, argparent)
@@ -21,8 +21,8 @@ ComponentTransform::ComponentTransform(GameObject* argparent) : Component(compon
 	typeName = "Transform";
 	name = "Transform";
 	numMax = 1;
-	transform = float4x4::FromTRS(position, rotation, scale);
-	UpdateEulerAngles();
+	//transform = float4x4::FromTRS(position, rotation, scale);
+	//UpdateEulerAngles();
 
 }
 
@@ -31,8 +31,8 @@ ComponentTransform::ComponentTransform(componentType argtype, GameObject * argpa
 	typeName = "Transform";
 	name = "Transform";
 	numMax = 1;
-	transform = float4x4::FromTRS(position, rotation, scale);
-	UpdateEulerAngles();
+//	transform = float4x4::FromTRS(position, rotation, scale);
+//	UpdateEulerAngles();
 
 }
 
@@ -200,7 +200,7 @@ void ComponentTransform::Restart()
 
 void ComponentTransform::OnUpdateTransform(const float4x4 & global, const float4x4 & parent_global)
 {
-	global_transform = parent_global.Inverted() * transform;
+	global_transform = parent_global * transform;
 	transform_modified = false;
 }
 
