@@ -155,6 +155,7 @@ void ComponentMesh::ResetDeformableMesh()
 	if (skin != nullptr) {
 		skin->CleanUp();
 		mdelete skin;
+		skin = nullptr;
 	}
 	skin = new ComponentMesh();
 	// fill the skin here with something like:
@@ -174,7 +175,6 @@ void ComponentMesh::ResetDeformableMesh()
 	memcpy(skin->indices, this->indices, sizeof(uint) * num_indices);
 	memcpy(skin->normals, this->normals, sizeof(float) * num_normals * 3);
 	memcpy(skin->textureCoords, this->textureCoords, sizeof(float) * num_UV * 3);
-	//normals here
 
 	// Name
 	skin->name = name;

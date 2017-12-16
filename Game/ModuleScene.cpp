@@ -59,14 +59,6 @@ update_status ModuleScene::Update(float dt)
 {
 	if (root != nullptr)
 		root->Update(dt);
-
-
-	/*float3 corners[8];
-	ComponentCamera* tmp = (ComponentCamera*)App->camera->curr_camera;
-	tmp->GetCorners(corners);
-	App->renderer3D->debugger->DrawFrustum(corners);*/
-
-	//App->renderer3D->debugger->SetColor(Red);
 	IteratingElement(root);
 	dynamic_gos_OnScreen.clear();
 	return UPDATE_CONTINUE;
@@ -108,6 +100,7 @@ bool ModuleScene::CleanUp()
 
 	RemoveAllGameObject();
 	root->CleanUp();
+
 	mdelete root;
 
 	return true;
@@ -246,6 +239,7 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 	}
 
 	RemoveAllGameObject();  // RESET SCENE
+
 	App->quadTree->RestartQuadtree();
 	App->renderer3D->GetToDraw().clear();
 	// Name
@@ -291,6 +285,7 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 	std::vector<Component*> tmp_cs;
 	scene_doc->MoveToRootSection();
 	int nComponents = scene_doc->GetArraySize("components");
+	std::vector<ComponentTransform*> transes;
 	for (int i = 0; i < nComponents; i++) {
 		scene_doc->MoveToRootSection();
 		scene_doc->MoveToSectionInsideArr("components", i);
@@ -298,7 +293,7 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 		Component* c = nullptr;
 		ComponentMaterial* mat = nullptr;
 		ComponentMesh* cmesh = nullptr;
-		int aux = 0;
+		int aux = 0;	
 		switch (type) {
 		case componentType_Mesh:
 			if(scene_doc->GetString("path") != nullptr)
@@ -344,6 +339,7 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 			trans->SetQuatRotation(r);
 			trans->SetScale(s);
 			c = trans;
+			transes.push_back(trans);
 			break;
 		}
 		if (c != nullptr) {
@@ -358,10 +354,25 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 	for (int i = 0; i < tmp_gos.size(); i++) {
 		for (int k = 0; k < tmp_cs.size(); k++) {
 			if (tmp_gos[i]->GetUID() == tmp_cs[k]->GetGoUID()) {
+				if (tmp_cs[k]->type != componentType_Transform)
 				tmp_gos[i]->AddComponent(tmp_cs[k]->type, tmp_cs[k], !(tmp_cs[k]->type == componentType_Transform));
+				else {
+					ComponentTransform* tmp_trans = (ComponentTransform*)tmp_cs[k];
+					tmp_gos[i]->GetTransform()->SetPosition(tmp_trans->GetPosition());
+					tmp_gos[i]->GetTransform()->SetQuatRotation(tmp_trans->GetQuatRotation());
+					tmp_gos[i]->GetTransform()->SetScale(tmp_trans->GetScale());
+				}
 			}
 		}
 	}
+
+	App->scene->root->OnUpdateTransform();
+
+	for (uint i = 0; i < transes.size(); ++i)
+	{
+		mdelete transes[i];
+	}
+
 	// Reimporting obj to quadtree
 
 	for (uint i = 0; i < tmp_gos.size(); ++i)

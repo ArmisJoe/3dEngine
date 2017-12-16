@@ -67,16 +67,19 @@ void GameObject::Update(float dt)
 
 void GameObject::CleanUp()
 {
-	if (!components.empty()) {
-		for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
-			if ((*it) != nullptr && ((*it)->type == componentType_Transform || (*it)->type == componentType_Camera)) {	// Transform is the only component not passed by reference
-				(*it)->CleanUp();
-				if((*it) != nullptr)
-					mdelete(*it);
-				(*it) = nullptr;
+	if (this != App->scene->GetRoot())
+	{
+		if (!components.empty()) {
+			for (std::vector<Component*>::iterator it = components.begin(); it != components.end(); it++) {
+				if ((*it) != nullptr && ((*it)->type == componentType_Transform || (*it)->type == componentType_Camera)) {	// Transform is the only component not passed by reference
+					(*it)->CleanUp();
+					if ((*it) != nullptr)
+						mdelete(*it);
+					(*it) = nullptr;
+				}
 			}
+			components.clear();
 		}
-		components.clear();
 	}
 
 	if (!children.empty()) {

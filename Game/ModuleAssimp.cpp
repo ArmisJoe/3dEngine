@@ -63,6 +63,8 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 	Quat rot(rotation.x, rotation.y, rotation.z, rotation.w);
 
 
+	// Fixed Pau's code 
+
 	static const char* dummies[5] = {
 		"$AssimpFbx$_PreRotation", "$AssimpFbx$_Rotation", "$AssimpFbx$_PostRotation",
 		"$AssimpFbx$_Scaling", "$AssimpFbx$_Translation" };

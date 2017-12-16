@@ -20,12 +20,8 @@ public:	// Module::
 
 private:
 	void ResetAllDeformableMeshes(GameObject* go);
-	void DeformMeshes(GameObject* go);
 public:
-	void AdaptToBone(ComponentBone* bone);
 	void AdaptMeshToBone(ComponentBone* bone, ComponentMesh* mesh);
-
-	GameObject* CheckGoBoneMatch(GameObject* go, ResourceBone* b);
 };
 
 #endif // MODULE_ANIMATION
