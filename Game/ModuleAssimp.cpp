@@ -149,16 +149,32 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 	scale = { scaling.x, scaling.y, scaling.z };
 
 
-	if (parent != nullptr)
+	/*if (parent == nullptr)
 	{
 		new_node->GetTransform()->LoadGlobalTransform(float4x4::FromTRS(position, rotationQuat, scale));
+	}*/
+	if (parent != nullptr)
+	{
+		float3 pos, sca;
+		Quat q;
+
+		parent->GetTransform()->GetGlobalTransform().Decompose(pos, q, sca);
+
+		new_node->GetTransform()->SetPosition(position + pos);
+		new_node->GetTransform()->SetQuatRotation(rotationQuat * q);
+		new_node->GetTransform()->SetScale(scale);
+
+		new_node->GetTransform()->LoadGlobalTransform(float4x4::FromTRS(position, rotationQuat, scale));
 	}
+	else {
 		new_node->GetTransform()->SetPosition(position);
 		new_node->GetTransform()->SetQuatRotation(rotationQuat);
 		new_node->GetTransform()->SetScale(scale);
 
-		new_node->GetTransform()->transform_modified = true;
-//	new_node->OnUpdateTransform();
+		new_node->GetTransform()->LoadGlobalTransform(float4x4::FromTRS(position, rotationQuat, scale));
+	}
+
+		new_node->OnUpdateTransform();
 
 	//LoadMeshes
 	std::string mesh_path;

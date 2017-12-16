@@ -58,4 +58,5 @@ private:
 
 public:
 	bool		transform_modified = true;
+	bool		has_started = false;
 };
