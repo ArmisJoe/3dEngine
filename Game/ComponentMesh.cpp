@@ -152,36 +152,31 @@ void ComponentMesh::DoSkin(GameObject* go)
 
 void ComponentMesh::ResetDeformableMesh()
 {
-	if (skin != nullptr) {
-		skin->CleanUp();
-		mdelete skin;
-		skin = nullptr;
+	if (skin == nullptr) {
+		skin = new ComponentMesh();
+		// fill the skin here with something like:
+		// skin->FillYourself(); [DEPRECATED] -> now FeelYourself();
+
+		skin->num_vertices = num_vertices;
+		skin->num_indices = num_indices;
+		skin->num_normals = num_normals;
+		skin->num_UV = num_UV;
+
+		skin->vertices = new float[num_vertices * 3];
+		skin->indices = new uint[num_indices];
+		skin->normals = new float[num_normals * 3];
+		skin->textureCoords = new float[skin->num_UV * 3];
+		// Name
+		skin->name = name;
+		// Parent -- Since it is a tmp mesh, we don't need to put it on the component list of the parent. 
+		//    So links go like this -- skin -> parent -x> skin
+		skin->parent = this->GetParent();
+
 	}
-	skin = new ComponentMesh();
-	// fill the skin here with something like:
-	// skin->FillYourself(); [DEPRECATED] -> now FeelYourself();
-
-	skin->num_vertices = num_vertices;
-	skin->num_indices = num_indices;
-	skin->num_normals = num_normals;
-	skin->num_UV = num_UV;
-
-	skin->vertices = new float[num_vertices * 3];
-	skin->indices = new uint[num_indices];
-	skin->normals = new float[num_normals * 3];
-	skin->textureCoords = new float[skin->num_UV * 3];
 
 	memcpy(skin->vertices, this->vertices, sizeof(float) * num_vertices * 3);
 	memcpy(skin->indices, this->indices, sizeof(uint) * num_indices);
 	memcpy(skin->normals, this->normals, sizeof(float) * num_normals * 3);
 	memcpy(skin->textureCoords, this->textureCoords, sizeof(float) * num_UV * 3);
-
-	// Name
-	skin->name = name;
-
-	// Parent -- Since it is a tmp mesh, we don't need to put it on the component list of the parent. 
-	//    So links go like this -- skin -> parent -x> skin
-	skin->parent = this->GetParent();
-
 }
 

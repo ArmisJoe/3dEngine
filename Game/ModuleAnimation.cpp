@@ -87,16 +87,18 @@ void ModuleSkinning::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * m
 			deformable->vertices[index * 3 + 1] += vertex.y * b->weigths[n];
 			deformable->vertices[index * 3 + 2] += vertex.z * b->weigths[n];
 
-			if (mesh->normals)
+			App->renderer3D->debugger->DrawAABB(vertex, float3(0.05, 0.05, 0.05), float3(255, 0, 0));
+
+			/*if (mesh->normals)
 			{
 				vertex = trans.TransformPos(float3(&mesh->normals[index * 3]));
 				deformable->normals[index * 3] += vertex.x * b->weigths[n];
 				deformable->normals[index * 3 + 1] += vertex.y * b->weigths[n];
 				deformable->normals[index * 3 + 2] += vertex.z * b->weigths[n];
-			}
+			}*/
 		}
 	}
-	mesh->BindSkin();
+	//mesh->BindSkin();
 }
 
 /*
