@@ -68,9 +68,9 @@ void ModuleSkinning::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * m
 		trans = trans * b->offsetMat;
 		ComponentMesh* deformable = mesh->skin;
 
-		for (uint i = 0; i < b->num_weigths; ++i)
+		for (uint n = 0; n < b->num_weigths; ++n)
 		{
-			uint index = b->indices[i];
+			uint index = b->indices[n];
 			float3 original(&mesh->vertices[index * 3]);
 			float3 vertex(&deformable->vertices[index * 3]);
 
@@ -83,16 +83,16 @@ void ModuleSkinning::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * m
 
 			vertex = trans.TransformPos(original);
 
-			deformable->vertices[index * 3] += vertex.x * b->weigths[i];
-			deformable->vertices[index * 3 + 1] += vertex.y * b->weigths[i];
-			deformable->vertices[index * 3 + 2] += vertex.z * b->weigths[i];
+			deformable->vertices[index * 3] += vertex.x * b->weigths[n];
+			deformable->vertices[index * 3 + 1] += vertex.y * b->weigths[n];
+			deformable->vertices[index * 3 + 2] += vertex.z * b->weigths[n];
 
 			if (mesh->normals)
 			{
 				vertex = trans.TransformPos(float3(&mesh->normals[index * 3]));
-				deformable->normals[index * 3] += vertex.x * b->weigths[i];
-				deformable->normals[index * 3 + 1] += vertex.y * b->weigths[i];
-				deformable->normals[index * 3 + 2] += vertex.z * b->weigths[i];
+				deformable->normals[index * 3] += vertex.x * b->weigths[n];
+				deformable->normals[index * 3 + 1] += vertex.y * b->weigths[n];
+				deformable->normals[index * 3 + 2] += vertex.z * b->weigths[n];
 			}
 		}
 	}

@@ -52,20 +52,19 @@ bool ModuleBoneLoader::Import(const aiBone * bone, std::string & output_file)
 
 	if (bone == nullptr) // Non-Valid Bone
 		return false;
-
-	// ok how do I store the componentmesh ?¿?!?!?
+	// [Ns N NWs Ts Is Ws]
 
 	ResourceBone new_bone;
 	new_bone.name = bone->mName.C_Str();
 
-	memcpy(new_bone.offsetMat.v, &bone->mOffsetMatrix.a1, sizeof(float) * 16);
 	new_bone.num_weigths = bone->mNumWeights;
-
-	new_bone.weigths = new float[bone->mNumWeights];
+	memcpy(new_bone.offsetMat.v, &bone->mOffsetMatrix.a1, sizeof(float) * 16);
+	
 	new_bone.indices = new uint[bone->mNumWeights];
+	new_bone.weigths = new float[bone->mNumWeights];
 	
 
-	for (uint i = 0; i < bone->mNumWeights; i++) {
+	for (uint i = 0; i < new_bone.num_weigths; i++) {
 		new_bone.indices[i] = bone->mWeights[i].mVertexId;
 		
 		new_bone.weigths[i] = bone->mWeights[i].mWeight;
@@ -73,12 +72,12 @@ bool ModuleBoneLoader::Import(const aiBone * bone, std::string & output_file)
 
 	ret = Save(new_bone, output_file);
 
-	if (new_bone.weigths != nullptr) {
+	/*if (new_bone.weigths != nullptr) {
 		mdelete[] new_bone.weigths;
 	}
 	if (new_bone.indices != nullptr) {
 		mdelete[] new_bone.indices;
-	}
+	}*/
 
 	return ret;
 }
@@ -117,11 +116,12 @@ bool ModuleBoneLoader::Load(const char * file, ResourceBone * res)
 	res->name = tmp_name;
 	mdelete[] tmp_name;
 	it += name_size;
+
 	//number of weights
 	memcpy(&res->num_weigths, it, sizeof(res->num_weigths));
 	it += sizeof(res->num_weigths);
 	//trans
-	memcpy(&res->offsetMat, it, sizeof(res->offsetMat));
+	memcpy(res->offsetMat.v, it, sizeof(res->offsetMat));
 	it += sizeof(res->offsetMat);
 	//alloc
 	uint size = name_size + sizeof(res->num_weigths) + sizeof(res->offsetMat) 
@@ -142,6 +142,11 @@ bool ModuleBoneLoader::Load(const char * file, ResourceBone * res)
 		mdelete[] buffer;
 
 	ret = true;
+
+	for (uint i = 0; i < 16; ++i) {
+		if (res->offsetMat.ptr()[i] < 0.0001 && res->offsetMat.ptr()[i] > 0)
+			res->offsetMat.ptr()[i] = 0;
+	}
 
 	return ret;
 }
@@ -172,7 +177,7 @@ bool ModuleBoneLoader::Save(const ResourceBone & bone, std::string & output_file
 		// componentMesh missing...
 
 		// Buffer Format
-		// [Ns N NWs Ts Is Ws]
+		// [Ns N NWs(uint) Ts(float[16]) Is(uint) Ws(float)]
 	uint name_size = sizeof(char) * bone.name.length();
 	uint n_weights_size = sizeof(bone.num_weigths);
 	uint trans_size = sizeof(bone.offsetMat);
@@ -195,12 +200,12 @@ bool ModuleBoneLoader::Save(const ResourceBone & bone, std::string & output_file
 	memcpy(it, tmp_name, name_size);
 	it += name_size;
 
-	// Number of Wights
+	// Number of Weights
 	memcpy(it, &bone.num_weigths, n_weights_size);
 	it += n_weights_size;
 
 	// Trans
-	memcpy(it, &bone.offsetMat, trans_size);
+	memcpy(it, &bone.offsetMat.v, trans_size);
 	it += trans_size;
 
 	//Indices
