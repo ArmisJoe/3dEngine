@@ -39,6 +39,7 @@ public:
 	void SetQuatRotation(Quat rotation);
 	void SetEulerRotation(float3 euler_angles);
 	void SetGlobalTransform(float4x4 transform);
+	void SetGlobalPosition(float3 position);
 
 	void Restart();
 	

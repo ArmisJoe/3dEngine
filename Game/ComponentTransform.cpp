@@ -156,7 +156,10 @@ void ComponentTransform::SetScale(float3 scale)
 
 void ComponentTransform::SetQuatRotation(Quat rotation)
 {
+	Quat diff = rotation * this->rotation.Inverted();
+
 	this->rotation = rotation;
+
 	UpdateEulerAngles();
 	UpdateTransform();
 }
@@ -172,17 +175,21 @@ void ComponentTransform::SetEulerRotation(float3 euler_angles)
 
 void ComponentTransform::SetGlobalTransform(float4x4 transform)
 {
-	if (GetParent() != nullptr)
-	{
-		if (GetParent()->GetParent() != nullptr)
-		{
-			float4x4 localTransform = GetParent()->GetParent()->GetTransform()->GetGlobalTransform().Inverted() * transform;
-			this->transform = localTransform;
-			global_transform = transform;
-			transform_modified = true;
-		}
-	}
+	global_transform = transform;
+	UpdateTransform();
 }
+
+void ComponentTransform::SetGlobalPosition(float3 position)
+{
+	float3 currpos, currscale;
+	Quat currrot;
+
+	GetGlobalTransform().Decompose(currpos, currrot, currscale);
+
+	float4x4 newtrans = newtrans.FromTRS(position, currrot, currscale);
+	SetGlobalTransform(newtrans);
+}
+
 void ComponentTransform::Restart()
 {
 	position = float3::zero;
@@ -237,6 +244,7 @@ void ComponentTransform::OnEditor()
 	Quat off_rot = Quat::identity;
 
 	if (ImGui::DragFloat3("Position:", pos, 0.1f)) {
+		SetGlobalPosition(float3(pos[0], pos[1], pos[2]));
 		if (GetParent() != nullptr && !GetParent()->IsStatic())
 		{
 		}
@@ -270,6 +278,7 @@ void ComponentTransform::OnEditor()
 	lsca[2] = scale.z;
 
 	if (ImGui::DragFloat3("LPosition:", lpos, 0.1f)) {
+		SetPosition(float3(lpos[0], lpos[1], lpos[2]));
 		if (GetParent() != nullptr && !GetParent()->IsStatic())
 		{
 		}

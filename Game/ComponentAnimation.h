@@ -37,13 +37,18 @@ public: // ComponentAnimation::
 	void Pause();
 	void UnPause();
 	void Stop();
-	void Blend(Animation* next_anim, float time);
+
+	void StartBlend(Animation* next_anim, float time);
+	void ResetBlend();
 
 	bool isPlay() const;
 	bool isPause() const;
 	void GetGOFromNodes();
 
 	GameObject* GetRootBoneGO();
+
+	void AddAnimation(Animation* anim);
+	void ChangeAnimation(Animation* anim, float time = 0);
 
 private:
 	void DrawBones(GameObject* boneGO);
@@ -52,6 +57,8 @@ private:
 public:
 	Animation* anim = nullptr;
 	AnimationState state = as_unloaded;
+
+	std::vector<Animation*> animations;
 
 	float time = 0.0f;
 
@@ -62,6 +69,17 @@ public:
 	bool gos_filled = false;
 
 private:
+	// Blending
+	bool blending = false;
+	Animation* blend_second_anim = nullptr;
+	Animation* blend_first_anim = nullptr;
+	float blend_start_time = 0.0f;
+	float blend_time = 0.0f;
+	float blend_timer = 0.0f;
+
+	// OnEditor/Config
+	float conf_time_to_change = 0.5f;
+
 	GameObject* rootBoneGO = nullptr;
 };
 

@@ -251,12 +251,13 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 		}
 		//Loading Animations
 		if (scene->HasAnimations() && Geometry != nullptr) {
+			ComponentAnimation* compAnim = new ComponentAnimation(Geometry);
 			for (int i = 0; i < scene->mNumAnimations; i++) {
 				Animation* new_anim = App->animation->ImportToLoad(scene->mAnimations[i]);
-				ComponentAnimation* compAnim = new ComponentAnimation(Geometry);
-				compAnim->anim = new_anim;
-				Geometry->AddComponent(componentType_Animation, compAnim, true);
+				if(new_anim != nullptr)
+					compAnim->AddAnimation(new_anim);
 			}
+			Geometry->AddComponent(componentType_Animation, compAnim, true);
 		}
 		//Camera Focus
 		//App->camera->FocusMesh(new_mesh->vertices, new_mesh->num_vertices);

@@ -20,21 +20,12 @@ ComponentAnimation::~ComponentAnimation()
 
 void ComponentAnimation::Start()
 {
+	anim = (!animations.empty()) ? animations[0] : nullptr;
 	GetGOFromNodes();
 }
 
 void ComponentAnimation::Update(float dt)
 {
-	// [TEST]
-	//if (anim != nullptr)
-	//	for (int i = 0; i < anim->Channels.size(); i++) {
-	//		AnimNode* b = anim->Channels[i];
-	//		b->object->GetTransform()->SetPosition(b->object->GetParent()->GetTransform()->GetPosition() + b->transKeys.positionKeys[0].value);
-	//		DrawBones(b->object);
-	//	}
-	//return;
-	// [!TEST]
-
 	if (anim == nullptr) {
 		state = as_unloaded;
 		return;
@@ -77,36 +68,54 @@ void ComponentAnimation::Update(float dt)
 	// Bone Movement
 	if (this->HasParent()) {
 		for (int i = 0; i < anim->NumChannels(); i++) {
-				AnimNode* b = anim->Channels[i];
-				GameObject* targetGo = nullptr;
-				GetGOFromNodes();
-				targetGo = b->object;
-				//GameObject* targetGo = CheckBoneGoMatch(this->parent, b);
-				if (targetGo != nullptr) { // Now we have the Go ('BoneGo') that will move
-					// Bone Debug Render
-					if (drawBones == true)
-						DrawBones(targetGo);
-					ComponentTransform* trans = (ComponentTransform*)targetGo->FindComponent(componentType_Transform);
-					if (trans != nullptr) {
+			AnimNode* b = anim->Channels[i];
+			GameObject* targetGo = nullptr;
+			GetGOFromNodes();
+			targetGo = b->object;
+			//GameObject* targetGo = CheckBoneGoMatch(this->parent, b);
+			if (targetGo != nullptr) { // Now we have the Go ('BoneGo') that will move
+				// Bone Debug Render
+				if (drawBones == true)
+					DrawBones(targetGo);
+				ComponentTransform* trans = (ComponentTransform*)targetGo->FindComponent(componentType_Transform);
+				if (trans != nullptr) {
+					TransformKeys::VectorKey bPos;
+					TransformKeys::QuatKey bRot;
+					TransformKeys::VectorKey bSca;
 
-						TransformKeys::VectorKey bPos = b->GetPosByTime(this->time);
-						TransformKeys::QuatKey bRot = b->GetRotByTime(this->time);
-						TransformKeys::VectorKey bSca = b->GetScaByTime(this->time);
+					if (blending) { // Blending
+						blend_timer += dt;
 
-						trans->SetPosition(bPos.value);
-						trans->SetQuatRotation(bRot.value);
-						trans->SetScale(bSca.value);
+						AnimNode* blending_b = nullptr;
+						for (int k = 0; k < blend_second_anim->NumChannels(); k++) {
+							if (b->name == blend_second_anim->Channels[k]->name) {
+								blending_b = blend_second_anim->Channels[k];
+								break;
+							}
+						}
 
-						//trans->SetGlobalPosition(bPos.value + targetGo->GetParent()->GetTransform()->GetPosition());
-						//trans->SetGlobalRotation(bRot.value * targetGo->GetParent()->GetTransform()->GetRotation());
-						//trans->SetGlobalScale(bSca.value);
-						//trans->ChangeLocalPosition(bPos.value);
-						//trans->ChangeLocalRotation(tmprot);
-						//trans->ChangeLocalScale(bSca.value);
-						
+						if (blending_b != nullptr) {
+							bPos = b->InterpolatePos(b->GetPosByTime(blend_start_time), blending_b->GetPosByTime(0), blend_time);
+							bRot = b->InterpolateRot(b->GetRotByTime(blend_start_time), blending_b->GetRotByTime(0), blend_time);
+							bSca = b->InterpolateSca(b->GetScaByTime(blend_start_time), blending_b->GetScaByTime(0), blend_time);
+						}
+
+						if (blend_timer >= blend_time) {
+							anim = blend_second_anim;
+							ResetBlend();
+						}
 					}
+					else {	// No Blending
+						bPos = b->GetPosByTime(this->time);
+						bRot = b->GetRotByTime(this->time);
+						bSca = b->GetScaByTime(this->time);
+					}
+
+					trans->SetGlobalPosition(bPos.value);
+					trans->SetQuatRotation(bRot.value);
+					trans->SetScale(bSca.value);
 				}
-			
+			}
 		}
 	}
 	else {
@@ -162,6 +171,16 @@ GameObject * ComponentAnimation::GetRootBoneGO()
 	return ret;
 }
 
+void ComponentAnimation::AddAnimation(Animation * anim)
+{
+	animations.push_back(anim);
+}
+
+void ComponentAnimation::ChangeAnimation(Animation * anim, float time)
+{
+	StartBlend(anim, time);
+}
+
 void ComponentAnimation::DrawBones(GameObject* boneGO)
 {
 	if (anim == nullptr)
@@ -170,8 +189,12 @@ void ComponentAnimation::DrawBones(GameObject* boneGO)
 	if (t == nullptr)
 		return;
 
-	App->renderer3D->debugger->DrawAABB(boneGO->GetTransform()->GetGlobalPosition(), float3(0.1, 0.1, 0.1));
-	
+
+	//if(boneGO == App->scene->GetSelected())
+		App->renderer3D->debugger->DrawAABB(boneGO->GetTransform()->GetGlobalPosition(), float3(0.1, 0.1, 0.1), float3(255, 0, 0));
+	//else
+	//	App->renderer3D->debugger->DrawAABB(boneGO->GetTransform()->GetGlobalPosition(), float3(0.1, 0.1, 0.1), float3(255, 255, 0));
+
 	/*for (int i = 0; i < boneGO->children.size(); i++) {
 		float line_vertex[] = { t->GetPosition().x, t->GetPosition().y, t->GetPosition().z, boneGO->children[i]->GetTransform()->GetPosition().x, boneGO->children[i]->GetTransform()->GetPosition().y, boneGO->children[i]->GetTransform()->GetPosition().z };
 		*/
@@ -235,11 +258,25 @@ void ComponentAnimation::Disable()
 
 void ComponentAnimation::OnEditor()
 {
-	ImGui::TextColored(COLOR_YELLOW, "Animation Name: ");
+	ImGui::TextColored(COLOR_YELLOW, "Current Animation: ");
 	ImGui::Text("\t%s", (anim != nullptr) ? anim->name.c_str() : "");
 	ImGui::TextColored(COLOR_YELLOW, "Time: ");
 	ImGui::SliderFloat("Frames", &time, 0, anim->duration, "%.0f", 1.0f);
 	ImGui::Checkbox("Loop?", &loop);
+	if (ImGui::CollapsingHeader("Animations")) {
+		for (int i = 0; i < animations.size(); i++) {
+			Animation* a = animations[i];
+			ImGui::Text("%s", a->name.c_str());
+			ImGui::SameLine();
+			bool selected = (a == anim);
+			if (ImGui::Checkbox("", &selected)) {
+				ChangeAnimation(a, conf_time_to_change);
+			}
+			ImGui::SameLine();
+			ImGui::InputFloat("Time", &conf_time_to_change, 0.1f, 0.1f);
+			ImGui::Separator();
+		}
+	}
 }
 
 void ComponentAnimation::Serialize(JSON_Doc * doc)
@@ -273,6 +310,20 @@ void ComponentAnimation::Stop()
 	state = as_stop;
 }
 
-void ComponentAnimation::Blend(Animation * next_anim, float time)
+void ComponentAnimation::StartBlend(Animation * next_anim, float time)
 {
+	blend_first_anim = this->anim;
+	blend_start_time = this->time;
+	blend_second_anim = next_anim;
+	blend_time = time;
+	blend_timer = 0.0f;
+	blending = true;
+}
+
+void ComponentAnimation::ResetBlend()
+{
+	blend_first_anim = nullptr;
+	blend_second_anim = nullptr;
+	blend_time = 0.0f;
+	blending = false;
 }
