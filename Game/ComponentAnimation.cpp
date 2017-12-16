@@ -111,7 +111,7 @@ void ComponentAnimation::Update(float dt)
 						bSca = b->GetScaByTime(this->time);
 					}
 
-					trans->SetGlobalPosition(bPos.value);
+					trans->SetPosition(bPos.value);
 					trans->SetQuatRotation(bRot.value);
 					trans->SetScale(bSca.value);
 				}

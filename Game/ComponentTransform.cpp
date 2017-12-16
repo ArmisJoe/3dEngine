@@ -156,10 +156,7 @@ void ComponentTransform::SetScale(float3 scale)
 
 void ComponentTransform::SetQuatRotation(Quat rotation)
 {
-	Quat diff = rotation * this->rotation.Inverted();
-
 	this->rotation = rotation;
-
 	UpdateEulerAngles();
 	UpdateTransform();
 }
