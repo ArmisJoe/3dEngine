@@ -189,7 +189,7 @@ void ComponentAnimation::DrawBones(GameObject* boneGO)
 	if (t == nullptr)
 		return;
 
-		//App->renderer3D->debugger->DrawAABB(boneGO->GetTransform()->GetGlobalPosition(), float3(0.1, 0.1, 0.1), float3(255, 0, 0));
+		App->renderer3D->debugger->DrawAABB(boneGO->GetTransform()->GetGlobalPosition(), float3(0.1, 0.1, 0.1), float3(255, 0, 0));
 }
 
 
