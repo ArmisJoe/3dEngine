@@ -22,7 +22,7 @@
             "2D_textures": true,
             "wireframe": true,
             "depth_test": true,
-            "cull_face": false
+            "cull_face": true
         },
         "textures": {
             "interpolation": 1,

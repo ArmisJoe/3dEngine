@@ -5,6 +5,7 @@
 #include "Module.h"
 
 #include "ResourceAnimation.h"
+#include "ModuleAssimp.h"
 #include "Assimp\include\anim.h"
 
 #define EXTENSION_ANIMATIONS "myanim"
@@ -25,6 +26,7 @@ public: // AnimationLoader::
 	bool Load(const char* file, Animation* res);
 	bool Save(const Animation& anim, std::string& output_file);
 	Animation* ImportToLoad(aiAnimation* anim);
+	Animation* ImportToLoadFromPath(const char* path, const uint pprocess_flag = aiProcessPreset_TargetRealtime_MaxQuality);
 
 private:
 	AnimNode* ImportBone(const aiNodeAnim* node);

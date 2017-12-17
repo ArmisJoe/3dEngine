@@ -25,6 +25,10 @@ public:
   
 	std::vector<AnimNode*> Channels; // Bones
   
+	// Serialize
+	std::string path;
+	std::string rawpath;
+
 public: // Utilities
 	AnimNode* GetRootBone() {
 		return (Channels.empty() ? nullptr : Channels[0]);

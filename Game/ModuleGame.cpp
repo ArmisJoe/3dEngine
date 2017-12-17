@@ -75,7 +75,7 @@ update_status ModuleGame::PostUpdate(float dt)
 		case gameState_editor:			// To Editor
 			App->editor->ClearLog();
 			GameTimer.Stop();
-			App->fs->FileDelete(App->scene->LoadScene("__tmp__playsavescene", false));
+			//App->fs->FileDelete(App->scene->LoadScene("__tmp__playsavescene", false));
 			break;
 		case gameState_play:			// To Play
 			App->editor->ClearLog();

@@ -111,7 +111,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 			}
 		}
 		// Bone Load
-		if (new_mesh != nullptr && aimesh->HasBones()) {
+		if (new_mesh != nullptr && aimesh->HasBones() && strcmp(GetFileFromPath(raw_path).c_str(), "Street environment_V01.FBX") != 0) {
 			ComponentBone* new_b = (ComponentBone*)new_node->AddComponent(componentType_Bone);
 			new_b->SetMesh(new_mesh);
 			for (int n = 0; n < aimesh->mNumBones; n++) {
@@ -162,12 +162,14 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 			Geometry->SetName(GetFileFromPath(path).c_str());
 		}
 		//Loading Animations
-		if (scene->HasAnimations() && Geometry != nullptr) {
+		if (scene->HasAnimations() && Geometry != nullptr && strcmp(Geometry->GetName().c_str(), "Street environment_V01.FBX") != 0) {
 			ComponentAnimation* compAnim = new ComponentAnimation(Geometry);
 			for (int i = 0; i < scene->mNumAnimations; i++) {
 				Animation* new_anim = App->animation->ImportToLoad(scene->mAnimations[i]);
-				if(new_anim != nullptr)
+				if (new_anim != nullptr) {
+					new_anim->rawpath = path;
 					compAnim->AddAnimation(new_anim);
+				}
 			}
 			Geometry->AddComponent(componentType_Animation, compAnim, true);
 		}

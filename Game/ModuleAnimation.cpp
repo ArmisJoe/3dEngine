@@ -70,6 +70,9 @@ void ModuleSkinning::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * m
 
 		for (uint n = 0; n < b->num_weigths; ++n)
 		{
+			if (b->weigths[n] <= 0)
+				continue;
+		
 			uint index = b->indices[n];
 			float3 original(&mesh->vertices[index * 3]);
 			float3 vertex(&deformable->vertices[index * 3]);

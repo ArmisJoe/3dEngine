@@ -346,10 +346,31 @@ Animation * ModuleAnimationLoader::ImportToLoad(aiAnimation * anim)
 		LOG("ERROR importing animation");
 	}
 
-	if (new_anim != nullptr)
+	if (new_anim != nullptr) {
+		new_anim->path = output_file;
 		App->res->animations.push_back(new_anim);
+	}
 
 	return new_anim;
+}
+
+Animation * ModuleAnimationLoader::ImportToLoadFromPath(const char * path, const uint pprocess_flag)
+{
+	Animation* a = nullptr;
+
+	App->editor->ClearLog();
+
+	const aiScene* scene = aiImportFile(path, pprocess_flag);
+
+	if (scene == nullptr) {
+		LOG("Unvalid Path:\n\t'%s'", path);
+		return nullptr;
+	}
+	for (int i = 0; i < scene->mNumAnimations; i++) {
+		
+	}
+
+	return a;
 }
 
 AnimNode * ModuleAnimationLoader::ImportBone(const aiNodeAnim * node)

@@ -247,6 +247,25 @@ void ComponentAnimation::OnEditor()
 
 void ComponentAnimation::Serialize(JSON_Doc * doc)
 {
+	//if (doc == NULL)
+	//	return;
+	//
+	//doc->SetNumber("type", type);
+	//doc->SetNumber("parentUID", (parent != nullptr) ? parent->GetUID() : -1);
+	//
+	//doc->SetString("name", name.c_str());
+	//doc->SetNumber("num_animations", animations.size());
+	//
+	//for (int i = 0; i < animations.size(); i++) {
+	//	doc->MoveToRootSection();
+	//	doc->AddSectionArr("animations");
+	//	doc->MoveToSectionInsideArr("animations", doc->GetArraySize("animations") - 1);
+	//	Animation* a = animations[i];
+	//	doc->SetString("name", a->name.c_str());
+	//	doc->SetNumber("duration", a->duration);
+	//	doc->SetNumber("tickspersec", a->tickspersec);
+	//}
+
 }
 
 void ComponentAnimation::Load(JSON_Doc * doc)
