@@ -1,6 +1,6 @@
 ï»¿#QUEENGINE3D
 
-QUEENGINE3D is a 3D Engine meant for videogames developed in C++ by students Pau Olivé and Josep Huguet at Universitat Politécnica de Catalunya (UPC).
+QUEENGINE3D is a 3D Engine meant for videogames developed in C++ by students Pau Olive and Josep Huguet at Universitat Politecnica de Catalunya (UPC).
 
 Github & Repository:
 
