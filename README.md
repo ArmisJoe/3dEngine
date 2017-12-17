@@ -9,11 +9,11 @@ Subject: 3D Engines
 
 [Link to source code for QUEENGINE3D](https://github.com/ArmisJoe/3dEngine)
 
-Josep Huguet: [](https://github.com/ArmisJoe)
+Josep Huguet: https://github.com/ArmisJoe
 
-Pau Olive: [](https://github.com/rcpauor32)
+Pau Olive: https://github.com/rcpauor32
 
-License (MIT): [](https://opensource.org/licenses/MIT)
+License (MIT): https://opensource.org/licenses/MIT
 
 ## Team
 ![i](https://lh3.googleusercontent.com/Bm7_aCpY7VurExeD4xF8laUciloISo6XASZF-82sinlCwfl3z10YWM4Kr0Q2HrfJik6kiWDHt5S_LfiMSit9=w1920-h925-rw)
