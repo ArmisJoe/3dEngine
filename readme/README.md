@@ -49,10 +49,13 @@ In charge of:
 - Animations: Objects with an animation will run on play-time.
 - Mouse Picking: Picking elements from the scene with the mouse directly.
 - Adaptative Octree: That stores and subdives according to the elements inserted, it is also used to accelerate camera culling.
+
 ## Animation System:
 For the last delivery, users are able to load an object with a an animation (only supports .fbx and .dae fromats).
 The animation is loaded separated from the code, in a Component Animation that stores the Animation nodes for each frame and their position. The bones are loaded in the Component Bone storing the weights needed to apply a transformation to the mesh.
 On each update, the animation nodes send the new updated position to every child from the animated object. After that, the mesh creates a copy of itself to which all vertex transformation are applied (Skinning) before being sent to the GPU.
+## Video Demonstration
+https://www.youtube.com/watch?v=RjmUNF4LWTo&feature=youtu.be
 ## Other Relevant Information
 
 ### Camera Controls
