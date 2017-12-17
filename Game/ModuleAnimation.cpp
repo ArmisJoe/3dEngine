@@ -57,9 +57,9 @@ void ModuleSkinning::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * m
 		// calc the transformation of this bone based on its root (not the global transformation)
 		ResourceBone* b = skeleton->skeleton[i];
 		if (b->object == nullptr)
-			skeleton->GetGOFromBones();
+			skeleton->LinkBonesToGO();
 		if (b->object == nullptr)
-			return;
+			continue;
 
 		float4x4 trans = b->object->GetTransform()->GetGlobalTransform();
 		trans = trans * mesh->GetParent()->GetTransform()->GetTransform().Inverted();
@@ -87,18 +87,28 @@ void ModuleSkinning::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * m
 			deformable->vertices[index * 3 + 1] += vertex.y * b->weigths[n];
 			deformable->vertices[index * 3 + 2] += vertex.z * b->weigths[n];
 
-			App->renderer3D->debugger->DrawAABB(vertex, float3(0.05, 0.05, 0.05), float3(255, 0, 0));
+			//App->renderer3D->debugger->DrawAABB(vertex, float3(0.05, 0.05, 0.05), float3(255, 0, 0));
 
-			/*if (mesh->normals)
+			if (mesh->normals)
 			{
 				vertex = trans.TransformPos(float3(&mesh->normals[index * 3]));
 				deformable->normals[index * 3] += vertex.x * b->weigths[n];
 				deformable->normals[index * 3 + 1] += vertex.y * b->weigths[n];
 				deformable->normals[index * 3 + 2] += vertex.z * b->weigths[n];
-			}*/
+			}
 		}
+
 	}
-	//mesh->BindSkin();
+	int b = 0;
+	for (int i = 0; i < mesh->skin->num_vertices; i++) {
+		float3 V;
+		V.x = mesh->skin->vertices[i * 3];
+		V.y = mesh->skin->vertices[i * 3 + 1];
+		V.z = mesh->skin->vertices[i * 3 + 2];
+		int kaka = 0;
+	}
+
+	mesh->BindSkin();
 }
 
 /*

@@ -33,6 +33,7 @@ public:
 
 public:
 	void GetGOFromBones();
+	void LinkBonesToGO();
 	ComponentMesh* GetMesh() const;
 	void SetMesh(ComponentMesh* m);
 public:
@@ -48,4 +49,6 @@ public:
 
 private:
 	GameObject* rootBoneGO = nullptr;
+private:
+	void MatchBoneAndGo(ResourceBone* bone, GameObject* go);
 };

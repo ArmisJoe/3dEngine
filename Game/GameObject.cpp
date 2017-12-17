@@ -34,6 +34,7 @@ GameObject::~GameObject()
 
 void GameObject::Start()
 {
+	FixAutoNaming();
 }
 
 void GameObject::Update(float dt)
@@ -513,6 +514,29 @@ void GameObject::RemoveIteration(bool toSelf) {
 		if (children[i] != nullptr) {
 			children[i]->RemoveIteration(true);
 		}
+	}
+
+}
+
+void GameObject::FixAutoNaming()
+{
+	if (name.length() < 0)
+		return;
+
+	int fixpos = 0;
+	bool error = false;
+
+	while (fixpos < name.length()) {
+		const char tmp[2] = { name.at(fixpos), '\0' } ;
+		if (strcmp(tmp, "$") == 0) {
+			error = true;
+			break;
+		}
+		fixpos++;
+	}
+	
+	if (error == true) {
+		name.erase(fixpos - 1, name.length() - (fixpos - 1));
 	}
 
 }

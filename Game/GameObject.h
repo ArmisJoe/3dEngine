@@ -101,6 +101,8 @@ public:
 	}
 	void RemoveIteration(bool toSelf = true);
 
+	void FixAutoNaming(); 	// Name Fixing (Thanks Maya ;D)
+
 private:
 	bool to_remove = false;
 	void RemoveThis();

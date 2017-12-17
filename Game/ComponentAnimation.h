@@ -54,6 +54,7 @@ private:
 	void DrawBones(GameObject* boneGO);
 	GameObject* CheckBoneGoMatch(GameObject* go, AnimNode* b);
 	void CollectGOs(AnimNode* node, GameObject* go);
+
 public:
 	Animation* anim = nullptr;
 	AnimationState state = as_unloaded;

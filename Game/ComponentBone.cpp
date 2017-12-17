@@ -86,6 +86,21 @@ void ComponentBone::SetMesh(ComponentMesh * m)
 {
 	mesh = m;
 }
+void ComponentBone::MatchBoneAndGo(ResourceBone * bone, GameObject * go)
+{
+
+	go->FixAutoNaming();
+
+	if (bone->name == go->GetName()) {
+		bone->object = go;
+		return;
+	}
+
+	for (int i = 0; i < go->children.size(); i++) {
+		MatchBoneAndGo(bone, go->children[i]);
+	}
+
+}
 void ComponentBone::CollectGOs(GameObject * go)
 {
 	PairedGOToBones tmp;
@@ -167,6 +182,15 @@ void ComponentBone::GetGOFromBones()
 			++it;
 		}*/
 		pairs_filled = true;
+	}
+}
+
+void ComponentBone::LinkBonesToGO()
+{
+	for (int i = 0; i < skeleton.size(); i++) {
+		if(skeleton[i]->object != nullptr)
+			continue;
+		MatchBoneAndGo(skeleton[i], App->scene->GetRoot());
 	}
 }
 
