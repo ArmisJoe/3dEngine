@@ -49,6 +49,7 @@ In charge of:
 - Animations: Objects with an animation will run on play-time.
 - Mouse Picking: Picking elements from the scene with the mouse directly.
 - Adaptative Octree: That stores and subdives according to the elements inserted, it is also used to accelerate camera culling.
+![i](https://media.giphy.com/media/l4EoRTG4ksTAiuQ7e/giphy.gif)
 
 ## Animation System:
 For the last delivery, users are able to load an object with a an animation (only supports .fbx and .dae fromats).
