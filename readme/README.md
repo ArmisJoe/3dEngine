@@ -16,13 +16,31 @@ Pau Olive: https://github.com/rcpauor32
 License (MIT): https://opensource.org/licenses/MIT
 
 ## Team
-
+![i](https://drive.google.com/file/d/1s3K9bgAkKF8oKBaZ7tPXRBbm70Yhxeo8/view?usp=sharing)
 
 ### Pau Olive (Left)
 In charge of:
+- GUI
+- Console, About, Ispector & Hierarchy Panels
+- Wireframe & Render
+- File System (w/DeVil)
+- Loading by Drag & Drop
+- Components Material, Mesh and Material
+- Importer to own format, and loader.
+- Scene Serialization (+ Play & Pause)
+- Component Animation
+- Interpolation & Blend
 
 ### Josep Huguet (Right)
 In charge of:
+- Set Up first code
+- Config panel
+- Component Camera & Module
+- AABBs for Game Objects
+- Mouse Picking from scene
+- Adaptative Octree & camera culling (accelerate)
+- Skinning
+- Component Transform & Bone
 
 ## Other Relevant Information
 
