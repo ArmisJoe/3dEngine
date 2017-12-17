@@ -8,7 +8,7 @@ QUEENGINE3D: https://github.com/ArmisJoe/3dEngine
 
 Josep Huguet: https://github.com/ArmisJoe
 
-Pau Olivé: https://github.com/rcpauor32
+Pau Olive: https://github.com/rcpauor32
 
 License (MIT): https://opensource.org/licenses/MIT
 
