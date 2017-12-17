@@ -22,7 +22,7 @@ public:
 	std::string name;
 	unsigned int duration = 0;
 	unsigned int tickspersec = 0;
-  
+	bool selected = false;
 	std::vector<AnimNode*> Channels; // Bones
   
 	// Serialize

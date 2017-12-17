@@ -148,7 +148,7 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 	App->editor->ClearLog();
 
 	GameObject* Geometry = nullptr;
-
+	GameObject* possibleCopy = nullptr;
 	const aiScene* scene = aiImportFile(path, pprocess_flag);
 	const aiNode* root_node = nullptr;
 
@@ -160,27 +160,68 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 		if (root_node->mNumChildren > 0) {
 			Geometry = LoadNode(root_node, scene, path);
 			Geometry->SetName(GetFileFromPath(path).c_str());
+				if (Geometry->GetName() == "Attack_alien.fbx")
+				{
+					for (uint i = 0; i < App->res->gameObjects.size(); ++i)
+						if (App->res->gameObjects[i]->GetName() == "Run_alien.fbx" || App->res->gameObjects[i]->GetName() == "Idle_alien.fbx")
+						{
+							possibleCopy = App->res->gameObjects[i];
+							Geometry->RemoveThis();
+							Geometry = nullptr;
+						}
+				}
 		}
 		//Loading Animations
-		if (scene->HasAnimations() && Geometry != nullptr && strcmp(Geometry->GetName().c_str(), "Street environment_V01.FBX") != 0) {
-			ComponentAnimation* compAnim = new ComponentAnimation(Geometry);
-			for (int i = 0; i < scene->mNumAnimations; i++) {
-				Animation* new_anim = App->animation->ImportToLoad(scene->mAnimations[i]);
-				if (new_anim != nullptr) {
-					new_anim->rawpath = path;
-					compAnim->AddAnimation(new_anim);
+		if (scene->HasAnimations())
+		{
+			if (Geometry != nullptr && strcmp(Geometry->GetName().c_str(), "Street environment_V01.FBX") != 0) {
+				ComponentAnimation* compAnim = new ComponentAnimation(Geometry);
+				for (int i = 0; i < scene->mNumAnimations; i++) {
+					Animation* new_anim = App->animation->ImportToLoad(scene->mAnimations[i]);
+					if (new_anim != nullptr) {
+						new_anim->rawpath = path;
+						compAnim->AddAnimation(new_anim);
+					}
+				}
+				Geometry->AddComponent(componentType_Animation, compAnim, true);
+			}
+			else {
+				//Camera Focus
+				//App->camera->FocusMesh(new_mesh->vertices, new_mesh->num_vertices);
+				//Release Scene
+				if (Geometry == nullptr && possibleCopy != nullptr) // Loads animation for existing object
+				{
+					if (possibleCopy->FindComponents(componentType_Animation).empty()) {
+						ComponentAnimation* compAnim = new ComponentAnimation(possibleCopy);
+						for (int i = 0; i < scene->mNumAnimations; ++i)
+						{
+							Animation* new_anim = App->animation->ImportToLoad(scene->mAnimations[i]);
+							if (new_anim != nullptr) {
+								new_anim->rawpath = path;
+								compAnim->AddAnimation(new_anim);
+							}
+						}
+						possibleCopy->AddComponent(componentType_Animation, compAnim, true);
+					}
+					else {
+						for (int i = 0; i < scene->mNumAnimations; ++i)
+						{
+							Animation* new_anim = App->animation->ImportToLoad(scene->mAnimations[i]);
+							if (new_anim != nullptr) {
+								new_anim->rawpath = path;
+								ComponentAnimation* tmp_anim = (ComponentAnimation*)possibleCopy->FindComponent(componentType_Animation);
+								tmp_anim->AddAnimation(new_anim);
+							}
+						}
+					}
 				}
 			}
-			Geometry->AddComponent(componentType_Animation, compAnim, true);
 		}
-		//Camera Focus
-		//App->camera->FocusMesh(new_mesh->vertices, new_mesh->num_vertices);
-		//Release Scene
-		aiReleaseImport(scene);
 	}
 	else
 		LOG("Error loading scene %s\n\tERROR -> %s", path, aiGetErrorString());
 
+		aiReleaseImport(scene);
 	//if (Geometry != nullptr)
 	//	App->res->gameObjects.push_back(Geometry);
 

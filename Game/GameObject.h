@@ -103,15 +103,18 @@ public:
 
 	void FixAutoNaming(); 	// Name Fixing (Thanks Maya ;D)
 
-private:
+
 	bool to_remove = false;
+public:
 	void RemoveThis();
+private:
 	void RemoveChild(GameObject* child);
 
 	void RemoveComponent(Component* c);
 
 public:
 	void OnUpdateTransform();
+
 
 private: // Serialization Values
 	double UID;

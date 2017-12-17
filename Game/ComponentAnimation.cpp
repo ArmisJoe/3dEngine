@@ -233,9 +233,9 @@ void ComponentAnimation::OnEditor()
 		for (int i = 0; i < animations.size(); i++) {
 			Animation* a = animations[i];
 			ImGui::Text("%s", a->name.c_str());
-			ImGui::SameLine();
-			bool selected = (a == anim);
-			if (ImGui::Checkbox("", &selected)) {
+			ImGui::SameLine();	
+			if (ImGui::Checkbox("", &a->selected)) {
+				anim = a;
 				ChangeAnimation(a, conf_time_to_change);
 			}
 			ImGui::SameLine();
@@ -303,6 +303,7 @@ void ComponentAnimation::StartBlend(Animation * next_anim, float time)
 	blend_time = time;
 	blend_timer = 0.0f;
 	blending = true;
+	this->anim = next_anim;
 }
 
 void ComponentAnimation::ResetBlend()
