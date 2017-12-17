@@ -16,7 +16,7 @@ Pau Olive: https://github.com/rcpauor32
 License (MIT): https://opensource.org/licenses/MIT
 
 ## Team
-![i](https://drive.google.com/file/d/1s3K9bgAkKF8oKBaZ7tPXRBbm70Yhxeo8/view?usp=sharing)
+![i](https://lh3.googleusercontent.com/Bm7_aCpY7VurExeD4xF8laUciloISo6XASZF-82sinlCwfl3z10YWM4Kr0Q2HrfJik6kiWDHt5S_LfiMSit9=w1920-h925-rw)
 
 ### Pau Olive (Left)
 In charge of:
