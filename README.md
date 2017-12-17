@@ -3,17 +3,17 @@
 QUEENGINE3D is a 3D Engine meant for videogames developed in C++ by students Pau Olive and Josep Huguet at Universitat Politecnica de Catalunya (UPC).
 Subject: 3D Engines
 
-Latest Release: https://github.com/ArmisJoe/3dEngine/releases/tag/Assignment3
+[Llink to Latest Release](https://github.com/ArmisJoe/3dEngine/releases/tag/Assignment3)
 
 ## Github & Repository:
 
-QUEENGINE3D: https://github.com/ArmisJoe/3dEngine
+[Link to source code for QUEENGINE3D](https://github.com/ArmisJoe/3dEngine)
 
-Josep Huguet: https://github.com/ArmisJoe
+Josep Huguet: [](https://github.com/ArmisJoe)
 
-Pau Olive: https://github.com/rcpauor32
+Pau Olive: [](https://github.com/rcpauor32)
 
-License (MIT): https://opensource.org/licenses/MIT
+License (MIT): [](https://opensource.org/licenses/MIT)
 
 ## Team
 ![i](https://lh3.googleusercontent.com/Bm7_aCpY7VurExeD4xF8laUciloISo6XASZF-82sinlCwfl3z10YWM4Kr0Q2HrfJik6kiWDHt5S_LfiMSit9=w1920-h925-rw)
@@ -41,6 +41,7 @@ In charge of:
 - Adaptative Octree & camera culling (accelerate)
 - Skinning
 - Component Transform & Bone
+
 ## Engine Subsystems:
 - Informative Panels: reflect module performance and help the user to navigate through different elements.
 - Drag & Drop Loading: lets the user import elements directly to the scene just by dragging the element.
@@ -59,7 +60,7 @@ On each update, the animation nodes send the new updated position to every child
 ![i](https://media.giphy.com/media/l4EpcOlnQbtKt1ckM/giphy.gif)
 
 ## Video Demonstration
-https://www.youtube.com/watch?v=RjmUNF4LWTo&feature=youtu.be
+[Link to video](https://www.youtube.com/watch?v=RjmUNF4LWTo&feature=youtu.be)
 ## Other Relevant Information
 
 ### Camera Controls
