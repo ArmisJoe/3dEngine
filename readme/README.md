@@ -3,7 +3,7 @@
 QUEENGINE3D is a 3D Engine meant for videogames developed in C++ by students Pau Olive and Josep Huguet at Universitat Politecnica de Catalunya (UPC).
 Subject: 3D Engines
 
-Latest Release: 
+Latest Release: https://github.com/ArmisJoe/3dEngine/releases/tag/Assignment3
 
 ## Github & Repository:
 
@@ -41,7 +41,18 @@ In charge of:
 - Adaptative Octree & camera culling (accelerate)
 - Skinning
 - Component Transform & Bone
-
+## Engine Subsystems:
+- Informative Panels: reflect module performance and help the user to navigate through different elements.
+- Drag & Drop Loading: lets the user import elements directly to the scene just by dragging the element.
+- Own Importer: Elements imported to the scene are saved to our own format and loaded after that.
+- Scene Serialization: The user can save the elements in the scene in a JSON format and load them whenever they want.
+- Animations: Objects with an animation will run on play-time.
+- Mouse Picking: Picking elements from the scene with the mouse directly.
+- Adaptative Octree: That stores and subdives according to the elements inserted, it is also used to accelerate camera culling.
+## Animation System:
+For the last delivery, users are able to load an object with a an animation (only supports .fbx and .dae fromats).
+The animation is loaded separated from the code, in a Component Animation that stores the Animation nodes for each frame and their position. The bones are loaded in the Component Bone storing the weights needed to apply a transformation to the mesh.
+On each update, the animation nodes send the new updated position to every child from the animated object. After that, the mesh creates a copy of itself to which all vertex transformation are applied (Skinning) before being sent to the GPU.
 ## Other Relevant Information
 
 ### Camera Controls
