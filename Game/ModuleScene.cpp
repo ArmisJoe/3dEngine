@@ -269,18 +269,6 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 		}
 		scene_doc->MoveToRootSection();
 	}
-	// GameObjects Connections
-	for (int i = 0; i < tmp_gos.size(); i++) {
-		GameObject* curr = tmp_gos[i];
-		for (int k = 0; k < tmp_gos.size(); k++) {
-			GameObject* checked = tmp_gos[k];
-			if (curr->GetParentUID() == checked->GetUID()) {
-				curr->SetParent(checked);
-				checked->AddChild(curr);
-				break;
-			}
-		}
-	}
 	// Components Load
 	std::vector<Component*> tmp_cs;
 	scene_doc->MoveToRootSection();
@@ -335,9 +323,21 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 			float3 p = { (float)scene_doc->GetNumber("position.x"), (float)scene_doc->GetNumber("position.y"), (float)scene_doc->GetNumber("position.z") };
 			Quat r = { (float)scene_doc->GetNumber("rotation.x"), (float)scene_doc->GetNumber("rotation.y"), (float)scene_doc->GetNumber("rotation.z"), (float)scene_doc->GetNumber("rotation.w") };
 			float3 s = { (float)scene_doc->GetNumber("scale.x"), (float)scene_doc->GetNumber("scale.y"), (float)scene_doc->GetNumber("scale.z") };
+			float gm_ptr[16] = { (float)scene_doc->GetNumber("global1"), (float)scene_doc->GetNumber("global2"), (float)scene_doc->GetNumber("global3"), (float)scene_doc->GetNumber("global4"), 
+				(float)scene_doc->GetNumber("global5"), (float)scene_doc->GetNumber("global6") ,(float)scene_doc->GetNumber("global7"), (float)scene_doc->GetNumber("global8"), 
+				(float)scene_doc->GetNumber("global9"), (float)scene_doc->GetNumber("global10"), (float)scene_doc->GetNumber("global11") ,(float)scene_doc->GetNumber("global12"), 
+				(float)scene_doc->GetNumber("global13"), (float)scene_doc->GetNumber("global14"), (float)scene_doc->GetNumber("global15"), (float)scene_doc->GetNumber("global16")	};
+			uint id = { (uint)scene_doc->GetNumber("UID") };
 			trans->SetPosition(p);
 			trans->SetQuatRotation(r);
 			trans->SetScale(s);
+			float4x4 gm;
+			for (uint i = 0; i < 16; ++i)
+				gm.ptr()[i] = gm_ptr[i];
+
+			trans->LoadGlobalTransform(gm);
+			trans->SetId(id);
+
 			c = trans;
 			transes.push_back(trans);
 			break;
@@ -347,26 +347,71 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 			c->type = (componentType)type;
 			tmp_cs.push_back(c);
 		}
-
-
 	}
+
+	
+	// GameObjects Connections
+	for (int i = 0; i < tmp_gos.size(); i++) {
+		GameObject* curr = tmp_gos[i];
+		for (int k = 0; k < tmp_gos.size(); k++) {
+			GameObject* checked = tmp_gos[k];
+			if (curr->GetParentUID() == checked->GetUID()) {
+				curr->SetParent(checked);
+				checked->AddChild(curr);
+				break;
+			}
+		}
+	}
+
+	/*for (uint i = 0; i < transes.size(); ++i) {
+		for (uint j = 0; j < tmp_gos.size(); ++j) {
+			if (tmp_gos[j]->GetUID() == transes[i]->GetID()) {
+				GameObject* it = tmp_gos[j];
+				it->GetTransform()->SetPosition(transes[i]->GetPosition());
+				it->GetTransform()->SetQuatRotation(transes[i]->GetQuatRotation());
+				it->GetTransform()->SetScale(transes[i]->GetScale());
+				it->GetTransform()->LoadGlobalTransform(transes[i]->GetGlobalTransform());
+				it->GetTransform()->SetId(transes[i]->GetID());
+				it->GetTransform()->transform_modified = false;
+				it->AABBneedsUpdate = true;
+			}
+		}
+	}*/
+	//App->scene->root->OnUpdateTransform();
+	//uint n = tmp_gos.size() - 1;
+	//SetTransforms(this->root, transes, n);
+
 	// Components Link
 	for (int i = 0; i < tmp_gos.size(); i++) {
 		for (int k = 0; k < tmp_cs.size(); k++) {
 			if (tmp_gos[i]->GetUID() == tmp_cs[k]->GetGoUID()) {
-				if (tmp_cs[k]->type != componentType_Transform)
-				tmp_gos[i]->AddComponent(tmp_cs[k]->type, tmp_cs[k], !(tmp_cs[k]->type == componentType_Transform));
+				if (tmp_cs[k]->type != componentType_Transform) {
+					tmp_gos[i]->AddComponent(tmp_cs[k]->type, tmp_cs[k], !(tmp_cs[k]->type == componentType_Transform));
+				}
 				else {
-					ComponentTransform* tmp_trans = (ComponentTransform*)tmp_cs[k];
-					tmp_gos[i]->GetTransform()->SetPosition(tmp_trans->GetPosition());
-					tmp_gos[i]->GetTransform()->SetQuatRotation(tmp_trans->GetQuatRotation());
-					tmp_gos[i]->GetTransform()->SetScale(tmp_trans->GetScale());
+					GameObject* it = tmp_gos[i];
+					ComponentTransform* transes = (ComponentTransform*)tmp_cs[k];
+					it->GetTransform()->SetPosition(transes->GetPosition());
+					it->GetTransform()->SetQuatRotation(transes->GetQuatRotation());
+					it->GetTransform()->SetScale(transes->GetScale());
+					it->GetTransform()->LoadGlobalTransform(transes->GetGlobalTransform());
+					it->GetTransform()->SetId(transes->GetID());
+					it->GetTransform()->transform_modified = false;
+					it->AABBneedsUpdate = true;
 				}
 			}
 		}
 	}
 
-	App->scene->root->OnUpdateTransform();
+	// Set AABBS
+	for (uint i = 0; i < tmp_gos.size(); ++i)
+	{
+		vector<Component*> cmps_now = tmp_gos[i]->FindComponents(componentType_Mesh);
+		for (uint k = 0;k < cmps_now.size(); ++k)
+		{
+			tmp_gos[i]->UpdateAABBFromMesh((ComponentMesh*) cmps_now[k]);
+		}
+	}
 
 	for (uint i = 0; i < transes.size(); ++i)
 	{
@@ -384,4 +429,20 @@ const char* ModuleScene::LoadScene(const char* scene_name, bool hasExtension)
 	}
 	return file.c_str();
 
+}
+
+void ModuleScene::SetTransforms(GameObject *it, vector<ComponentTransform*> trans, uint &i)
+{
+	if (it != root) {
+		it->GetTransform()->SetPosition(trans[i]->GetPosition());
+		it->GetTransform()->SetQuatRotation(trans[i]->GetQuatRotation());
+		it->GetTransform()->SetScale(trans[i]->GetScale());
+		it->GetTransform()->LoadGlobalTransform(trans[i]->GetGlobalTransform());
+		it->GetTransform()->transform_modified = false;
+		it->AABBneedsUpdate = true;
+		i--;
+		
+	}
+	for (uint k = 0; k < it->children.size(); ++k)
+		SetTransforms(it->children[k], trans, i);
 }

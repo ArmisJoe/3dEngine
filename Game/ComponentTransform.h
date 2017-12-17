@@ -28,7 +28,8 @@ public:
 	// Global
 	float4x4	GetGlobalTransform() const;
 	float3		GetGlobalPosition() const;
-
+	// UID
+	uint		GetID() const;
 private:
 	void UpdateEulerAngles();
 	void UpdateTransform();
@@ -40,12 +41,12 @@ public:
 	void SetEulerRotation(float3 euler_angles);
 	void SetGlobalTransform(float4x4 transform);
 	void SetGlobalPosition(float3 position);
-
+	void SetId(uint id) { this->id = id; }
 	void Restart();
 	
 	void OnUpdateTransform(const float4x4& global, const float4x4& parent_global = float4x4::identity);
 
-	void LoadGlobalTransform(float4x4 transform);
+	void LoadGlobalTransform(float4x4 transform); // WARNING: Use ONLY during GameObject loading
 
 
 private:
@@ -56,7 +57,7 @@ private:
 	float3		scale = float3::zero;
 	Quat		rotation = Quat::identity;
 	float3		rotinEuler = float3::zero;
-
+	uint		id;
 public:
 	bool		transform_modified = true;
 	bool		has_started = false;

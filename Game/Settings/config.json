@@ -20,7 +20,7 @@
             "lighting": true,
             "material_color": false,
             "2D_textures": true,
-            "wireframe": true,
+            "wireframe": false,
             "depth_test": true,
             "cull_face": true
         },

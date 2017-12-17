@@ -12,6 +12,10 @@ ComponentTransform::ComponentTransform() : Component(componentType_Transform)
 	typeName = "Transform";
 	name = "Transform";
 	numMax = 1;
+	if (parent != nullptr)
+		id = parent->GetUID();
+	else
+		id = RandomNumber();
 	//transform = float4x4::FromTRS(position, rotation, scale);
 	//UpdateEulerAngles();
 }
@@ -21,6 +25,10 @@ ComponentTransform::ComponentTransform(GameObject* argparent) : Component(compon
 	typeName = "Transform";
 	name = "Transform";
 	numMax = 1;
+	if (parent != nullptr)
+	id = parent->GetUID();
+	else
+		id = RandomNumber();
 	//transform = float4x4::FromTRS(position, rotation, scale);
 	//UpdateEulerAngles();
 
@@ -31,6 +39,10 @@ ComponentTransform::ComponentTransform(componentType argtype, GameObject * argpa
 	typeName = "Transform";
 	name = "Transform";
 	numMax = 1;
+	if (parent != nullptr)
+	id = parent->GetUID();
+	else
+		id = RandomNumber();
 //	transform = float4x4::FromTRS(position, rotation, scale);
 //	UpdateEulerAngles();
 
@@ -65,6 +77,25 @@ void ComponentTransform::Serialize(JSON_Doc* doc) {
 	doc->SetNumber("scale.x", scale.x);
 	doc->SetNumber("scale.y", scale.y);
 	doc->SetNumber("scale.z", scale.z);
+	// Global Rotation
+	doc->SetNumber("global1", global_transform.ptr()[0]);
+	doc->SetNumber("global2", global_transform.ptr()[1]);
+	doc->SetNumber("global3", global_transform.ptr()[2]);
+	doc->SetNumber("global4", global_transform.ptr()[3]);
+	doc->SetNumber("global5", global_transform.ptr()[4]); 
+	doc->SetNumber("global6", global_transform.ptr()[5]);
+	doc->SetNumber("global7", global_transform.ptr()[6]);
+	doc->SetNumber("global8", global_transform.ptr()[7]);
+	doc->SetNumber("global9", global_transform.ptr()[8]);
+	doc->SetNumber("global10", global_transform.ptr()[9]);
+	doc->SetNumber("global11", global_transform.ptr()[10]);
+	doc->SetNumber("global12", global_transform.ptr()[11]);
+	doc->SetNumber("global13", global_transform.ptr()[12]);
+	doc->SetNumber("global14", global_transform.ptr()[13]);
+	doc->SetNumber("global15", global_transform.ptr()[14]);
+	doc->SetNumber("global16", global_transform.ptr()[15]);
+	// UID
+	doc->SetNumber("UID", id);
 }
 
 float4x4 ComponentTransform::GetTransform() const
@@ -101,6 +132,10 @@ float3 ComponentTransform::GetGlobalPosition() const
 {
 	float4x4 global_transform = GetGlobalTransform();
 	return float3(global_transform[0][3], global_transform[1][3], global_transform[2][3]);
+}
+uint ComponentTransform::GetID() const
+{
+	return id;
 }
 /*
 Quat ComponentTransform::GetGlobalQuatRotation() const

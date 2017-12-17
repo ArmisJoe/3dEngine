@@ -17,15 +17,19 @@
 GameObject::GameObject(GameObject * p) : parent(p)
 {
 	name = "GameObject";
-	this->AddComponent(componentType_Transform);
 	UID = RandomNumber();
+
+	this->AddComponent(componentType_Transform);
+
 }
 
 GameObject::GameObject()
 {
 	name = "GameObject";
-    this->AddComponent(componentType_Transform);
 	UID = RandomNumber();
+
+	this->AddComponent(componentType_Transform);
+
 }
 
 GameObject::~GameObject()

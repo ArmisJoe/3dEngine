@@ -47,6 +47,8 @@ public:
 		grid_on = flag;
 	}
 
+private:
+	void SetTransforms(GameObject* it, vector<ComponentTransform*> trans, uint &i);
 public:
 	std::string curr_scene_name = "scene01";
 	vector<GameObject*> static_gos;

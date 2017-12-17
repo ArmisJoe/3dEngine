@@ -89,7 +89,7 @@ GameObject * ModuleAssimp::LoadNode(const aiNode * node, const aiScene* scene, c
 	new_node->GetTransform()->SetQuatRotation(rot);
 	new_node->GetTransform()->SetScale(scale);
 	
-		new_node->OnUpdateTransform();
+	new_node->OnUpdateTransform();
 
 	//LoadMeshes
 	std::string mesh_path;
