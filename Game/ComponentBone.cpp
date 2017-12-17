@@ -86,6 +86,7 @@ void ComponentBone::SetMesh(ComponentMesh * m)
 {
 	mesh = m;
 }
+
 void ComponentBone::MatchBoneAndGo(ResourceBone * bone, GameObject * go)
 {
 
@@ -101,31 +102,21 @@ void ComponentBone::MatchBoneAndGo(ResourceBone * bone, GameObject * go)
 	}
 
 }
-void ComponentBone::CollectGOs(GameObject * go)
+
+void ComponentBone::CollectGOs(GameObject * go, ResourceBone* b)
 {
-	PairedGOToBones tmp;
-	tmp.object = go;
-	tmp.name = go->GetName();
-	pairedgotobones.push_back(tmp);
+	if (go == nullptr || b == nullptr)
+		return;
+
+	if (go->GetName() == b->name)
+	{
+		b->object = go;
+	}
 
 	for (uint i = 0; i < go->children.size(); ++i)
-		CollectGOs(go->children[i]);
+		CollectGOs(go->children[i], b);
 }
-bool ComponentBone::insert_BoneToIterate(ResourceBone * bone)
-{
-	if (bone == nullptr || gos_filled == false)
-		return false;
 
-	for (uint i = 0; i < pairedgotobones.size(); ++i) {
-		if (pairedgotobones[i].name == bone->name)
-		{
-			pairedgotobones[i].bones.push_back(bone);
-			bone->object = pairedgotobones[i].object;
-			return true;
-		}
-	}
-	return false;
-}
 void ComponentBone::GetRootBone(GameObject* go)
 {
 	if (rootBoneGO != nullptr)
@@ -159,29 +150,15 @@ GameObject * ComponentBone::GetRootBoneGO()
 		return rootBoneGO;
 	return nullptr;
 }
+
 void ComponentBone::GetGOFromBones()
 {
 	if (gos_filled == false)
 	{
-		CollectGOs(App->scene->GetRoot());
-		gos_filled = true;
-	}
-
-	if (pairs_filled == false)
-	{
 		for (uint i = 0; i < skeleton.size(); ++i)
-		{
-			insert_BoneToIterate(skeleton[i]);
-		}
+		CollectGOs(App->scene->GetRoot(), skeleton[i]);
 
-		/*for (vector<PairedGOToBones>::iterator it = pairedgotobones.begin(); it != pairedgotobones.end();)
-		{
-			if ((*it).bones.empty() == true)
-				it = pairedgotobones.erase(it);
-
-			++it;
-		}*/
-		pairs_filled = true;
+		gos_filled = true;
 	}
 }
 

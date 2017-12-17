@@ -22,11 +22,8 @@ public:
 	void OnEditor();
 private:
 	bool gos_filled = false;
-	bool pairs_filled = false;
 	ComponentMesh* mesh = nullptr;
-	void CollectGOs(GameObject* go);
-	bool insert_BoneToIterate(ResourceBone* bone);
-
+	void CollectGOs(GameObject* go, ResourceBone* b);
 public:
 	void	GetRootBone(GameObject*);
 	GameObject*		GetRootBoneGO();

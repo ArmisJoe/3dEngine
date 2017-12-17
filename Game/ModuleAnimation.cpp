@@ -99,14 +99,6 @@ void ModuleSkinning::AdaptMeshToBone(ComponentBone * skeleton, ComponentMesh * m
 		}
 
 	}
-	int b = 0;
-	for (int i = 0; i < mesh->skin->num_vertices; i++) {
-		float3 V;
-		V.x = mesh->skin->vertices[i * 3];
-		V.y = mesh->skin->vertices[i * 3 + 1];
-		V.z = mesh->skin->vertices[i * 3 + 2];
-		int kaka = 0;
-	}
 
 	mesh->BindSkin();
 }
