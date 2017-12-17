@@ -160,7 +160,7 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 		if (root_node->mNumChildren > 0) {
 			Geometry = LoadNode(root_node, scene, path);
 			Geometry->SetName(GetFileFromPath(path).c_str());
-				if (Geometry->GetName() == "Attack_alien.fbx")
+				/*if (Geometry->GetName() == "Attack_alien.fbx")
 				{
 					for (uint i = 0; i < App->res->gameObjects.size(); ++i)
 						if (App->res->gameObjects[i]->GetName() == "Run_alien.fbx" || App->res->gameObjects[i]->GetName() == "Idle_alien.fbx")
@@ -169,7 +169,7 @@ GameObject* ModuleAssimp::LoadGeometry(const char* path, const unsigned int ppro
 							Geometry->RemoveThis();
 							Geometry = nullptr;
 						}
-				}
+				}*/
 		}
 		//Loading Animations
 		if (scene->HasAnimations())

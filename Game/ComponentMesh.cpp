@@ -173,6 +173,12 @@ void ComponentMesh::ResetDeformableMesh()
 		skin->parent = this->GetParent();
 
 	}
+	else {
+		skin->vertices = new float[num_vertices * 3];
+		skin->indices = new uint[num_indices];
+		skin->normals = new float[num_normals * 3];
+		skin->textureCoords = new float[skin->num_UV * 3];
+	}
 
 	memcpy(skin->vertices, this->vertices, sizeof(float) * num_vertices * 3);
 	memcpy(skin->indices, this->indices, sizeof(uint) * num_indices);

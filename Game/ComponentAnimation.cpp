@@ -26,6 +26,27 @@ void ComponentAnimation::Start()
 
 void ComponentAnimation::Update(float dt)
 {
+/*	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_UP)
+	{
+		if (animations.size() > 0)
+		{
+			anim = animations[0];
+			gos_filled = false;
+			GetGOFromNodes();
+		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_UP)
+	{
+		if (animations.size() > 1)
+		{
+			anim = animations[1];
+			gos_filled = false;
+			GetGOFromNodes();
+		}
+	}*/
+
+
 	if (anim == nullptr) {
 		state = as_unloaded;
 		return;
@@ -70,7 +91,6 @@ void ComponentAnimation::Update(float dt)
 		for (int i = 0; i < anim->NumChannels(); i++) {
 			AnimNode* b = anim->Channels[i];
 			GameObject* targetGo = nullptr;
-			GetGOFromNodes();
 			targetGo = b->object;
 			//GameObject* targetGo = CheckBoneGoMatch(this->parent, b);
 			if (targetGo != nullptr) { // Now we have the Go ('BoneGo') that will move
@@ -234,10 +254,10 @@ void ComponentAnimation::OnEditor()
 			Animation* a = animations[i];
 			ImGui::Text("%s", a->name.c_str());
 			ImGui::SameLine();	
-			if (ImGui::Checkbox("", &a->selected)) {
+		/*	if (ImGui::Checkbox("", &a->selected)) {
 				anim = a;
 				ChangeAnimation(a, conf_time_to_change);
-			}
+			}*/
 			ImGui::SameLine();
 			ImGui::InputFloat("Time", &conf_time_to_change, 0.1f, 0.1f);
 			ImGui::Separator();
