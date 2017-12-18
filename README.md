@@ -3,7 +3,7 @@
 QUEENGINE3D is a 3D Engine meant for videogames developed in C++ by students Pau Olive and Josep Huguet at Universitat Politecnica de Catalunya (UPC).
 Subject: 3D Engines
 
-[Llink to Latest Release](https://github.com/ArmisJoe/3dEngine/releases/tag/Assignment3)
+[Link to Latest Release](https://github.com/ArmisJoe/3dEngine/releases/tag/Assignment3)
 
 ## Github & Repository:
 
@@ -16,7 +16,7 @@ Pau Olive: https://github.com/rcpauor32
 License (MIT): https://opensource.org/licenses/MIT
 
 ## Team
-![i](https://lh3.googleusercontent.com/Bm7_aCpY7VurExeD4xF8laUciloISo6XASZF-82sinlCwfl3z10YWM4Kr0Q2HrfJik6kiWDHt5S_LfiMSit9=w1920-h925-rw)
+![i](https://lh5.googleusercontent.com/ZQcvYFLGfVJX9vGFCEjgGJ3tMcfRgIs53snMLqUhngkG8hRmmy8EsTX17WZIteZvYpOf_axICuaQLZLnEjQH=w1680-h895-rw)
 
 ### Pau Olive (Left)
 In charge of:
